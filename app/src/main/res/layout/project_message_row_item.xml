@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/colorBGblueShade"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingRight="5dp"
+    android:weightSum="2">
+
+    <View
+        android:id="@+id/flag"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/prof_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/flag"
+        android:background="@color/colorAccent" />
+
+
+    <LinearLayout
+        android:id="@+id/name_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/prof_img"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:weightSum="2">
+
+        <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:text="Company name"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".7"
+            android:gravity="right"
+            android:text="Date"
+            android:textColor="@color/colorTextDark"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/des_cont"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/name_cont"
+        android:layout_toRightOf="@+id/prof_img"
+        android:orientation="horizontal"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/attached"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_attachment" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="2"
+            android:text="        Description of the message .......dfgdf aksdjlf naskjdfnksdnfks adnfkkjnkk"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorLightGray" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

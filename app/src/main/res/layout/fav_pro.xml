@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGblueShade"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorLightBrick"
+        android:gravity="center"
+        android:text="You have not added any pros to your favourite."
+        android:textColor="@color/colorTextDark"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorGreen"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/fav_pro_white" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="SEARCH LOCAL PROS"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/colorHeader" />
+
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="POST YOUR PROJECTS"
+        android:textColor="@color/colorTextDark"
+        android:textSize="14sp" />
+
+    <com.android.llc.proringer.viewsmod.textview.ProLightTextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="When the pros complete for your\nbusiness.You save money!"
+        android:textColor="@color/colorTextDark"
+        android:textSize="12sp" />
+</LinearLayout>

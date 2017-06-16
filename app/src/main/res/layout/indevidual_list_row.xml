@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/date_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/oval_orange_background"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="dd/mm/yyy"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/receiver_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:maxWidth="250dp"
+            android:padding="10dp"
+            android:text="blah blah blah blah blaaaahhhhh... blaaa . bla bla bla blahhh bla bla bla bla blaaaaaaa.. aa blahh blah and blahhhk."
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/sender_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorLightOrange"
+            android:maxWidth="250dp"
+            android:padding="10dp"
+            android:text="blah blah blah blah blaaaahhhhh... blaaa . bla bla bla blahhh bla bla bla bla blaaaaaaa.. aa blahh blah and blahhhk."
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/receiver_image_cont"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/receiver_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:alpha="0.9"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_download" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/receiver_image_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:alpha="0.7"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="9:13 PM"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sender_image_cont"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/sender_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/sender_image_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:alpha="0.7"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="9:13 PM"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
