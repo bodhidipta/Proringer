@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.main_content;
+package com.android.llc.proringer.fragments.bottomNav;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,10 +27,10 @@ import com.android.llc.proringer.R;
  * -->
  */
 
-public class FavPros extends Fragment {
+public class MyProjects extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fav_pro, container, false);
+        return inflater.inflate(R.layout.my_projects, container, false);
     }
 }

@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.appconstant.ProApplication;
 
 /**
  * Created by bodhidipta on 09/06/17.
@@ -40,8 +41,14 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreen.this, GetStarted.class));
-                finish();
+                if (ProApplication.getInstance().getUserId().equals("")) {
+                    startActivity(new Intent(SplashScreen.this, GetStarted.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(SplashScreen.this, LandScreenActivity.class));
+                    finish();
+                }
+
             }
         }, 2700);
     }

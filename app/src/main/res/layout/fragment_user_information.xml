@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGblueShade"
+    android:padding="10dp">
+
+    <android.support.design.internal.ForegroundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:addStatesFromChildren="false"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="First name"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_selecter"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Last name"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_selecter"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone number"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_selecter"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorHeader" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="address"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_selecter"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.2">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.8"
+                android:text="Zip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight=".1" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1.1"
+                android:text="City"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight=".1" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1.1"
+                android:text="state"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:weightSum="3.2">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/zip_code"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".8"
+                android:background="@drawable/edit_text_selecter"
+                android:hint="Zip code"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight=".1" />
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/city"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1.1"
+                android:background="@drawable/edit_text_selecter"
+                android:hint="City"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight=".1" />
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/state"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1.1"
+                android:background="@drawable/edit_text_selecter"
+                android:hint="State"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorHeader" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/save_ifo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="SAVE INFORMATION"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+    </android.support.design.internal.ForegroundLinearLayout>
+
+</ScrollView>

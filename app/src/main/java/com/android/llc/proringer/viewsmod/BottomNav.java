@@ -104,7 +104,7 @@ public class BottomNav {
         cerete_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchSelection(CREATE_PROJECT);
+               // switchSelection(CREATE_PROJECT);
                 listener.onClick(CREATE_PROJECT);
             }
         });

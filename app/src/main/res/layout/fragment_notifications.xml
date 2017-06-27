@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGblueShade"
+    android:fillViewport="true"
+    android:padding="10dp"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Email Notifications"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorSelectedDark" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Newsletter"
+
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/email_newsletter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Chat Messages"
+
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/email_chat_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Tips &amp; Articles "
+
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/email_tips_artcl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Project Responses"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/email_prjct_rspnse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:text="Mobile Notifications"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorSelectedDark" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Newsletter"
+
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/mobile_newsletter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Chat Messages"
+
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/mobile_chat_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Tips &amp; Articles "
+
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/mobile_tips_artcl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Project Responses"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.SwitchHelper
+                android:id="@+id/mobile_prjct_rspnse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

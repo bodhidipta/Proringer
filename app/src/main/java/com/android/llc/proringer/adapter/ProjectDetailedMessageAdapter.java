@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.DetailedMessaging;
+import com.android.llc.proringer.helper.onItemClick;
 
 /**
  * Created by bodhidipta on 13/06/17.
@@ -30,9 +30,11 @@ import com.android.llc.proringer.activities.DetailedMessaging;
 
 public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> {
     Context mcontext = null;
+    private onItemClick listener;
 
-    public ProjectDetailedMessageAdapter(Context mcontext) {
+    public ProjectDetailedMessageAdapter(Context mcontext, onItemClick callback) {
         this.mcontext = mcontext;
+        listener = callback;
     }
 
     @Override
@@ -46,16 +48,17 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
     }
 
     @Override
-    public void onBindViewHolder(ProjectDetailedMessageAdapter.ViewHolder holder, int position) {
-        if (position%3==0){
+    public void onBindViewHolder(ProjectDetailedMessageAdapter.ViewHolder holder, final int position) {
+        if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.flag.setVisibility(View.INVISIBLE);
         }
         holder.cont_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DetailedMessaging) mcontext).transactIndevidualMessaging();
+                listener.onItemClick(position);
+
             }
         });
     }
@@ -68,7 +71,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 
         public ViewHolder(View itemView) {
             super(itemView);
-            flag=(View)itemView.findViewById(R.id.flag);
+            flag = (View) itemView.findViewById(R.id.flag);
             more = (LinearLayout) itemView.findViewById(R.id.more);
             cont_main = (RelativeLayout) itemView.findViewById(R.id.cont_main);
         }

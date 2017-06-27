@@ -61,13 +61,13 @@ public class GetStarted extends AppCompatActivity {
         get_started.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(GetStarted.this, SignUp.class), LOG_IN_REQUEST);
+                startActivityForResult(new Intent(GetStarted.this, SignUp.class), SIGN_UP_REQUEST);
             }
         });
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(GetStarted.this, LogIn.class), SIGN_UP_REQUEST);
+                startActivityForResult(new Intent(GetStarted.this, LogIn.class), LOG_IN_REQUEST);
             }
         });
 
@@ -91,6 +91,12 @@ public class GetStarted extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.post_project).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GetStarted.this, ActivityPostProject.class));
+            }
+        });
 
         adapter = new GetStartedTutorial(getSupportFragmentManager());
         get_started_pager.setAdapter(adapter);
@@ -157,11 +163,16 @@ public class GetStarted extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_UP_REQUEST) {
-            startActivity(new Intent(GetStarted.this, LandScreenActivity.class));
-            finish();
-        } else if (LOG_IN_REQUEST == requestCode) {
-            startActivity(new Intent(GetStarted.this, LandScreenActivity.class));
-            finish();
+            if (resultCode == RESULT_OK) {
+                startActivity(new Intent(GetStarted.this, LogIn.class));
+                finish();
+            }
+
+        } else if (requestCode == LOG_IN_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                startActivity(new Intent(GetStarted.this, LandScreenActivity.class));
+                finish();
+            }
         }
     }
 }

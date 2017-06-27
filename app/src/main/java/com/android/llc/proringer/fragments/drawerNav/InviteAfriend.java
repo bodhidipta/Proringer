@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.main_content;
+package com.android.llc.proringer.fragments.drawerNav;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 
 /**
- * Created by bodhidipta on 12/06/17.
- * <!-- * Copyright (c) 2017, Proringer-->
+ * Created by bodhidipta on 22/06/17.
+ * <!-- * Copyright (c) 2017, The Proringer-->
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,13 +24,12 @@ import com.android.llc.proringer.R;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * -->
  */
 
-public class MyProjects extends Fragment {
+public class InviteAfriend extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.my_projects, container, false);
+        return inflater.inflate(R.layout.fragment_invite_friend, container, false);
     }
 }

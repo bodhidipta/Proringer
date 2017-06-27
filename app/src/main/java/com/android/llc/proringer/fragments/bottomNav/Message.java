@@ -1,23 +1,19 @@
-package com.android.llc.proringer.fragments.main_content;
+package com.android.llc.proringer.fragments.bottomNav;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.adapter.ProjectMessageAdapter;
+import com.android.llc.proringer.helper.onItemClick;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -34,7 +30,6 @@ import com.android.llc.proringer.adapter.ProjectMessageAdapter;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 public class Message extends Fragment {
@@ -52,9 +47,17 @@ public class Message extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
         project_message_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ProjectMessageAdapter(getActivity());
+
+
+        adapter = new ProjectMessageAdapter(getActivity(), new onItemClick() {
+            @Override
+            public void onItemClick(int pos) {
+                ((LandScreenActivity) getActivity()).toggleToolBar(true);
+                ((LandScreenActivity) getActivity()).transactProjectMessaging();
+            }
+        });
+
         project_message_list.setAdapter(adapter);
     }
-
 
 }

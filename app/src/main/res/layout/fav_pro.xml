@@ -20,6 +20,7 @@
         android:layout_height="?android:attr/actionBarSize"
         android:layout_marginTop="20dp"
         android:background="@color/colorGreen"
+        android:id="@+id/find_local_pros"
         android:gravity="center"
         android:orientation="horizontal">
 

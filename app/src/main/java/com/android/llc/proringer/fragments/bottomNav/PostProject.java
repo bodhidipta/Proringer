@@ -1,11 +1,11 @@
-package com.android.llc.proringer.fragments.postproject;
+package com.android.llc.proringer.fragments.bottomNav;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -20,6 +20,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.PostProjectGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectListAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
@@ -90,6 +91,12 @@ public class PostProject extends Fragment {
         container_location = (RelativeLayout) view.findViewById(R.id.container_location);
         container_add_photoes = (RelativeLayout) view.findViewById(R.id.container_add_photoes);
 
+        if (ProApplication.getInstance().equals("")) {
+            progress_posting.setMax(10);
+        } else {
+            progress_posting.setMax(9);
+        }
+
         ProServiceApiHelper.getInstance(getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
@@ -114,6 +121,18 @@ public class PostProject extends Fragment {
             public void onError(String error) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Error")
+                        .setMessage("" + error)
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
 
             }
 
@@ -150,13 +169,23 @@ public class PostProject extends Fragment {
         view.findViewById(R.id.continue_location_section).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                step++;
-                progress_posting.setProgress(step);
-                selected_service_property.setText("" + step9option);
-                /**
-                 * IF no user is login then visible registration process or visible last part
-                 */
-                container_registration.setVisibility(View.VISIBLE);
+                if (ProApplication.getInstance().getUserId().equals("")) {
+                    step++;
+                    progress_posting.setProgress(step);
+                    selected_service_property.setText("" + step9option);
+                    /**
+                     * IF no user is login then visible registration process or visible last part
+                     */
+                    container_registration.setVisibility(View.VISIBLE);
+                } else {
+
+                    step++;
+                    progress_posting.setProgress(step);
+                    selected_service_property.setText("" + step10option);
+                    content_post_form_submit.setVisibility(View.VISIBLE);
+                    Logger.printMessage("@steps", "" + step);
+                }
+
             }
         });
         view.findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
@@ -275,6 +304,18 @@ public class PostProject extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Error")
+                        .setMessage("" + error)
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
             }
 
             @Override
@@ -295,7 +336,7 @@ public class PostProject extends Fragment {
         } else {
             pro_service_listing.setVisibility(View.GONE);
         }
-        Logger.prontMessage("backAt",""+step);
+        Logger.printMessage("backAt", "" + step);
 
         if (step == 1) {
             step = 0;
@@ -310,7 +351,7 @@ public class PostProject extends Fragment {
         } else if (step == 2) {
 
 
-            Logger.prontMessage("backAt", "selectedId -->" + selectedId);
+            Logger.printMessage("backAt", "selectedId -->" + selectedId);
             adapter.updateList(serviceListing);
             step--;
             progress_posting.setProgress(step);
@@ -387,10 +428,19 @@ public class PostProject extends Fragment {
             selected_service_property.setText("" + step7option);
             container_location.setVisibility(View.GONE);
         } else if (step == 9) {
-            step--;
-            progress_posting.setProgress(step);
-            selected_service_property.setText("" + step8option);
-            container_registration.setVisibility(View.GONE);
+            if (ProApplication.getInstance().equals("")) {
+                step--;
+                progress_posting.setProgress(step);
+                selected_service_property.setText("" + step8option);
+                container_registration.setVisibility(View.GONE);
+            } else {
+                step--;
+                progress_posting.setProgress(step);
+
+                selected_service_property.setText("" + step9option);
+                content_post_form_submit.setVisibility(View.GONE);
+            }
+
         } else if (step == 10) {
             step--;
             progress_posting.setProgress(step);
@@ -402,4 +452,5 @@ public class PostProject extends Fragment {
 
 
     }
+
 }

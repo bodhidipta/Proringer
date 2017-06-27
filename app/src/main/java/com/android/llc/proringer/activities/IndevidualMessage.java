@@ -1,18 +1,14 @@
-package com.android.llc.proringer.fragments.messaging;
+package com.android.llc.proringer.activities;
 
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.IndevidualChatAdapter;
-import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.pojo.ChatPojo;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +17,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 /**
- * Created by bodhidipta on 13/06/17.
+ * Created by bodhidipta on 20/06/17.
  * <!-- * Copyright (c) 2017, The Proringer-->
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,20 +33,21 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class IndevidualMessaging extends Fragment {
+public class IndevidualMessage extends AppCompatActivity {
     RecyclerView chat_list;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.individual_chat_details, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        chat_list = (RecyclerView) view.findViewById(R.id.chat_list);
-        chat_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true));
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.individual_chat_details);
+        findViewById(R.id.tool_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        chat_list = (RecyclerView) findViewById(R.id.chat_list);
+        chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         LinkedList<ChatPojo> chatList = new LinkedList<>();
 
         java.util.Calendar calendar = java.util.Calendar.getInstance();
@@ -126,7 +123,11 @@ public class IndevidualMessaging extends Fragment {
         chatList.add(pojo8);
 
         Collections.reverse(chatList);
-        chat_list.setAdapter(new IndevidualChatAdapter(getActivity(), chatList));
+        chat_list.setAdapter(new IndevidualChatAdapter(this, chatList));
+    }
 
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -16,32 +16,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:padding="10dp"
             android:orientation="vertical"
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="350dp"
-                android:layout_height="250dp"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
                 android:src="@drawable/cartoon" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:text="We look forward to getting your matched with local professionals.We'll keep you inform when a pro replies to your project. Also , you can check your project messages from your dashboard."
                 android:textColor="@color/colorTextDark"
                 android:textSize="12sp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/close_project"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:text="CLOSE"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+</RelativeLayout>
 
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:id="@+id/close_project"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="CLOSE"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -49,23 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="20dp"
+            android:padding="10dp"
             android:visibility="gone">
-
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="We just need a few quick details.Lets get your account setup and activated.Your project will go out to pros once you confirm your information."
-                android:textColor="@color/colorTextDark"
-                android:textSize="12sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorHeader" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -77,6 +71,21 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:scrollbars="none">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="We just need a few quick details.Lets get your account setup and activated.Your project will go out to pros once you confirm your information."
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorHeader" />
 
                     <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
                         android:layout_width="match_parent"
@@ -147,7 +156,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
                         android:id="@+id/register"
                         android:layout_width="match_parent"
-                        android:layout_height="?android:attr/actionBarSize"
+                        android:layout_height="@dimen/button_height"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/colorAccent"
@@ -203,7 +212,7 @@
             android:id="@+id/container_location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:visibility="gone">
 
             <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
@@ -219,7 +228,7 @@
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/continue_location_section"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="@dimen/button_height"
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorAccent"
                 android:gravity="center"
@@ -233,7 +242,7 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/continue_location_section"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="?android:attr/actionBarSize" />
+                android:layout_marginTop="@dimen/button_height" />
         </RelativeLayout>
 
         <LinearLayout
@@ -241,7 +250,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="20dp"
+            android:padding="10dp"
             android:visibility="gone">
 
             <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
@@ -261,7 +270,7 @@
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/continue_project_describing"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:gravity="center"
@@ -274,12 +283,12 @@
             android:id="@+id/container_add_photoes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:visibility="visible">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="@dimen/button_height"
                 android:background="@color/colorAccent"
                 android:gravity="center"
                 android:text="ADD PHOTO"
@@ -289,7 +298,7 @@
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/continue_image_section"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="@dimen/button_height"
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorAccent"
                 android:gravity="center"
@@ -302,7 +311,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/continue_image_section"
-                android:layout_marginTop="?android:attr/actionBarSize" />
+                android:layout_marginTop="@dimen/button_height" />
         </RelativeLayout>
 
 

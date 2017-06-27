@@ -42,6 +42,7 @@
         android:id="@+id/cont_bottom"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:elevation="5dp"
         android:layout_gravity="bottom">
 
         <LinearLayout
@@ -49,7 +50,6 @@
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
-            android:elevation="4dp"
             android:orientation="horizontal"
             android:weightSum="5">
 
@@ -163,15 +163,16 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_centerInParent="true"
-            android:elevation="5dp">
+            android:background="@drawable/circle_white">
 
             <ImageView
                 android:id="@+id/cerete_project"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
                 android:src="@drawable/project_button_icon" />
         </RelativeLayout>
 
@@ -192,19 +193,23 @@
             android:src="@drawable/icon" />
 
         <ImageView
-            android:layout_width="56dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:id="@+id/search_local_pro_header"
             android:layout_gravity="center_vertical|right"
-            android:padding="12dp"
+            android:padding="8dp"
             android:src="@drawable/ic_search_pro" />
+
+
     </android.support.v7.widget.Toolbar>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/back_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:visibility="gone"
         android:background="?attr/colorPrimary"
         android:elevation="5dp"
+        android:visibility="gone"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <ImageView
@@ -214,10 +219,10 @@
             android:src="@drawable/icon" />
 
         <ImageView
-            android:layout_width="56dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|right"
-            android:padding="12dp"
+            android:padding="8dp"
             android:src="@drawable/ic_search_pro" />
     </android.support.v7.widget.Toolbar>
 

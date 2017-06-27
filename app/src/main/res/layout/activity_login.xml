@@ -13,9 +13,9 @@
         android:background="@color/colorPrimary">
 
         <ImageView
+            android:id="@+id/tool_back"
             android:layout_width="35dp"
             android:layout_height="match_parent"
-            android:id="@+id/tool_back"
             android:src="@drawable/ic_chevron_left" />
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -37,6 +37,7 @@
         android:padding="10dp">
 
         <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -49,6 +50,7 @@
             android:textSize="14sp" />
 
         <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -61,18 +63,18 @@
             android:textSize="14sp" />
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/forget_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:id="@+id/forget_password"
-            android:text="Forget you password?"
+            android:text="Forgot you password?"
             android:textColor="@color/colorAccent"
             android:textSize="14sp" />
 
         <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
             android:id="@+id/log_in"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="5dp"
             android:background="@color/colorAccent"
             android:gravity="center"
@@ -89,7 +91,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="@dimen/button_height"
             android:background="#3c5a99">
 
             <ImageView

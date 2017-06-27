@@ -126,8 +126,8 @@
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/get_started"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:layout_marginBottom="10dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/colorAccent"
@@ -148,7 +148,7 @@
                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                     android:id="@+id/sign_in"
                     android:layout_width="0dp"
-                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_height="@dimen/button_height"
                     android:layout_marginBottom="10dp"
                     android:layout_weight=".7"
                     android:background="@color/colorPrimary"
@@ -165,8 +165,9 @@
                     android:layout_weight=".1" />
 
                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/post_project"
                     android:layout_width="0dp"
-                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_height="@dimen/button_height"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1.2"

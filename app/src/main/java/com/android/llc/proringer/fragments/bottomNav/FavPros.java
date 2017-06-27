@@ -1,22 +1,18 @@
-package com.android.llc.proringer.fragments.messaging;
+package com.android.llc.proringer.fragments.bottomNav;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.DetailedMessaging;
-import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
+import com.android.llc.proringer.activities.LandScreenActivity;
 
 /**
- * Created by bodhidipta on 13/06/17.
- * <!-- * Copyright (c) 2017, The Proringer-->
+ * Created by bodhidipta on 12/06/17.
+ * <!-- * Copyright (c) 2017, Proringer-->
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,25 +25,24 @@ import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * -->
  */
 
-public class ProjectMessaging extends Fragment {
-    RelativeLayout detailed_project_search;
-    RecyclerView message_list;
-
+public class FavPros extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.project_detailed_messaging, container, false);
+        return inflater.inflate(R.layout.fav_pro, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
-
-        message_list = (RecyclerView) view.findViewById(R.id.message_list);
-        message_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        message_list.setAdapter(new ProjectDetailedMessageAdapter(getActivity()));
+        view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LandScreenActivity)getActivity()).transactSearchLocalPros();
+            }
+        });
     }
 }

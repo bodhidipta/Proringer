@@ -48,11 +48,12 @@ public class NavigationHandler {
             ABOUT = "abt",
             LOGOUT = "logout";
 
-    public static NavigationHandler getInstance(View view) {
-        return new NavigationHandler(view);
+    public static NavigationHandler getInstance() {
+        if (instance == null)
+            instance = new NavigationHandler();
+        return instance;
     }
-
-    private NavigationHandler(View view) {
+    public void init(View view,OnHandleInput listener){
         inflatedView = view;
         find_local_pros_cont = (LinearLayout) view.findViewById(R.id.find_local_pros_cont);
         find_local_pros_img = (ImageView) view.findViewById(R.id.find_local_pros_img);
@@ -135,15 +136,21 @@ public class NavigationHandler {
             }
         });
 
+
+        handleViewInput(listener);
     }
 
-    public void handleViewInput(OnHandleInput callback) {
+    private NavigationHandler() {
+    }
+
+    private void handleViewInput(OnHandleInput callback) {
         listener = callback;
     }
 
     public void highlightTag(String tag) {
         switch (tag) {
             case FIND_LOCAL_PROS:
+
                 find_local_pros_cont.setBackgroundColor(Color.parseColor("#656565"));
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro_white);
                 find_local_pros_text.setTextColor(Color.WHITE);
@@ -162,8 +169,10 @@ public class NavigationHandler {
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
+                listener.onClickItem(FIND_LOCAL_PROS);
                 break;
             case USER_INFORMATION:
+                listener.onClickItem(USER_INFORMATION);
                 userInformation.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
@@ -185,6 +194,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case LOGIN_SETTINGS:
+                listener.onClickItem(LOGIN_SETTINGS);
                 login_settings.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
@@ -206,6 +216,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case NOTIFICATION:
+                listener.onClickItem(NOTIFICATION);
                 notification.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
@@ -227,6 +238,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case HOME_SCHEDUL:
+                listener.onClickItem(HOME_SCHEDUL);
                 home_scheduler.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
@@ -248,6 +260,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case INVITE_FRIEND:
+                listener.onClickItem(INVITE_FRIEND);
                 invite_friend.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
@@ -269,6 +282,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case SUPPORT:
+                listener.onClickItem(SUPPORT);
                 support_cont.setBackgroundColor(Color.parseColor("#656565"));
                 support_img.setBackgroundResource(R.drawable.ic_support_white);
                 support_text.setTextColor(Color.WHITE);
@@ -289,7 +303,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case ABOUT:
-
+                listener.onClickItem(ABOUT);
                 about_cont.setBackgroundColor(Color.parseColor("#656565"));
                 about_img.setBackgroundResource(R.drawable.ic_about_white);
                 about_text.setTextColor(Color.WHITE);
@@ -310,7 +324,7 @@ public class NavigationHandler {
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case LOGOUT:
-
+                listener.onClickItem(LOGOUT);
                 log_out.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
@@ -338,6 +352,6 @@ public class NavigationHandler {
 
 
     public interface OnHandleInput {
-        void onClickItem();
+        void onClickItem(String tag);
     }
 }

@@ -4,7 +4,28 @@
     android:layout_height="match_parent"
     android:background="@drawable/chat_background"
     android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
 
+        <ImageView
+            android:id="@+id/tool_back"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_chevron_left" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Individual Message"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp" />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

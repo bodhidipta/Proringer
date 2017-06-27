@@ -1,7 +1,6 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.DetailedMessaging;
+import com.android.llc.proringer.helper.onItemClick;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 
 /**
@@ -31,9 +30,11 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout;
 
 public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAdapter.ViewHolder> {
     private Context mcontext;
+    private onItemClick listener;
 
-    public ProjectMessageAdapter(Context mcontext) {
+    public ProjectMessageAdapter(Context mcontext, onItemClick calback) {
         this.mcontext = mcontext;
+        listener = calback;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
         } else {
@@ -52,7 +53,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         holder.main_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mcontext.startActivity(new Intent(mcontext, DetailedMessaging.class));
+                listener.onItemClick(position);
             }
         });
     }
@@ -74,4 +75,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             main_container = (RelativeLayout) itemView.findViewById(R.id.main_container);
         }
     }
+
+
 }

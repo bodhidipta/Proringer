@@ -19,12 +19,5 @@ package com.android.llc.proringer.appconstant;
  */
 
 public class ProConstant {
-    private static final ProConstant ourInstance = new ProConstant();
-
-    public static ProConstant getInstance() {
-        return ourInstance;
-    }
-
-    private ProConstant() {
-    }
+    public static boolean cameraRequested = false;
 }

@@ -1,12 +1,19 @@
 package com.android.llc.proringer.activities;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.LoginFilter;
 import android.view.View;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProBoldTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 
@@ -31,6 +38,9 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 public class LogIn extends AppCompatActivity {
     private ProSemiBoldTextView sign_up;
     private ProSemiBoldTextView log_in;
+    private ProLightEditText email, password;
+    private ProgressDialog pgDialog = null;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,12 +62,65 @@ public class LogIn extends AppCompatActivity {
         });
         sign_up = (ProSemiBoldTextView) findViewById(R.id.sign_up);
         log_in = (ProSemiBoldTextView) findViewById(R.id.log_in);
-
+        email = (ProLightEditText) findViewById(R.id.email);
+        password = (ProLightEditText) findViewById(R.id.password);
         log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(GetStarted.LOG_IN_REQUEST);
-                finish();
+
+                if (email.getText().toString().trim().equals("")) {
+                    email.setError("Please enter your email address.");
+                } else if (password.getText().toString().trim().equals("")) {
+                    password.setError("Please enter password.");
+                } else {
+                    ProServiceApiHelper.getInstance(LogIn.this).getUserLoggedIn(
+                            new ProServiceApiHelper.getApiProcessCallback() {
+                                @Override
+                                public void onStart() {
+                                    pgDialog = new ProgressDialog(LogIn.this);
+                                    pgDialog.setTitle("Signing In");
+                                    pgDialog.setMessage("Please wait ..");
+                                    pgDialog.setCancelable(false);
+                                    pgDialog.show();
+                                }
+
+                                @Override
+                                public void onComplete(String message) {
+                                    if (pgDialog != null && pgDialog.isShowing())
+                                        pgDialog.dismiss();
+
+                                    ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
+                                    setResult(GetStarted.RESULT_OK);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String error) {
+                                    if (pgDialog != null && pgDialog.isShowing())
+                                        pgDialog.dismiss();
+                                    new AlertDialog.Builder(LogIn.this)
+                                            .setTitle("Sign in error")
+                                            .setMessage("" + error)
+                                            .setCancelable(false)
+                                            .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                    log_in.performClick();
+                                                }
+                                            })
+                                            .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            })
+                                            .show();
+                                }
+                            },
+                            email.getText().toString().trim(),
+                            password.getText().toString().trim());
+                }
             }
         });
 
@@ -69,5 +132,11 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(GetStarted.RESULT_CANCELED);
+        finish();
     }
 }
