@@ -2,29 +2,61 @@ package com.android.llc.proringer.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.adapter.LocationListAdapter;
 import com.android.llc.proringer.adapter.PostProjectGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectListAdapter;
+import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.utils.ImageTakerActivityCamera;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.PermissionController;
+import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
+import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by bodhidipta on 20/06/17.
@@ -46,15 +78,15 @@ import java.util.LinkedList;
 public class ActivityPostProject extends AppCompatActivity {
     private ProgressBar progress_posting;
     private ProRegularTextView selected_service_category, service_request_category, pro_request_category, selected_service_property;
-    private RecyclerView pro_service_listing;
-    private LinearLayout  content_post_form_submit,container_registration, container_project_description;
+    private RecyclerView pro_service_listing, location_list;
+    private LinearLayout content_post_form_submit, container_registration, container_project_description;
     private RelativeLayout container_location, container_add_photoes;
     private ProgressDialog pgDialog = null;
     private PostProjectListAdapter adapter = null;
     private PostProjectGridAdapter gridAdapter = null;
     private LinkedList<ProCategoryData> serviceListing = null;
     private int step = 0;
-    private String selectedId = "", step1Option = "",
+    private String selectedId = "", step1Option = "", serviceId = "", service_look_type = "", property_type = "", project_stage = "", timeframe_id = "",
             step2option = "What type of work best describe this project?",
             step3option = "What type of property will this be for?",
             step4option = "What is the current status for this project?",
@@ -66,6 +98,16 @@ public class ActivityPostProject extends AppCompatActivity {
             step10option = "WE SENT YOUR PROJECT TO THE PROS!";
     private ImageView header_icon = null;
     private ProRegularTextView header_text = null;
+    private static final int REQUEST_IMAGE_CAPTURE = 5;
+    private static final int PICK_IMAGE = 3;
+    private String mCurrentPhotoPath = "";
+    private ImageView image_pager;
+    private ProRegularEditText project_description_text, zip_code_text;
+    public Address selectedAddressData = null;
+    private Object lock = new Object();
+
+    private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +134,9 @@ public class ActivityPostProject extends AppCompatActivity {
         pro_request_category = (ProRegularTextView) findViewById(R.id.pro_request_category);
         selected_service_property = (ProRegularTextView) findViewById(R.id.selected_service_property);
 
+        location_list = (RecyclerView) findViewById(R.id.location_list);
+        location_list.setLayoutManager(new LinearLayoutManager(ActivityPostProject.this));
+
         pro_service_listing = (RecyclerView) findViewById(R.id.pro_service_listing);
         pro_service_listing.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
 
@@ -101,12 +146,68 @@ public class ActivityPostProject extends AppCompatActivity {
         container_location = (RelativeLayout) findViewById(R.id.container_location);
         container_add_photoes = (RelativeLayout) findViewById(R.id.container_add_photoes);
 
+        first_name = (ProLightEditText) findViewById(R.id.first_name);
+        last_name = (ProLightEditText) findViewById(R.id.last_name);
+        email = (ProLightEditText) findViewById(R.id.email);
+        password = (ProLightEditText) findViewById(R.id.password);
+        confirm_password = (ProLightEditText) findViewById(R.id.confirm_password);
+        zip_code = (ProLightEditText) findViewById(R.id.zip_code);
+
+
+        image_pager = (ImageView) findViewById(R.id.image_pager);
+        project_description_text = (ProRegularEditText) findViewById(R.id.project_description_text);
+        zip_code_text = (ProRegularEditText) findViewById(R.id.zip_code_text);
+
+
         if (ProApplication.getInstance().equals("")) {
             progress_posting.setMax(10);
         } else {
             progress_posting.setMax(9);
         }
 
+        findViewById(R.id.add_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityPostProject.this, PermissionController.class);
+                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
+                startActivityForResult(intent, 200);
+            }
+        });
+
+
+        zip_code_text.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                synchronized (lock) {
+                    if (searchLocationWithZip(s.toString(), new onZipSearchComplete() {
+                        @Override
+                        public void onSearchComplete(List<Address> listAddresses) {
+                            location_list.setAdapter(new LocationListAdapter(ActivityPostProject.this, listAddresses, new LocationListAdapter.onItemelcted() {
+                                @Override
+                                public void onSelect(int pos, Address data) {
+                                    selectedAddressData = data;
+                                }
+                            }));
+                        }
+                    })) {
+
+                    } else {
+                        Toast.makeText(ActivityPostProject.this, "Please enter Zip code for USA or Canada.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+        });
 
         ProServiceApiHelper.getInstance(ActivityPostProject.this).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
@@ -171,41 +272,50 @@ public class ActivityPostProject extends AppCompatActivity {
         findViewById(R.id.continue_project_describing).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                step++;
-                progress_posting.setProgress(step);
-                selected_service_property.setText("" + step8option);
-                container_location.setVisibility(View.VISIBLE);
+                if (project_description_text.getText().toString().trim().equals("")) {
+                    project_description_text.setError("Please enter project description.");
+                } else {
+                    step++;
+                    progress_posting.setProgress(step);
+                    selected_service_property.setText("" + step8option);
+                    container_location.setVisibility(View.VISIBLE);
+                }
+
             }
         });
         findViewById(R.id.continue_location_section).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ProApplication.getInstance().getUserId().equals("")) {
-                    step++;
-                    progress_posting.setProgress(step);
-                    selected_service_property.setText("" + step9option);
-                    /**
-                     * IF no user is login then visible registration process or visible last part
-                     */
-                    container_registration.setVisibility(View.VISIBLE);
+                if (selectedAddressData == null) {
+                    zip_code_text.setError("Please enter a valid zip code to continue.");
                 } else {
-                    findViewById(R.id.back_header).setVisibility(View.GONE);
-                    step++;
-                    progress_posting.setProgress(step);
-                    selected_service_property.setText("" + step10option);
-                    content_post_form_submit.setVisibility(View.VISIBLE);
-                    Logger.printMessage("@steps", "" + step);
+                    if (ProApplication.getInstance().getUserId().equals("")) {
+                        step++;
+                        progress_posting.setProgress(step);
+                        selected_service_property.setText("" + step9option);
+                        /**
+                         * IF no user is login then visible registration process or visible last part
+                         */
+                        container_registration.setVisibility(View.VISIBLE);
+                    } else {
+                        findViewById(R.id.back_header).setVisibility(View.GONE);
+                        step++;
+                        progress_posting.setProgress(step);
+                        selected_service_property.setText("" + step10option);
+                        content_post_form_submit.setVisibility(View.VISIBLE);
+                        Logger.printMessage("@steps", "" + step);
+                    }
                 }
+
             }
         });
         findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                step++;
-                progress_posting.setProgress(step);
-                selected_service_property.setText("" + step10option);
-                content_post_form_submit.setVisibility(View.VISIBLE);
-                findViewById(R.id.back_header).setVisibility(View.GONE);
+                if (validateRegistration()) {
+
+                }
+
             }
         });
         findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {
@@ -241,6 +351,7 @@ public class ActivityPostProject extends AppCompatActivity {
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 1) {
                             step++;
+                            serviceId=data.getId();
                             progress_posting.setProgress(step);
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("", "", "Repair", "");
@@ -259,14 +370,15 @@ public class ActivityPostProject extends AppCompatActivity {
 
                         } else if (step == 2) {
                             step++;
+                            service_look_type=data.getCategory_name();
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step3option);
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Single Family Home", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Condominium", "");
-                            ProCategoryData data3 = new ProCategoryData("", "", "Townhome", "");
-                            ProCategoryData data4 = new ProCategoryData("", "", "Multi-Family", "");
-                            ProCategoryData data5 = new ProCategoryData("", "", "Commercial", "");
+                            ProCategoryData data1 = new ProCategoryData("4", "", "Single Family Home", "");
+                            ProCategoryData data2 = new ProCategoryData("5", "", "Condominium", "");
+                            ProCategoryData data3 = new ProCategoryData("6", "", "Townhome", "");
+                            ProCategoryData data4 = new ProCategoryData("7", "", "Multi-Family", "");
+                            ProCategoryData data5 = new ProCategoryData("1", "", "Commercial", "");
                             dataList.add(data1);
                             dataList.add(data2);
                             dataList.add(data3);
@@ -279,6 +391,8 @@ public class ActivityPostProject extends AppCompatActivity {
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step4option);
 
+                            property_type=data.getId();
+
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("", "", "Ready to hire", "");
                             ProCategoryData data2 = new ProCategoryData("", "", "Planning and Budgeting", "");
@@ -287,14 +401,16 @@ public class ActivityPostProject extends AppCompatActivity {
                             adapter.updateList(dataList);
                         } else if (step == 4) {
                             step++;
+                            project_stage=data.getCategory_name();
+
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step5option);
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Timing Is Flexible", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Within 1 Week", "");
-                            ProCategoryData data3 = new ProCategoryData("", "", "1-2 Week", "");
-                            ProCategoryData data4 = new ProCategoryData("", "", "More Than 2 Weeks", "");
-                            ProCategoryData data5 = new ProCategoryData("", "", "Emergency", "");
+                            ProCategoryData data1 = new ProCategoryData("1", "", "Timing Is Flexible", "");
+                            ProCategoryData data2 = new ProCategoryData("2", "", "Within 1 Week", "");
+                            ProCategoryData data3 = new ProCategoryData("3", "", "1-2 Week", "");
+                            ProCategoryData data4 = new ProCategoryData("4", "", "More Than 2 Weeks", "");
+                            ProCategoryData data5 = new ProCategoryData("5", "", "Emergency", "");
                             dataList.add(data1);
                             dataList.add(data2);
                             dataList.add(data3);
@@ -304,6 +420,7 @@ public class ActivityPostProject extends AppCompatActivity {
                             adapter.updateList(dataList);
                         } else if (step == 5) {
                             step++;
+                            timeframe_id=data.getId();
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step6option);
                             pro_service_listing.setVisibility(View.GONE);
@@ -475,4 +592,284 @@ public class ActivityPostProject extends AppCompatActivity {
     public void onBackPressed() {
         performBack();
     }
+
+
+    private void showImagePickerOption() {
+        new AlertDialog.Builder(ActivityPostProject.this)
+                .setCancelable(true)
+                .setTitle("Property image")
+                .setMessage("please choose image source type.")
+                .setPositiveButton("Gallery", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_PICK);
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            intent.setType("image/*");
+                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+                        }
+                    }
+                })
+                .setNegativeButton("Camera", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        ProConstant.cameraRequested = true;
+                        startActivityForResult(new Intent(ActivityPostProject.this, ImageTakerActivityCamera.class), REQUEST_IMAGE_CAPTURE);
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
+        try {
+            Logger.printMessage("resultCode", "requestCode " + requestCode + " &b resultcode :: " + resultCode);
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (data != null) {
+                            mCurrentPhotoPath = data.getExtras().get("data").toString();
+                            Logger.printMessage("image****", "" + mCurrentPhotoPath);
+                            Glide.with(ActivityPostProject.this).load("file://" + mCurrentPhotoPath).into(new GlideDrawableImageViewTarget(image_pager) {
+                                @Override
+                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                                    super.onResourceReady(resource, animation);
+                                }
+                            });
+                        }
+                    }
+                }, 800);
+            } else if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+                Logger.printMessage("image****", "" + data.getData());
+                try {
+                    Uri uri = data.getData();
+                    File dataFile = new File(getRealPathFromURI(uri));
+                    if (!dataFile.exists())
+                        Logger.printMessage("image****", "data file does not exists");
+                    mCurrentPhotoPath = dataFile.getAbsolutePath();
+                    Glide.with(ActivityPostProject.this).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(image_pager) {
+                        /**
+                         * {@inheritDoc}
+                         * If no {@link GlideAnimation} is given or if the animation does not set the
+                         * {@link Drawable} on the view, the drawable is set using
+                         * {@link ImageView#setImageDrawable(Drawable)}.
+                         *
+                         * @param resource  {@inheritDoc}
+                         * @param animation {@inheritDoc}
+                         */
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                            super.onResourceReady(resource, animation);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (requestCode == 200 && resultCode == RESULT_OK) {
+                showImagePickerOption();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    //file uri to real location in filesystem
+    public String getRealPathFromURI(Uri contentURI) {
+        Cursor cursor = ActivityPostProject.this.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            // Source is Dropbox or other similar local file path
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
+
+
+    private boolean searchLocationWithZip(String key, onZipSearchComplete callback) {
+        Geocoder geocoder = new Geocoder(ActivityPostProject.this, Locale.getDefault());
+        try {
+            final List<Address> listAddresses = geocoder.getFromLocationName(key, 100);
+            if (null != listAddresses && listAddresses.size() > 0) {
+                Logger.printMessage("@locZip", "list has been found :" + listAddresses.size());
+                Logger.printMessage("@locZip", "list has been found :" + listAddresses.get(0).getCountryName());
+
+                if (listAddresses.get(0).getCountryName().contains("United States") ||
+                        listAddresses.get(0).getCountryName().contains("Canada")) {
+                    callback.onSearchComplete(listAddresses);
+                    return true;
+
+                } else {
+                    return false;
+                }
+            } else {
+                Logger.printMessage("@locZip", "No list found yet !");
+                return false;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public interface onZipSearchComplete {
+        void onSearchComplete(List<Address> listAddresses);
+    }
+
+    private boolean validateRegistration() {
+        if (first_name.getText().toString().trim().equals("")) {
+            first_name.setError("Please enter First name.");
+            return false;
+        } else {
+            if (last_name.getText().toString().trim().equals("")) {
+                last_name.setError("Please enter Last name.");
+                return false;
+            } else {
+                if (email.getText().toString().trim().equals("")) {
+                    email.setError("Please enter Email.");
+                    return false;
+
+                } else {
+                    if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
+                        if (password.getText().toString().trim().equals("")) {
+                            password.setError("Please enter Password.");
+                            return false;
+
+                        } else {
+                            if (confirm_password.getText().toString().trim().equals("")) {
+                                confirm_password.setError("Please enter Confirm password.");
+                                return false;
+
+                            } else {
+
+                                if (confirm_password.getText().toString().trim().equals(password.getText().toString().trim())) {
+                                    if (zip_code.getText().toString().trim().equals("")) {
+                                        zip_code.setError("Please enter Zip.");
+                                        return false;
+                                    } else {
+                                        completePostProject();
+                                        return true;
+                                    }
+                                } else {
+                                    confirm_password.setError("Password and Confirm password does not matched.");
+                                    return false;
+                                }
+                            }
+                        }
+                    } else {
+                        email.setError("Please enter valid Email address.");
+                        return false;
+
+                    }
+                }
+            }
+        }
+    }
+
+    private void completePostProject() {
+        ProServiceApiHelper.getInstance(ActivityPostProject.this).postProject(
+                new ProServiceApiHelper.getApiProcessCallback() {
+                    @Override
+                    public void onStart() {
+                        pgDialog = new ProgressDialog(ActivityPostProject.this);
+                        pgDialog.setTitle("Post Project");
+                        pgDialog.setMessage("Please wait ..");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
+
+                    }
+
+                    @Override
+                    public void onComplete(String message) {
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
+
+                        step++;
+                        progress_posting.setProgress(step);
+                        selected_service_property.setText("" + step10option);
+                        content_post_form_submit.setVisibility(View.VISIBLE);
+                        findViewById(R.id.back_header).setVisibility(View.GONE);
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
+                        showErrorDialog("Project post error", "" + error);
+                    }
+                },
+                selectedId,
+                serviceId,
+                service_look_type,
+                property_type,
+                project_stage,
+                timeframe_id,
+                mCurrentPhotoPath,
+                project_description_text.getText().toString().trim(),
+                selectedAddressData.getPostalCode(),
+                selectedAddressData.getSubAdminArea()!=null?selectedAddressData.getSubAdminArea():selectedAddressData.getAdminArea(),
+                selectedAddressData.getAdminArea()!=null?selectedAddressData.getAdminArea():selectedAddressData.getAdminArea(),
+                selectedAddressData.getCountryName().contains("Canada")?"CA":"US",
+                selectedAddressData.getLatitude()+"",
+                selectedAddressData.getLongitude()+"",
+                first_name.getText().toString().trim(),
+                last_name.getText().toString().trim(),
+                email.getText().toString().trim(),
+                confirm_password.getText().toString().trim()
+        );
+        /**
+         * .add("cat_id", params[0])
+         .add("service_id", params[1])
+         .add("service_look_type", params[2])
+         .add("property_type", params[3])
+         .add("project_stage", params[4])
+         .add("timeframe_id", params[5])
+         .add("project_image", params[6])
+         .add("project_details", params[7])
+         .add("project_zipcode", params[8])
+         .add("city", params[9])
+         .add("state", params[10])
+         .add("country", params[11])
+         .add("latitude", params[12])
+         .add("longitude", params[13])
+         .add("f_name", params[14])
+         .add("l_name", params[15])
+         .add("email_id", params[16])
+         .add("password", params[17])
+         */
+    }
+
+    private void showErrorDialog(String title, String message) {
+        new AlertDialog.Builder(ActivityPostProject.this)
+                .setTitle("" + title)
+                .setMessage("" + message)
+                .setCancelable(false)
+                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        validateRegistration();
+                    }
+                })
+                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+
 }

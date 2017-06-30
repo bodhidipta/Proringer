@@ -67,6 +67,7 @@ public class PostProject extends Fragment {
             step9option = "Lets get acquainted",
             step10option = "WE SENT YOUR PROJECT TO THE PROS!";
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -195,6 +196,28 @@ public class PostProject extends Fragment {
                 progress_posting.setProgress(step);
                 selected_service_property.setText("" + step10option);
                 content_post_form_submit.setVisibility(View.VISIBLE);
+
+                /**
+                 * Post it ..
+                 cat_id = category id(from category list api)
+                 service_id = category service id (from category service list api)
+                 service_look_type( static content list)
+                 property_type = property id(from category property list api)
+                 project_stage( static content list)
+                 timeframe_id = project timeframe id (from category timeframe list api)
+                 project_image
+                 project_details
+                 project_zipcode
+                 city
+                 state = state_code(from state table)
+                 country = country_code(from country table)
+                 latitude
+                 longitude
+                 f_name
+                 l_name
+                 email_id
+                 password
+                 */
             }
         });
         view.findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {

@@ -70,6 +70,8 @@ public class ProServiceApiHelper {
     private String homeSchedulerOptionList = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_option";
     private String homeSchedulerValuesList = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_list?user_id=";
     private String updateHomeSchedularOption = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_save";
+    private String inviteFriends = "http://esolz.co.in/lab6/proringer_latest/app_invite_friend";
+    private String postProjectApi = "http://esolz.co.in/lab6/proringer_latest/app_project_post";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -1120,7 +1122,7 @@ public class ProServiceApiHelper {
                                 .addFormDataPart("gutter_clean", "" + params[17]);
                         if (upload_temp != null) {
                             Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
-                            requestBody.addFormDataPart("property_image", upload_temp.getName()+"", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
+                            requestBody.addFormDataPart("property_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
                         }
 
 
@@ -1166,26 +1168,198 @@ public class ProServiceApiHelper {
 
     }
 
-    /**
-     * Interface used to get call back for getServiceList and getCategoryList
-     */
-    public interface onProCategoryListener {
-        void onComplete(LinkedList<ProCategoryData> listdata);
+    public void inviteFriends(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
 
-        void onError(String error);
 
-        void onStartFetch();
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", ProApplication.getInstance().getUserId())
+                                .add("first_name", params[0])
+                                .add("last_name", params[1])
+                                .add("email", params[2])
+                                .add("conf_emailid", params[3])
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .post(requestBody)
+                                .url(inviteFriends)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+
     }
 
-    /**
-     * Interface used to get call back for Normal API execution
-     */
-    public interface getApiProcessCallback {
-        void onStart();
+    public void postProject(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+                File upload_temp;
 
-        void onComplete(String message);
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
 
-        void onError(String error);
+                @Override
+                protected String doInBackground(String... params) {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        try {
+                            if (!params[6].equals("")) {
+                                try {
+                                    Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[6]);
+                                    Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
+                                    upload_temp = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
+                                    upload_temp.createNewFile();
+                                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                    bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                                    byte[] bitmapdata = bos.toByteArray();
+
+                                    FileOutputStream fos = new FileOutputStream(upload_temp);
+                                    fos.write(bitmapdata);
+                                    fos.flush();
+                                    fos.close();
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    return null;
+                                }
+
+                            }
+                            final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+                            MultipartBody.Builder requestBody = new MultipartBody.Builder()
+                                    .setType(MultipartBody.FORM)
+                                    .addFormDataPart("user_id", ProApplication.getInstance().getUserId())
+                                    .addFormDataPart("user_type", "H")
+                                    .addFormDataPart("cat_id", params[0])
+                                    .addFormDataPart("service_id", params[1])
+                                    .addFormDataPart("service_look_type", params[2])
+                                    .addFormDataPart("property_type", params[3])
+                                    .addFormDataPart("project_stage", params[4])
+                                    .addFormDataPart("timeframe_id", params[5])
+                                    .addFormDataPart("project_details", params[7])
+                                    .addFormDataPart("project_zipcode", params[8])
+                                    .addFormDataPart("city","")
+                                    .addFormDataPart("state", "")
+                                    .addFormDataPart("country", params[11])
+                                    .addFormDataPart("latitude", params[12])
+                                    .addFormDataPart("longitude", params[13])
+                                    .addFormDataPart("f_name", params[14])
+                                    .addFormDataPart("l_name", params[15])
+                                    .addFormDataPart("email_id", params[16])
+                                    .addFormDataPart("password", params[17]);
+                            if (upload_temp != null) {
+                                Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
+                                requestBody.addFormDataPart("project_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
+                            }
+
+                            Request request = new Request.Builder()
+                                    .post(requestBody.build())
+                                    .url(postProjectApi)
+                                    .build();
+
+                            Response response = client.newCall(request).execute();
+                            String responseString = response.body().string();
+
+                            Logger.printMessage("home_svhe", "" + responseString);
+                            JSONObject jsonObject = new JSONObject(responseString);
+                            if (jsonObject.getBoolean("response")) {
+                                return jsonObject.getString("message");
+                            } else {
+                                exception = jsonObject.getString("message");
+                                return exception;
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            exception = e.getMessage();
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute (String s){
+                        super.onPostExecute(s);
+                        if (exception.equals("")) {
+                            callback.onComplete(s);
+                        } else {
+                            callback.onError(s);
+                        }
+                    }
+                }.
+
+                executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+            } else{
+                callback.onError("No internet connection found. Please check your internet connection.");
+            }
+
+        }
+
+        /**
+         * Interface used to get call back for getServiceList and getCategoryList
+         */
+        public interface onProCategoryListener {
+            void onComplete(LinkedList<ProCategoryData> listdata);
+
+            void onError(String error);
+
+            void onStartFetch();
+        }
+
+        /**
+         * Interface used to get call back for Normal API execution
+         */
+        public interface getApiProcessCallback {
+            void onStart();
+
+            void onComplete(String message);
+
+            void onError(String error);
+        }
+
     }
-
-}

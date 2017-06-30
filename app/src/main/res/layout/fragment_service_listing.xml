@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGblueShade"
+    android:orientation="vertical">
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/service_request_category"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:text="What kind of service do you need?"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:visibility="visible" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pro_service_listing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+</LinearLayout>

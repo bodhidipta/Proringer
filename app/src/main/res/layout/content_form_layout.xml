@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="10dp"
             android:orientation="vertical"
+            android:padding="10dp"
             android:visibility="gone">
 
             <ImageView
@@ -29,27 +29,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="20dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="20dp"
                 android:text="We look forward to getting your matched with local professionals.We'll keep you inform when a pro replies to your project. Also , you can check your project messages from your dashboard."
                 android:textColor="@color/colorTextDark"
                 android:textSize="12sp" />
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-        android:id="@+id/close_project"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:background="@color/colorAccent"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:text="CLOSE"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
-</RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/close_project"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="CLOSE"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -93,6 +95,7 @@
                         android:background="@drawable/edit_text_selecter"
                         android:hint="First Name"
                         android:inputType="text"
+                        android:id="@+id/first_name"
                         android:padding="10dp"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
@@ -105,6 +108,7 @@
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Last Name"
                         android:inputType="text"
+                        android:id="@+id/last_name"
                         android:padding="10dp"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
@@ -114,6 +118,7 @@
                         android:layout_height="40dp"
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Email"
+                        android:id="@+id/email"
                         android:inputType="textEmailAddress"
                         android:padding="10dp"
                         android:textColor="@color/colorTextDark"
@@ -127,6 +132,7 @@
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Password"
                         android:inputType="textPassword"
+                        android:id="@+id/password"
                         android:padding="10dp"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
@@ -137,6 +143,7 @@
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Confirm Password"
                         android:inputType="textPassword"
+                        android:id="@+id/confirm_password"
                         android:padding="10dp"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
@@ -148,7 +155,8 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Zip Code"
-                        android:inputType="number"
+                        android:inputType="text"
+                        android:id="@+id/zip_code"
                         android:padding="10dp"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
@@ -287,6 +295,7 @@
             android:visibility="visible">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/add_photo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:background="@color/colorAccent"
@@ -306,7 +315,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
-            <android.support.v4.view.ViewPager
+            <ImageView
                 android:id="@+id/image_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
