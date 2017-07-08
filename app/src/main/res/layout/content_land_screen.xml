@@ -39,6 +39,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:id="@+id/profile_pic"
                         android:background="@color/colorPrimary" />
                 </RelativeLayout>
 
@@ -51,6 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="JOHN DOE"
+                        android:id="@+id/name"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
 
@@ -58,6 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Somewhere in earth"
+                        android:id="@+id/address"
                         android:textColor="@color/colorAccent"
                         android:textSize="12sp" />
 
@@ -160,7 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="15"
+                    android:text="0"
                     android:textSize="28sp" />
 
             </LinearLayout>
@@ -214,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="15"
+                    android:text="0"
                     android:textSize="28sp" />
 
             </LinearLayout>
@@ -230,6 +233,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/userInformation"
             android:layout_height="?android:attr/actionBarSize">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -256,6 +260,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/login_settings"
             android:layout_height="?android:attr/actionBarSize">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -282,6 +287,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/notification"
             android:layout_height="?android:attr/actionBarSize">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -308,6 +314,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/home_schedule"
             android:layout_height="?android:attr/actionBarSize">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -334,6 +341,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/invite_a_friend"
             android:layout_height="?android:attr/actionBarSize">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView

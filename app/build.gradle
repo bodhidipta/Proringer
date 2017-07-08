@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'proringer'
             keyPassword '123456'
-            storeFile file('/Users/bodhidipta/Documents/Bodhis workspace/Proringer/proringerKeystore.jks')
+            storeFile file('/Users/manishsethia/Documents/Android projects/Proringer/ProringerKeystore.jks')
             storePassword '123456'
         }
     }

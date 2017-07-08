@@ -49,7 +49,7 @@ public class InviteAfriend extends Fragment {
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         email = (ProLightEditText) view.findViewById(R.id.email);
         confirm_email = (ProLightEditText) view.findViewById(R.id.confirm_email);
-
+        invited_submit=(ProRegularTextView)view.findViewById(R.id.invited_submit);
         invited_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

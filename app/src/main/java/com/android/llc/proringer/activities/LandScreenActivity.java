@@ -38,7 +38,7 @@ import com.android.llc.proringer.viewsmod.NavigationHandler;
 public class LandScreenActivity extends AppCompatActivity {
     ImageView nav_toggle;
     private DrawerLayout mDrawer;
-    private BottomNav bottomNavInstance = null;
+    public BottomNav bottomNavInstance = null;
 
     private Toolbar toolbar = null;
     private Toolbar back_toolbar = null;
@@ -223,7 +223,7 @@ public class LandScreenActivity extends AppCompatActivity {
     }
 
 
-    private void transacNotifications() {
+    public void transacNotifications() {
 
         toggleToolBar(false);
 

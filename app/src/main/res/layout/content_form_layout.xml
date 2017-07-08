@@ -156,8 +156,10 @@
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Zip Code"
                         android:inputType="text"
+                        android:gravity="center_vertical"
                         android:id="@+id/zip_code"
-                        android:padding="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp" />
 
@@ -230,7 +232,7 @@
                 android:background="@drawable/background_white_with_border"
                 android:hint="Zip code"
                 android:padding="4dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
