@@ -23,6 +23,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -105,6 +106,7 @@ public class ActivityPostProject extends AppCompatActivity {
     private ProRegularEditText project_description_text, zip_code_text;
     public Address selectedAddressData = null;
     private Object lock = new Object();
+    private InputMethodManager keyboard;
 
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
 
@@ -119,6 +121,7 @@ public class ActivityPostProject extends AppCompatActivity {
                 performBack();
             }
         });
+        keyboard=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -563,7 +566,7 @@ public class ActivityPostProject extends AppCompatActivity {
             selected_service_property.setText("" + step7option);
             container_location.setVisibility(View.GONE);
         } else if (step == 9) {
-            if (ProApplication.getInstance().equals("")) {
+            if (!ProApplication.getInstance().equals("")) {
                 step--;
                 progress_posting.setProgress(step);
                 selected_service_property.setText("" + step8option);
@@ -753,13 +756,27 @@ public class ActivityPostProject extends AppCompatActivity {
                             } else {
 
                                 if (confirm_password.getText().toString().trim().equals(password.getText().toString().trim())) {
-                                    if (zip_code.getText().toString().trim().equals("")) {
-                                        zip_code.setError("Please enter Zip.");
-                                        return false;
+
+                                    if (confirm_password.getText().toString().trim().length() > 6 &&
+                                            confirm_password.getText().toString().trim().matches(".*[^0-9].*")) {
+                                        if (zip_code.getText().toString().trim().equals("")) {
+                                            zip_code.setError("Please enter Zip.");
+                                            return false;
+                                        } else {
+                                            completePostProject();
+                                            return true;
+                                        }
                                     } else {
-                                        completePostProject();
-                                        return true;
+
+                                        if (confirm_password.getText().toString().trim().length() < 6) {
+                                            confirm_password.setError("Password should contains at least 6 character.");
+                                        } else if (!confirm_password.getText().toString().trim().matches(".*[^0-9].*")) {
+                                            confirm_password.setError("Password should combination of Alphanumeric and Number.");
+                                        }
+                                        return false;
                                     }
+
+
                                 } else {
                                     confirm_password.setError("Password and Confirm password does not matched.");
                                     return false;
@@ -799,6 +816,13 @@ public class ActivityPostProject extends AppCompatActivity {
                         selected_service_property.setText("" + step10option);
                         content_post_form_submit.setVisibility(View.VISIBLE);
                         findViewById(R.id.back_header).setVisibility(View.GONE);
+                        try {
+
+                            keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                     }
 

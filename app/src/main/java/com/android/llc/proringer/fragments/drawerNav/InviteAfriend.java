@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,6 +36,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class InviteAfriend extends Fragment {
     ProLightEditText first_name, last_name, email, confirm_email;
     ProRegularTextView invited_submit;
+    ProgressDialog pgDia;
 
     @Nullable
     @Override
@@ -65,19 +67,22 @@ public class InviteAfriend extends Fragment {
         } else {
             if (last_name.getText().toString().trim().equals("")) {
                 last_name.setError("Last name can not be blank.");
+                last_name.requestFocus();
             } else {
                 if (email.getText().toString().toString().trim().equals("")) {
                     email.setError("Email name can not be blank.");
-
+                    email.requestFocus();
                 } else {
                     if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
                         if (email.getText().toString().trim().equals(confirm_email.getText().toString().trim())) {
                             getSubmitParams();
                         } else {
                             confirm_email.setError("Email and confirm email does not match.");
+                            confirm_email.requestFocus();
                         }
                     } else {
                         email.setError("Invalid email address.");
+                        email.requestFocus();
                     }
                 }
             }
@@ -89,11 +94,17 @@ public class InviteAfriend extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-
+                        pgDia=new ProgressDialog(getActivity());
+                        pgDia.setTitle("Invite Friend");
+                        pgDia.setMessage("Inviting friend. Please wait.");
+                        pgDia.setCancelable(false);
+                        pgDia.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
+                        if (pgDia!=null && pgDia.isShowing())
+                            pgDia.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Invite Friend")
                                 .setMessage("" + message)
@@ -110,6 +121,8 @@ public class InviteAfriend extends Fragment {
 
                     @Override
                     public void onError(String error) {
+                        if (pgDia!=null && pgDia.isShowing())
+                            pgDia.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Invite Friend Error")
                                 .setMessage("" + error)

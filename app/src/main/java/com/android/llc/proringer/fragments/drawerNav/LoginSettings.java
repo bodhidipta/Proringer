@@ -104,7 +104,7 @@ public class LoginSettings extends Fragment {
             if (confirm_new_email.getText().toString().trim().equals(new_email.getText().toString().trim())) {
                 updateCurrentEmail();
             } else {
-                new_email.setError("Confirm email address doesn't match new email address.");
+                confirm_new_email.setError("Confirm email address doesn't match new email address.");
             }
         } else {
             new_email.setError("Invalid email address.");
@@ -175,7 +175,7 @@ public class LoginSettings extends Fragment {
                     }
                 },
                 new_email.getText().toString().trim(),
-                confirm_new_email.toString().trim());
+                confirm_new_email.getText().toString().trim());
     }
 
     /**

@@ -645,6 +645,7 @@ public class ProServiceApiHelper {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
                         try {
+                            callback.onComplete(s);
                             getUserInformation(callback);
                         } catch (Exception io) {
                             io.printStackTrace();
@@ -1297,6 +1298,9 @@ public class ProServiceApiHelper {
                             if (upload_temp != null) {
                                 Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
                                 requestBody.addFormDataPart("project_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
+                            }else{
+                                requestBody.addFormDataPart("project_image", "");
+
                             }
 
                             Request request = new Request.Builder()

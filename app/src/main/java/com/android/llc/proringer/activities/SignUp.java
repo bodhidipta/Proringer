@@ -1,6 +1,7 @@
 package com.android.llc.proringer.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -53,6 +55,7 @@ public class SignUp extends AppCompatActivity {
     private ProSemiBoldTextView complete_submit;
     private LinearLayout main_content;
     private ProgressDialog pgDialog = null;
+    private InputMethodManager keyboard;
     private RelativeLayout container_confirm;
     private ProRegularTextView email_confirmed, contact, mail_resent;
 
@@ -61,7 +64,7 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         sign_up_with_facebook = (RelativeLayout) findViewById(R.id.sign_up_with_facebook);
 
         first_name = (ProLightEditText) findViewById(R.id.first_name);
@@ -218,11 +221,23 @@ public class SignUp extends AppCompatActivity {
                             } else {
 
                                 if (confirm_password.getText().toString().trim().equals(password.getText().toString().trim())) {
-                                    if (zip_code.getText().toString().trim().equals("")) {
-                                        zip_code.setError("Please enter Zip.");
+                                    if (confirm_password.getText().toString().trim().length() > 6 &&
+                                            confirm_password.getText().toString().trim().matches(".*[^0-9].*")) {
+                                        if (zip_code.getText().toString().trim().equals("")) {
+                                            zip_code.setError("Please enter Zip.");
+                                        } else {
+                                            callRegisteration();
+                                        }
                                     } else {
-                                        callRegisteration();
+
+                                        if (confirm_password.getText().toString().trim().length() < 6) {
+                                            confirm_password.setError("Password should contains at least 6 character.");
+                                        } else if (!confirm_password.getText().toString().trim().matches(".*[^0-9].*")) {
+                                            confirm_password.setError("Password should combination of Alphanumeric and Number.");
+                                        }
                                     }
+
+
                                 } else {
                                     confirm_password.setError("Password and Confirm password does not matched.");
                                 }
@@ -259,6 +274,14 @@ public class SignUp extends AppCompatActivity {
                                                                                findViewById(R.id.header_image).setVisibility(View.VISIBLE);
                                                                                findViewById(R.id.header_text).setVisibility(View.GONE);
                                                                                findViewById(R.id.back_header).setVisibility(View.GONE);
+
+                                                                               try {
+                                                                                   keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+                                                                               } catch (Exception e) {
+                                                                                   e.printStackTrace();
+                                                                               }
+
+
                                                                                showDialog("Registration ", "" + message);
 
                                                                            }
@@ -314,4 +337,14 @@ public class SignUp extends AppCompatActivity {
                 .show();
     }
 
+
+    boolean isAlphanumeric(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c < 0x30 || (c >= 0x3a && c <= 0x40) || (c > 0x5a && c <= 0x60) || c > 0x7a)
+                return false;
+        }
+
+        return true;
+    }
 }

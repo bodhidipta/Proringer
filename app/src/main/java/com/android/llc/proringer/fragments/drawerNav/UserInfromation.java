@@ -128,6 +128,8 @@ public class UserInfromation extends Fragment {
                 "");
     }
 
+
+
     private void plotUserInformation() {
         DatabaseHandler.getInstance(getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
