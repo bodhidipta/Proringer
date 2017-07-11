@@ -43,6 +43,7 @@ public class LoginSettings extends Fragment {
     private ProRegularTextView current_email, update_email, change_password;
     private ProLightEditText new_email, confirm_new_email, current_password, new_password, confirm_new_password;
     private ProgressDialog prgress = null;
+    private boolean isShown = false;
 
     @Nullable
     @Override
@@ -78,18 +79,31 @@ public class LoginSettings extends Fragment {
             }
         });
 
-        view.findViewById(R.id.show_password).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_DOWN){
-                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                }else if (event.getAction()==MotionEvent.ACTION_UP){
-                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        view.findViewById(R.id.show_password).setOnClickListener(
+//                new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction()==MotionEvent.ACTION_DOWN){
+//                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+//                }else if (event.getAction()==MotionEvent.ACTION_UP){
+//                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//
+//                }
+//                return true;
+//            }
+//        }
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!isShown) {
+                            current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        } else {
+                            current_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
+                        }
+                    }
                 }
-                return true;
-            }
-        });
+        );
 
     }
 

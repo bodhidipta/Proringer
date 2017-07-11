@@ -671,6 +671,8 @@ public class HomeReminders extends Fragment {
 
                     @Override
                     public void onComplete(String message) {
+
+
                         try {
                             JSONObject mainres = new JSONObject(message);
                             JSONObject options = mainres.getJSONObject("info_array");
@@ -732,6 +734,16 @@ public class HomeReminders extends Fragment {
                     public void onComplete(String message) {
                         if (pgDial != null && pgDial.isShowing())
                             pgDial.dismiss();
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Update Home Scheduler")
+                                .setMessage("Successfully updated Home scheduler options.")
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
 
                     }
 
@@ -825,7 +837,7 @@ public class HomeReminders extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         ProConstant.cameraRequested = true;
-                       startActivityForResult(new Intent(getActivity(), ImageTakerActivityCamera.class), REQUEST_IMAGE_CAPTURE);
+                        startActivityForResult(new Intent(getActivity(), ImageTakerActivityCamera.class), REQUEST_IMAGE_CAPTURE);
                     }
                 })
                 .create()

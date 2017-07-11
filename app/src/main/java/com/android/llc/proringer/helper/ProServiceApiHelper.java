@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
+import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
@@ -20,8 +21,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
@@ -58,7 +61,7 @@ public class ProServiceApiHelper {
     private final String categoryAPI = "http://esolz.co.in/lab6/proringer_latest/app_categorylist";
     private String serviceAPI = "http://esolz.co.in/lab6/proringer_latest/app_catrgoryservice_list";
     private String registrationAPI = "http://esolz.co.in/lab6/proringer_latest/app_signup";
-    private String loginAPi = "http://esolz.co.in/lab6/proringer_latest/app_control/user_login";
+    private String loginAPi = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_login";
     private String forgetPaswword = "http://esolz.co.in/lab6/proringer_latest/app_forgot_password";
     private String resetPaswword = "http://esolz.co.in/lab6/proringer_latest/app_resetpassword";
     private String getUserInformation = "http://esolz.co.in/lab6/proringer_latest/app_userinformation_list";
@@ -331,6 +334,7 @@ public class ProServiceApiHelper {
                                 .add("email", params[0])
                                 .add("password", params[1])
                                 .add("device_type", "a")
+                                .add("user_type", "H")
                                 .build();
 
 
@@ -1249,123 +1253,254 @@ public class ProServiceApiHelper {
 
                 @Override
                 protected String doInBackground(String... params) {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        try {
-                            if (!params[6].equals("")) {
-                                try {
-                                    Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[6]);
-                                    Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
-                                    upload_temp = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
-                                    upload_temp.createNewFile();
-                                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                                    bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                                    byte[] bitmapdata = bos.toByteArray();
+                    try {
+                        if (!params[6].equals("")) {
+                            try {
+                                Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[6]);
+                                Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
+                                upload_temp = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
+                                upload_temp.createNewFile();
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                                byte[] bitmapdata = bos.toByteArray();
 
-                                    FileOutputStream fos = new FileOutputStream(upload_temp);
-                                    fos.write(bitmapdata);
-                                    fos.flush();
-                                    fos.close();
+                                FileOutputStream fos = new FileOutputStream(upload_temp);
+                                fos.write(bitmapdata);
+                                fos.flush();
+                                fos.close();
 
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    return null;
-                                }
-
-                            }
-                            final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
-                            MultipartBody.Builder requestBody = new MultipartBody.Builder()
-                                    .setType(MultipartBody.FORM)
-                                    .addFormDataPart("user_id", ProApplication.getInstance().getUserId())
-                                    .addFormDataPart("user_type", "H")
-                                    .addFormDataPart("cat_id", params[0])
-                                    .addFormDataPart("service_id", params[1])
-                                    .addFormDataPart("service_look_type", params[2])
-                                    .addFormDataPart("property_type", params[3])
-                                    .addFormDataPart("project_stage", params[4])
-                                    .addFormDataPart("timeframe_id", params[5])
-                                    .addFormDataPart("project_details", params[7])
-                                    .addFormDataPart("project_zipcode", params[8])
-                                    .addFormDataPart("city","")
-                                    .addFormDataPart("state", "")
-                                    .addFormDataPart("country", params[11])
-                                    .addFormDataPart("latitude", params[12])
-                                    .addFormDataPart("longitude", params[13])
-                                    .addFormDataPart("f_name", params[14])
-                                    .addFormDataPart("l_name", params[15])
-                                    .addFormDataPart("email_id", params[16])
-                                    .addFormDataPart("password", params[17]);
-                            if (upload_temp != null) {
-                                Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
-                                requestBody.addFormDataPart("project_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
-                            }else{
-                                requestBody.addFormDataPart("project_image", "");
-
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                return null;
                             }
 
-                            Request request = new Request.Builder()
-                                    .post(requestBody.build())
-                                    .url(postProjectApi)
-                                    .build();
-
-                            Response response = client.newCall(request).execute();
-                            String responseString = response.body().string();
-
-                            Logger.printMessage("home_svhe", "" + responseString);
-                            JSONObject jsonObject = new JSONObject(responseString);
-                            if (jsonObject.getBoolean("response")) {
-                                return jsonObject.getString("message");
-                            } else {
-                                exception = jsonObject.getString("message");
-                                return exception;
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            exception = e.getMessage();
                         }
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute (String s){
-                        super.onPostExecute(s);
-                        if (exception.equals("")) {
-                            callback.onComplete(s);
+                        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+                        MultipartBody.Builder requestBody = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("user_id", ProApplication.getInstance().getUserId())
+                                .addFormDataPart("user_type", "H")
+                                .addFormDataPart("cat_id", params[0])
+                                .addFormDataPart("service_id", params[1])
+                                .addFormDataPart("service_look_type", params[2])
+                                .addFormDataPart("property_type", params[3])
+                                .addFormDataPart("project_stage", params[4])
+                                .addFormDataPart("timeframe_id", params[5])
+                                .addFormDataPart("project_details", params[7])
+                                .addFormDataPart("project_zipcode", params[8])
+                                .addFormDataPart("city", "")
+                                .addFormDataPart("state", "")
+                                .addFormDataPart("country", params[11])
+                                .addFormDataPart("latitude", params[12])
+                                .addFormDataPart("longitude", params[13])
+                                .addFormDataPart("f_name", params[14])
+                                .addFormDataPart("l_name", params[15])
+                                .addFormDataPart("email_id", params[16])
+                                .addFormDataPart("password", params[17]);
+                        if (upload_temp != null) {
+                            Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
+                            requestBody.addFormDataPart("project_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
                         } else {
-                            callback.onError(s);
+                            requestBody.addFormDataPart("project_image", "");
+
                         }
+
+                        Request request = new Request.Builder()
+                                .post(requestBody.build())
+                                .url(postProjectApi)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
                     }
-                }.
+                    return null;
+                }
 
-                executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.
 
-            } else{
-                callback.onError("No internet connection found. Please check your internet connection.");
-            }
+                    executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
-        }
-
-        /**
-         * Interface used to get call back for getServiceList and getCategoryList
-         */
-        public interface onProCategoryListener {
-            void onComplete(LinkedList<ProCategoryData> listdata);
-
-            void onError(String error);
-
-            void onStartFetch();
-        }
-
-        /**
-         * Interface used to get call back for Normal API execution
-         */
-        public interface getApiProcessCallback {
-            void onStart();
-
-            void onComplete(String message);
-
-            void onError(String error);
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
         }
 
     }
+
+    public void getSearchArea(String zipCode, final onSearchZipCallback callback) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+                List<AddressData> addressList;
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStartFetch();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                    try {
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        Request request = new Request.Builder()
+                                .url(searchLocalProject)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        JSONObject mainRes = new JSONObject(responseString);
+
+                        if (mainRes.getString("status").equalsIgnoreCase("OK") &&
+                                mainRes.has("results") &&
+                                mainRes.getJSONArray("results").length() > 0) {
+
+
+
+                                addressList = new ArrayList<AddressData>();
+                                JSONArray results = mainRes.getJSONArray("results");
+
+                                for (int i = 0; i < results.length(); i++) {
+
+                                    JSONObject innerIncer = results.getJSONObject(i);
+                                    if (innerIncer.getJSONArray("types").toString().contains("postal_code")) {
+
+                                        String city = "";
+                                        String country = "";
+                                        String state_code = "";
+
+                                        /**
+                                         * loop through address component
+                                         * for country and state
+                                         */
+                                        if (innerIncer.has("address_components") &&
+                                                innerIncer.getJSONArray("address_components").length() > 0) {
+
+                                            JSONArray address_components = innerIncer.getJSONArray("address_components");
+
+                                            for (int j = 0; j < address_components.length(); j++) {
+
+                                                if (address_components.getJSONObject(j).has("types") &&
+                                                        address_components.getJSONObject(j).getJSONArray("types").length() > 0
+                                                        ) {
+
+                                                    JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
+
+                                                    for (int k = 0; k < types.length(); k++) {
+                                                        if (types.getString(k).equals("administrative_area_level_2")) {
+                                                            city = address_components.getJSONObject(j).getString("short_name");
+                                                        }
+
+                                                        if (types.getString(k).equals("administrative_area_level_1")) {
+                                                            state_code = address_components.getJSONObject(j).getString("short_name");
+                                                        }
+
+                                                        if (types.getString(k).equals("country")) {
+                                                            country = address_components.getJSONObject(j).getString("short_name");
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            AddressData data = new AddressData(
+                                                    innerIncer.getString("formatted_address"),
+                                                    state_code,
+                                                    country,
+                                                    params[0]
+                                            );
+                                            data.setCity(city);
+                                            data.setLatitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lat"));
+                                            data.setLongitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lng"));
+                                            addressList.add(data);
+                                        }
+                                    }else{
+                                        exception="Please enter postal code.";
+                                    }
+                                }
+                        }
+
+                        Logger.printMessage("location", "" + responseString);
+                        return responseString;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = "Some error occured while searching entered zip. Please search again.";
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        if (addressList != null && addressList.size() > 0)
+                            callback.onComplete(addressList);
+                    } else {
+                        callback.onError(exception);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, zipCode);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
+    /**
+     * Interface used to get call back for getServiceList and getCategoryList
+     */
+    public interface onProCategoryListener {
+        void onComplete(LinkedList<ProCategoryData> listdata);
+
+        void onError(String error);
+
+        void onStartFetch();
+    }
+
+    /**
+     * Interface used to get call back for search locationList
+     */
+    public interface onSearchZipCallback {
+        void onComplete(List<AddressData> listdata);
+
+        void onError(String error);
+
+        void onStartFetch();
+    }
+
+    /**
+     * Interface used to get call back for Normal API execution
+     */
+    public interface getApiProcessCallback {
+        void onStart();
+
+        void onComplete(String message);
+
+        void onError(String error);
+    }
+
+}

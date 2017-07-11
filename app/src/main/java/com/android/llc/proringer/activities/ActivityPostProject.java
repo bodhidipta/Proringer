@@ -39,6 +39,7 @@ import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.ImageTakerActivityCamera;
 import com.android.llc.proringer.utils.Logger;
@@ -85,6 +86,7 @@ public class ActivityPostProject extends AppCompatActivity {
     private ProgressDialog pgDialog = null;
     private PostProjectListAdapter adapter = null;
     private PostProjectGridAdapter gridAdapter = null;
+    private boolean zipSearchGoing = false;
     private LinkedList<ProCategoryData> serviceListing = null;
     private int step = 0;
     private String selectedId = "", step1Option = "", serviceId = "", service_look_type = "", property_type = "", project_stage = "", timeframe_id = "",
@@ -104,10 +106,10 @@ public class ActivityPostProject extends AppCompatActivity {
     private String mCurrentPhotoPath = "";
     private ImageView image_pager;
     private ProRegularEditText project_description_text, zip_code_text;
-    public Address selectedAddressData = null;
+    public AddressData selectedAddressData = null;
     private Object lock = new Object();
     private InputMethodManager keyboard;
-
+    private LocationListAdapter zip_search_adapter = null;
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
 
 
@@ -121,7 +123,7 @@ public class ActivityPostProject extends AppCompatActivity {
                 performBack();
             }
         });
-        keyboard=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,21 +194,7 @@ public class ActivityPostProject extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 synchronized (lock) {
-                    if (searchLocationWithZip(s.toString(), new onZipSearchComplete() {
-                        @Override
-                        public void onSearchComplete(List<Address> listAddresses) {
-                            location_list.setAdapter(new LocationListAdapter(ActivityPostProject.this, listAddresses, new LocationListAdapter.onItemelcted() {
-                                @Override
-                                public void onSelect(int pos, Address data) {
-                                    selectedAddressData = data;
-                                }
-                            }));
-                        }
-                    })) {
-
-                    } else {
-                        Toast.makeText(ActivityPostProject.this, "Please enter Zip code for USA or Canada.", Toast.LENGTH_SHORT).show();
-                    }
+                    searchLocationWithZip(s.toString());
                 }
 
             }
@@ -354,7 +342,7 @@ public class ActivityPostProject extends AppCompatActivity {
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 1) {
                             step++;
-                            serviceId=data.getId();
+                            serviceId = data.getId();
                             progress_posting.setProgress(step);
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("", "", "Repair", "");
@@ -373,7 +361,7 @@ public class ActivityPostProject extends AppCompatActivity {
 
                         } else if (step == 2) {
                             step++;
-                            service_look_type=data.getCategory_name();
+                            service_look_type = data.getCategory_name();
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step3option);
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
@@ -394,7 +382,7 @@ public class ActivityPostProject extends AppCompatActivity {
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step4option);
 
-                            property_type=data.getId();
+                            property_type = data.getId();
 
                             LinkedList<ProCategoryData> dataList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("", "", "Ready to hire", "");
@@ -404,7 +392,7 @@ public class ActivityPostProject extends AppCompatActivity {
                             adapter.updateList(dataList);
                         } else if (step == 4) {
                             step++;
-                            project_stage=data.getCategory_name();
+                            project_stage = data.getCategory_name();
 
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step5option);
@@ -423,7 +411,7 @@ public class ActivityPostProject extends AppCompatActivity {
                             adapter.updateList(dataList);
                         } else if (step == 5) {
                             step++;
-                            timeframe_id=data.getId();
+                            timeframe_id = data.getId();
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step6option);
                             pro_service_listing.setVisibility(View.GONE);
@@ -697,38 +685,36 @@ public class ActivityPostProject extends AppCompatActivity {
     }
 
 
-    private boolean searchLocationWithZip(String key, onZipSearchComplete callback) {
-        Geocoder geocoder = new Geocoder(ActivityPostProject.this, Locale.getDefault());
-        try {
-            final List<Address> listAddresses = geocoder.getFromLocationName(key, 100);
-            if (null != listAddresses && listAddresses.size() > 0) {
-                Logger.printMessage("@locZip", "list has been found :" + listAddresses.size());
-                Logger.printMessage("@locZip", "list has been found :" + listAddresses.get(0).getCountryName());
+    private void searchLocationWithZip(String key) {
+        ProServiceApiHelper.getInstance(ActivityPostProject.this).getSearchArea(key, new ProServiceApiHelper.onSearchZipCallback() {
+            @Override
+            public void onComplete(List<AddressData> listdata) {
+                zipSearchGoing = false;
+                if (zip_search_adapter == null) {
+                    zip_search_adapter = new LocationListAdapter(ActivityPostProject.this, listdata, new LocationListAdapter.onItemelcted() {
+                        @Override
+                        public void onSelect(int pos, AddressData data) {
+                            selectedAddressData = data;
+                        }
+                    });
 
-                if (listAddresses.get(0).getCountryName().contains("United States") ||
-                        listAddresses.get(0).getCountryName().contains("Canada")) {
-                    callback.onSearchComplete(listAddresses);
-                    return true;
-
+                    location_list.setAdapter(zip_search_adapter);
                 } else {
-                    return false;
+                    zip_search_adapter.updateData(listdata);
                 }
-            } else {
-                Logger.printMessage("@locZip", "No list found yet !");
-                return false;
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+            @Override
+            public void onError(String error) {
 
+            }
+
+            @Override
+            public void onStartFetch() {
+
+            }
+        });
     }
-
-    public interface onZipSearchComplete {
-        void onSearchComplete(List<Address> listAddresses);
-    }
-
     private boolean validateRegistration() {
         if (first_name.getText().toString().trim().equals("")) {
             first_name.setError("Please enter First name.");
@@ -841,12 +827,12 @@ public class ActivityPostProject extends AppCompatActivity {
                 timeframe_id,
                 mCurrentPhotoPath,
                 project_description_text.getText().toString().trim(),
-                selectedAddressData.getPostalCode(),
-                selectedAddressData.getSubAdminArea()!=null?selectedAddressData.getSubAdminArea():selectedAddressData.getAdminArea(),
-                selectedAddressData.getAdminArea()!=null?selectedAddressData.getAdminArea():selectedAddressData.getAdminArea(),
-                selectedAddressData.getCountryName().contains("Canada")?"CA":"US",
-                selectedAddressData.getLatitude()+"",
-                selectedAddressData.getLongitude()+"",
+                selectedAddressData.getZip_code(),
+                selectedAddressData.getCity(),
+                selectedAddressData.getState_code(),
+                selectedAddressData.getCountry_code(),
+                selectedAddressData.getLatitude() + "",
+                selectedAddressData.getLongitude() + "",
                 first_name.getText().toString().trim(),
                 last_name.getText().toString().trim(),
                 email.getText().toString().trim(),

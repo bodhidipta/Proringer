@@ -1,14 +1,17 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Address;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import java.util.LinkedList;
@@ -33,10 +36,11 @@ import java.util.List;
 
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder> {
     private Context mcontext;
-    private List<Address> addressList;
+    private List<AddressData> addressList;
     private onItemelcted listener;
+    private String selected_address = "";
 
-    public LocationListAdapter(Context mcontext, List<Address> addressList, onItemelcted call) {
+    public LocationListAdapter(Context mcontext, List<AddressData> addressList, onItemelcted call) {
         this.mcontext = mcontext;
         this.addressList = addressList;
         listener = call;
@@ -54,28 +58,27 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.txtspinemwnu.setText(addressList.get(position).getLocality());
-        if (addressList.get(position).getSubLocality() != null) {
-            holder.txtspinemwnu.append("," + addressList.get(position).getSubLocality());
+        if (selected_address.equals("")) {
+            holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.txtspinemwnu.setTextColor(Color.parseColor("#333333"));
+        } else {
+            holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#505050"));
+            holder.txtspinemwnu.setTextColor(Color.parseColor("#ffffff"));
         }
-        if (addressList.get(position).getSubAdminArea() != null) {
-            holder.txtspinemwnu.append("," + addressList.get(position).getSubAdminArea());
-        }
-        if (addressList.get(position).getAdminArea() != null) {
-            holder.txtspinemwnu.append("," + addressList.get(position).getAdminArea());
-        }
-
-        if (addressList.get(position).getCountryName() != null) {
-            holder.txtspinemwnu.append("," + addressList.get(position).getCountryName());
-        }
-        if (addressList.get(position).getPostalCode() != null) {
-            holder.txtspinemwnu.append("," + addressList.get(position).getPostalCode());
-        }
+        holder.txtspinemwnu.setText(addressList.get(position).getFormatted_address());
 
         holder.txtspinemwnu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onSelect(position, addressList.get(position));
+                if (addressList.get(position).getCountry_code().equals("US") ||
+                        addressList.get(position).getCountry_code().equals("CA")) {
+                    selected_address = addressList.get(position).getFormatted_address();
+                    listener.onSelect(position, addressList.get(position));
+                    notifyDataSetChanged();
+                } else {
+                    Toast.makeText(mcontext, "Please select zip code for country US or Canada.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -91,6 +94,12 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
     }
 
     public interface onItemelcted {
-        void onSelect(int pos, Address data);
+        void onSelect(int pos, AddressData data);
+    }
+
+    public void updateData(List<AddressData> list) {
+        addressList = list;
+        selected_address = "";
+        notifyDataSetChanged();
     }
 }
