@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
@@ -29,13 +29,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Newsletter"
 
                 android:textColor="@color/colorTextDark"
@@ -51,13 +50,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Chat Messages"
 
                 android:textColor="@color/colorTextDark"
@@ -73,13 +71,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Tips &amp; Articles "
 
                 android:textColor="@color/colorTextDark"
@@ -95,13 +92,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Project Responses"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
@@ -130,13 +126,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Newsletter"
 
                 android:textColor="@color/colorTextDark"
@@ -152,13 +147,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Chat Messages"
 
                 android:textColor="@color/colorTextDark"
@@ -174,13 +168,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Tips &amp; Articles "
 
                 android:textColor="@color/colorTextDark"
@@ -196,13 +189,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="54dp">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Project Responses"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
