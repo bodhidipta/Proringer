@@ -30,7 +30,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="14sp" />
     </LinearLayout>
-<!--fgdrgdgdfrgdrfdfr-->
+<!--tytytrytrytrrt-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pros_list"
         android:layout_width="match_parent"
