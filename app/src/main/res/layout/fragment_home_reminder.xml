@@ -93,12 +93,36 @@
                 android:layout_height="1px"
                 android:layout_weight=".1" />
 
-            <Spinner
-                android:id="@+id/sq_ft"
+            <RelativeLayout
+                android:id="@+id/RLsq_ft"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_sq_ft"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -140,24 +164,77 @@
             android:orientation="horizontal"
             android:weightSum="2.1">
 
-            <Spinner
-                android:id="@+id/graage"
+            <RelativeLayout
+                android:id="@+id/RLGraage"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_graage"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1px"
                 android:layout_weight=".1" />
 
-            <Spinner
-                android:id="@+id/prototype"
+
+
+            <RelativeLayout
+                android:id="@+id/RLPrototype"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_prototype"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -199,24 +276,78 @@
             android:orientation="horizontal"
             android:weightSum="2.1">
 
-            <Spinner
-                android:id="@+id/basement"
+
+
+            <RelativeLayout
+                android:id="@+id/RLBasement"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_basement"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1px"
                 android:layout_weight=".1" />
 
-            <Spinner
-                android:id="@+id/lot_size"
+
+            <RelativeLayout
+                android:id="@+id/RLLot_size"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_lot_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 
@@ -258,24 +389,77 @@
             android:orientation="horizontal"
             android:weightSum="2.1">
 
-            <Spinner
-                android:id="@+id/age_of_roof"
+
+            <RelativeLayout
+                android:id="@+id/RLAge_of_roof"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_age_of_roof"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1px"
                 android:layout_weight=".1" />
 
-            <Spinner
-                android:id="@+id/age_of_ac"
+            <RelativeLayout
+                android:id="@+id/RLAge_of_ac"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_age_of_ac"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -317,12 +501,38 @@
             android:orientation="horizontal"
             android:weightSum="2.1">
 
-            <Spinner
-                android:id="@+id/age_of_furance"
+
+            <RelativeLayout
+                android:id="@+id/RLAge_of_furance"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_age_of_furance"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="0dp"
@@ -380,24 +590,74 @@
             android:orientation="horizontal"
             android:weightSum="2.1">
 
-            <Spinner
-                android:id="@+id/age_water_heater"
+
+            <RelativeLayout
+                android:id="@+id/RLAge_water_heater"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_age_water_heater"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1px"
                 android:layout_weight=".1" />
 
-            <Spinner
-                android:id="@+id/age_window"
+            <RelativeLayout
+                android:id="@+id/RLAge_window"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" >
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_age_window"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white_with_border" />
+
+                <ImageView
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

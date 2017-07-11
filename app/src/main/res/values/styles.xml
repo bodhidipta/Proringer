@@ -29,6 +29,7 @@
 
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:layout_gravity">clip_horizontal</item>
+        <item name="behavior_peekHeight">300dp</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
