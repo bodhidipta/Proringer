@@ -79,6 +79,9 @@ public class HomeReminders extends Fragment {
     private static final int PICK_IMAGE = 3;
     String mCurrentPhotoPath = "";
 
+    String selected_sq_ft_id="0",selected_graage_id="0",selected_prototype_id="0",selected_basement_id="0",selected_lot_size_id="0",
+            selected_age_of_roof_id="0",selected_age_of_ac_id="0",selected_age_of_furance_id="0",selected_age_water_heater_id="0",selected_age_window_id="0";
+
     RelativeLayout RLsq_ft,RLGraage,RLPrototype,RLBasement,RLLot_size,RLAge_of_roof,RLAge_of_ac,RLAge_of_furance,RLAge_water_heater,RLAge_window;
     ProRegularTextView tv_sq_ft,tv_graage,tv_prototype,tv_basement,tv_lot_size,tv_age_of_roof,tv_age_of_ac,tv_age_of_furance,tv_age_water_heater,tv_age_window;
 
@@ -462,8 +465,8 @@ public class HomeReminders extends Fragment {
                             sqftvalue.add("Select SQ. FT.");
                             sqftid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("square_footage").length(); i++) {
-                                sqftvalue.add(jsonObject.getJSONArray("square_footage").getJSONObject(i).getString("value"));
-                                sqftid.add(jsonObject.getJSONArray("square_footage").getJSONObject(i).getString("id"));
+                                sqftvalue.add(jsonObject.getJSONArray("square_footage").getJSONObject(i).getString("value").trim());
+                                sqftid.add(jsonObject.getJSONArray("square_footage").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("square_footage", sqftid);
                             valueList.put("square_footage", sqftvalue);
@@ -471,12 +474,14 @@ public class HomeReminders extends Fragment {
                             RLsq_ft.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("square_footage","square_footage");
 
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(sqftvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_sq_ft.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("square_footage").get(position));
+                                            selected_sq_ft_id=idList.get("square_footage").get(position);
                                         }
                                     });
 
@@ -491,8 +496,8 @@ public class HomeReminders extends Fragment {
                             garagevalue.add("Select Garage");
                             garageid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("garage").length(); i++) {
-                                garagevalue.add(jsonObject.getJSONArray("garage").getJSONObject(i).getString("value"));
-                                garageid.add(jsonObject.getJSONArray("garage").getJSONObject(i).getString("id"));
+                                garagevalue.add(jsonObject.getJSONArray("garage").getJSONObject(i).getString("value").trim());
+                                garageid.add(jsonObject.getJSONArray("garage").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("garage", garageid);
                             valueList.put("garage", garagevalue);
@@ -500,11 +505,13 @@ public class HomeReminders extends Fragment {
                             RLGraage.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("garage","garage");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(garagevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_graage.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("garage").get(position));
+                                            selected_graage_id=idList.get("garage").get(position);
                                         }
                                     });
                                 }
@@ -518,8 +525,8 @@ public class HomeReminders extends Fragment {
                             basementvalue.add("Select Basement");
                             basementid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("basement").length(); i++) {
-                                basementvalue.add(jsonObject.getJSONArray("basement").getJSONObject(i).getString("value"));
-                                basementid.add(jsonObject.getJSONArray("basement").getJSONObject(i).getString("id"));
+                                basementvalue.add(jsonObject.getJSONArray("basement").getJSONObject(i).getString("value").trim());
+                                basementid.add(jsonObject.getJSONArray("basement").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("basement", basementid);
                             valueList.put("basement", basementvalue);
@@ -527,11 +534,13 @@ public class HomeReminders extends Fragment {
                             RLBasement.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("basement","basement");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(basementvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_basement.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("basement").get(position));
+                                            selected_basement_id=idList.get("basement").get(position);
                                         }
                                     });
                                 }
@@ -545,8 +554,8 @@ public class HomeReminders extends Fragment {
                             lot_sizevalue.add("Select Size");
                             lot_sizeid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("lot_size").length(); i++) {
-                                lot_sizevalue.add(jsonObject.getJSONArray("lot_size").getJSONObject(i).getString("value"));
-                                lot_sizeid.add(jsonObject.getJSONArray("lot_size").getJSONObject(i).getString("id"));
+                                lot_sizevalue.add(jsonObject.getJSONArray("lot_size").getJSONObject(i).getString("value").trim());
+                                lot_sizeid.add(jsonObject.getJSONArray("lot_size").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("lot_size", lot_sizeid);
                             valueList.put("lot_size", lot_sizevalue);
@@ -554,11 +563,13 @@ public class HomeReminders extends Fragment {
                             RLLot_size.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("lot_size","lot_size");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(lot_sizevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_lot_size.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("lot_size").get(position));
+                                            selected_lot_size_id=idList.get("lot_size").get(position);
                                         }
                                     });
                                 }
@@ -572,8 +583,8 @@ public class HomeReminders extends Fragment {
                             age_of_roofvalue.add("Select Age");
                             age_of_roofid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("age_of_roof").length(); i++) {
-                                age_of_roofvalue.add(jsonObject.getJSONArray("age_of_roof").getJSONObject(i).getString("value"));
-                                age_of_roofid.add(jsonObject.getJSONArray("age_of_roof").getJSONObject(i).getString("id"));
+                                age_of_roofvalue.add(jsonObject.getJSONArray("age_of_roof").getJSONObject(i).getString("value").trim());
+                                age_of_roofid.add(jsonObject.getJSONArray("age_of_roof").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("age_of_roof", age_of_roofid);
                             valueList.put("age_of_roof", age_of_roofvalue);
@@ -581,11 +592,13 @@ public class HomeReminders extends Fragment {
                             RLAge_of_roof.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("age_of_roof","age_of_roof");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(age_of_roofvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_of_roof.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("age_of_roof").get(position));
+                                            selected_age_of_roof_id=idList.get("age_of_roof").get(position);
                                         }
                                     });
                                 }
@@ -599,8 +612,8 @@ public class HomeReminders extends Fragment {
                             age_of_acvalue.add("Select Age");
                             age_of_acid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("age_of_ac").length(); i++) {
-                                age_of_acvalue.add(jsonObject.getJSONArray("age_of_ac").getJSONObject(i).getString("value"));
-                                age_of_acid.add(jsonObject.getJSONArray("age_of_ac").getJSONObject(i).getString("id"));
+                                age_of_acvalue.add(jsonObject.getJSONArray("age_of_ac").getJSONObject(i).getString("value").trim());
+                                age_of_acid.add(jsonObject.getJSONArray("age_of_ac").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("age_of_ac", age_of_acid);
                             valueList.put("age_of_ac", age_of_acvalue);
@@ -608,11 +621,13 @@ public class HomeReminders extends Fragment {
                             RLAge_of_ac.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("age_of_ac","age_of_ac");
+
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(age_of_acvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_of_ac.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("age_of_ac").get(position));
                                         }
                                     });
                                 }
@@ -627,8 +642,8 @@ public class HomeReminders extends Fragment {
                             age_of_furnancevalue.add("Select Age");
                             age_of_furnanceid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("age_of_furnance").length(); i++) {
-                                age_of_furnancevalue.add(jsonObject.getJSONArray("age_of_furnance").getJSONObject(i).getString("value"));
-                                age_of_furnanceid.add(jsonObject.getJSONArray("age_of_furnance").getJSONObject(i).getString("id"));
+                                age_of_furnancevalue.add(jsonObject.getJSONArray("age_of_furnance").getJSONObject(i).getString("value").trim());
+                                age_of_furnanceid.add(jsonObject.getJSONArray("age_of_furnance").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("age_of_furnance", age_of_furnanceid);
                             valueList.put("age_of_furnance", age_of_furnancevalue);
@@ -636,11 +651,13 @@ public class HomeReminders extends Fragment {
                             RLAge_of_furance.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("age_of_furnance","age_of_furnance");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(age_of_furnancevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_of_furance.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("age_of_furnance").get(position));
+                                            selected_age_of_furance_id=idList.get("age_of_furnance").get(position);
                                         }
                                     });
                                 }
@@ -654,8 +671,8 @@ public class HomeReminders extends Fragment {
                             age_of_water_heatervalue.add("Select Age");
                             age_of_water_heaterid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("age_of_water_heater").length(); i++) {
-                                age_of_water_heatervalue.add(jsonObject.getJSONArray("age_of_water_heater").getJSONObject(i).getString("value"));
-                                age_of_water_heaterid.add(jsonObject.getJSONArray("age_of_water_heater").getJSONObject(i).getString("id"));
+                                age_of_water_heatervalue.add(jsonObject.getJSONArray("age_of_water_heater").getJSONObject(i).getString("value").trim());
+                                age_of_water_heaterid.add(jsonObject.getJSONArray("age_of_water_heater").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("age_of_water_heater", age_of_water_heaterid);
                             valueList.put("age_of_water_heater", age_of_water_heatervalue);
@@ -668,11 +685,13 @@ public class HomeReminders extends Fragment {
                             RLAge_water_heater.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("age_of_water_heater","age_of_water_heater");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(age_of_water_heatervalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_water_heater.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("age_of_water_heater").get(position));
+                                            selected_age_water_heater_id=idList.get("age_of_water_heater").get(position);
                                         }
                                     });
                                 }
@@ -686,8 +705,8 @@ public class HomeReminders extends Fragment {
                             age_of_windowsvalue.add("Select Age");
                             age_of_windowsid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("age_of_windows").length(); i++) {
-                                age_of_windowsvalue.add(jsonObject.getJSONArray("age_of_windows").getJSONObject(i).getString("value"));
-                                age_of_windowsid.add(jsonObject.getJSONArray("age_of_windows").getJSONObject(i).getString("id"));
+                                age_of_windowsvalue.add(jsonObject.getJSONArray("age_of_windows").getJSONObject(i).getString("value").trim());
+                                age_of_windowsid.add(jsonObject.getJSONArray("age_of_windows").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("age_of_windows", age_of_windowsid);
                             valueList.put("age_of_windows", age_of_windowsvalue);
@@ -695,11 +714,13 @@ public class HomeReminders extends Fragment {
                             RLAge_window.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Logger.printMessage("age_of_windows","age_of_windows");
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(age_of_windowsvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_window.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("age_of_windows").get(position));
+                                            selected_age_window_id=idList.get("age_of_windows").get(position);
                                         }
                                     });
                                 }
@@ -713,8 +734,8 @@ public class HomeReminders extends Fragment {
                             property_typevalue.add("Select Property");
                             property_typeid.add("0");
                             for (int i = 0; i < jsonObject.getJSONArray("property_type").length(); i++) {
-                                property_typevalue.add(jsonObject.getJSONArray("property_type").getJSONObject(i).getString("value"));
-                                property_typeid.add(jsonObject.getJSONArray("property_type").getJSONObject(i).getString("id"));
+                                property_typevalue.add(jsonObject.getJSONArray("property_type").getJSONObject(i).getString("value").trim());
+                                property_typeid.add(jsonObject.getJSONArray("property_type").getJSONObject(i).getString("id").trim());
                             }
                             idList.put("property_type", property_typeid);
                             valueList.put("property_type", property_typevalue);
@@ -722,25 +743,23 @@ public class HomeReminders extends Fragment {
                             RLPrototype.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-
-                                    Logger.printMessage("property_type","property_type");
-
                                     BottomSheetGlobalList.getInstatnce(getActivity()).showSiteSelectionDialog(property_typevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_prototype.setText(value);
+                                            Logger.printMessage("value",""+value);
+                                            Logger.printMessage("id",""+idList.get("property_type").get(position));
+                                            selected_prototype_id=idList.get("property_type").get(position);
                                         }
                                     });
                                 }
                             });
 
+                            setOptions();
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                        setOptions();
-
-
                     }
 
                     @Override
@@ -775,42 +794,59 @@ public class HomeReminders extends Fragment {
                     public void onStart() {
 
                     }
-
                     @Override
                     public void onComplete(String message) {
-
-
                         try {
                             JSONObject mainres = new JSONObject(message);
                             JSONObject options = mainres.getJSONObject("info_array");
 
                             year_build.setText(options.getString("year_built"));
 
-                            tv_sq_ft.setText(valueList.get("square_footage").indexOf(options.getJSONObject("square_footage").getString("value")));
-                            tv_graage.setText(valueList.get("garage").indexOf(options.getJSONObject("garage").getString("value")));
-                            tv_prototype.setText(valueList.get("property_type").indexOf(options.getJSONObject("property_type").getString("value")));
-                            tv_basement.setText(valueList.get("basement").indexOf(options.getJSONObject("basement").getString("value")));
-                            tv_lot_size.setText(valueList.get("lot_size").indexOf(options.getJSONObject("lot_size").getString("value")));
-                            tv_age_of_roof.setText(valueList.get("age_of_roof").indexOf(options.getJSONObject("roof_age").getString("value")));
-                            tv_age_of_ac.setText(valueList.get("age_of_ac").indexOf(options.getJSONObject("a/c_age").getString("value")));
-                            tv_age_of_furance.setText(valueList.get("age_of_furnance").indexOf(options.getJSONObject("furnance_age").getString("value")));
-                            tv_age_water_heater.setText(valueList.get("age_of_water_heater").indexOf(options.getJSONObject("water_heater_age").getString("value")));
-                            tv_age_window.setText(valueList.get("age_of_windows").indexOf(options.getJSONObject("window_age").getString("value")));
+//                            tv_sq_ft.setText(valueList.get("square_footage").indexOf(options.getJSONObject("square_footage").getString("value").trim()));
+                            tv_sq_ft.setText(options.getJSONObject("square_footage").getString("value").trim());
+                            selected_sq_ft_id=options.getJSONObject("square_footage").getString("id").trim();
+//                            tv_graage.setText(valueList.get("garage").indexOf(options.getJSONObject("garage").getString("value").trim()));
+                            tv_graage.setText(options.getJSONObject("garage").getString("value").trim());
+                            selected_graage_id=options.getJSONObject("garage").getString("id").trim();
+//                            tv_prototype.setText(valueList.get("property_type").indexOf(options.getJSONObject("property_type").getString("value").trim()));
+                            tv_prototype.setText(options.getJSONObject("property_type").getString("value").trim());
+                            selected_prototype_id=options.getJSONObject("property_type").getString("id").trim();
+//                            tv_basement.setText(valueList.get("basement").indexOf(options.getJSONObject("basement").getString("value").trim()));
+                            tv_basement.setText(options.getJSONObject("basement").getString("value").trim());
+                            selected_basement_id=options.getJSONObject("basement").getString("id").trim();
+//                            tv_lot_size.setText(valueList.get("lot_size").indexOf(options.getJSONObject("lot_size").getString("value").trim()));
+                            tv_lot_size.setText(options.getJSONObject("lot_size").getString("value").trim());
+                            selected_lot_size_id=options.getJSONObject("lot_size").getString("id").trim();
+//                            tv_age_of_roof.setText(valueList.get("age_of_roof").indexOf(options.getJSONObject("roof_age").getString("value").trim()));
+                            tv_age_of_roof.setText(options.getJSONObject("roof_age").getString("value").trim());
+                            selected_age_of_roof_id=options.getJSONObject("roof_age").getString("id").trim();
+//                            tv_age_of_ac.setText(valueList.get("age_of_ac").indexOf(options.getJSONObject("a/c_age").getString("value").trim()));
+                            tv_age_of_ac.setText(options.getJSONObject("a/c_age").getString("value").trim());
+                            selected_age_of_ac_id=options.getJSONObject("a/c_age").getString("id").trim();
+//                            tv_age_of_furance.setText(valueList.get("age_of_furnance").indexOf(options.getJSONObject("furnance_age").getString("value").trim()));
+                            tv_age_of_furance.setText(options.getJSONObject("furnance_age").getString("value").trim());
+                            selected_age_of_furance_id=options.getJSONObject("furnance_age").getString("id").trim();
+//                            tv_age_water_heater.setText(valueList.get("age_of_water_heater").indexOf(options.getJSONObject("water_heater_age").getString("value").trim()));
+                            tv_age_water_heater.setText(options.getJSONObject("water_heater_age").getString("value").trim());
+                            selected_age_water_heater_id=options.getJSONObject("water_heater_age").getString("id").trim();
+//                            tv_age_window.setText(valueList.get("age_of_windows").indexOf(options.getJSONObject("window_age").getString("value").trim()));
+                            tv_age_window.setText(options.getJSONObject("window_age").getString("value").trim());
+                            selected_age_window_id=options.getJSONObject("window_age").getString("id").trim();
 
 
 
-                            ac_filter.setText(options.getString("filter_change"));
+                            ac_filter.setText(options.getString("filter_change").trim());
 
-                            last_water_heater_flush.setText(options.getString("water_heater_flush"));
-                            last_chimney_sweep.setText(options.getString("chimney_sweep"));
+                            last_water_heater_flush.setText(options.getString("water_heater_flush").trim());
+                            last_chimney_sweep.setText(options.getString("chimney_sweep").trim());
 
-                            last_test_for_radon_gas.setText(options.getString("randon_gas"));
-                            Smoke_detector_battery.setText(options.getString("smoke_detector"));
-                            co_detector_battery.setText(options.getString("co_detector"));
-                            last_gutter_clean.setText(options.getString("gutter_clean"));
+                            last_test_for_radon_gas.setText(options.getString("randon_gas").trim());
+                            Smoke_detector_battery.setText(options.getString("smoke_detector").trim());
+                            co_detector_battery.setText(options.getString("co_detector").trim());
+                            last_gutter_clean.setText(options.getString("gutter_clean").trim());
 
-                            if (!options.getString("property_picture").equals(""))
-                                Glide.with(getActivity()).load(options.getString("property_picture")).centerCrop().into(property_image);
+                            if (!options.getString("property_picture").trim().equals(""))
+                                Glide.with(getActivity()).load(options.getString("property_picture").trim()).centerCrop().into(property_image);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -879,7 +915,7 @@ public class HomeReminders extends Fragment {
                                 })
                                 .show();
                     }
-                }
+                },
                 /*
                   .addFormDataPart("user_id", ProApplication.getInstance().getUserId())
                                 .addFormDataPart("year_build", "" + params[0])
@@ -905,27 +941,25 @@ public class HomeReminders extends Fragment {
 
 
 
-
-                ////////////////////////////////////////////////////////////////////////////////
-//                year_build.getText().toString().trim(),
-//                idList.get("square_footage").get(sq_ft.getSelectedItemPosition()),
-//                idList.get("garage").get(graage.getSelectedItemPosition()),
-//                idList.get("property_type").get(prototype.getSelectedItemPosition()),
-//                idList.get("basement").get(basement.getSelectedItemPosition()),
-//                idList.get("lot_size").get(lot_size.getSelectedItemPosition()),
-//                idList.get("age_of_roof").get(age_of_roof.getSelectedItemPosition()),
-//                idList.get("age_of_ac").get(age_of_ac.getSelectedItemPosition()),
-//                idList.get("age_of_furnance").get(age_of_furance.getSelectedItemPosition()),
-//                ac_filter.getText().toString().trim(),
-//                idList.get("age_of_water_heater").get(age_water_heater.getSelectedItemPosition()),
-//                idList.get("age_of_windows").get(age_window.getSelectedItemPosition()),
-//                last_water_heater_flush.getText().toString().trim(),
-//                last_chimney_sweep.getText().toString().trim(),
-//                last_test_for_radon_gas.getText().toString().trim(),
-//                Smoke_detector_battery.getText().toString().trim(),
-//                co_detector_battery.getText().toString().trim(),
-//                last_gutter_clean.getText().toString().trim(),
-//                mCurrentPhotoPath
+                year_build.getText().toString().trim(),
+                selected_sq_ft_id,
+                selected_graage_id,
+                selected_prototype_id,
+                selected_basement_id,
+                selected_lot_size_id,
+                selected_age_of_roof_id,
+                selected_age_of_ac_id,
+                selected_age_of_furance_id,
+                ac_filter.getText().toString().trim(),
+                selected_age_water_heater_id,
+                selected_age_window_id,
+                last_water_heater_flush.getText().toString().trim(),
+                last_chimney_sweep.getText().toString().trim(),
+                last_test_for_radon_gas.getText().toString().trim(),
+                Smoke_detector_battery.getText().toString().trim(),
+                co_detector_battery.getText().toString().trim(),
+                last_gutter_clean.getText().toString().trim(),
+                mCurrentPhotoPath
 
         );
     }
