@@ -30,10 +30,10 @@
             android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/home"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_gravity="right"
-            android:id="@+id/home"
             android:padding="12dp"
             android:src="@drawable/ic_home" />
     </android.support.v7.widget.Toolbar>
@@ -48,10 +48,12 @@
         android:progressTint="@color/colorAccent" />
 
     <LinearLayout
+        android:id="@+id/title_lebel_container"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/selected_service_category"
@@ -79,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="What kind of pro do you need?"
+            android:text="What kind of service do you need?"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
     </LinearLayout>
@@ -95,23 +97,9 @@
         android:textSize="14sp"
         android:visibility="gone" />
 
-    <View
+    <FrameLayout
+        android:id="@+id/container_fragment"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/colorTextDark" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/pro_service_listing"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible" />
-
-        <include layout="@layout/content_form_layout" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
