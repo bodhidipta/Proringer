@@ -34,7 +34,7 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class IndevidualChatAdapter extends RecyclerView.Adapter<IndevidualChatAdapter.ViewHolder> {
+public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mcontext;
     private LinkedList<ChatPojo> dataList;
 
@@ -44,53 +44,75 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<IndevidualChatAd
     }
 
     @Override
-    public IndevidualChatAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        if(viewType==1){
+            return new ViewHolderReceiver(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_receiver, parent, false));
+
+        }else {
+            return new ViewHolderSender(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_sender, parent, false));
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(IndevidualChatAdapter.ViewHolder holder, int position) {
-        if (dataList.get(position).isDateVisible()) {
-            holder.date_header.setVisibility(View.VISIBLE);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-            if (dataList.get(position).getDate().equals(new SimpleDateFormat("dd-MM-yyyy").format(new Date()))) {
-                holder.date_header.setText("Today");
-            } else {
-                holder.date_header.setText(dataList.get(position).getDate());
-            }
-        } else {
-            holder.date_header.setVisibility(View.GONE);
+        switch (holder.getItemViewType()) {
+            case 1:
+                ViewHolderReceiver viewHolderReceiver = (ViewHolderReceiver)holder;
+
+                if (dataList.get(position).isDateVisible()) {
+                    viewHolderReceiver.date_header.setVisibility(View.VISIBLE);
+
+                    if (dataList.get(position).getDate().equals(new SimpleDateFormat("dd-MM-yyyy").format(new Date()))) {
+                        viewHolderReceiver.date_header.setText("Today");
+                    } else {
+                        viewHolderReceiver.date_header.setText(dataList.get(position).getDate());
+                    }
+                } else {
+                    viewHolderReceiver.date_header.setVisibility(View.GONE);
+                }
+
+                if (dataList.get(position).ismessage()) {
+                    viewHolderReceiver.receiver_message.setVisibility(View.VISIBLE);
+                    viewHolderReceiver.receiver_image_cont.setVisibility(View.GONE);
+                } else {
+                    viewHolderReceiver.receiver_image_cont.setVisibility(View.VISIBLE);
+                    viewHolderReceiver.receiver_message.setVisibility(View.GONE);
+                }
+                Glide.with(mcontext).load(dataList.get(position).getImageLink()).centerCrop().into(viewHolderReceiver.receiver_image);
+                break;
+
+            case 2:
+                ViewHolderSender viewHolderSender = (ViewHolderSender)holder;
+
+
+                if (dataList.get(position).isDateVisible()) {
+                    viewHolderSender.date_header.setVisibility(View.VISIBLE);
+
+                    if (dataList.get(position).getDate().equals(new SimpleDateFormat("dd-MM-yyyy").format(new Date()))) {
+                        viewHolderSender.date_header.setText("Today");
+                    } else {
+                        viewHolderSender.date_header.setText(dataList.get(position).getDate());
+                    }
+                } else {
+                    viewHolderSender.date_header.setVisibility(View.GONE);
+                }
+
+
+
+                if (dataList.get(position).ismessage()) {
+                    viewHolderSender.sender_message.setVisibility(View.VISIBLE);
+                    viewHolderSender.sender_image_cont.setVisibility(View.GONE);
+                } else {
+                    viewHolderSender.sender_image_cont.setVisibility(View.VISIBLE);
+                    viewHolderSender.sender_message.setVisibility(View.GONE);
+                    Glide.with(mcontext).load(dataList.get(position).getImageLink()).fitCenter()
+                            .into(viewHolderSender.sender_image);
+                }
+                break;
         }
-
-        if (dataList.get(position).isSender()) {
-            holder.receiver_image_cont.setVisibility(View.GONE);
-            holder.receiver_message.setVisibility(View.GONE);
-
-
-            if (dataList.get(position).ismessage()) {
-                holder.sender_message.setVisibility(View.VISIBLE);
-                holder.sender_image_cont.setVisibility(View.GONE);
-            } else {
-                holder.sender_image_cont.setVisibility(View.VISIBLE);
-                holder.sender_message.setVisibility(View.GONE);
-                Glide.with(mcontext).load(dataList.get(position).getImageLink()).fitCenter()
-                        .into(holder.sender_image);
-            }
-        } else {
-            holder.sender_image_cont.setVisibility(View.GONE);
-            holder.sender_message.setVisibility(View.GONE);
-
-
-            if (dataList.get(position).ismessage()) {
-                holder.receiver_message.setVisibility(View.VISIBLE);
-                holder.receiver_image_cont.setVisibility(View.GONE);
-            } else {
-                holder.receiver_image_cont.setVisibility(View.VISIBLE);
-                holder.receiver_message.setVisibility(View.GONE);
-            }
-            Glide.with(mcontext).load(dataList.get(position).getImageLink()).centerCrop().into(holder.receiver_image);
-        }
-
     }
 
     @Override
@@ -98,24 +120,44 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<IndevidualChatAd
         return dataList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        ProRegularTextView date_header, receiver_message, sender_message, receiver_image_date, sender_image_date;
-        ImageView receiver_image, sender_image;
-        RelativeLayout receiver_image_cont, sender_image_cont;
+    class ViewHolderReceiver extends RecyclerView.ViewHolder {
+        ProRegularTextView date_header, receiver_message, receiver_image_date;
+        ImageView receiver_image;
+        RelativeLayout receiver_image_cont;
 
-        public ViewHolder(View itemView) {
+        public ViewHolderReceiver(View itemView) {
             super(itemView);
             date_header = (ProRegularTextView) itemView.findViewById(R.id.date_header);
             receiver_message = (ProRegularTextView) itemView.findViewById(R.id.receiver_message);
-            sender_message = (ProRegularTextView) itemView.findViewById(R.id.sender_message);
             receiver_image_date = (ProRegularTextView) itemView.findViewById(R.id.receiver_image_date);
-            sender_image_date = (ProRegularTextView) itemView.findViewById(R.id.sender_image_date);
             receiver_image = (ImageView) itemView.findViewById(R.id.receiver_image);
-            sender_image = (ImageView) itemView.findViewById(R.id.sender_image);
             receiver_image_cont = (RelativeLayout) itemView.findViewById(R.id.receiver_image_cont);
+        }
+    }
+
+    class ViewHolderSender extends RecyclerView.ViewHolder {
+        ProRegularTextView date_header, sender_message, sender_image_date;
+        ImageView sender_image;
+        RelativeLayout sender_image_cont;
+
+        public ViewHolderSender(View itemView) {
+            super(itemView);
+            date_header = (ProRegularTextView) itemView.findViewById(R.id.date_header);
+            sender_message = (ProRegularTextView) itemView.findViewById(R.id.sender_message);
+            sender_image_date = (ProRegularTextView) itemView.findViewById(R.id.sender_image_date);
+            sender_image = (ImageView) itemView.findViewById(R.id.sender_image);
             sender_image_cont = (RelativeLayout) itemView.findViewById(R.id.sender_image_cont);
 
+        }
+    }
 
+
+    @Override
+    public int getItemViewType(int position) {
+        if (dataList.get(position).isSender()) {
+                return  2;
+        }else {
+            return 1;
         }
     }
 }

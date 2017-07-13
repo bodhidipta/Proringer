@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="2dp"
-            android:text="Delete\nConcersation"
+            android:text="Delete\nConversation"
             android:textColor="@android:color/white"
             android:textSize="8sp" />
     </LinearLayout>

@@ -76,22 +76,27 @@ public class LandScreenActivity extends AppCompatActivity {
                 Logger.printMessage("Fragmnet_stack", "" + getSupportFragmentManager().getBackStackEntryCount());
                 switch (selected_tag) {
                     case BottomNav.DASHBOARD:
+                        closeDrawer();
                         toggleProMapSearch(false);
                         transactDashBoard();
                         break;
                     case BottomNav.MY_PROJECTS:
+                        closeDrawer();
                         toggleProMapSearch(false);
                         transactMyProjects();
                         break;
                     case BottomNav.MESSAGES:
+                        closeDrawer();
                         toggleProMapSearch(false);
                         transactMessages();
                         break;
                     case BottomNav.FAV_PROS:
+                        closeDrawer();
                         toggleProMapSearch(false);
                         transactFavPros();
                         break;
                     case BottomNav.CREATE_PROJECT:
+                        closeDrawer();
                         toggleProMapSearch(false);
                         toggleToolBar(false);
                         transactCreateProject();

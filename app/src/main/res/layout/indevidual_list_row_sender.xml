@@ -25,18 +25,6 @@
         android:layout_height="wrap_content">
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:id="@+id/receiver_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:maxWidth="250dp"
-            android:padding="10dp"
-            android:text="blah blah blah blah blaaaahhhhh... blaaa . bla bla bla blahhh bla bla bla bla blaaaaaaa.. aa blahh blah and blahhhk."
-            android:textColor="@color/colorTextDark"
-            android:textSize="14sp"
-            android:visibility="gone" />
-
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/sender_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,48 +35,14 @@
             android:text="blah blah blah blah blaaaahhhhh... blaaa . bla bla bla blahhh bla bla bla bla blaaaaaaa.. aa blahh blah and blahhhk."
             android:textColor="@color/colorTextDark"
             android:textSize="14sp"
-            android:visibility="gone" />
-
-        <RelativeLayout
-            android:id="@+id/receiver_image_cont"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/receiver_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_centerInParent="true"
-                android:alpha="0.9"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_download" />
-
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:id="@+id/receiver_image_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:alpha="0.7"
-                android:background="@android:color/background_dark"
-                android:gravity="center"
-                android:padding="2dp"
-                android:text="9:13 PM"
-                android:textColor="@color/colorPrimary"
-                android:textSize="10sp" />
-        </RelativeLayout>
+            android:visibility="visible" />
 
         <RelativeLayout
             android:id="@+id/sender_image_cont"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_alignParentRight="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/sender_image"
