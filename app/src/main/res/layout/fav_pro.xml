@@ -7,6 +7,7 @@
     android:padding="10dp">
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/tv_empty_show"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/colorLightBrick"

@@ -5,15 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,14 +26,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.Toast;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.LocationListAdapter;
 import com.android.llc.proringer.adapter.PostProjectGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectListAdapter;
-import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -49,18 +41,13 @@ import com.android.llc.proringer.utils.PermissionController;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-
 import java.io.File;
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by bodhidipta on 20/06/17.

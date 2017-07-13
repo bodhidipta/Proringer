@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                android:background="@color/colorLightGray"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
+
+                <ImageView
+                    android:id="@+id/img_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="56dp" />
+
+                <RelativeLayout
+                    android:layout_width="200dp"
+                    android:layout_height="56dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/img_likes"
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:padding="15dp"
+                        android:src="@drawable/ic_favorite" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/img_likes">
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:hint="Added to favourite"
+                            android:textSize="12sp" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/RLToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/colorPrimary"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:padding="15dp"
+                    android:src="@drawable/left_slider" />
+
+                <ImageView
+                    android:id="@+id/img_share"
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="15dp"
+                    android:src="@drawable/left_slider" />
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/img_share"
+                    android:layout_toRightOf="@id/img_back"
+                    android:gravity="center"
+                    android:hint="Buuble Granite Roofing Company"
+                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+            </RelativeLayout>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <ImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:background="@color/colorLightGray" />
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_review_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="56dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/colorAccent"
+                        android:gravity="center"
+                        android:text="review pro"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_toLeftOf="@+id/tv_review_btn"
+                        android:layout_toRightOf="@+id/img_profile">
+
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:id="@+id/tv_rate_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.55"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="24sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <RatingBar
+                            android:id="@+id/rbar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_rate_value"
+                            android:layout_marginTop="5dp"
+                            android:numStars="5"
+                            android:rating="4.5"
+                            android:stepSize="0.5" />
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:id="@+id/tv_review_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rbar"
+                            android:layout_marginTop="5dp"
+                            android:text="12"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="12sp" />
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:id="@+id/tv_review_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rbar"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/tv_review_value"
+                            android:text="Review"
+                            android:textSize="12sp" />
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rbar"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_review_name"
+                            android:text="View All"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="12sp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="Buuble Granite Roofing Company"
+                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_name"
+                            android:hint="James Bobblehead"
+                            android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                    </RelativeLayout>
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="2"
+                        android:hint="75021 West High North Divided Ave Grove City,OH 43123"
+                        android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="View More"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/SplitLine_hor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorLightGray" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="left"
+                    android:text="hbjdsjhfdghjngdbfjjgdbhgfjgdbjgjgdbjnjgdbjhjgdbdfjgdbdfhjgdbfdjgdbfdhbjgdbhfjgdbfdhjgdbdhjgdbhjfjgdbfdhjgdbhfhjgdbhfdjgdbfdhjgdbfhjgdbhfdjgdbfdhjgd"
+                    android:textColor="@color/colorHeader"
+                    android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Service"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                        <View
+                            android:id="@+id/SplitLine_hor2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorLightGray" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Roofing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Roofing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Plumbing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Plumbing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Water Restoration"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Water Restoration"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Concrete"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Concrete"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name55"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Roofing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Roofing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Plumbing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Plumbing"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_name7"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Home inspection"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv7"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="More..."
+                                android:textColor="@color/colorAccent"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Business Hours"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <View
+                            android:id="@+id/SplitLine_hor3"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorLightGray" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_monday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="8am-5pm"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_monday"
+                                android:text="Monday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_tuesday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="8am-5pm"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_tuesday"
+                                android:text="Tuesday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_wednesday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="8am-5pm"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_wednesday"
+                                android:text="Wednesday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_thursday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="8am-5pm"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_thursday"
+                                android:text="Thursday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_friday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="8am-5pm"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_friday"
+                                android:text="Friday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_saturday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="Closed"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_saturday"
+                                android:text="Saturday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp">
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/time_sunday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="Closed"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/time_sunday"
+                                android:text="Sunday"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service Area"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="View All"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/SplitLine_hor4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorLightGray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="winchester-on-the-severn,MD"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Linstead-on-the-severn,MD"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Columbus,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Grove City,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Hilliard,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Westerville,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="winchester-on-the-severn,MD"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Linstead-on-the-severn,MD"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Columbus,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Grove City,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Hilliard,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:text="Westerville,OH"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/verified" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="verified"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="20sp" />
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="business"
+                                android:textAllCaps="true"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_contact_pro_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="center"
+                        android:text="contact pro"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

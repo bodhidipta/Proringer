@@ -3,12 +3,15 @@ package com.android.llc.proringer.fragments.bottomNav;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.adapter.SearchProListAdapter;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -29,6 +32,7 @@ import com.android.llc.proringer.activities.LandScreenActivity;
  */
 
 public class FavPros extends Fragment {
+//    private RecyclerView pros_list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +42,11 @@ public class FavPros extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//        pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
+//        pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        pros_list.setAdapter(new SearchProListAdapter(getActivity()));
+
         view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGblueShade"
+    android:orientation="vertical">
+
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/pro_request_category"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="What kind of pro do you need?"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_listing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
