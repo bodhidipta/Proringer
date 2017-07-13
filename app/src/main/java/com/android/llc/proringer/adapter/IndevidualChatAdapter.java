@@ -46,6 +46,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+        ////change////////
         if(viewType==1){
             return new ViewHolderReceiver(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_receiver, parent, false));
 
