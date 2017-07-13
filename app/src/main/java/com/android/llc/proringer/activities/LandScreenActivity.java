@@ -76,18 +76,23 @@ public class LandScreenActivity extends AppCompatActivity {
                 Logger.printMessage("Fragmnet_stack", "" + getSupportFragmentManager().getBackStackEntryCount());
                 switch (selected_tag) {
                     case BottomNav.DASHBOARD:
+                        toggleProMapSearch(false);
                         transactDashBoard();
                         break;
                     case BottomNav.MY_PROJECTS:
+                        toggleProMapSearch(false);
                         transactMyProjects();
                         break;
                     case BottomNav.MESSAGES:
+                        toggleProMapSearch(false);
                         transactMessages();
                         break;
                     case BottomNav.FAV_PROS:
+                        toggleProMapSearch(false);
                         transactFavPros();
                         break;
                     case BottomNav.CREATE_PROJECT:
+                        toggleProMapSearch(false);
                         toggleToolBar(false);
                         transactCreateProject();
                         break;
@@ -105,33 +110,51 @@ public class LandScreenActivity extends AppCompatActivity {
                 switch (tag) {
                     case NavigationHandler.FIND_LOCAL_PROS:
                         closeDrawer();
+                        toggleProMapSearch(true);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactSearchLocalPros();
                         break;
                     case NavigationHandler.USER_INFORMATION:
                         closeDrawer();
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactUserInformation();
                         break;
                     case NavigationHandler.LOGIN_SETTINGS:
                         closeDrawer();
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactLoginSettings();
                         break;
                     case NavigationHandler.NOTIFICATION:
                         closeDrawer();
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transacNotifications();
                         break;
                     case NavigationHandler.HOME_SCHEDUL:
                         closeDrawer();
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactHomeRemainder();
                         break;
                     case NavigationHandler.INVITE_FRIEND:
                         closeDrawer();
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactInviteFriends();
                         break;
+
                     case NavigationHandler.SUPPORT:
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         break;
                     case NavigationHandler.ABOUT:
+                        toggleProMapSearch(false);
+                        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         break;
                     case NavigationHandler.LOGOUT:
+
                         closeDrawer();
                         ProApplication.getInstance().logOut();
                         startActivity(new Intent(LandScreenActivity.this, GetStarted.class));
@@ -143,10 +166,15 @@ public class LandScreenActivity extends AppCompatActivity {
 
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.nav_toggle_icon, null));
 
+        /**
+         * Toolbar icon of search local pro icon
+         */
         findViewById(R.id.search_local_pro_header).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleProMapSearch(true);
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.FIND_LOCAL_PROS);
+                bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                 transactSearchLocalPros();
             }
         });
@@ -182,6 +210,10 @@ public class LandScreenActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * \
+     * Fragment transaction of DashBoard
+     */
     private void transactDashBoard() {
 
         toggleToolBar(false);
@@ -199,6 +231,9 @@ public class LandScreenActivity extends AppCompatActivity {
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
     }
 
+    /**
+     * Fragment transaction for MyProject
+     */
     private void transactMyProjects() {
 
         toggleToolBar(false);
@@ -222,7 +257,9 @@ public class LandScreenActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Fragment transaction for Notification
+     */
     public void transacNotifications() {
 
         toggleToolBar(false);
@@ -246,6 +283,9 @@ public class LandScreenActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Fragment transaction for Favourite Pros
+     */
     private void transactFavPros() {
 
         toggleToolBar(false);
@@ -265,6 +305,9 @@ public class LandScreenActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Fragment transaction for Messages
+     */
     private void transactMessages() {
 
         toggleToolBar(false);
@@ -310,11 +353,13 @@ public class LandScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Transact Local pro list
+     * Fragment transaction for Search Local Pros
      */
     public void transactSearchLocalPros() {
 
         toggleToolBar(false);
+        toggleProMapSearch(true);
+        bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + SearchLocalPro.class.getCanonicalName()) != null) {
             Logger.printMessage("back_stack", "Removed *****" + SearchLocalPro.class.getCanonicalName());
@@ -437,11 +482,19 @@ public class LandScreenActivity extends AppCompatActivity {
         startActivity(new Intent(LandScreenActivity.this, ActivityPostProject.class));
     }
 
+    /**
+     * Redirection to Dashboard fragment transaction
+     */
     public void redirectToDashBoard() {
         bottomNavInstance.highLightSelected(BottomNav.DASHBOARD);
         transactDashBoard();
     }
 
+    /**
+     * Toggle toolbar header for message details
+     *
+     * @param state
+     */
     public void toggleToolBar(boolean state) {
         if (state) {
             back_toolbar.setVisibility(View.VISIBLE);
@@ -494,6 +547,16 @@ public class LandScreenActivity extends AppCompatActivity {
                     mDrawer.closeDrawer(GravityCompat.START);
             }
         });
+    }
+
+    private void toggleProMapSearch(boolean state) {
+        if (!state) {
+            findViewById(R.id.search_local_pro_header_map).setVisibility(View.GONE);
+            findViewById(R.id.search_local_pro_header).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.search_local_pro_header_map).setVisibility(View.VISIBLE);
+            findViewById(R.id.search_local_pro_header).setVisibility(View.GONE);
+        }
     }
 
 }

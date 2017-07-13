@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -78,32 +79,21 @@ public class LoginSettings extends Fragment {
                 validatePasswordInput();
             }
         });
+        view.findViewById(R.id.show_password).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction()==MotionEvent.ACTION_DOWN){
+                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else if (event.getAction()==MotionEvent.ACTION_UP){
+                    current_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    current_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
-        view.findViewById(R.id.show_password).setOnClickListener(
-//                new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction()==MotionEvent.ACTION_DOWN){
-//                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-//                }else if (event.getAction()==MotionEvent.ACTION_UP){
-//                    current_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-//
-//                }
-//                return true;
-//            }
-//        }
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!isShown) {
-                            current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        } else {
-                            current_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-                        }
-                    }
                 }
-        );
+                return true;
+            }
+        });
+
 
     }
 

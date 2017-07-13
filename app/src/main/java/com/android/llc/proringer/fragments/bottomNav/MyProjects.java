@@ -3,11 +3,17 @@ package com.android.llc.proringer.fragments.bottomNav;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.adapter.ProjectListingAdapter;
+import com.android.llc.proringer.pojo.ProjectPostedData;
+
+import java.util.LinkedList;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -32,5 +38,20 @@ public class MyProjects extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.my_projects, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView project_list=(RecyclerView)view.findViewById(R.id.project_list);
+        project_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        LinkedList<ProjectPostedData> datal=new LinkedList<>();
+        datal.add(new ProjectPostedData(true,false,true));
+        datal.add(new ProjectPostedData(false,true,false));
+        datal.add(new ProjectPostedData(true,false,false));
+        datal.add(new ProjectPostedData(false,false,false));
+
+        project_list.setAdapter(new ProjectListingAdapter(getActivity(),datal));
     }
 }

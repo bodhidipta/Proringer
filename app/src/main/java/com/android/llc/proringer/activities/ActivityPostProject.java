@@ -19,9 +19,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -117,12 +119,12 @@ public class ActivityPostProject extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_project_get_started);
-        findViewById(R.id.back_header).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                performBack();
-            }
-        });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,6 +320,13 @@ public class ActivityPostProject extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            performBack();
+        return super.onOptionsItemSelected(item);
     }
 
     private void selectService(String id) {
@@ -715,6 +724,7 @@ public class ActivityPostProject extends AppCompatActivity {
             }
         });
     }
+
     private boolean validateRegistration() {
         if (first_name.getText().toString().trim().equals("")) {
             first_name.setError("Please enter First name.");

@@ -677,11 +677,6 @@ public class HomeReminders extends Fragment {
                             idList.put("age_of_water_heater", age_of_water_heaterid);
                             valueList.put("age_of_water_heater", age_of_water_heatervalue);
 
-
-                            /**
-                             * ******************************** Missing value
-                             */
-
                             RLAge_water_heater.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {

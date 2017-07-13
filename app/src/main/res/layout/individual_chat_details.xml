@@ -4,17 +4,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/chat_background"
     android:orientation="vertical">
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary">
 
-        <ImageView
-            android:id="@+id/tool_back"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_chevron_left" />
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_width="wrap_content"
@@ -25,7 +20,7 @@
             android:text="Individual Message"
             android:textColor="@color/colorTextDark"
             android:textSize="16sp" />
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

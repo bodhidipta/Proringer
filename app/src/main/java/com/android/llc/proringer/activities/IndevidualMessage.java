@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.android.llc.proringer.R;
@@ -40,12 +42,12 @@ public class IndevidualMessage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.individual_chat_details);
-        findViewById(R.id.tool_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         chat_list = (RecyclerView) findViewById(R.id.chat_list);
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         LinkedList<ChatPojo> chatList = new LinkedList<>();
@@ -124,6 +126,14 @@ public class IndevidualMessage extends AppCompatActivity {
 
         Collections.reverse(chatList);
         chat_list.setAdapter(new IndevidualChatAdapter(this, chatList));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            onBackPressed();
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
