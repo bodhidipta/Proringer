@@ -69,7 +69,10 @@ public class PostProjectRegistrationandFinalize extends Fragment {
                     ((ActivityPostProject) getActivity()).last_name = last_name.getText().toString().trim();
                     ((ActivityPostProject) getActivity()).email = email.getText().toString().trim();
                     ((ActivityPostProject) getActivity()).confirm_password = confirm_password.getText().toString().trim();
-                    ((ActivityPostProject) getActivity()).completePostProject();
+                    synchronized (new Object()){
+                        ((ActivityPostProject) getActivity()).completePostProject();
+                    }
+
                 }
 
             }
@@ -111,7 +114,6 @@ public class PostProjectRegistrationandFinalize extends Fragment {
                                             zip_code.setError("Please enter Zip.");
                                             return false;
                                         } else {
-                                            ((ActivityPostProject) getActivity()).completePostProject();
                                             return true;
                                         }
                                     } else {

@@ -5,7 +5,40 @@
     android:layout_height="match_parent"
     android:visibility="visible">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/header_icon"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/icon" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/icon"
+            android:textColor="@color/colorTextDark"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="right"
+            android:padding="12dp"
+            android:src="@drawable/ic_home" />
+    </android.support.v7.widget.Toolbar>
+
     <ScrollView
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/confirm_login"

@@ -79,13 +79,11 @@ public class ActivityPostProject extends AppCompatActivity {
     private ImageView header_icon = null;
     private ProRegularTextView header_text = null;
     public String mCurrentPhotoPath = "";
-    private ImageView image_pager;
     public String project_description_text = "";
     public AddressData selectedAddressData = null;
-    private Object lock = new Object();
     private InputMethodManager keyboard;
 
-    public String first_name, last_name, email, password, confirm_password;
+    public String first_name="", last_name="", email="", password="", confirm_password="";
 
     /**
      * NEW FLOW VARS
@@ -120,7 +118,7 @@ public class ActivityPostProject extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         fragmentPushList = new ArrayList<>();
 
@@ -143,10 +141,6 @@ public class ActivityPostProject extends AppCompatActivity {
         pro_request_category = (ProRegularTextView) findViewById(R.id.pro_request_category);
         selected_service_category = (ProRegularTextView) findViewById(R.id.selected_service_category);
         selected_service_property = (ProRegularTextView) findViewById(R.id.selected_service_property);
-
-
-
-        image_pager = (ImageView) findViewById(R.id.image_pager);
 
 
         if (ProApplication.getInstance().equals("")) {
@@ -236,6 +230,26 @@ public class ActivityPostProject extends AppCompatActivity {
     }
 
     public void completePostProject() {
+
+        Logger.printMessage("@registrationPostPro","selectedCategory :"+selectedCategory.getId());
+        Logger.printMessage("@registrationPostPro","selectedService :"+selectedService.getId());
+        Logger.printMessage("@registrationPostPro","service_look_type :"+service_look_type);
+        Logger.printMessage("@registrationPostPro","property_type :"+property_type);
+        Logger.printMessage("@registrationPostPro","project_stage :"+project_stage);
+        Logger.printMessage("@registrationPostPro","timeframe_id :"+timeframe_id);
+        Logger.printMessage("@registrationPostPro","mCurrentPhotoPath :"+mCurrentPhotoPath);
+        Logger.printMessage("@registrationPostPro","project_description_text :"+project_description_text);
+        Logger.printMessage("@registrationPostPro","selectedAddressData.getZip_code() :"+selectedAddressData.getZip_code());
+        Logger.printMessage("@registrationPostPro","selectedAddressData.getCity() :"+selectedAddressData.getCity());
+        Logger.printMessage("@registrationPostPro","selectedAddressData.getState_code() :"+selectedAddressData.getState_code());
+        Logger.printMessage("@registrationPostPro","selectedAddressData.getCountry_code() :"+selectedAddressData.getCountry_code());
+        Logger.printMessage("@registrationPostPro","selectedAddressData.getLatitude() :"+selectedAddressData.getLatitude());
+        Logger.printMessage("@registrationPostPro"," selectedAddressData.getLongitude() :"+ selectedAddressData.getLongitude());
+        Logger.printMessage("@registrationPostPro"," selectedAddressData.getLongitude() :"+ selectedAddressData.getLongitude());
+        Logger.printMessage("@registrationPostPro"," first_name :"+ first_name);
+        Logger.printMessage("@registrationPostPro","last_name:"+last_name);
+        Logger.printMessage("@registrationPostPro","email:"+email);
+        Logger.printMessage("@registrationPostPro","confirm_password:"+confirm_password);
         ProServiceApiHelper.getInstance(ActivityPostProject.this).postProject(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
@@ -260,7 +274,6 @@ public class ActivityPostProject extends AppCompatActivity {
                             ((PostProjectRegistrationandFinalize) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationandFinalize.class.getCanonicalName())).showProjectPosted();
 
                         }
-                        findViewById(R.id.back_header).setVisibility(View.GONE);
 
                         closeKeypad();
 
@@ -292,6 +305,7 @@ public class ActivityPostProject extends AppCompatActivity {
                 email,
                 confirm_password
         );
+
         /**
          * .add("cat_id", params[0])
          .add("service_id", params[1])
