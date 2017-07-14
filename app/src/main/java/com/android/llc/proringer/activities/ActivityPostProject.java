@@ -32,6 +32,7 @@ import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 /**
@@ -55,13 +56,15 @@ public class ActivityPostProject extends AppCompatActivity {
 
     public FragmentManager fragmentManager = null;
 
+    boolean back = false;
+    boolean forwardStep = false;
+
     private ProgressBar progress_posting;
-    private ProRegularTextView selected_service_category, selected_service_property;
+    public ProRegularTextView selected_service_category, pro_request_category, selected_service_property;
     private LinearLayout content_post_form_submit;
     private ProgressDialog pgDialog = null;
 
     ArrayList<String> fragmentPushList;
-    boolean isBack=false,isForward=false;
 
     private int step = 0;
     private String selectedId = "", step1Option = "", serviceId = "",
@@ -76,8 +79,6 @@ public class ActivityPostProject extends AppCompatActivity {
             step10option = "WE SENT YOUR PROJECT TO THE PROS!";
     private ImageView header_icon = null;
     private ProRegularTextView header_text = null;
-    private static final int REQUEST_IMAGE_CAPTURE = 5;
-    private static final int PICK_IMAGE = 3;
     public String mCurrentPhotoPath = "";
     private ImageView image_pager;
     public String project_description_text = "";
@@ -88,9 +89,14 @@ public class ActivityPostProject extends AppCompatActivity {
     public String first_name, last_name, email, password, confirm_password;
 
     /**
-     * @param savedInstanceState
+     * NEW FLOW VARS
      */
 
+    public LinkedList<ProCategoryData> serviceListing = null;
+    public LinkedList<ProCategoryData> service_look_typeList = null;
+    public LinkedList<ProCategoryData> property_typeList = null;
+    public LinkedList<ProCategoryData> project_stageList = null;
+    public LinkedList<ProCategoryData> selectedServiceList = null;
 
     public ProCategoryData selectedCategory;
     public ProCategoryData selectedService;
@@ -100,7 +106,12 @@ public class ActivityPostProject extends AppCompatActivity {
     public String timeframe_id;
     private int progressStep = 0;
 
-    LinearLayout title_lebel_container;
+    public LinearLayout title_lebel_container;
+
+    /**
+     * For Service and other listing
+     */
+    public boolean isForth = true;
 
 
     @Override
@@ -123,12 +134,14 @@ public class ActivityPostProject extends AppCompatActivity {
             }
         });
 
-        title_lebel_container = (LinearLayout) findViewById(R.id.title_lebel_container);
 
         header_icon = (ImageView) findViewById(R.id.header_icon);
         header_text = (ProRegularTextView) findViewById(R.id.header_text);
 
         progress_posting = (ProgressBar) findViewById(R.id.progress_posting);
+
+        title_lebel_container = (LinearLayout) findViewById(R.id.title_lebel_container);
+        pro_request_category = (ProRegularTextView) findViewById(R.id.pro_request_category);
         selected_service_category = (ProRegularTextView) findViewById(R.id.selected_service_category);
         selected_service_property = (ProRegularTextView) findViewById(R.id.selected_service_property);
 
@@ -149,90 +162,6 @@ public class ActivityPostProject extends AppCompatActivity {
         changeFragmentNext(1);
 
 
-        ///////////////////KLMNGBKLMBVKMLBNVKLMBNKLMBNMKLMNBBNKLHMNBMK,L
-//        findViewById(R.id.add_photo).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ActivityPostProject.this, PermissionController.class);
-//                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
-//                startActivityForResult(intent, 200);
-//            }
-//        });
-
-
-//        ProServiceApiHelper.getInstance(ActivityPostProject.this).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
-//            @Override
-//            public void onComplete(LinkedList<ProCategoryData> listdata) {
-//
-//                if (pgDialog != null && pgDialog.isShowing())
-//                    pgDialog.dismiss();
-//                progress_posting.setProgress(step);
-//
-//                gridAdapter = new PostProjectGridAdapter(ActivityPostProject.this, listdata, new PostProjectGridAdapter.onClickItem() {
-//                    @Override
-//                    public void onSelectItemClick(int position, ProCategoryData data) {
-//                        if (step == 0) {
-//                            step1Option = data.getCategory_name();
-//                            selectedId = data.getId();
-//                            selectService(data.getId());
-//                        }
-//                    }
-//                });
-//                pro_service_listing.setAdapter(gridAdapter);
-//
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                if (pgDialog != null && pgDialog.isShowing())
-//                    pgDialog.dismiss();
-//
-//                new AlertDialog.Builder(ActivityPostProject.this)
-//                        .setTitle("Error")
-//                        .setMessage("" + error)
-//                        .setCancelable(false)
-//                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                        .show();
-//
-//            }
-//
-//            @Override
-//            public void onStartFetch() {
-//                pgDialog = new ProgressDialog(ActivityPostProject.this);
-//                pgDialog.setTitle("Preparing category");
-//                pgDialog.setMessage("Please wait while preparing category list.");
-//                pgDialog.setCancelable(false);
-//                pgDialog.show();
-//
-//            }
-//        });
-
-//        findViewById(R.id.continue_image_section).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                step++;
-//                progress_posting.setProgress(step);
-//                selected_service_property.setText("" + step7option);
-//                container_project_description.setVisibility(View.VISIBLE);
-//
-//            }
-//        });
-
-
-//        findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                /**
-//                 * on close redirect flow to get started screen
-//                 */
-//                finish();
-//            }
-//        });
     }
 
     @Override
@@ -244,28 +173,35 @@ public class ActivityPostProject extends AppCompatActivity {
 
 
     public void performBack() {
-        isBack=true;
+        back = true;
         Logger.printMessage("pop_up", "pop up");
         decreaseStep();
         closeKeypad();
-
+        isForth=false;
         if (fragmentPushList.size() >= 1) {
             if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryList.class.getCanonicalName())) {
                 finish();
-            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectSelectImage.class.getCanonicalName())
-                    || fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectContainDescription.class.getCanonicalName())
-                    || fragmentPushList.get(fragmentPushList.size() - 1).equals(SearchLocation.class.getCanonicalName())
-                    || fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectRegistrationandFinalize.class.getCanonicalName())) {
-
-                if (fragmentManager.getBackStackEntryCount() > 0) {
-                    fragmentManager.popBackStackImmediate();
-                }
-
             } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherList.class.getCanonicalName())) {
 
-                if (isBack){
+                performServiceListingBack();
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectSelectImage.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectSelectImage.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + PostProjectSelectImage.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentPushList.remove(fragmentPushList.size() - 1);
+                Logger.printMessage("@back_service", "Got fragmnet on top after pop :" + getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
 
-                }
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectContainDescription.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectContainDescription.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + PostProjectContainDescription.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentPushList.remove(fragmentPushList.size() - 1);
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(SearchLocation.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + SearchLocation.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + SearchLocation.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentPushList.remove(fragmentPushList.size() - 1);
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectRegistrationandFinalize.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectRegistrationandFinalize.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + PostProjectRegistrationandFinalize.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentPushList.remove(fragmentPushList.size() - 1);
             }
         }
     }
@@ -386,9 +322,8 @@ public class ActivityPostProject extends AppCompatActivity {
     public void changeFragmentNext(int next) {
         switch (next) {
             case 1:
-
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
-                transaction1.add(R.id.container_fragment, new CateGoryList(), "" + CateGoryList.class.getCanonicalName());
+                transaction1.replace(R.id.container_fragment, new CateGoryList(), "" + CateGoryList.class.getCanonicalName());
                 transaction1.addToBackStack("" + CateGoryList.class.getCanonicalName());
                 transaction1.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
@@ -400,9 +335,9 @@ public class ActivityPostProject extends AppCompatActivity {
                 break;
 
             case 2:
-
+                isForth=true;
                 FragmentTransaction transaction2 = fragmentManager.beginTransaction();
-                transaction2.add(R.id.container_fragment, new ServiceAndOtherList(), "" + ServiceAndOtherList.class.getCanonicalName());
+                transaction2.replace(R.id.container_fragment, new ServiceAndOtherList(), "" + ServiceAndOtherList.class.getCanonicalName());
                 transaction2.addToBackStack("" + ServiceAndOtherList.class.getCanonicalName());
                 transaction2.commit();
 
@@ -416,7 +351,7 @@ public class ActivityPostProject extends AppCompatActivity {
             case 3:
 
                 FragmentTransaction transaction3 = fragmentManager.beginTransaction();
-                transaction3.add(R.id.container_fragment, new PostProjectSelectImage(), "" + PostProjectSelectImage.class.getCanonicalName());
+                transaction3.replace(R.id.container_fragment, new PostProjectSelectImage(), "" + PostProjectSelectImage.class.getCanonicalName());
                 transaction3.addToBackStack("" + PostProjectSelectImage.class.getCanonicalName());
                 transaction3.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
@@ -429,7 +364,7 @@ public class ActivityPostProject extends AppCompatActivity {
 
             case 4:
                 FragmentTransaction transaction4 = fragmentManager.beginTransaction();
-                transaction4.add(R.id.container_fragment, new PostProjectContainDescription(), "" + PostProjectContainDescription.class.getCanonicalName());
+                transaction4.replace(R.id.container_fragment, new PostProjectContainDescription(), "" + PostProjectContainDescription.class.getCanonicalName());
                 transaction4.addToBackStack("" + PostProjectContainDescription.class.getCanonicalName());
                 transaction4.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
@@ -444,7 +379,7 @@ public class ActivityPostProject extends AppCompatActivity {
             case 5:
 
                 FragmentTransaction transaction5 = fragmentManager.beginTransaction();
-                transaction5.add(R.id.container_fragment, new SearchLocation(), "" + SearchLocation.class.getCanonicalName());
+                transaction5.replace(R.id.container_fragment, new SearchLocation(), "" + SearchLocation.class.getCanonicalName());
                 transaction5.addToBackStack("" + SearchLocation.class.getCanonicalName());
                 transaction5.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
@@ -457,7 +392,7 @@ public class ActivityPostProject extends AppCompatActivity {
             case 6:
 
                 FragmentTransaction transaction6 = fragmentManager.beginTransaction();
-                transaction6.add(R.id.container_fragment, new PostProjectRegistrationandFinalize(), "" + PostProjectRegistrationandFinalize.class.getCanonicalName());
+                transaction6.replace(R.id.container_fragment, new PostProjectRegistrationandFinalize(), "" + PostProjectRegistrationandFinalize.class.getCanonicalName());
                 transaction6.addToBackStack("" + PostProjectRegistrationandFinalize.class.getCanonicalName());
                 transaction6.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
@@ -470,30 +405,35 @@ public class ActivityPostProject extends AppCompatActivity {
     }
 
     public void increaseStep() {
+        Logger.printMessage("increaseStep", "increaseStep");
         progressStep++;
         progress_posting.setProgress(progressStep);
 
         if (progressStep == 1) {
+            title_lebel_container.setVisibility(View.VISIBLE);
+
+        } else if (progressStep == 2) {
+            pro_request_category.setVisibility(View.GONE);
             selected_service_category.setVisibility(View.VISIBLE);
             selected_service_category.setText(selectedCategory.getCategory_name());
             selected_service_property.setVisibility(View.VISIBLE);
-            selected_service_property.setText("" + step2option);
-        } else if (progressStep == 2) {
-            selected_service_property.setText("" + step3option);
-        } else if (progressStep == 3) {
-            selected_service_property.setText("" + step4option);
-        } else if (progressStep == 4) {
-            selected_service_property.setText("" + step5option);
 
+            selected_service_property.setText("" + step2option);
+        } else if (progressStep == 3) {
+            selected_service_property.setText("" + step3option);
+        } else if (progressStep == 4) {
+            selected_service_property.setText("" + step4option);
         } else if (progressStep == 5) {
-            selected_service_property.setText("" + step6option);
+            selected_service_property.setText("" + step5option);
         } else if (progressStep == 6) {
-            selected_service_property.setText("" + step7option);
+            selected_service_property.setText("" + step6option);
         } else if (progressStep == 7) {
-            selected_service_property.setText("" + step8option);
+            selected_service_property.setText("" + step7option);
         } else if (progressStep == 8) {
-            selected_service_property.setText("" + step9option);
+            selected_service_property.setText("" + step8option);
         } else if (progressStep == 9) {
+            selected_service_property.setText("" + step9option);
+        } else {
             selected_service_property.setText("" + step10option);
         }
     }
@@ -503,24 +443,29 @@ public class ActivityPostProject extends AppCompatActivity {
         progress_posting.setProgress(progressStep);
 
         if (progressStep == 0) {
-            selected_service_category.setVisibility(View.GONE);
-            selected_service_category.setText(selectedCategory.getCategory_name());
-            selected_service_property.setVisibility(View.GONE);
+            title_lebel_container.setVisibility(View.GONE);
+
         } else if (progressStep == 1) {
-            selected_service_property.setText("" + step2option);
+
+            selected_service_category.setVisibility(View.GONE);
+            selected_service_property.setVisibility(View.GONE);
+            pro_request_category.setVisibility(View.VISIBLE);
+
         } else if (progressStep == 2) {
-            selected_service_property.setText("" + step3option);
+            selected_service_property.setText("" + step2option);
         } else if (progressStep == 3) {
-            selected_service_property.setText("" + step4option);
+            selected_service_property.setText("" + step3option);
         } else if (progressStep == 4) {
-            selected_service_property.setText("" + step5option);
+            selected_service_property.setText("" + step4option);
         } else if (progressStep == 5) {
-            selected_service_property.setText("" + step6option);
+            selected_service_property.setText("" + step5option);
         } else if (progressStep == 6) {
-            selected_service_property.setText("" + step7option);
+            selected_service_property.setText("" + step6option);
         } else if (progressStep == 7) {
-            selected_service_property.setText("" + step8option);
+            selected_service_property.setText("" + step7option);
         } else if (progressStep == 8) {
+            selected_service_property.setText("" + step8option);
+        } else {
             selected_service_property.setText("" + step9option);
         }
     }
@@ -533,4 +478,18 @@ public class ActivityPostProject extends AppCompatActivity {
         }
     }
 
+    private void performServiceListingBack() {
+        Logger.printMessage("@back_service", "Got fragmnet on top :" + getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
+        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(ServiceAndOtherList.class.getCanonicalName())
+                &&
+                ((ServiceAndOtherList) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherList.class.getCanonicalName())).step > 0) {
+            ((ServiceAndOtherList) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherList.class.getCanonicalName())).performBack();
+        } else {
+            isForth=true;
+            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + ServiceAndOtherList.class.getCanonicalName())).commit();
+            fragmentManager.popBackStack("" + ServiceAndOtherList.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fragmentPushList.remove(fragmentPushList.size() - 1);
+
+        }
+    }
 }
