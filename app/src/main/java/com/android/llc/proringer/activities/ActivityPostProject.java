@@ -31,6 +31,8 @@ import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by bodhidipta on 20/06/17.
@@ -58,13 +60,16 @@ public class ActivityPostProject extends AppCompatActivity {
     private LinearLayout content_post_form_submit;
     private ProgressDialog pgDialog = null;
 
+    ArrayList<String> fragmentPushList;
+    boolean isBack=false,isForward=false;
+
     private int step = 0;
     private String selectedId = "", step1Option = "", serviceId = "",
             step2option = "What type of work best describe this project?",
             step3option = "What type of property will this be for?",
             step4option = "What is the current status for this project?",
             step5option = "When would you like to start?",
-            step6option = "Add a photo(Optional) ",
+            step6option = "Add a photo(Optional)",
             step7option = "Add details about the project",
             step8option = "Where is the project located",
             step9option = "Lets get acquainted",
@@ -106,6 +111,8 @@ public class ActivityPostProject extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        fragmentPushList = new ArrayList<>();
 
 
         keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -237,17 +244,29 @@ public class ActivityPostProject extends AppCompatActivity {
 
 
     public void performBack() {
-        if (progressStep == 1 || progressStep == 2 || progressStep == 3 || progressStep == 4 || progressStep == 5) {
-            decreaseStep();
-        } else if (progressStep==6||progressStep==7||progressStep==8){
-            closeKeypad();
-            if (getFragmentManager().getBackStackEntryCount() > 0) {
-                getFragmentManager().popBackStack();
-                decreaseStep();
+        isBack=true;
+        Logger.printMessage("pop_up", "pop up");
+        decreaseStep();
+        closeKeypad();
+
+        if (fragmentPushList.size() >= 1) {
+            if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryList.class.getCanonicalName())) {
+                finish();
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectSelectImage.class.getCanonicalName())
+                    || fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectContainDescription.class.getCanonicalName())
+                    || fragmentPushList.get(fragmentPushList.size() - 1).equals(SearchLocation.class.getCanonicalName())
+                    || fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectRegistrationandFinalize.class.getCanonicalName())) {
+
+                if (fragmentManager.getBackStackEntryCount() > 0) {
+                    fragmentManager.popBackStackImmediate();
+                }
+
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherList.class.getCanonicalName())) {
+
+                if (isBack){
+
+                }
             }
-        }
-        else if(progressStep==0){
-            finish();
         }
     }
 
@@ -374,6 +393,10 @@ public class ActivityPostProject extends AppCompatActivity {
                 transaction1.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
+                fragmentPushList.add(CateGoryList.class.getCanonicalName());
+
+                Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
+
                 break;
 
             case 2:
@@ -382,7 +405,11 @@ public class ActivityPostProject extends AppCompatActivity {
                 transaction2.add(R.id.container_fragment, new ServiceAndOtherList(), "" + ServiceAndOtherList.class.getCanonicalName());
                 transaction2.addToBackStack("" + ServiceAndOtherList.class.getCanonicalName());
                 transaction2.commit();
+
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
+
+                fragmentPushList.add(ServiceAndOtherList.class.getCanonicalName());
+                Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
 
@@ -394,6 +421,8 @@ public class ActivityPostProject extends AppCompatActivity {
                 transaction3.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
+                fragmentPushList.add(PostProjectSelectImage.class.getCanonicalName());
+                Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
 
@@ -404,6 +433,10 @@ public class ActivityPostProject extends AppCompatActivity {
                 transaction4.addToBackStack("" + PostProjectContainDescription.class.getCanonicalName());
                 transaction4.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
+
+
+                fragmentPushList.add(PostProjectContainDescription.class.getCanonicalName());
+                Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
 
@@ -416,6 +449,9 @@ public class ActivityPostProject extends AppCompatActivity {
                 transaction5.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
+                fragmentPushList.add(SearchLocation.class.getCanonicalName());
+                Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
+
                 break;
 
             case 6:
@@ -425,6 +461,9 @@ public class ActivityPostProject extends AppCompatActivity {
                 transaction6.addToBackStack("" + PostProjectRegistrationandFinalize.class.getCanonicalName());
                 transaction6.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
+
+                fragmentPushList.add(PostProjectRegistrationandFinalize.class.getCanonicalName());
+                Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
         }
@@ -486,7 +525,7 @@ public class ActivityPostProject extends AppCompatActivity {
         }
     }
 
-    public void closeKeypad(){
+    public void closeKeypad() {
         try {
             keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
         } catch (Exception e) {

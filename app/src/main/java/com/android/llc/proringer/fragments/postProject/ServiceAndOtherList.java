@@ -8,11 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
 import com.android.llc.proringer.adapter.PostProjectListAdapter;
