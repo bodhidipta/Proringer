@@ -61,7 +61,6 @@ public class ActivityPostProject extends AppCompatActivity {
 
     private ProgressBar progress_posting;
     public ProRegularTextView selected_service_category, pro_request_category, selected_service_property;
-    private LinearLayout content_post_form_submit;
     private ProgressDialog pgDialog = null;
 
     ArrayList<String> fragmentPushList;
@@ -145,7 +144,6 @@ public class ActivityPostProject extends AppCompatActivity {
         selected_service_category = (ProRegularTextView) findViewById(R.id.selected_service_category);
         selected_service_property = (ProRegularTextView) findViewById(R.id.selected_service_property);
 
-        content_post_form_submit = (LinearLayout) findViewById(R.id.content_post_form_submit);
 
 
         image_pager = (ImageView) findViewById(R.id.image_pager);
@@ -258,7 +256,10 @@ public class ActivityPostProject extends AppCompatActivity {
                         step++;
                         progress_posting.setProgress(step);
                         selected_service_property.setText("" + step10option);
-                        content_post_form_submit.setVisibility(View.VISIBLE);
+                        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationandFinalize.class.getCanonicalName())){
+                            ((PostProjectRegistrationandFinalize) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationandFinalize.class.getCanonicalName())).showProjectPosted();
+
+                        }
                         findViewById(R.id.back_header).setVisibility(View.GONE);
 
                         closeKeypad();
@@ -272,8 +273,8 @@ public class ActivityPostProject extends AppCompatActivity {
                         showErrorDialog("Project post error", "" + error);
                     }
                 },
-                selectedId,
-                serviceId,
+                selectedCategory.getId(),
+                selectedService.getId(),
                 service_look_type,
                 property_type,
                 project_stage,

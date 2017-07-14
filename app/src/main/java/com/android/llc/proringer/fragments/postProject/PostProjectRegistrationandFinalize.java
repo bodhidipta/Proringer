@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.postProject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,8 +8,11 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.PostedFinishActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
@@ -18,6 +22,8 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
 public class PostProjectRegistrationandFinalize extends Fragment {
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
+    private LinearLayout content_post_form_submit;
+
 
     @Nullable
     @Override
@@ -34,6 +40,7 @@ public class PostProjectRegistrationandFinalize extends Fragment {
         password = (ProLightEditText) view.findViewById(R.id.password);
         confirm_password = (ProLightEditText) view.findViewById(R.id.confirm_password);
         zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
+        content_post_form_submit = (LinearLayout)view.findViewById(R.id.content_post_form_submit);
 
 
         if (ProApplication.getInstance().getUserId().equals("")) {
@@ -45,6 +52,13 @@ public class PostProjectRegistrationandFinalize extends Fragment {
             view.findViewById(R.id.content_post_form_submit).setVisibility(View.VISIBLE);
         }
 
+        view.findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), PostedFinishActivity.class));
+                getActivity().finish();
+            }
+        });
 
         view.findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,5 +139,9 @@ public class PostProjectRegistrationandFinalize extends Fragment {
                 }
             }
         }
+    }
+
+    public void showProjectPosted(){
+        content_post_form_submit.setVisibility(View.VISIBLE);
     }
 }
