@@ -6,6 +6,7 @@
     <color name="colorHeader">#7c7c7c</color>
     <color name="colorTextDark">#505050</color>
     <color name="colorTextBlack">#000000</color>
+    <color name="colorTextLightGreen">#EDF9F1</color>
     <color name="colorSelectedDark">#656565</color>
     <color name="colorGlobalIcons">#727272</color>
     <color name="colorBGblueShade">#f3f5f9</color>
