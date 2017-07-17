@@ -10,7 +10,6 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-
 import java.util.LinkedList;
 
 /**
