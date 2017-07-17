@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBGblueShade"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
         android:id="@+id/tv_empty_show"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorLightBrick"
         android:gravity="center"
         android:text="You have not added any pros to your favourite."
@@ -17,11 +19,13 @@
         android:textSize="14sp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorGreen"
         android:id="@+id/find_local_pros"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorGreen"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -39,4 +43,10 @@
             android:textColor="@color/colorPrimary"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pros_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

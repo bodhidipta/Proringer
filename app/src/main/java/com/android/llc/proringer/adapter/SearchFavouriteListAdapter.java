@@ -15,10 +15,10 @@ import com.android.llc.proringer.activities.ProjectDetailsActivity;
  * Created by su on 7/13/17.
  */
 
-public class SearchFavouriteAdapter extends RecyclerView.Adapter<SearchFavouriteAdapter.ViewHolder> {
+public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavouriteListAdapter.ViewHolder> {
     private Context mcontext = null;
 
-    public SearchFavouriteAdapter(Context mcontext) {
+    public SearchFavouriteListAdapter(Context mcontext) {
         this.mcontext = mcontext;
     }
 

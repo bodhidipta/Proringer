@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.adapter.SearchFavouriteListAdapter;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 
 /**
@@ -32,7 +33,7 @@ import com.android.llc.proringer.adapter.SearchProListAdapter;
  */
 
 public class FavPros extends Fragment {
-//    private RecyclerView pros_list;
+    private RecyclerView pros_list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,9 +44,13 @@ public class FavPros extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
-//        pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        pros_list.setAdapter(new SearchProListAdapter(getActivity()));
+        view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
+
+        pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
+        pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        pros_list.setAdapter(new SearchFavouriteListAdapter(getActivity()));
+
+
 
         view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
             @Override
