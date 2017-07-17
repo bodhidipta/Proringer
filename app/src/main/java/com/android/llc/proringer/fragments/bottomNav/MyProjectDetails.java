@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments;
+package com.android.llc.proringer.fragments.bottomNav;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
