@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.MyProjectDetails;
@@ -270,7 +269,7 @@ public class LandScreenActivity extends AppCompatActivity {
      */
     public void transactMyProjectsDetails() {
 
-        toggleToolBar(false);
+        toggleToolBar(true);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + MyProjectDetails.class.getCanonicalName()) != null) {
             Logger.printMessage("back_stack", "Removed *****" + MyProjectDetails.class.getCanonicalName());

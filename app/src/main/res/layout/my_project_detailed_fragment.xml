@@ -1,355 +1,451 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container_confirm"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBGblueShade"
-    >
-
-    <RelativeLayout
-        android:id="@+id/toolbar"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/colorBGblueShade"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <ImageView
-            android:id="@+id/tool_back"
-            android:padding="10dp"
-            android:layout_width="54dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_chevron_left" />
-
-        <ImageView
-            android:id="@+id/header_icon"
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-           android:layout_centerInParent="true"
-            android:src="@drawable/icon" />
-
-        <ImageView
-            android:id="@+id/home"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_alignParentRight="true"
-            android:padding="12dp"
-            android:src="@drawable/ic_home" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_below="@+id/toolbar"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
-            android:id="@+id/header_text"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Project Details"
-            android:textColor="@color/colorTextDark"
-            android:background="@drawable/background_white_with_border"
-            android:textSize="18sp"
-        />
+            android:orientation="vertical"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
+            >
 
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Posted In"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
+            <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
+                android:id="@+id/header_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="10001"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="Project Details"
+                android:textColor="@color/colorTextDark"
+                android:textSize="18sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Posted In"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="10001"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Project"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="Roofing"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Service"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="Asphalt"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Type"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/proSemiBoldTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="Installation"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Property"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="Single Family Home"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Posted In"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="Planning and Budgeting"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Type"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="Installation"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Posted In"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:text="More than 2 weeks"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Project Image"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorLightGray" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clipToPadding="false"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_white_with_border"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="15dp"
+                    android:text="Description"
+                    android:textSize="16sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/background_light_green_with_border"
+                    android:gravity="left"
+                    android:padding="15dp"
+                    android:text="Lorem ipsum dolor sit amet,consectetur adipiscing elit.Nulla nec tellus id turpis malesuada sollicitudin Etiam lectus magna iaculis quis tortor ultricies,feugiat dapibus augue"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:weightSum="3">
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:text="Edit"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorGreen"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:text="Renew"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorHeader"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:text="Delete"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
 
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Project"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="Roofing"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Service"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="Asphalt"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Type"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:id="@+id/proSemiBoldTextView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@drawable/background_light_green_with_border"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:text="Installation"
-                android:textSize="16sp" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Property"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="Single Family Home"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Posted In"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="Planning and Budgeting"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Type"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="Installation"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="Posted In"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="3"
-                android:text="More than 2 weeks"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+    </ScrollView>
