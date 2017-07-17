@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.android.llc.proringer.utils.Logger;
 
 import java.util.LinkedList;
 
@@ -46,6 +48,24 @@ public class MyProjects extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView project_list=(RecyclerView)view.findViewById(R.id.project_list);
         project_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ProServiceApiHelper.getInstance(getActivity()).getMyProjectList(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onComplete(String message) {
+
+                Logger.printMessage("message",""+message);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
 
         LinkedList<ProjectPostedData> datal=new LinkedList<>();
         datal.add(new ProjectPostedData(true,false,true));
