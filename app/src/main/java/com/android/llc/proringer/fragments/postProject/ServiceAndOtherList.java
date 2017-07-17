@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
-import com.android.llc.proringer.adapter.PostProjectListAdapter;
+import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 
@@ -27,7 +27,7 @@ import java.util.LinkedList;
 public class ServiceAndOtherList extends Fragment {
     private ProgressDialog pgDialog;
     private RecyclerView service_list;
-    private PostProjectListAdapter adapter;
+    private PostProjectServiceAndOtherListAdapter adapter;
     public int step = 0;
 
 
@@ -96,9 +96,9 @@ public class ServiceAndOtherList extends Fragment {
     }
 
     private void initAdapter(LinkedList<ProCategoryData> itemData) {
-        adapter = new PostProjectListAdapter(getActivity(),
-                itemData, PostProjectListAdapter.TYPE_LIST,
-                new PostProjectListAdapter.onClickItem() {
+        adapter = new PostProjectServiceAndOtherListAdapter(getActivity(),
+                itemData, PostProjectServiceAndOtherListAdapter.TYPE_LIST,
+                new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         ((ActivityPostProject) getActivity()).isForth=true;

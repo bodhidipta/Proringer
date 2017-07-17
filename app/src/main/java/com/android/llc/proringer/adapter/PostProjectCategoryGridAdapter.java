@@ -31,51 +31,51 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class PostProjectListAdapter extends RecyclerView.Adapter<PostProjectListAdapter.ViewHolder> {
+public class PostProjectCategoryGridAdapter extends RecyclerView.Adapter<PostProjectCategoryGridAdapter.ViewHolder> {
     private Context mcontext;
     private LinkedList<ProCategoryData> itemList;
     private onClickItem listener;
-    public static final int TYPE_GRID = 0;
-    public static final int TYPE_LIST = 1;
-    private int suppliedType = 0;
 
-    public PostProjectListAdapter(Context mcontext, LinkedList<ProCategoryData> itemList, int type, onClickItem listener) {
+
+    public PostProjectCategoryGridAdapter(Context mcontext, LinkedList<ProCategoryData> itemList, onClickItem listener) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.listener = listener;
-        suppliedType = type;
+
     }
 
     @Override
-    public PostProjectListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PostProjectCategoryGridAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.post_project_category_row, parent, false));
+        return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.post_project_category_grid_row, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(PostProjectListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(PostProjectCategoryGridAdapter.ViewHolder holder, final int position) {
+
 
         holder.item_.setText(itemList.get(position).getCategory_name());
-        holder.item_.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onSelectItemClick(position, itemList.get(position));
-                }
-            });
+        Glide.with(mcontext).load(itemList.get(position).getCategory_image()).centerCrop().into(holder.image_);
+        holder.image_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onSelectItemClick(position, itemList.get(position));
+            }
+        });
 
 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView item_;
+        ImageView image_;
 
         public ViewHolder(View itemView) {
             super(itemView);
             item_ = (ProRegularTextView) itemView.findViewById(R.id.item_);
+            image_ = (ImageView) itemView.findViewById(R.id.image);
         }
     }
-
-
 
     public void updateList(LinkedList<ProCategoryData> list) {
         itemList = list;

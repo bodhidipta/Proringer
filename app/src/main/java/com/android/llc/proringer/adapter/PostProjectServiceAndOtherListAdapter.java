@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import com.bumptech.glide.Glide;
 
 import java.util.LinkedList;
 
@@ -31,51 +29,51 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class PostProjectGridAdapter extends RecyclerView.Adapter<PostProjectGridAdapter.ViewHolder> {
+public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<PostProjectServiceAndOtherListAdapter.ViewHolder> {
     private Context mcontext;
     private LinkedList<ProCategoryData> itemList;
     private onClickItem listener;
+    public static final int TYPE_GRID = 0;
+    public static final int TYPE_LIST = 1;
+    private int suppliedType = 0;
 
-
-    public PostProjectGridAdapter(Context mcontext, LinkedList<ProCategoryData> itemList, onClickItem listener) {
+    public PostProjectServiceAndOtherListAdapter(Context mcontext, LinkedList<ProCategoryData> itemList, int type, onClickItem listener) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.listener = listener;
-
+        suppliedType = type;
     }
 
     @Override
-    public PostProjectGridAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PostProjectServiceAndOtherListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.post_project_category_grid_row, parent, false));
+            return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.post_project_category_row, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(PostProjectGridAdapter.ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(PostProjectServiceAndOtherListAdapter.ViewHolder holder, final int position) {
 
         holder.item_.setText(itemList.get(position).getCategory_name());
-        Glide.with(mcontext).load(itemList.get(position).getCategory_image()).centerCrop().into(holder.image_);
-        holder.image_.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onSelectItemClick(position, itemList.get(position));
-            }
-        });
+        holder.item_.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onSelectItemClick(position, itemList.get(position));
+                }
+            });
 
 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView item_;
-        ImageView image_;
 
         public ViewHolder(View itemView) {
             super(itemView);
             item_ = (ProRegularTextView) itemView.findViewById(R.id.item_);
-            image_ = (ImageView) itemView.findViewById(R.id.image);
         }
     }
+
+
 
     public void updateList(LinkedList<ProCategoryData> list) {
         itemList = list;

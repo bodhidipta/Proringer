@@ -18,8 +18,8 @@ import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.adapter.PostProjectGridAdapter;
-import com.android.llc.proringer.adapter.PostProjectListAdapter;
+import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
+import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
@@ -52,8 +52,8 @@ public class PostProject extends Fragment {
     private LinearLayout content_post_form_submit, container_registration, container_project_description;
     private RelativeLayout container_location, container_add_photoes;
     private ProgressDialog pgDialog = null;
-    private PostProjectListAdapter adapter = null;
-    private PostProjectGridAdapter gridAdapter = null;
+    private PostProjectServiceAndOtherListAdapter adapter = null;
+    private PostProjectCategoryGridAdapter gridAdapter = null;
     private LinkedList<ProCategoryData> serviceListing = null;
     private int step = 0;
     private String selectedId = "", step1Option = "",
@@ -104,7 +104,7 @@ public class PostProject extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
                 progress_posting.setProgress(step);
-                gridAdapter = new PostProjectGridAdapter(getActivity(), listdata, new PostProjectGridAdapter.onClickItem() {
+                gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 0) {
@@ -243,7 +243,7 @@ public class PostProject extends Fragment {
                 progress_posting.setProgress(step);
 
 
-                adapter = new PostProjectListAdapter(getActivity(), listdata, PostProjectListAdapter.TYPE_LIST, new PostProjectListAdapter.onClickItem() {
+                adapter = new PostProjectServiceAndOtherListAdapter(getActivity(), listdata, PostProjectServiceAndOtherListAdapter.TYPE_LIST, new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 1) {

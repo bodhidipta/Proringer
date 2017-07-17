@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
-import com.android.llc.proringer.adapter.PostProjectGridAdapter;
+import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
@@ -30,7 +28,8 @@ import java.util.LinkedList;
 public class CateGoryList extends Fragment {
     RecyclerView category_listing;
     ProgressDialog pgDialog;
-    PostProjectGridAdapter gridAdapter;
+    PostProjectCategoryGridAdapter gridAdapter;
+
 
     @Nullable
     @Override
@@ -50,7 +49,7 @@ public class CateGoryList extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                gridAdapter = new PostProjectGridAdapter(getActivity(), listdata, new PostProjectGridAdapter.onClickItem() {
+                gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         ((ActivityPostProject) getActivity()).selectedCategory = data;
@@ -94,6 +93,13 @@ public class CateGoryList extends Fragment {
                 pgDialog.setCancelable(false);
                 pgDialog.show();
 
+            }
+        });
+
+        view.findViewById(R.id.see_all_categories).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Logger.printMessage("show list","list vise");
             }
         });
 

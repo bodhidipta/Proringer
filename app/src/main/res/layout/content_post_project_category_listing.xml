@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/category_background"
     android:orientation="vertical">
 
@@ -15,8 +16,24 @@
         android:textColor="@color/colorAccent"
         android:textSize="16sp" />
 
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/see_all_categories"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:background="@color/colorAccent"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:text="See All categories"
+        app:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/pro_request_category"
+        android:layout_above="@+id/see_all_categories"
         android:id="@+id/category_listing"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</LinearLayout>
+</RelativeLayout>

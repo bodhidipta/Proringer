@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
-import com.android.llc.proringer.adapter.LocationListAdapter;
+import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
@@ -26,7 +26,7 @@ import java.util.List;
 public class SearchLocation extends Fragment {
     ProRegularEditText zip_code_text;
     private boolean zipSearchGoing = false;
-    private LocationListAdapter zip_search_adapter = null;
+    private PostProjectLocationListAdapter zip_search_adapter = null;
     RecyclerView location_list;
     @Nullable
     @Override
@@ -89,7 +89,7 @@ public class SearchLocation extends Fragment {
                 Logger.printMessage("listdata",""+listdata);
 
                 if (zip_search_adapter == null) {
-                    zip_search_adapter = new LocationListAdapter(getActivity(), listdata, new LocationListAdapter.onItemelcted() {
+                    zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), listdata, new PostProjectLocationListAdapter.onItemelcted() {
                         @Override
                         public void onSelect(int pos, AddressData data) {
                             ((ActivityPostProject) getActivity()).selectedAddressData = data;

@@ -2,8 +2,6 @@ package com.android.llc.proringer.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.location.Address;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,13 +31,13 @@ import java.util.List;
  * limitations under the License.
  */
 
-public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder> {
+public class PostProjectLocationListAdapter extends RecyclerView.Adapter<PostProjectLocationListAdapter.ViewHolder> {
     private Context mcontext;
     private List<AddressData> addressList;
     private onItemelcted listener;
     private String selected_address = "";
 
-    public LocationListAdapter(Context mcontext, List<AddressData> addressList, onItemelcted call) {
+    public PostProjectLocationListAdapter(Context mcontext, List<AddressData> addressList, onItemelcted call) {
         this.mcontext = mcontext;
         this.addressList = addressList;
         listener = call;
