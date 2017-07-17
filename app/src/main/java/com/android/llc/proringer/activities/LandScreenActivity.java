@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.fragments.MyProjectDetails;
 import com.android.llc.proringer.fragments.bottomNav.DashBoard;
 import com.android.llc.proringer.fragments.bottomNav.FavPros;
 import com.android.llc.proringer.fragments.drawerNav.HomeReminders;
@@ -261,6 +262,36 @@ public class LandScreenActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+    /**
+     * Fragment transaction for MyProject Details
+     */
+    public void transactMyProjectsDetails() {
+
+        toggleToolBar(false);
+
+        if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + MyProjectDetails.class.getCanonicalName()) != null) {
+            Logger.printMessage("back_stack", "Removed *****" + MyProjectDetails.class.getCanonicalName());
+
+            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + MyProjectDetails.class.getCanonicalName())).commit();
+            fragmentManager.popBackStack("" + MyProjectDetails.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
+        FragmentTransaction trasaction = fragmentManager.beginTransaction();
+        trasaction.replace(R.id.fragment_container, new MyProjectDetails(), "" + MyProjectDetails.class.getCanonicalName());
+        trasaction.addToBackStack("" + MyProjectDetails.class.getCanonicalName());
+        trasaction.commit();
+
+        Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
+        for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
+            Logger.printMessage("back_stack", "" + getSupportFragmentManager().getBackStackEntryAt(i).getName());
+        }
+
+    }
+
+
 
     /**
      * Fragment transaction for Notification

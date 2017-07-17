@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 
@@ -52,6 +53,17 @@ public class MyProjects extends Fragment {
         datal.add(new ProjectPostedData(true,false,false));
         datal.add(new ProjectPostedData(false,false,false));
 
-        project_list.setAdapter(new ProjectListingAdapter(getActivity(),datal));
+        project_list.setAdapter(new ProjectListingAdapter(getActivity(), datal, new onOptionSelected() {
+            @Override
+            public void onItemPassed(int position, String value) {
+
+                ((LandScreenActivity)getActivity()).transactMyProjectsDetails();
+
+            }
+        }));
+    }
+
+    public interface onOptionSelected {
+        void onItemPassed(int position, String value);
     }
 }

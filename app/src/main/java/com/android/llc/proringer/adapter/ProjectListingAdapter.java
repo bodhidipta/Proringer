@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.fragments.bottomNav.MyProjects;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -21,10 +22,12 @@ import java.util.List;
 public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAdapter.ViewHolder> {
     private Context mcontext = null;
     private List<ProjectPostedData> itemList;
+    MyProjects.onOptionSelected callback;
 
-    public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList) {
+    public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList,MyProjects.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.itemList = itemList;
+        this.callback=callback;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.job_status.setVisibility(View.INVISIBLE);
         holder.messages.setVisibility(View.INVISIBLE);
         holder.pro_hired.setVisibility(View.INVISIBLE);
@@ -46,6 +49,8 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
         holder.lebel_hireing_offr.setVisibility(View.INVISIBLE);
         holder.review_pro.setVisibility(View.INVISIBLE);
         holder.right_chevron.setVisibility(View.INVISIBLE);
+
+
 
         if (position==0){
          holder.start_project.setVisibility(View.VISIBLE);
@@ -88,6 +93,12 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
             holder.review_pro.setVisibility(View.VISIBLE);
         }
+        holder.totalView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.onItemPassed(position,"value shift to details page");
+            }
+        });
 
 
 
@@ -97,6 +108,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
         ProRegularTextView job_status, messages, pro_hired, no_pro_hired, lebel_hireing_offr, review_pro;
         ImageView right_chevron;
         LinearLayout start_project;
+        View totalView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -108,6 +120,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
             lebel_hireing_offr = (ProRegularTextView) itemView.findViewById(R.id.lebel_hireing_offr);
             review_pro = (ProRegularTextView) itemView.findViewById(R.id.review_pro);
             right_chevron = (ImageView) itemView.findViewById(R.id.right_chevron);
+            totalView=itemView;
         }
     }
 }
