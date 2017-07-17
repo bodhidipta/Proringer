@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/actionBarSize">
-
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/colorAccent">
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
         android:id="@+id/item_"
@@ -12,16 +13,8 @@
         android:padding="10dp"
         android:paddingRight="30dp"
         android:text="Here"
-        android:textColor="@color/colorTextDark"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
-
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_right_chevron_dark" />
 
     <View
         android:layout_width="match_parent"

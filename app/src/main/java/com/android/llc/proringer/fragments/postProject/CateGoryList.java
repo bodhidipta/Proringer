@@ -7,18 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
+import com.android.llc.proringer.adapter.PostProjectCategoryListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
-
 import java.util.LinkedList;
 
 /**
@@ -29,6 +29,8 @@ public class CateGoryList extends Fragment {
     RecyclerView category_listing;
     ProgressDialog pgDialog;
     PostProjectCategoryGridAdapter gridAdapter;
+    PostProjectCategoryListAdapter listAdapter;
+    LinkedList<ProCategoryData> proCategoryDatasSortedList;
 
 
     @Nullable
@@ -48,6 +50,9 @@ public class CateGoryList extends Fragment {
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
+
+                proCategoryDatasSortedList =listdata;
+
 
                 gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
@@ -100,10 +105,17 @@ public class CateGoryList extends Fragment {
             @Override
             public void onClick(View view) {
                 Logger.printMessage("show list","list vise");
+
+                category_listing.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                listAdapter=new PostProjectCategoryListAdapter(getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
+                    @Override
+                    public void onSelectItemClick(int position, ProCategoryData data) {
+
+                    }
+                });
+                category_listing.setAdapter(listAdapter);
             }
         });
-
-
     }
-
 }
