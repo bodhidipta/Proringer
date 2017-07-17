@@ -15,7 +15,8 @@
 
         <ImageView
             android:id="@+id/tool_back"
-            android:layout_width="35dp"
+            android:padding="10dp"
+            android:layout_width="54dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_chevron_left" />
 
@@ -65,30 +66,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="Posted In"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:text="10001"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
@@ -101,30 +102,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
-                android:text="Posted In"
+                android:layout_weight="2"
+                android:text="Project"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="10001"
+                android:layout_weight="3"
+                android:text="Roofing"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
@@ -137,30 +138,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
-                android:text="Posted In"
+                android:layout_weight="2"
+                android:text="Service"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="10001"
+                android:layout_weight="3"
+                android:text="Asphalt"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
@@ -173,30 +174,65 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
-                android:text="Posted In"
+                android:layout_weight="2"
+                android:text="Type"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                android:id="@+id/proSemiBoldTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/background_light_green_with_border"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="Installation"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:clipToPadding="false"
+            android:elevation="3dp"
+            android:layout_height="45dp">
+
+
+            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
                 android:layout_weight="2"
-                android:text="10001"
+                android:text="Property"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:background="@drawable/background_white_with_border"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+              />
+
+            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                android:layout_weight="3"
+                android:text="Single Family Home"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
@@ -209,30 +245,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="Posted In"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="10001"
+                android:layout_weight="3"
+                android:text="Planning and Budgeting"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
@@ -245,30 +281,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
-                android:text="Posted In"
+                android:layout_weight="2"
+                android:text="Type"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="10001"
+                android:layout_weight="3"
+                android:text="Installation"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
@@ -281,66 +317,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="5"
             android:clipToPadding="false"
             android:elevation="3dp"
             android:layout_height="45dp">
 
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="Posted In"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
               />
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="10001"
+                android:layout_weight="3"
+                android:text="More than 2 weeks"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-               />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:clipToPadding="false"
-            android:elevation="3dp"
-            android:layout_height="45dp">
-
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="1"
-                android:text="Posted In"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:background="@drawable/background_white_with_border"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-              />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_weight="2"
-                android:text="10001"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:background="@drawable/background_light_green_with_border"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                />
