@@ -539,7 +539,6 @@ public class LandScreenActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-
         } else {
             back_toolbar.setVisibility(View.GONE);
             toolbar.setVisibility(View.VISIBLE);
@@ -568,6 +567,11 @@ public class LandScreenActivity extends AppCompatActivity {
             else if (fragmentManager.findFragmentByTag(ProjectMessaging.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(ProjectMessaging.class.getCanonicalName())) {
                 toggleToolBar(false);
                 transactMessages();
+            }
+
+            else if(fragmentManager.findFragmentByTag(MyProjectDetails.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(MyProjectDetails.class.getCanonicalName())){
+                toggleToolBar(false);
+                transactMyProjects();
             }
 
         }
