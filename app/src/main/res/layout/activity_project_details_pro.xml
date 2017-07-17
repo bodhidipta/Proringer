@@ -174,7 +174,7 @@
 
                         <RatingBar
                             android:id="@+id/rbar"
-                            style="?android:attr/ratingBarStyleSmall"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_rate_value"
