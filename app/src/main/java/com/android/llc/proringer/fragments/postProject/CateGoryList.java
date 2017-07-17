@@ -19,6 +19,8 @@ import com.android.llc.proringer.adapter.PostProjectCategoryListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 /**
@@ -30,8 +32,8 @@ public class CateGoryList extends Fragment {
     ProgressDialog pgDialog;
     PostProjectCategoryGridAdapter gridAdapter;
     PostProjectCategoryListAdapter listAdapter;
-    LinkedList<ProCategoryData> proCategoryDatasSortedList;
-
+    LinkedList<String> proCategoryDatasSortedList;
+    LinkedList<ProCategoryData> listdataMain;
 
     @Nullable
     @Override
@@ -51,7 +53,54 @@ public class CateGoryList extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                proCategoryDatasSortedList =listdata;
+
+                listdataMain=listdata;
+
+                proCategoryDatasSortedList =new LinkedList<String>();
+                for (int d=0;d<listdata.size();d++)
+                {
+                    proCategoryDatasSortedList.add(listdata.get(d).getCategory_name());
+                }
+
+
+                addAlbhabetHeader('A');
+                addAlbhabetHeader('B');
+                addAlbhabetHeader('C');
+                addAlbhabetHeader('D');
+                addAlbhabetHeader('E');
+                addAlbhabetHeader('F');
+                addAlbhabetHeader('G');
+                addAlbhabetHeader('H');
+                addAlbhabetHeader('I');
+                addAlbhabetHeader('J');
+                addAlbhabetHeader('K');
+                addAlbhabetHeader('L');
+                addAlbhabetHeader('M');
+                addAlbhabetHeader('N');
+                addAlbhabetHeader('O');
+                addAlbhabetHeader('P');
+                addAlbhabetHeader('Q');
+                addAlbhabetHeader('R');
+                addAlbhabetHeader('S');
+                addAlbhabetHeader('T');
+                addAlbhabetHeader('U');
+                addAlbhabetHeader('V');
+                addAlbhabetHeader('W');
+                addAlbhabetHeader('X');
+                addAlbhabetHeader('Y');
+                addAlbhabetHeader('Z');
+
+
+
+                Collections.sort(proCategoryDatasSortedList, new Comparator<String>()
+                {
+                    @Override
+                    public int compare(String text1, String text2)
+                    {
+                        return text1.compareToIgnoreCase(text2);
+                    }
+                });
+
 
 
                 gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
@@ -110,12 +159,41 @@ public class CateGoryList extends Fragment {
 
                 listAdapter=new PostProjectCategoryListAdapter(getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
                     @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
+                    public void onSelectItemClick(int position, String data) {
 
+                        Logger.printMessage("data###",""+data);
+                        Logger.printMessage("listdataMain###",""+listdataMain.size());
+
+                        for (int p=0;p<listdataMain.size();p++){
+                            if (listdataMain.get(p).getCategory_name().trim().equalsIgnoreCase(data)){
+                                //true
+                                Logger.printMessage("Category_name###",""+listdataMain.get(p).getCategory_name());
+                                Logger.printMessage("Id###",""+listdataMain.get(p).getId());
+                                Logger.printMessage("Category_image###",""+listdataMain.get(p).getCategory_image());
+                                Logger.printMessage("Parent_id###",""+listdataMain.get(p).getParent_id());
+
+                                ((ActivityPostProject) getActivity()).selectedCategory = listdataMain.get(p);
+                                ((ActivityPostProject) getActivity()).setHeaderCategory();
+                                ((ActivityPostProject) getActivity()).increaseStep();
+                                /**
+                                 * fragment calling
+                                 */
+                                ((ActivityPostProject) getActivity()).changeFragmentNext(2);
+                                break;
+                            }
+                        }
                     }
                 });
                 category_listing.setAdapter(listAdapter);
             }
         });
+    }
+    public void addAlbhabetHeader(char a){
+        for (int p=0;p<proCategoryDatasSortedList.size();p++){
+            if(proCategoryDatasSortedList.get(p).toUpperCase().charAt(0)==a){
+                proCategoryDatasSortedList.add(""+a);
+                break;
+            }
+        }
     }
 }
