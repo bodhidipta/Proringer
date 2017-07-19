@@ -62,21 +62,23 @@ public class ProServiceApiHelper {
     private final String categoryAPI = "http://esolz.co.in/lab6/proringer_latest/app_categorylist";
     private String serviceAPI = "http://esolz.co.in/lab6/proringer_latest/app_catrgoryservice_list";
     private String registrationAPI = "http://esolz.co.in/lab6/proringer_latest/app_signup";
-    private String loginAPi = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_login";
-    private String forgetPaswword = "http://esolz.co.in/lab6/proringer_latest/app_forgot_password";
-    private String resetPaswword = "http://esolz.co.in/lab6/proringer_latest/app_resetpassword";
-    private String getUserInformation = "http://esolz.co.in/lab6/proringer_latest/app_userinformation_list";
-    private String updateUserInformation = "http://esolz.co.in/lab6/proringer_latest/app_userinfo_edit";
-    private String changeUserEmail = "http://esolz.co.in/lab6/proringer_latest/app_change_email";
-    private String changeUserPassword = "http://esolz.co.in/lab6/proringer_latest/app_change_password";
-    private String getNotificationDetails = "http://esolz.co.in/lab6/proringer_latest/app_notification_list";
-    private String updateNotificationDetails = "http://esolz.co.in/lab6/proringer_latest/app_notification_save";
-    private String homeSchedulerOptionList = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_option";
-    private String homeSchedulerValuesList = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_list?user_id=";
-    private String updateHomeSchedularOption = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_save";
-    private String inviteFriends = "http://esolz.co.in/lab6/proringer_latest/app_invite_friend";
-    private String postProjectApi = "http://esolz.co.in/lab6/proringer_latest/app_project_post";
-    private String myProjectListApi = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_myproject?user_id=";
+    private String loginAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_login";
+    private String forgetPaswwordAPI = "http://esolz.co.in/lab6/proringer_latest/app_forgot_password";
+    private String resetPaswwordAPI = "http://esolz.co.in/lab6/proringer_latest/app_resetpassword";
+    private String getUserInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_userinformation_list";
+    private String updateUserInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_userinfo_edit";
+    private String changeUserEmailAPI = "http://esolz.co.in/lab6/proringer_latest/app_change_email";
+    private String changeUserPasswordAPI = "http://esolz.co.in/lab6/proringer_latest/app_change_password";
+    private String getNotificationDetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_notification_list";
+    private String updateNotificationDetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_notification_save";
+    private String homeSchedulerOptionListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_option";
+    private String homeSchedulerValuesListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_list?user_id=";
+    private String updateHomeSchedularOptionAPI = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_save";
+    private String inviteFriendsAPI = "http://esolz.co.in/lab6/proringer_latest/app_invite_friend";
+    private String postProjectAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_post";
+    private String myProjectListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_myproject?user_id=";
+    private String faqInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
+    private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -343,13 +345,13 @@ public class ProServiceApiHelper {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Request request = new Request.Builder()
-                                .url(loginAPi)
+                                .url(loginAPI)
                                 .post(body)
                                 .build();
 
                         Response resposne = client.newCall(request).execute();
                         String response_string = resposne.body().string();
-                        Logger.printMessage("LogIN", loginAPi + "\n" + params[0] + "/" + params[1] + "\n" + response_string);
+                        Logger.printMessage("LogIN", loginAPI + "\n" + params[0] + "/" + params[1] + "\n" + response_string);
                         JSONObject mainResponseObj = new JSONObject(response_string);
                         if (mainResponseObj.getBoolean("response")) {
                             exception = "";
@@ -410,7 +412,7 @@ public class ProServiceApiHelper {
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_email", params[0]).build();
                         Request request = new Request.Builder()
-                                .url(forgetPaswword)
+                                .url(forgetPaswwordAPI)
                                 .post(requestBody)
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
@@ -472,7 +474,7 @@ public class ProServiceApiHelper {
                                 .add("user_reset_code", params[0])
                                 .add("new_password", params[0]).build();
                         Request request = new Request.Builder()
-                                .url(resetPaswword)
+                                .url(resetPaswwordAPI)
                                 .post(requestBody)
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
@@ -528,8 +530,10 @@ public class ProServiceApiHelper {
                 protected String doInBackground(String... params) {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
-                        String userIfoAPI = getUserInformation + "?user_id=" + ProApplication.getInstance().getUserId();
+                        String userIfoAPI = getUserInformationAPI + "?user_id=" + ProApplication.getInstance().getUserId();
                         Logger.printMessage("userInfo", ProApplication.getInstance().getUserId());
+
+                        Logger.printMessage("userIfoAPI",""+userIfoAPI);
 
                         Request request = new Request.Builder()
                                 .url(userIfoAPI)
@@ -624,7 +628,7 @@ public class ProServiceApiHelper {
                                 .build();
 
                         Request request = new Request.Builder()
-                                .url(updateUserInformation)
+                                .url(updateUserInformationAPI)
                                 .post(requestBody)
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
@@ -695,7 +699,7 @@ public class ProServiceApiHelper {
                                 .build();
                         Request request = new Request.Builder()
                                 .post(requestBody)
-                                .url(changeUserEmail)
+                                .url(changeUserEmailAPI)
                                 .build();
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
@@ -727,7 +731,6 @@ public class ProServiceApiHelper {
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
-
     }
 
     /**
@@ -759,7 +762,7 @@ public class ProServiceApiHelper {
                                 .build();
                         Request request = new Request.Builder()
                                 .post(requestBody)
-                                .url(changeUserPassword)
+                                .url(changeUserPasswordAPI)
                                 .build();
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
@@ -814,7 +817,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String notiAPI = getNotificationDetails + "?user_id=" + ProApplication.getInstance().getUserId();
+                        String notiAPI = getNotificationDetailsAPI + "?user_id=" + ProApplication.getInstance().getUserId();
                         Request request = new Request.Builder()
                                 .get()
                                 .url(notiAPI)
@@ -866,7 +869,6 @@ public class ProServiceApiHelper {
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
-
     }
 
     /**
@@ -905,7 +907,7 @@ public class ProServiceApiHelper {
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
-                                .url(updateNotificationDetails)
+                                .url(updateNotificationDetailsAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -942,7 +944,7 @@ public class ProServiceApiHelper {
     }
 
     /**
-     * Get Home Schedular options..
+     * Get Home Scheduler options..
      *
      * @param callback
      */
@@ -961,11 +963,11 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("homeSchedulerOptionList", "" + homeSchedulerOptionList);
+                        Logger.printMessage("homeSchedulerOptionList", "" + homeSchedulerOptionListAPI);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(homeSchedulerOptionList)
+                                .url(homeSchedulerOptionListAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -1023,7 +1025,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String ApiOption = homeSchedulerValuesList + "" + ProApplication.getInstance().getUserId();
+                        String ApiOption = homeSchedulerValuesListAPI + "" + ProApplication.getInstance().getUserId();
                         Logger.printMessage("home_svhe", "" + ApiOption);
 
                         Request request = new Request.Builder()
@@ -1066,7 +1068,7 @@ public class ProServiceApiHelper {
     }
 
     /**
-     * Update Home schedular options
+     * Update Home scheduler options
      *
      * @param callback
      * @param params
@@ -1135,11 +1137,11 @@ public class ProServiceApiHelper {
                         }
 
 
-                        Logger.printMessage("@logUrl", updateHomeSchedularOption + "?user_id=" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("@logUrl", updateHomeSchedularOptionAPI + "?user_id=" + ProApplication.getInstance().getUserId());
                         Request request = new Request.Builder()
                                 .post(requestBody.build())
                                 .addHeader("content-type", "multipart/form-data")
-                                .url(updateHomeSchedularOption)
+                                .url(updateHomeSchedularOptionAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -1177,6 +1179,12 @@ public class ProServiceApiHelper {
 
     }
 
+    /**
+     * Invite Friends
+     *
+     * @param callback
+     * @param params
+     */
     public void inviteFriends(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -1203,7 +1211,7 @@ public class ProServiceApiHelper {
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
-                                .url(inviteFriends)
+                                .url(inviteFriendsAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -1241,6 +1249,13 @@ public class ProServiceApiHelper {
         }
 
     }
+
+    /**
+     * Post Project
+     *
+     * @param callback
+     * @param params
+     */
 
     public void postProject(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
@@ -1313,7 +1328,7 @@ public class ProServiceApiHelper {
 
                         Request request = new Request.Builder()
                                 .post(requestBody.build())
-                                .url(postProjectApi)
+                                .url(postProjectAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -1354,6 +1369,11 @@ public class ProServiceApiHelper {
 
     }
 
+    /**
+     * get MyProject List
+     *
+     * @param callback
+     */
     public void getMyProjectList(final projectListCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -1372,7 +1392,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String ApiOption = myProjectListApi + "" + ProApplication.getInstance().getUserId();
+                        String ApiOption = myProjectListAPI + "" + ProApplication.getInstance().getUserId();
                         Logger.printMessage("home_myProjectList", "" + ApiOption);
 
                         Request request = new Request.Builder()
@@ -1452,6 +1472,12 @@ public class ProServiceApiHelper {
 
     }
 
+    /**
+     * Search area by google API
+     *
+     * @param zipCode
+     * @param callback
+     */
 
     public void getSearchArea(String zipCode, final onSearchZipCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
@@ -1579,6 +1605,148 @@ public class ProServiceApiHelper {
 
 
     /**
+     * Faq Information
+     *
+     * @param callback
+     */
+    public void getFaqInformation(final faqCallback callback) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        String ApiOption = faqInformationAPI;
+                        Logger.printMessage("faqInformation", "" + ApiOption);
+
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(ApiOption)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return responseString;
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+
+    }
+
+
+
+    /**
+     * Contact us
+     *
+     * @param callback
+     * @param params
+     */
+    public void contactUs(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("fname", params[0])
+                                .add("lname", params[1])
+                                .add("email", params[2])
+                                .add("phonenumber", params[3])
+                                .add("contact_info", params[4])
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .post(requestBody)
+                                .url(contactUsAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+
+    }
+
+
+
+
+
+
+    /**
      * Interface used to get call back for getServiceList and getCategoryList
      */
     public interface onProCategoryListener {
@@ -1623,4 +1791,14 @@ public class ProServiceApiHelper {
     }
 
 
+    /**
+     * Interface used to get call back for faq
+     */
+    public interface faqCallback {
+        void onStart();
+
+        void onComplete(String s);
+
+        void onError(String error);
+    }
 }

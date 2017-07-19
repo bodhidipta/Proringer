@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.drawerNav;
+package com.android.llc.proringer.fragments.main_content;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,34 +14,20 @@ import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
-import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 
 /**
- * Created by bodhidipta on 22/06/17.
- * <!-- * Copyright (c) 2017, The Proringer-->
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Created by su on 7/19/17.
  */
 
-public class InviteAfriend extends Fragment {
-    ProLightEditText first_name, last_name, email, confirm_email;
-    ProRegularTextView invited_submit;
+public class ContactUs extends Fragment {
+    ProLightEditText first_name, last_name, email, phonenumber, contact_info;
     ProgressDialog pgDia;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_invite_friend, container, false);
+        return inflater.inflate(R.layout.fragment_contact_us, container, false);
     }
 
     @Override
@@ -50,18 +36,19 @@ public class InviteAfriend extends Fragment {
         first_name = (ProLightEditText) view.findViewById(R.id.first_name);
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         email = (ProLightEditText) view.findViewById(R.id.email);
-        confirm_email = (ProLightEditText) view.findViewById(R.id.confirm_email);
-        invited_submit=(ProRegularTextView)view.findViewById(R.id.invited_submit);
-        invited_submit.setOnClickListener(new View.OnClickListener() {
+        phonenumber = (ProLightEditText) view.findViewById(R.id.phonenumber);
+        contact_info = (ProLightEditText) view.findViewById(R.id.contact_info);
+
+        view.findViewById(R.id.contact_us).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateInvite();
+                validateContactUs();
             }
         });
 
     }
 
-    private void validateInvite() {
+    private void validateContactUs() {
         if (first_name.getText().toString().trim().equals("")) {
             first_name.setError("First name can not be blank.");
         } else {
@@ -71,42 +58,46 @@ public class InviteAfriend extends Fragment {
             } else {
                 if (email.getText().toString().trim().equals("")) {
                     email.setError("Email name can not be blank.");
-                    email.requestFocus();
-                } else {
-                    if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
-                        if (email.getText().toString().trim().equals(confirm_email.getText().toString().trim())) {
+
+                    if(phonenumber.getText().toString().trim().equals("")){
+                        phonenumber.setError("Phone number name can not be blank.");
+                        phonenumber.requestFocus();
+                    }
+                    else {
+                        if (contact_info.getText().toString().trim().equals("")){
+                            contact_info.setError("Phone number name can not be blank.");
+                            contact_info.requestFocus();
+                        }else {
                             getSubmitParams();
-                        } else {
-                            confirm_email.setError("Email and confirm email does not match.");
-                            confirm_email.requestFocus();
                         }
-                    } else {
+                    }
+
+                } else {
                         email.setError("Invalid email address.");
                         email.requestFocus();
-                    }
                 }
             }
         }
     }
 
     private void getSubmitParams() {
-        ProServiceApiHelper.getInstance(getActivity()).inviteFriends(
+        ProServiceApiHelper.getInstance(getActivity()).contactUs(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDia=new ProgressDialog(getActivity());
-                        pgDia.setTitle("Invite Friend");
-                        pgDia.setMessage("Inviting friend. Please wait.");
+                        pgDia = new ProgressDialog(getActivity());
+                        pgDia.setTitle("Contact Us");
+                        pgDia.setMessage("Please wait....");
                         pgDia.setCancelable(false);
                         pgDia.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDia!=null && pgDia.isShowing())
+                        if (pgDia != null && pgDia.isShowing())
                             pgDia.dismiss();
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Invite Friend")
+                                .setTitle("Contact Us")
                                 .setMessage("" + message)
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
@@ -121,16 +112,16 @@ public class InviteAfriend extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDia!=null && pgDia.isShowing())
+                        if (pgDia != null && pgDia.isShowing())
                             pgDia.dismiss();
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Invite Friend Error")
+                                .setTitle("Contact Us Error")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
-                                        validateInvite();
+                                        validateContactUs();
                                     }
                                 })
                                 .setNegativeButton("abort", new DialogInterface.OnClickListener() {
@@ -145,13 +136,15 @@ public class InviteAfriend extends Fragment {
                 first_name.getText().toString().trim(),
                 last_name.getText().toString().trim(),
                 email.getText().toString().trim(),
-                confirm_email.getText().toString().trim());
+                phonenumber.getText().toString().trim(),
+                contact_info.getText().toString().trim());
     }
 
-    private void resetForm(){
+    private void resetForm() {
         first_name.setText("");
         last_name.setText("");
         email.setText("");
-        confirm_email.setText("");
+        phonenumber.setText("");
+        contact_info.setText("");
     }
 }
