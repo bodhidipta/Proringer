@@ -78,7 +78,7 @@ public class ProServiceApiHelper {
     private String postProjectAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_post";
     private String myProjectListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_myproject?user_id=";
     private String faqInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
-    private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
+    private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_contact_us";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
