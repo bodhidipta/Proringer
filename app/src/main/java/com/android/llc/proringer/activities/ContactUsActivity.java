@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -59,22 +60,24 @@ public class ContactUsActivity extends AppCompatActivity {
             } else {
                 if (email.getText().toString().trim().equals("")) {
                     email.setError("Email name can not be blank.");
-
-                    if (phonenumber.getText().toString().trim().equals("")) {
-                        phonenumber.setError("Phone number name can not be blank.");
-                        phonenumber.requestFocus();
-                    } else {
-                        if (contact_info.getText().toString().trim().equals("")) {
-                            contact_info.setError("Phone number name can not be blank.");
-                            contact_info.requestFocus();
-                        } else {
-                            getSubmitParams();
-                        }
-                    }
-
                 } else {
-                    email.setError("Invalid email address.");
-                    email.requestFocus();
+                    if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
+
+                        if (phonenumber.getText().toString().trim().equals("")) {
+                            phonenumber.setError("Phone number name can not be blank.");
+                            phonenumber.requestFocus();
+                        } else {
+                            if (contact_info.getText().toString().trim().equals("")) {
+                                contact_info.setError("Phone number name can not be blank.");
+                                contact_info.requestFocus();
+                            } else {
+                                getSubmitParams();
+                            }
+                        }
+                    } else {
+                        email.setError("Invalid email address.");
+                        email.requestFocus();
+                    }
                 }
             }
         }
