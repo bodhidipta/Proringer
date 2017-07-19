@@ -232,6 +232,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/background_white_with_border"
                 android:hint="Zip code"
+                android:inputType="text"
                 android:padding="4dp"
                 android:maxLength="5"
                 android:textColor="@color/colorTextDark"

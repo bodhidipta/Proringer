@@ -18,7 +18,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="FAQ's"
+            android:text="Contact Us"
             android:textColor="@color/colorTextDark"
             android:textSize="16sp" />
 
@@ -110,7 +110,7 @@
                 android:background="@drawable/edit_text_selecter"
                 android:gravity="top|left"
                 android:hint="Contact Info"
-                android:inputType="text"
+                android:inputType="text|textMultiLine"
                 android:padding="10dp"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />

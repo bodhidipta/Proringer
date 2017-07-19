@@ -6,14 +6,21 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
@@ -22,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by bodhidipta on 22/06/17.
@@ -43,6 +51,7 @@ import java.io.IOException;
 public class UserInfromation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     private ProgressDialog pgDia = null;
+    ImageView error_progress;
 
     @Nullable
     @Override
@@ -60,16 +69,40 @@ public class UserInfromation extends Fragment {
         zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
         city = (ProLightEditText) view.findViewById(R.id.city);
         state = (ProLightEditText) view.findViewById(R.id.state);
+        error_progress=(ImageView)view.findViewById(R.id.error_progress);
+
+
         plotUserInformation();
         view.findViewById(R.id.save_ifo).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        updateUserInformation();
+                        if(error_progress.getVisibility()==View.GONE) {
+                            updateUserInformation();
+                        }else {
+                            Toast.makeText(getActivity(), "Only Canada and US zip code valid", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
         );
+
+        zip_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                searchLocationWithZip(s.toString());
+            }
+        });
 
     }
 
@@ -128,8 +161,6 @@ public class UserInfromation extends Fragment {
                 "");
     }
 
-
-
     private void plotUserInformation() {
         DatabaseHandler.getInstance(getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
@@ -167,5 +198,29 @@ public class UserInfromation extends Fragment {
 
                     }
                 });
+    }
+
+    private void searchLocationWithZip(String key) {
+        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(key, new ProServiceApiHelper.onSearchZipCallback() {
+            @Override
+            public void onComplete(List<AddressData> listdata) {
+
+                Logger.printMessage("complete_search", "" + listdata);
+
+                if (listdata!=null && listdata.size()>0){
+                    error_progress.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                error_progress.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onStartFetch() {
+                error_progress.setVisibility(View.GONE);
+            }
+        });
     }
 }

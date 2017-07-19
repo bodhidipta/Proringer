@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -19,8 +20,9 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
  */
 
 public class ContactUsActivity extends AppCompatActivity {
-    ProLightEditText first_name, last_name, email, phonenumber, contact_info;
+    ProLightEditText first_name, last_name, email, phonenumber;
     ProgressDialog pgDia;
+    EditText contact_info;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class ContactUsActivity extends AppCompatActivity {
         last_name = (ProLightEditText) findViewById(R.id.last_name);
         email = (ProLightEditText) findViewById(R.id.email);
         phonenumber = (ProLightEditText) findViewById(R.id.phonenumber);
-        contact_info = (ProLightEditText) findViewById(R.id.contact_info);
+        contact_info = (EditText) findViewById(R.id.contact_info);
 
         findViewById(R.id.contact_us).setOnClickListener(new View.OnClickListener() {
             @Override
