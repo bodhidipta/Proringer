@@ -233,7 +233,7 @@
                     android:text="Status"
                     android:textSize="16sp" />
 
-                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                     android:id="@+id/tv_status"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

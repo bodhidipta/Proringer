@@ -33,7 +33,7 @@ public class MyProjectDetails extends Fragment {
         ProRegularTextView tv_type = (ProRegularTextView) view.findViewById(R.id.tv_type);
         ProRegularTextView tv_property = (ProRegularTextView) view.findViewById(R.id.tv_property);
         ProRegularTextView tv_status = (ProRegularTextView) view.findViewById(R.id.tv_status);
-        ProRegularTextView tv_type2 = (ProRegularTextView) view.findViewById(R.id.tv_type2);
+//        ProRegularTextView tv_type2 = (ProRegularTextView) view.findViewById(R.id.tv_type2);
         ProRegularTextView tv_start = (ProRegularTextView) view.findViewById(R.id.tv_start);
         ProRegularTextView img_description = (ProRegularTextView) view.findViewById(R.id.img_description);
         ImageView img_project = (ImageView) view.findViewById(R.id.img_project);

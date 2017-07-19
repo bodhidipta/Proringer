@@ -149,17 +149,33 @@
             android:orientation="horizontal"
             android:weightSum="3.2">
 
-            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
-                android:id="@+id/zip_code"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight=".8"
-                android:background="@drawable/edit_text_selecter"
-                android:hint="Zip code"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textColor="@color/colorTextDark"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8">
+
+                <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                    android:id="@+id/zip_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_selecter"
+                    android:hint="Zip code"
+                    android:inputType="text"
+                    android:maxLength="5"
+                    android:padding="10dp"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false"
+                    android:id="@+id/wrong_zip"
+                    android:src="@drawable/ic_error_outline" />
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="0dp"
