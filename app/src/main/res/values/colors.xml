@@ -11,6 +11,7 @@
     <color name="colorGlobalIcons">#727272</color>
     <color name="colorBGblueShade">#f3f5f9</color>
     <color name="colorLightGray">#d7d7d7</color>
+    <color name="colorDarkGray">#c1bfbf</color>
     <color name="colorLightBrick">#f2cec5</color>
     <color name="colorGreen">#2ecc71</color>
     <color name="colorSky">#2ab3ef</color>

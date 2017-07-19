@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.fragments.bottomNav.MyProjectDetails;
+import com.android.llc.proringer.fragments.main_content.MyProjectDetails;
 import com.android.llc.proringer.fragments.bottomNav.DashBoard;
 import com.android.llc.proringer.fragments.bottomNav.FavPros;
 import com.android.llc.proringer.fragments.drawerNav.HomeReminders;

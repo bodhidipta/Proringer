@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 
 import com.android.llc.proringer.pojo.NotificationData;
+import com.android.llc.proringer.pojo.ProjectPostedData;
 
 /**
  * Created by bodhidipta on 09/06/17.
@@ -27,6 +28,7 @@ public class ProApplication extends Application {
     private static ProApplication instance = null;
     private SharedPreferences userPreference = null;
     private SharedPreferences notificationPreference = null;
+    private ProjectPostedData dataSelected=null;
 
     public static ProApplication getInstance() {
         return instance;
@@ -102,4 +104,13 @@ public class ProApplication extends Application {
     public void logOut() {
         userPreference.edit().clear().apply();
     }
+
+    public ProjectPostedData getDataSelected() {
+        return dataSelected;
+    }
+
+    public void setDataSelected(ProjectPostedData dataSelected) {
+        this.dataSelected = dataSelected;
+    }
 }
+

@@ -52,7 +52,8 @@
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
-            android:weightSum="5">
+            android:weightSum="5"
+            android:elevation="4dp">
 
             <LinearLayout
                 android:id="@+id/dashboard_cont"
@@ -166,6 +167,7 @@
         <RelativeLayout
             android:layout_width="65dp"
             android:layout_height="65dp"
+            android:elevation="4dp"
             android:layout_centerInParent="true"
             android:background="@drawable/circle_white">
 

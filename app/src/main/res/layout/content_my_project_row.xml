@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/start_project"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/start_project"
+        android:layout_marginTop="20dp"
         android:background="@color/colorGreen"
         android:gravity="center"
         android:orientation="horizontal">
@@ -36,12 +35,12 @@
         android:id="@+id/total_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         app:cardBackgroundColor="#F5F5F5"
         app:cardCornerRadius="3dp"
-        android:layout_marginBottom="10dp"
         app:cardElevation="2dp">
 
         <RelativeLayout
@@ -54,9 +53,11 @@
                 android:id="@+id/project_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Project name"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
                 android:textColor="@color/colorTextDark"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_toStartOf="@+id/right_chevron" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/create_date"
@@ -103,8 +104,8 @@
                 android:textSize="12sp" />
 
             <ImageView
-                android:layout_width="25dp"
                 android:id="@+id/right_chevron"
+                android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -114,8 +115,9 @@
                 android:id="@+id/review_pro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
+
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/project_name"
                 android:background="@color/colorGreen"
                 android:gravity="center"
                 android:paddingBottom="15dp"
@@ -124,7 +126,8 @@
                 android:paddingTop="15dp"
                 android:text="REVIEW PRO"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="visible" />
 
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -146,6 +149,8 @@
                 android:id="@+id/pro_hired"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/lebel_hireing_offr"
+                android:layout_below="@+id/project_name"
                 android:layout_marginRight="10dp"
                 android:background="@color/colorGreen"
                 android:paddingBottom="10dp"
@@ -154,9 +159,7 @@
                 android:paddingTop="10dp"
                 android:text="YES"
                 android:textColor="#ffffff"
-                android:textSize="12sp"
-                android:layout_below="@+id/project_name"
-                android:layout_alignStart="@+id/lebel_hireing_offr" />
+                android:textSize="12sp" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/lebel_hireing_offr"

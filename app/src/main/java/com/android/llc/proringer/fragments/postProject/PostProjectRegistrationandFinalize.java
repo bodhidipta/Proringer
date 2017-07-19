@@ -55,8 +55,13 @@ public class PostProjectRegistrationandFinalize extends Fragment {
         view.findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PostedFinishActivity.class));
-                getActivity().finish();
+                if (ProApplication.getInstance().getUserId().equals("")){
+                    startActivity(new Intent(getActivity(), PostedFinishActivity.class));
+                    getActivity().finish();
+                }else{
+                    getActivity().finish();
+                }
+
             }
         });
 

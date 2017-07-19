@@ -9,6 +9,7 @@ import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
@@ -960,7 +961,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("homeSchedulerOptionList",""+homeSchedulerOptionList);
+                        Logger.printMessage("homeSchedulerOptionList", "" + homeSchedulerOptionList);
 
                         Request request = new Request.Builder()
                                 .get()
@@ -1353,14 +1354,17 @@ public class ProServiceApiHelper {
 
     }
 
-    public void getMyProjectList(final getApiProcessCallback callback) {
+    public void getMyProjectList(final projectListCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
+                LinkedList<ProjectPostedData> linkedList = null;
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    linkedList = new LinkedList<ProjectPostedData>();
+                    callback.onStart();
                 }
 
                 @Override
@@ -1381,6 +1385,44 @@ public class ProServiceApiHelper {
                         Logger.printMessage("home_svhe", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
+                            if (jsonObject.has("info_array")) {
+                                JSONArray info_array = jsonObject.getJSONArray("info_array");
+                                if (info_array.length() > 0) {
+                                    for (int i = 0; i < info_array.length(); i++) {
+                                        ProjectPostedData data = new ProjectPostedData(
+                                                info_array.getJSONObject(i).getString("id"),
+                                                info_array.getJSONObject(i).getString("project_name"),
+                                                info_array.getJSONObject(i).getJSONObject("property_type").getString("property_type_id"),
+                                                info_array.getJSONObject(i).getJSONObject("property_type").getString("property_type_name"),
+                                                info_array.getJSONObject(i).getString("city"),
+                                                info_array.getJSONObject(i).getString("zip"),
+                                                info_array.getJSONObject(i).getJSONObject("project_category").getString("category_id"),
+                                                info_array.getJSONObject(i).getJSONObject("project_category").getString("category_name"),
+                                                info_array.getJSONObject(i).getJSONObject("project_category_service").getString("service_id"),
+                                                info_array.getJSONObject(i).getJSONObject("project_category_service").getString("service name"),
+                                                info_array.getJSONObject(i).getJSONObject("country").getString("country_id"),
+                                                info_array.getJSONObject(i).getJSONObject("country").getString("country_code"),
+                                                info_array.getJSONObject(i).getJSONObject("state").getString("state_id"),
+                                                info_array.getJSONObject(i).getJSONObject("state").getString("state_code"),
+                                                info_array.getJSONObject(i).getString("project_image"),
+                                                info_array.getJSONObject(i).getString("date_time"),
+                                                info_array.getJSONObject(i).getString("last_edit"),
+                                                info_array.getJSONObject(i).getJSONObject("project_timeframe").getString("timeframe_id"),
+                                                info_array.getJSONObject(i).getJSONObject("project_timeframe").getString("timeframe_name"),
+                                                info_array.getJSONObject(i).getString("project_service_looktype"),
+                                                info_array.getJSONObject(i).getString("project_stage"),
+                                                info_array.getJSONObject(i).getString("project_status"),
+                                                info_array.getJSONObject(i).getString("project_response"),
+                                                info_array.getJSONObject(i).getString("project_award"),
+                                                info_array.getJSONObject(i).getString("latitude"),
+                                                info_array.getJSONObject(i).getString("longitude"),
+                                                info_array.getJSONObject(i).getString("new_user_status")
+                                        );
+
+                                        linkedList.add(data);
+                                    }
+                                }
+                            }
                             return responseString;
                         } else {
                             exception = jsonObject.getString("message");
@@ -1398,7 +1440,7 @@ public class ProServiceApiHelper {
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
-                        callback.onComplete(s);
+                        callback.onComplete(linkedList);
                     } else {
                         callback.onError(s);
                     }
@@ -1443,51 +1485,51 @@ public class ProServiceApiHelper {
                                 mainRes.getJSONArray("results").length() > 0) {
 
 
+                            addressList = new ArrayList<AddressData>();
+                            JSONArray results = mainRes.getJSONArray("results");
 
-                                addressList = new ArrayList<AddressData>();
-                                JSONArray results = mainRes.getJSONArray("results");
+                            for (int i = 0; i < results.length(); i++) {
 
-                                for (int i = 0; i < results.length(); i++) {
+                                JSONObject innerIncer = results.getJSONObject(i);
+                                if (innerIncer.getJSONArray("types").toString().contains("postal_code")) {
 
-                                    JSONObject innerIncer = results.getJSONObject(i);
-                                    if (innerIncer.getJSONArray("types").toString().contains("postal_code")) {
+                                    String city = "";
+                                    String country = "";
+                                    String state_code = "";
 
-                                        String city = "";
-                                        String country = "";
-                                        String state_code = "";
+                                    /**
+                                     * loop through address component
+                                     * for country and state
+                                     */
+                                    if (innerIncer.has("address_components") &&
+                                            innerIncer.getJSONArray("address_components").length() > 0) {
 
-                                        /**
-                                         * loop through address component
-                                         * for country and state
-                                         */
-                                        if (innerIncer.has("address_components") &&
-                                                innerIncer.getJSONArray("address_components").length() > 0) {
+                                        JSONArray address_components = innerIncer.getJSONArray("address_components");
 
-                                            JSONArray address_components = innerIncer.getJSONArray("address_components");
+                                        for (int j = 0; j < address_components.length(); j++) {
 
-                                            for (int j = 0; j < address_components.length(); j++) {
+                                            if (address_components.getJSONObject(j).has("types") &&
+                                                    address_components.getJSONObject(j).getJSONArray("types").length() > 0
+                                                    ) {
 
-                                                if (address_components.getJSONObject(j).has("types") &&
-                                                        address_components.getJSONObject(j).getJSONArray("types").length() > 0
-                                                        ) {
+                                                JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
 
-                                                    JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
+                                                for (int k = 0; k < types.length(); k++) {
+                                                    if (types.getString(k).equals("administrative_area_level_2")) {
+                                                        city = address_components.getJSONObject(j).getString("short_name");
+                                                    }
 
-                                                    for (int k = 0; k < types.length(); k++) {
-                                                        if (types.getString(k).equals("administrative_area_level_2")) {
-                                                            city = address_components.getJSONObject(j).getString("short_name");
-                                                        }
+                                                    if (types.getString(k).equals("administrative_area_level_1")) {
+                                                        state_code = address_components.getJSONObject(j).getString("short_name");
+                                                    }
 
-                                                        if (types.getString(k).equals("administrative_area_level_1")) {
-                                                            state_code = address_components.getJSONObject(j).getString("short_name");
-                                                        }
-
-                                                        if (types.getString(k).equals("country")) {
-                                                            country = address_components.getJSONObject(j).getString("short_name");
-                                                        }
+                                                    if (types.getString(k).equals("country")) {
+                                                        country = address_components.getJSONObject(j).getString("short_name");
                                                     }
                                                 }
                                             }
+                                        }
+                                        if (country.equals("CA") || country.equals("US")) {
                                             AddressData data = new AddressData(
                                                     innerIncer.getString("formatted_address"),
                                                     state_code,
@@ -1498,11 +1540,15 @@ public class ProServiceApiHelper {
                                             data.setLatitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lat"));
                                             data.setLongitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lng"));
                                             addressList.add(data);
+                                        } else {
+                                            callback.onError("Error re pagla !");
                                         }
-                                    }else{
-                                        exception="Please enter postal code.";
+
                                     }
+                                } else {
+                                    exception = "Please enter postal code.";
                                 }
+                            }
                         }
 
                         Logger.printMessage("location", "" + responseString);
@@ -1530,6 +1576,7 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
+
 
     /**
      * Interface used to get call back for getServiceList and getCategoryList
@@ -1563,5 +1610,17 @@ public class ProServiceApiHelper {
 
         void onError(String error);
     }
+
+    /**
+     * Interface used to get call back for PostedProject list(MyProject)
+     */
+    public interface projectListCallback {
+        void onStart();
+
+        void onComplete(List projectList);
+
+        void onError(String error);
+    }
+
 
 }

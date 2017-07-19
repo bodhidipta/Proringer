@@ -1,8 +1,11 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +15,13 @@ import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.Logger;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -37,6 +42,8 @@ import java.util.LinkedList;
  */
 
 public class MyProjects extends Fragment {
+    ProgressDialog dialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,46 +51,62 @@ public class MyProjects extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView project_list=(RecyclerView)view.findViewById(R.id.project_list);
+        final RecyclerView project_list = (RecyclerView) view.findViewById(R.id.project_list);
         project_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ProServiceApiHelper.getInstance(getActivity()).getMyProjectList(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
             @Override
             public void onStart() {
-
+                dialog = new ProgressDialog(getActivity());
+                dialog.setTitle("My Projects");
+                dialog.setCancelable(false);
+                dialog.setMessage("Getting MyProject list. Please wait.");
+                dialog.show();
             }
 
             @Override
-            public void onComplete(String message) {
+            public void onComplete(final List projectList) {
 
-                Logger.printMessage("message",""+message);
+                if (dialog != null && dialog.isShowing())
+                    dialog.dismiss();
+
+                if (projectList != null && projectList.size() > 0)
+                    project_list.setAdapter(new ProjectListingAdapter(getActivity(), projectList, new onOptionSelected() {
+                        @Override
+                        public void onItemPassed(int position, String value) {
+                            ProApplication.getInstance().setDataSelected((ProjectPostedData) projectList.get(position));
+                            ((LandScreenActivity) getActivity()).transactMyProjectsDetails();
+
+                        }
+                    }));
+                else
+                    view.findViewById(R.id.no_project_available).setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onError(String error) {
-
+                if (dialog != null && dialog.isShowing())
+                    dialog.dismiss();
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("MyProjects Error")
+                        .setMessage("" + error)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
 
-        LinkedList<ProjectPostedData> datal=new LinkedList<>();
-        datal.add(new ProjectPostedData(true,false,true));
-        datal.add(new ProjectPostedData(false,true,false));
-        datal.add(new ProjectPostedData(true,false,false));
-        datal.add(new ProjectPostedData(false,false,false));
-
-        project_list.setAdapter(new ProjectListingAdapter(getActivity(), datal, new onOptionSelected() {
-            @Override
-            public void onItemPassed(int position, String value) {
-
-                ((LandScreenActivity)getActivity()).transactMyProjectsDetails();
-
-            }
-        }));
     }
 
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }
+
+
 }
