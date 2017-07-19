@@ -2,6 +2,7 @@ package com.android.llc.proringer.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -40,6 +41,7 @@ public class ForgetPassword extends AppCompatActivity {
     private ProLightEditText email, request_code, password, confirm_password;
     private ProRegularTextView submit_email;
     private ProgressDialog pgDialog = null;
+    ProRegularTextView tv_contact_us;
 
 
     @Override
@@ -51,6 +53,16 @@ public class ForgetPassword extends AppCompatActivity {
         request_code = (ProLightEditText) findViewById(R.id.request_code);
         password = (ProLightEditText) findViewById(R.id.password);
         confirm_password = (ProLightEditText) findViewById(R.id.confirm_password);
+
+
+        tv_contact_us= (ProRegularTextView) findViewById(R.id.tv_contact_us);
+
+        tv_contact_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               startActivity(new Intent(ForgetPassword.this,ContactUsActivity.class));
+            }
+        });
 
 
         findViewById(R.id.submit_email).setOnClickListener(new View.OnClickListener() {

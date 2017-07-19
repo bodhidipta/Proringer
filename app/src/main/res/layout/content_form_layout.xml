@@ -155,6 +155,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/edit_text_selecter"
                         android:hint="Zip Code"
+                        android:maxLength="5"
                         android:inputType="text"
                         android:gravity="center_vertical"
                         android:id="@+id/zip_code"
@@ -232,6 +233,7 @@
                 android:background="@drawable/background_white_with_border"
                 android:hint="Zip code"
                 android:padding="4dp"
+                android:maxLength="5"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
 

@@ -610,7 +610,16 @@ public class ProServiceApiHelper {
                 protected String doInBackground(String... params) {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
                         Logger.printMessage("userInfo", ProApplication.getInstance().getUserId());
+                        Logger.printMessage("country",""+params[4]);
+                        Logger.printMessage("latitude",""+params[9]);
+                        Logger.printMessage("longitude",""+params[10]);
+                        Logger.printMessage("details",""+params[8]);
+                        Logger.printMessage("state",""+params[5]);
+                        Logger.printMessage("zipcode",""+params[6]);
+
+
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", ProApplication.getInstance().getUserId())

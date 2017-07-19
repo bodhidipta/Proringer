@@ -148,6 +148,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_text_selecter"
                     android:hint="Zip Code"
+                    android:maxLength="5"
                     android:inputType="text"
                     android:gravity="center_vertical"
                     android:id="@+id/zip_code"
