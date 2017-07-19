@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -16,6 +17,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -64,6 +66,11 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         sign_up_with_facebook = (RelativeLayout) findViewById(R.id.sign_up_with_facebook);
 
@@ -179,12 +186,6 @@ public class SignUp extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.back_header).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
     }
 
     @Override
@@ -273,7 +274,7 @@ public class SignUp extends AppCompatActivity {
 
                                                                                findViewById(R.id.header_image).setVisibility(View.VISIBLE);
                                                                                findViewById(R.id.header_text).setVisibility(View.GONE);
-                                                                               findViewById(R.id.back_header).setVisibility(View.GONE);
+                                                                               getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
                                                                                try {
                                                                                    keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
@@ -346,5 +347,13 @@ public class SignUp extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            onBackPressed();
+
+        return super.onOptionsItemSelected(item);
     }
 }

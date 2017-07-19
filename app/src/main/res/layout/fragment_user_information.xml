@@ -157,7 +157,6 @@
                 android:background="@drawable/edit_text_selecter"
                 android:hint="Zip code"
                 android:inputType="number"
-                android:maxLength="5"
                 android:padding="10dp"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
