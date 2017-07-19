@@ -463,6 +463,7 @@
                     android:hint="Zip Code"
                     android:inputType="text"
                     android:padding="10dp"
+                    android:maxLength="5"
                     android:textColor="@color/colorTextDark"
                     android:textSize="14sp" />
 
