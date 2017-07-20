@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
