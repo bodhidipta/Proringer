@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
-import android.widget.ImageView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
