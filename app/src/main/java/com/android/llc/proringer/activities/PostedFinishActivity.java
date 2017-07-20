@@ -1,6 +1,7 @@
 package com.android.llc.proringer.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -37,8 +38,16 @@ public class PostedFinishActivity extends AppCompatActivity {
         contact= (ProRegularTextView) findViewById(R.id.contact);
 
 
-        mail_resent.setText(Html.fromHtml(getString(R.string.posted_finish_resent)));
-        contact.setText(Html.fromHtml(getString(R.string.posted_finish_contact_us)));
+        if (Build.VERSION.SDK_INT >= 24)
+        {
+            mail_resent.setText(Html.fromHtml(getString(R.string.posted_finish_resent),Html.FROM_HTML_MODE_LEGACY));
+            contact.setText(Html.fromHtml(getString(R.string.posted_finish_contact_us),Html.FROM_HTML_MODE_LEGACY));
+        }
+        else
+        {
+            mail_resent.setText(Html.fromHtml(getString(R.string.posted_finish_resent)));
+            contact.setText(Html.fromHtml(getString(R.string.posted_finish_contact_us)));
+        }
 
 
         mail_resent.setOnClickListener(new View.OnClickListener() {

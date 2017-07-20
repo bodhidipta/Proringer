@@ -1,6 +1,7 @@
 package com.android.llc.proringer.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.fragments.main_content.ContactUs;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
@@ -30,7 +30,15 @@ public class ResendConfirmation extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tv_resend= (ProRegularTextView) findViewById(R.id.tv_resend);
-        tv_resend.setText(Html.fromHtml(getString(R.string.resend_contact_us)));
+
+        if (Build.VERSION.SDK_INT >= 24)
+        {
+            tv_resend.setText(Html.fromHtml(getString(R.string.resend_contact_us),Html.FROM_HTML_MODE_LEGACY));
+        }
+        else
+        {
+            tv_resend.setText(Html.fromHtml(getString(R.string.resend_contact_us)));
+        }
 
         tv_resend.setOnClickListener(new View.OnClickListener() {
             @Override
