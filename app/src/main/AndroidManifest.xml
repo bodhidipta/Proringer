@@ -103,12 +103,14 @@
             android:name=".activities.ResendConfirmation"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             />
 
         <activity
             android:name=".activities.ContactUsActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             />
 
     </application>
