@@ -9,7 +9,9 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.android.llc.proringer.R;
@@ -37,7 +39,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  */
 
 public class ForgetPassword extends AppCompatActivity {
-    private ProSemiBoldTextView header_text;
+    private ProRegularTextView header_text;
     private ProLightEditText email, request_code, password, confirm_password;
     private ProgressDialog pgDialog = null;
     ProRegularTextView tv_contact_us;
@@ -47,7 +49,14 @@ public class ForgetPassword extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_forget_password);
-        header_text = (ProSemiBoldTextView) findViewById(R.id.header_text);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        header_text = (ProRegularTextView) findViewById(R.id.header_text);
         email = (ProLightEditText) findViewById(R.id.email);
         request_code = (ProLightEditText) findViewById(R.id.request_code);
         password = (ProLightEditText) findViewById(R.id.password);
@@ -203,13 +212,13 @@ public class ForgetPassword extends AppCompatActivity {
                 }
             }
         });
+    }
 
-
-        findViewById(R.id.tool_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

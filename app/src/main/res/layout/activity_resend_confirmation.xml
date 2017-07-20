@@ -7,20 +7,13 @@
     android:background="@color/colorBGblueShade"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary">
 
-        <ImageView
-            android:id="@+id/tool_back"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_chevron_left" />
-
-        <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-            android:id="@+id/header_text"
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -29,7 +22,9 @@
             android:text="Resend Confirmation"
             android:textColor="@color/colorTextDark"
             android:textSize="16sp" />
-    </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
 
     <LinearLayout
         android:id="@+id/pre_submit_email"
@@ -97,22 +92,14 @@
                 android:textSize="12sp" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/tv_resend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="Check your inbox and spam/junk mail folders.If you can not locate it feel free to"
                 android:textColor="@color/colorTextDark"
                 android:textSize="12sp" />
 
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text=" Resend confirmation"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp" />
 
 
         </LinearLayout>

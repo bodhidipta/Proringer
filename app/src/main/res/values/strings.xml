@@ -5,4 +5,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="resend_contact_us">
+<![CDATA[
+<p>Check your inbox and spam/junk mail folders.If you can not locate it feel free to <span style="color:#f1592a">Contact Us</span>
+</p>
+]]>
+</string>
 </resources>
