@@ -82,13 +82,10 @@ public class FavPros extends Fragment {
 
                         JSONArray info_array=jsonObject.getJSONArray("info_array");
                         pros_list.setAdapter(new SearchFavouriteListAdapter(getActivity(),info_array));
-
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
