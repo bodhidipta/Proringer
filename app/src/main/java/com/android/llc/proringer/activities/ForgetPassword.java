@@ -39,7 +39,6 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 public class ForgetPassword extends AppCompatActivity {
     private ProSemiBoldTextView header_text;
     private ProLightEditText email, request_code, password, confirm_password;
-    private ProRegularTextView submit_email;
     private ProgressDialog pgDialog = null;
     ProRegularTextView tv_contact_us;
 
@@ -55,6 +54,7 @@ public class ForgetPassword extends AppCompatActivity {
         confirm_password = (ProLightEditText) findViewById(R.id.confirm_password);
 
 
+
         tv_contact_us= (ProRegularTextView) findViewById(R.id.tv_contact_us);
 
         tv_contact_us.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +64,12 @@ public class ForgetPassword extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.resend_confirmation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ForgetPassword.this,ResendConfirmation.class));
+            }
+        });
 
         findViewById(R.id.submit_email).setOnClickListener(new View.OnClickListener() {
             @Override

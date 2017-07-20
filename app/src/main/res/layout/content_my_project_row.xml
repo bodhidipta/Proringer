@@ -127,7 +127,7 @@
                 android:text="REVIEW PRO"
                 android:textColor="#ffffff"
                 android:textSize="12sp"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView

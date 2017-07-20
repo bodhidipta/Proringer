@@ -1,6 +1,9 @@
 package com.android.llc.proringer.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.bottomNav.MyProjects;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -24,11 +29,13 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
     private Context mcontext = null;
     private List<ProjectPostedData> itemList;
     MyProjects.onOptionSelected callback;
+    ProgressDialog pgDia;
 
     public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList, MyProjects.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.callback = callback;
+        pgDia = new ProgressDialog(mcontext);
     }
 
     @Override
@@ -111,6 +118,72 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
             holder.review_pro.setText("DELETE");
 
         }
+
+        holder.review_pro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (itemList.get(position).getProject_status().equalsIgnoreCase("D")) {
+
+                    ProServiceApiHelper.getInstance(mcontext).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                  @Override
+                                                                                  public void onStart() {
+
+                                                                                      pgDia.setTitle("Contact Us");
+                                                                                      pgDia.setMessage("Please wait....");
+                                                                                      pgDia.setCancelable(false);
+                                                                                      pgDia.show();
+
+                                                                                  }
+
+                                                                                  @Override
+                                                                                  public void onComplete(String message) {
+
+                                                                                      itemList.remove(position);
+                                                                                      notifyItemRemoved(position);
+
+                                                                                      if (pgDia != null && pgDia.isShowing())
+                                                                                          pgDia.dismiss();
+
+
+                                                                                      new AlertDialog.Builder(mcontext)
+                                                                                              .setTitle("Delete My project")
+                                                                                              .setMessage("" + message)
+                                                                                              .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                  @Override
+                                                                                                  public void onClick(DialogInterface dialog, int which) {
+                                                                                                      dialog.dismiss();
+                                                                                                  }
+                                                                                              })
+                                                                                              .setCancelable(false)
+                                                                                              .show();
+                                                                                  }
+
+                                                                                  @Override
+                                                                                  public void onError(String error) {
+                                                                                      if (pgDia != null && pgDia.isShowing())
+                                                                                          pgDia.dismiss();
+
+                                                                                      new AlertDialog.Builder(mcontext)
+                                                                                              .setTitle("Contact Us Error")
+                                                                                              .setMessage("" + error)
+                                                                                              .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                  @Override
+                                                                                                  public void onClick(DialogInterface dialog, int which) {
+                                                                                                      dialog.dismiss();
+                                                                                                  }
+                                                                                              })
+                                                                                              .setCancelable(false)
+                                                                                              .show();
+
+                                                                                  }
+                                                                              },
+                            ProApplication.getInstance().getUserId(),
+                            itemList.get(position).getId());
+
+                }
+            }
+        });
+
 
         holder.create_date.setText("Created on " + itemList.get(position).getDate_time());
         holder.project_name.setText(itemList.get(position).getProject_name());

@@ -26,7 +26,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="FORGET PASSWORD"
+            android:text="Resend Confirmation"
             android:textColor="@color/colorTextDark"
             android:textSize="16sp" />
     </RelativeLayout>
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Forget your password?"
+            android:text="Resend Confirmation"
             android:textColor="@color/colorAccent"
             android:textSize="14sp" />
 
@@ -54,7 +54,7 @@
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Enter your password and we'll send\ninstructions on how to reset your password."
+            android:text="Tell us which email address is associated with your accound"
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
 
@@ -65,7 +65,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit_text_selecter"
-            android:hint="Email"
+            android:hint="Account email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textColor="@color/colorTextDark"
@@ -84,6 +84,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="bottom|center">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -91,12 +92,20 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="Account not confirmed?"
+                android:text="If you have not received the confirmation email within 30 minutes please follow these steps"
                 android:textColor="@color/colorTextDark"
                 android:textSize="12sp" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:id="@+id/resend_confirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Check your inbox and spam/junk mail folders.If you can not locate it feel free to"
+                android:textColor="@color/colorTextDark"
+                android:textSize="12sp" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
