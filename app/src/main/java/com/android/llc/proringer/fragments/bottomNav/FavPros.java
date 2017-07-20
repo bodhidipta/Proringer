@@ -1,8 +1,11 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +16,13 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchFavouriteListAdapter;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -34,6 +44,7 @@ import com.android.llc.proringer.adapter.SearchProListAdapter;
 
 public class FavPros extends Fragment {
     private RecyclerView pros_list;
+    ProgressDialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,9 +59,56 @@ public class FavPros extends Fragment {
 
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        pros_list.setAdapter(new SearchFavouriteListAdapter(getActivity()));
 
 
+        ProServiceApiHelper.getInstance(getActivity()).getUserFavouriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+                dialog = new ProgressDialog(getActivity());
+                dialog.setTitle("FavPros");
+                dialog.setCancelable(false);
+                dialog.setMessage("Getting FavPros list. Please wait.");
+                dialog.show();
+            }
+
+            @Override
+            public void onComplete(String message) {
+                if (dialog != null && dialog.isShowing())
+                    dialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(message);
+
+                    if (jsonObject.has("info_array")) {
+
+                        JSONArray info_array=jsonObject.getJSONArray("info_array");
+                        pros_list.setAdapter(new SearchFavouriteListAdapter(getActivity(),info_array));
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String error) {
+                if (dialog != null && dialog.isShowing())
+                    dialog.dismiss();
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("FavPros Error")
+                        .setMessage("" + error)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
+
+            }
+        });
 
         view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
             @Override

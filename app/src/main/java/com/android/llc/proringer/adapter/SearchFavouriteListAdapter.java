@@ -11,20 +11,24 @@ import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
 
+import org.json.JSONArray;
+
 /**
  * Created by su on 7/13/17.
  */
 
 public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavouriteListAdapter.ViewHolder> {
     private Context mcontext = null;
+    JSONArray jsonInfoArray;
 
-    public SearchFavouriteListAdapter(Context mcontext) {
+    public SearchFavouriteListAdapter(Context mcontext,JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
+        this.jsonInfoArray=jsonInfoArray;
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return jsonInfoArray.length();
     }
 
     @Override
