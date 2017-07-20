@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
@@ -48,6 +52,9 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
 
             holder.tv_total_review.setText("("+jsonInfoArray.getJSONObject(position).getString("total_review")+")");
 
+            holder.tv_description.setText(jsonInfoArray.getJSONObject(position).getString("description"));
+
+
             if (!jsonInfoArray.getJSONObject(position).getString("profile_img").equals(""))
                 Glide.with(mcontext).load(jsonInfoArray.getJSONObject(position).getString("profile_img")).centerCrop().into(holder.img_project);
 
@@ -56,6 +63,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
                 holder.img_verify.setVisibility(View.VISIBLE);
                 holder.img_verify_tick.setVisibility(View.VISIBLE);
                 holder.tv_verify.setVisibility(View.VISIBLE);
+                holder.linear_layout_border.setBackgroundResource(R.drawable.background_with_orange_border);
             }else {
                 holder.img_verify.setVisibility(View.GONE);
                 holder.img_verify_tick.setVisibility(View.GONE);
@@ -88,10 +96,11 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout linear_layout_border;
         RatingBar ratingBar;
         CardView main_container;
         ProSemiBoldTextView tv_pros_company_name;
-        ProRegularTextView tv_category_name,tv_address,tv_verify,tv_total_review;
+        ProRegularTextView tv_category_name,tv_address,tv_verify,tv_total_review,tv_description,tv_more;
         ImageView img_project,img_verify,img_verify_tick;
 
         public ViewHolder(View itemView) {
@@ -106,10 +115,14 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
             tv_total_review= (ProRegularTextView) itemView.findViewById(R.id.tv_total_review);
             tv_address= (ProRegularTextView) itemView.findViewById(R.id.tv_address);
             tv_verify= (ProRegularTextView) itemView.findViewById(R.id.tv_verify);
+            tv_description= (ProRegularTextView) itemView.findViewById(R.id.tv_description);
+            tv_more= (ProRegularTextView) itemView.findViewById(R.id.tv_more);
 
             img_project= (ImageView) itemView.findViewById(R.id.img_project);
             img_verify= (ImageView) itemView.findViewById(R.id.img_verify);
             img_verify_tick= (ImageView) itemView.findViewById(R.id.img_verify_tick);
+
+            linear_layout_border= (LinearLayout) itemView.findViewById(R.id.linear_layout_border);
 
         }
     }

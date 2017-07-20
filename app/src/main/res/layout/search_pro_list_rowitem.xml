@@ -18,10 +18,10 @@
         app:cardBackgroundColor="@color/colorPrimary">
 
         <LinearLayout
+            android:id="@+id/linear_layout_border"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="@drawable/background_with_orange_border"
             android:orientation="horizontal"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
@@ -173,7 +173,7 @@
                     android:orientation="vertical">
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/description"
+                        android:id="@+id/tv_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:autoText="false"
@@ -195,13 +195,13 @@
                         android:textSize="10sp" />
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/more"
+                        android:id="@+id/tv_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="12sp"
                         android:maxLines="3"
                         android:paddingLeft="5dp"
-                        android:text="More.."
+                        android:text="Read More.."
                         android:textAlignment="viewStart"
                         android:textColor="@color/colorAccent"
                         android:textSize="10sp" />
