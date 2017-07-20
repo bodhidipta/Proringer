@@ -1,7 +1,10 @@
 package com.android.llc.proringer.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -15,6 +18,7 @@ import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -29,10 +33,11 @@ import org.json.JSONArray;
 public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavouriteListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-
+    ProgressDialog pgDia;
     public SearchFavouriteListAdapter(Context mcontext,JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
         this.jsonInfoArray=jsonInfoArray;
+        pgDia = new ProgressDialog(mcontext);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.ratingBar.setMax(5);
         try {
             holder.ratingBar.setRating(Float.valueOf(jsonInfoArray.getJSONObject(position).getString("pro_avg_review_rating")));
@@ -88,6 +93,75 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
             }
         });
 
+        holder.img_favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ///////////delete from favourite list
+                try {
+                ProServiceApiHelper.getInstance(mcontext).deleteFavouritePro(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                              @Override
+                                                                              public void onStart() {
+
+                                                                                  pgDia.setTitle("My Project");
+                                                                                  pgDia.setMessage("It's deleting.Please wait....");
+                                                                                  pgDia.setCancelable(false);
+                                                                                  pgDia.show();
+
+                                                                              }
+
+                                                                              @Override
+                                                                              public void onComplete(String message) {
+
+                                                                                  jsonInfoArray.remove(position);
+                                                                                  notifyItemRemoved(position);
+
+                                                                                  if (pgDia != null && pgDia.isShowing())
+                                                                                      pgDia.dismiss();
+
+
+                                                                                  new AlertDialog.Builder(mcontext)
+                                                                                          .setTitle("Delete Fav pros")
+                                                                                          .setMessage("" + message)
+                                                                                          .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                              @Override
+                                                                                              public void onClick(DialogInterface dialog, int which) {
+                                                                                                  dialog.dismiss();
+                                                                                              }
+                                                                                          })
+                                                                                          .setCancelable(false)
+                                                                                          .show();
+                                                                              }
+
+                                                                              @Override
+                                                                              public void onError(String error) {
+                                                                                  if (pgDia != null && pgDia.isShowing())
+                                                                                      pgDia.dismiss();
+
+                                                                                  new AlertDialog.Builder(mcontext)
+                                                                                          .setTitle("Delete Fav pros")
+                                                                                          .setMessage("" + error)
+                                                                                          .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                              @Override
+                                                                                              public void onClick(DialogInterface dialog, int which) {
+                                                                                                  dialog.dismiss();
+                                                                                              }
+                                                                                          })
+                                                                                          .setCancelable(false)
+                                                                                          .show();
+
+                                                                              }
+                                                                          },
+                        ProApplication.getInstance().getUserId(),
+                        jsonInfoArray.getJSONObject(position).getString("pros_id")
+                );
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     @Override
@@ -101,7 +175,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
         CardView main_container;
         ProSemiBoldTextView tv_pros_company_name;
         ProRegularTextView tv_category_name,tv_address,tv_verify,tv_total_review,tv_description,tv_more;
-        ImageView img_project,img_verify,img_verify_tick;
+        ImageView img_project,img_verify,img_verify_tick,img_favourite;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -121,6 +195,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
             img_project= (ImageView) itemView.findViewById(R.id.img_project);
             img_verify= (ImageView) itemView.findViewById(R.id.img_verify);
             img_verify_tick= (ImageView) itemView.findViewById(R.id.img_verify_tick);
+            img_favourite= (ImageView) itemView.findViewById(R.id.img_favourite);
 
             linear_layout_border= (LinearLayout) itemView.findViewById(R.id.linear_layout_border);
 

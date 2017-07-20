@@ -128,8 +128,8 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
                                                                                   @Override
                                                                                   public void onStart() {
 
-                                                                                      pgDia.setTitle("Contact Us");
-                                                                                      pgDia.setMessage("Please wait....");
+                                                                                      pgDia.setTitle("My project");
+                                                                                      pgDia.setMessage("It's deleting.Please wait....");
                                                                                       pgDia.setCancelable(false);
                                                                                       pgDia.show();
 
@@ -164,7 +164,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
                                                                                           pgDia.dismiss();
 
                                                                                       new AlertDialog.Builder(mcontext)
-                                                                                              .setTitle("Contact Us Error")
+                                                                                              .setTitle("My project deleting Error")
                                                                                               .setMessage("" + error)
                                                                                               .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                                                                                   @Override

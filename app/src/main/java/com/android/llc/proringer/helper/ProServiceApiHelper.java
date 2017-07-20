@@ -82,6 +82,7 @@ public class ProServiceApiHelper {
     private String myProjectDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_delete";
     private String myProjectdetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_details?user_id=";
     private String favouriteProsListAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros?user_id=";
+    private String favouriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -1892,7 +1893,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * get notification status
+     * get favourite Pro list
      *
      * @param callback
      */
@@ -1950,6 +1951,75 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
+
+
+
+    /**
+     * delete my project
+     *
+     * @param callback
+     * @param params
+     */
+    public void deleteFavouritePro(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", params[0])
+                                .add("favourite_id", params[1])
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .post(requestBody)
+                                .url(favouriteProsDeleteAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
 
 
     /**
