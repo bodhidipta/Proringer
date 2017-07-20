@@ -169,47 +169,16 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="6dp"
+                    android:maxLines="2"
+                    android:text="Hello world its blah ! blah blah blah blah blah blah blah blah blah blah blah blah blah blah ah blah blah blah blah blah blah blah blah blah blah blah ah blah blah blah blah blah blah blah blah blah blah blah "
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp" />
 
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoText="false"
-                        android:clickable="false"
-                        android:contextClickable="false"
-                        android:drawingCacheQuality="auto"
-                        android:ellipsize="marquee"
-                        android:enabled="false"
-                        android:freezesText="false"
-                        android:linksClickable="false"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:maxLines="2"
-                        android:paddingLeft="5dp"
-                        android:singleLine="false"
-                        android:soundEffectsEnabled="false"
-                        android:text="Hello world its blah ! blah blah blah blah blah blah blah blah blah blah blah blah blah blah ah blah blah blah blah blah blah blah blah blah blah blah ah blah blah blah blah blah blah blah blah blah blah blah "
-                        android:textColor="@color/colorTextDark"
-                        android:textIsSelectable="false"
-                        android:textSize="10sp" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingExtra="12sp"
-                        android:maxLines="3"
-                        android:paddingLeft="5dp"
-                        android:text="Read More.."
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="10sp" />
-
-
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

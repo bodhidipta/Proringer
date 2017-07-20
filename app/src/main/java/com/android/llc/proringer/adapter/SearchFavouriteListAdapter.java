@@ -8,6 +8,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +62,39 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
 
             holder.tv_total_review.setText("("+jsonInfoArray.getJSONObject(position).getString("total_review")+")");
 
-            holder.tv_description.setText(jsonInfoArray.getJSONObject(position).getString("description"));
 
+            /**
+             * Read more spannable text with click listener
+             */
+            String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description");
+            Logger.printMessage("contactTextOne",""+contactTextOne);
+            String contactTextClick = " Read more..";
+
+
+            Spannable word1 = new SpannableString(contactTextOne);
+            word1.setSpan(new ForegroundColorSpan(mcontext.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            if (word1.length()>80) {
+                holder.tv_description.setText(word1.subSequence(1, 60));
+
+                Spannable word2 = new SpannableString(contactTextClick);
+                ClickableSpan myClickableSpan = new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+                        // There is the OnCLick. put your intent to Register class here
+                        widget.invalidate();
+                        Logger.printMessage("SpanHello", "click");
+                    }
+
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        ds.setColor(mcontext.getResources().getColor(R.color.colorAccent));
+                        ds.setUnderlineText(false);
+                    }
+                };
+                word2.setSpan(myClickableSpan, 0, contactTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                holder.tv_description.append(word2);
+            }
 
             if (!jsonInfoArray.getJSONObject(position).getString("profile_img").equals(""))
                 Glide.with(mcontext).load(jsonInfoArray.getJSONObject(position).getString("profile_img")).centerCrop().into(holder.img_project);
@@ -74,8 +110,6 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
                 holder.img_verify_tick.setVisibility(View.GONE);
                 holder.tv_verify.setVisibility(View.GONE);
             }
-
-
         }
         catch (Exception e)
         {
@@ -174,7 +208,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
         RatingBar ratingBar;
         CardView main_container;
         ProSemiBoldTextView tv_pros_company_name;
-        ProRegularTextView tv_category_name,tv_address,tv_verify,tv_total_review,tv_description,tv_more;
+        ProRegularTextView tv_category_name,tv_address,tv_verify,tv_total_review,tv_description;
         ImageView img_project,img_verify,img_verify_tick,img_favourite;
 
         public ViewHolder(View itemView) {
@@ -190,7 +224,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
             tv_address= (ProRegularTextView) itemView.findViewById(R.id.tv_address);
             tv_verify= (ProRegularTextView) itemView.findViewById(R.id.tv_verify);
             tv_description= (ProRegularTextView) itemView.findViewById(R.id.tv_description);
-            tv_more= (ProRegularTextView) itemView.findViewById(R.id.tv_more);
+
 
             img_project= (ImageView) itemView.findViewById(R.id.img_project);
             img_verify= (ImageView) itemView.findViewById(R.id.img_verify);
