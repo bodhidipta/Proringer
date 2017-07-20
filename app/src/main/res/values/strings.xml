@@ -7,9 +7,24 @@
     <string name="action_settings">Settings</string>
 
     <string name="resend_contact_us">
-<![CDATA[
-<p>Check your inbox and spam/junk mail folders.If you can not locate it feel free to <span style="color:#f1592a">Contact Us</span>
-</p>
-]]>
-</string>
+        <![CDATA[
+        <p>Check your inbox and spam/junk mail folders.If you can not locate it feel free to <span style="color:#f1592a">Contact Us</span>
+        </p>
+        ]]>
+    </string>
+    
+    <string name="posted_finish_resent">
+         <![CDATA[
+        <p>If you do not received confirmation email within 30 minutes you can <span style="color:#f1592a">request it to be resent.</span>
+        </p>
+        ]]>
+    </string>
+
+    <string name="posted_finish_contact_us">
+    <![CDATA[
+        <p>If you already request your confirmation email to be reset and you have not received that email within 30 minutes and do not see it in your Spam/Junk folder please <span style="color:#f1592a">contact us</span>
+         and include a phone number.
+        </p>
+        ]]>
+    </string>
 </resources>

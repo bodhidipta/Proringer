@@ -290,7 +290,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
-                    android:text="If you do not received confirmation email within 30 minutes you can request it to be resent."
                     android:textColor="@color/colorTextDark"
                     android:textSize="12sp" />
 
@@ -315,7 +314,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
-                    android:text="If you already request your confirmation email to be reset and you have not received that email within 30 minutes and do not see it in your Spam/Junk folder please contact us and include a phone number."
                     android:textColor="@color/colorTextDark"
                     android:textSize="12sp" />
 
