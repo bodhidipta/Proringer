@@ -80,6 +80,7 @@ public class ProServiceApiHelper {
     private String faqInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
     private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_contact_us";
     private String myProjectDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_delete";
+    private String myProjectdetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_details?user_id=";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -1380,6 +1381,72 @@ public class ProServiceApiHelper {
     }
 
     /**
+     * get MyProject details
+     *
+     * @param callback
+     * @param params
+     */
+    public void getMyProjectDetails(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        String ApiOption = myProjectdetailsAPI + "" + ProApplication.getInstance().getUserId()+"&project_id="+params[0];
+                        Logger.printMessage("myProjectdetailsAPI", "" + ApiOption);
+
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(ApiOption)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return responseString;
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+
+    }
+
+
+    /**
      * get MyProject List
      *
      * @param callback
@@ -1481,6 +1548,8 @@ public class ProServiceApiHelper {
         }
 
     }
+
+
 
     /**
      * Search area by google API
