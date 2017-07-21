@@ -20,10 +20,11 @@ public class PostProjectCategoryListAdapter extends RecyclerView.Adapter<Recycle
     LinkedList<String> proCategoryDatasSortedList;
     private onClickItem listener;
 
-    public PostProjectCategoryListAdapter(Context mcontext, LinkedList<String> proCategoryDatasSortedList, onClickItem listener) {
+    public PostProjectCategoryListAdapter(Context mcontext, LinkedList<String> proCategoryDatasSortedList,onClickItem listener) {
         this.mcontext = mcontext;
         this.proCategoryDatasSortedList = proCategoryDatasSortedList;
         this.listener = listener;
+
     }
 
     class ViewHolder1 extends RecyclerView.ViewHolder {
@@ -125,5 +126,6 @@ public class PostProjectCategoryListAdapter extends RecyclerView.Adapter<Recycle
     public interface onClickItem {
         void onSelectItemClick(int position, String data);
     }
+
 
 }

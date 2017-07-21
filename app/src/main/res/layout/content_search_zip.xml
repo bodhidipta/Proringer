@@ -3,44 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBGblueShade"
-    android:orientation="vertical"
-    android:clickable="true">
+    android:clickable="true"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/container_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
         android:visibility="visible">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
-        android:id="@+id/zip_code_text"
-        android:inputType="text"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/background_white_with_border"
-        android:hint="Zip code"
-        android:padding="4dp"
-        android:maxLength="5"
-        android:textColor="@color/colorTextDark"
-        android:textSize="14sp" />
-    <ProgressBar
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:visibility="gone"
-        android:id="@+id/loading_progress"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/error_progress"
-        android:visibility="gone"
-        android:src="@drawable/ic_error_outline"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
-</RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
+                android:id="@+id/zip_code_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_white_with_border"
+                android:hint="Zip code"
+                android:inputType="text"
+                android:maxLength="5"
+                android:padding="4dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <ProgressBar
+                android:id="@+id/loading_progress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/error_progress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_error_outline"
+                android:visibility="gone" />
+        </RelativeLayout>
 
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView

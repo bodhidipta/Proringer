@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/category_background"
     android:orientation="vertical">
 
@@ -17,23 +17,52 @@
         android:textSize="16sp" />
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-        android:layout_alignParentBottom="true"
         android:id="@+id/see_all_categories"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorAccent"
         android:elevation="2dp"
         android:gravity="center"
         android:text="See All categories"
-        app:textAllCaps="true"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:textAllCaps="true" />
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/pro_request_category"
-        android:layout_above="@+id/see_all_categories"
         android:id="@+id/category_listing"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/see_all_categories"
+        android:layout_below="@+id/pro_request_category" />
+
+    <RelativeLayout
+        android:id="@+id/Rl_header_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/pro_request_category"
+        android:background="@color/colorAccent"
+        android:visibility="gone">
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/item_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:paddingRight="30dp"
+            android:text="Here"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorLightGray" />
+    </RelativeLayout>
+
+
+
 </RelativeLayout>
