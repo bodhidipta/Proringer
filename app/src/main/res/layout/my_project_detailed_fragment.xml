@@ -398,6 +398,7 @@
 
 
             <LinearLayout
+                android:id="@+id/LL_Active"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
@@ -457,6 +458,26 @@
 
 
             </LinearLayout>
+
+            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                android:layout_margin="20dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tv_accepted_review"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/colorGreen"
+                android:gravity="center"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="Renew"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                />
 
 
         </LinearLayout>
