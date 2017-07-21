@@ -1846,6 +1846,10 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
+                        Logger.printMessage("user_id",""+ params[0]);
+                        Logger.printMessage("project_id",""+ params[1]);
+                        Logger.printMessage("myProjectDeleteAPI",""+myProjectDeleteAPI);
+
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", params[0])
                                 .add("project_id", params[1])

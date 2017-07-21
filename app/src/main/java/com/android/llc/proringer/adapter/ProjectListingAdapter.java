@@ -129,7 +129,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
                                                                                   public void onStart() {
 
                                                                                       pgDia.setTitle("My project");
-                                                                                      pgDia.setMessage("It's deleting.Please wait....");
+                                                                                      pgDia.setMessage("Delete It's deleting.Please wait....");
                                                                                       pgDia.setCancelable(false);
                                                                                       pgDia.show();
 
@@ -146,7 +146,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
 
                                                                                       new AlertDialog.Builder(mcontext)
-                                                                                              .setTitle("Delete My project")
+                                                                                              .setTitle("Deleted My project")
                                                                                               .setMessage("" + message)
                                                                                               .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                                                                                   @Override

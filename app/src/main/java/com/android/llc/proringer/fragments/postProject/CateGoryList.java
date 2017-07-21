@@ -19,6 +19,7 @@ import com.android.llc.proringer.adapter.PostProjectCategoryListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -155,36 +156,65 @@ public class CateGoryList extends Fragment {
             public void onClick(View view) {
                 Logger.printMessage("show list","list vise");
 
-                category_listing.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                if(((ProRegularTextView)view.findViewById(R.id.see_all_categories)).
+//                        getText().toString().trim().equalsIgnoreCase("See All categories"))
+//                {
+                    category_listing.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                listAdapter=new PostProjectCategoryListAdapter(getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
-                    @Override
-                    public void onSelectItemClick(int position, String data) {
+                    listAdapter=new PostProjectCategoryListAdapter(getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
+                        @Override
+                        public void onSelectItemClick(int position, String data) {
 
-                        Logger.printMessage("data###",""+data);
-                        Logger.printMessage("listdataMain###",""+listdataMain.size());
+                            Logger.printMessage("data###",""+data);
+                            Logger.printMessage("listdataMain###",""+listdataMain.size());
 
-                        for (int p=0;p<listdataMain.size();p++){
-                            if (listdataMain.get(p).getCategory_name().trim().equalsIgnoreCase(data)){
-                                //true
-                                Logger.printMessage("Category_name###",""+listdataMain.get(p).getCategory_name());
-                                Logger.printMessage("Id###",""+listdataMain.get(p).getId());
-                                Logger.printMessage("Category_image###",""+listdataMain.get(p).getCategory_image());
-                                Logger.printMessage("Parent_id###",""+listdataMain.get(p).getParent_id());
+                            for (int p=0;p<listdataMain.size();p++){
+                                if (listdataMain.get(p).getCategory_name().trim().equalsIgnoreCase(data)){
+                                    //true
+                                    Logger.printMessage("Category_name###",""+listdataMain.get(p).getCategory_name());
+                                    Logger.printMessage("Id###",""+listdataMain.get(p).getId());
+                                    Logger.printMessage("Category_image###",""+listdataMain.get(p).getCategory_image());
+                                    Logger.printMessage("Parent_id###",""+listdataMain.get(p).getParent_id());
 
-                                ((ActivityPostProject) getActivity()).selectedCategory = listdataMain.get(p);
-                                ((ActivityPostProject) getActivity()).setHeaderCategory();
-                                ((ActivityPostProject) getActivity()).increaseStep();
-                                /**
-                                 * fragment calling
-                                 */
-                                ((ActivityPostProject) getActivity()).changeFragmentNext(2);
-                                break;
+                                    ((ActivityPostProject) getActivity()).selectedCategory = listdataMain.get(p);
+                                    ((ActivityPostProject) getActivity()).setHeaderCategory();
+                                    ((ActivityPostProject) getActivity()).increaseStep();
+                                    /**
+                                     * fragment calling
+                                     */
+                                    ((ActivityPostProject) getActivity()).changeFragmentNext(2);
+                                    break;
+                                }
                             }
                         }
-                    }
-                });
-                category_listing.setAdapter(listAdapter);
+                    });
+                    category_listing.setAdapter(listAdapter);
+
+                    ((ProRegularTextView)view.findViewById(R.id.see_all_categories)).setVisibility(View.GONE);
+//                    ((ProRegularTextView)view.findViewById(R.id.see_all_categories)).
+//                            setText("See All categories grid");
+
+//                }else {
+//                    category_listing.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+//                    gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdataMain, new PostProjectCategoryGridAdapter.onClickItem() {
+//                        @Override
+//                        public void onSelectItemClick(int position, ProCategoryData data) {
+//                            ((ActivityPostProject) getActivity()).selectedCategory = data;
+//                            ((ActivityPostProject) getActivity()).setHeaderCategory();
+//                            ((ActivityPostProject) getActivity()).increaseStep();
+//                            /**
+//                             * fragment calling
+//                             */
+//                            ((ActivityPostProject) getActivity()).changeFragmentNext(2);
+//
+//                        }
+//                    });
+//                    category_listing.setAdapter(gridAdapter);
+//
+//                    ((ProRegularTextView)view.findViewById(R.id.see_all_categories)).
+//                            setText("See All categories");
+//                }
+
             }
         });
     }
