@@ -129,69 +129,88 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
         holder.img_favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ///////////delete from favourite list
-                try {
-                ProServiceApiHelper.getInstance(mcontext).deleteFavouritePro(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                              @Override
-                                                                              public void onStart() {
 
-                                                                                  pgDia.setTitle("My Project");
-                                                                                  pgDia.setMessage("It's deleting.Please wait....");
-                                                                                  pgDia.setCancelable(false);
-                                                                                  pgDia.show();
-
-                                                                              }
-
-                                                                              @Override
-                                                                              public void onComplete(String message) {
-
-                                                                                  jsonInfoArray.remove(position);
-                                                                                  notifyItemRemoved(position);
-
-                                                                                  if (pgDia != null && pgDia.isShowing())
-                                                                                      pgDia.dismiss();
+                new AlertDialog.Builder(mcontext)
+                        .setTitle("Do you want do delete..")
 
 
-                                                                                  new AlertDialog.Builder(mcontext)
-                                                                                          .setTitle("Delete Fav pros")
-                                                                                          .setMessage("" + message)
-                                                                                          .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                              @Override
-                                                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                                                  dialog.dismiss();
-                                                                                              }
-                                                                                          })
-                                                                                          .setCancelable(false)
-                                                                                          .show();
-                                                                              }
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                ///////////delete from favourite list
+                                try {
+                                    ProServiceApiHelper.getInstance(mcontext).deleteFavouritePro(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                                     @Override
+                                                                                                     public void onStart() {
 
-                                                                              @Override
-                                                                              public void onError(String error) {
-                                                                                  if (pgDia != null && pgDia.isShowing())
-                                                                                      pgDia.dismiss();
+                                                                                                         pgDia.setTitle("My Project");
+                                                                                                         pgDia.setMessage("It's deleting.Please wait....");
+                                                                                                         pgDia.setCancelable(false);
+                                                                                                         pgDia.show();
 
-                                                                                  new AlertDialog.Builder(mcontext)
-                                                                                          .setTitle("Delete Fav pros")
-                                                                                          .setMessage("" + error)
-                                                                                          .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                              @Override
-                                                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                                                  dialog.dismiss();
-                                                                                              }
-                                                                                          })
-                                                                                          .setCancelable(false)
-                                                                                          .show();
+                                                                                                     }
 
-                                                                              }
-                                                                          },
-                        ProApplication.getInstance().getUserId(),
-                        jsonInfoArray.getJSONObject(position).getString("pros_id")
-                );
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+                                                                                                     @Override
+                                                                                                     public void onComplete(String message) {
+
+                                                                                                         jsonInfoArray.remove(position);
+                                                                                                         notifyItemRemoved(position);
+
+                                                                                                         if (pgDia != null && pgDia.isShowing())
+                                                                                                             pgDia.dismiss();
+
+
+                                                                                                         new AlertDialog.Builder(mcontext)
+                                                                                                                 .setTitle("Delete Fav pros")
+                                                                                                                 .setMessage("" + message)
+                                                                                                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                     @Override
+                                                                                                                     public void onClick(DialogInterface dialog, int which) {
+                                                                                                                         dialog.dismiss();
+                                                                                                                     }
+                                                                                                                 })
+                                                                                                                 .setCancelable(false)
+                                                                                                                 .show();
+                                                                                                     }
+
+                                                                                                     @Override
+                                                                                                     public void onError(String error) {
+                                                                                                         if (pgDia != null && pgDia.isShowing())
+                                                                                                             pgDia.dismiss();
+
+                                                                                                         new AlertDialog.Builder(mcontext)
+                                                                                                                 .setTitle("Delete Fav pros")
+                                                                                                                 .setMessage("" + error)
+                                                                                                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                     @Override
+                                                                                                                     public void onClick(DialogInterface dialog, int which) {
+                                                                                                                         dialog.dismiss();
+                                                                                                                     }
+                                                                                                                 })
+                                                                                                                 .setCancelable(false)
+                                                                                                                 .show();
+
+                                                                                                     }
+                                                                                                 },
+                                            ProApplication.getInstance().getUserId(),
+                                            jsonInfoArray.getJSONObject(position).getString("pros_id")
+                                    );
+                                }
+                                catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setCancelable(false)
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
 
             }
         });
