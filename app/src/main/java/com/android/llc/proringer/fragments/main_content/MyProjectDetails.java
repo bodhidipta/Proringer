@@ -84,7 +84,6 @@ public class MyProjectDetails extends Fragment {
             LL_Active.setVisibility(View.GONE);
             tv_accepted_review.setVisibility(View.GONE);
         }
-
 //        ProServiceApiHelper.getInstance(getActivity()).getMyProjectDetails(new ProServiceApiHelper.getApiProcessCallback() {
 //            @Override
 //            public void onStart() {
