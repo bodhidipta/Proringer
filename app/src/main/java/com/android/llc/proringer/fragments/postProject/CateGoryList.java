@@ -193,7 +193,7 @@ public class CateGoryList extends Fragment {
                 });
                 category_listing.setAdapter(listAdapter);
 
-                category_listing.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                category_listing.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                         super.onScrollStateChanged(recyclerView, newState);
@@ -210,37 +210,64 @@ public class CateGoryList extends Fragment {
                         Logger.printMessage("psition",""+displayedposition);
 
 
-                        if (proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("A")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("B")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("C")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("D")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("E")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("F")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("G")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("H")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("I")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("J")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("K")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("L")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("M")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("N")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("O")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("P")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("Q")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("R")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("S")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("T")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("U")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("V")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("W")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("X")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("Y")
-                                ||proCategoryDatasSortedList.get(displayedposition).equalsIgnoreCase("Z")) {
-
-                            item_header.setText(proCategoryDatasSortedList.get(displayedposition));
+                        if (proCategoryDatasSortedList.get(displayedposition).startsWith("A")){
+                            item_header.setText("A");
                         }
-
-
+                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("B")){
+                            item_header.setText("B");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("C")){
+                            item_header.setText("C");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("D")){
+                            item_header.setText("D");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("E")){
+                            item_header.setText("E");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("F")){
+                            item_header.setText("F");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("G")){
+                            item_header.setText("G");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("H")){
+                            item_header.setText("H");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("I")){
+                            item_header.setText("I");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("J")){
+                            item_header.setText("J");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("K")){
+                            item_header.setText("K");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("L")){
+                            item_header.setText("L");
+                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("M")){
+                            item_header.setText("M");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("N")){
+                            item_header.setText("N");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("O")){
+                            item_header.setText("O");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("P")){
+                            item_header.setText("P");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("Q")){
+                            item_header.setText("Q");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("R")){
+                            item_header.setText("R");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("S")){
+                            item_header.setText("S");
+                        }
+                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("T")){
+                            item_header.setText("T");
+                        }
+                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("U")){
+                            item_header.setText("U");
+                        }
+                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("V")){
+                            item_header.setText("V");
+                        }
+                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("W")){
+                            item_header.setText("W");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("X")){
+                            item_header.setText("X");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("Y")){
+                            item_header.setText("Y");
+                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("Z")){
+                            item_header.setText("Z");
+                        }
                     }
                 });
 
