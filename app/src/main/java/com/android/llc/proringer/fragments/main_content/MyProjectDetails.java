@@ -35,6 +35,8 @@ public class MyProjectDetails extends Fragment {
     LinearLayout LL_Active;
     ProSemiBoldTextView tv_accepted_review;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,6 +86,12 @@ public class MyProjectDetails extends Fragment {
             LL_Active.setVisibility(View.GONE);
             tv_accepted_review.setVisibility(View.GONE);
         }
+        view.findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete();
+            }
+        });
 //        ProServiceApiHelper.getInstance(getActivity()).getMyProjectDetails(new ProServiceApiHelper.getApiProcessCallback() {
 //            @Override
 //            public void onStart() {
@@ -129,5 +137,63 @@ public class MyProjectDetails extends Fragment {
 //                        .show();
 //            }
 //        }, ProApplication.getInstance().getDataSelected().getId());
+    }
+
+    public void delete(){
+        ProServiceApiHelper.getInstance(getActivity()).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                           @Override
+                                                                           public void onStart() {
+
+                                                                               dialog.setTitle("My project");
+                                                                               dialog.setMessage("It's deleting.Please wait....");
+                                                                               dialog.setCancelable(false);
+                                                                               dialog.show();
+
+                                                                           }
+
+                                                                           @Override
+                                                                           public void onComplete(String message) {
+
+//                                                                          itemList.remove(position);
+//                                                                          notifyItemRemoved(position);
+
+                                                                               if (dialog != null && dialog.isShowing())
+                                                                                   dialog.dismiss();
+
+
+                                                                               new AlertDialog.Builder(getActivity())
+                                                                                       .setTitle("Delete My project")
+                                                                                       .setMessage("" + message)
+                                                                                       .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                           @Override
+                                                                                           public void onClick(DialogInterface dialog, int which) {
+                                                                                               dialog.dismiss();
+                                                                                           }
+                                                                                       })
+                                                                                       .setCancelable(false)
+                                                                                       .show();
+                                                                           }
+
+                                                                           @Override
+                                                                           public void onError(String error) {
+                                                                               if (dialog != null && dialog.isShowing())
+                                                                                   dialog.dismiss();
+
+                                                                               new AlertDialog.Builder(getActivity())
+                                                                                       .setTitle("My project deleting Error")
+                                                                                       .setMessage("" + error)
+                                                                                       .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                           @Override
+                                                                                           public void onClick(DialogInterface dialog, int which) {
+                                                                                               dialog.dismiss();
+                                                                                           }
+                                                                                       })
+                                                                                       .setCancelable(false)
+                                                                                       .show();
+
+                                                                           }
+                                                                       },
+                ProApplication.getInstance().getUserId(),
+                ProApplication.getInstance().getDataSelected().getId());
     }
 }

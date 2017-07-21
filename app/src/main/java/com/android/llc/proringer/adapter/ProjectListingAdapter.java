@@ -124,61 +124,6 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
             public void onClick(View view) {
                 if (itemList.get(position).getProject_status().equalsIgnoreCase("DA")) {
 
-                    ProServiceApiHelper.getInstance(mcontext).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                                  @Override
-                                                                                  public void onStart() {
-
-                                                                                      pgDia.setTitle("My project");
-                                                                                      pgDia.setMessage("It's deleting.Please wait....");
-                                                                                      pgDia.setCancelable(false);
-                                                                                      pgDia.show();
-
-                                                                                  }
-
-                                                                                  @Override
-                                                                                  public void onComplete(String message) {
-
-                                                                                      itemList.remove(position);
-                                                                                      notifyItemRemoved(position);
-
-                                                                                      if (pgDia != null && pgDia.isShowing())
-                                                                                          pgDia.dismiss();
-
-
-                                                                                      new AlertDialog.Builder(mcontext)
-                                                                                              .setTitle("Delete My project")
-                                                                                              .setMessage("" + message)
-                                                                                              .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                  @Override
-                                                                                                  public void onClick(DialogInterface dialog, int which) {
-                                                                                                      dialog.dismiss();
-                                                                                                  }
-                                                                                              })
-                                                                                              .setCancelable(false)
-                                                                                              .show();
-                                                                                  }
-
-                                                                                  @Override
-                                                                                  public void onError(String error) {
-                                                                                      if (pgDia != null && pgDia.isShowing())
-                                                                                          pgDia.dismiss();
-
-                                                                                      new AlertDialog.Builder(mcontext)
-                                                                                              .setTitle("My project deleting Error")
-                                                                                              .setMessage("" + error)
-                                                                                              .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                  @Override
-                                                                                                  public void onClick(DialogInterface dialog, int which) {
-                                                                                                      dialog.dismiss();
-                                                                                                  }
-                                                                                              })
-                                                                                              .setCancelable(false)
-                                                                                              .show();
-
-                                                                                  }
-                                                                              },
-                            ProApplication.getInstance().getUserId(),
-                            itemList.get(position).getId());
 
                 }
             }
