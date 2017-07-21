@@ -115,21 +115,21 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
             holder.review_pro.setVisibility(View.VISIBLE);
             holder.review_pro.setBackgroundResource(R.drawable.background_solid_grey_with_border);
-            holder.review_pro.setText("DELETE");
+            holder.review_pro.setText("DELETED");
 
         }
 
         holder.review_pro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemList.get(position).getProject_status().equalsIgnoreCase("D")) {
+                if (itemList.get(position).getProject_status().equalsIgnoreCase("DA")) {
 
                     ProServiceApiHelper.getInstance(mcontext).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                   @Override
                                                                                   public void onStart() {
 
                                                                                       pgDia.setTitle("My project");
-                                                                                      pgDia.setMessage("Delete It's deleting.Please wait....");
+                                                                                      pgDia.setMessage("It's deleting.Please wait....");
                                                                                       pgDia.setCancelable(false);
                                                                                       pgDia.show();
 
@@ -146,7 +146,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
 
                                                                                       new AlertDialog.Builder(mcontext)
-                                                                                              .setTitle("Deleted My project")
+                                                                                              .setTitle("Delete My project")
                                                                                               .setMessage("" + message)
                                                                                               .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                                                                                   @Override
