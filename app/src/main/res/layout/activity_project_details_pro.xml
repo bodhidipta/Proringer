@@ -80,7 +80,7 @@
                     android:layout_width="56dp"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:padding="15dp"
+                    android:padding="20dp"
                     android:src="@drawable/left_slider" />
 
                 <ImageView
@@ -89,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:padding="15dp"
+                    android:padding="20dp"
                     android:src="@drawable/left_slider" />
 
 
@@ -97,8 +97,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@id/img_share"
-                    android:layout_toRightOf="@id/img_back"
                     android:gravity="center"
                     android:hint="Buuble Granite Roofing Company"
                     android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
