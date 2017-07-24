@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="What kind of pro do you need?"
         android:textColor="@color/colorAccent"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
         android:id="@+id/see_all_categories"
@@ -37,20 +37,19 @@
         android:layout_below="@+id/pro_request_category" />
 
 
-
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:layout_below="@+id/pro_request_category"
-            android:id="@+id/item_header"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:paddingRight="30dp"
-            android:text="Here"
-            android:background="@color/colorAccent"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
-            android:visibility="gone"/>
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/item_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/pro_request_category"
+        android:background="@color/colorAccent"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:paddingRight="30dp"
+        android:text="Here"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
