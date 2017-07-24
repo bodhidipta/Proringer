@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -168,6 +169,8 @@ public class MyProjectDetails extends Fragment {
                                                                                            @Override
                                                                                            public void onClick(DialogInterface dialog, int which) {
                                                                                                dialog.dismiss();
+                                                                                               ((LandScreenActivity) getActivity()).toggleToolBar(false);
+                                                                                               ((LandScreenActivity) getActivity()).transactMyProjects();
                                                                                            }
                                                                                        })
                                                                                        .setCancelable(false)

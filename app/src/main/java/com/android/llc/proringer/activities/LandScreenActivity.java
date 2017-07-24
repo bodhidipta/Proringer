@@ -239,7 +239,7 @@ public class LandScreenActivity extends AppCompatActivity {
     /**
      * Fragment transaction for MyProject
      */
-    private void transactMyProjects() {
+    public void transactMyProjects() {
 
         toggleToolBar(false);
 
