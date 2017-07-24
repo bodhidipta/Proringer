@@ -66,6 +66,13 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
         }
 
+        holder.start_project.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /////start project/////
+            }
+        });
+
         if (itemList.get(position).getProject_status().equals("Y")) {
 
             /**
