@@ -21,6 +21,7 @@ import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ import java.util.List;
  */
 
 public class SearchLocation extends Fragment {
+    List<AddressData> addressDataList;
     ProRegularEditText zip_code_text;
     private boolean zipSearchGoing = false;
     private PostProjectLocationListAdapter zip_search_adapter = null;
@@ -49,6 +51,8 @@ public class SearchLocation extends Fragment {
         loading_progress = (ProgressBar) view.findViewById(R.id.loading_progress);
         error_progress=(ImageView)view.findViewById(R.id.error_progress);
         location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        addressDataList=new ArrayList<>();
 
 
         zip_code_text.addTextChangedListener(new TextWatcher() {
@@ -92,15 +96,17 @@ public class SearchLocation extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getSearchArea(key, new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
+                addressDataList=listdata;
 
                 zipSearchGoing = false;
                 loading_progress.setVisibility(View.GONE);
                 error_progress.setVisibility(View.GONE);
-                Logger.printMessage("listdata", "" + listdata);
 
-                if (listdata!=null && listdata.size()>0){
+                Logger.printMessage("addressDataList", "" + addressDataList);
+
+                if (addressDataList!=null && addressDataList.size()>0){
                     if (zip_search_adapter == null) {
-                        zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), listdata, new PostProjectLocationListAdapter.onItemelcted() {
+                        zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
                             public void onSelect(int pos, AddressData data) {
                                 ((ActivityPostProject) getActivity()).selectedAddressData = data;
@@ -116,6 +122,11 @@ public class SearchLocation extends Fragment {
 
             @Override
             public void onError(String error) {
+
+                if(zip_search_adapter!=null) {
+                    addressDataList.clear();
+                    zip_search_adapter.updateData(addressDataList);
+                }
                 loading_progress.setVisibility(View.GONE);
                 error_progress.setVisibility(View.VISIBLE);
             }
