@@ -2,6 +2,7 @@ package com.android.llc.proringer.adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.fragments.bottomNav.MyProjects;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -64,6 +67,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
             @Override
             public void onClick(View view) {
                 /////start project/////
+                mcontext.startActivity(new Intent(mcontext, ActivityPostProject.class));
             }
         });
 
