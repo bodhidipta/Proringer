@@ -39,7 +39,7 @@ public class CateGoryList extends Fragment {
     LinkedList<String> proCategoryDatasSortedList;
     LinkedList<ProCategoryData> listdataMain;
     ProRegularTextView item_header;
-    RelativeLayout Rl_header_list_text;
+
 
     @Nullable
     @Override
@@ -54,7 +54,7 @@ public class CateGoryList extends Fragment {
         category_listing.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
-        Rl_header_list_text = (RelativeLayout) view.findViewById(R.id.Rl_header_list_text);
+        item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
 
         ProServiceApiHelper.getInstance(getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
@@ -71,32 +71,32 @@ public class CateGoryList extends Fragment {
                 }
 
 
-                addAlbhabetHeader('A');
-                addAlbhabetHeader('B');
-                addAlbhabetHeader('C');
-                addAlbhabetHeader('D');
-                addAlbhabetHeader('E');
-                addAlbhabetHeader('F');
-                addAlbhabetHeader('G');
-                addAlbhabetHeader('H');
-                addAlbhabetHeader('I');
-                addAlbhabetHeader('J');
-                addAlbhabetHeader('K');
-                addAlbhabetHeader('L');
-                addAlbhabetHeader('M');
-                addAlbhabetHeader('N');
-                addAlbhabetHeader('O');
-                addAlbhabetHeader('P');
-                addAlbhabetHeader('Q');
-                addAlbhabetHeader('R');
-                addAlbhabetHeader('S');
-                addAlbhabetHeader('T');
-                addAlbhabetHeader('U');
-                addAlbhabetHeader('V');
-                addAlbhabetHeader('W');
-                addAlbhabetHeader('X');
-                addAlbhabetHeader('Y');
-                addAlbhabetHeader('Z');
+                addAlphabetHeader('A');
+                addAlphabetHeader('B');
+                addAlphabetHeader('C');
+                addAlphabetHeader('D');
+                addAlphabetHeader('E');
+                addAlphabetHeader('F');
+                addAlphabetHeader('G');
+                addAlphabetHeader('H');
+                addAlphabetHeader('I');
+                addAlphabetHeader('J');
+                addAlphabetHeader('K');
+                addAlphabetHeader('L');
+                addAlphabetHeader('M');
+                addAlphabetHeader('N');
+                addAlphabetHeader('O');
+                addAlphabetHeader('P');
+                addAlphabetHeader('Q');
+                addAlphabetHeader('R');
+                addAlphabetHeader('S');
+                addAlphabetHeader('T');
+                addAlphabetHeader('U');
+                addAlphabetHeader('V');
+                addAlphabetHeader('W');
+                addAlphabetHeader('X');
+                addAlphabetHeader('Y');
+                addAlphabetHeader('Z');
 
 
                 Collections.sort(proCategoryDatasSortedList, new Comparator<String>() {
@@ -273,7 +273,7 @@ public class CateGoryList extends Fragment {
 
 
                 ((ProRegularTextView) view.findViewById(R.id.see_all_categories)).setVisibility(View.GONE);
-                Rl_header_list_text.setVisibility(View.VISIBLE);
+                item_header.setVisibility(View.VISIBLE);
 
 //                    ((ProRegularTextView)view.findViewById(R.id.see_all_categories)).
 //                            setText("See All categories grid");
@@ -303,7 +303,7 @@ public class CateGoryList extends Fragment {
         });
     }
 
-    public void addAlbhabetHeader(char a) {
+    public void addAlphabetHeader(char a) {
         for (int p = 0; p < proCategoryDatasSortedList.size(); p++) {
             if (proCategoryDatasSortedList.get(p).toUpperCase().charAt(0) == a) {
                 proCategoryDatasSortedList.add("" + a);
