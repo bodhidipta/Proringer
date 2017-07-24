@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/background_white_with_border"
-                android:hint="Zip code"
+                android:hint="71111"
                 android:inputType="text"
                 android:maxLength="5"
                 android:padding="4dp"
