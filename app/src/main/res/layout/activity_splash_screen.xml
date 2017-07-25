@@ -23,7 +23,7 @@
         android:background="@drawable/header" />
 
     <ImageView
-        android:src="@drawable/ic_all_out"
+        android:src="@mipmap/loader"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/abcd"

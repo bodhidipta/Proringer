@@ -48,7 +48,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     RotateAnimation rotate = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    rotate.setDuration(2000);
+                    rotate.setDuration(3000);
                     rotate.setInterpolator(new LinearInterpolator());
                     image_l.startAnimation(rotate);
                 } catch (Exception ioe) {
