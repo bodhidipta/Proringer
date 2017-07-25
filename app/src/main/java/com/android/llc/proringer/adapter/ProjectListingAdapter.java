@@ -136,7 +136,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
 
         holder.create_date.setText("Created on " + itemList.get(position).getDate_time());
-        holder.project_name.setText(itemList.get(position).getProject_name());
+        holder.project_name.setText(itemList.get(position).getProject_category_name());
 
 //        if (itemList.get(position).isAccepted()){
 //            holder.job_status.setVisibility(View.VISIBLE);
