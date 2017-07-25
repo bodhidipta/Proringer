@@ -115,7 +115,6 @@
                 android:id="@+id/review_pro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/project_name"
                 android:background="@color/colorGreen"
