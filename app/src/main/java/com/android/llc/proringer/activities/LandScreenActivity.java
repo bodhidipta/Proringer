@@ -6,30 +6,32 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.fragments.main_content.MyProjectDetails;
 import com.android.llc.proringer.fragments.bottomNav.DashBoard;
 import com.android.llc.proringer.fragments.bottomNav.FavPros;
+import com.android.llc.proringer.fragments.bottomNav.Message;
+import com.android.llc.proringer.fragments.bottomNav.MyProjects;
+import com.android.llc.proringer.fragments.bottomNav.PostProject;
 import com.android.llc.proringer.fragments.drawerNav.HomeReminders;
 import com.android.llc.proringer.fragments.drawerNav.InviteAfriend;
 import com.android.llc.proringer.fragments.drawerNav.LoginSettings;
 import com.android.llc.proringer.fragments.drawerNav.Notifications;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalPro;
-import com.android.llc.proringer.fragments.bottomNav.Message;
-import com.android.llc.proringer.fragments.bottomNav.MyProjects;
-import com.android.llc.proringer.fragments.bottomNav.PostProject;
 import com.android.llc.proringer.fragments.drawerNav.UserInfromation;
+import com.android.llc.proringer.fragments.main_content.MyProjectDetails;
+import com.android.llc.proringer.fragments.main_content.MyProjectRatePro;
 import com.android.llc.proringer.fragments.main_content.ProjectMessaging;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
@@ -263,7 +265,6 @@ public class LandScreenActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Fragment transaction for MyProject Details
      */
@@ -289,7 +290,6 @@ public class LandScreenActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     /**
@@ -404,6 +404,30 @@ public class LandScreenActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, new SearchLocalPro(), "" + SearchLocalPro.class.getCanonicalName());
         transaction.addToBackStack("" + SearchLocalPro.class.getCanonicalName());
+        transaction.commit();
+
+        Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
+
+        for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
+            Logger.printMessage("back_stack", "" + getSupportFragmentManager().getBackStackEntryAt(i).getName());
+        }
+    }
+
+    /**
+     * Fragment transaction for my projects rate pro
+     */
+    public void transactMyProjectRate() {
+
+        toggleToolBar(true);
+
+        if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + MyProjectRatePro.class.getCanonicalName()) != null) {
+            Logger.printMessage("back_stack", "Removed *****" + MyProjectRatePro.class.getCanonicalName());
+            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + MyProjectRatePro.class.getCanonicalName())).commit();
+            fragmentManager.popBackStack("" + MyProjectRatePro.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new MyProjectRatePro(), "" + MyProjectRatePro.class.getCanonicalName());
+        transaction.addToBackStack("" + MyProjectRatePro.class.getCanonicalName());
         transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
@@ -567,9 +591,10 @@ public class LandScreenActivity extends AppCompatActivity {
             else if (fragmentManager.findFragmentByTag(ProjectMessaging.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(ProjectMessaging.class.getCanonicalName())) {
                 toggleToolBar(false);
                 transactMessages();
-            }
-
-            else if(fragmentManager.findFragmentByTag(MyProjectDetails.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(MyProjectDetails.class.getCanonicalName())){
+            } else if (fragmentManager.findFragmentByTag(MyProjectDetails.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(MyProjectDetails.class.getCanonicalName())) {
+                toggleToolBar(false);
+                transactMyProjects();
+            } else if (fragmentManager.findFragmentByTag(MyProjectRatePro.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(MyProjectRatePro.class.getCanonicalName())) {
                 toggleToolBar(false);
                 transactMyProjects();
             }

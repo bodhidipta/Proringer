@@ -98,6 +98,21 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
             holder.pro_hired.setVisibility(View.VISIBLE);
             holder.no_pro_hired.setVisibility(View.VISIBLE);
 
+            holder.no_pro_hired.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ////////////delete/////////////
+                }
+            });
+
+            holder.pro_hired.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /////////////////send to my project rate pro list/////
+                    ((LandScreenActivity) mcontext).transactMyProjectRate();
+                }
+            });
+
             holder.lebel_hireing_offr.setVisibility(View.VISIBLE);
         } else if (itemList.get(position).getProject_status().equals("A")) {
 
