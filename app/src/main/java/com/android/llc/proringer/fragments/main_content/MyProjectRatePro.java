@@ -3,6 +3,8 @@ package com.android.llc.proringer.fragments.main_content;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.android.llc.proringer.R;
  */
 
 public class MyProjectRatePro extends Fragment {
+    RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -23,5 +26,7 @@ public class MyProjectRatePro extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recyclerView= (RecyclerView) view.findViewById(R.id.rcv_);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }
