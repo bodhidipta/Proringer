@@ -7,6 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -37,6 +41,22 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+        final ImageView image_l = (ImageView) findViewById(R.id.loader);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    RotateAnimation rotate = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    rotate.setDuration(2000);
+                    rotate.setInterpolator(new LinearInterpolator());
+                    image_l.startAnimation(rotate);
+                } catch (Exception ioe) {
+                    ioe.printStackTrace();
+                }
+
+            }
+        });
 
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -15,9 +15,20 @@
 
 
     <ImageView
+        android:id="@+id/abcd"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:background="@drawable/header" />
+
+    <ImageView
+        android:src="@drawable/ic_all_out"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/abcd"
+        android:id="@+id/loader"
+        android:layout_width="25dp"
+        android:layout_height="25dp" />
+
 </RelativeLayout>
