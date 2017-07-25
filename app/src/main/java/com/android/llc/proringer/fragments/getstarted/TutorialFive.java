@@ -47,6 +47,6 @@ public class TutorialFive extends Fragment {
         description = (ProLightTextView) view.findViewById(R.id.description);
 
         header_text.setText("GROW YOUR NETWORK");
-        description.setText("Add pros to your favourites lists so next\ntime you need them their easy to find.");
+        description.setText("Add pros to your favorites lists so next\ntime you need them their easy to find.");
     }
 }

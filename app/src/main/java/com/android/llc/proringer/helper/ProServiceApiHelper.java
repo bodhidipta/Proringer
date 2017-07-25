@@ -81,8 +81,8 @@ public class ProServiceApiHelper {
     private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_contact_us";
     private String myProjectDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_delete";
     private String myProjectdetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_details?user_id=";
-    private String favouriteProsListAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros?user_id=";
-    private String favouriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
+    private String favoriteProsListAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros?user_id=";
+    private String favoriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -1980,11 +1980,11 @@ public class ProServiceApiHelper {
 
 
     /**
-     * get favourite Pro list
+     * get favorite Pro list
      *
      * @param callback
      */
-    public void getUserFavouriteProsList(final getApiProcessCallback callback) {
+    public void getUserFavoriteProsList(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -2000,7 +2000,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String notiAPI = favouriteProsListAPI + ProApplication.getInstance().getUserId();
+                        String notiAPI = favoriteProsListAPI + ProApplication.getInstance().getUserId();
                         Logger.printMessage("notiAPI",notiAPI);
                         Request request = new Request.Builder()
                                 .get()
@@ -2047,7 +2047,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void deleteFavouritePro(final getApiProcessCallback callback, String... params) {
+    public void deleteFavoritePro(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2064,16 +2064,16 @@ public class ProServiceApiHelper {
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", params[0])
-                                .add("favourite_id", params[1])
+                                .add("favorite_id", params[1])
                                 .build();
 
                         Logger.printMessage("user_id", params[0]);
-                        Logger.printMessage("favourite_id", params[1]);
-                        Logger.printMessage("favouriteProsDeleteAPI",favouriteProsDeleteAPI);
+                        Logger.printMessage("favorite_id", params[1]);
+                        Logger.printMessage("favoriteProsDeleteAPI",favoriteProsDeleteAPI);
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
-                                .url(favouriteProsDeleteAPI)
+                                .url(favoriteProsDeleteAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();

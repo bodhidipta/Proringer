@@ -192,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
                         android:padding="5dp"
-                        android:text="FAVOURITE PROS"
+                        android:text="FAVORITE PROS"
                         android:textColor="@color/colorTextDark"
                         android:textSize="12sp" />
 

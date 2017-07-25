@@ -7,13 +7,11 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +32,11 @@ import org.json.JSONArray;
  * Created by su on 7/13/17.
  */
 
-public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavouriteListAdapter.ViewHolder> {
+public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavoriteListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
     ProgressDialog pgDia;
-    public SearchFavouriteListAdapter(Context mcontext,JSONArray jsonInfoArray) {
+    public SearchFavoriteListAdapter(Context mcontext, JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
         this.jsonInfoArray=jsonInfoArray;
         pgDia = new ProgressDialog(mcontext);
@@ -126,7 +124,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
             }
         });
 
-        holder.img_favourite.setOnClickListener(new View.OnClickListener() {
+        holder.img_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -138,9 +136,9 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                ///////////delete from favourite list
+                                ///////////delete from favorite list
                                 try {
-                                    ProServiceApiHelper.getInstance(mcontext).deleteFavouritePro(new ProServiceApiHelper.getApiProcessCallback() {
+                                    ProServiceApiHelper.getInstance(mcontext).deleteFavoritePro(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                      @Override
                                                                                                      public void onStart() {
 
@@ -227,7 +225,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
         CardView main_container;
         ProSemiBoldTextView tv_pros_company_name;
         ProRegularTextView tv_category_name,tv_address,tv_verify,tv_total_review,tv_description;
-        ImageView img_project,img_verify,img_verify_tick,img_favourite;
+        ImageView img_project,img_verify,img_verify_tick,img_favorite;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -247,7 +245,7 @@ public class SearchFavouriteListAdapter extends RecyclerView.Adapter<SearchFavou
             img_project= (ImageView) itemView.findViewById(R.id.img_project);
             img_verify= (ImageView) itemView.findViewById(R.id.img_verify);
             img_verify_tick= (ImageView) itemView.findViewById(R.id.img_verify_tick);
-            img_favourite= (ImageView) itemView.findViewById(R.id.img_favourite);
+            img_favorite= (ImageView) itemView.findViewById(R.id.img_favorite);
 
             linear_layout_border= (LinearLayout) itemView.findViewById(R.id.linear_layout_border);
 

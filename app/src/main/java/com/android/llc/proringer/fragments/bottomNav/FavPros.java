@@ -14,11 +14,8 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.adapter.SearchFavouriteListAdapter;
-import com.android.llc.proringer.adapter.SearchProListAdapter;
-import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.adapter.SearchFavoriteListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,7 +58,7 @@ public class FavPros extends Fragment {
         pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        ProServiceApiHelper.getInstance(getActivity()).getUserFavouriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 dialog = new ProgressDialog(getActivity());
@@ -81,7 +78,7 @@ public class FavPros extends Fragment {
                     if (jsonObject.has("info_array")) {
 
                         JSONArray info_array=jsonObject.getJSONArray("info_array");
-                        pros_list.setAdapter(new SearchFavouriteListAdapter(getActivity(),info_array));
+                        pros_list.setAdapter(new SearchFavoriteListAdapter(getActivity(),info_array));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

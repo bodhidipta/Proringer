@@ -319,7 +319,7 @@ public class LandScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Fragment transaction for Favourite Pros
+     * Fragment transaction for Favorite Pros
      */
     private void transactFavPros() {
 
