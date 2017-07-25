@@ -5,9 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.fragments.main_content.MyProjectRatePro;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
  * Created by su on 7/25/17.
@@ -15,18 +16,18 @@ import com.android.llc.proringer.fragments.main_content.MyProjectRatePro;
 
 public class MyProjectRateProAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    Context  mcontext;
-    public MyProjectRateProAdapter(Context context){
-        this.mcontext=context;
+    Context mcontext;
+
+    public MyProjectRateProAdapter(Context context) {
+        this.mcontext = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType==0){
+        if (viewType == 0) {
             return new ViewHolder0(LayoutInflater.from(mcontext).inflate(R.layout.adapter_pro_rate_first_view, parent, false));
-        }
-        else {
-            return new ViewHolder0(LayoutInflater.from(mcontext).inflate(R.layout.adapter_pro_rate_second_view, parent, false));
+        } else {
+            return new ViewHolder2(LayoutInflater.from(mcontext).inflate(R.layout.adapter_pro_rate_second_view, parent, false));
         }
     }
 
@@ -45,18 +46,28 @@ public class MyProjectRateProAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 10;
     }
 
     class ViewHolder0 extends RecyclerView.ViewHolder {
+        ProRegularTextView tv_name, tv_description;
+        ImageView img_project;
+
         public ViewHolder0(View itemView) {
             super(itemView);
+            img_project = (ImageView) itemView.findViewById(R.id.img_project);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (ProRegularTextView) itemView.findViewById(R.id.tv_description);
         }
     }
 
     class ViewHolder2 extends RecyclerView.ViewHolder {
+        ProRegularTextView tv_name, tv_description;
+
         public ViewHolder2(View itemView) {
             super(itemView);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (ProRegularTextView) itemView.findViewById(R.id.tv_description);
         }
     }
 
@@ -64,7 +75,10 @@ public class MyProjectRateProAdapter extends RecyclerView.Adapter<RecyclerView.V
     public int getItemViewType(int position) {
         // Just as an example, return 0 or 2 depending on position
         // Note that unlike in ListView adapters, types don't have to be contiguous
-        return position % 2 * 2;
+        if (position < 5)
+            return 0;
+        else
+            return 2;
     }
 
 }

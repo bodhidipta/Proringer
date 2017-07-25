@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.adapter.MyProjectRateProAdapter;
 
 /**
  * Created by su on 7/25/17.
@@ -17,6 +18,7 @@ import com.android.llc.proringer.R;
 
 public class MyProjectRatePro extends Fragment {
     RecyclerView recyclerView;
+    MyProjectRateProAdapter myProjectRateProAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,5 +30,8 @@ public class MyProjectRatePro extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView= (RecyclerView) view.findViewById(R.id.rcv_);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        myProjectRateProAdapter=new MyProjectRateProAdapter(getActivity());
+        recyclerView.setAdapter(myProjectRateProAdapter);
     }
 }
