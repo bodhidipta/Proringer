@@ -32,6 +32,7 @@
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/select_pro"
+                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
