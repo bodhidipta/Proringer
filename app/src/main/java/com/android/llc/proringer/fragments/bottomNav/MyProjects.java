@@ -73,7 +73,6 @@ public class MyProjects extends Fragment {
                         @Override
                         public void onItemPassed(int position, String value) {
                             ProApplication.getInstance().setDataSelected((ProjectPostedData) projectList.get(position));
-
                             ((LandScreenActivity) getActivity()).transactMyProjectsDetails();
 
 
