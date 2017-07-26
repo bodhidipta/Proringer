@@ -27,4 +27,7 @@
         </p>
         ]]>
     </string>
+    <string name="ok">Ok</string>
+    <string name="title_location_permission">Location Permission</string>
+    <string name="text_location_permission">Properly take Location permission again</string>
 </resources>
