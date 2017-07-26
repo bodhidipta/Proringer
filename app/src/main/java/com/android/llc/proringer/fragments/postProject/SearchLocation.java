@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
@@ -56,10 +55,20 @@ public class SearchLocation extends Fragment {
         addressDataList=new ArrayList<>();
 
         if(!ProApplication.getInstance().getUserId().equals("")){
-            zip_code_text.setText(ProApplication.getInstance().getZipCode());
+            zip_code_text.setHint(ProApplication.getInstance().getZipCode());
         }else {
 
         }
+
+
+        zip_code_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    zip_code_text.setHint("");
+                else
+                    zip_code_text.setHint(ProApplication.getInstance().getZipCode());
+            }
+        });
 
 
         zip_code_text.addTextChangedListener(new TextWatcher() {

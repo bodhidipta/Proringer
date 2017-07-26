@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/background_white_with_border"
-                android:hint="71111"
+                android:hint="71110"
                 android:gravity="center"
                 android:inputType="text"
                 android:maxLength="6"
