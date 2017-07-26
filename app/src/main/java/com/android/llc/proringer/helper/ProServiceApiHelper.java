@@ -2114,6 +2114,70 @@ public class ProServiceApiHelper {
 
 
     /**
+     * get zip code  using google api
+     *
+     * @param callback
+     * @param params
+     */
+    public void getZipCodeUsingGoogleApi(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        String notiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+params[0]+","+params[1]+"&key=YOUR_API_KEY";
+                        Logger.printMessage("notiAPI",notiAPI);
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(notiAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return responseString;
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
+
+
+
+    /**
      * Interface used to get call back for getServiceList and getCategoryList
      */
     public interface onProCategoryListener {

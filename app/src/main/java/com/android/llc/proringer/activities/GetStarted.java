@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.GetStartedTutorial;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -70,7 +71,7 @@ public class GetStarted extends AppCompatActivity{
         get_started = (ProRegularTextView) findViewById(R.id.get_started);
         sign_in = (ProRegularTextView) findViewById(R.id.sign_in);
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         get_started.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,12 +194,12 @@ public class GetStarted extends AppCompatActivity{
 
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission. ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    Manifest.permission. ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -222,7 +223,7 @@ public class GetStarted extends AppCompatActivity{
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        new String[]{Manifest.permission. ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
             return false;
@@ -236,18 +237,24 @@ public class GetStarted extends AppCompatActivity{
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
                     // permission was granted, yay! Do the
                     // location-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission. ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
                         //Request location updates:
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, locationListener);
                     }
 
                 } else {
+
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    checkLocationPermission();
+
                 }
                 return;
             }
@@ -260,20 +267,42 @@ public class GetStarted extends AppCompatActivity{
         super.onResume();
 
         if (checkLocationPermission()) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission. ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
                 //Request location updates:
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, locationListener);
             }
         }
     }
 
-    private  LocationListener locationListener = new LocationListener() {
+    private final LocationListener locationListener = new LocationListener() {
+
         public void onLocationChanged(Location location) {
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
 
             Logger.printMessage("longitude","longitude:-"+longitude);
             Logger.printMessage("latitude","longitude:-"+latitude);
+
+            ProServiceApiHelper.getInstance(GetStarted.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onComplete(String message) {
+
+
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            },""+latitude,""+longitude);
         }
 
         @Override
