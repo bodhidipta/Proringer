@@ -129,7 +129,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             public void onClick(View view) {
 
                 new AlertDialog.Builder(mcontext)
-                        .setTitle("Do you want do delete..")
+                        .setTitle("Are you sure you want to remove this pro from your favorites list?")
 
 
                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -142,7 +142,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
                                                                                                      @Override
                                                                                                      public void onStart() {
 
-                                                                                                         pgDia.setTitle("My Project");
+                                                                                                         pgDia.setTitle("Delete Favorite pros");
                                                                                                          pgDia.setMessage("It's deleting.Please wait....");
                                                                                                          pgDia.setCancelable(false);
                                                                                                          pgDia.show();
@@ -160,7 +160,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
 
 
                                                                                                          new AlertDialog.Builder(mcontext)
-                                                                                                                 .setTitle("Delete Fav pros")
+                                                                                                                 .setTitle("Delete Favorite pros")
                                                                                                                  .setMessage("" + message)
                                                                                                                  .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                                                                                                      @Override
