@@ -161,7 +161,7 @@
                     android:background="@drawable/edit_text_selecter"
                     android:hint="Zip code"
                     android:inputType="text"
-                    android:maxLength="5"
+                    android:maxLength="6"
                     android:padding="10dp"
                     android:textColor="@color/colorTextDark"
                     android:textSize="14sp" />
