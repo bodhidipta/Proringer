@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,8 @@ import com.android.llc.proringer.adapter.GetStartedTutorial;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
  * Created by bodhidipta on 10/06/17.
@@ -247,7 +250,7 @@ public class GetStarted extends AppCompatActivity{
                             == PackageManager.PERMISSION_GRANTED) {
 
                         //Request location updates:
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, locationListener);
+                        ///////////////Here called location /////////////////
                     }
 
                 } else {
@@ -271,53 +274,31 @@ public class GetStarted extends AppCompatActivity{
                     Manifest.permission. ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
 
-                //Request location updates:
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, locationListener);
+
+                ///////////////Here called location /////////////////
             }
         }
     }
 
-    private final LocationListener locationListener = new LocationListener() {
 
-        public void onLocationChanged(Location location) {
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
+    public void getZip(double latitude,double longitude){
 
-            Logger.printMessage("longitude","longitude:-"+longitude);
-            Logger.printMessage("latitude","longitude:-"+latitude);
+        ProServiceApiHelper.getInstance(GetStarted.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
 
-            ProServiceApiHelper.getInstance(GetStarted.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
-                @Override
-                public void onStart() {
+            }
 
-                }
-
-                @Override
-                public void onComplete(String message) {
+            @Override
+            public void onComplete(String message) {
 
 
-                }
+            }
 
-                @Override
-                public void onError(String error) {
+            @Override
+            public void onError(String error) {
 
-                }
-            },""+latitude,""+longitude);
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
+            }
+        },""+latitude,""+longitude);
+    }
 }
