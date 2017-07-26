@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
@@ -53,6 +54,12 @@ public class SearchLocation extends Fragment {
         location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         addressDataList=new ArrayList<>();
+
+        if(!ProApplication.getInstance().getUserId().equals("")){
+            zip_code_text.setText(ProApplication.getInstance().getZipCode());
+        }else {
+
+        }
 
 
         zip_code_text.addTextChangedListener(new TextWatcher() {

@@ -28,7 +28,7 @@ public class ProApplication extends Application {
     private static ProApplication instance = null;
     private SharedPreferences userPreference = null;
     private SharedPreferences notificationPreference = null;
-    private ProjectPostedData dataSelected=null;
+    private ProjectPostedData dataSelected = null;
 
     public static ProApplication getInstance() {
         return instance;
@@ -45,12 +45,14 @@ public class ProApplication extends Application {
     public void setUserPreference(String user_id,
                                   String user_type,
                                   String first_name,
-                                  String last_name) {
+                                  String last_name,
+                                  String zip_code) {
         userPreference.edit().clear().apply();
         userPreference.edit().putString("UserId", user_id).apply();
         userPreference.edit().putString("UserType", user_type).apply();
         userPreference.edit().putString("UserFirstName", first_name).apply();
         userPreference.edit().putString("UserLastName", last_name).apply();
+        userPreference.edit().putString("ZipCode", zip_code).apply();
     }
 
     public void setNotificationPreference(String... params) {
@@ -83,6 +85,10 @@ public class ProApplication extends Application {
 
     public String getUserId() {
         return userPreference.getString("UserId", "");
+    }
+
+    public String getZipCode() {
+        return userPreference.getString("ZipCode", "");
     }
 
     public String getUserType() {

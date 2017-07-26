@@ -135,15 +135,16 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
             holder.review_pro.setVisibility(View.VISIBLE);
             holder.review_pro.setBackgroundResource(R.drawable.background_solid_grey_with_border);
-            holder.review_pro.setText("DELETED");
+            holder.review_pro.setText("DELETE");
 
         }
 
         holder.review_pro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemList.get(position).getProject_status().equalsIgnoreCase("DA")) {
+                if (itemList.get(position).getProject_status().equalsIgnoreCase("D")) {
 
+                    //////////////////I m waiting for web page //////////////
 
                 }
             }

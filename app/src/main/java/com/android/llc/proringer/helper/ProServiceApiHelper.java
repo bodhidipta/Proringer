@@ -379,7 +379,7 @@ public class ProServiceApiHelper {
                         if (mainResponseObj.getBoolean("response")) {
                             exception = "";
                             JSONObject jsonInfo = mainResponseObj.getJSONObject("info_array");
-                            ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"));
+                            ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"),jsonInfo.getString("zipcode"));
                             return mainResponseObj.getString("message");
                         } else {
                             exception = "true";
