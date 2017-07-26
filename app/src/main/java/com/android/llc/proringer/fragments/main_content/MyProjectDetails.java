@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -19,6 +20,10 @@ import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by su on 7/17/17.
@@ -82,28 +87,14 @@ public class MyProjectDetails extends Fragment {
             LL_Active.setVisibility(View.GONE);
             tv_accepted_review.setVisibility(View.GONE);
         }
+        else {
+            LL_Active.setVisibility(View.GONE);
+            tv_accepted_review.setVisibility(View.GONE);
+        }
         view.findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Are you sure you want to remove this project from your MyProject list?")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                delete();
-                            }
-                        })
-                        .setCancelable(false)
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .show();
+                delete();
             }
         });
 //        ProServiceApiHelper.getInstance(getActivity()).getMyProjectDetails(new ProServiceApiHelper.getApiProcessCallback() {
@@ -158,7 +149,7 @@ public class MyProjectDetails extends Fragment {
                                                                            @Override
                                                                            public void onStart() {
 
-                                                                               dialog.setTitle("Delete My project");
+                                                                               dialog.setTitle("My project");
                                                                                dialog.setMessage("It's deleting.Please wait....");
                                                                                dialog.setCancelable(false);
                                                                                dialog.show();

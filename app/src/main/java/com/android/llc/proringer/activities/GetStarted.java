@@ -280,7 +280,6 @@ public class GetStarted extends AppCompatActivity{
 
 
     public void getZip(double latitude,double longitude){
-
         ProServiceApiHelper.getInstance(GetStarted.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {

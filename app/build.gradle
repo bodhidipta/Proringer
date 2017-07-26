@@ -58,5 +58,4 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.google.android.gms:play-services:11.0.2'
 }
