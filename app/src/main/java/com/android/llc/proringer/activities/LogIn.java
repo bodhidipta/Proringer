@@ -90,7 +90,10 @@ public class LogIn extends AppCompatActivity {
                                         pgDialog.dismiss();
 
                                     ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
-                                    setResult(GetStarted.RESULT_OK);
+
+                                    Intent intent=new Intent(LogIn.this, LandScreenActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
                                     finish();
                                 }
 
@@ -128,7 +131,6 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LogIn.this, SignUp.class));
-                finish();
             }
         });
 

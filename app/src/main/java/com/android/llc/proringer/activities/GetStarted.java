@@ -51,8 +51,7 @@ public class GetStarted extends AppCompatActivity{
     private GetStartedTutorial adapter;
     private ImageView pager_dot_one, pager_dot_two, pager_dot_three, pager_dot_four, pager_dot_five, slide_left, slide_right;
     private ProRegularTextView get_started, sign_in;
-    public static final int LOG_IN_REQUEST = 1;
-    public static final int SIGN_UP_REQUEST = 2;
+
 
 
     @Override
@@ -77,13 +76,13 @@ public class GetStarted extends AppCompatActivity{
         get_started.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(GetStarted.this, SignUp.class), SIGN_UP_REQUEST);
+                startActivity(new Intent(GetStarted.this, SignUp.class));
             }
         });
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(GetStarted.this, LogIn.class), LOG_IN_REQUEST);
+                startActivity(new Intent(GetStarted.this, LogIn.class));
             }
         });
 
@@ -172,23 +171,6 @@ public class GetStarted extends AppCompatActivity{
                 pager_dot_four.setBackgroundResource(R.drawable.circle_dark);
                 pager_dot_five.setBackgroundResource(R.drawable.circle_orenge_border);
                 break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SIGN_UP_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                startActivity(new Intent(GetStarted.this, LogIn.class));
-                finish();
-            }
-
-        } else if (requestCode == LOG_IN_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                startActivity(new Intent(GetStarted.this, LandScreenActivity.class));
-                finish();
-            }
         }
     }
 

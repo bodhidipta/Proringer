@@ -167,7 +167,6 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignUp.this, LogIn.class));
-                finish();
             }
         });
 
@@ -181,23 +180,17 @@ public class SignUp extends AppCompatActivity {
         findViewById(R.id.confirm_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sign_in.performClick();
+                Intent intent=new Intent(SignUp.this, LogIn.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         });
-
-
     }
 
     @Override
     public void onBackPressed() {
-        if (container_confirm.getVisibility() == View.VISIBLE) {
-            setResult(RESULT_OK);
             finish();
-        } else {
-            setResult(RESULT_CANCELED);
-            finish();
-        }
-
     }
 
     private void validateRegistration() {
