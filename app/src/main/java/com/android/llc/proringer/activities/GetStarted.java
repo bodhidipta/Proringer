@@ -21,10 +21,8 @@ import android.widget.ImageView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.GetStartedTutorial;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+
 
 /**
  * Created by bodhidipta on 10/06/17.
