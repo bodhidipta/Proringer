@@ -94,7 +94,27 @@ public class MyProjectDetails extends Fragment {
         view.findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                delete();
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Are you sure you want to remove it from your my project list?")
+
+
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                ///////////delete from favorite list
+                                delete();
+                            }
+                        })
+                        .setCancelable(false)
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
 //        ProServiceApiHelper.getInstance(getActivity()).getMyProjectDetails(new ProServiceApiHelper.getApiProcessCallback() {
