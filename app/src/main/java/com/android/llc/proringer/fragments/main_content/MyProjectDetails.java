@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -22,10 +21,6 @@ import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by su on 7/17/17.
@@ -37,8 +32,6 @@ public class MyProjectDetails extends Fragment {
     ImageView img_project;
     LinearLayout LL_Active;
     ProSemiBoldTextView tv_accepted_review;
-
-
 
     @Nullable
     @Override
@@ -103,7 +96,7 @@ public class MyProjectDetails extends Fragment {
                 title.setPadding(10, 10, 10, 10);
                 title.setGravity(Gravity.CENTER);
                 title.setTextColor(getResources().getColor(R.color.colorTextBlack));
-                title.setTextSize(14);
+                title.setTextSize(24);
 
 
                 new AlertDialog.Builder(getActivity())

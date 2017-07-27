@@ -137,7 +137,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
                 title.setPadding(10, 10, 10, 10);
                 title.setGravity(Gravity.CENTER);
                 title.setTextColor(mcontext.getResources().getColor(R.color.colorTextBlack));
-                title.setTextSize(14);
+                title.setTextSize(24);
 
                 new AlertDialog.Builder(mcontext)
                         .setCustomTitle(title)
