@@ -96,7 +96,7 @@ public class MyProjectDetails extends Fragment {
                 title.setPadding(10, 10, 10, 10);
                 title.setGravity(Gravity.CENTER);
                 title.setTextColor(getResources().getColor(R.color.colorTextBlack));
-                title.setTextSize(24);
+                title.setTextSize(18);
 
 
                 new AlertDialog.Builder(getActivity())
