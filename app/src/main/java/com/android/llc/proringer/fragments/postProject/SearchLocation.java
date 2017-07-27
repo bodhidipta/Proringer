@@ -186,18 +186,30 @@ public class SearchLocation extends Fragment {
                             if (outer_block_check) {
                                 break;
                             }
-                            JSONArray jsonArrayAddressComponents = jsonArrayResults.getJSONObject(i).getJSONArray("address_components");
 
-                            for (int j = 0; j < jsonArrayAddressComponents.length(); j++) {
+                            /**
+                             * loop through address component
+                             * for country and state
+                             */
+                            if (jsonArrayResults.getJSONObject(i).has("address_components") &&
+                                    jsonArrayResults.getJSONObject(i).getJSONArray("address_components").length() > 0) {
+                                JSONArray jsonArrayAddressComponents = jsonArrayResults.getJSONObject(i).getJSONArray("address_components");
 
-                                JSONObject addressObj = jsonArrayAddressComponents.getJSONObject(j);
-                                JSONArray jsonArrayType = addressObj.getJSONArray("types");
-                                Logger.printMessage("types", "" + jsonArrayType.get(0));
+                                for (int j = 0; j < jsonArrayAddressComponents.length(); j++) {
 
-                                if (jsonArrayType.get(0).equals("postal_code")) {
-                                    zip_code_text.setHint(addressObj.getString("long_name"));
-                                    outer_block_check = true;
-                                    break;
+                                    if (jsonArrayAddressComponents.getJSONObject(j).has("types") &&
+                                            jsonArrayAddressComponents.getJSONObject(j).getJSONArray("types").length() > 0
+                                            ) {
+
+                                        JSONArray jsonArrayType = jsonArrayAddressComponents.getJSONObject(j).getJSONArray("types");
+                                        Logger.printMessage("types", "" + jsonArrayType.get(0));
+
+                                        if (jsonArrayType.get(0).equals("postal_code")) {
+                                            zip_code_text.setHint(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
+                                            outer_block_check = true;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }

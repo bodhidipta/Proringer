@@ -1639,7 +1639,6 @@ public class ProServiceApiHelper {
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
-
     }
 
 
@@ -1682,7 +1681,6 @@ public class ProServiceApiHelper {
                         if (mainRes.getString("status").equalsIgnoreCase("OK") &&
                                 mainRes.has("results") &&
                                 mainRes.getJSONArray("results").length() > 0) {
-
 
                             addressList = new ArrayList<AddressData>();
                             JSONArray results = mainRes.getJSONArray("results");
@@ -1742,7 +1740,6 @@ public class ProServiceApiHelper {
                                         } else {
                                             callback.onError("Error re pagla !");
                                         }
-
                                     }
                                 } else {
                                     exception = "Please enter postal code.";
