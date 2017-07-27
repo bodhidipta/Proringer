@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.postProject;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import android.widget.ProgressBar;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
-import com.android.llc.proringer.activities.GetStarted;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -42,7 +42,8 @@ public class SearchLocation extends Fragment {
     RecyclerView location_list;
     ProgressBar loading_progress;
     ImageView error_progress;
-    public boolean outer_block_check=false;
+    public boolean outer_block_check = false;
+    ProgressDialog dialog;
 
     @Nullable
     @Override
@@ -170,11 +171,17 @@ public class SearchLocation extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-
+                dialog = new ProgressDialog(getActivity());
+                dialog.setTitle("FavPros");
+                dialog.setCancelable(false);
+                dialog.setMessage("Getting FavPros list. Please wait.");
+                dialog.show();
             }
+
             @Override
             public void onComplete(String message) {
-
+                if (dialog != null && dialog.isShowing())
+                    dialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(message);
                     JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
@@ -182,8 +189,7 @@ public class SearchLocation extends Fragment {
 
                         for (int i = 0; i < jsonArrayResults.length(); i++) {
 
-                            if (outer_block_check)
-                            {
+                            if (outer_block_check) {
                                 break;
                             }
                             JSONArray jsonArrayAddressComponents = jsonArrayResults.getJSONObject(i).getJSONArray("address_components");
@@ -191,13 +197,12 @@ public class SearchLocation extends Fragment {
                             for (int j = 0; j < jsonArrayAddressComponents.length(); j++) {
 
                                 JSONObject addressObj = jsonArrayAddressComponents.getJSONObject(j);
-                                JSONArray jsonArrayType=addressObj.getJSONArray("types");
+                                JSONArray jsonArrayType = addressObj.getJSONArray("types");
                                 Logger.printMessage("types", "" + jsonArrayType.get(0));
 
-                                if (jsonArrayType.get(0).equals("postal_code"))
-                                {
+                                if (jsonArrayType.get(0).equals("postal_code")) {
                                     zip_code_text.setHint(addressObj.getString("long_name"));
-                                    outer_block_check=true;
+                                    outer_block_check = true;
                                     break;
                                 }
                             }
@@ -207,13 +212,12 @@ public class SearchLocation extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
             public void onError(String error) {
-
+                if (dialog != null && dialog.isShowing())
+                    dialog.dismiss();
             }
         });
     }
