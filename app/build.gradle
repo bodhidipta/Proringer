@@ -20,6 +20,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -58,4 +60,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile 'com.google.android.gms:play-services:11.0.2'
+    compile 'com.android.support:multidex:1.0.0'
 }

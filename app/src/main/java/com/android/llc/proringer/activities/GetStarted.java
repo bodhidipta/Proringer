@@ -1,13 +1,18 @@
 package com.android.llc.proringer.activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,10 +23,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.GetStartedTutorial;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
+import java.text.DateFormat;
+import java.util.Date;
 
 
 /**
@@ -42,17 +54,25 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * -->
  */
 
-public class GetStarted extends AppCompatActivity{
+public class GetStarted extends AppCompatActivity implements
+        LocationListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private LocationManager locationManager;
-
     private ViewPager get_started_pager;
     private GetStartedTutorial adapter;
     private ImageView pager_dot_one, pager_dot_two, pager_dot_three, pager_dot_four, pager_dot_five, slide_left, slide_right;
     private ProRegularTextView get_started, sign_in;
 
 
+    private static final String TAG = "GetStarted";
+    private static final long INTERVAL = 1000 * 10;
+    private static final long FASTEST_INTERVAL = 1000 * 5;
+    LocationRequest mLocationRequest;
+    GoogleApiClient mGoogleApiClient;
+    Location mCurrentLocation;
+    String mLastUpdateTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +91,21 @@ public class GetStarted extends AppCompatActivity{
         get_started = (ProRegularTextView) findViewById(R.id.get_started);
         sign_in = (ProRegularTextView) findViewById(R.id.sign_in);
 
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Logger.printMessage(TAG, "onCreate ...............................");
+        //show error dialog if GoolglePlayServices not available
+        if (!isGooglePlayServicesAvailable()) {
+            finish();
+        }
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
 
         get_started.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,12 +211,12 @@ public class GetStarted extends AppCompatActivity{
 
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission. ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission. ACCESS_FINE_LOCATION)) {
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -206,7 +240,7 @@ public class GetStarted extends AppCompatActivity{
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission. ACCESS_FINE_LOCATION},
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
             return false;
@@ -226,11 +260,15 @@ public class GetStarted extends AppCompatActivity{
                     // permission was granted, yay! Do the
                     // location-related task you need to do.
                     if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission. ACCESS_FINE_LOCATION)
+                            Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
                         //Request location updates:
                         ///////////////Here called location /////////////////
+                        if (mGoogleApiClient.isConnected()) {
+                            startLocationUpdates();
+                            Logger.printMessage(TAG, "Location update resumed .....................");
+                        }
                     }
 
                 } else {
@@ -251,17 +289,22 @@ public class GetStarted extends AppCompatActivity{
 
         if (checkLocationPermission()) {
             if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission. ACCESS_FINE_LOCATION)
+                    Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
 
 
                 ///////////////Here called location /////////////////
+
+                if (mGoogleApiClient.isConnected()) {
+                    startLocationUpdates();
+                    Logger.printMessage(TAG, "Location update resumed .....................");
+                }
             }
         }
     }
 
 
-    public void getZip(double latitude,double longitude){
+    public void getZip(double latitude, double longitude) {
         ProServiceApiHelper.getInstance(GetStarted.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -278,6 +321,106 @@ public class GetStarted extends AppCompatActivity{
             public void onError(String error) {
 
             }
-        },""+latitude,""+longitude);
+        }, "" + latitude, "" + longitude);
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Logger.printMessage(TAG, "Firing onLocationChanged..............................................");
+        mCurrentLocation = location;
+        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+        updateUI();
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Logger.printMessage(TAG, "onConnected - isConnected ...............: " + mGoogleApiClient.isConnected());
+        startLocationUpdates();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Logger.printMessage(TAG, "Connection failed: " + connectionResult.toString());
+
+    }
+
+
+    private boolean isGooglePlayServicesAvailable() {
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(this);
+        if (result != ConnectionResult.SUCCESS) {
+            if (googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(this, result,
+                        0).show();
+            }
+
+            return false;
+        }
+        return true;
+    }
+
+
+    private void updateUI() {
+        Logger.printMessage(TAG, "UI update initiated .............");
+        if (null != mCurrentLocation) {
+            String lat = String.valueOf(mCurrentLocation.getLatitude());
+            String lng = String.valueOf(mCurrentLocation.getLongitude());
+            Logger.printMessage("updateUI", "At Time: " + mLastUpdateTime + "\n" +
+                    "Latitude: " + lat + "\n" +
+                    "Longitude: " + lng + "\n" +
+                    "Accuracy: " + mCurrentLocation.getAccuracy() + "\n" +
+                    "Provider: " + mCurrentLocation.getProvider());
+        } else {
+            Logger.printMessage(TAG, "location is null ...............");
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Logger.printMessage(TAG, "onStart fired ..............");
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Logger.printMessage(TAG, "onStop fired ..............");
+        mGoogleApiClient.disconnect();
+        Logger.printMessage(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
+    }
+
+
+    protected void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        Logger.printMessage(TAG, "Location update started ..............: ");
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        Logger.printMessage(TAG, "Location update stopped .......................");
+    }
+
 }
