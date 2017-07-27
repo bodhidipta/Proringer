@@ -62,7 +62,6 @@ public class SearchLocation extends Fragment {
         if (!ProApplication.getInstance().getUserId().equals("")) {
             zip_code_text.setHint(ProApplication.getInstance().getZipCode());
         } else {
-
             //////////set current location zip code////
             Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[0]);
             Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[1]);
