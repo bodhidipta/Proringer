@@ -90,7 +90,7 @@ public class ProServiceApiHelper {
     private String favoriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
 
     private String faqInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
-    private String termsOfUseAPI = "";
+    private String termsOfUseAPI = "http://esolz.co.in/lab6/proringer_latest/app_term";
     private String privacyPolicyAPI = "";
 
 
