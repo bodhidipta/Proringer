@@ -12,12 +12,15 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -128,8 +131,16 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             @Override
             public void onClick(View view) {
 
+                TextView title = new TextView(mcontext);
+                title.setText("Are you sure you want to remove from favorites?");
+//                title.setBackgroundResource(R.drawable.gradient);
+                title.setPadding(10, 10, 10, 10);
+                title.setGravity(Gravity.CENTER);
+                title.setTextColor(mcontext.getResources().getColor(R.color.colorTextBlack));
+                title.setTextSize(14);
+
                 new AlertDialog.Builder(mcontext)
-                        .setTitle("Are you sure you want to remove this pro from your favorites list?")
+                        .setCustomTitle(title)
 
 
                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {

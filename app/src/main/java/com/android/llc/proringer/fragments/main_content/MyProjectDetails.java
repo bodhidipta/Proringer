@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
@@ -95,10 +97,17 @@ public class MyProjectDetails extends Fragment {
             @Override
             public void onClick(View view) {
 
+                TextView title = new TextView(getActivity());
+                title.setText("Are you sure you want to close and remove this project?");
+//                title.setBackgroundResource(R.drawable.gradient);
+                title.setPadding(10, 10, 10, 10);
+                title.setGravity(Gravity.CENTER);
+                title.setTextColor(getResources().getColor(R.color.colorTextBlack));
+                title.setTextSize(14);
+
+
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Are you sure you want to remove it from your my project list?")
-
-
+                        .setCustomTitle(title)
                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
