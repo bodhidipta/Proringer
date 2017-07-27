@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
@@ -22,11 +21,9 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,11 +100,9 @@ public class SearchLocation extends Fragment {
         view.findViewById(R.id.continue_location_section).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 /**
                  * fragment calling
                  */
-
                 if (((ActivityPostProject) getActivity()).selectedAddressData == null) {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
                 } else {
@@ -208,7 +203,6 @@ public class SearchLocation extends Fragment {
                             }
                         }
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
