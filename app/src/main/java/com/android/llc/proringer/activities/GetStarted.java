@@ -67,8 +67,8 @@ public class GetStarted extends AppCompatActivity implements
 
 
     private static final String TAG = "GetStarted";
-    private static final long INTERVAL = 1000 * 10;
-    private static final long FASTEST_INTERVAL = 1000 * 5;
+    private static final long INTERVAL = 1000 * 60;//// Update location every 1 minute
+    private static final long FASTEST_INTERVAL = 1000 * 10;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
@@ -303,27 +303,6 @@ public class GetStarted extends AppCompatActivity implements
         }
     }
 
-
-    public void getZip(double latitude, double longitude) {
-        ProServiceApiHelper.getInstance(GetStarted.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
-            @Override
-            public void onStart() {
-
-            }
-
-            @Override
-            public void onComplete(String message) {
-
-
-            }
-
-            @Override
-            public void onError(String error) {
-
-            }
-        }, "" + latitude, "" + longitude);
-    }
-
     @Override
     public void onLocationChanged(Location location) {
         Logger.printMessage(TAG, "Firing onLocationChanged..............................................");
@@ -371,6 +350,9 @@ public class GetStarted extends AppCompatActivity implements
         if (null != mCurrentLocation) {
             String lat = String.valueOf(mCurrentLocation.getLatitude());
             String lng = String.valueOf(mCurrentLocation.getLongitude());
+
+            ProServiceApiHelper.getInstance(GetStarted.this).setCurrentLatLng(lat,lng);
+
             Logger.printMessage("updateUI", "At Time: " + mLastUpdateTime + "\n" +
                     "Latitude: " + lat + "\n" +
                     "Longitude: " + lng + "\n" +

@@ -59,6 +59,11 @@ public class ProServiceApiHelper {
     private static ProServiceApiHelper instance = null;
     private static Context mcontext;
     private onProCategoryListener listener;
+
+    private String currentLat="";
+    private String currentLng="";
+
+
     private final String categoryAPI = "http://esolz.co.in/lab6/proringer_latest/app_categorylist";
     private String serviceAPI = "http://esolz.co.in/lab6/proringer_latest/app_catrgoryservice_list";
     private String registrationAPI = "http://esolz.co.in/lab6/proringer_latest/app_signup";
@@ -84,6 +89,7 @@ public class ProServiceApiHelper {
     private String favoriteProsListAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros?user_id=";
     private String favoriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
 
+
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
             instance = new ProServiceApiHelper();
@@ -92,6 +98,18 @@ public class ProServiceApiHelper {
     }
 
     private ProServiceApiHelper() {
+    }
+
+    public void setCurrentLatLng(String currentLat,String currentLng){
+        this.currentLat=currentLat;
+        this.currentLng=currentLng;
+    }
+
+    public String[] getCurrentLatLng(){
+        String str[]={
+                currentLat,currentLng
+        };
+        return str;
     }
 
     /**
@@ -2135,7 +2153,8 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String notiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+params[0]+","+params[1]+"&key=YOUR_API_KEY";
+                        String notiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[0]+","+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[1]
+                                +"&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
                         Logger.printMessage("notiAPI",notiAPI);
                         Request request = new Request.Builder()
                                 .get()
@@ -2145,7 +2164,7 @@ public class ProServiceApiHelper {
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
                         JSONObject jsonObject = new JSONObject(responseString);
-                        if (jsonObject.getBoolean("response")) {
+                        if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
                             return responseString;
                         } else {
                             exception = jsonObject.getString("message");

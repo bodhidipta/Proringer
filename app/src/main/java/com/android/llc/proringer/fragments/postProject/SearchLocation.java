@@ -12,14 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.GetStarted;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +42,7 @@ public class SearchLocation extends Fragment {
     RecyclerView location_list;
     ProgressBar loading_progress;
     ImageView error_progress;
+    public boolean outer_block_check=false;
 
     @Nullable
     @Override
@@ -49,15 +56,19 @@ public class SearchLocation extends Fragment {
         zip_code_text = (ProRegularEditText) view.findViewById(R.id.zip_code_text);
         location_list = (RecyclerView) view.findViewById(R.id.location_list);
         loading_progress = (ProgressBar) view.findViewById(R.id.loading_progress);
-        error_progress=(ImageView)view.findViewById(R.id.error_progress);
+        error_progress = (ImageView) view.findViewById(R.id.error_progress);
         location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        addressDataList=new ArrayList<>();
+        addressDataList = new ArrayList<>();
 
-        if(!ProApplication.getInstance().getUserId().equals("")){
+        if (!ProApplication.getInstance().getUserId().equals("")) {
             zip_code_text.setHint(ProApplication.getInstance().getZipCode());
-        }else {
+        } else {
 
+            //////////set current location zip code////
+            Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[0]);
+            Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[1]);
+            getCurrentLocationZip();
         }
 
 
@@ -112,7 +123,7 @@ public class SearchLocation extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getSearchArea(key, new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
-                addressDataList=listdata;
+                addressDataList = listdata;
 
                 zipSearchGoing = false;
                 loading_progress.setVisibility(View.GONE);
@@ -120,7 +131,7 @@ public class SearchLocation extends Fragment {
 
                 Logger.printMessage("addressDataList", "" + addressDataList);
 
-                if (addressDataList!=null && addressDataList.size()>0){
+                if (addressDataList != null && addressDataList.size() > 0) {
                     if (zip_search_adapter == null) {
                         zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
@@ -139,7 +150,7 @@ public class SearchLocation extends Fragment {
             @Override
             public void onError(String error) {
 
-                if(zip_search_adapter!=null) {
+                if (zip_search_adapter != null) {
                     addressDataList.clear();
                     zip_search_adapter.updateData(addressDataList);
                 }
@@ -155,4 +166,55 @@ public class SearchLocation extends Fragment {
         });
     }
 
+    public void getCurrentLocationZip() {
+        ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+
+            }
+            @Override
+            public void onComplete(String message) {
+
+                try {
+                    JSONObject jsonObject = new JSONObject(message);
+                    JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
+                    if (jsonArrayResults.length() > 0) {
+
+                        for (int i = 0; i < jsonArrayResults.length(); i++) {
+
+                            if (outer_block_check)
+                            {
+                                break;
+                            }
+                            JSONArray jsonArrayAddressComponents = jsonArrayResults.getJSONObject(i).getJSONArray("address_components");
+
+                            for (int j = 0; j < jsonArrayAddressComponents.length(); j++) {
+
+                                JSONObject addressObj = jsonArrayAddressComponents.getJSONObject(j);
+                                JSONArray jsonArrayType=addressObj.getJSONArray("types");
+                                Logger.printMessage("types", "" + jsonArrayType.get(0));
+
+                                if (jsonArrayType.get(0).equals("postal_code"))
+                                {
+                                    zip_code_text.setHint(addressObj.getString("long_name"));
+                                    outer_block_check=true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
 }
