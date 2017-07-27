@@ -91,6 +91,28 @@ public class SignUp extends AppCompatActivity {
         contact.setMovementMethod(LinkMovementMethod.getInstance());
         mail_resent.setMovementMethod(LinkMovementMethod.getInstance());
 
+        findViewById(R.id.terms_of_use).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(SignUp.this, TermsPrivacyActivity.class);
+                intent.putExtra("value", "term");
+                startActivity(intent);
+
+            }
+        });
+
+
+        findViewById(R.id.privacy_policy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(SignUp.this, TermsPrivacyActivity.class);
+                intent.putExtra("value", "policy");
+                startActivity(intent);
+            }
+        });
+
         /**
          * Contact us spannable text with click listener
          */
