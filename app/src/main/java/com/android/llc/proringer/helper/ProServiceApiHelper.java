@@ -21,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -2411,7 +2412,8 @@ public class ProServiceApiHelper {
                     OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                     try {
-                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        String query = URLEncoder.encode(params[0], "utf-8");
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
                         Logger.printMessage("searchLocationAPI",""+searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)

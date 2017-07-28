@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,10 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -25,7 +26,6 @@ import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -271,6 +271,77 @@ public class UserInfromation extends Fragment {
                     try {
                         checkToShowAfterSearach = true;
                         address.setText(value.getString("description"));
+
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
+
+                        ProServiceApiHelper.getInstance(getActivity()).getZipLocatgionStateAPI(address.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onComplete(String message) {
+                                try {
+                                    JSONObject mainRes = new JSONObject(message);
+
+                                    if (mainRes.getString("status").equalsIgnoreCase("OK") &&
+                                            mainRes.has("results") &&
+                                            mainRes.getJSONArray("results").length() > 0) {
+
+                                        JSONArray results = mainRes.getJSONArray("results");
+
+                                        JSONObject innerIncer = results.getJSONObject(0);
+
+                                            /**
+                                             * loop through address component
+                                             * for country and state
+                                             */
+                                            if (innerIncer.has("address_components") &&
+                                                    innerIncer.getJSONArray("address_components").length() > 0) {
+
+                                                Logger.printMessage("address_components",""+innerIncer.getJSONArray("address_components"));
+
+                                                JSONArray address_components = innerIncer.getJSONArray("address_components");
+
+                                                for (int j = 0; j < address_components.length(); j++) {
+
+                                                    if (address_components.getJSONObject(j).has("types") &&
+                                                            address_components.getJSONObject(j).getJSONArray("types").length() > 0
+                                                            ) {
+
+                                                        JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
+
+                                                        for (int k = 0; k < types.length(); k++) {
+                                                            if (types.getString(k).equals("administrative_area_level_2")) {
+                                                                city.setText(address_components.getJSONObject(j).getString("long_name"));
+                                                            }
+                                                            if (types.getString(k).equals("administrative_area_level_1")) {
+                                                                state.setText(address_components.getJSONObject(j).getString("long_name"));
+                                                            }
+                                                            if (types.getString(k).equals("postal_code")) {
+                                                                zip_code.setText(address_components.getJSONObject(j).getString("long_name"));
+                                                            }
+                                                            else {
+                                                                zip_code.setText("");
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
