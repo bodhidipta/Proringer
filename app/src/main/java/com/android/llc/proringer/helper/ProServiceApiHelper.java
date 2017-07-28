@@ -2481,11 +2481,11 @@ public class ProServiceApiHelper {
                         Logger.printMessage("user_id", params[0]);
                         Logger.printMessage("category_search", params[1]);
                         Logger.printMessage("zip_search", params[2]);
-                        Logger.printMessage("proslistingAPI",proslistingAPI);
+                        Logger.printMessage("proslistingAPI",proslistingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2]);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(proslistingAPI)
+                                .url(proslistingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2])
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -2494,7 +2494,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("proslistingAPI", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
-                            return jsonObject.getString("message");
+                            return responseString;
                         } else {
                             exception = jsonObject.getString("message");
                             return exception;
