@@ -386,7 +386,6 @@ public class GetStarted extends AppCompatActivity implements
                 ///////////////Here called location /////////////////
                 if (mGoogleApiClient.isConnected()) {
                     PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-                    Logger.printMessage(TAG, "Location update started ..............: ");
                     Logger.printMessage(TAG, "Location update resumed .....................");
                 }
             }
@@ -423,10 +422,11 @@ public class GetStarted extends AppCompatActivity implements
                     == PackageManager.PERMISSION_GRANTED) {
 
                 ///////////////Here called location /////////////////
-                mGoogleApiClient.disconnect();
-                Logger.printMessage(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
+                if (mGoogleApiClient.isConnected()) {
+                    mGoogleApiClient.disconnect();
+                    Logger.printMessage(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
+                }
             }
         }
-
     }
 }
