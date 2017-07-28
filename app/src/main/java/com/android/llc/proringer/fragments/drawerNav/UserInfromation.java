@@ -6,30 +6,29 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ActivityPostProject;
-import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
+import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by bodhidipta on 22/06/17.
@@ -52,6 +51,11 @@ public class UserInfromation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     private ProgressDialog pgDia = null;
     ImageView error_progress;
+    PopupWindow popupWindow;
+
+    boolean checkToShowAfterSearach = false;
+
+    PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
 
     @Nullable
     @Override
@@ -65,11 +69,30 @@ public class UserInfromation extends Fragment {
         first_name = (ProLightEditText) view.findViewById(R.id.first_name);
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         contact = (ProLightEditText) view.findViewById(R.id.contact);
+
         address = (ProLightEditText) view.findViewById(R.id.address);
+
+        address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    address.setText("");
+            }
+        });
+
+
         zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
+        zip_code.setEnabled(false);
+        zip_code.setClickable(false);
+
         city = (ProLightEditText) view.findViewById(R.id.city);
+        city.setEnabled(false);
+        city.setClickable(false);
+
         state = (ProLightEditText) view.findViewById(R.id.state);
-        error_progress=(ImageView)view.findViewById(R.id.error_progress);
+        state.setEnabled(false);
+        state.setClickable(false);
+
+        error_progress = (ImageView) view.findViewById(R.id.error_progress);
 
 
         plotUserInformation();
@@ -77,33 +100,15 @@ public class UserInfromation extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(error_progress.getVisibility()==View.GONE) {
+                        if (error_progress.getVisibility() == View.GONE) {
                             updateUserInformation();
-                        }else {
+                        } else {
                             Toast.makeText(getActivity(), "Only Canada and US zip code valid", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
 
         );
-
-        zip_code.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                searchLocationWithZip(s.toString());
-            }
-        });
-
     }
 
     private void updateUserInformation() {
@@ -179,6 +184,29 @@ public class UserInfromation extends Fragment {
                             first_name.setText(innerObj.getString("f_name") + "");
                             last_name.setText(innerObj.getString("l_name") + "");
                             address.setText(innerObj.getString("address") + "");
+                            address.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                    if (!s.toString().trim().equals("")) {
+                                        if (checkToShowAfterSearach == false) {
+                                            CreateGooglePlaceList(address, s.toString());
+                                        } else {
+                                            checkToShowAfterSearach = false;
+                                        }
+                                    }
+                                }
+                            });
                             city.setText(innerObj.getString("city") + "");
                             state.setText(innerObj.getString("state") + "");
                             zip_code.setText(innerObj.getString("zipcode") + "");
@@ -200,27 +228,77 @@ public class UserInfromation extends Fragment {
                 });
     }
 
-    private void searchLocationWithZip(String key) {
-        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(key, new ProServiceApiHelper.onSearchZipCallback() {
+    public void CreateGooglePlaceList(final View view, String place) {
+        ProServiceApiHelper.getInstance(getActivity()).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
             @Override
-            public void onComplete(List<AddressData> listdata) {
+            public void onStart() {
+            }
 
-                Logger.printMessage("complete_search", "" + listdata);
+            @Override
+            public void onComplete(String message) {
+                try {
+                    JSONObject jsonObject = new JSONObject(message);
+                    JSONArray jsonArray = jsonObject.getJSONArray("predictions");
+                    showDialog(view, jsonArray);
 
-                if (listdata!=null && listdata.size()>0){
-                    error_progress.setVisibility(View.GONE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
+                Logger.printMessage("message", "" + message);
             }
 
             @Override
             public void onError(String error) {
-                error_progress.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onStartFetch() {
-                error_progress.setVisibility(View.GONE);
             }
         });
+    }
+
+
+    private void showDialog(View v, JSONArray PredictionsJsonArray) {
+
+        if (popupWindow == null) {
+            popupWindow = new PopupWindow(getActivity());
+
+            View dailogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_place, null);
+
+            RecyclerView rcv_ = (RecyclerView) dailogView.findViewById(R.id.rcv_);
+            rcv_.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog(getActivity(), PredictionsJsonArray, new onOptionSelected() {
+                @Override
+                public void onItemPassed(int position, JSONObject value) {
+                    try {
+                        checkToShowAfterSearach = true;
+                        address.setText(value.getString("description"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    popupWindow.dismiss();
+                }
+            });
+
+            rcv_.setAdapter(placeCustomListAdapterDialog);
+            // some other visual settings
+            popupWindow.setFocusable(false);
+            popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+            popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+
+            // set the list view as pop up window content
+            popupWindow.setContentView(dailogView);
+            popupWindow.showAsDropDown(v, -5, 0);
+
+
+        } else if (popupWindow != null && !popupWindow.isShowing()) {
+            popupWindow.showAsDropDown(v, -5, 0);
+            placeCustomListAdapterDialog.setRefresh(PredictionsJsonArray);
+
+        } else if (popupWindow != null && popupWindow.isShowing()) {
+            placeCustomListAdapterDialog.setRefresh(PredictionsJsonArray);
+        }
+    }
+
+    public interface onOptionSelected {
+        void onItemPassed(int position, JSONObject value);
     }
 }

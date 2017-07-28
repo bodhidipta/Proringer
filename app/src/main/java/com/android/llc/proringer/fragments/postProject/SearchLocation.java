@@ -17,6 +17,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ActivityPostProject;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
@@ -60,7 +61,7 @@ public class SearchLocation extends Fragment {
         addressDataList = new ArrayList<>();
 
         if (!ProApplication.getInstance().getUserId().equals("")) {
-            zip_code_text.setHint(ProApplication.getInstance().getZipCode());
+            plotUserInformation();
         } else {
             //////////set current location zip code////
             Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[0]);
@@ -226,4 +227,39 @@ public class SearchLocation extends Fragment {
             }
         });
     }
+
+    private void plotUserInformation() {
+        DatabaseHandler.getInstance(getActivity()).getUserInfo(
+                ProApplication.getInstance().getUserId(),
+                new DatabaseHandler.onQueryCompleteListener() {
+                    @Override
+                    public void onSuccess(String... s) {
+                        /**
+                         * User data already found in database
+                         */
+
+                        Logger.printMessage("@dashBoard", "on database data exists");
+                        try {
+                            JSONObject mainObject = new JSONObject(s[0]);
+                            JSONArray info_arr = mainObject.getJSONArray("info_array");
+                            JSONObject innerObj = info_arr.getJSONObject(0);
+
+                            zip_code_text.setText(innerObj.getString("zipcode") + "");
+
+                        } catch (JSONException jse) {
+                            jse.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String s) {
+                        /**
+                         * No user data found on database or something went wrong
+                         */
+                        Logger.printMessage("@dashBoard", "on database data not exists");
+
+                    }
+                });
+    }
+
 }
