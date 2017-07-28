@@ -94,6 +94,8 @@ public class ProServiceApiHelper {
     private String termsOfUseAPI = "http://esolz.co.in/lab6/proringer_latest/app_term";
     private String privacyPolicyAPI = "http://esolz.co.in/lab6/proringer_latest/app_privacy_policy";
 
+    private String proslistingAPI = "http://esolz.co.in/lab6/proringer_latest/app_serch_result_project?user_id=";
+
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -2266,9 +2268,8 @@ public class ProServiceApiHelper {
      * get zip code  using google api
      *
      * @param callback
-     * @param params
      */
-    public void getZipCodeUsingGoogleApi(final getApiProcessCallback callback, String... params) {
+    public void getZipCodeUsingGoogleApi(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -2390,7 +2391,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * get Zip Locatgion State List code  using google api
+     * get Zip Location State List code  using google api
      *
      * @param callback
      */
@@ -2452,6 +2453,8 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
+
+
 
     /**
      * Interface used to get call back for getServiceList and getCategoryList
