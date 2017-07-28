@@ -15,12 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 
 /**
@@ -114,6 +116,13 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                 holder.img_verify_tick.setVisibility(View.GONE);
                 holder.tv_verify.setVisibility(View.GONE);
             }
+
+            if (jsonInfoArray.getJSONObject(position).getString("pro_status").equalsIgnoreCase("")) {
+                holder.img_favorite.setImageResource(R.drawable.ic_favorite);
+            } else {
+                holder.img_favorite.setImageResource(R.drawable.ic_favorite);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
