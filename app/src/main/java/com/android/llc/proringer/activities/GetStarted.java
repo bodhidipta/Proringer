@@ -5,14 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,9 +21,15 @@ import com.android.llc.proringer.adapter.GetStartedTutorial;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -100,6 +98,9 @@ public class GetStarted extends AppCompatActivity implements
         mLocationRequest.setInterval(INTERVAL);
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -265,14 +266,17 @@ public class GetStarted extends AppCompatActivity implements
 
                         //Request location updates:
                         ///////////////Here called location /////////////////
+
+                        mGoogleApiClient.connect();
+
                         if (mGoogleApiClient.isConnected()) {
-                            startLocationUpdates();
+                            PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+                            Logger.printMessage(TAG, "Location update started ..............: ");
                             Logger.printMessage(TAG, "Location update resumed .....................");
                         }
                     }
 
                 } else {
-
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
 
@@ -280,26 +284,6 @@ public class GetStarted extends AppCompatActivity implements
                 return;
             }
 
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (checkLocationPermission()) {
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-
-
-                ///////////////Here called location /////////////////
-
-                if (mGoogleApiClient.isConnected()) {
-                    startLocationUpdates();
-                    Logger.printMessage(TAG, "Location update resumed .....................");
-                }
-            }
         }
     }
 
@@ -315,7 +299,17 @@ public class GetStarted extends AppCompatActivity implements
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Logger.printMessage(TAG, "onConnected - isConnected ...............: " + mGoogleApiClient.isConnected());
-        startLocationUpdates();
+        if (checkLocationPermission()) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                ///////////////Here called location /////////////////
+
+                PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+                Logger.printMessage(TAG, "Location update started ..............: ");
+            }
+        }
     }
 
     @Override
@@ -351,7 +345,7 @@ public class GetStarted extends AppCompatActivity implements
             String lat = String.valueOf(mCurrentLocation.getLatitude());
             String lng = String.valueOf(mCurrentLocation.getLongitude());
 
-            ProServiceApiHelper.getInstance(GetStarted.this).setCurrentLatLng(lat,lng);
+            ProServiceApiHelper.getInstance(GetStarted.this).setCurrentLatLng(lat, lng);
 
             Logger.printMessage("updateUI", "At Time: " + mLastUpdateTime + "\n" +
                     "Latitude: " + lat + "\n" +
@@ -367,42 +361,72 @@ public class GetStarted extends AppCompatActivity implements
     public void onStart() {
         super.onStart();
         Logger.printMessage(TAG, "onStart fired ..............");
-        mGoogleApiClient.connect();
+
+        if (checkLocationPermission()) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                ///////////////Here called location /////////////////
+                mGoogleApiClient.connect();
+            }
+        }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (checkLocationPermission()) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                ///////////////Here called location /////////////////
+                if (mGoogleApiClient.isConnected()) {
+                    PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+                    Logger.printMessage(TAG, "Location update started ..............: ");
+                    Logger.printMessage(TAG, "Location update resumed .....................");
+                }
+            }
+        }
+    }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        stopLocationUpdates();
+
+        if (checkLocationPermission()) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                ///////////////Here called location /////////////////
+                if (mGoogleApiClient.isConnected()) {
+                    LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+                    Logger.printMessage(TAG, "Location update stopped .......................");
+                }
+            }
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
         Logger.printMessage(TAG, "onStop fired ..............");
-        mGoogleApiClient.disconnect();
-        Logger.printMessage(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
-    }
 
+        if (checkLocationPermission()) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
 
-    protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+                ///////////////Here called location /////////////////
+                mGoogleApiClient.disconnect();
+                Logger.printMessage(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
+            }
         }
-        PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        Logger.printMessage(TAG, "Location update started ..............: ");
-    }
 
-    protected void stopLocationUpdates() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        Logger.printMessage(TAG, "Location update stopped .......................");
     }
-
 }
