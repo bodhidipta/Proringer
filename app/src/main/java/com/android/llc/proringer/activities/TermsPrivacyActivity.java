@@ -46,6 +46,7 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             loadDataTermsOfUse();
         }else {
             tv_title.setText("Privacy Policy");
+            loadPrivacyPolicy();
         }
 
     }
@@ -64,8 +65,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 pgDia=new ProgressDialog(TermsPrivacyActivity.this);
-                pgDia.setTitle("Faq");
-                pgDia.setMessage("Fag page loading Please wait...");
+                pgDia.setTitle("Terms of Use");
+                pgDia.setMessage("Terms of Use page loading Please wait...");
                 pgDia.setCancelable(false);
                 pgDia.show();
             }
@@ -79,12 +80,11 @@ public class TermsPrivacyActivity extends AppCompatActivity {
 
                 try {
                     JSONObject jsonObject=new JSONObject(s);
-                    JSONObject termsjsonObject=jsonObject.getJSONObject("terms");
 
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     TextView tv=new TextView(TermsPrivacyActivity.this);
                     tv.setLayoutParams(lparams);
-                    tv.setText(Html.fromHtml(termsjsonObject.getString("page_content")));
+                    tv.setText(Html.fromHtml(jsonObject.getString("page_content")));
                     main_container.addView(tv);
 
                 } catch (JSONException e) {
@@ -105,8 +105,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 pgDia=new ProgressDialog(TermsPrivacyActivity.this);
-                pgDia.setTitle("Faq");
-                pgDia.setMessage("Fag page loading Please wait...");
+                pgDia.setTitle("Privacy Policy");
+                pgDia.setMessage("Privacy Policy loading Please wait...");
                 pgDia.setCancelable(false);
                 pgDia.show();
             }
@@ -115,6 +115,21 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             public void onComplete(String s) {
                 if (pgDia!=null && pgDia.isShowing())
                     pgDia.dismiss();
+
+                Logger.printMessage("message",""+s);
+
+                try {
+                    JSONObject jsonObject=new JSONObject(s);
+
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    TextView tv=new TextView(TermsPrivacyActivity.this);
+                    tv.setLayoutParams(lparams);
+                    tv.setText(Html.fromHtml(jsonObject.getString("page_content")));
+                    main_container.addView(tv);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

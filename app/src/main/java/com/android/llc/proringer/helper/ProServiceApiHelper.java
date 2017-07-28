@@ -92,7 +92,7 @@ public class ProServiceApiHelper {
 
     private String faqInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
     private String termsOfUseAPI = "http://esolz.co.in/lab6/proringer_latest/app_term";
-    private String privacyPolicyAPI = "";
+    private String privacyPolicyAPI = "http://esolz.co.in/lab6/proringer_latest/app_privacy_policy";
 
 
     public static ProServiceApiHelper getInstance(Context context) {
