@@ -315,13 +315,13 @@ public class UserInfromation extends Fragment {
 
                                                         for (int k = 0; k < types.length(); k++) {
                                                             if (types.getString(k).equals("administrative_area_level_2")) {
-                                                                city.setText(address_components.getJSONObject(j).getString("long_name"));
+                                                                city.setText(address_components.getJSONObject(j).getString("short_name"));
                                                             }
                                                             if (types.getString(k).equals("administrative_area_level_1")) {
-                                                                state.setText(address_components.getJSONObject(j).getString("long_name"));
+                                                                state.setText(address_components.getJSONObject(j).getString("short_name"));
                                                             }
                                                             if (types.getString(k).equals("postal_code")) {
-                                                                zip_code.setText(address_components.getJSONObject(j).getString("long_name"));
+                                                                zip_code.setText(address_components.getJSONObject(j).getString("short_name"));
                                                             }
                                                             else {
                                                                 zip_code.setText("");
