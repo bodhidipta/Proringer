@@ -2328,7 +2328,6 @@ public class ProServiceApiHelper {
      * get Location List code  using google api
      *
      * @param callback
-     * @param params
      */
 
     public void getLocationListUsingGoogleAPI(String place, final getApiProcessCallback callback) {
@@ -2359,15 +2358,12 @@ public class ProServiceApiHelper {
 
                         JSONObject mainRes = new JSONObject(responseString);
 
-                        if (mainRes.getString("status").equalsIgnoreCase("OK") &&
-                                mainRes.has("results") &&
-                                mainRes.getJSONArray("results").length() > 0) {
-
-
+                        if (mainRes.getString("status").equalsIgnoreCase("OK")) {
+                            return responseString;
+                        } else {
+                            exception = mainRes.getString("status");
+                            return exception;
                         }
-
-                        Logger.printMessage("location", "" + responseString);
-                        return responseString;
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = "Something error. Please search again.";
@@ -2380,6 +2376,70 @@ public class ProServiceApiHelper {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
                             callback.onComplete(s);
+                    } else {
+                        callback.onError(exception);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, place);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
+
+    /**
+     * get Zip Locatgion State List code  using google api
+     *
+     * @param callback
+     */
+
+    public void getZipLocatgionStateAPI(String place, final getApiProcessCallback callback) {
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                    try {
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Request request = new Request.Builder()
+                                .url(searchLocalProject)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        JSONObject mainRes = new JSONObject(responseString);
+
+                        if (mainRes.getString("status").equalsIgnoreCase("OK")) {
+                            return responseString;
+                        } else {
+                            exception =mainRes.getString("status");
+                            return exception;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = "Something error. Please search again.";
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
                     } else {
                         callback.onError(exception);
                     }
