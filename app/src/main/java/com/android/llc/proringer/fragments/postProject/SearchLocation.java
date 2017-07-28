@@ -116,7 +116,7 @@ public class SearchLocation extends Fragment {
     }
 
     private void searchLocationWithZip(String key) {
-        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(key, new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
                 addressDataList = listdata;
@@ -159,7 +159,7 @@ public class SearchLocation extends Fragment {
                 loading_progress.setVisibility(View.VISIBLE);
                 error_progress.setVisibility(View.GONE);
             }
-        });
+        },key);
     }
 
     public void getCurrentLocationZip() {

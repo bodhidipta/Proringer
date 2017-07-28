@@ -275,7 +275,7 @@ public class UserInfromation extends Fragment {
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
 
-                        ProServiceApiHelper.getInstance(getActivity()).getZipLocatgionStateAPI(address.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
+                        ProServiceApiHelper.getInstance(getActivity()).getZipLocatgionStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
                             @Override
                             public void onStart() {
 
@@ -341,7 +341,7 @@ public class UserInfromation extends Fragment {
                             public void onError(String error) {
 
                             }
-                        });
+                        },address.getText().toString().trim());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

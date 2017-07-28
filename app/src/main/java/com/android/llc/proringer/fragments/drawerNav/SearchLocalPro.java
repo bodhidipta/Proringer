@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 
 /**
  * Created by bodhidipta on 21/06/17.
@@ -30,6 +32,8 @@ import com.android.llc.proringer.adapter.SearchProListAdapter;
 
 public class SearchLocalPro extends Fragment {
     private RecyclerView pros_list;
+    String category_search="";
+    String zip_search="";
 
     @Nullable
     @Override
@@ -43,6 +47,23 @@ public class SearchLocalPro extends Fragment {
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
         pros_list.setAdapter(new SearchProListAdapter(getActivity()));
+
+        ProServiceApiHelper.getInstance(getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onComplete(String message) {
+
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        },ProApplication.getInstance().getUserId(),category_search,zip_search);
 
     }
 }

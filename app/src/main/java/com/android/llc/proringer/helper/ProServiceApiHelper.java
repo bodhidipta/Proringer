@@ -1653,11 +1653,11 @@ public class ProServiceApiHelper {
     /**
      * Search area by google API
      *
-     * @param zipCode
      * @param callback
+     * @param params
      */
 
-    public void getSearchArea(String zipCode, final onSearchZipCallback callback) {
+    public void getSearchArea(final onSearchZipCallback callback,String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1773,7 +1773,7 @@ public class ProServiceApiHelper {
                         callback.onError(exception);
                     }
                 }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, zipCode);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
@@ -2328,11 +2328,11 @@ public class ProServiceApiHelper {
 
     /**
      * get Location List code  using google api
-     *
+     * @param param
      * @param callback
      */
 
-    public void getLocationListUsingGoogleAPI(String place, final getApiProcessCallback callback) {
+    public void getLocationListUsingGoogleAPI(String param, final getApiProcessCallback callback) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2382,7 +2382,7 @@ public class ProServiceApiHelper {
                         callback.onError(exception);
                     }
                 }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, place);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, param);
 
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
@@ -2396,7 +2396,7 @@ public class ProServiceApiHelper {
      * @param callback
      */
 
-    public void getZipLocatgionStateAPI(String place, final getApiProcessCallback callback) {
+    public void getZipLocatgionStateAPI(final getApiProcessCallback callback,String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2447,13 +2447,81 @@ public class ProServiceApiHelper {
                         callback.onError(exception);
                     }
                 }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, place);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
 
+
+
+    /**
+     * get Location List code  using google api
+     * @param callback
+     * @param params
+     */
+
+    public void getProsListingAPI(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+
+                        Logger.printMessage("user_id", params[0]);
+                        Logger.printMessage("category_search", params[1]);
+                        Logger.printMessage("zip_search", params[2]);
+                        Logger.printMessage("proslistingAPI",proslistingAPI);
+
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(proslistingAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("proslistingAPI", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
 
 
     /**
