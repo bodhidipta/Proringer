@@ -336,7 +336,6 @@ public class UserInfromation extends Fragment {
                                     e.printStackTrace();
                                 }
                             }
-
                             @Override
                             public void onError(String error) {
 
