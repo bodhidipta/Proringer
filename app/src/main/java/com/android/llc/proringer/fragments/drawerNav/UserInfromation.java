@@ -360,11 +360,8 @@ public class UserInfromation extends Fragment {
             popupWindow.showAsDropDown(v, -5, 0);
 
 
-        } else if (popupWindow != null && !popupWindow.isShowing()) {
+        } else {
             popupWindow.showAsDropDown(v, -5, 0);
-            placeCustomListAdapterDialog.setRefresh(PredictionsJsonArray);
-
-        } else if (popupWindow != null && popupWindow.isShowing()) {
             placeCustomListAdapterDialog.setRefresh(PredictionsJsonArray);
         }
     }
