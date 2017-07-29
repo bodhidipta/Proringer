@@ -580,7 +580,6 @@ public class ProServiceApiHelper {
                 protected void onPreExecute() {
                     super.onPreExecute();
                     callback.onStart();
-
                 }
 
                 @Override

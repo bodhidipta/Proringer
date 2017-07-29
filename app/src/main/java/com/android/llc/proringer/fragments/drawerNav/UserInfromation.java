@@ -50,11 +50,8 @@ import org.json.JSONObject;
 public class UserInfromation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     private ProgressDialog pgDia = null;
-    ImageView error_progress;
     PopupWindow popupWindow;
-
     boolean checkToShowAfterSearach = false;
-
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
 
     @Nullable
@@ -92,22 +89,15 @@ public class UserInfromation extends Fragment {
         state.setEnabled(false);
         state.setClickable(false);
 
-        error_progress = (ImageView) view.findViewById(R.id.error_progress);
-
 
         plotUserInformation();
         view.findViewById(R.id.save_ifo).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (error_progress.getVisibility() == View.GONE) {
-                            updateUserInformation();
-                        } else {
-                            Toast.makeText(getActivity(), "Only Canada and US zip code valid", Toast.LENGTH_SHORT).show();
-                        }
+                        updateUserInformation();
                     }
                 }
-
         );
     }
 
