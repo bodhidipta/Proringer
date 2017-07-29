@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -247,6 +249,11 @@ public class UserInformation extends Fragment {
 
         if (popupWindow == null) {
             popupWindow = new PopupWindow(getActivity());
+            // Closes the popup window when touch outside.
+            popupWindow.setOutsideTouchable(false);
+            popupWindow.setFocusable(false);
+            // Removes default background.
+            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             View dailogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_place, null);
 
@@ -360,6 +367,9 @@ public class UserInformation extends Fragment {
     @Override
     public void onPause() {
         Logger.printMessage("PopUpWindow","close");
+        if (popupWindow!=null){
+            popupWindow.dismiss();
+        }
         super.onPause();
     }
 }
