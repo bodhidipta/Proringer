@@ -59,6 +59,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
     public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
         this.jsonInfoArray = jsonInfoArray;
+        pgDia = new ProgressDialog(mcontext);
     }
 
     @Override
@@ -157,7 +158,6 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                     } else {
                         addFavPro(jsonInfoArray.getJSONObject(position).getString("pros_id"));
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
