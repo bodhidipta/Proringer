@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -48,6 +49,8 @@ public class LandScreenActivity extends AppCompatActivity{
     private ActionBarDrawerToggle toggle = null;
     private FragmentManager fragmentManager = null;
 
+    private InputMethodManager keyboard;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class LandScreenActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
+        keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -606,6 +610,7 @@ public class LandScreenActivity extends AppCompatActivity{
     }
 
     private void closeDrawer() {
+        closeKeypad();
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -622,6 +627,14 @@ public class LandScreenActivity extends AppCompatActivity{
         } else {
             findViewById(R.id.search_local_pro_header_map).setVisibility(View.VISIBLE);
             findViewById(R.id.search_local_pro_header).setVisibility(View.GONE);
+        }
+    }
+
+    public void closeKeypad() {
+        try {
+            keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
