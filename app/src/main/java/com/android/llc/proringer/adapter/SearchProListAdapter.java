@@ -1,7 +1,10 @@
 package com.android.llc.proringer.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -9,21 +12,26 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by bodhidipta on 21/06/17.
@@ -45,6 +53,8 @@ import org.json.JSONArray;
 public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
+    ProgressDialog pgDia;
+
 
     public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
@@ -140,6 +150,18 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             @Override
             public void onClick(View view) {
 
+                try {
+
+                    if (jsonInfoArray.getJSONObject(position).getString("pro_status").equalsIgnoreCase("Y")) {
+                        DeleteFavPro(jsonInfoArray.getJSONObject(position).getString("pros_id"));
+                    } else {
+                        addFavPro(jsonInfoArray.getJSONObject(position).getString("pros_id"));
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -179,6 +201,162 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
 
             linear_layout_border = (LinearLayout) itemView.findViewById(R.id.linear_layout_border);
 
+        }
+    }
+
+    public void DeleteFavPro(final String pros_id){
+
+        TextView title = new TextView(mcontext);
+        title.setText("Are you sure you want to remove from favorites?");
+//                title.setBackgroundResource(R.drawable.gradient);
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(mcontext.getResources().getColor(R.color.colorTextBlack));
+        title.setTextSize(18);
+
+        new AlertDialog.Builder(mcontext)
+                .setCustomTitle(title)
+
+
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        ///////////delete from favorite list
+                        try {
+                            ProServiceApiHelper.getInstance(mcontext).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                            @Override
+                                                                                            public void onStart() {
+
+                                                                                                pgDia.setTitle("Delete Favorite pros");
+                                                                                                pgDia.setMessage("It's deleting.Please wait....");
+                                                                                                pgDia.setCancelable(false);
+                                                                                                pgDia.show();
+
+                                                                                            }
+
+                                                                                            @Override
+                                                                                            public void onComplete(String message) {
+
+                                                                                                notifyDataSetChanged();
+
+                                                                                                if (pgDia != null && pgDia.isShowing())
+                                                                                                    pgDia.dismiss();
+
+
+                                                                                                new AlertDialog.Builder(mcontext)
+                                                                                                        .setTitle("Delete Favorite pros")
+                                                                                                        .setMessage("" + message)
+                                                                                                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                            @Override
+                                                                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                                                                dialog.dismiss();
+                                                                                                            }
+                                                                                                        })
+                                                                                                        .setCancelable(false)
+                                                                                                        .show();
+                                                                                            }
+
+                                                                                            @Override
+                                                                                            public void onError(String error) {
+                                                                                                if (pgDia != null && pgDia.isShowing())
+                                                                                                    pgDia.dismiss();
+
+                                                                                                new AlertDialog.Builder(mcontext)
+                                                                                                        .setTitle("Delete Fav pros")
+                                                                                                        .setMessage("" + error)
+                                                                                                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                            @Override
+                                                                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                                                                dialog.dismiss();
+                                                                                                            }
+                                                                                                        })
+                                                                                                        .setCancelable(false)
+                                                                                                        .show();
+
+                                                                                            }
+                                                                                        },
+                                    ProApplication.getInstance().getUserId(),
+                                    pros_id
+                            );
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .setCancelable(false)
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    public void addFavPro(final  String pros_id){
+        try {
+            ProServiceApiHelper.getInstance(mcontext).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                @Override
+                                                                                public void onStart() {
+
+                                                                                    pgDia.setTitle("Add Favorite pros");
+                                                                                    pgDia.setMessage("It's adding.Please wait....");
+                                                                                    pgDia.setCancelable(false);
+                                                                                    pgDia.show();
+
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onComplete(String message) {
+
+                                                                                    notifyDataSetChanged();
+
+                                                                                    if (pgDia != null && pgDia.isShowing())
+                                                                                        pgDia.dismiss();
+
+
+                                                                                    new AlertDialog.Builder(mcontext)
+                                                                                            .setTitle("Add Favorite pros")
+                                                                                            .setMessage("" + message)
+                                                                                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                @Override
+                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                    dialog.dismiss();
+                                                                                                }
+                                                                                            })
+                                                                                            .setCancelable(false)
+                                                                                            .show();
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onError(String error) {
+                                                                                    if (pgDia != null && pgDia.isShowing())
+                                                                                        pgDia.dismiss();
+
+                                                                                    new AlertDialog.Builder(mcontext)
+                                                                                            .setTitle("Add Fav pros")
+                                                                                            .setMessage("" + error)
+                                                                                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                @Override
+                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                    dialog.dismiss();
+                                                                                                }
+                                                                                            })
+                                                                                            .setCancelable(false)
+                                                                                            .show();
+
+                                                                                }
+                                                                            },
+                    ProApplication.getInstance().getUserId(),
+                    pros_id
+            );
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }
