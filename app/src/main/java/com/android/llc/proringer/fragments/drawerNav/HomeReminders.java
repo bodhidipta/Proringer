@@ -68,7 +68,7 @@ public class HomeReminders extends Fragment {
 
     private HashMap<String, ArrayList<String>> idList;
     private HashMap<String, ArrayList<String>> valueList;
-    private ProgressDialog pgDial = null;
+    private ProgressDialog pgDialog = null;
     private ProRegularTextView year_build, ac_filter, last_water_heater_flush,
             last_chimney_sweep, last_test_for_radon_gas, Smoke_detector_battery,
             co_detector_battery, last_gutter_clean;
@@ -442,11 +442,11 @@ public class HomeReminders extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDial = new ProgressDialog(getActivity());
-                        pgDial.setTitle("Home Schedule");
-                        pgDial.setMessage("Getting option data for Home Schedule. Please wait.");
-                        pgDial.setCancelable(false);
-                        pgDial.show();
+                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog.setTitle("Home Schedule");
+                        pgDialog.setMessage("Getting option data for Home Schedule. Please wait.");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
@@ -759,8 +759,8 @@ public class HomeReminders extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDial != null && pgDial.isShowing())
-                            pgDial.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Home Schedule Option Error")
                                 .setMessage("" + error)
@@ -847,14 +847,14 @@ public class HomeReminders extends Fragment {
                             e.printStackTrace();
                         }
 
-                        if (pgDial != null && pgDial.isShowing())
-                            pgDial.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                     }
 
                     @Override
                     public void onError(String error) {
-                        if (pgDial != null && pgDial.isShowing())
-                            pgDial.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                     }
                 });
     }
@@ -864,17 +864,17 @@ public class HomeReminders extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDial = new ProgressDialog(getActivity());
-                        pgDial.setTitle("Home Reminder");
-                        pgDial.setMessage("Updating details. Please wait.");
-                        pgDial.setCancelable(false);
-                        pgDial.show();
+                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog.setTitle("Home Reminder");
+                        pgDialog.setMessage("Updating details. Please wait.");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDial != null && pgDial.isShowing())
-                            pgDial.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Update Home Scheduler")
                                 .setMessage("Successfully updated Home scheduler options.")
@@ -890,8 +890,8 @@ public class HomeReminders extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDial != null && pgDial.isShowing())
-                            pgDial.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Update Error")
                                 .setMessage("" + error)

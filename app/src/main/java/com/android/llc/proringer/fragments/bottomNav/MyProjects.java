@@ -38,7 +38,7 @@ import java.util.List;
  */
 
 public class MyProjects extends Fragment {
-    ProgressDialog dialog;
+    ProgressDialog pgDialog;
 
     @Nullable
     @Override
@@ -55,18 +55,18 @@ public class MyProjects extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
             @Override
             public void onStart() {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setTitle("My Projects");
-                dialog.setCancelable(false);
-                dialog.setMessage("Getting MyProject list. Please wait.");
-                dialog.show();
+                pgDialog = new ProgressDialog(getActivity());
+                pgDialog.setTitle("My Projects");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Getting MyProject list. Please wait.");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(final List projectList) {
 
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 if (projectList != null && projectList.size() > 0)
                     project_list.setAdapter(new ProjectListingAdapter(getActivity(), projectList, new onOptionSelected() {
@@ -86,8 +86,8 @@ public class MyProjects extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
                 new AlertDialog.Builder(getActivity())
                         .setTitle("MyProjects Error")
                         .setMessage("" + error)

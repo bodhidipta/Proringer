@@ -40,7 +40,7 @@ public class SearchLocalPro extends Fragment {
     private RecyclerView pros_list;
     String category_search="";
     String zip_search="";
-    ProgressDialog dialog;
+    ProgressDialog pgDialog;
 
     @Nullable
     @Override
@@ -58,17 +58,17 @@ public class SearchLocalPro extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setTitle("FavPros");
-                dialog.setCancelable(false);
-                dialog.setMessage("Getting FavPros list. Please wait.");
-                dialog.show();
+                pgDialog = new ProgressDialog(getActivity());
+                pgDialog.setTitle("FavPros");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Getting FavPros list. Please wait.");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 try {
                     JSONObject jsonObject = new JSONObject(message);
@@ -85,8 +85,8 @@ public class SearchLocalPro extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         },ProApplication.getInstance().getUserId(),category_search,zip_search);
 

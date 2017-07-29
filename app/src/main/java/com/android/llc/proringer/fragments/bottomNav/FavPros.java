@@ -41,7 +41,7 @@ import org.json.JSONObject;
 
 public class FavPros extends Fragment {
     private RecyclerView pros_list;
-    ProgressDialog dialog;
+    ProgressDialog pgDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,17 +61,17 @@ public class FavPros extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setTitle("FavPros");
-                dialog.setCancelable(false);
-                dialog.setMessage("Getting FavPros list. Please wait.");
-                dialog.show();
+                pgDialog = new ProgressDialog(getActivity());
+                pgDialog.setTitle("FavPros");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Getting FavPros list. Please wait.");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(message);
 
@@ -87,8 +87,8 @@ public class FavPros extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 new AlertDialog.Builder(getActivity())
                         .setTitle("FavPros Error")

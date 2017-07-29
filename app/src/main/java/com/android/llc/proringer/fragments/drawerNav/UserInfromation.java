@@ -49,7 +49,7 @@ import org.json.JSONObject;
 
 public class UserInfromation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
-    private ProgressDialog pgDia = null;
+    private ProgressDialog pgDialog = null;
     PopupWindow popupWindow;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
@@ -106,23 +106,23 @@ public class UserInfromation extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDia = new ProgressDialog(getActivity());
-                        pgDia.setTitle("User Information");
-                        pgDia.setMessage("Updating user information. Please wait..");
-                        pgDia.setCancelable(false);
-                        pgDia.show();
+                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog.setTitle("User Information");
+                        pgDialog.setMessage("Updating user information. Please wait..");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDia != null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                     }
 
                     @Override
                     public void onError(String error) {
-                        if (pgDia != null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Error updating information")
                                 .setMessage("" + error)

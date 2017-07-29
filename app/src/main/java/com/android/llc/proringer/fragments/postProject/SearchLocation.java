@@ -41,7 +41,7 @@ public class SearchLocation extends Fragment {
     ProgressBar loading_progress;
     ImageView error_progress;
     public boolean outer_block_check = false;
-    ProgressDialog dialog;
+    ProgressDialog pgDialog;
 
     @Nullable
     @Override
@@ -166,17 +166,17 @@ public class SearchLocation extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setTitle("FavPros");
-                dialog.setCancelable(false);
-                dialog.setMessage("Getting FavPros list. Please wait.");
-                dialog.show();
+                pgDialog = new ProgressDialog(getActivity());
+                pgDialog.setTitle("FavPros");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Getting FavPros list. Please wait.");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(message);
                     JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
@@ -222,8 +222,8 @@ public class SearchLocation extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         });
     }

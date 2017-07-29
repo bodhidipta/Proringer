@@ -22,7 +22,7 @@ import org.json.JSONObject;
  */
 
 public class TermsPrivacyActivity extends AppCompatActivity {
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
     ProRegularTextView tv_title;
     LinearLayout main_container;
     @Override
@@ -64,17 +64,17 @@ public class TermsPrivacyActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getTermsOfUseInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDia=new ProgressDialog(TermsPrivacyActivity.this);
-                pgDia.setTitle("Terms of Use");
-                pgDia.setMessage("Terms of Use page loading Please wait...");
-                pgDia.setCancelable(false);
-                pgDia.show();
+                pgDialog=new ProgressDialog(TermsPrivacyActivity.this);
+                pgDialog.setTitle("Terms of Use");
+                pgDialog.setMessage("Terms of Use page loading Please wait...");
+                pgDialog.setCancelable(false);
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String s) {
-                if (pgDia!=null && pgDia.isShowing())
-                    pgDia.dismiss();
+                if (pgDialog!=null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 Logger.printMessage("message",""+s);
 
@@ -94,8 +94,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDia!=null && pgDia.isShowing())
-                    pgDia.dismiss();
+                if (pgDialog!=null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         });
     }
@@ -104,17 +104,17 @@ public class TermsPrivacyActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getPrivacyPolicyInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDia=new ProgressDialog(TermsPrivacyActivity.this);
-                pgDia.setTitle("Privacy Policy");
-                pgDia.setMessage("Privacy Policy loading Please wait...");
-                pgDia.setCancelable(false);
-                pgDia.show();
+                pgDialog=new ProgressDialog(TermsPrivacyActivity.this);
+                pgDialog.setTitle("Privacy Policy");
+                pgDialog.setMessage("Privacy Policy loading Please wait...");
+                pgDialog.setCancelable(false);
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String s) {
-                if (pgDia!=null && pgDia.isShowing())
-                    pgDia.dismiss();
+                if (pgDialog!=null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 Logger.printMessage("message",""+s);
 
@@ -134,8 +134,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDia!=null && pgDia.isShowing())
-                    pgDia.dismiss();
+                if (pgDialog!=null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         });
     }

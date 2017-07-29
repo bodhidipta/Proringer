@@ -22,7 +22,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
 public class ContactUsActivity extends AppCompatActivity {
     ProLightEditText first_name, last_name, email, phonenumber;
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
     EditText contact_info;
 
     @Override
@@ -88,17 +88,17 @@ public class ContactUsActivity extends AppCompatActivity {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDia = new ProgressDialog(ContactUsActivity.this);
-                        pgDia.setTitle("Contact Us");
-                        pgDia.setMessage("Please wait....");
-                        pgDia.setCancelable(false);
-                        pgDia.show();
+                        pgDialog = new ProgressDialog(ContactUsActivity.this);
+                        pgDialog.setTitle("Contact Us");
+                        pgDialog.setMessage("Please wait....");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDia != null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(ContactUsActivity.this)
                                 .setTitle("Contact Us")
                                 .setMessage("" + message)
@@ -115,8 +115,8 @@ public class ContactUsActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDia != null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(ContactUsActivity.this)
                                 .setTitle("Contact Us Error")
                                 .setMessage("" + error)

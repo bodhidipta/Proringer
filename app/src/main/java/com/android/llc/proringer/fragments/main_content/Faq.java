@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 public class Faq extends Fragment {
     LinearLayout linear_main_container;
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
 
 
     @Nullable
@@ -45,17 +45,17 @@ public class Faq extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getFaqInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDia=new ProgressDialog(getActivity());
-                pgDia.setTitle("Faq");
-                pgDia.setMessage("Fag page loading Please wait...");
-                pgDia.setCancelable(false);
-                pgDia.show();
+                pgDialog=new ProgressDialog(getActivity());
+                pgDialog.setTitle("Faq");
+                pgDialog.setMessage("Fag page loading Please wait...");
+                pgDialog.setCancelable(false);
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String s) {
-                if (pgDia!=null && pgDia.isShowing())
-                    pgDia.dismiss();
+                if (pgDialog!=null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 try {
                     JSONObject jsonObject = new JSONObject(s);
@@ -104,8 +104,8 @@ public class Faq extends Fragment {
             }
             @Override
             public void onError(String error) {
-                if (pgDia!=null && pgDia.isShowing())
-                    pgDia.dismiss();
+                if (pgDialog!=null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         });
 

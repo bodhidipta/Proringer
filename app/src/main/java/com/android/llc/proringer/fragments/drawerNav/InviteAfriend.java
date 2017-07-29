@@ -36,7 +36,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class InviteAfriend extends Fragment {
     ProLightEditText first_name, last_name, email, confirm_email;
     ProRegularTextView invited_submit;
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
 
     @Nullable
     @Override
@@ -94,17 +94,17 @@ public class InviteAfriend extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDia=new ProgressDialog(getActivity());
-                        pgDia.setTitle("Invite Friend");
-                        pgDia.setMessage("Inviting friend. Please wait.");
-                        pgDia.setCancelable(false);
-                        pgDia.show();
+                        pgDialog=new ProgressDialog(getActivity());
+                        pgDialog.setTitle("Invite Friend");
+                        pgDialog.setMessage("Inviting friend. Please wait.");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDia!=null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog!=null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Invite Friend")
                                 .setMessage("" + message)
@@ -121,8 +121,8 @@ public class InviteAfriend extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDia!=null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog!=null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Invite Friend Error")
                                 .setMessage("" + error)

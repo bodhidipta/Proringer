@@ -53,13 +53,13 @@ import org.json.JSONException;
 public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
 
 
     public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
         this.jsonInfoArray = jsonInfoArray;
-        pgDia = new ProgressDialog(mcontext);
+        pgDialog = new ProgressDialog(mcontext);
     }
 
     @Override
@@ -228,10 +228,10 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                                                                                             @Override
                                                                                             public void onStart() {
 
-                                                                                                pgDia.setTitle("Delete Favorite pros");
-                                                                                                pgDia.setMessage("It's deleting.Please wait....");
-                                                                                                pgDia.setCancelable(false);
-                                                                                                pgDia.show();
+                                                                                                pgDialog.setTitle("Delete Favorite pros");
+                                                                                                pgDialog.setMessage("It's deleting.Please wait....");
+                                                                                                pgDialog.setCancelable(false);
+                                                                                                pgDialog.show();
 
                                                                                             }
 
@@ -240,8 +240,8 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
 
                                                                                                 notifyDataSetChanged();
 
-                                                                                                if (pgDia != null && pgDia.isShowing())
-                                                                                                    pgDia.dismiss();
+                                                                                                if (pgDialog != null && pgDialog.isShowing())
+                                                                                                    pgDialog.dismiss();
 
 
                                                                                                 new AlertDialog.Builder(mcontext)
@@ -259,8 +259,8 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
 
                                                                                             @Override
                                                                                             public void onError(String error) {
-                                                                                                if (pgDia != null && pgDia.isShowing())
-                                                                                                    pgDia.dismiss();
+                                                                                                if (pgDialog != null && pgDialog.isShowing())
+                                                                                                    pgDialog.dismiss();
 
                                                                                                 new AlertDialog.Builder(mcontext)
                                                                                                         .setTitle("Delete Fav pros")
@@ -302,10 +302,10 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                                                                                 @Override
                                                                                 public void onStart() {
 
-                                                                                    pgDia.setTitle("Add Favorite pros");
-                                                                                    pgDia.setMessage("It's adding.Please wait....");
-                                                                                    pgDia.setCancelable(false);
-                                                                                    pgDia.show();
+                                                                                    pgDialog.setTitle("Add Favorite pros");
+                                                                                    pgDialog.setMessage("It's adding.Please wait....");
+                                                                                    pgDialog.setCancelable(false);
+                                                                                    pgDialog.show();
 
                                                                                 }
 
@@ -314,8 +314,8 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
 
                                                                                     notifyDataSetChanged();
 
-                                                                                    if (pgDia != null && pgDia.isShowing())
-                                                                                        pgDia.dismiss();
+                                                                                    if (pgDialog != null && pgDialog.isShowing())
+                                                                                        pgDialog.dismiss();
 
 
                                                                                     new AlertDialog.Builder(mcontext)
@@ -333,8 +333,8 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
 
                                                                                 @Override
                                                                                 public void onError(String error) {
-                                                                                    if (pgDia != null && pgDia.isShowing())
-                                                                                        pgDia.dismiss();
+                                                                                    if (pgDialog != null && pgDialog.isShowing())
+                                                                                        pgDialog.dismiss();
 
                                                                                     new AlertDialog.Builder(mcontext)
                                                                                             .setTitle("Add Fav pros")

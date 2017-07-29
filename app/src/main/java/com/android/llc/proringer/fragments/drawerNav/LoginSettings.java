@@ -43,7 +43,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class LoginSettings extends Fragment {
     private ProRegularTextView current_email, update_email, change_password;
     private ProLightEditText new_email, confirm_new_email, current_password, new_password, confirm_new_password;
-    private ProgressDialog prgress = null;
+    private ProgressDialog pgDialog = null;
     private boolean isShown = false;
 
     @Nullable
@@ -123,17 +123,17 @@ public class LoginSettings extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        prgress = new ProgressDialog(getActivity());
-                        prgress.setTitle("Change Email");
-                        prgress.setMessage("Updating new email address. Please wait.");
-                        prgress.setCancelable(false);
-                        prgress.show();
+                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog.setTitle("Change Email");
+                        pgDialog.setMessage("Updating new email address. Please wait.");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (prgress != null && prgress.isShowing())
-                            prgress.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
 
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Change Email")
@@ -154,8 +154,8 @@ public class LoginSettings extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (prgress != null && prgress.isShowing())
-                            prgress.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
 
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Change Email Error")
@@ -209,17 +209,17 @@ public class LoginSettings extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        prgress = new ProgressDialog(getActivity());
-                        prgress.setTitle("Change Password");
-                        prgress.setMessage("Updating new password. Please wait.");
-                        prgress.setCancelable(false);
-                        prgress.show();
+                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog.setTitle("Change Password");
+                        pgDialog.setMessage("Updating new password. Please wait.");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (prgress != null && prgress.isShowing())
-                            prgress.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
 
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Change Password")
@@ -239,8 +239,8 @@ public class LoginSettings extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (prgress != null && prgress.isShowing())
-                            prgress.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
 
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Change Password Error")

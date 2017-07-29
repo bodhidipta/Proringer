@@ -20,7 +20,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
 public class ContactUs extends Fragment {
     ProLightEditText first_name, last_name, email, phonenumber, contact_info;
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
 
     @Nullable
     @Override
@@ -83,17 +83,17 @@ public class ContactUs extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDia = new ProgressDialog(getActivity());
-                        pgDia.setTitle("Contact Us");
-                        pgDia.setMessage("Please wait....");
-                        pgDia.setCancelable(false);
-                        pgDia.show();
+                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog.setTitle("Contact Us");
+                        pgDialog.setMessage("Please wait....");
+                        pgDialog.setCancelable(false);
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDia != null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Contact Us")
                                 .setMessage("" + message)
@@ -110,8 +110,8 @@ public class ContactUs extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDia != null && pgDia.isShowing())
-                            pgDia.dismiss();
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Contact Us Error")
                                 .setMessage("" + error)

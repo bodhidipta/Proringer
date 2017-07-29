@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
  */
 
 public class MyProjectDetails extends Fragment {
-    ProgressDialog dialog;
+    ProgressDialog pgDialog;
     ProRegularTextView tv_posted_in, tv_project, tv_service, tv_type, tv_property, tv_status, tv_start, img_description;
     ImageView img_project;
     LinearLayout LL_Active;
@@ -171,10 +171,10 @@ public class MyProjectDetails extends Fragment {
                                                                            @Override
                                                                            public void onStart() {
 
-                                                                               dialog.setTitle("My project");
-                                                                               dialog.setMessage("It's deleting.Please wait....");
-                                                                               dialog.setCancelable(false);
-                                                                               dialog.show();
+                                                                               pgDialog.setTitle("My project");
+                                                                               pgDialog.setMessage("It's deleting.Please wait....");
+                                                                               pgDialog.setCancelable(false);
+                                                                               pgDialog.show();
 
                                                                            }
 
@@ -184,8 +184,8 @@ public class MyProjectDetails extends Fragment {
 //                                                                          itemList.remove(position);
 //                                                                          notifyItemRemoved(position);
 
-                                                                               if (dialog != null && dialog.isShowing())
-                                                                                   dialog.dismiss();
+                                                                               if (pgDialog != null && pgDialog.isShowing())
+                                                                                   pgDialog.dismiss();
 
 
                                                                                new AlertDialog.Builder(getActivity())
@@ -205,8 +205,8 @@ public class MyProjectDetails extends Fragment {
 
                                                                            @Override
                                                                            public void onError(String error) {
-                                                                               if (dialog != null && dialog.isShowing())
-                                                                                   dialog.dismiss();
+                                                                               if (pgDialog != null && pgDialog.isShowing())
+                                                                                   pgDialog.dismiss();
 
                                                                                new AlertDialog.Builder(getActivity())
                                                                                        .setTitle("My project deleting Error")
