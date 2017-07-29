@@ -96,7 +96,7 @@ public class ProServiceApiHelper {
 
     private String proslistingAPI = "http://esolz.co.in/lab6/proringer_latest/app_serch_result_project?user_id=";
 
-    private String favouriteProAdddelete = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pro_adddelete";
+    private String favouriteProAdddeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pro_adddelete";
 
 
 
@@ -649,7 +649,7 @@ public class ProServiceApiHelper {
     }
 
     /**
-     * Update useer information and save on local db
+     * Update user information and save on local db
      *
      * @param callback
      * @param params
@@ -2523,6 +2523,80 @@ public class ProServiceApiHelper {
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
+    }
+
+
+    /**
+     * app favourite pro add or delete
+     *
+     * @param callback
+     * @param params
+     */
+    public void favouriteProAddDelete(final getApiProcessCallback callback, String... params) {
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Logger.printMessage("user_id",":-"+ProApplication.getInstance().getUserId());
+                        Logger.printMessage("pro_id",":-"+params[0]);
+                        Logger.printMessage("updateUserInformationAPI",favouriteProAdddeleteAPI);
+
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", ProApplication.getInstance().getUserId())
+                                .add("pro_id", params[0])
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .url(favouriteProAdddeleteAPI)
+                                .post(requestBody)
+                                .build();
+                        Response response = okHttpClient.newCall(request).execute();
+                        String responseString = response.body().string();
+                        Logger.printMessage("UpdateUserInfo", responseString);
+                        JSONObject respo = new JSONObject(responseString);
+                        if (respo.getBoolean("response")) {
+                            return respo.getString("message");
+                        } else {
+                            exception = respo.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(final String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        try {
+                            callback.onComplete(s);
+                        } catch (Exception io) {
+                            callback.onError(io.getMessage());
+                        }
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else
+            callback.onError("No internet connection found. Please check your internet connection.");
     }
 
 
