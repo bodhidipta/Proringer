@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
