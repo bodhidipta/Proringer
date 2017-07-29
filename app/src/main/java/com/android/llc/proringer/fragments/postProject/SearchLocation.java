@@ -167,9 +167,9 @@ public class SearchLocation extends Fragment {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog(getActivity());
-                pgDialog.setTitle("FavPros");
+                pgDialog.setTitle("Get Current Location zipcode");
                 pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting FavPros list. Please wait.");
+                pgDialog.setMessage("Loading. Please wait.");
                 pgDialog.show();
             }
 
