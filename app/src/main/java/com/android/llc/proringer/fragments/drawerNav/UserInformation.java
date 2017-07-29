@@ -255,9 +255,9 @@ public class UserInformation extends Fragment {
             // Removes default background.
             popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-            View dailogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_place, null);
+            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_place, null);
 
-            RecyclerView rcv_ = (RecyclerView) dailogView.findViewById(R.id.rcv_);
+            RecyclerView rcv_ = (RecyclerView) dialogView.findViewById(R.id.rcv_);
             rcv_.setLayoutManager(new LinearLayoutManager(getActivity()));
 
             placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog(getActivity(), PredictionsJsonArray, new onOptionSelected() {
@@ -350,7 +350,7 @@ public class UserInformation extends Fragment {
             popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 
             // set the list view as pop up window content
-            popupWindow.setContentView(dailogView);
+            popupWindow.setContentView(dialogView);
             popupWindow.showAsDropDown(v, -5, 0);
 
 
