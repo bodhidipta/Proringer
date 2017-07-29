@@ -166,7 +166,7 @@ public class LandScreenActivity extends AppCompatActivity{
 
                         closeDrawer();
                         ProApplication.getInstance().logOut();
-                        startActivity(new Intent(LandScreenActivity.this, GetStarted.class));
+                        startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
                         finish();
                         break;
                 }
@@ -540,7 +540,7 @@ public class LandScreenActivity extends AppCompatActivity{
      * Transact post project activity
      */
     private void transactCreateProject() {
-        startActivity(new Intent(LandScreenActivity.this, ActivityPostProject.class));
+        startActivity(new Intent(LandScreenActivity.this, PostProjectActivity.class));
     }
 
     /**

@@ -35,7 +35,7 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class IndevidualMessage extends AppCompatActivity {
+public class IndividualMessageActivity extends AppCompatActivity {
     RecyclerView chat_list;
 
     @Override

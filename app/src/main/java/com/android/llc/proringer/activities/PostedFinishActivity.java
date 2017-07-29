@@ -1,12 +1,10 @@
 package com.android.llc.proringer.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -121,7 +119,7 @@ public class PostedFinishActivity extends AppCompatActivity {
         findViewById(R.id.confirm_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PostedFinishActivity.this,LogIn.class));
+                startActivity(new Intent(PostedFinishActivity.this,LogInActivity.class));
                 finish();
             }
         });

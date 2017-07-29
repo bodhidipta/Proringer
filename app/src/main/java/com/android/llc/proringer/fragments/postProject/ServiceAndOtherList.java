@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
@@ -43,8 +43,8 @@ public class ServiceAndOtherList extends Fragment {
         service_list = (RecyclerView) view.findViewById(R.id.service_list);
         service_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        if (((ActivityPostProject) getActivity()).isForth)
-            selectService(((ActivityPostProject) getActivity()).selectedCategory.getId());
+        if (((PostProjectActivity) getActivity()).isForth)
+            selectService(((PostProjectActivity) getActivity()).selectedCategory.getId());
         else {
             step = 5;
             performBack();
@@ -59,7 +59,7 @@ public class ServiceAndOtherList extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                ((ActivityPostProject) getActivity()).serviceListing = listdata;
+                ((PostProjectActivity) getActivity()).serviceListing = listdata;
                 initAdapter(listdata);
 
             }
@@ -101,83 +101,83 @@ public class ServiceAndOtherList extends Fragment {
                 new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
-                        ((ActivityPostProject) getActivity()).isForth=true;
+                        ((PostProjectActivity) getActivity()).isForth=true;
                         if (step == 0) {
                             step++;
 
-                            ((ActivityPostProject) getActivity()).selectedService = data;
-                            ((ActivityPostProject) getActivity()).increaseStep();
+                            ((PostProjectActivity) getActivity()).selectedService = data;
+                            ((PostProjectActivity) getActivity()).increaseStep();
 
-                            ((ActivityPostProject) getActivity()).selectedServiceList = new LinkedList<>();
+                            ((PostProjectActivity) getActivity()).selectedServiceList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("", "", "Repair", "");
                             ProCategoryData data2 = new ProCategoryData("", "", "Installation", "");
                             ProCategoryData data3 = new ProCategoryData("", "", "Others", "");
-                            ((ActivityPostProject) getActivity()).selectedServiceList.add(data1);
-                            ((ActivityPostProject) getActivity()).selectedServiceList.add(data2);
-                            ((ActivityPostProject) getActivity()).selectedServiceList.add(data3);
+                            ((PostProjectActivity) getActivity()).selectedServiceList.add(data1);
+                            ((PostProjectActivity) getActivity()).selectedServiceList.add(data2);
+                            ((PostProjectActivity) getActivity()).selectedServiceList.add(data3);
 
-                            adapter.updateList(((ActivityPostProject) getActivity()).selectedServiceList);
+                            adapter.updateList(((PostProjectActivity) getActivity()).selectedServiceList);
 
                         } else if (step == 1) {
                             step++;
-                            ((ActivityPostProject) getActivity()).service_look_type = data.getCategory_name();
-                            ((ActivityPostProject) getActivity()).increaseStep();
+                            ((PostProjectActivity) getActivity()).service_look_type = data.getCategory_name();
+                            ((PostProjectActivity) getActivity()).increaseStep();
 
-                            ((ActivityPostProject) getActivity()).service_look_typeList = new LinkedList<>();
+                            ((PostProjectActivity) getActivity()).service_look_typeList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("4", "", "Single Family Home", "");
                             ProCategoryData data2 = new ProCategoryData("5", "", "Condominium", "");
                             ProCategoryData data3 = new ProCategoryData("6", "", "Townhome", "");
                             ProCategoryData data4 = new ProCategoryData("7", "", "Multi-Family", "");
                             ProCategoryData data5 = new ProCategoryData("1", "", "Commercial", "");
-                            ((ActivityPostProject) getActivity()).service_look_typeList.add(data1);
-                            ((ActivityPostProject) getActivity()).service_look_typeList.add(data2);
-                            ((ActivityPostProject) getActivity()).service_look_typeList.add(data3);
-                            ((ActivityPostProject) getActivity()).service_look_typeList.add(data4);
-                            ((ActivityPostProject) getActivity()).service_look_typeList.add(data5);
+                            ((PostProjectActivity) getActivity()).service_look_typeList.add(data1);
+                            ((PostProjectActivity) getActivity()).service_look_typeList.add(data2);
+                            ((PostProjectActivity) getActivity()).service_look_typeList.add(data3);
+                            ((PostProjectActivity) getActivity()).service_look_typeList.add(data4);
+                            ((PostProjectActivity) getActivity()).service_look_typeList.add(data5);
 
-                            adapter.updateList(((ActivityPostProject) getActivity()).service_look_typeList);
+                            adapter.updateList(((PostProjectActivity) getActivity()).service_look_typeList);
                         } else if (step == 2) {
                             step++;
 
-                            ((ActivityPostProject) getActivity()).property_type = data.getId();
-                            ((ActivityPostProject) getActivity()).increaseStep();
+                            ((PostProjectActivity) getActivity()).property_type = data.getId();
+                            ((PostProjectActivity) getActivity()).increaseStep();
 
-                            ((ActivityPostProject) getActivity()).property_typeList = new LinkedList<>();
+                            ((PostProjectActivity) getActivity()).property_typeList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("", "", "Ready to hire", "");
                             ProCategoryData data2 = new ProCategoryData("", "", "Planning and Budgeting", "");
-                            ((ActivityPostProject) getActivity()).property_typeList.add(data1);
-                            ((ActivityPostProject) getActivity()).property_typeList.add(data2);
-                            adapter.updateList(((ActivityPostProject) getActivity()).property_typeList);
+                            ((PostProjectActivity) getActivity()).property_typeList.add(data1);
+                            ((PostProjectActivity) getActivity()).property_typeList.add(data2);
+                            adapter.updateList(((PostProjectActivity) getActivity()).property_typeList);
 
                         } else if (step == 3) {
                             step++;
-                            ((ActivityPostProject) getActivity()).project_stage = data.getCategory_name();
-                            ((ActivityPostProject) getActivity()).increaseStep();
+                            ((PostProjectActivity) getActivity()).project_stage = data.getCategory_name();
+                            ((PostProjectActivity) getActivity()).increaseStep();
 
-                            ((ActivityPostProject) getActivity()).project_stageList = new LinkedList<>();
+                            ((PostProjectActivity) getActivity()).project_stageList = new LinkedList<>();
                             ProCategoryData data1 = new ProCategoryData("1", "", "Timing Is Flexible", "");
                             ProCategoryData data2 = new ProCategoryData("2", "", "Within 1 Week", "");
                             ProCategoryData data3 = new ProCategoryData("3", "", "1-2 Week", "");
                             ProCategoryData data4 = new ProCategoryData("4", "", "More Than 2 Weeks", "");
                             ProCategoryData data5 = new ProCategoryData("5", "", "Emergency", "");
-                            ((ActivityPostProject) getActivity()).project_stageList.add(data1);
-                            ((ActivityPostProject) getActivity()).project_stageList.add(data2);
-                            ((ActivityPostProject) getActivity()).project_stageList.add(data3);
-                            ((ActivityPostProject) getActivity()).project_stageList.add(data4);
-                            ((ActivityPostProject) getActivity()).project_stageList.add(data5);
+                            ((PostProjectActivity) getActivity()).project_stageList.add(data1);
+                            ((PostProjectActivity) getActivity()).project_stageList.add(data2);
+                            ((PostProjectActivity) getActivity()).project_stageList.add(data3);
+                            ((PostProjectActivity) getActivity()).project_stageList.add(data4);
+                            ((PostProjectActivity) getActivity()).project_stageList.add(data5);
 
-                            adapter.updateList(((ActivityPostProject) getActivity()).project_stageList
+                            adapter.updateList(((PostProjectActivity) getActivity()).project_stageList
                             );
                         } else if (step == 4) {
                             step++;
-                            ((ActivityPostProject) getActivity()).timeframe_id = data.getId();
-                            ((ActivityPostProject) getActivity()).increaseStep();
+                            ((PostProjectActivity) getActivity()).timeframe_id = data.getId();
+                            ((PostProjectActivity) getActivity()).increaseStep();
 
 
                             /**
                              * fragment calling
                              */
-                            ((ActivityPostProject) getActivity()).changeFragmentNext(3);
+                            ((PostProjectActivity) getActivity()).changeFragmentNext(3);
 
                         }
                     }
@@ -188,23 +188,23 @@ public class ServiceAndOtherList extends Fragment {
     public void performBack() {
         switch (step) {
             case 1:
-                adapter.updateList(((ActivityPostProject) getActivity()).serviceListing);
+                adapter.updateList(((PostProjectActivity) getActivity()).serviceListing);
                 step--;
                 break;
             case 2:
-                adapter.updateList(((ActivityPostProject) getActivity()).selectedServiceList);
+                adapter.updateList(((PostProjectActivity) getActivity()).selectedServiceList);
                 step--;
                 break;
             case 3:
-                adapter.updateList(((ActivityPostProject) getActivity()).service_look_typeList);
+                adapter.updateList(((PostProjectActivity) getActivity()).service_look_typeList);
                 step--;
                 break;
             case 4:
-                adapter.updateList(((ActivityPostProject) getActivity()).property_typeList);
+                adapter.updateList(((PostProjectActivity) getActivity()).property_typeList);
                 step--;
                 break;
             case 5:
-                initAdapter(((ActivityPostProject) getActivity()).project_stageList);
+                initAdapter(((PostProjectActivity) getActivity()).project_stageList);
                 step--;
                 break;
         }

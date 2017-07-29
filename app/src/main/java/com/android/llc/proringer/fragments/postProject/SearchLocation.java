@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
@@ -103,12 +103,12 @@ public class SearchLocation extends Fragment {
                 /**
                  * fragment calling
                  */
-                if (((ActivityPostProject) getActivity()).selectedAddressData == null) {
+                if (((PostProjectActivity) getActivity()).selectedAddressData == null) {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
                 } else {
-                    ((ActivityPostProject) getActivity()).closeKeypad();
-                    ((ActivityPostProject) getActivity()).increaseStep();
-                    ((ActivityPostProject) getActivity()).changeFragmentNext(6);
+                    ((PostProjectActivity) getActivity()).closeKeypad();
+                    ((PostProjectActivity) getActivity()).increaseStep();
+                    ((PostProjectActivity) getActivity()).changeFragmentNext(6);
                 }
             }
         });
@@ -132,7 +132,7 @@ public class SearchLocation extends Fragment {
                         zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
                             public void onSelect(int pos, AddressData data) {
-                                ((ActivityPostProject) getActivity()).selectedAddressData = data;
+                                ((PostProjectActivity) getActivity()).selectedAddressData = data;
                             }
                         });
 

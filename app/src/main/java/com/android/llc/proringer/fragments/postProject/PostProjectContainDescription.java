@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
 /**
@@ -38,10 +38,10 @@ public class PostProjectContainDescription extends Fragment {
                     project_description_text.setError("Please enter project description");
                 }
                 else {
-                    ((ActivityPostProject) getActivity()).closeKeypad();
-                    ((ActivityPostProject) getActivity()).increaseStep();
-                    ((ActivityPostProject) getActivity()).project_description_text=project_description_text.getText().toString().trim();
-                    ((ActivityPostProject) getActivity()).changeFragmentNext(5);
+                    ((PostProjectActivity) getActivity()).closeKeypad();
+                    ((PostProjectActivity) getActivity()).increaseStep();
+                    ((PostProjectActivity) getActivity()).project_description_text=project_description_text.getText().toString().trim();
+                    ((PostProjectActivity) getActivity()).changeFragmentNext(5);
                 }
             }
         });

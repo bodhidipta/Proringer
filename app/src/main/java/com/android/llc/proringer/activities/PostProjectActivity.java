@@ -52,7 +52,7 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class ActivityPostProject extends AppCompatActivity {
+public class PostProjectActivity extends AppCompatActivity {
 
     public FragmentManager fragmentManager = null;
 
@@ -210,7 +210,7 @@ public class ActivityPostProject extends AppCompatActivity {
 
 
     private void showErrorDialog(String title, String message) {
-        new AlertDialog.Builder(ActivityPostProject.this)
+        new AlertDialog.Builder(PostProjectActivity.this)
                 .setTitle("" + title)
                 .setMessage("" + message)
                 .setCancelable(false)
@@ -250,11 +250,11 @@ public class ActivityPostProject extends AppCompatActivity {
         Logger.printMessage("@registrationPostPro","last_name:"+last_name);
         Logger.printMessage("@registrationPostPro","email:"+email);
         Logger.printMessage("@registrationPostPro","confirm_password:"+confirm_password);
-        ProServiceApiHelper.getInstance(ActivityPostProject.this).postProject(
+        ProServiceApiHelper.getInstance(PostProjectActivity.this).postProject(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog(ActivityPostProject.this);
+                        pgDialog = new ProgressDialog(PostProjectActivity.this);
                         pgDialog.setTitle("Post Project");
                         pgDialog.setMessage("Please wait ..");
                         pgDialog.setCancelable(false);

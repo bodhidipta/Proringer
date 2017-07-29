@@ -52,7 +52,7 @@ import java.util.Date;
  * -->
  */
 
-public class GetStarted extends AppCompatActivity implements
+public class GetStartedActivity extends AppCompatActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -64,7 +64,7 @@ public class GetStarted extends AppCompatActivity implements
     private ProRegularTextView get_started, sign_in;
 
 
-    private static final String TAG = "GetStarted";
+    private static final String TAG = "GetStartedActivity";
     private static final long INTERVAL = 1000 * 60;//// Update location every 1 minute
     private static final long FASTEST_INTERVAL = 1000 * 10;
     LocationRequest mLocationRequest;
@@ -111,13 +111,13 @@ public class GetStarted extends AppCompatActivity implements
         get_started.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GetStarted.this, SignUp.class));
+                startActivity(new Intent(GetStartedActivity.this, SignUpActivity.class));
             }
         });
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GetStarted.this, LogIn.class));
+                startActivity(new Intent(GetStartedActivity.this, LogInActivity.class));
             }
         });
 
@@ -144,7 +144,7 @@ public class GetStarted extends AppCompatActivity implements
         findViewById(R.id.post_project).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GetStarted.this, ActivityPostProject.class));
+                startActivity(new Intent(GetStartedActivity.this, PostProjectActivity.class));
             }
         });
 
@@ -229,7 +229,7 @@ public class GetStarted extends AppCompatActivity implements
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(GetStarted.this,
+                                ActivityCompat.requestPermissions(GetStartedActivity.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
                             }
@@ -345,7 +345,7 @@ public class GetStarted extends AppCompatActivity implements
             String lat = String.valueOf(mCurrentLocation.getLatitude());
             String lng = String.valueOf(mCurrentLocation.getLongitude());
 
-            ProServiceApiHelper.getInstance(GetStarted.this).setCurrentLatLng(lat, lng);
+            ProServiceApiHelper.getInstance(GetStartedActivity.this).setCurrentLatLng(lat, lng);
 
             Logger.printMessage("updateUI", "At Time: " + mLastUpdateTime + "\n" +
                     "Latitude: " + lat + "\n" +

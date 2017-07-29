@@ -1,21 +1,13 @@
 package com.android.llc.proringer.viewsmod;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.LogIn;
-import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProBoldTextView;
 
 /**

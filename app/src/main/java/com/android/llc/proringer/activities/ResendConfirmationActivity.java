@@ -16,7 +16,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * Created by su on 7/19/17.
  */
 
-public class ResendConfirmation extends AppCompatActivity {
+public class ResendConfirmationActivity extends AppCompatActivity {
     ProRegularTextView tv_resend;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class ResendConfirmation extends AppCompatActivity {
         tv_resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ResendConfirmation.this, ContactUsActivity.class));
+                startActivity(new Intent(ResendConfirmationActivity.this, ContactUsActivity.class));
             }
         });
     }

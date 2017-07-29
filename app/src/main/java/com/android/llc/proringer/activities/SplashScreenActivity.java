@@ -33,7 +33,7 @@ import com.android.llc.proringer.appconstant.ProApplication;
  * -->
  */
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +62,10 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 if (ProApplication.getInstance().getUserId().equals("")) {
-                    startActivity(new Intent(SplashScreen.this, GetStarted.class));
+                    startActivity(new Intent(SplashScreenActivity.this, GetStartedActivity.class));
                     finish();
                 } else {
-                    startActivity(new Intent(SplashScreen.this, LandScreenActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, LandScreenActivity.class));
                     finish();
                 }
 

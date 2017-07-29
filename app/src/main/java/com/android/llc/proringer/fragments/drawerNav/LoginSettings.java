@@ -16,8 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.GetStarted;
-import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.activities.GetStartedActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -144,7 +143,7 @@ public class LoginSettings extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                         ProApplication.getInstance().logOut();
-                                        startActivity(new Intent(getActivity(), GetStarted.class));
+                                        startActivity(new Intent(getActivity(), GetStartedActivity.class));
                                         getActivity().finish();
                                     }
                                 })
@@ -230,7 +229,7 @@ public class LoginSettings extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                         ProApplication.getInstance().logOut();
-                                        startActivity(new Intent(getActivity(), GetStarted.class));
+                                        startActivity(new Intent(getActivity(), GetStartedActivity.class));
                                         getActivity().finish();
                                     }
                                 })

@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectCategoryListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -107,13 +107,13 @@ public class CateGoryList extends Fragment {
                 gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
-                        ((ActivityPostProject) getActivity()).selectedCategory = data;
-                        ((ActivityPostProject) getActivity()).setHeaderCategory();
-                        ((ActivityPostProject) getActivity()).increaseStep();
+                        ((PostProjectActivity) getActivity()).selectedCategory = data;
+                        ((PostProjectActivity) getActivity()).setHeaderCategory();
+                        ((PostProjectActivity) getActivity()).increaseStep();
                         /**
                          * fragment calling
                          */
-                        ((ActivityPostProject) getActivity()).changeFragmentNext(2);
+                        ((PostProjectActivity) getActivity()).changeFragmentNext(2);
 
                     }
                 });
@@ -176,13 +176,13 @@ public class CateGoryList extends Fragment {
                                 Logger.printMessage("Category_image###", "" + listdataMain.get(p).getCategory_image());
                                 Logger.printMessage("Parent_id###", "" + listdataMain.get(p).getParent_id());
 
-                                ((ActivityPostProject) getActivity()).selectedCategory = listdataMain.get(p);
-                                ((ActivityPostProject) getActivity()).setHeaderCategory();
-                                ((ActivityPostProject) getActivity()).increaseStep();
+                                ((PostProjectActivity) getActivity()).selectedCategory = listdataMain.get(p);
+                                ((PostProjectActivity) getActivity()).setHeaderCategory();
+                                ((PostProjectActivity) getActivity()).increaseStep();
                                 /**
                                  * fragment calling
                                  */
-                                ((ActivityPostProject) getActivity()).changeFragmentNext(2);
+                                ((PostProjectActivity) getActivity()).changeFragmentNext(2);
                                 break;
                             }
                         }
@@ -280,13 +280,13 @@ public class CateGoryList extends Fragment {
 //                    gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdataMain, new PostProjectCategoryGridAdapter.onClickItem() {
 //                        @Override
 //                        public void onSelectItemClick(int position, ProCategoryData data) {
-//                            ((ActivityPostProject) getActivity()).selectedCategory = data;
-//                            ((ActivityPostProject) getActivity()).setHeaderCategory();
-//                            ((ActivityPostProject) getActivity()).increaseStep();
+//                            ((PostProjectActivity) getActivity()).selectedCategory = data;
+//                            ((PostProjectActivity) getActivity()).setHeaderCategory();
+//                            ((PostProjectActivity) getActivity()).increaseStep();
 //                            /**
 //                             * fragment calling
 //                             */
-//                            ((ActivityPostProject) getActivity()).changeFragmentNext(2);
+//                            ((PostProjectActivity) getActivity()).changeFragmentNext(2);
 //
 //                        }
 //                    });

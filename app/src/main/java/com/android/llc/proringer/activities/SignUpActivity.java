@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -22,7 +21,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -50,7 +48,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  * -->
  */
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private ProBoldTextView sign_in;
     private RelativeLayout sign_up_with_facebook;
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
@@ -95,7 +93,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(SignUp.this, TermsPrivacyActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, TermsPrivacyActivity.class);
                 intent.putExtra("value", "term");
                 startActivity(intent);
 
@@ -107,7 +105,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(SignUp.this, TermsPrivacyActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, TermsPrivacyActivity.class);
                 intent.putExtra("value", "policy");
                 startActivity(intent);
             }
@@ -188,7 +186,7 @@ public class SignUp extends AppCompatActivity {
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUp.this, LogIn.class));
+                startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
             }
         });
 
@@ -202,7 +200,7 @@ public class SignUp extends AppCompatActivity {
         findViewById(R.id.confirm_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignUp.this, LogIn.class);
+                Intent intent=new Intent(SignUpActivity.this, LogInActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -269,10 +267,10 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void callRegisteration() {
-        ProServiceApiHelper.getInstance(SignUp.this).getUserRegistered(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(SignUpActivity.this).getUserRegistered(new ProServiceApiHelper.getApiProcessCallback() {
                                                                            @Override
                                                                            public void onStart() {
-                                                                               pgDialog = new ProgressDialog(SignUp.this);
+                                                                               pgDialog = new ProgressDialog(SignUpActivity.this);
                                                                                pgDialog.setTitle("Registering");
                                                                                pgDialog.setMessage("Please wait ..");
                                                                                pgDialog.setCancelable(false);
@@ -318,7 +316,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void showDialog(String title, String message) {
-        new AlertDialog.Builder(SignUp.this)
+        new AlertDialog.Builder(SignUpActivity.this)
                 .setTitle("" + title)
                 .setMessage("" + message)
                 .setCancelable(false)
@@ -333,7 +331,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void showErrorDialog(String title, String message) {
-        new AlertDialog.Builder(SignUp.this)
+        new AlertDialog.Builder(SignUpActivity.this)
                 .setTitle("" + title)
                 .setMessage("" + message)
                 .setCancelable(false)

@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.LoginFilter;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,7 +15,6 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
-import com.android.llc.proringer.viewsmod.textview.ProBoldTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 
 /**
@@ -37,7 +35,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  * -->
  */
 
-public class LogIn extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
     private ProSemiBoldTextView sign_up;
     private ProSemiBoldTextView log_in;
     private ProLightEditText email, password;
@@ -57,7 +55,7 @@ public class LogIn extends AppCompatActivity {
         findViewById(R.id.forget_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LogIn.this, ForgetPassword.class));
+                startActivity(new Intent(LogInActivity.this, ForgetPasswordActivity.class));
             }
         });
         sign_up = (ProSemiBoldTextView) findViewById(R.id.sign_up);
@@ -73,11 +71,11 @@ public class LogIn extends AppCompatActivity {
                 } else if (password.getText().toString().trim().equals("")) {
                     password.setError("Please enter password.");
                 } else {
-                    ProServiceApiHelper.getInstance(LogIn.this).getUserLoggedIn(
+                    ProServiceApiHelper.getInstance(LogInActivity.this).getUserLoggedIn(
                             new ProServiceApiHelper.getApiProcessCallback() {
                                 @Override
                                 public void onStart() {
-                                    pgDialog = new ProgressDialog(LogIn.this);
+                                    pgDialog = new ProgressDialog(LogInActivity.this);
                                     pgDialog.setTitle("Signing In");
                                     pgDialog.setMessage("Please wait ..");
                                     pgDialog.setCancelable(false);
@@ -91,7 +89,7 @@ public class LogIn extends AppCompatActivity {
 
                                     ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
 
-                                    Intent intent=new Intent(LogIn.this, LandScreenActivity.class);
+                                    Intent intent=new Intent(LogInActivity.this, LandScreenActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                     finish();
@@ -101,7 +99,7 @@ public class LogIn extends AppCompatActivity {
                                 public void onError(String error) {
                                     if (pgDialog != null && pgDialog.isShowing())
                                         pgDialog.dismiss();
-                                    new AlertDialog.Builder(LogIn.this)
+                                    new AlertDialog.Builder(LogInActivity.this)
                                             .setTitle("Sign in error")
                                             .setMessage("" + error)
                                             .setCancelable(false)
@@ -130,7 +128,7 @@ public class LogIn extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LogIn.this, SignUp.class));
+                startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
             }
         });
 
@@ -145,7 +143,7 @@ public class LogIn extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(GetStarted.RESULT_CANCELED);
+        setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
     }
 }

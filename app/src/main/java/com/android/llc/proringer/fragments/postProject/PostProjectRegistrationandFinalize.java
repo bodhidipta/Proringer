@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ActivityPostProject;
+import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.activities.PostedFinishActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -70,12 +70,12 @@ public class PostProjectRegistrationandFinalize extends Fragment {
             public void onClick(View v) {
                 if (validateRegistration()) {
 
-                    ((ActivityPostProject) getActivity()).first_name = first_name.getText().toString().trim();
-                    ((ActivityPostProject) getActivity()).last_name = last_name.getText().toString().trim();
-                    ((ActivityPostProject) getActivity()).email = email.getText().toString().trim();
-                    ((ActivityPostProject) getActivity()).confirm_password = confirm_password.getText().toString().trim();
+                    ((PostProjectActivity) getActivity()).first_name = first_name.getText().toString().trim();
+                    ((PostProjectActivity) getActivity()).last_name = last_name.getText().toString().trim();
+                    ((PostProjectActivity) getActivity()).email = email.getText().toString().trim();
+                    ((PostProjectActivity) getActivity()).confirm_password = confirm_password.getText().toString().trim();
                     synchronized (new Object()){
-                        ((ActivityPostProject) getActivity()).completePostProject();
+                        ((PostProjectActivity) getActivity()).completePostProject();
                     }
 
                 }
