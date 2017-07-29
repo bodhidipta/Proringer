@@ -39,11 +39,11 @@ import org.json.JSONException;
 public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavoriteListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-    ProgressDialog pgDia;
+    ProgressDialog pgDialog;
     public SearchFavoriteListAdapter(Context mcontext, JSONArray jsonInfoArray) {
         this.mcontext = mcontext;
         this.jsonInfoArray=jsonInfoArray;
-        pgDia = new ProgressDialog(mcontext);
+        pgDialog = new ProgressDialog(mcontext);
     }
 
     @Override
@@ -207,10 +207,10 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
                                                                                             @Override
                                                                                             public void onStart() {
 
-                                                                                                pgDia.setTitle("Delete Favorite pros");
-                                                                                                pgDia.setMessage("It's deleting.Please wait....");
-                                                                                                pgDia.setCancelable(false);
-                                                                                                pgDia.show();
+                                                                                                pgDialog.setTitle("Delete Favorite pros");
+                                                                                                pgDialog.setMessage("It's deleting.Please wait....");
+                                                                                                pgDialog.setCancelable(false);
+                                                                                                pgDialog.show();
 
                                                                                             }
 
@@ -220,8 +220,8 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
                                                                                                 jsonInfoArray.remove(pos);
                                                                                                 notifyItemRemoved(pos);
 
-                                                                                                if (pgDia != null && pgDia.isShowing())
-                                                                                                    pgDia.dismiss();
+                                                                                                if (pgDialog != null && pgDialog.isShowing())
+                                                                                                    pgDialog.dismiss();
 
 
                                                                                                 new AlertDialog.Builder(mcontext)
@@ -239,8 +239,8 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
 
                                                                                             @Override
                                                                                             public void onError(String error) {
-                                                                                                if (pgDia != null && pgDia.isShowing())
-                                                                                                    pgDia.dismiss();
+                                                                                                if (pgDialog != null && pgDialog.isShowing())
+                                                                                                    pgDialog.dismiss();
 
                                                                                                 new AlertDialog.Builder(mcontext)
                                                                                                         .setTitle("Delete Fav pros")
