@@ -2222,11 +2222,11 @@ public class ProServiceApiHelper {
 
                         Logger.printMessage("user_id",":-"+ params[0]);
                         Logger.printMessage("favorite_id",":-"+ params[1]);
-                        Logger.printMessage("favoriteProsDeleteAPI",favoriteProsDeleteAPI);
+                        Logger.printMessage("favouriteProAdddeleteAPI",favouriteProAdddeleteAPI);
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
-                                .url(favoriteProsDeleteAPI)
+                                .url(favouriteProAdddeleteAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
