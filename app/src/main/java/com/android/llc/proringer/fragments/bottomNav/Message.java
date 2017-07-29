@@ -14,6 +14,9 @@ import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.adapter.ProjectMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
+import com.android.llc.proringer.pojo.ProjectMessage;
+
+import java.util.ArrayList;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -36,6 +39,8 @@ public class Message extends Fragment {
     private RecyclerView project_message_list;
     private ProjectMessageAdapter adapter;
 
+    ArrayList<ProjectMessage> projectMessageArrayList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,11 +50,19 @@ public class Message extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        projectMessageArrayList=new ArrayList<>();
+
+
+        for (int i=0;i<15;i++){
+            ProjectMessage projectMessage=new ProjectMessage();
+            projectMessage.setIsopen(false);
+            projectMessageArrayList.add(projectMessage);
+        }
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
         project_message_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        adapter = new ProjectMessageAdapter(getActivity(), new onItemClick() {
+        adapter = new ProjectMessageAdapter(getActivity(),projectMessageArrayList, new onItemClick() {
             @Override
             public void onItemClick(int pos) {
                 ((LandScreenActivity) getActivity()).toggleToolBar(true);

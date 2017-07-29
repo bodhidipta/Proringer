@@ -9,7 +9,10 @@ import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
+import com.android.llc.proringer.pojo.ProjectMessage;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
+
+import java.util.ArrayList;
 
 /**
  * Created by bodhidipta on 12/06/17.
@@ -31,10 +34,12 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout;
 public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAdapter.ViewHolder> {
     private Context mcontext;
     private onItemClick listener;
+    ArrayList<ProjectMessage> projectMessageArrayList;
 
-    public ProjectMessageAdapter(Context mcontext, onItemClick calback) {
+    public ProjectMessageAdapter(Context mcontext,ArrayList<ProjectMessage> projectMessageArrayList, onItemClick calback) {
         this.mcontext = mcontext;
         listener = calback;
+        this.projectMessageArrayList=projectMessageArrayList;
     }
 
     @Override
@@ -60,7 +65,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
     @Override
     public int getItemCount() {
-        return 15;
+        return projectMessageArrayList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
