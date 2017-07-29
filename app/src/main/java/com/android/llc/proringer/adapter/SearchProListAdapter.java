@@ -118,6 +118,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                 holder.img_verify.setVisibility(View.GONE);
                 holder.img_verify_tick.setVisibility(View.GONE);
                 holder.tv_verify.setVisibility(View.GONE);
+                holder.linear_layout_border.setBackgroundResource(R.drawable.background_with_white_border);
             }
 
             if (jsonInfoArray.getJSONObject(position).getString("pro_status").equalsIgnoreCase("Y")) {
