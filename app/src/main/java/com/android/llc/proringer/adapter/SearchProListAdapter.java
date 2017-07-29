@@ -153,7 +153,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             @Override
             public void onClick(View view) {
                 try {
-                    callback.onItemPassed(position,jsonInfoArray.getJSONObject(position).getString("pros_id"),jsonInfoArray.getJSONObject(position).getString("pro_status"));
+                    callback.onItemPassed(jsonInfoArray.getJSONObject(position).getString("pros_id"),jsonInfoArray.getJSONObject(position).getString("pro_status"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

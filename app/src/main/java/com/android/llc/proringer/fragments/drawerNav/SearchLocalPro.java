@@ -18,6 +18,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +49,6 @@ public class SearchLocalPro extends Fragment {
     ProgressDialog pgDialog2;
     ProgressDialog pgDialog3;
     SearchProListAdapter searchProListAdapter;
-    JSONArray info_array;
 
     @Nullable
     @Override
@@ -67,7 +67,7 @@ public class SearchLocalPro extends Fragment {
     }
 
     public interface onOptionSelected {
-        void onItemPassed(int position, String value, String addorDelete);
+        void onItemPassed(String value, String addorDelete);
     }
 
 
@@ -92,13 +92,14 @@ public class SearchLocalPro extends Fragment {
 
                     if (jsonObject.has("info_array")) {
 
-                        info_array = jsonObject.getJSONArray("info_array");
+                        JSONArray info_array = jsonObject.getJSONArray("info_array");
 
                         if (searchProListAdapter == null) {
 
                             searchProListAdapter = new SearchProListAdapter(getActivity(), info_array, new onOptionSelected() {
                                 @Override
-                                public void onItemPassed(int position, String value, String addorDelete) {
+                                public void onItemPassed(String value, String addorDelete) {
+                                    Logger.printMessage("value",":--"+value);
                                     if (addorDelete.trim().equals("Y")) {
                                         deleteFavPro(value);
                                     } else {

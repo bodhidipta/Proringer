@@ -2550,13 +2550,13 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id",":-"+ProApplication.getInstance().getUserId());
-                        Logger.printMessage("pro_id",":-"+params[0]);
+                        Logger.printMessage("user_id",":-"+params[0]);
+                        Logger.printMessage("pro_id",":-"+params[1]);
                         Logger.printMessage("updateUserInformationAPI",favouriteProAdddeleteAPI);
 
                         RequestBody requestBody = new FormBody.Builder()
-                                .add("user_id", ProApplication.getInstance().getUserId())
-                                .add("pro_id", params[0])
+                                .add("user_id", params[0])
+                                .add("pro_id", params[1])
                                 .build();
 
                         Request request = new Request.Builder()
