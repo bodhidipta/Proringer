@@ -117,10 +117,10 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                 holder.tv_verify.setVisibility(View.GONE);
             }
 
-            if (jsonInfoArray.getJSONObject(position).getString("pro_status").equalsIgnoreCase("")) {
+            if (jsonInfoArray.getJSONObject(position).getString("pro_status").equalsIgnoreCase("Y")) {
                 holder.img_favorite.setImageResource(R.drawable.ic_favorite);
             } else {
-                holder.img_favorite.setImageResource(R.drawable.ic_favorite);
+                holder.img_favorite.setImageResource(R.drawable.ic_un_favorite);
             }
 
         } catch (Exception e) {
