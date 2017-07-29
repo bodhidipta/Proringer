@@ -244,8 +244,14 @@ public class SearchLocation extends Fragment {
                             JSONArray info_arr = mainObject.getJSONArray("info_array");
                             JSONObject innerObj = info_arr.getJSONObject(0);
 
-                            zip_code_text.setText(innerObj.getString("zipcode") + "");
+                            Logger.printMessage("zipCode","zipCode:-"+innerObj.getString("zipcode"));
 
+                            if (innerObj.getString("zipcode").trim().equals("")){
+                                zip_code_text.setText("");
+                            }
+                            else {
+                                zip_code_text.setText(innerObj.getString("zipcode") + "");
+                            }
                         } catch (JSONException jse) {
                             jse.printStackTrace();
                         }

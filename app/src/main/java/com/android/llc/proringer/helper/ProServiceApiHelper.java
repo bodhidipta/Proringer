@@ -667,18 +667,18 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id", ProApplication.getInstance().getUserId());
-                        Logger.printMessage("f_name",""+params[0]);
-                        Logger.printMessage("l_name",""+params[1]);
-                        Logger.printMessage("address",""+params[2]);
-                        Logger.printMessage("city",""+params[3]);
-                        Logger.printMessage("country",""+params[4]);
-                        Logger.printMessage("state",""+params[5]);
-                        Logger.printMessage("zipcode",""+params[6]);
-                        Logger.printMessage("phone",""+params[7]);
-                        Logger.printMessage("details",""+params[8]);
-                        Logger.printMessage("latitude",""+params[9]);
-                        Logger.printMessage("longitude",""+params[10]);
+                        Logger.printMessage("user_id","user_id:-"+ProApplication.getInstance().getUserId());
+                        Logger.printMessage("f_name","f_name:-"+params[0]);
+                        Logger.printMessage("l_name","l_name:-"+params[1]);
+                        Logger.printMessage("address","address:-"+params[2]);
+                        Logger.printMessage("city","city:-"+params[3]);
+                        Logger.printMessage("country","country:-"+params[4]);
+                        Logger.printMessage("state","state:-"+params[5]);
+                        Logger.printMessage("zipcode","zipcode:-"+params[6]);
+                        Logger.printMessage("phone","phone:-"+params[7]);
+                        Logger.printMessage("details","details:-"+params[8]);
+                        Logger.printMessage("latitude","latitude:-"+params[9]);
+                        Logger.printMessage("longitude","longitude:-"+params[10]);
                         Logger.printMessage("updateUserInformationAPI",updateUserInformationAPI);
 
 
@@ -705,7 +705,7 @@ public class ProServiceApiHelper {
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("userInfo", responseString);
+                        Logger.printMessage("UpdateUserInfo", responseString);
                         JSONObject respo = new JSONObject(responseString);
                         if (respo.getBoolean("response")) {
                             return respo.getString("message");
@@ -719,13 +719,13 @@ public class ProServiceApiHelper {
                         exception = e.getMessage();
                         return exception;
                     }
-
                 }
 
                 @Override
                 protected void onPostExecute(final String s) {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
+                        Logger.printMessage("successfullyUpdateMSQL","YES");
                         try {
                             callback.onComplete(s);
                             getUserInformation(callback);
@@ -733,7 +733,6 @@ public class ProServiceApiHelper {
                             io.printStackTrace();
                             callback.onError(io.getMessage());
                         }
-
                     } else {
                         callback.onError(s);
                     }
