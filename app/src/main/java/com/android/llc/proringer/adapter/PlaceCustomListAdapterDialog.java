@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.fragments.drawerNav.UserInfromation;
+import com.android.llc.proringer.fragments.drawerNav.UserInformation;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,8 +18,8 @@ import org.json.JSONException;
 public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCustomListAdapterDialog.MyViewHolder> {
     Context mContext;
     JSONArray predictionsJsonArray;
-    UserInfromation.onOptionSelected callback;
-    public PlaceCustomListAdapterDialog(Context mContext,JSONArray predictionsJsonArray, UserInfromation.onOptionSelected callback){
+    UserInformation.onOptionSelected callback;
+    public PlaceCustomListAdapterDialog(Context mContext,JSONArray predictionsJsonArray, UserInformation.onOptionSelected callback){
         this.mContext=mContext;
         this.predictionsJsonArray=predictionsJsonArray;
         this.callback=callback;

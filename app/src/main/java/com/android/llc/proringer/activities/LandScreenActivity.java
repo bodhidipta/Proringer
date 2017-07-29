@@ -30,7 +30,7 @@ import com.android.llc.proringer.fragments.drawerNav.InviteAfriend;
 import com.android.llc.proringer.fragments.drawerNav.LoginSettings;
 import com.android.llc.proringer.fragments.drawerNav.Notifications;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalPro;
-import com.android.llc.proringer.fragments.drawerNav.UserInfromation;
+import com.android.llc.proringer.fragments.drawerNav.UserInformation;
 import com.android.llc.proringer.fragments.main_content.MyProjectDetails;
 import com.android.llc.proringer.fragments.main_content.MyProjectRatePro;
 import com.android.llc.proringer.fragments.main_content.ProjectMessaging;
@@ -498,14 +498,14 @@ public class LandScreenActivity extends AppCompatActivity{
 
         toggleToolBar(false);
 
-        if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + UserInfromation.class.getCanonicalName()) != null) {
-            Logger.printMessage("back_stack", "Removed *****" + UserInfromation.class.getCanonicalName());
-            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + UserInfromation.class.getCanonicalName())).commit();
-            fragmentManager.popBackStack("" + UserInfromation.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + UserInformation.class.getCanonicalName()) != null) {
+            Logger.printMessage("back_stack", "Removed *****" + UserInformation.class.getCanonicalName());
+            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + UserInformation.class.getCanonicalName())).commit();
+            fragmentManager.popBackStack("" + UserInformation.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, new UserInfromation(), "" + UserInfromation.class.getCanonicalName());
-        transaction.addToBackStack("" + UserInfromation.class.getCanonicalName());
+        transaction.replace(R.id.fragment_container, new UserInformation(), "" + UserInformation.class.getCanonicalName());
+        transaction.addToBackStack("" + UserInformation.class.getCanonicalName());
         transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + fragmentManager.getBackStackEntryCount());

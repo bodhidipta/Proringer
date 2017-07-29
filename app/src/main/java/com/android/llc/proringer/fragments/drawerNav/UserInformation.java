@@ -16,9 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -47,7 +45,7 @@ import org.json.JSONObject;
  * limitations under the License.
  */
 
-public class UserInfromation extends Fragment {
+public class UserInformation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     private ProgressDialog pgDialog = null;
     PopupWindow popupWindow;
@@ -190,7 +188,7 @@ public class UserInfromation extends Fragment {
 
                                     if (!s.toString().trim().equals("")) {
                                         if (checkToShowAfterSearach == false) {
-                                            CreateGooglePlaceList(address, s.toString());
+                                            createGooglePlaceList(address, s.toString());
                                         } else {
                                             checkToShowAfterSearach = false;
                                         }
@@ -218,7 +216,7 @@ public class UserInfromation extends Fragment {
                 });
     }
 
-    public void CreateGooglePlaceList(final View view, String place) {
+    public void createGooglePlaceList(final View view, String place) {
         ProServiceApiHelper.getInstance(getActivity()).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -357,5 +355,11 @@ public class UserInfromation extends Fragment {
 
     public interface onOptionSelected {
         void onItemPassed(int position, JSONObject value);
+    }
+
+    @Override
+    public void onPause() {
+        Logger.printMessage("PopUpWindow","close");
+        super.onPause();
     }
 }
