@@ -55,7 +55,6 @@ import org.json.JSONException;
 public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-    ProgressDialog pgDialog;
     SearchLocalPro.onOptionSelected callback;
 
 
@@ -63,7 +62,6 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
         this.mcontext = mcontext;
         this.jsonInfoArray = jsonInfoArray;
         this.callback=callback;
-        pgDialog = new ProgressDialog(mcontext);
     }
 
     @Override
@@ -197,7 +195,11 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             img_favorite = (ImageView) itemView.findViewById(R.id.img_favorite);
 
             linear_layout_border = (LinearLayout) itemView.findViewById(R.id.linear_layout_border);
-
         }
+    }
+
+    public void refreshData(JSONArray jsonInfoArray){
+        this.jsonInfoArray=jsonInfoArray;
+        notifyDataSetChanged();
     }
 }
