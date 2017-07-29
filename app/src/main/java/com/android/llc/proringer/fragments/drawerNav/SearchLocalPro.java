@@ -13,13 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.adapter.SearchFavoriteListAdapter;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
