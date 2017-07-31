@@ -256,7 +256,7 @@ public class PostProjectActivity extends AppCompatActivity {
                     public void onStart() {
                         pgDialog = new ProgressDialog(PostProjectActivity.this);
                         pgDialog.setTitle("Post Project");
-                        pgDialog.setMessage("Please wait ..");
+                        pgDialog.setMessage("Post project uploading.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
 

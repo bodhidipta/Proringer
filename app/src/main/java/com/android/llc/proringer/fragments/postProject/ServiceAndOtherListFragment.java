@@ -87,7 +87,7 @@ public class ServiceAndOtherListFragment extends Fragment {
             public void onStartFetch() {
                 pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
                 pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Please wait while preparing category list.");
+                pgDialog.setMessage("Getting Preparing category list.Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();
 

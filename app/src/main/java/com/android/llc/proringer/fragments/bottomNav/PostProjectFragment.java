@@ -141,7 +141,7 @@ public class PostProjectFragment extends Fragment {
             public void onStartFetch() {
                 pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Please wait while preparing category list.");
+                pgDialog.setMessage("Getting Preparing category list.Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();
 
@@ -345,7 +345,7 @@ public class PostProjectFragment extends Fragment {
             public void onStartFetch() {
                 pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Please wait while preparing category list.");
+                pgDialog.setMessage("Getting Preparing category list.Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();
 

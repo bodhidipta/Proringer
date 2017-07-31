@@ -445,7 +445,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onStart() {
                         pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("Home Schedule");
-                        pgDialog.setMessage("Getting option data for Home Schedule. Please wait.");
+                        pgDialog.setMessage("Getting option data for Home Schedule.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }
@@ -867,7 +867,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onStart() {
                         pgDialog = new ProgressDialog(getActivity());
                         pgDialog.setTitle("Home Reminder");
-                        pgDialog.setMessage("Updating details. Please wait.");
+                        pgDialog.setMessage("Updating details.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }

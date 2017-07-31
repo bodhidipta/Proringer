@@ -114,7 +114,7 @@ public class DashBoardFragment extends Fragment {
             public void onStart() {
                 pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("My Dashboard");
-                pgDialog.setMessage("It's loading.Please wait....");
+                pgDialog.setMessage("My Dashboard page loading.Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();
             }

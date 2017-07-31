@@ -77,7 +77,7 @@ public class LogInActivity extends AppCompatActivity {
                                 public void onStart() {
                                     pgDialog = new ProgressDialog(LogInActivity.this);
                                     pgDialog.setTitle("Signing In");
-                                    pgDialog.setMessage("Please wait ..");
+                                    pgDialog.setMessage("Signing user.Please wait...");
                                     pgDialog.setCancelable(false);
                                     pgDialog.show();
                                 }

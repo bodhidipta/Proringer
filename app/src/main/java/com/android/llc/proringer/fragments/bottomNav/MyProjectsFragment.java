@@ -58,7 +58,7 @@ public class MyProjectsFragment extends Fragment {
                 pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("My Projects");
                 pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting MyProject list. Please wait.");
+                pgDialog.setMessage("Getting MyProject list.Please wait...");
                 pgDialog.show();
             }
 

@@ -113,7 +113,7 @@ public class UserInformationFragment extends Fragment {
                     public void onStart() {
                         pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("User Information");
-                        pgDialog.setMessage("Updating user information. Please wait..");
+                        pgDialog.setMessage("Updating user information.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }

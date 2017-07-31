@@ -90,7 +90,7 @@ public class ContactUsActivity extends AppCompatActivity {
                     public void onStart() {
                         pgDialog = new ProgressDialog(ContactUsActivity.this);
                         pgDialog.setTitle("Contact Us");
-                        pgDialog.setMessage("Please wait....");
+                        pgDialog.setMessage("your contact address is sending to us.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }

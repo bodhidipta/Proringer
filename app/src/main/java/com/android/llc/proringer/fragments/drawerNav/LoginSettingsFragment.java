@@ -125,7 +125,7 @@ public class LoginSettingsFragment extends Fragment {
                     public void onStart() {
                         pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("Change Email");
-                        pgDialog.setMessage("Updating new email address. Please wait.");
+                        pgDialog.setMessage("Updating new email address.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }
@@ -211,7 +211,7 @@ public class LoginSettingsFragment extends Fragment {
                     public void onStart() {
                         pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("Change Password");
-                        pgDialog.setMessage("Updating new password. Please wait.");
+                        pgDialog.setMessage("Updating new password.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }

@@ -68,7 +68,7 @@ public class FavProsFragment extends Fragment {
                 pgDialog = new ProgressDialog(getActivity());
                 pgDialog.setTitle("Favorite Pros Fragment");
                 pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting Favorite Pros Fragment list. Please wait.");
+                pgDialog.setMessage("Getting Favorite Pros list.Please wait...");
                 pgDialog.show();
             }
 
@@ -153,7 +153,7 @@ public class FavProsFragment extends Fragment {
                                                                                             public void onStart() {
 
                                                                                                 pgDialog.setTitle("Delete Favorite pros");
-                                                                                                pgDialog.setMessage("It's deleting.Please wait....");
+                                                                                                pgDialog.setMessage("Favorite pros deleting.Please wait...");
                                                                                                 pgDialog.setCancelable(false);
                                                                                                 pgDialog.show();
 

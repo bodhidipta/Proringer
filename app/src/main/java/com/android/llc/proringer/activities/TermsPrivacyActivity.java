@@ -69,7 +69,7 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             public void onStart() {
                 pgDialog = new ProgressDialog(TermsPrivacyActivity.this);
                 pgDialog.setTitle("Terms of Use");
-                pgDialog.setMessage("Terms of Use page loading Please wait...");
+                pgDialog.setMessage("Terms of Use page loading.Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();
             }
@@ -113,7 +113,7 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             public void onStart() {
                 pgDialog = new ProgressDialog(TermsPrivacyActivity.this);
                 pgDialog.setTitle("Privacy Policy");
-                pgDialog.setMessage("Privacy Policy loading Please wait...");
+                pgDialog.setMessage("Privacy Policy page loading.Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();
             }

@@ -46,7 +46,7 @@ public class FaqFragment extends Fragment {
             @Override
             public void onStart() {
                 pgDialog=new ProgressDialog(getActivity());
-                pgDialog.setTitle("FaqFragment");
+                pgDialog.setTitle("Faq");
                 pgDialog.setMessage("Fag page loading Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();

@@ -88,7 +88,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         public void onStart() {
                             pgDialog = new ProgressDialog(ForgetPasswordActivity.this);
                             pgDialog.setTitle("Requesting password");
-                            pgDialog.setMessage("Requesting password reset code to your registered email address. Please wait ..");
+                            pgDialog.setMessage("Requesting password reset code to your registered email address.Please wait...");
                             pgDialog.setCancelable(false);
                             pgDialog.show();
                         }
@@ -154,7 +154,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                             public void onStart() {
                                                 pgDialog = new ProgressDialog(ForgetPasswordActivity.this);
                                                 pgDialog.setTitle("Resetting password");
-                                                pgDialog.setMessage("Please wait ..");
+                                                pgDialog.setMessage("Please wait...");
                                                 pgDialog.setCancelable(false);
                                                 pgDialog.show();
                                             }

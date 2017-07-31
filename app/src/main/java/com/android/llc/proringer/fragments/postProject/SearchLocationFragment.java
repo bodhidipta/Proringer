@@ -167,9 +167,9 @@ public class SearchLocationFragment extends Fragment {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
-                pgDialog.setTitle("Get Current Location zipcode");
+                pgDialog.setTitle("Current Location zipCode");
                 pgDialog.setCancelable(false);
-                pgDialog.setMessage("Loading. Please wait.");
+                pgDialog.setMessage("Loading your current location.Please wait...");
                 pgDialog.show();
             }
 

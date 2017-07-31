@@ -97,7 +97,7 @@ public class InviteAFriendFragment extends Fragment {
                     public void onStart() {
                         pgDialog=new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("Invite Friend");
-                        pgDialog.setMessage("Inviting friend. Please wait.");
+                        pgDialog.setMessage("Inviting friend.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }

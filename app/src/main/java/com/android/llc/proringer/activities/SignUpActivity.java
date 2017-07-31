@@ -272,7 +272,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                                            public void onStart() {
                                                                                pgDialog = new ProgressDialog(SignUpActivity.this);
                                                                                pgDialog.setTitle("Registering");
-                                                                               pgDialog.setMessage("Please wait ..");
+                                                                               pgDialog.setMessage("Please wait...");
                                                                                pgDialog.setCancelable(false);
                                                                                pgDialog.show();
 
