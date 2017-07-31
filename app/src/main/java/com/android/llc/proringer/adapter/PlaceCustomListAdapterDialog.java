@@ -11,17 +11,19 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 /**
  * Created by su on 7/28/17.
  */
 
 public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCustomListAdapterDialog.MyViewHolder> {
     Context mContext;
-    JSONArray predictionsJsonArray;
+    ArrayList<String> stringArrayList;
     UserInformation.onOptionSelected callback;
-    public PlaceCustomListAdapterDialog(Context mContext,JSONArray predictionsJsonArray, UserInformation.onOptionSelected callback){
+    public PlaceCustomListAdapterDialog(Context mContext,ArrayList<String> stringArrayList, UserInformation.onOptionSelected callback){
         this.mContext=mContext;
-        this.predictionsJsonArray=predictionsJsonArray;
+        this.stringArrayList=stringArrayList;
         this.callback=callback;
     }
 
@@ -33,26 +35,19 @@ public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCust
     @Override
     public void onBindViewHolder(PlaceCustomListAdapterDialog.MyViewHolder holder, final int position) {
 
-        try {
-            holder.tv.setText(predictionsJsonArray.getJSONObject(position).getString("description"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            holder.tv.setText(stringArrayList.get(position));
+
         holder.tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    callback.onItemPassed(position,predictionsJsonArray.getJSONObject(position));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    callback.onItemPassed(position,stringArrayList);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return predictionsJsonArray.length();
+        return stringArrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -62,8 +57,8 @@ public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCust
             tv= (ProRegularTextView) itemView.findViewById(R.id.tv);
         }
     }
-    public void setRefresh(JSONArray predictionsJsonArray){
-        this.predictionsJsonArray=predictionsJsonArray;
+    public void setRefresh(ArrayList<String> stringArrayList){
+        this.stringArrayList=stringArrayList;
         notifyDataSetChanged();
     }
 }

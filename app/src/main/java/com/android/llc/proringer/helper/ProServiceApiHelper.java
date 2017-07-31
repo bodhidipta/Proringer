@@ -2394,6 +2394,93 @@ public class ProServiceApiHelper {
     }
 
 
+    public void getSearchPlacesFixFilter(final onSearchPlacesNameCallback callback,String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+                ArrayList<String> addressList;
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStartFetch();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                    try {
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Request request = new Request.Builder()
+                                .url(searchLocalProject)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        JSONObject mainRes = new JSONObject(responseString);
+
+                        if (mainRes.getString("status").equalsIgnoreCase("OK") &&
+                                mainRes.has("predictions") &&
+                                mainRes.getJSONArray("predictions").length() > 0) {
+
+                            addressList = new ArrayList<String>();
+                            JSONArray predictions = mainRes.getJSONArray("predictions");
+
+                            for (int i = 0; i < predictions.length(); i++) {
+
+                                JSONObject innerIncer = predictions.getJSONObject(i);
+
+                                    if (innerIncer.has("terms") &&
+                                            innerIncer.getJSONArray("terms").length() > 0) {
+
+                                        /**
+                                         * loop through address component
+                                         * for country and state
+                                         */
+
+                                        JSONArray terms = innerIncer.getJSONArray("terms");
+
+                                        for (int j = 0; j < terms.length(); j++) {
+                                            if (terms.getJSONObject(j).getString("value").contains("United States") ||
+                                                    terms.getJSONObject(j).getString("value").contains("Canada")) {
+                                                addressList.add(innerIncer.getString("description"));
+                                              break;
+                                            }
+                                        }
+                                    }
+                            }
+                        }
+
+                        Logger.printMessage("location", "" + responseString);
+                        return responseString;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = "Some error occured while searching entered zip. Please search again.";
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        if (addressList != null && addressList.size() > 0)
+                            callback.onComplete(addressList);
+                    } else {
+                        callback.onError(exception);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
+
     /**
      * get Zip Location State List code  using google api
      *
@@ -2669,6 +2756,17 @@ public class ProServiceApiHelper {
      */
     public interface onProCategoryListener {
         void onComplete(LinkedList<ProCategoryData> listdata);
+
+        void onError(String error);
+
+        void onStartFetch();
+    }
+
+    /**
+     * Interface used to get call back for search locationList
+     */
+    public interface onSearchPlacesNameCallback {
+        void onComplete(ArrayList<String> listdata);
 
         void onError(String error);
 

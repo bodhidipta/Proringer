@@ -29,6 +29,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.ArrayList;
 
 /**
  * Created by bodhidipta on 22/06/17.
@@ -222,34 +223,52 @@ public class UserInformation extends Fragment {
                 });
     }
 
+//    public void createGooglePlaceList(final View view, String place) {
+//        ProServiceApiHelper.getInstance(getActivity()).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
+//            @Override
+//            public void onStart() {
+//            }
+//
+//            @Override
+//            public void onComplete(String message) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(message);
+//                    JSONArray jsonArray = jsonObject.getJSONArray("predictions");
+//                    showDialog(view, jsonArray);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                Logger.printMessage("message", "" + message);
+//            }
+//
+//            @Override
+//            public void onError(String error) {
+//            }
+//        });
+//    }
     public void createGooglePlaceList(final View view, String place) {
-        ProServiceApiHelper.getInstance(getActivity()).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
-            @Override
-            public void onStart() {
-            }
+        ProServiceApiHelper.getInstance(getActivity()).getSearchPlacesFixFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
             @Override
-            public void onComplete(String message) {
-                try {
-                    JSONObject jsonObject = new JSONObject(message);
-                    JSONArray jsonArray = jsonObject.getJSONArray("predictions");
-                    showDialog(view, jsonArray);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                Logger.printMessage("message", "" + message);
+            public void onComplete(ArrayList<String> listdata) {
+                showDialog(view,listdata);
             }
 
             @Override
             public void onError(String error) {
+
             }
-        });
+
+            @Override
+            public void onStartFetch() {
+
+            }
+        },place);
     }
 
-
-    private void showDialog(View v, JSONArray PredictionsJsonArray) {
+    private void showDialog(View v, ArrayList<String> stringArrayList) {
 
         if (popupWindow == null) {
             popupWindow = new PopupWindow(getActivity());
@@ -261,12 +280,11 @@ public class UserInformation extends Fragment {
             RecyclerView rcv_ = (RecyclerView) dialogView.findViewById(R.id.rcv_);
             rcv_.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog(getActivity(), PredictionsJsonArray, new onOptionSelected() {
+            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog(getActivity(), stringArrayList, new onOptionSelected() {
                 @Override
-                public void onItemPassed(int position, JSONObject value) {
-                    try {
+                public void onItemPassed(int position, ArrayList<String> stringArrayList) {
                         checkToShowAfterSearach = true;
-                        address.setText(value.getString("description"));
+                        address.setText(stringArrayList.get(position));
 
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
@@ -337,9 +355,6 @@ public class UserInformation extends Fragment {
 
                             }
                         },address.getText().toString().trim());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                     popupWindow.dismiss();
                 }
             });
@@ -357,12 +372,12 @@ public class UserInformation extends Fragment {
 
         } else {
             popupWindow.showAsDropDown(v, -5, 0);
-            placeCustomListAdapterDialog.setRefresh(PredictionsJsonArray);
+            placeCustomListAdapterDialog.setRefresh(stringArrayList);
         }
     }
 
     public interface onOptionSelected {
-        void onItemPassed(int position, JSONObject value);
+        void onItemPassed(int position,ArrayList<String> stringArrayList);
     }
 
     @Override
