@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -49,6 +50,7 @@ import org.json.JSONObject;
 
 public class UserInformation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
+    boolean pause_condition=false;
     private ProgressDialog pgDialog = null;
     PopupWindow popupWindow;
     boolean checkToShowAfterSearach = false;
@@ -189,10 +191,12 @@ public class UserInformation extends Fragment {
                                 public void afterTextChanged(Editable s) {
 
                                     if (!s.toString().trim().equals("")) {
-                                        if (checkToShowAfterSearach == false) {
-                                            createGooglePlaceList(address, s.toString());
-                                        } else {
-                                            checkToShowAfterSearach = false;
+                                        if(!pause_condition) {
+                                            if (checkToShowAfterSearach == false) {
+                                                createGooglePlaceList(address, s.toString());
+                                            } else {
+                                                checkToShowAfterSearach = false;
+                                            }
                                         }
                                     }
                                 }
@@ -249,9 +253,6 @@ public class UserInformation extends Fragment {
 
         if (popupWindow == null) {
             popupWindow = new PopupWindow(getActivity());
-            // Closes the popup window when touch outside.
-            popupWindow.setOutsideTouchable(false);
-            popupWindow.setFocusable(false);
             // Removes default background.
             popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -369,7 +370,17 @@ public class UserInformation extends Fragment {
         Logger.printMessage("PopUpWindow","close");
         if (popupWindow!=null){
             popupWindow.dismiss();
+            popupWindow=null;
+            pause_condition=true;
         }
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (popupWindow!=null){
+            pause_condition=false;
+        }
+        super.onResume();
     }
 }
