@@ -59,10 +59,10 @@ public class Message extends Fragment {
             projectMessageArrayList.add(projectMessage);
         }
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
-        project_message_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        project_message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
 
-        adapter = new ProjectMessageAdapter(getActivity(),projectMessageArrayList, new onItemClick() {
+        adapter = new ProjectMessageAdapter((LandScreenActivity)getActivity(),projectMessageArrayList, new onItemClick() {
             @Override
             public void onItemClick(int pos) {
                 ((LandScreenActivity) getActivity()).toggleToolBar(true);

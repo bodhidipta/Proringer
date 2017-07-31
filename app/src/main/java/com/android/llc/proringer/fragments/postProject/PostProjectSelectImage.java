@@ -50,7 +50,7 @@ public class PostProjectSelectImage extends Fragment {
         view.findViewById(R.id.add_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PermissionController.class);
+                Intent intent = new Intent((PostProjectActivity)getActivity(), PermissionController.class);
                 intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
                 startActivityForResult(intent, 200);
             }
@@ -97,7 +97,7 @@ public class PostProjectSelectImage extends Fragment {
                     if (!dataFile.exists())
                         Logger.printMessage("image****", "data file does not exists");
                     mCurrentPhotoPath = dataFile.getAbsolutePath();
-                    Glide.with(getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(image_pager) {
+                    Glide.with((PostProjectActivity)getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(image_pager) {
                         /**
                          * {@inheritDoc}
                          * If no {@link GlideAnimation} is given or if the animation does not set the
@@ -125,7 +125,7 @@ public class PostProjectSelectImage extends Fragment {
 
     }
     public String getRealPathFromURI(Uri contentURI) {
-        Cursor cursor = getActivity().getContentResolver().query(contentURI, null, null, null, null);
+        Cursor cursor = ((PostProjectActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {
             // Source is Dropbox or other similar local file path
             return contentURI.getPath();
@@ -137,7 +137,7 @@ public class PostProjectSelectImage extends Fragment {
     }
 
     private void showImagePickerOption() {
-        new AlertDialog.Builder(getActivity())
+        new AlertDialog.Builder((PostProjectActivity)getActivity())
                 .setCancelable(true)
                 .setTitle("Property image")
                 .setMessage("please choose image source type.")
@@ -146,7 +146,7 @@ public class PostProjectSelectImage extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         Intent intent = new Intent(Intent.ACTION_PICK);
-                        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        if (intent.resolveActivity(((PostProjectActivity)getActivity()).getPackageManager()) != null) {
                             intent.setType("image/*");
                             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 

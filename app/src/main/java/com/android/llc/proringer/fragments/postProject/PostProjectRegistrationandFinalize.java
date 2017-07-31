@@ -56,10 +56,10 @@ public class PostProjectRegistrationandFinalize extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ProApplication.getInstance().getUserId().equals("")){
-                    startActivity(new Intent(getActivity(), PostedFinishActivity.class));
-                    getActivity().finish();
+                    startActivity(new Intent((PostProjectActivity)getActivity(), PostedFinishActivity.class));
+                    ((PostProjectActivity)getActivity()).finish();
                 }else{
-                    getActivity().finish();
+                    ((PostProjectActivity)getActivity()).finish();
                 }
 
             }

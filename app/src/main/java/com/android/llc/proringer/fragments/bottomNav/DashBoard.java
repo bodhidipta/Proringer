@@ -109,10 +109,10 @@ public class DashBoard extends Fragment {
     }
 
     private void plotUserInformation() {
-        ProServiceApiHelper.getInstance(getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("My Dashboard");
                 pgDialog.setMessage("It's loading.Please wait....");
                 pgDialog.setCancelable(false);
@@ -129,7 +129,7 @@ public class DashBoard extends Fragment {
                     JSONArray jsonInfoArray=jsonObject.getJSONArray("info_array");
 
                     if (!jsonInfoArray.getJSONObject(0).getString("profile_img").equals(""))
-                        Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
+                        Glide.with((LandScreenActivity)getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
 
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 

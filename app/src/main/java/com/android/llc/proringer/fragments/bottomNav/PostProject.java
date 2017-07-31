@@ -98,13 +98,13 @@ public class PostProject extends Fragment {
             progress_posting.setMax(9);
         }
 
-        ProServiceApiHelper.getInstance(getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
                 progress_posting.setProgress(step);
-                gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
+                gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity)getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 0) {
@@ -123,7 +123,7 @@ public class PostProject extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder((LandScreenActivity)getActivity())
                         .setTitle("Error")
                         .setMessage("" + error)
                         .setCancelable(false)
@@ -139,7 +139,7 @@ public class PostProject extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("Preparing category");
                 pgDialog.setMessage("Please wait while preparing category list.");
                 pgDialog.setCancelable(false);
@@ -231,7 +231,7 @@ public class PostProject extends Fragment {
     }
 
     private void selectService(String id) {
-        ProServiceApiHelper.getInstance(getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
@@ -243,7 +243,7 @@ public class PostProject extends Fragment {
                 progress_posting.setProgress(step);
 
 
-                adapter = new PostProjectServiceAndOtherListAdapter(getActivity(), listdata, PostProjectServiceAndOtherListAdapter.TYPE_LIST, new PostProjectServiceAndOtherListAdapter.onClickItem() {
+                adapter = new PostProjectServiceAndOtherListAdapter((LandScreenActivity)getActivity(), listdata, PostProjectServiceAndOtherListAdapter.TYPE_LIST, new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 1) {
@@ -327,7 +327,7 @@ public class PostProject extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder((LandScreenActivity)getActivity())
                         .setTitle("Error")
                         .setMessage("" + error)
                         .setCancelable(false)
@@ -343,7 +343,7 @@ public class PostProject extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("Preparing category");
                 pgDialog.setMessage("Please wait while preparing category list.");
                 pgDialog.setCancelable(false);

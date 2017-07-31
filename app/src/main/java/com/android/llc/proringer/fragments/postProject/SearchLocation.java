@@ -56,7 +56,7 @@ public class SearchLocation extends Fragment {
         location_list = (RecyclerView) view.findViewById(R.id.location_list);
         loading_progress = (ProgressBar) view.findViewById(R.id.loading_progress);
         error_progress = (ImageView) view.findViewById(R.id.error_progress);
-        location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        location_list.setLayoutManager(new LinearLayoutManager((PostProjectActivity)getActivity()));
 
         addressDataList = new ArrayList<>();
 
@@ -64,8 +64,8 @@ public class SearchLocation extends Fragment {
             plotUserInformation();
         } else {
             //////////set current location zip code////
-            Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[0]);
-            Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance(getActivity()).getCurrentLatLng()[1]);
+            Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getCurrentLatLng()[0]);
+            Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getCurrentLatLng()[1]);
             getCurrentLocationZip();
         }
 
@@ -116,7 +116,7 @@ public class SearchLocation extends Fragment {
     }
 
     private void searchLocationWithZip(String key) {
-        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
                 addressDataList = listdata;
@@ -129,7 +129,7 @@ public class SearchLocation extends Fragment {
 
                 if (addressDataList != null && addressDataList.size() > 0) {
                     if (zip_search_adapter == null) {
-                        zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
+                        zip_search_adapter = new PostProjectLocationListAdapter((PostProjectActivity)getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
                             public void onSelect(int pos, AddressData data) {
                                 ((PostProjectActivity) getActivity()).selectedAddressData = data;
@@ -163,10 +163,10 @@ public class SearchLocation extends Fragment {
     }
 
     public void getCurrentLocationZip() {
-        ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
                 pgDialog.setTitle("Get Current Location zipcode");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Loading. Please wait.");
@@ -229,7 +229,7 @@ public class SearchLocation extends Fragment {
     }
 
     private void plotUserInformation() {
-        DatabaseHandler.getInstance(getActivity()).getUserInfo(
+        DatabaseHandler.getInstance((PostProjectActivity)getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override

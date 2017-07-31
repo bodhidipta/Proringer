@@ -48,12 +48,12 @@ public class CateGoryList extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         category_listing = (RecyclerView) view.findViewById(R.id.category_listing);
-        category_listing.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        category_listing.setLayoutManager(new GridLayoutManager((PostProjectActivity)getActivity(), 3));
 
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
 
-        ProServiceApiHelper.getInstance(getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
@@ -104,7 +104,7 @@ public class CateGoryList extends Fragment {
                 });
 
 
-                gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
+                gridAdapter = new PostProjectCategoryGridAdapter((PostProjectActivity)getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         ((PostProjectActivity) getActivity()).selectedCategory = data;
@@ -126,7 +126,7 @@ public class CateGoryList extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder((PostProjectActivity)getActivity())
                         .setTitle("Error")
                         .setMessage("" + error)
                         .setCancelable(false)
@@ -142,7 +142,7 @@ public class CateGoryList extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
                 pgDialog.setTitle("Preparing category");
                 pgDialog.setMessage("Please wait while preparing category list.");
                 pgDialog.setCancelable(false);
@@ -159,9 +159,9 @@ public class CateGoryList extends Fragment {
 //                if(((ProRegularTextView)view.findViewById(R.id.see_all_categories)).
 //                        getText().toString().trim().equalsIgnoreCase("See All categories"))
 //                {
-                category_listing.setLayoutManager(new LinearLayoutManager(getActivity()));
+                category_listing.setLayoutManager(new LinearLayoutManager((PostProjectActivity)getActivity()));
 
-                listAdapter = new PostProjectCategoryListAdapter(getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
+                listAdapter = new PostProjectCategoryListAdapter((PostProjectActivity)getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, String data) {
 

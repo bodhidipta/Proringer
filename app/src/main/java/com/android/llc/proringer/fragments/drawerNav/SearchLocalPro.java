@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -60,7 +61,7 @@ public class SearchLocalPro extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
-        pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
         setListAdapter();
 
@@ -72,10 +73,10 @@ public class SearchLocalPro extends Fragment {
 
 
     public void setListAdapter() {
-        ProServiceApiHelper.getInstance(getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog1 = new ProgressDialog(getActivity());
+                pgDialog1 = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog1.setTitle("FavPros");
                 pgDialog1.setCancelable(false);
                 pgDialog1.setMessage("Getting FavPros list. Please wait.");
@@ -96,7 +97,7 @@ public class SearchLocalPro extends Fragment {
 
                         if (searchProListAdapter == null) {
 
-                            searchProListAdapter = new SearchProListAdapter(getActivity(), info_array, new onOptionSelected() {
+                            searchProListAdapter = new SearchProListAdapter((LandScreenActivity)getActivity(), info_array, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(String value, String addorDelete) {
                                     Logger.printMessage("value",":--"+value);
@@ -127,15 +128,15 @@ public class SearchLocalPro extends Fragment {
 
     public void deleteFavPro(final String pros_id) {
 
-        TextView title = new TextView(getActivity());
+        TextView title = new TextView((LandScreenActivity)getActivity());
         title.setText("Are you sure you want to remove from favorites?");
 //                title.setBackgroundResource(R.drawable.gradient);
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
-        title.setTextColor(getActivity().getResources().getColor(R.color.colorTextBlack));
+        title.setTextColor(((LandScreenActivity)getActivity()).getResources().getColor(R.color.colorTextBlack));
         title.setTextSize(18);
 
-        new AlertDialog.Builder(getActivity())
+        new AlertDialog.Builder((LandScreenActivity)getActivity())
                 .setCustomTitle(title)
 
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -144,10 +145,10 @@ public class SearchLocalPro extends Fragment {
                         dialog.dismiss();
                         ///////////delete from favorite list
                         try {
-                            ProServiceApiHelper.getInstance(getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+                            ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                      @Override
                                                                                                      public void onStart() {
-                                                                                                         pgDialog2 = new ProgressDialog(getActivity());
+                                                                                                         pgDialog2 = new ProgressDialog((LandScreenActivity)getActivity());
                                                                                                          pgDialog2.setTitle("Delete Favorite pros");
                                                                                                          pgDialog2.setMessage("It's deleting.Please wait....");
                                                                                                          pgDialog2.setCancelable(false);
@@ -161,7 +162,7 @@ public class SearchLocalPro extends Fragment {
                                                                                                          if (pgDialog2 != null && pgDialog2.isShowing())
                                                                                                              pgDialog2.dismiss();
 
-                                                                                                         new AlertDialog.Builder(getActivity())
+                                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
                                                                                                                  .setTitle("Delete Favorite pros")
                                                                                                                  .setMessage("" + message)
                                                                                                                  .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -180,7 +181,7 @@ public class SearchLocalPro extends Fragment {
                                                                                                          if (pgDialog2 != null && pgDialog2.isShowing())
                                                                                                              pgDialog2.dismiss();
 
-                                                                                                         new AlertDialog.Builder(getActivity())
+                                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
                                                                                                                  .setTitle("Delete Fav pros")
                                                                                                                  .setMessage("" + error)
                                                                                                                  .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -213,10 +214,10 @@ public class SearchLocalPro extends Fragment {
 
     public void addFavPro(final String pros_id) {
         try {
-            ProServiceApiHelper.getInstance(getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+            ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                      @Override
                                                                                      public void onStart() {
-                                                                                         pgDialog3 = new ProgressDialog(getActivity());
+                                                                                         pgDialog3 = new ProgressDialog((LandScreenActivity)getActivity());
                                                                                          pgDialog3.setTitle("Add Favorite pros");
                                                                                          pgDialog3.setMessage("It's adding.Please wait....");
                                                                                          pgDialog3.setCancelable(false);
@@ -231,7 +232,7 @@ public class SearchLocalPro extends Fragment {
                                                                                              pgDialog3.dismiss();
 
 
-                                                                                         new AlertDialog.Builder(getActivity())
+                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
                                                                                                  .setTitle("Add Favorite pros")
                                                                                                  .setMessage("" + message)
                                                                                                  .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -251,7 +252,7 @@ public class SearchLocalPro extends Fragment {
                                                                                          if (pgDialog3 != null && pgDialog3.isShowing())
                                                                                              pgDialog3.dismiss();
 
-                                                                                         new AlertDialog.Builder(getActivity())
+                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
                                                                                                  .setTitle("Add Fav pros")
                                                                                                  .setMessage("" + error)
                                                                                                  .setPositiveButton("ok", new DialogInterface.OnClickListener() {

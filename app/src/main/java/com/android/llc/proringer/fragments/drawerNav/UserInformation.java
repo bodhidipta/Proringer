@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
@@ -105,11 +106,11 @@ public class UserInformation extends Fragment {
     }
 
     private void updateUserInformation() {
-        ProServiceApiHelper.getInstance(getActivity()).updateUserInformation(
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateUserInformation(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog(getActivity());
+                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("User Information");
                         pgDialog.setMessage("Updating user information. Please wait..");
                         pgDialog.setCancelable(false);
@@ -126,7 +127,7 @@ public class UserInformation extends Fragment {
                     public void onError(String error) {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder(getActivity())
+                        new AlertDialog.Builder((LandScreenActivity)getActivity())
                                 .setTitle("Error updating information")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
@@ -160,7 +161,7 @@ public class UserInformation extends Fragment {
     }
 
     private void plotUserInformation() {
-        DatabaseHandler.getInstance(getActivity()).getUserInfo(
+        DatabaseHandler.getInstance((LandScreenActivity)getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
@@ -223,7 +224,7 @@ public class UserInformation extends Fragment {
                 });
     }
     public void createGooglePlaceList(final View view, String place) {
-        ProServiceApiHelper.getInstance(getActivity()).getSearchPlacesFixFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getSearchPlacesFixFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
             @Override
             public void onComplete(ArrayList<String> listdata) {
@@ -245,25 +246,25 @@ public class UserInformation extends Fragment {
     private void showDialog(View v, ArrayList<String> stringArrayList) {
 
         if (popupWindow == null) {
-            popupWindow = new PopupWindow(getActivity());
+            popupWindow = new PopupWindow((LandScreenActivity)getActivity());
             // Removes default background.
             popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_place, null);
+            View dialogView = ((LandScreenActivity)getActivity()).getLayoutInflater().inflate(R.layout.dialog_show_place, null);
 
             RecyclerView rcv_ = (RecyclerView) dialogView.findViewById(R.id.rcv_);
-            rcv_.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rcv_.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
-            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog(getActivity(), stringArrayList, new onOptionSelected() {
+            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog((LandScreenActivity)getActivity(), stringArrayList, new onOptionSelected() {
                 @Override
                 public void onItemPassed(int position, ArrayList<String> stringArrayList) {
                         checkToShowAfterSearach = true;
                         address.setText(stringArrayList.get(position));
 
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        InputMethodManager imm = (InputMethodManager) ((LandScreenActivity)getActivity()).getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
 
-                        ProServiceApiHelper.getInstance(getActivity()).getZipLocationStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
+                        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getZipLocationStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
                             @Override
                             public void onStart() {
 

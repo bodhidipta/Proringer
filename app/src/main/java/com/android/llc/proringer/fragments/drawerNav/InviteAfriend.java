@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -90,11 +91,11 @@ public class InviteAfriend extends Fragment {
     }
 
     private void getSubmitParams() {
-        ProServiceApiHelper.getInstance(getActivity()).inviteFriends(
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).inviteFriends(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog=new ProgressDialog(getActivity());
+                        pgDialog=new ProgressDialog((LandScreenActivity)getActivity());
                         pgDialog.setTitle("Invite Friend");
                         pgDialog.setMessage("Inviting friend. Please wait.");
                         pgDialog.setCancelable(false);
@@ -105,7 +106,7 @@ public class InviteAfriend extends Fragment {
                     public void onComplete(String message) {
                         if (pgDialog!=null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder(getActivity())
+                        new AlertDialog.Builder((LandScreenActivity)getActivity())
                                 .setTitle("Invite Friend")
                                 .setMessage("" + message)
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -123,7 +124,7 @@ public class InviteAfriend extends Fragment {
                     public void onError(String error) {
                         if (pgDialog!=null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder(getActivity())
+                        new AlertDialog.Builder((LandScreenActivity)getActivity())
                                 .setTitle("Invite Friend Error")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {

@@ -59,10 +59,10 @@ public class FavPros extends Fragment {
         view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
 
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
-        pros_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
 
-        ProServiceApiHelper.getInstance(getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog(getActivity());
@@ -83,7 +83,7 @@ public class FavPros extends Fragment {
 
                         JSONArray info_array=jsonObject.getJSONArray("info_array");
 
-                        searchFavoriteListAdapter=new SearchFavoriteListAdapter(getActivity(), info_array, new onOptionSelected() {
+                        searchFavoriteListAdapter=new SearchFavoriteListAdapter((LandScreenActivity)getActivity(), info_array, new onOptionSelected() {
                             @Override
                             public void onItemPassed(int position, String value) {
                                 DeleteFavPro(value,position);
@@ -119,7 +119,7 @@ public class FavPros extends Fragment {
         view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LandScreenActivity)getActivity()).transactSearchLocalPros();
+                ((LandScreenActivity)(LandScreenActivity)getActivity()).transactSearchLocalPros();
             }
         });
     }
@@ -135,10 +135,10 @@ public class FavPros extends Fragment {
 //                title.setBackgroundResource(R.drawable.gradient);
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
-        title.setTextColor(getActivity().getResources().getColor(R.color.colorTextBlack));
+        title.setTextColor(((LandScreenActivity)getActivity()).getResources().getColor(R.color.colorTextBlack));
         title.setTextSize(18);
 
-        new AlertDialog.Builder(getActivity())
+        new AlertDialog.Builder((LandScreenActivity)getActivity())
                 .setCustomTitle(title)
 
 
@@ -148,7 +148,7 @@ public class FavPros extends Fragment {
                         dialog.dismiss();
                         ///////////delete from favorite list
                         try {
-                            ProServiceApiHelper.getInstance(getActivity()).deleteFavoritePro(new ProServiceApiHelper.getApiProcessCallback() {
+                            ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).deleteFavoritePro(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                             @Override
                                                                                             public void onStart() {
 
@@ -186,7 +186,7 @@ public class FavPros extends Fragment {
                                                                                                 if (pgDialog != null && pgDialog.isShowing())
                                                                                                     pgDialog.dismiss();
 
-                                                                                                new AlertDialog.Builder(getActivity())
+                                                                                                new AlertDialog.Builder((LandScreenActivity)getActivity())
                                                                                                         .setTitle("Delete Fav pros")
                                                                                                         .setMessage("" + error)
                                                                                                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {

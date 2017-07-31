@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.MyProjectRateProAdapter;
 
 /**
@@ -28,9 +29,9 @@ public class MyProjectRatePro extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView= (RecyclerView) view.findViewById(R.id.rcv_);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
-        myProjectRateProAdapter=new MyProjectRateProAdapter(getActivity());
+        myProjectRateProAdapter=new MyProjectRateProAdapter((LandScreenActivity)getActivity());
         recyclerView.setAdapter(myProjectRateProAdapter);
     }
 }

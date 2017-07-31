@@ -50,12 +50,12 @@ public class MyProjects extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final RecyclerView project_list = (RecyclerView) view.findViewById(R.id.project_list);
-        project_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        project_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
-        ProServiceApiHelper.getInstance(getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("My Projects");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Getting MyProject list. Please wait.");
@@ -69,7 +69,7 @@ public class MyProjects extends Fragment {
                     pgDialog.dismiss();
 
                 if (projectList != null && projectList.size() > 0)
-                    project_list.setAdapter(new ProjectListingAdapter(getActivity(), projectList, new onOptionSelected() {
+                    project_list.setAdapter(new ProjectListingAdapter((LandScreenActivity)getActivity(), projectList, new onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, String value) {
                             ProApplication.getInstance().setDataSelected((ProjectPostedData) projectList.get(position));
@@ -88,7 +88,7 @@ public class MyProjects extends Fragment {
             public void onError(String error) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder((LandScreenActivity)getActivity())
                         .setTitle("MyProjects Error")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {

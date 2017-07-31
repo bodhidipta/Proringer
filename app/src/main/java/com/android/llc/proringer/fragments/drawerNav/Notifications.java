@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -121,7 +122,7 @@ public class Notifications extends Fragment {
     }
 
     private void getNotifiactionState() {
-        ProServiceApiHelper.getInstance(getActivity()).getUserNotification(
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getUserNotification(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
@@ -149,7 +150,7 @@ public class Notifications extends Fragment {
     }
 
     private void setChangeNotification() {
-        ProServiceApiHelper.getInstance(getActivity()).updateUserNotification(
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateUserNotification(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

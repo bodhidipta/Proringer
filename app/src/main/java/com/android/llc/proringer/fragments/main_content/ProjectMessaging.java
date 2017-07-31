@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.IndividualMessageActivity;
+import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
 
@@ -49,11 +50,11 @@ public class ProjectMessaging extends Fragment {
         detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
 
         message_list = (RecyclerView) view.findViewById(R.id.message_list);
-        message_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        message_list.setAdapter(new ProjectDetailedMessageAdapter(getActivity(), new onItemClick() {
+        message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+        message_list.setAdapter(new ProjectDetailedMessageAdapter((LandScreenActivity)getActivity(), new onItemClick() {
             @Override
             public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), IndividualMessageActivity.class));
+                startActivity(new Intent((LandScreenActivity)getActivity(), IndividualMessageActivity.class));
             }
         }));
     }
