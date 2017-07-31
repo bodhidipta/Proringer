@@ -1,10 +1,8 @@
 package com.android.llc.proringer.helper;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.pojo.AddressData;
@@ -13,14 +11,11 @@ import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +23,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -36,7 +30,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
 
 /**
