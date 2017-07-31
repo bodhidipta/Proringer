@@ -98,6 +98,7 @@ public class ProServiceApiHelper {
     private String proslistingAPI = "http://esolz.co.in/lab6/proringer_latest/app_serch_result_project?user_id=";
 
     private String favouriteProAdddeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pro_adddelete";
+    private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
 
 
 
@@ -2598,6 +2599,68 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else
             callback.onError("No internet connection found. Please check your internet connection.");
+    }
+
+
+
+    /**
+     * get DashBoard details
+     *
+     * @param callback
+     */
+    public void getDashBoardDetails(final getApiProcessCallback callback) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        String dashAPI = homeownerDashboardAPI + "?user_id=" + ProApplication.getInstance().getUserId();
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(dashAPI)
+                                .build();
+
+                        Logger.printMessage("homeownerDashboardAPI",dashAPI);
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return responseString;
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
     }
 
 

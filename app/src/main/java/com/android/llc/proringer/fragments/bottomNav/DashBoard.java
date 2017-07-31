@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,8 +46,9 @@ import org.json.JSONObject;
 
 public class DashBoard extends Fragment {
     ImageView profile_pic;
-    ProRegularTextView name;
-    ProLightTextView address;
+    ProRegularTextView tv_name,tv_active_projects,tv_favorite_pros;
+    ProLightTextView tv_address;
+    ProgressDialog pgDialog;
 
     @Nullable
     @Override
@@ -56,9 +59,12 @@ public class DashBoard extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         profile_pic = (ImageView) view.findViewById(R.id.profile_pic);
-        name = (ProRegularTextView) view.findViewById(R.id.name);
-        address = (ProLightTextView) view.findViewById(R.id.address);
+        tv_name = (ProRegularTextView) view.findViewById(R.id.tv_name);
+        tv_active_projects = (ProRegularTextView) view.findViewById(R.id.tv_active_projects);
+        tv_favorite_pros = (ProRegularTextView) view.findViewById(R.id.tv_favorite_pros);
+        tv_address = (ProLightTextView) view.findViewById(R.id.tv_address);
 
         view.findViewById(R.id.post_project).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +73,6 @@ public class DashBoard extends Fragment {
             }
         });
 
-        getUpdateUserData();
         plotUserInformation();
 
         view.findViewById(R.id.userInformation).setOnClickListener(new View.OnClickListener() {
@@ -106,66 +111,52 @@ public class DashBoard extends Fragment {
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.INVITE_FRIEND);
             }
         });
-
-
     }
 
-
-    private void getUpdateUserData() {
-        ProServiceApiHelper.getInstance(getActivity()).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
+    private void plotUserInformation() {
+        ProServiceApiHelper.getInstance(getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-
+                pgDialog = new ProgressDialog(getActivity());
+                pgDialog.setTitle("My Dashboard");
+                pgDialog.setMessage("It's loading.Please wait....");
+                pgDialog.setCancelable(false);
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
+
+                try {
+                    JSONObject jsonObject=new JSONObject(message);
+                    JSONArray jsonInfoArray=jsonObject.getJSONArray("info_array");
+
+                    if (!jsonInfoArray.getJSONObject(0).getString("profile_img").equals(""))
+                        Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
+
+                    tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
+
+                    tv_address.setText(jsonInfoArray.getJSONObject(0).getString("city")
+                            +","+jsonInfoArray.getJSONObject(0).getString("state_code")
+                            +","+jsonInfoArray.getJSONObject(0).getString("zipcode"));
+
+                    tv_active_projects.setText(jsonInfoArray.getJSONObject(0).getString("total_active_project"));
+                    tv_favorite_pros.setText(jsonInfoArray.getJSONObject(0).getString("total_fav_pro"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
 
             @Override
             public void onError(String error) {
-
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         });
-    }
-
-
-    private void plotUserInformation() {
-        DatabaseHandler.getInstance(getActivity()).getUserInfo(
-                ProApplication.getInstance().getUserId(),
-                new DatabaseHandler.onQueryCompleteListener() {
-                    @Override
-                    public void onSuccess(String... s) {
-                        /**
-                         * User data already found in database
-                         */
-
-                        Logger.printMessage("@dashBoard", "on database data exists");
-                        try {
-                            JSONObject mainObject = new JSONObject(s[0]);
-                            JSONArray info_arr = mainObject.getJSONArray("info_array");
-                            JSONObject innerObj = info_arr.getJSONObject(0);
-                            name.setText(innerObj.getString("f_name") + " ");
-                           // name.append(innerObj.getString("l_name") + "");
-
-                            address.setText(innerObj.getString("city") + "," + innerObj.getString("state") + "," + innerObj.getString("zipcode"));
-
-
-                        } catch (JSONException jse) {
-                            jse.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(String s) {
-                        /**
-                         * No user data found on database or something went wrong
-                         */
-                        Logger.printMessage("@dashBoard", "on database data not exists");
-
-                    }
-                });
     }
 
 }

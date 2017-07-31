@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -54,8 +55,8 @@ public class MyProjectDetails extends Fragment {
         img_description = (ProRegularTextView) view.findViewById(R.id.img_description);
         img_project = (ImageView) view.findViewById(R.id.img_project);
 
-        LL_Active= (LinearLayout) view.findViewById(R.id.LL_Active);
-        tv_accepted_review= (ProSemiBoldTextView) view.findViewById(R.id.tv_accepted_review);
+        LL_Active = (LinearLayout) view.findViewById(R.id.LL_Active);
+        tv_accepted_review = (ProSemiBoldTextView) view.findViewById(R.id.tv_accepted_review);
 
 
         tv_posted_in.setText(ProApplication.getInstance().getDataSelected().getDate_time());
@@ -70,7 +71,7 @@ public class MyProjectDetails extends Fragment {
         if (!ProApplication.getInstance().getDataSelected().getProject_image().equals(""))
             Glide.with(getActivity()).load(ProApplication.getInstance().getDataSelected().getProject_image()).centerCrop().into(img_project);
 
-        Logger.printMessage("project_status",""+ProApplication.getInstance().getDataSelected().getProject_status());
+        Logger.printMessage("project_status", "" + ProApplication.getInstance().getDataSelected().getProject_status());
 
         if (ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("Y")) {
             LL_Active.setVisibility(View.VISIBLE);
@@ -81,8 +82,7 @@ public class MyProjectDetails extends Fragment {
         } else if (ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("D")) {
             LL_Active.setVisibility(View.GONE);
             tv_accepted_review.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             LL_Active.setVisibility(View.GONE);
             tv_accepted_review.setVisibility(View.GONE);
         }
@@ -166,11 +166,11 @@ public class MyProjectDetails extends Fragment {
 //        }, ProApplication.getInstance().getDataSelected().getId());
     }
 
-    public void delete(){
+    public void delete() {
         ProServiceApiHelper.getInstance(getActivity()).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
                                                                            @Override
                                                                            public void onStart() {
-
+                                                                               pgDialog = new ProgressDialog(getActivity());
                                                                                pgDialog.setTitle("My project");
                                                                                pgDialog.setMessage("It's deleting.Please wait....");
                                                                                pgDialog.setCancelable(false);
