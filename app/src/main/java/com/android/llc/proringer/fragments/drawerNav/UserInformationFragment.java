@@ -95,6 +95,7 @@ public class UserInformationFragment extends Fragment {
 
 
         plotUserInformation();
+
         view.findViewById(R.id.save_ifo).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
