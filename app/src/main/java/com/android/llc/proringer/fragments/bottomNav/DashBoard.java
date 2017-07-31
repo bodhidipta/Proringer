@@ -9,19 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -179,6 +174,5 @@ public class DashBoard extends Fragment {
             }
         });
     }
-
 
 }
