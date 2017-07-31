@@ -51,9 +51,10 @@ public class UserInformation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     boolean pause_condition=false;
     private ProgressDialog pgDialog = null;
-    static PopupWindow popupWindow;
+    PopupWindow popupWindow;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
+
 
     @Nullable
     @Override
@@ -192,7 +193,7 @@ public class UserInformation extends Fragment {
                                     if (!s.toString().trim().equals("")) {
                                         if(!pause_condition) {
                                             if (checkToShowAfterSearach == false) {
-                                                createGooglePlaceList(address, s.toString());
+                                                createGooglePlaceList(address, s.toString().trim());
                                             } else {
                                                 checkToShowAfterSearach = false;
                                             }
