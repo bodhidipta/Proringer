@@ -66,9 +66,9 @@ public class FavProsFragment extends Fragment {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog(getActivity());
-                pgDialog.setTitle("FavProsFragment");
+                pgDialog.setTitle("Favorite Pros Fragment");
                 pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting FavProsFragment list. Please wait.");
+                pgDialog.setMessage("Getting Favorite Pros Fragment list. Please wait.");
                 pgDialog.show();
             }
 
