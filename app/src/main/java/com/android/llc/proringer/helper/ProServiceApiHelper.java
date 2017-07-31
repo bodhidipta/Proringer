@@ -1653,138 +1653,6 @@ public class ProServiceApiHelper {
     }
 
 
-
-    /**
-     * Search area by google API
-     *
-     * @param callback
-     * @param params
-     */
-
-    public void getSearchArea(final onSearchZipCallback callback,String... params) {
-        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
-            new AsyncTask<String, Void, String>() {
-                String exception = "";
-                List<AddressData> addressList;
-
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    callback.onStartFetch();
-                }
-
-                @Override
-                protected String doInBackground(String... params) {
-                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
-
-                    try {
-                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
-                        Request request = new Request.Builder()
-                                .url(searchLocalProject)
-                                .build();
-
-                        Response response = client.newCall(request).execute();
-                        String responseString = response.body().string();
-
-                        JSONObject mainRes = new JSONObject(responseString);
-
-                        if (mainRes.getString("status").equalsIgnoreCase("OK") &&
-                                mainRes.has("results") &&
-                                mainRes.getJSONArray("results").length() > 0) {
-
-                            addressList = new ArrayList<AddressData>();
-                            JSONArray results = mainRes.getJSONArray("results");
-
-                            for (int i = 0; i < results.length(); i++) {
-
-                                JSONObject innerIncer = results.getJSONObject(i);
-                                if (innerIncer.getJSONArray("types").toString().contains("postal_code")) {
-
-                                    String city = "";
-                                    String country = "";
-                                    String state_code = "";
-
-                                    /**
-                                     * loop through address component
-                                     * for country and state
-                                     */
-                                    if (innerIncer.has("address_components") &&
-                                            innerIncer.getJSONArray("address_components").length() > 0) {
-
-                                        JSONArray address_components = innerIncer.getJSONArray("address_components");
-
-                                        for (int j = 0; j < address_components.length(); j++) {
-
-                                            if (address_components.getJSONObject(j).has("types") &&
-                                                    address_components.getJSONObject(j).getJSONArray("types").length() > 0
-                                                    ) {
-
-                                                JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
-
-                                                for (int k = 0; k < types.length(); k++) {
-                                                    if (types.getString(k).equals("administrative_area_level_2")) {
-                                                        city = address_components.getJSONObject(j).getString("short_name");
-                                                    }
-
-                                                    if (types.getString(k).equals("administrative_area_level_1")) {
-                                                        state_code = address_components.getJSONObject(j).getString("short_name");
-                                                    }
-
-                                                    if (types.getString(k).equals("country")) {
-                                                        country = address_components.getJSONObject(j).getString("short_name");
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        if (country.equals("CA") || country.equals("US")) {
-                                            AddressData data = new AddressData(
-                                                    innerIncer.getString("formatted_address"),
-                                                    state_code,
-                                                    country,
-                                                    params[0]
-                                            );
-                                            data.setCity(city);
-                                            data.setLatitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lat"));
-                                            data.setLongitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lng"));
-                                            addressList.add(data);
-                                        } else {
-                                            callback.onError("Error re pagla !");
-                                        }
-                                    }
-                                } else {
-                                    exception = "Please enter postal code.";
-                                }
-                            }
-                        }
-
-                        Logger.printMessage("location", "" + responseString);
-                        return responseString;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        exception = "Some error occured while searching entered zip. Please search again.";
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(String s) {
-                    super.onPostExecute(s);
-                    if (exception.equals("")) {
-                        if (addressList != null && addressList.size() > 0)
-                            callback.onComplete(addressList);
-                    } else {
-                        callback.onError(exception);
-                    }
-                }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
-
-        } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
-        }
-    }
-
-
     /**
      * Faq Information
      *
@@ -2266,7 +2134,135 @@ public class ProServiceApiHelper {
         }
     }
 
+    /**
+     * Search area by google API
+     *
+     * @param callback
+     * @param params
+     */
 
+    public void getSearchArea(final onSearchZipCallback callback,String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+                List<AddressData> addressList;
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStartFetch();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                    try {
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Request request = new Request.Builder()
+                                .url(searchLocalProject)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        JSONObject mainRes = new JSONObject(responseString);
+
+                        if (mainRes.getString("status").equalsIgnoreCase("OK") &&
+                                mainRes.has("results") &&
+                                mainRes.getJSONArray("results").length() > 0) {
+
+                            addressList = new ArrayList<AddressData>();
+                            JSONArray results = mainRes.getJSONArray("results");
+
+                            for (int i = 0; i < results.length(); i++) {
+
+                                JSONObject innerIncer = results.getJSONObject(i);
+                                if (innerIncer.getJSONArray("types").toString().contains("postal_code")) {
+
+                                    String city = "";
+                                    String country = "";
+                                    String state_code = "";
+
+                                    /**
+                                     * loop through address component
+                                     * for country and state
+                                     */
+                                    if (innerIncer.has("address_components") &&
+                                            innerIncer.getJSONArray("address_components").length() > 0) {
+
+                                        JSONArray address_components = innerIncer.getJSONArray("address_components");
+
+                                        for (int j = 0; j < address_components.length(); j++) {
+
+                                            if (address_components.getJSONObject(j).has("types") &&
+                                                    address_components.getJSONObject(j).getJSONArray("types").length() > 0
+                                                    ) {
+
+                                                JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
+
+                                                for (int k = 0; k < types.length(); k++) {
+                                                    if (types.getString(k).equals("administrative_area_level_2")) {
+                                                        city = address_components.getJSONObject(j).getString("short_name");
+                                                    }
+
+                                                    if (types.getString(k).equals("administrative_area_level_1")) {
+                                                        state_code = address_components.getJSONObject(j).getString("short_name");
+                                                    }
+
+                                                    if (types.getString(k).equals("country")) {
+                                                        country = address_components.getJSONObject(j).getString("short_name");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (country.equals("CA") || country.equals("US")) {
+                                            AddressData data = new AddressData(
+                                                    innerIncer.getString("formatted_address"),
+                                                    state_code,
+                                                    country,
+                                                    params[0]
+                                            );
+                                            data.setCity(city);
+                                            data.setLatitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lat"));
+                                            data.setLongitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lng"));
+                                            addressList.add(data);
+                                        } else {
+                                            callback.onError("Error re pagla !");
+                                        }
+                                    }
+                                } else {
+                                    exception = "Please enter postal code.";
+                                }
+                            }
+                        }
+
+                        Logger.printMessage("location", "" + responseString);
+                        return responseString;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = "Some error occured while searching entered zip. Please search again.";
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        if (addressList != null && addressList.size() > 0)
+                            callback.onComplete(addressList);
+                    } else {
+                        callback.onError(exception);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
 
     /**
      * get zip code  using google api
