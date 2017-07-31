@@ -159,4 +159,26 @@ public class DashBoard extends Fragment {
         });
     }
 
+    private void getUpdateUserData() {
+        ProServiceApiHelper.getInstance(getActivity()).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onComplete(String message) {
+
+
+
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+
 }
