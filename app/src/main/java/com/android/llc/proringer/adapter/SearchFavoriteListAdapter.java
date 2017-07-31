@@ -41,12 +41,10 @@ import org.json.JSONException;
 public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavoriteListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-    ProgressDialog pgDialog;
     FavPros.onOptionSelected callback;
     public SearchFavoriteListAdapter(Context mcontext, JSONArray jsonInfoArray,FavPros.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.jsonInfoArray=jsonInfoArray;
-        pgDialog = new ProgressDialog(mcontext);
         this.callback=callback;
     }
 

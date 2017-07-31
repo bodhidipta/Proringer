@@ -2289,12 +2289,12 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String notiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[0]+","+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[1]
+                        String geocodenotiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[0]+","+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[1]
                                 +"&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("notiAPI",notiAPI);
+                        Logger.printMessage("geocode",geocodenotiAPI);
                         Request request = new Request.Builder()
                                 .get()
-                                .url(notiAPI)
+                                .url(geocodenotiAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
