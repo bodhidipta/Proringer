@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,7 +34,7 @@ import com.android.llc.proringer.viewsmod.SwitchHelper;
 
 public class NotificationsFragment extends Fragment {
     private SwitchHelper email_newsletter, email_chat_msg, email_tips_artcl, email_prjct_rspnse, mobile_newsletter, mobile_chat_msg, mobile_tips_artcl, mobile_prjct_rspnse;
-
+    ProgressDialog pgDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class NotificationsFragment extends Fragment {
         mobile_tips_artcl.setState(ProApplication.getInstance().getUserNotification().isMobile_tips_article());
         mobile_prjct_rspnse.setState(ProApplication.getInstance().getUserNotification().isMobile_project_replies());
 
-        getNotifiactionState();
+        getNotificationState();
         email_newsletter.setOnclickCallback(new SwitchHelper.onClickListener() {
             @Override
             public void onClick(boolean state) {
@@ -121,16 +122,23 @@ public class NotificationsFragment extends Fragment {
 
     }
 
-    private void getNotifiactionState() {
+    private void getNotificationState() {
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getUserNotification(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-
+                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                        pgDialog.setTitle("Notification");
+                        pgDialog.setCancelable(false);
+                        pgDialog.setMessage("Getting Notification data.Please wait...");
+                        pgDialog.show();
                     }
 
                     @Override
                     public void onComplete(String message) {
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
+
                         email_newsletter.setState(ProApplication.getInstance().getUserNotification().isEmail_newsletter());
                         email_chat_msg.setState(ProApplication.getInstance().getUserNotification().isEmail_chat_msg());
                         email_tips_artcl.setState(ProApplication.getInstance().getUserNotification().isEmail_tips_article());
@@ -145,6 +153,8 @@ public class NotificationsFragment extends Fragment {
                     @Override
                     public void onError(String error) {
 
+                        if (pgDialog != null && pgDialog.isShowing())
+                            pgDialog.dismiss();
                     }
                 });
     }
