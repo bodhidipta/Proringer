@@ -26,13 +26,12 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
     private Context mcontext = null;
     private List<ProjectPostedData> itemList;
     MyProjects.onOptionSelected callback;
-    ProgressDialog pgDialog;
+
 
     public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList, MyProjects.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.callback = callback;
-        pgDialog = new ProgressDialog(mcontext);
     }
 
     @Override

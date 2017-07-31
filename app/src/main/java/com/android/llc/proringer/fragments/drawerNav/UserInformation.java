@@ -51,7 +51,7 @@ public class UserInformation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     boolean pause_condition=false;
     private ProgressDialog pgDialog = null;
-    PopupWindow popupWindow;
+    static PopupWindow popupWindow;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
 
