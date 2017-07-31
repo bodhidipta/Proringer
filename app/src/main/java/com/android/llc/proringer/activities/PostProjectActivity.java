@@ -57,7 +57,7 @@ public class PostProjectActivity extends AppCompatActivity {
     public FragmentManager fragmentManager = null;
 
     boolean back = false;
-    boolean forwardStep = false;
+
 
     private ProgressBar progress_posting;
     public ProRegularTextView selected_service_category, pro_request_category, selected_service_property;
