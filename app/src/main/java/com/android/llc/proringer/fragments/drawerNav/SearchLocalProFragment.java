@@ -77,9 +77,9 @@ public class SearchLocalProFragment extends Fragment {
             @Override
             public void onStart() {
                 pgDialog1 = new ProgressDialog((LandScreenActivity)getActivity());
-                pgDialog1.setTitle("FavProsFragment");
+                pgDialog1.setTitle("ProsFragment");
                 pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting FavProsFragment list. Please wait.");
+                pgDialog1.setMessage("Getting ProsFragment list. Please wait.");
                 pgDialog1.show();
             }
 
