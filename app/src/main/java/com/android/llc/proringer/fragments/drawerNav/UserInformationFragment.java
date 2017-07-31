@@ -227,8 +227,8 @@ public class UserInformationFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
             @Override
-            public void onComplete(ArrayList<String> listdata) {
-                showDialog(view,listdata);
+            public void onComplete(ArrayList<String> listData) {
+                showDialog(view,listData);
             }
 
             @Override
