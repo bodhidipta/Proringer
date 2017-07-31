@@ -84,26 +84,31 @@ public class LandScreenActivity extends AppCompatActivity{
                 Logger.printMessage("Fragment_stack", "" + getSupportFragmentManager().getBackStackEntryCount());
                 switch (selected_tag) {
                     case BottomNav.DASHBOARD:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         transactDashBoard();
                         break;
                     case BottomNav.MY_PROJECTS:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         transactMyProjects();
                         break;
                     case BottomNav.MESSAGES:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         transactMessages();
                         break;
                     case BottomNav.FAV_PROS:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         transactFavPros();
                         break;
                     case BottomNav.CREATE_PROJECT:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         toggleToolBar(false);
@@ -122,36 +127,42 @@ public class LandScreenActivity extends AppCompatActivity{
             public void onClickItem(String tag) {
                 switch (tag) {
                     case NavigationHandler.FIND_LOCAL_PROS:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(true);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactSearchLocalPros();
                         break;
                     case NavigationHandler.USER_INFORMATION:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactUserInformation();
                         break;
                     case NavigationHandler.LOGIN_SETTINGS:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactLoginSettings();
                         break;
                     case NavigationHandler.NOTIFICATION:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transacNotifications();
                         break;
                     case NavigationHandler.HOME_SCHEDUL:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactHomeRemainder();
                         break;
                     case NavigationHandler.INVITE_FRIEND:
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
@@ -159,15 +170,17 @@ public class LandScreenActivity extends AppCompatActivity{
                         break;
 
                     case NavigationHandler.SUPPORT:
+                        DismissPopUpWindowByCustom();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         break;
                     case NavigationHandler.ABOUT:
+                        DismissPopUpWindowByCustom();
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         break;
                     case NavigationHandler.LOGOUT:
-
+                        DismissPopUpWindowByCustom();
                         closeDrawer();
                         ProApplication.getInstance().logOut();
                         startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
@@ -228,7 +241,7 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction of DashBoard
      */
     private void transactDashBoard() {
-
+        DismissPopUpWindowByCustom();
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + DashBoard.class.getCanonicalName()) != null) {
@@ -248,7 +261,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction for MyProject
      */
     public void transactMyProjects() {
-
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + MyProjects.class.getCanonicalName()) != null) {
@@ -302,7 +314,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction for Notification
      */
     public void transacNotifications() {
-
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + Notifications.class.getCanonicalName()) != null) {
@@ -328,7 +339,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction for Favorite Pros
      */
     private void transactFavPros() {
-
         toggleToolBar(false);
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + FavPros.class.getCanonicalName()) != null) {
             Logger.printMessage("back_stack", "Removed *****" + FavPros.class.getCanonicalName());
@@ -350,7 +360,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction for Messages
      */
     private void transactMessages() {
-
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + Message.class.getCanonicalName()) != null) {
@@ -397,7 +406,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction for Search Local Pros
      */
     public void transactSearchLocalPros() {
-
         toggleToolBar(false);
         toggleProMapSearch(true);
         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
@@ -423,7 +431,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Fragment transaction for my projects rate pro
      */
     public void transactMyProjectRate() {
-
         toggleToolBar(true);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + MyProjectRatePro.class.getCanonicalName()) != null) {
@@ -447,7 +454,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Transact Login settings
      */
     public void transactLoginSettings() {
-
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + LoginSettings.class.getCanonicalName()) != null) {
@@ -471,7 +477,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Transact Invite a friends
      */
     public void transactInviteFriends() {
-
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + InviteAfriend.class.getCanonicalName()) != null) {
@@ -495,7 +500,6 @@ public class LandScreenActivity extends AppCompatActivity{
      * Transact User Information
      */
     public void transactUserInformation() {
-
         toggleToolBar(false);
 
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + UserInformation.class.getCanonicalName()) != null) {
@@ -519,9 +523,7 @@ public class LandScreenActivity extends AppCompatActivity{
      * Transact Home remainder
      */
     public void transactHomeRemainder() {
-
         toggleToolBar(false);
-
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + HomeReminders.class.getCanonicalName()) != null) {
             Logger.printMessage("back_stack", "Removed *****" + HomeReminders.class.getCanonicalName());
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + HomeReminders.class.getCanonicalName())).commit();
@@ -544,6 +546,7 @@ public class LandScreenActivity extends AppCompatActivity{
      * Transact post project activity
      */
     private void transactCreateProject() {
+        DismissPopUpWindowByCustom();
         startActivity(new Intent(LandScreenActivity.this, PostProjectActivity.class));
     }
 
@@ -636,6 +639,11 @@ public class LandScreenActivity extends AppCompatActivity{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void DismissPopUpWindowByCustom() {
+        if (fragmentManager.findFragmentByTag(UserInformation.class.getCanonicalName()) != null && fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName().equals(UserInformation.class.getCanonicalName()))
+            ((UserInformation) fragmentManager.findFragmentByTag(UserInformation.class.getCanonicalName())).closeMyPopUpWindow();
     }
 
 }
