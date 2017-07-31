@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.fragments.drawerNav.UserInformation;
+import com.android.llc.proringer.fragments.drawerNav.UserInformationFragment;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import java.util.ArrayList;
 
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCustomListAdapterDialog.MyViewHolder> {
     Context mContext;
     ArrayList<String> stringArrayList;
-    UserInformation.onOptionSelected callback;
-    public PlaceCustomListAdapterDialog(Context mContext,ArrayList<String> stringArrayList, UserInformation.onOptionSelected callback){
+    UserInformationFragment.onOptionSelected callback;
+    public PlaceCustomListAdapterDialog(Context mContext,ArrayList<String> stringArrayList, UserInformationFragment.onOptionSelected callback){
         this.mContext=mContext;
         this.stringArrayList=stringArrayList;
         this.callback=callback;

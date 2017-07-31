@@ -19,12 +19,12 @@ import android.widget.ProgressBar;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.fragments.postProject.CateGoryList;
-import com.android.llc.proringer.fragments.postProject.PostProjectContainDescription;
-import com.android.llc.proringer.fragments.postProject.PostProjectRegistrationandFinalize;
-import com.android.llc.proringer.fragments.postProject.PostProjectSelectImage;
-import com.android.llc.proringer.fragments.postProject.SearchLocation;
-import com.android.llc.proringer.fragments.postProject.ServiceAndOtherList;
+import com.android.llc.proringer.fragments.postProject.CateGoryListFragment;
+import com.android.llc.proringer.fragments.postProject.PostProjectContainDescriptionFragment;
+import com.android.llc.proringer.fragments.postProject.PostProjectRegistrationAndFinalizeFragment;
+import com.android.llc.proringer.fragments.postProject.PostProjectSelectImageFragment;
+import com.android.llc.proringer.fragments.postProject.SearchLocationFragment;
+import com.android.llc.proringer.fragments.postProject.ServiceAndOtherListFragment;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.pojo.ProCategoryData;
@@ -171,28 +171,28 @@ public class PostProjectActivity extends AppCompatActivity {
         closeKeypad();
         isForth=false;
         if (fragmentPushList.size() >= 1) {
-            if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryList.class.getCanonicalName())) {
+            if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryListFragment.class.getCanonicalName())) {
                 finish();
-            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherList.class.getCanonicalName())) {
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherListFragment.class.getCanonicalName())) {
 
                 performServiceListingBack();
-            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectSelectImage.class.getCanonicalName())) {
-                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectSelectImage.class.getCanonicalName())).commit();
-                fragmentManager.popBackStack("" + PostProjectSelectImage.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectSelectImageFragment.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectSelectImageFragment.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + PostProjectSelectImageFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentPushList.remove(fragmentPushList.size() - 1);
                 Logger.printMessage("@back_service", "Got fragmnet on top after pop :" + getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
 
-            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectContainDescription.class.getCanonicalName())) {
-                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectContainDescription.class.getCanonicalName())).commit();
-                fragmentManager.popBackStack("" + PostProjectContainDescription.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectContainDescriptionFragment.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectContainDescriptionFragment.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + PostProjectContainDescriptionFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentPushList.remove(fragmentPushList.size() - 1);
-            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(SearchLocation.class.getCanonicalName())) {
-                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + SearchLocation.class.getCanonicalName())).commit();
-                fragmentManager.popBackStack("" + SearchLocation.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(SearchLocationFragment.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + SearchLocationFragment.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + SearchLocationFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentPushList.remove(fragmentPushList.size() - 1);
-            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectRegistrationandFinalize.class.getCanonicalName())) {
-                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectRegistrationandFinalize.class.getCanonicalName())).commit();
-                fragmentManager.popBackStack("" + PostProjectRegistrationandFinalize.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())) {
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())).commit();
+                fragmentManager.popBackStack("" + PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentPushList.remove(fragmentPushList.size() - 1);
             }
         }
@@ -270,8 +270,8 @@ public class PostProjectActivity extends AppCompatActivity {
                         step++;
                         progress_posting.setProgress(step);
                         selected_service_property.setText("" + step10option);
-                        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationandFinalize.class.getCanonicalName())){
-                            ((PostProjectRegistrationandFinalize) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationandFinalize.class.getCanonicalName())).showProjectPosted();
+                        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())){
+                            ((PostProjectRegistrationAndFinalizeFragment) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())).showProjectPosted();
 
                         }
 
@@ -338,12 +338,12 @@ public class PostProjectActivity extends AppCompatActivity {
         switch (next) {
             case 1:
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
-                transaction1.replace(R.id.container_fragment, new CateGoryList(), "" + CateGoryList.class.getCanonicalName());
-                transaction1.addToBackStack("" + CateGoryList.class.getCanonicalName());
+                transaction1.replace(R.id.container_fragment, new CateGoryListFragment(), "" + CateGoryListFragment.class.getCanonicalName());
+                transaction1.addToBackStack("" + CateGoryListFragment.class.getCanonicalName());
                 transaction1.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
-                fragmentPushList.add(CateGoryList.class.getCanonicalName());
+                fragmentPushList.add(CateGoryListFragment.class.getCanonicalName());
 
                 Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
@@ -352,13 +352,13 @@ public class PostProjectActivity extends AppCompatActivity {
             case 2:
                 isForth=true;
                 FragmentTransaction transaction2 = fragmentManager.beginTransaction();
-                transaction2.replace(R.id.container_fragment, new ServiceAndOtherList(), "" + ServiceAndOtherList.class.getCanonicalName());
-                transaction2.addToBackStack("" + ServiceAndOtherList.class.getCanonicalName());
+                transaction2.replace(R.id.container_fragment, new ServiceAndOtherListFragment(), "" + ServiceAndOtherListFragment.class.getCanonicalName());
+                transaction2.addToBackStack("" + ServiceAndOtherListFragment.class.getCanonicalName());
                 transaction2.commit();
 
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
-                fragmentPushList.add(ServiceAndOtherList.class.getCanonicalName());
+                fragmentPushList.add(ServiceAndOtherListFragment.class.getCanonicalName());
                 Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
@@ -366,12 +366,12 @@ public class PostProjectActivity extends AppCompatActivity {
             case 3:
 
                 FragmentTransaction transaction3 = fragmentManager.beginTransaction();
-                transaction3.replace(R.id.container_fragment, new PostProjectSelectImage(), "" + PostProjectSelectImage.class.getCanonicalName());
-                transaction3.addToBackStack("" + PostProjectSelectImage.class.getCanonicalName());
+                transaction3.replace(R.id.container_fragment, new PostProjectSelectImageFragment(), "" + PostProjectSelectImageFragment.class.getCanonicalName());
+                transaction3.addToBackStack("" + PostProjectSelectImageFragment.class.getCanonicalName());
                 transaction3.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
-                fragmentPushList.add(PostProjectSelectImage.class.getCanonicalName());
+                fragmentPushList.add(PostProjectSelectImageFragment.class.getCanonicalName());
                 Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
@@ -379,13 +379,13 @@ public class PostProjectActivity extends AppCompatActivity {
 
             case 4:
                 FragmentTransaction transaction4 = fragmentManager.beginTransaction();
-                transaction4.replace(R.id.container_fragment, new PostProjectContainDescription(), "" + PostProjectContainDescription.class.getCanonicalName());
-                transaction4.addToBackStack("" + PostProjectContainDescription.class.getCanonicalName());
+                transaction4.replace(R.id.container_fragment, new PostProjectContainDescriptionFragment(), "" + PostProjectContainDescriptionFragment.class.getCanonicalName());
+                transaction4.addToBackStack("" + PostProjectContainDescriptionFragment.class.getCanonicalName());
                 transaction4.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
 
-                fragmentPushList.add(PostProjectContainDescription.class.getCanonicalName());
+                fragmentPushList.add(PostProjectContainDescriptionFragment.class.getCanonicalName());
                 Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
@@ -394,12 +394,12 @@ public class PostProjectActivity extends AppCompatActivity {
             case 5:
 
                 FragmentTransaction transaction5 = fragmentManager.beginTransaction();
-                transaction5.replace(R.id.container_fragment, new SearchLocation(), "" + SearchLocation.class.getCanonicalName());
-                transaction5.addToBackStack("" + SearchLocation.class.getCanonicalName());
+                transaction5.replace(R.id.container_fragment, new SearchLocationFragment(), "" + SearchLocationFragment.class.getCanonicalName());
+                transaction5.addToBackStack("" + SearchLocationFragment.class.getCanonicalName());
                 transaction5.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
-                fragmentPushList.add(SearchLocation.class.getCanonicalName());
+                fragmentPushList.add(SearchLocationFragment.class.getCanonicalName());
                 Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
@@ -407,12 +407,12 @@ public class PostProjectActivity extends AppCompatActivity {
             case 6:
 
                 FragmentTransaction transaction6 = fragmentManager.beginTransaction();
-                transaction6.replace(R.id.container_fragment, new PostProjectRegistrationandFinalize(), "" + PostProjectRegistrationandFinalize.class.getCanonicalName());
-                transaction6.addToBackStack("" + PostProjectRegistrationandFinalize.class.getCanonicalName());
+                transaction6.replace(R.id.container_fragment, new PostProjectRegistrationAndFinalizeFragment(), "" + PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName());
+                transaction6.addToBackStack("" + PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName());
                 transaction6.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
-                fragmentPushList.add(PostProjectRegistrationandFinalize.class.getCanonicalName());
+                fragmentPushList.add(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName());
                 Logger.printMessage("fragmentPushList", "" + fragmentPushList.size());
 
                 break;
@@ -495,14 +495,14 @@ public class PostProjectActivity extends AppCompatActivity {
 
     private void performServiceListingBack() {
         Logger.printMessage("@back_service", "Got fragmnet on top :" + getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
-        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(ServiceAndOtherList.class.getCanonicalName())
+        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(ServiceAndOtherListFragment.class.getCanonicalName())
                 &&
-                ((ServiceAndOtherList) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherList.class.getCanonicalName())).step > 0) {
-            ((ServiceAndOtherList) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherList.class.getCanonicalName())).performBack();
+                ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).step > 0) {
+            ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).performBack();
         } else {
             isForth=true;
-            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + ServiceAndOtherList.class.getCanonicalName())).commit();
-            fragmentManager.popBackStack("" + ServiceAndOtherList.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + ServiceAndOtherListFragment.class.getCanonicalName())).commit();
+            fragmentManager.popBackStack("" + ServiceAndOtherListFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentPushList.remove(fragmentPushList.size() - 1);
 
         }

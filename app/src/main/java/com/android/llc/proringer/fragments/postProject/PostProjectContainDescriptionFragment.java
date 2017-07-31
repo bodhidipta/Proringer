@@ -14,7 +14,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
  * Created by su on 7/13/17.
  */
 
-public class PostProjectContainDescription extends Fragment {
+public class PostProjectContainDescriptionFragment extends Fragment {
     ProRegularEditText project_description_text;
     @Nullable
     @Override

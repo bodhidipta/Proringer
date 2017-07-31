@@ -49,7 +49,7 @@ import java.util.ArrayList;
  * limitations under the License.
  */
 
-public class UserInformation extends Fragment {
+public class UserInformationFragment extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     private boolean pause_condition=false;
     private ProgressDialog pgDialog = null;

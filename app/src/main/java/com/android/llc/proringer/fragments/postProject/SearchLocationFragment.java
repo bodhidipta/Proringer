@@ -32,7 +32,7 @@ import java.util.List;
  * Created by su on 7/13/17.
  */
 
-public class SearchLocation extends Fragment {
+public class SearchLocationFragment extends Fragment {
     List<AddressData> addressDataList;
     ProRegularEditText zip_code_text;
     private boolean zipSearchGoing = false;

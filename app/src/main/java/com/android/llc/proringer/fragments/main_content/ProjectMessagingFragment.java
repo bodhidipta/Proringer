@@ -34,7 +34,7 @@ import com.android.llc.proringer.helper.onItemClick;
  * limitations under the License.
  */
 
-public class ProjectMessaging extends Fragment {
+public class ProjectMessagingFragment extends Fragment {
     RelativeLayout detailed_project_search;
     RecyclerView message_list;
 

@@ -40,7 +40,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * limitations under the License.
  */
 
-public class LoginSettings extends Fragment {
+public class LoginSettingsFragment extends Fragment {
     private ProRegularTextView current_email, update_email, change_password;
     private ProLightEditText new_email, confirm_new_email, current_password, new_password, confirm_new_password;
     private ProgressDialog pgDialog = null;

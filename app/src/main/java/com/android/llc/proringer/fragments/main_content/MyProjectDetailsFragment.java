@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
  * Created by su on 7/17/17.
  */
 
-public class MyProjectDetails extends Fragment {
+public class MyProjectDetailsFragment extends Fragment {
     ProgressDialog pgDialog;
     ProRegularTextView tv_posted_in, tv_project, tv_service, tv_type, tv_property, tv_status, tv_start, img_description;
     ImageView img_project;
@@ -153,7 +153,7 @@ public class MyProjectDetails extends Fragment {
 //                    dialog.dismiss();
 //
 //                new AlertDialog.Builder(getActivity())
-//                        .setTitle("MyProjects Error")
+//                        .setTitle("MyProjectsFragment Error")
 //                        .setMessage("" + error)
 //                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 //                            @Override

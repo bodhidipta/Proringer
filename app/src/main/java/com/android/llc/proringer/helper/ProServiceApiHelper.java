@@ -1647,7 +1647,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * Faq Information
+     * FaqFragment Information
      *
      * @param callback
      */
@@ -2615,7 +2615,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * get DashBoard details
+     * get DashBoardFragment details
      *
      * @param callback
      */

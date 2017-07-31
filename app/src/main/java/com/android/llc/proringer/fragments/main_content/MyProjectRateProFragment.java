@@ -16,7 +16,7 @@ import com.android.llc.proringer.adapter.MyProjectRateProAdapter;
  * Created by su on 7/25/17.
  */
 
-public class MyProjectRatePro extends Fragment {
+public class MyProjectRateProFragment extends Fragment {
     RecyclerView recyclerView;
     MyProjectRateProAdapter myProjectRateProAdapter;
     @Nullable

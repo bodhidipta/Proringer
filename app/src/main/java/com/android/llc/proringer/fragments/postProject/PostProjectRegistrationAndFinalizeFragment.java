@@ -20,7 +20,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
  * Created by su on 7/13/17.
  */
 
-public class PostProjectRegistrationandFinalize extends Fragment {
+public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
     private LinearLayout content_post_form_submit;
 

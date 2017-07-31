@@ -28,7 +28,7 @@ import java.util.LinkedList;
  * Created by su on 7/13/17.
  */
 
-public class CateGoryList extends Fragment {
+public class CateGoryListFragment extends Fragment {
     RecyclerView category_listing;
     ProgressDialog pgDialog;
     PostProjectCategoryGridAdapter gridAdapter;

@@ -42,7 +42,7 @@ import org.json.JSONObject;
  * limitations under the License.
  */
 
-public class SearchLocalPro extends Fragment {
+public class SearchLocalProFragment extends Fragment {
     private RecyclerView pros_list;
     String category_search = "";
     String zip_search = "";
@@ -77,9 +77,9 @@ public class SearchLocalPro extends Fragment {
             @Override
             public void onStart() {
                 pgDialog1 = new ProgressDialog((LandScreenActivity)getActivity());
-                pgDialog1.setTitle("FavPros");
+                pgDialog1.setTitle("FavProsFragment");
                 pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting FavPros list. Please wait.");
+                pgDialog1.setMessage("Getting FavProsFragment list. Please wait.");
                 pgDialog1.show();
             }
 

@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
-import com.android.llc.proringer.fragments.drawerNav.SearchLocalPro;
+import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -45,10 +45,10 @@ import org.json.JSONException;
 public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-    SearchLocalPro.onOptionSelected callback;
+    SearchLocalProFragment.onOptionSelected callback;
 
 
-    public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray,SearchLocalPro.onOptionSelected callback ) {
+    public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray,SearchLocalProFragment.onOptionSelected callback ) {
         this.mcontext = mcontext;
         this.jsonInfoArray = jsonInfoArray;
         this.callback=callback;

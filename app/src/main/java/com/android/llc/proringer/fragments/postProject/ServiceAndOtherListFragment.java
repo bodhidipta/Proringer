@@ -24,7 +24,7 @@ import java.util.LinkedList;
  * Created by su on 7/13/17.
  */
 
-public class ServiceAndOtherList extends Fragment {
+public class ServiceAndOtherListFragment extends Fragment {
     private ProgressDialog pgDialog;
     private RecyclerView service_list;
     private PostProjectServiceAndOtherListAdapter adapter;

@@ -37,7 +37,7 @@ import java.util.List;
  * -->
  */
 
-public class MyProjects extends Fragment {
+public class MyProjectsFragment extends Fragment {
     ProgressDialog pgDialog;
 
     @Nullable
@@ -89,7 +89,7 @@ public class MyProjects extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
                 new AlertDialog.Builder((LandScreenActivity)getActivity())
-                        .setTitle("MyProjects Error")
+                        .setTitle("MyProjectsFragment Error")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

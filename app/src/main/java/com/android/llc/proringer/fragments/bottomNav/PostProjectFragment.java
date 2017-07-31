@@ -45,7 +45,7 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class PostProject extends Fragment {
+public class PostProjectFragment extends Fragment {
     private ProgressBar progress_posting;
     private ProRegularTextView selected_service_category, service_request_category, pro_request_category, selected_service_property;
     private RecyclerView pro_service_listing;

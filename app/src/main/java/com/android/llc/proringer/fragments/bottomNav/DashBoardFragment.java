@@ -39,7 +39,7 @@ import org.json.JSONObject;
  * -->
  */
 
-public class DashBoard extends Fragment {
+public class DashBoardFragment extends Fragment {
     ImageView profile_pic;
     ProRegularTextView tv_name,tv_active_projects,tv_favorite_pros;
     ProLightTextView tv_address;

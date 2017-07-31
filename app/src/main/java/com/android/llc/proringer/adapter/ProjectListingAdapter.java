@@ -1,6 +1,5 @@
 package com.android.llc.proringer.adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,7 @@ import android.widget.LinearLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.fragments.bottomNav.MyProjects;
+import com.android.llc.proringer.fragments.bottomNav.MyProjectsFragment;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -25,10 +24,10 @@ import java.util.List;
 public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAdapter.ViewHolder> {
     private Context mcontext = null;
     private List<ProjectPostedData> itemList;
-    MyProjects.onOptionSelected callback;
+    MyProjectsFragment.onOptionSelected callback;
 
 
-    public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList, MyProjects.onOptionSelected callback) {
+    public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList, MyProjectsFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.callback = callback;

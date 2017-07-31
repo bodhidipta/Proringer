@@ -35,7 +35,7 @@ import java.util.ArrayList;
  * limitations under the License.
  */
 
-public class Message extends Fragment {
+public class MessageFragment extends Fragment {
     private RecyclerView project_message_list;
     private ProjectMessageAdapter adapter;
 

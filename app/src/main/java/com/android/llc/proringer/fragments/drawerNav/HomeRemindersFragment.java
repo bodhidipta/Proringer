@@ -65,7 +65,7 @@ import static android.app.Activity.RESULT_OK;
  * limitations under the License.
  */
 
-public class HomeReminders extends Fragment {
+public class HomeRemindersFragment extends Fragment {
 
     private HashMap<String, ArrayList<String>> idList;
     private HashMap<String, ArrayList<String>> valueList;

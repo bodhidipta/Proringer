@@ -32,7 +32,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by su on 7/13/17.
  */
 
-public class PostProjectSelectImage extends Fragment {
+public class PostProjectSelectImageFragment extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 5;
     private static final int PICK_IMAGE = 3;
     private String mCurrentPhotoPath = "";

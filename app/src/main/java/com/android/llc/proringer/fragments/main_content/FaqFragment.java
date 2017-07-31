@@ -20,7 +20,7 @@ import org.json.JSONObject;
  * Created by su on 7/19/17.
  */
 
-public class Faq extends Fragment {
+public class FaqFragment extends Fragment {
     LinearLayout linear_main_container;
     ProgressDialog pgDialog;
 
@@ -46,7 +46,7 @@ public class Faq extends Fragment {
             @Override
             public void onStart() {
                 pgDialog=new ProgressDialog(getActivity());
-                pgDialog.setTitle("Faq");
+                pgDialog.setTitle("FaqFragment");
                 pgDialog.setMessage("Fag page loading Please wait...");
                 pgDialog.setCancelable(false);
                 pgDialog.show();

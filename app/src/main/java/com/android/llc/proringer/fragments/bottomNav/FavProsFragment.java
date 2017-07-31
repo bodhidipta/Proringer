@@ -42,7 +42,7 @@ import org.json.JSONObject;
  * -->
  */
 
-public class FavPros extends Fragment {
+public class FavProsFragment extends Fragment {
     private RecyclerView pros_list;
     ProgressDialog pgDialog;
     SearchFavoriteListAdapter searchFavoriteListAdapter;
@@ -66,9 +66,9 @@ public class FavPros extends Fragment {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog(getActivity());
-                pgDialog.setTitle("FavPros");
+                pgDialog.setTitle("FavProsFragment");
                 pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting FavPros list. Please wait.");
+                pgDialog.setMessage("Getting FavProsFragment list. Please wait.");
                 pgDialog.show();
             }
 
@@ -103,7 +103,7 @@ public class FavPros extends Fragment {
                     pgDialog.dismiss();
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("FavPros Error")
+                        .setTitle("FavProsFragment Error")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

@@ -1,10 +1,7 @@
 package com.android.llc.proringer.adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -12,21 +9,16 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProjectDetailsActivity;
-import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.fragments.bottomNav.FavPros;
-import com.android.llc.proringer.fragments.bottomNav.MyProjects;
-import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -41,8 +33,8 @@ import org.json.JSONException;
 public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavoriteListAdapter.ViewHolder> {
     private Context mcontext = null;
     JSONArray jsonInfoArray;
-    FavPros.onOptionSelected callback;
-    public SearchFavoriteListAdapter(Context mcontext, JSONArray jsonInfoArray,FavPros.onOptionSelected callback) {
+    FavProsFragment.onOptionSelected callback;
+    public SearchFavoriteListAdapter(Context mcontext, JSONArray jsonInfoArray,FavProsFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.jsonInfoArray=jsonInfoArray;
         this.callback=callback;
