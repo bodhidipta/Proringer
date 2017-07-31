@@ -50,11 +50,11 @@ import java.util.ArrayList;
 
 public class UserInformation extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
-    boolean pause_condition=false;
+    private boolean pause_condition=false;
     private ProgressDialog pgDialog = null;
-    PopupWindow popupWindow;
-    boolean checkToShowAfterSearach = false;
-    PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
+    private static PopupWindow popupWindow;
+    private boolean checkToShowAfterSearach = false;
+    private PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
 
 
     @Nullable
@@ -372,7 +372,9 @@ public class UserInformation extends Fragment {
 
         } else {
             popupWindow.showAsDropDown(v, -5, 0);
-            placeCustomListAdapterDialog.setRefresh(stringArrayList);
+            if (placeCustomListAdapterDialog!=null) {
+                placeCustomListAdapterDialog.setRefresh(stringArrayList);
+            }
         }
     }
 
