@@ -172,7 +172,7 @@ public class MyProjectDetailsFragment extends Fragment {
                                                                            public void onStart() {
                                                                                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                                                                                pgDialog.setTitle("My project");
-                                                                               pgDialog.setMessage("project is deleting.Please wait...");
+                                                                               pgDialog.setMessage("Project is deleting.Please wait...");
                                                                                pgDialog.setCancelable(false);
                                                                                pgDialog.show();
 

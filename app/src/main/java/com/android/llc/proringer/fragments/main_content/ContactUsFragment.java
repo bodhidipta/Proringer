@@ -85,7 +85,7 @@ public class ContactUsFragment extends Fragment {
                     public void onStart() {
                         pgDialog = new ProgressDialog(getActivity());
                         pgDialog.setTitle("Contact Us");
-                        pgDialog.setMessage("your contact address is sending to us.Please wait...");
+                        pgDialog.setMessage("Your contact address is sending to us.Please wait...");
                         pgDialog.setCancelable(false);
                         pgDialog.show();
                     }
