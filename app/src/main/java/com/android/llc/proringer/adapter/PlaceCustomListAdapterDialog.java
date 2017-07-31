@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.fragments.drawerNav.UserInformation;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 
 /**
