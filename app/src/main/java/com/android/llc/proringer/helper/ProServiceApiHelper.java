@@ -2318,7 +2318,7 @@ public class ProServiceApiHelper {
         }
     }
 
-    public void getSearchPlacesFixFilter(final onSearchPlacesNameCallback callback,String... params) {
+    public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback,String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";

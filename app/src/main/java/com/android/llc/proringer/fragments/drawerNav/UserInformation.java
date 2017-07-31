@@ -224,7 +224,7 @@ public class UserInformation extends Fragment {
                 });
     }
     public void createGooglePlaceList(final View view, String place) {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getSearchPlacesFixFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
             @Override
             public void onComplete(ArrayList<String> listdata) {
