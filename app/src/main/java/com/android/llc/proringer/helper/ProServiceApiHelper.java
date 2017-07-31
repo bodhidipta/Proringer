@@ -62,8 +62,8 @@ public class ProServiceApiHelper {
     private String serviceAPI = "http://esolz.co.in/lab6/proringer_latest/app_catrgoryservice_list";
     private String registrationAPI = "http://esolz.co.in/lab6/proringer_latest/app_signup";
     private String loginAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_login";
-    private String forgetPaswwordAPI = "http://esolz.co.in/lab6/proringer_latest/app_forgot_password";
-    private String resetPaswwordAPI = "http://esolz.co.in/lab6/proringer_latest/app_resetpassword";
+    private String forgetPasswordAPI = "http://esolz.co.in/lab6/proringer_latest/app_forgot_password";
+    private String resetPasswordAPI = "http://esolz.co.in/lab6/proringer_latest/app_resetpassword";
     private String getUserInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_userinformation_list";
     private String updateUserInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_userinfo_edit";
     private String changeUserEmailAPI = "http://esolz.co.in/lab6/proringer_latest/app_change_email";
@@ -151,8 +151,8 @@ public class ProServiceApiHelper {
                                 .build();
 
                         Response response = client.newCall(request).execute();
-                        String responsetring = response.body().string();
-                        JSONObject mainObject = new JSONObject(responsetring);
+                        String responseString = response.body().string();
+                        JSONObject mainObject = new JSONObject(responseString);
 
                         if (mainObject.getBoolean("response")) {
                             JSONArray lsitingArray = mainObject.getJSONArray("info_array");
@@ -230,8 +230,8 @@ public class ProServiceApiHelper {
                                 .build();
 
                         Response response = client.newCall(request).execute();
-                        String responsetring = response.body().string();
-                        JSONObject mainObject = new JSONObject(responsetring);
+                        String responseString = response.body().string();
+                        JSONObject mainObject = new JSONObject(responseString);
 
                         if (mainObject.getBoolean("response")) {
                             JSONArray lsitingArray = mainObject.getJSONArray("info_array");
@@ -396,8 +396,8 @@ public class ProServiceApiHelper {
                                 .post(body)
                                 .build();
 
-                        Response resposne = client.newCall(request).execute();
-                        String response_string = resposne.body().string();
+                        Response response = client.newCall(request).execute();
+                        String response_string = response.body().string();
                         Logger.printMessage("LogIN", loginAPI + "\n" + params[0] + "/" + params[1] + "\n" + response_string);
                         JSONObject mainResponseObj = new JSONObject(response_string);
                         if (mainResponseObj.getBoolean("response")) {
@@ -460,10 +460,10 @@ public class ProServiceApiHelper {
                                 .add("user_email", params[0]).build();
 
                         Logger.printMessage("user_email",":-"+params[0]);
-                        Logger.printMessage("forgetPaswwordAPI",forgetPaswwordAPI);
+                        Logger.printMessage("forgetPasswordAPI",forgetPasswordAPI);
 
                         Request request = new Request.Builder()
-                                .url(forgetPaswwordAPI)
+                                .url(forgetPasswordAPI)
                                 .post(requestBody)
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
@@ -514,7 +514,6 @@ public class ProServiceApiHelper {
                 protected void onPreExecute() {
                     super.onPreExecute();
                     callback.onStart();
-
                 }
 
                 @Override
@@ -527,10 +526,10 @@ public class ProServiceApiHelper {
 
                         Logger.printMessage("user_reset_code",":-"+params[0]);
                         Logger.printMessage("new_password",":-"+params[1]);
-                        Logger.printMessage("resetPaswwordAPI",resetPaswwordAPI);
+                        Logger.printMessage("resetPasswordAPI",resetPasswordAPI);
 
                         Request request = new Request.Builder()
-                                .url(resetPaswwordAPI)
+                                .url(resetPasswordAPI)
                                 .post(requestBody)
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
@@ -755,6 +754,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -826,6 +826,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -897,6 +898,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -904,13 +906,13 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String notiAPI = getNotificationDetailsAPI + "?user_id=" + ProApplication.getInstance().getUserId();
+                        String notificationAPI = getNotificationDetailsAPI + "?user_id=" + ProApplication.getInstance().getUserId();
                         Request request = new Request.Builder()
                                 .get()
-                                .url(notiAPI)
+                                .url(notificationAPI)
                                 .build();
 
-                        Logger.printMessage("notiAPI",notiAPI);
+                        Logger.printMessage("notificationAPI",notificationAPI);
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
@@ -974,7 +976,8 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                }
+                    callback.onStart();
+            }
 
                 @Override
                 protected String doInBackground(String... params) {
@@ -1057,6 +1060,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -1119,6 +1123,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -1183,6 +1188,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -1295,6 +1301,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -1659,7 +1666,6 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-
                     callback.onStart();
                 }
 
@@ -1724,7 +1730,6 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-
                     callback.onStart();
                 }
 
@@ -1789,7 +1794,6 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-
                     callback.onStart();
                 }
 
@@ -1856,6 +1860,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -1938,6 +1943,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -2009,6 +2015,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -2016,11 +2023,11 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String notiAPI = favoriteProsListAPI + ProApplication.getInstance().getUserId();
-                        Logger.printMessage("notiAPI",notiAPI);
+                        String FavProListAPI = favoriteProsListAPI + ProApplication.getInstance().getUserId();
+                        Logger.printMessage("favoriteProsListAPI",FavProListAPI);
                         Request request = new Request.Builder()
                                 .get()
-                                .url(notiAPI)
+                                .url(FavProListAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -2071,6 +2078,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -2485,6 +2493,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override
@@ -2506,7 +2515,7 @@ public class ProServiceApiHelper {
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
 
-                        Logger.printMessage("proslistingAPI", "" + responseString);
+                        Logger.printMessage("prosListingAPI", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
                             return responseString;
