@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -18,6 +19,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 public class ResendConfirmationActivity extends AppCompatActivity {
     ProRegularTextView tv_resend;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +30,11 @@ public class ResendConfirmationActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tv_resend= (ProRegularTextView) findViewById(R.id.tv_resend);
+        tv_resend = (ProRegularTextView) findViewById(R.id.tv_resend);
 
-        if (Build.VERSION.SDK_INT >= 24)
-        {
-            tv_resend.setText(Html.fromHtml(getString(R.string.resend_contact_us),Html.FROM_HTML_MODE_LEGACY));
-        }
-        else
-        {
+        if (Build.VERSION.SDK_INT >= 24) {
+            tv_resend.setText(Html.fromHtml(getString(R.string.resend_contact_us), Html.FROM_HTML_MODE_LEGACY));
+        } else {
             tv_resend.setText(Html.fromHtml(getString(R.string.resend_contact_us)));
         }
 
@@ -46,6 +45,7 @@ public class ResendConfirmationActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
