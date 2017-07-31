@@ -367,12 +367,13 @@ public class UserInformation extends Fragment {
 
     @Override
     public void onResume() {
-        pause_condition=false;
+        if (popupWindow!=null){
+            pause_condition=false;
+        }
         super.onResume();
     }
 
     public void closeMyPopUpWindow(){
-        Logger.printMessage("PopUpWindow","close");
         if (popupWindow!=null){
             popupWindow.dismiss();
             popupWindow=null;
