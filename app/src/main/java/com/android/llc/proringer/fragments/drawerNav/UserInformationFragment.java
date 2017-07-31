@@ -167,6 +167,8 @@ public class UserInformationFragment extends Fragment {
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
                     public void onSuccess(String... s) {
+
+                        Logger.printMessage("database","Yes");
                         /**
                          * User data already found in database
                          */
