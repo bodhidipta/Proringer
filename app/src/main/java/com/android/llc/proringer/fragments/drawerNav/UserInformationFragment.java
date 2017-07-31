@@ -53,7 +53,7 @@ public class UserInformationFragment extends Fragment {
     private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
     private boolean pause_condition=false;
     private ProgressDialog pgDialog = null;
-    private static PopupWindow popupWindow;
+    private PopupWindow popupWindow;
     private boolean checkToShowAfterSearach = false;
     private PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
 
@@ -359,9 +359,7 @@ public class UserInformationFragment extends Fragment {
 
     @Override
     public void onResume() {
-        if (popupWindow!=null){
-            pause_condition=false;
-        }
+        pause_condition=false;
         super.onResume();
     }
 
