@@ -222,32 +222,6 @@ public class UserInformation extends Fragment {
                     }
                 });
     }
-
-//    public void createGooglePlaceList(final View view, String place) {
-//        ProServiceApiHelper.getInstance(getActivity()).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
-//            @Override
-//            public void onStart() {
-//            }
-//
-//            @Override
-//            public void onComplete(String message) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(message);
-//                    JSONArray jsonArray = jsonObject.getJSONArray("predictions");
-//                    showDialog(view, jsonArray);
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                Logger.printMessage("message", "" + message);
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//            }
-//        });
-//    }
     public void createGooglePlaceList(final View view, String place) {
         ProServiceApiHelper.getInstance(getActivity()).getSearchPlacesFixFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
