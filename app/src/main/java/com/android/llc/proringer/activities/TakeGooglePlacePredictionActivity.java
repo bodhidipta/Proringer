@@ -172,13 +172,16 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
                                     for (int k = 0; k < types.length(); k++) {
                                         if (types.getString(k).equals("administrative_area_level_2")) {
                                             city=address_components.getJSONObject(j).getString("short_name");
+                                            Logger.printMessage("city","-->"+city);
                                         }
                                         if (types.getString(k).equals("administrative_area_level_1")) {
                                             state=address_components.getJSONObject(j).getString("short_name");
+                                            Logger.printMessage("state","-->"+state);
                                         }
 
                                         if (types.getString(k).equals("postal_code")) {
                                             zip_code=address_components.getJSONObject(j).getString("short_name");
+                                            Logger.printMessage("zip_code","-->"+zip_code);
                                         }
                                     }
                                 }
