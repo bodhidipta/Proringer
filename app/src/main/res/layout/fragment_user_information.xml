@@ -100,7 +100,7 @@
                 android:textSize="14sp"
                 android:padding="10dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorLightGray"/>
+                android:textColor="@color/colorTextDark"/>
 
             <ImageView
                 android:layout_width="wrap_content"
