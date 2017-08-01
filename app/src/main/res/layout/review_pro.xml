@@ -53,6 +53,8 @@
             android:background="@color/colorHeader" />
 
         <RatingBar
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:theme="@style/RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
