@@ -1,141 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/colorPrimary">
-
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Review"
-                android:textColor="@color/colorTextDark"
-                android:textSize="16sp" />
-
-        </android.support.v7.widget.Toolbar>
-
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="#000000" />
-
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:text="Review"
             android:textColor="@color/colorTextDark"
             android:textSize="16sp" />
 
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Bobblehead Granite Roofing Company,INC"
-            android:textColor="@color/colorTextDark"
-            android:textSize="16sp" />
+    </android.support.v7.widget.Toolbar>
 
-        <View
-            android:id="@+id/SplitLine_hor1"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorHeader" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RatingBar
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:theme="@style/RatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:numStars="5"
-            android:rating="3.5"
-            android:stepSize="0.5" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="#000000" />
 
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Excellent!"
-            android:textColor="@color/colorTextDark"
-            android:textSize="16sp" />
 
-        <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
-            android:id="@+id/project_description_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/background_white_with_border"
-            android:gravity="top"
-            android:hint="Describe your project and overall experience wworking with Bobblehead Granite Roofing Company,INC "
-            android:inputType="textAutoCorrect|textMultiLine"
-            android:maxHeight="300dp"
-            android:minHeight="120dp"
-            android:padding="3dp"
-            android:textColor="@color/colorTextDark"
-            android:textSize="14sp" />
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Review"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp" />
 
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:id="@+id/change_password"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorAccent"
-            android:gravity="center"
-            android:text="POST REVIEW"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Bobblehead Granite Roofing Company,INC"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_terms_guidelines"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/colorTextDark"
-            android:textSize="12sp" />
+            <View
+                android:id="@+id/SplitLine_hor1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorHeader" />
 
-    </LinearLayout>
-</ScrollView>
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:numStars="5"
+                android:rating="3.5"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Excellent!"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp" />
+
+            <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
+                android:id="@+id/project_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_white_with_border"
+                android:gravity="top"
+                android:hint="Describe your project and overall experience wworking with Bobblehead Granite Roofing Company,INC "
+                android:inputType="textAutoCorrect|textMultiLine"
+                android:maxHeight="300dp"
+                android:minHeight="120dp"
+                android:padding="3dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/change_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="POST REVIEW"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_terms_guidelines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
 
