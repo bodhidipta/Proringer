@@ -203,11 +203,15 @@ public class UserInformationFragment extends Fragment {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
 
-                Logger.printMessage("onActivityResult","onActivityresult");
                 Bundle extras = data.getBundleExtra("data");
                 if (extras != null) {
-                    Logger.printMessage("FADDRESS",""+extras.getString("FADDRESS"));
-                    tv_search_by_location.setText(extras.getString("zip"));
+
+                    Logger.printMessage("selectedPlace","--->"+extras.getString("selectedPlace"));
+                    Logger.printMessage("zip","--->"+extras.getString("zip"));
+                    Logger.printMessage("city","--->"+extras.getString("city"));
+                    Logger.printMessage("state","--->"+extras.getString("state"));
+
+                    tv_search_by_location.setText(extras.getString("selectedPlace"));
                     zip_code.setText(extras.getString("zip"));
                     city.setText(extras.getString("city"));
                     state.setText(extras.getString("state"));
