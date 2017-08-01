@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -26,6 +27,7 @@ public class ProReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_pro);
         tv_terms_guidelines= (TextView) findViewById(R.id.tv_terms_guidelines);
+        tv_terms_guidelines.setMovementMethod(LinkMovementMethod.getInstance());
 
         /**
          * Contact us spannable text with click listener

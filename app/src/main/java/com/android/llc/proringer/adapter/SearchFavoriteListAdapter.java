@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -165,7 +166,9 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             tv_total_review= (ProRegularTextView) itemView.findViewById(R.id.tv_total_review);
             tv_address= (ProRegularTextView) itemView.findViewById(R.id.tv_address);
             tv_verify= (ProRegularTextView) itemView.findViewById(R.id.tv_verify);
+
             tv_description= (ProRegularTextView) itemView.findViewById(R.id.tv_description);
+            tv_description.setMovementMethod(LinkMovementMethod.getInstance());
 
 
             img_project= (ImageView) itemView.findViewById(R.id.img_project);
