@@ -36,6 +36,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
     RecyclerView rcv_location_suggestion;
     EditText locationText;
     String selectedPlace = "",city="",state="",zip_code="";
+    boolean AfterPrressNoCallTextChangerListener=false;
     private PlaceCustomListAdapter placeCustomListAdapter;
 
     @Override
@@ -73,7 +74,11 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetch_LocationSuggession(s.toString().trim());
+                if(!AfterPrressNoCallTextChangerListener) {
+                    fetch_LocationSuggession(s.toString().trim());
+                }else {
+                    AfterPrressNoCallTextChangerListener=false;
+                }
             }
 
             @Override
@@ -101,10 +106,14 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
                     placeCustomListAdapter=new PlaceCustomListAdapter(TakeGooglePlacePredictionActivity.this, listData, new TakeGooglePlacePredictionActivity.onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, ArrayList<String> stringArrayList) {
+
+                            AfterPrressNoCallTextChangerListener=true;
+
                             locationText.setText(stringArrayList.get(position));
                             selectedPlace=stringArrayList.get(position);
                             rcv_location_suggestion.setVisibility(View.GONE);
                             getZipCityState();
+
                         }
                     });
                     rcv_location_suggestion.setVisibility(View.VISIBLE);
