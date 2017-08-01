@@ -9,6 +9,7 @@ import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.utils.Logger;
@@ -19,12 +20,12 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  */
 
 public class ProReviewActivity extends AppCompatActivity {
-    ProRegularTextView tv_terms_guidelines;
+    TextView tv_terms_guidelines;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_pro);
-        tv_terms_guidelines= (ProRegularTextView) findViewById(R.id.tv_terms_guidelines);
+        tv_terms_guidelines= (TextView) findViewById(R.id.tv_terms_guidelines);
 
         /**
          * Contact us spannable text with click listener
