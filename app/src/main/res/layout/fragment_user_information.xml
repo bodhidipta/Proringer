@@ -178,7 +178,7 @@
                     android:maxLength="6"
                     android:padding="10dp"
                     android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
             <View
                 android:layout_width="0dp"
