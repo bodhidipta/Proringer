@@ -35,7 +35,6 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         }
 
         setDataProListDetails();
-
     }
     public void setDataProListDetails(){
         ProServiceApiHelper.getInstance(ProjectDetailsActivity.this).getProIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
