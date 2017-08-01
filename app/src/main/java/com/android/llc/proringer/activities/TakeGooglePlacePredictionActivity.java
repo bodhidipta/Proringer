@@ -101,10 +101,10 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
                     placeCustomListAdapter=new PlaceCustomListAdapter(TakeGooglePlacePredictionActivity.this, listData, new TakeGooglePlacePredictionActivity.onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, ArrayList<String> stringArrayList) {
-                            getZipCityState();
                             locationText.setText(stringArrayList.get(position));
                             selectedPlace=stringArrayList.get(position);
                             rcv_location_suggestion.setVisibility(View.GONE);
+                            getZipCityState();
                         }
                     });
                     rcv_location_suggestion.setVisibility(View.VISIBLE);
