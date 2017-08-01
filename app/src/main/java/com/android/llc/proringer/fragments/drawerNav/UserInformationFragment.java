@@ -4,33 +4,26 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
+import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
 
 /**
  * Created by bodhidipta on 22/06/17.
@@ -50,13 +43,10 @@ import java.util.ArrayList;
  */
 
 public class UserInformationFragment extends Fragment {
-    private ProLightEditText first_name, last_name, contact, address, zip_code, city, state;
-    private boolean pause_condition=false;
-    private ProgressDialog pgDialog = null;
-    private PopupWindow popupWindow;
-    private boolean checkToShowAfterSearach = false;
-    private PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
-
+    private ProLightEditText first_name, last_name, contact, zip_code, city, state;
+    ProRegularTextView tv_search_by_location;
+    RelativeLayout RLSearchByLocation;
+    ProgressDialog pgDialog=null;
 
     @Nullable
     @Override
@@ -71,12 +61,15 @@ public class UserInformationFragment extends Fragment {
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         contact = (ProLightEditText) view.findViewById(R.id.contact);
 
-        address = (ProLightEditText) view.findViewById(R.id.address);
+        RLSearchByLocation = (RelativeLayout) view.findViewById(R.id.RLSearchByLocation);
+        tv_search_by_location= (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
 
-        address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    address.setText("");
+        RLSearchByLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i=new Intent(getActivity(), TakeGooglePlacePredictionActivity.class);
+                startActivityForResult(i, 1);
             }
         });
 
@@ -150,7 +143,7 @@ public class UserInformationFragment extends Fragment {
                 },
                 first_name.getText().toString().trim(),
                 last_name.getText().toString().trim(),
-                address.getText().toString().trim(),
+                tv_search_by_location.getText().toString().trim(),
                 city.getText().toString().trim(),
                 "USA",
                 state.getText().toString().trim(),
@@ -180,32 +173,8 @@ public class UserInformationFragment extends Fragment {
                             JSONObject innerObj = info_arr.getJSONObject(0);
                             first_name.setText(innerObj.getString("f_name") + "");
                             last_name.setText(innerObj.getString("l_name") + "");
-                            address.setText(innerObj.getString("address") + "");
-                            address.addTextChangedListener(new TextWatcher() {
-                                @Override
-                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                            tv_search_by_location.setText(innerObj.getString("address") + "");
 
-                                }
-
-                                @Override
-                                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                                }
-
-                                @Override
-                                public void afterTextChanged(Editable s) {
-
-                                    if (!s.toString().trim().equals("")) {
-                                        if(!pause_condition) {
-                                            if (checkToShowAfterSearach == false) {
-                                                createGooglePlaceList(address, s.toString().trim());
-                                            } else {
-                                                checkToShowAfterSearach = false;
-                                            }
-                                        }
-                                    }
-                                }
-                            });
                             city.setText(innerObj.getString("city") + "");
                             state.setText(innerObj.getString("state") + "");
                             zip_code.setText(innerObj.getString("zipcode") + "");
@@ -226,151 +195,25 @@ public class UserInformationFragment extends Fragment {
                     }
                 });
     }
-    public void createGooglePlaceList(final View view, String place) {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
-
-            @Override
-            public void onComplete(ArrayList<String> listData) {
-                showDialog(view,listData);
-            }
-
-            @Override
-            public void onError(String error) {
-
-            }
-
-            @Override
-            public void onStartFetch() {
-
-            }
-        },place);
-    }
-
-    private void showDialog(View v, ArrayList<String> stringArrayList) {
-
-        if (popupWindow == null) {
-            popupWindow = new PopupWindow((LandScreenActivity)getActivity());
-            // Removes default background.
-            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-            View dialogView = ((LandScreenActivity)getActivity()).getLayoutInflater().inflate(R.layout.dialog_show_place, null);
-
-            RecyclerView rcv_ = (RecyclerView) dialogView.findViewById(R.id.rcv_);
-            rcv_.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
-
-            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog((LandScreenActivity)getActivity(), stringArrayList, new onOptionSelected() {
-                @Override
-                public void onItemPassed(int position, ArrayList<String> stringArrayList) {
-                        checkToShowAfterSearach = true;
-                        address.setText(stringArrayList.get(position));
-
-                        InputMethodManager imm = (InputMethodManager) ((LandScreenActivity)getActivity()).getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
-
-                        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getZipLocationStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
-                            @Override
-                            public void onStart() {
-
-                            }
-
-                            @Override
-                            public void onComplete(String message) {
-                                try {
-                                    JSONObject mainRes = new JSONObject(message);
-
-                                    if (mainRes.getString("status").equalsIgnoreCase("OK") &&
-                                            mainRes.has("results") &&
-                                            mainRes.getJSONArray("results").length() > 0) {
-
-                                        JSONArray results = mainRes.getJSONArray("results");
-
-                                        JSONObject innerIncer = results.getJSONObject(0);
-
-                                            /**
-                                             * loop through address component
-                                             * for country and state
-                                             */
-                                            if (innerIncer.has("address_components") &&
-                                                    innerIncer.getJSONArray("address_components").length() > 0) {
-
-                                                Logger.printMessage("address_components",""+innerIncer.getJSONArray("address_components"));
-
-                                                JSONArray address_components = innerIncer.getJSONArray("address_components");
-
-                                                for (int j = 0; j < address_components.length(); j++) {
-
-                                                    if (address_components.getJSONObject(j).has("types") &&
-                                                            address_components.getJSONObject(j).getJSONArray("types").length() > 0
-                                                            ) {
-
-                                                        JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
-
-                                                        for (int k = 0; k < types.length(); k++) {
-                                                            if (types.getString(k).equals("administrative_area_level_2")) {
-                                                                city.setText(address_components.getJSONObject(j).getString("short_name"));
-                                                            }
-                                                            if (types.getString(k).equals("administrative_area_level_1")) {
-                                                                state.setText(address_components.getJSONObject(j).getString("short_name"));
-                                                            }
-                                                            if (types.getString(k).equals("postal_code")) {
-                                                                zip_code.setText(address_components.getJSONObject(j).getString("short_name"));
-                                                            }
-                                                            else {
-                                                                zip_code.setText("");
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                    }
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            @Override
-                            public void onError(String error) {
-
-                            }
-                        },address.getText().toString().trim());
-                    popupWindow.dismiss();
-                }
-            });
-
-            rcv_.setAdapter(placeCustomListAdapterDialog);
-            // some other visual settings
-            popupWindow.setFocusable(false);
-            popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-            popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-
-            // set the list view as pop up window content
-            popupWindow.setContentView(dialogView);
-            popupWindow.showAsDropDown(v, -5, 0);
-
-
-        } else {
-            popupWindow.showAsDropDown(v, -5, 0);
-            if (placeCustomListAdapterDialog!=null) {
-                placeCustomListAdapterDialog.setRefresh(stringArrayList);
-            }
-        }
-    }
-
-    public interface onOptionSelected {
-        void onItemPassed(int position,ArrayList<String> stringArrayList);
-    }
 
     @Override
-    public void onResume() {
-        pause_condition=false;
-        super.onResume();
-    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    public void closeMyPopUpWindow(){
-        if (popupWindow!=null){
-            popupWindow.dismiss();
-            popupWindow=null;
-            pause_condition=true;
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+
+                Logger.printMessage("onActivityResult","onActivityresult");
+                Bundle extras = data.getBundleExtra("data");
+                if (extras != null) {
+                    Logger.printMessage("FADDRESS",""+extras.getString("FADDRESS"));
+                    tv_search_by_location.setText(extras.getString("zip"));
+                    zip_code.setText(extras.getString("zip"));
+                    city.setText(extras.getString("city"));
+                    state.setText(extras.getString("state"));
+                }
+
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
 import com.android.llc.proringer.fragments.drawerNav.UserInformationFragment;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import java.util.ArrayList;
@@ -14,23 +15,23 @@ import java.util.ArrayList;
  * Created by su on 7/28/17.
  */
 
-public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCustomListAdapterDialog.MyViewHolder> {
+public class PlaceCustomListAdapter extends RecyclerView.Adapter<PlaceCustomListAdapter.MyViewHolder> {
     Context mContext;
     ArrayList<String> stringArrayList;
-    UserInformationFragment.onOptionSelected callback;
-    public PlaceCustomListAdapterDialog(Context mContext,ArrayList<String> stringArrayList, UserInformationFragment.onOptionSelected callback){
+    TakeGooglePlacePredictionActivity.onOptionSelected callback;
+    public PlaceCustomListAdapter(Context mContext, ArrayList<String> stringArrayList, TakeGooglePlacePredictionActivity.onOptionSelected callback){
         this.mContext=mContext;
         this.stringArrayList=stringArrayList;
         this.callback=callback;
     }
 
     @Override
-    public PlaceCustomListAdapterDialog.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PlaceCustomListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_dailog_google_place, parent, false);
-        return new PlaceCustomListAdapterDialog.MyViewHolder(itemView);    }
+        return new PlaceCustomListAdapter.MyViewHolder(itemView);    }
 
     @Override
-    public void onBindViewHolder(PlaceCustomListAdapterDialog.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(PlaceCustomListAdapter.MyViewHolder holder, final int position) {
 
             holder.tv.setText(stringArrayList.get(position));
 
@@ -58,4 +59,5 @@ public class PlaceCustomListAdapterDialog extends RecyclerView.Adapter<PlaceCust
         this.stringArrayList=stringArrayList;
         notifyDataSetChanged();
     }
+
 }
