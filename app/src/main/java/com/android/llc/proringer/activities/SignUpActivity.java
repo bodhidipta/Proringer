@@ -96,7 +96,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Intent intent = new Intent(SignUpActivity.this, TermsPrivacyActivity.class);
                 intent.putExtra("value", "term");
                 startActivity(intent);
-
             }
         });
 
