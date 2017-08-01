@@ -79,7 +79,7 @@ public class SearchLocalProFragment extends Fragment {
                 pgDialog1 = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog1.setTitle("Local Pros");
                 pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting local pros list. Please wait.");
+                pgDialog1.setMessage("Getting local pros list.Please wait...");
                 pgDialog1.show();
             }
 
@@ -150,7 +150,7 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                      public void onStart() {
                                                                                                          pgDialog2 = new ProgressDialog((LandScreenActivity)getActivity());
                                                                                                          pgDialog2.setTitle("Delete Favorite pros");
-                                                                                                         pgDialog2.setMessage("It's deleting.Please wait....");
+                                                                                                         pgDialog2.setMessage("project is deleting.Please wait....");
                                                                                                          pgDialog2.setCancelable(false);
                                                                                                          pgDialog2.show();
 
@@ -219,7 +219,7 @@ public class SearchLocalProFragment extends Fragment {
                                                                                      public void onStart() {
                                                                                          pgDialog3 = new ProgressDialog((LandScreenActivity)getActivity());
                                                                                          pgDialog3.setTitle("Add Favorite pros");
-                                                                                         pgDialog3.setMessage("It's adding.Please wait....");
+                                                                                         pgDialog3.setMessage("A project is adding.Please wait....");
                                                                                          pgDialog3.setCancelable(false);
                                                                                          pgDialog3.show();
 

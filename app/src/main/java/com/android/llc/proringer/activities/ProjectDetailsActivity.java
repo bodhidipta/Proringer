@@ -43,7 +43,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                 pgDialog1 = new ProgressDialog(ProjectDetailsActivity.this);
                 pgDialog1.setTitle("Local Pros Details");
                 pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting local pros details. Please wait.");
+                pgDialog1.setMessage("Getting local pros details.Please wait...");
                 pgDialog1.show();
             }
 
