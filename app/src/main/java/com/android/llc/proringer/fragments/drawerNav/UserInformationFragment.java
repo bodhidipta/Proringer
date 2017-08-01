@@ -221,7 +221,7 @@ public class UserInformationFragment extends Fragment {
                         /**
                          * No user data found on database or something went wrong
                          */
-                        Logger.printMessage("@dashBoard", "on database data not exists");
+                        Logger.printMessage("@dashBoard", "on database data not exists:--"+s);
 
                     }
                 });
