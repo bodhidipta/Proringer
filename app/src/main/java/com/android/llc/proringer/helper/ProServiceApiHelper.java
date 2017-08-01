@@ -92,6 +92,7 @@ public class ProServiceApiHelper {
 
     private String favouriteProAdddeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pro_adddelete";
     private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
+    private String proIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
 
 
 
@@ -2326,6 +2327,7 @@ public class ProServiceApiHelper {
         }
     }
 
+
     public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback,String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2414,7 +2416,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * get Zip Location State List code  using google api
+     * get Zip city location name State List code  using google api
      *
      * @param callback
      */
@@ -2624,7 +2626,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * get DashBoardFragment details
+     * get DashBoard details
      *
      * @param callback
      */
@@ -2681,6 +2683,83 @@ public class ProServiceApiHelper {
         } else {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
+    }
+
+
+    /**
+     * get pro_individual_listing
+     *
+     * @param callback
+     * @param params
+     */
+    public void getProIndividualListing(final getApiProcessCallback callback, String... params) {
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Logger.printMessage("user_id",":-"+params[0]);
+                        Logger.printMessage("pro_id",":-"+params[1]);
+
+
+                        String proIndividualListAPI = proIndividualListingAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1];
+
+                        Logger.printMessage("proIndividualListAPI",proIndividualListAPI);
+
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(proIndividualListAPI)
+                                .build();
+
+
+
+                        Response response = okHttpClient.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("proIndividualDetails", responseString);
+
+                        JSONObject responseJsonObj = new JSONObject(responseString);
+                        if (responseJsonObj.getBoolean("response")) {
+                            return responseJsonObj.getString("message");
+                        } else {
+                            exception = responseJsonObj.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(final String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        try {
+                            callback.onComplete(s);
+                        } catch (Exception io) {
+                            callback.onError(io.getMessage());
+                        }
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else
+            callback.onError("No internet connection found. Please check your internet connection.");
     }
 
 

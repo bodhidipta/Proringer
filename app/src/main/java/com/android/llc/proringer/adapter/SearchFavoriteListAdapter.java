@@ -118,6 +118,11 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(mcontext, ProjectDetailsActivity.class);
+                try {
+                    intent.putExtra("pros_id",""+jsonInfoArray.getJSONObject(position).getString("pros_id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 mcontext.startActivity(intent);
             }
         });
