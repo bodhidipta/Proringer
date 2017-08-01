@@ -64,7 +64,7 @@ public class ProReviewActivity extends AppCompatActivity {
         tv_terms_guidelines.append(word3);
 
 
-        Spannable word4 = new SpannableString(termsTextClick);
+        Spannable word4 = new SpannableString(reviewGuidelinesClick);
         ClickableSpan myReviewGuidelinesClick = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
@@ -79,7 +79,7 @@ public class ProReviewActivity extends AppCompatActivity {
                 ds.setUnderlineText(false);
             }
         };
-        word4.setSpan(myReviewGuidelinesClick, 0, termsTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        word4.setSpan(myReviewGuidelinesClick, 0, reviewGuidelinesClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_terms_guidelines.append(word4);
 
     }
