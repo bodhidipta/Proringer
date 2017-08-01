@@ -17,7 +17,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 public class ProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back;
     String pros_id="";
-    ProgressDialog pgDialog1;
+    ProgressDialog pgDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,23 +40,23 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProjectDetailsActivity.this).getProIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog1 = new ProgressDialog(ProjectDetailsActivity.this);
-                pgDialog1.setTitle("Local Pros Details");
-                pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting local pros details.Please wait...");
-                pgDialog1.show();
+                pgDialog = new ProgressDialog(ProjectDetailsActivity.this);
+                pgDialog.setTitle("Local Pros Details");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Getting local pros details.Please wait...");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
 
             @Override
             public void onError(String error) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         }, ProApplication.getInstance().getUserId(),pros_id);
     }
