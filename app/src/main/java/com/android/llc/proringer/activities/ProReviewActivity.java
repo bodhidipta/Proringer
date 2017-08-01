@@ -3,6 +3,7 @@ package com.android.llc.proringer.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -11,10 +12,8 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.utils.Logger;
-import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
  * Created by su on 8/1/17.
@@ -26,6 +25,12 @@ public class ProReviewActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_pro);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         tv_terms_guidelines= (TextView) findViewById(R.id.tv_terms_guidelines);
         tv_terms_guidelines.setMovementMethod(LinkMovementMethod.getInstance());
 

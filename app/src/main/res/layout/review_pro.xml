@@ -9,6 +9,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Review"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
