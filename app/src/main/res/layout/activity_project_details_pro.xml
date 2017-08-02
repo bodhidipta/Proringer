@@ -67,6 +67,12 @@
             </RelativeLayout>
 
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+
             <RelativeLayout
                 android:id="@+id/RLToolbar"
                 android:layout_width="match_parent"
@@ -330,209 +336,10 @@
                             android:layout_marginTop="5dp"
                             android:background="@color/colorLightGray" />
 
-
-                        <LinearLayout
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rcv_service"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Roofing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="Roofing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Plumbing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="Plumbing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Water Restoration"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="Water Restoration"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name4"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Concrete"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv4"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="Concrete"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name55"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Roofing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv5"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="Roofing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name6"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Plumbing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv6"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="Plumbing"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_name7"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_weight="1"
-                                android:text="Home inspection"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv7"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:text="More..."
-                                android:textColor="@color/colorAccent"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
+                            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
                     </LinearLayout>
@@ -559,187 +366,10 @@
                             android:layout_marginTop="5dp"
                             android:background="@color/colorLightGray" />
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_monday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="8am-5pm"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_monday"
-                                android:text="Monday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_tuesday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="8am-5pm"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_tuesday"
-                                android:text="Tuesday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_wednesday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="8am-5pm"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_wednesday"
-                                android:text="Wednesday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_thursday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="8am-5pm"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_thursday"
-                                android:text="Thursday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_friday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="8am-5pm"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_friday"
-                                android:text="Friday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_saturday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="Closed"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_saturday"
-                                android:text="Saturday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/time_sunday"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="Closed"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@+id/time_sunday"
-                                android:text="Sunday"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </RelativeLayout>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rcv_business_hour"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
                     </LinearLayout>
@@ -921,6 +551,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="56dp"
                 card_view:cardElevation="3dp">
 
                 <LinearLayout

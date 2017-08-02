@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.adapter.ProDetailsBusinessHourAdapter;
+import com.android.llc.proringer.adapter.ProDetailsServiceAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -26,11 +31,14 @@ import org.json.JSONObject;
 public class ProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back, img_top, img_profile;
     String pros_id = "";
+    RecyclerView rcv_service,rcv_business_hour;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1;
     ProRegularTextView tv_review_btn;
     ProRegularTextView tv_review_value,tv_rate_value;
     RatingBar rbar;
+    ProDetailsServiceAdapter proDetailsServiceAdapter;
+    ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +53,12 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         tv_review_value= (ProRegularTextView) findViewById(R.id.tv_review_value);
         tv_rate_value= (ProRegularTextView) findViewById(R.id.tv_rate_value);
         rbar= (RatingBar) findViewById(R.id.rbar);
+
+        rcv_service= (RecyclerView) findViewById(R.id.rcv_service);
+        rcv_service.setLayoutManager(new GridLayoutManager(ProjectDetailsActivity.this,2));
+
+        rcv_business_hour= (RecyclerView) findViewById(R.id.rcv_business_hour);
+        rcv_business_hour.setLayoutManager(new LinearLayoutManager(ProjectDetailsActivity.this));
 
 
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +119,11 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
                     rbar.setRating(Float.parseFloat(infoArrayJsonObject.getString("total_avg_review")));
 
+                    proDetailsServiceAdapter=new ProDetailsServiceAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("services"));
+                    rcv_service.setAdapter(proDetailsServiceAdapter);
 
-
+                    proDetailsBusinessHourAdapter=new ProDetailsBusinessHourAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("bussiness_hours"));
+                    rcv_business_hour.setAdapter(proDetailsBusinessHourAdapter);
 
 
                 } catch (JSONException e) {
@@ -120,6 +137,12 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                 if (pgDialog1 != null && pgDialog1.isShowing())
                     pgDialog1.dismiss();
             }
-        }, ProApplication.getInstance().getUserId(), pros_id);
+        },
+                "56"
+//                ProApplication.getInstance().getUserId()
+                ,
+//                pros_id
+                "82"
+        );
     }
 }
