@@ -2731,7 +2731,7 @@ public class ProServiceApiHelper {
 
                         JSONObject responseJsonObj = new JSONObject(responseString);
                         if (responseJsonObj.getBoolean("response")) {
-                            return responseJsonObj.getString("message");
+                            return responseString;
                         } else {
                             exception = responseJsonObj.getString("message");
                             return exception;
