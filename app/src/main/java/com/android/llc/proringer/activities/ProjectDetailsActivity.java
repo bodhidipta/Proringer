@@ -34,8 +34,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
     RecyclerView rcv_service,rcv_business_hour;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1;
-    ProRegularTextView tv_review_btn;
-    ProRegularTextView tv_review_value,tv_rate_value;
+    ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,tv_user_name,tv_address,tv_city_state_zipcode;
     RatingBar rbar;
     ProDetailsServiceAdapter proDetailsServiceAdapter;
     ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
@@ -52,6 +51,12 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         tv_review_btn = (ProRegularTextView) findViewById(R.id.tv_review_btn);
         tv_review_value= (ProRegularTextView) findViewById(R.id.tv_review_value);
         tv_rate_value= (ProRegularTextView) findViewById(R.id.tv_rate_value);
+        tv_about= (ProRegularTextView) findViewById(R.id.tv_about);
+        tv_company_name= (ProRegularTextView) findViewById(R.id.tv_company_name);
+        tv_user_name= (ProRegularTextView) findViewById(R.id.tv_user_name);
+        tv_address= (ProRegularTextView) findViewById(R.id.tv_address);
+        tv_city_state_zipcode= (ProRegularTextView) findViewById(R.id.tv_city_state_zipcode);
+
         rbar= (RatingBar) findViewById(R.id.rbar);
 
         rcv_service= (RecyclerView) findViewById(R.id.rcv_service);
@@ -113,11 +118,19 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                     if (!infoJsonObject.getString("profile_image").equals(""))
                         Glide.with(ProjectDetailsActivity.this).load(infoJsonObject.getString("profile_image")).centerCrop().into(img_profile);
 
+                    tv_company_name.setText(infoJsonObject.getString("company_name"));
+                    tv_user_name.setText(infoJsonObject.getString("user_name"));
+                    tv_address.setText(infoJsonObject.getString("address"));
+                    tv_city_state_zipcode.setText(infoJsonObject.getString("city")+", "+infoJsonObject.getString("state")+" "+infoJsonObject.getString("zipcode"));
+
 
                     tv_review_value.setText(infoArrayJsonObject.getString("total_review"));
                     tv_rate_value.setText(infoArrayJsonObject.getString("total_avg_review"));
 
+
                     rbar.setRating(Float.parseFloat(infoArrayJsonObject.getString("total_avg_review")));
+
+                    tv_about.setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
                     proDetailsServiceAdapter=new ProDetailsServiceAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("services"));
                     rcv_service.setAdapter(proDetailsServiceAdapter);
