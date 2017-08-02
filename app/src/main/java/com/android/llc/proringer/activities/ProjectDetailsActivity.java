@@ -77,6 +77,8 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         rcv_service_area= (RecyclerView) findViewById(R.id.rcv_service_area);
         rcv_service_area.setLayoutManager(new GridLayoutManager(ProjectDetailsActivity.this,2));
 
+        findViewById(R.id.LLViewAll).setVisibility(View.GONE);
+
         view_all_service_area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
