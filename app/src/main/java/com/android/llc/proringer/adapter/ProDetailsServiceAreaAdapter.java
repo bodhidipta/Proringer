@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -14,25 +16,25 @@ import org.json.JSONException;
  * Created by su on 8/2/17.
  */
 
-public class ProDetailsServiceAdapter extends RecyclerView.Adapter<ProDetailsServiceAdapter.MyViewHolder> {
-    JSONArray serviceJsonArray;
+public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetailsServiceAreaAdapter.MyViewHolder> {
+    JSONArray serviceAreaJsonArray;
     Context context;
 
-    public ProDetailsServiceAdapter(Context context, JSONArray serviceJsonArray){
+    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray){
         this.context=context;
-        this.serviceJsonArray=serviceJsonArray;
+        this.serviceAreaJsonArray=serviceJsonArray;
     }
 
     @Override
-    public ProDetailsServiceAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_service, parent, false);
-        return new ProDetailsServiceAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ProDetailsServiceAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         try {
-            holder.tv_name.setText(serviceJsonArray.getJSONObject(position).getString("service_name"));
+            holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("city_services"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -40,7 +42,7 @@ public class ProDetailsServiceAdapter extends RecyclerView.Adapter<ProDetailsSer
 
     @Override
     public int getItemCount() {
-        return serviceJsonArray.length();
+        return serviceAreaJsonArray.length();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

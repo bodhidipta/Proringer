@@ -11,11 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProDetailsBusinessHourAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAdapter;
-import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -31,13 +30,14 @@ import org.json.JSONObject;
 public class ProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back, img_top, img_profile;
     String pros_id = "";
-    RecyclerView rcv_service,rcv_business_hour;
+    RecyclerView rcv_service,rcv_business_hour,rcv_service_area;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1;
     ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,tv_user_name,tv_address,tv_city_state_zipcode;
     RatingBar rbar;
-    ProDetailsServiceAdapter proDetailsServiceAdapter;
+    ProDetailsServiceAdapter proDetailsService;
     ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
+    ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +64,10 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
         rcv_business_hour= (RecyclerView) findViewById(R.id.rcv_business_hour);
         rcv_business_hour.setLayoutManager(new LinearLayoutManager(ProjectDetailsActivity.this));
+
+        rcv_service_area= (RecyclerView) findViewById(R.id.rcv_service_area);
+        rcv_service_area.setLayoutManager(new GridLayoutManager(ProjectDetailsActivity.this,2));
+
 
 
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -132,12 +136,14 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
                     tv_about.setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
-                    proDetailsServiceAdapter=new ProDetailsServiceAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("services"));
-                    rcv_service.setAdapter(proDetailsServiceAdapter);
+                    proDetailsService =new ProDetailsServiceAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("services"));
+                    rcv_service.setAdapter(proDetailsService);
 
                     proDetailsBusinessHourAdapter=new ProDetailsBusinessHourAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("bussiness_hours"));
                     rcv_business_hour.setAdapter(proDetailsBusinessHourAdapter);
 
+                    proDetailsServiceAreaAdapter=new ProDetailsServiceAreaAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("service_area"));
+                    rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

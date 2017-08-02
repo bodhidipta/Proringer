@@ -75,8 +75,8 @@ public class UserInformationFragment extends Fragment {
 
 
         zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
-        zip_code.setEnabled(false);
-        zip_code.setClickable(false);
+//        zip_code.setEnabled(false);
+//        zip_code.setClickable(false);
 
         city = (ProLightEditText) view.findViewById(R.id.city);
         city.setEnabled(false);
