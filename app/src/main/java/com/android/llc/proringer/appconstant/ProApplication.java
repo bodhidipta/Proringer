@@ -2,6 +2,9 @@ package com.android.llc.proringer.appconstant;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 
 import com.android.llc.proringer.pojo.NotificationData;
 import com.android.llc.proringer.pojo.ProjectPostedData;
@@ -117,6 +120,16 @@ public class ProApplication extends Application {
 
     public void setDataSelected(ProjectPostedData dataSelected) {
         this.dataSelected = dataSelected;
+    }
+
+
+    public static void SetRatingColor(LayerDrawable stars) {
+        stars.getDrawable(2).setColorFilter(Color.parseColor("#FFf1592a"),
+                PorterDuff.Mode.SRC_ATOP); // for filled stars
+        stars.getDrawable(1).setColorFilter(Color.parseColor("#FFf1592a"),
+                PorterDuff.Mode.SRC_ATOP); // for half filled stars
+        stars.getDrawable(0).setColorFilter(Color.parseColor("#FFd6d7db"),
+                PorterDuff.Mode.SRC_ATOP); // for empty stars
     }
 }
 

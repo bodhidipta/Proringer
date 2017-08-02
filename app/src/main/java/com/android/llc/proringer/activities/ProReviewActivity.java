@@ -1,5 +1,6 @@
 package com.android.llc.proringer.activities;
 
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,12 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.utils.Logger;
 
 /**
@@ -22,6 +27,7 @@ import com.android.llc.proringer.utils.Logger;
 
 public class ProReviewActivity extends AppCompatActivity {
     TextView tv_terms_guidelines;
+    RatingBar ratBar_review;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,26 @@ public class ProReviewActivity extends AppCompatActivity {
 
         tv_terms_guidelines= (TextView) findViewById(R.id.tv_terms_guidelines);
         tv_terms_guidelines.setMovementMethod(LinkMovementMethod.getInstance());
+
+//        ratBar_review= (RatingBar) findViewById(R.id.ratBar_review);
+//
+//        LayerDrawable starst = (LayerDrawable) ratBar_review.getProgressDrawable();
+//        ProApplication.SetRatingColor(starst);
+
+        ratBar_review=(RatingBar)findViewById(R.id.ratBar_review);
+
+        ratBar_review.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                // TODO Auto-generated method stub
+                Toast.makeText(getApplicationContext(),Float.toString(rating),Toast.LENGTH_LONG).show();
+
+            }
+
+        });
+
 
         /**
          * Contact us spannable text with click listener

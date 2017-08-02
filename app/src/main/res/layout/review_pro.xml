@@ -33,8 +33,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="#000000" />
@@ -75,16 +75,14 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/colorHeader" />
 
+
             <RatingBar
+                android:id="@+id/ratBar_review"
+                android:layout_gravity="center"
+                style="@style/CustomRatingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:numStars="5"
-                android:rating="3.5"
-                android:stepSize="0.5"
-                android:theme="@style/RatingBar" />
+                android:layout_height="wrap_content"></RatingBar>
+
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="wrap_content"
@@ -139,7 +137,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:textColor="@color/colorTextDark"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
