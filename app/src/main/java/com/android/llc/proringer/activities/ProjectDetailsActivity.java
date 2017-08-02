@@ -33,7 +33,9 @@ public class ProjectDetailsActivity extends AppCompatActivity {
     RecyclerView rcv_service,rcv_business_hour,rcv_service_area;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1;
-    ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,tv_user_name,tv_address,tv_city_state_zipcode;
+    ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,
+            tv_user_name,tv_address,tv_city_state_zipcode,tv_business_since,tv_no_of_employee
+            ,tv_proringer_awarded,tv_business_review,tv_last_verified_on,view_all_service_area;
     RatingBar rbar;
     ProDetailsServiceAdapter proDetailsService;
     ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
@@ -57,6 +59,13 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         tv_address= (ProRegularTextView) findViewById(R.id.tv_address);
         tv_city_state_zipcode= (ProRegularTextView) findViewById(R.id.tv_city_state_zipcode);
 
+        tv_business_since= (ProRegularTextView) findViewById(R.id.tv_business_since);
+        tv_no_of_employee= (ProRegularTextView) findViewById(R.id.tv_no_of_employee);
+        tv_proringer_awarded= (ProRegularTextView) findViewById(R.id.tv_proringer_awarded);
+        tv_business_review= (ProRegularTextView) findViewById(R.id.tv_business_review);
+        tv_last_verified_on= (ProRegularTextView) findViewById(R.id.tv_last_verified_on);
+        view_all_service_area= (ProRegularTextView) findViewById(R.id.view_all_service_area);
+
         rbar= (RatingBar) findViewById(R.id.rbar);
 
         rcv_service= (RecyclerView) findViewById(R.id.rcv_service);
@@ -67,6 +76,13 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
         rcv_service_area= (RecyclerView) findViewById(R.id.rcv_service_area);
         rcv_service_area.setLayoutManager(new GridLayoutManager(ProjectDetailsActivity.this,2));
+
+        view_all_service_area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findViewById(R.id.LLViewAll).setVisibility(View.VISIBLE);
+            }
+        });
 
 
 
@@ -144,6 +160,17 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
                     proDetailsServiceAreaAdapter=new ProDetailsServiceAreaAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("service_area"));
                     rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
+
+                    JSONObject company_infoJsonOBJ=infoArrayJsonObject.getJSONObject("company_info");
+
+                    tv_business_since.setText(company_infoJsonOBJ.getString("business_since"));
+                    tv_no_of_employee.setText(company_infoJsonOBJ.getString("no_of_employee"));
+                    tv_proringer_awarded.setText(company_infoJsonOBJ.getString("proringer_awarded"));
+                    tv_business_review.setText(company_infoJsonOBJ.getString("business_review"));
+                    tv_last_verified_on.setText(company_infoJsonOBJ.getString("last_verified_on"));
+
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
