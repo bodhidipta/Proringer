@@ -100,59 +100,75 @@ public class UserInformationFragment extends Fragment {
     }
 
     private void updateUserInformation() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateUserInformation(
-                new ProServiceApiHelper.getApiProcessCallback() {
-                    @Override
-                    public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
-                        pgDialog.setTitle("User Information");
-                        pgDialog.setMessage("Updating user information.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
-                    }
 
-                    @Override
-                    public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
-                    }
+        if (!zip_code.getText().toString().trim().equals("")) {
+            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformation(
+                    new ProServiceApiHelper.getApiProcessCallback() {
+                        @Override
+                        public void onStart() {
+                            pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
+                            pgDialog.setTitle("User Information");
+                            pgDialog.setMessage("Updating user information.Please wait...");
+                            pgDialog.setCancelable(false);
+                            pgDialog.show();
+                        }
 
-                    @Override
-                    public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                .setTitle("Error updating information")
-                                .setMessage("" + error)
-                                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        updateUserInformation();
-                                    }
-                                })
-                                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
+                        @Override
+                        public void onComplete(String message) {
+                            if (pgDialog != null && pgDialog.isShowing())
+                                pgDialog.dismiss();
+                        }
 
-                    }
-                },
-                first_name.getText().toString().trim(),
-                last_name.getText().toString().trim(),
-                tv_search_by_location.getText().toString().trim(),
-                city.getText().toString().trim(),
-                "USA",
-                state.getText().toString().trim(),
-                zip_code.getText().toString().trim(),
-                contact.getText().toString().trim(),
-                "",
-                "",
-                "");
+                        @Override
+                        public void onError(String error) {
+                            if (pgDialog != null && pgDialog.isShowing())
+                                pgDialog.dismiss();
+                            new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                    .setTitle("Error updating information")
+                                    .setMessage("" + error)
+                                    .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            updateUserInformation();
+                                        }
+                                    })
+                                    .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
+
+                        }
+                    },
+                    first_name.getText().toString().trim(),
+                    last_name.getText().toString().trim(),
+                    tv_search_by_location.getText().toString().trim(),
+                    city.getText().toString().trim(),
+                    "USA",
+                    state.getText().toString().trim(),
+                    zip_code.getText().toString().trim(),
+                    contact.getText().toString().trim(),
+                    "",
+                    "",
+                    "");
+        }
+        else {
+            new android.support.v7.app.AlertDialog.Builder((LandScreenActivity)getActivity())
+                    .setTitle("Updating  Error")
+                    .setMessage("Please Choose the correct address which will contains zip code")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
+
 
     private void plotUserInformation() {
         DatabaseHandler.getInstance((LandScreenActivity)getActivity()).getUserInfo(
