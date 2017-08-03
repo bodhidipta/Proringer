@@ -1,6 +1,5 @@
 package com.android.llc.proringer.activities;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +44,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     String pros_id = "";
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
     JSONObject jsonObject = null;
-    ProgressDialog pgDialog1,pgDialog2;
+    ProgressDialog pgDialog1, pgDialog2;
     RatingBar rbar;
     ProsDetailsServiceAdapter proDetailsService;
     ProsDetailsBusinessHourAdapter prosDetailsBusinessHourAdapter;
@@ -52,7 +52,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     ProsDetailsLicenseAdapter prosDetailsLicenseAdapter;
     ProsDetailsImageAdapter prosDetailsImageAdapter;
 
-    JSONObject infoArrayJsonObject=null;
+    JSONObject infoArrayJsonObject = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,10 +117,10 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                if (infoArrayJsonObject!=null && !infoArrayJsonObject.getJSONObject("about").getString("description").trim().equals("")){
+                    if (infoArrayJsonObject != null && !infoArrayJsonObject.getJSONObject("about").getString("description").trim().equals("")) {
 
                         showDescribetion(infoArrayJsonObject.getJSONObject("about").getString("description"));
-                }
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +166,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_city_state_zipcode)).setText(infoJsonObject.getString("city") + ", " + infoJsonObject.getString("state") + " " + infoJsonObject.getString("zipcode"));
 
 
-                                                                                                            ((ProRegularTextView)findViewById(R.id.tv_review_value)).setText(infoArrayJsonObject.getString("total_review"));
+                                                                                                            ((ProRegularTextView) findViewById(R.id.tv_review_value)).setText(infoArrayJsonObject.getString("total_review"));
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_rate_value)).setText(infoArrayJsonObject.getString("total_avg_review"));
 
 
@@ -259,8 +259,8 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                     pgDialog2.dismiss();
 
                 try {
-                    JSONObject portfolioObj=new JSONObject(message);
-                    JSONArray portfolioInfoArray=portfolioObj.getJSONArray("info_array");
+                    JSONObject portfolioObj = new JSONObject(message);
+                    JSONArray portfolioInfoArray = portfolioObj.getJSONArray("info_array");
 
 
                     final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
@@ -273,7 +273,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                     RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
                     rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
-                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter=new ProsDetailsPortfolioImageAdapter(ProProjectDetailsActivity.this,portfolioInfoArray);
+                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProProjectDetailsActivity.this, portfolioInfoArray);
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
                     dialog.show();
 
@@ -289,9 +289,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                 if (pgDialog2 != null && pgDialog2.isShowing())
                     pgDialog2.dismiss();
             }
-        },portfolio_id);
-
-
+        }, portfolio_id);
 
 
     }
@@ -301,7 +299,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     }
 
 
-    private void showDescribetion(String msg){
+    private void showDescribetion(String msg) {
         final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
@@ -319,7 +317,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        scrollView.getLayoutParams().width = (width-30);
+        scrollView.getLayoutParams().width = (width - 30);
 //        scrollView.getLayoutParams().height = (height-30)/2;
 
         tv_show_describetion.setText(msg);
