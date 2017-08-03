@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProDetailsBusinessHourAdapter;
+import com.android.llc.proringer.adapter.ProDetailsLicenseAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -30,7 +31,7 @@ import org.json.JSONObject;
 public class ProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back, img_top, img_profile;
     String pros_id = "";
-    RecyclerView rcv_service,rcv_business_hour,rcv_service_area;
+    RecyclerView rcv_service,rcv_business_hour,rcv_service_area,rcv_license;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1;
     ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,
@@ -40,6 +41,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
     ProDetailsServiceAdapter proDetailsService;
     ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
     ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter;
+    ProDetailsLicenseAdapter proDetailsLicenseAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +78,11 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
         rcv_service_area= (RecyclerView) findViewById(R.id.rcv_service_area);
         rcv_service_area.setLayoutManager(new GridLayoutManager(ProjectDetailsActivity.this,2));
+
+        rcv_license= (RecyclerView) findViewById(R.id.rcv_license);
+        rcv_license.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+
 
         findViewById(R.id.LLViewAll).setVisibility(View.GONE);
 
@@ -172,6 +179,8 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                     tv_last_verified_on.setText(company_infoJsonOBJ.getString("last_verified_on"));
 
 
+                    proDetailsLicenseAdapter=new ProDetailsLicenseAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("licence"));
+                    rcv_license.setAdapter(proDetailsLicenseAdapter);
 
 
                 } catch (JSONException e) {
