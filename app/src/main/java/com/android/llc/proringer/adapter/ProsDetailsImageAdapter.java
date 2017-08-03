@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProProjectDetailsActivity;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
@@ -18,18 +18,18 @@ import org.json.JSONArray;
  * Created by su on 8/3/17.
  */
 
-public class ProsProjectDetailsAdapter extends RecyclerView.Adapter<ProsProjectDetailsAdapter.MyViewHolder> {
+public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsImageAdapter.MyViewHolder> {
     Context context;
     JSONArray imagejsonArray;
     int height;
     int width;
 
-    public ProsProjectDetailsAdapter(Context context,JSONArray imagejsonArray){
+    public ProsDetailsImageAdapter(Context context, JSONArray imagejsonArray){
         this.context=context;
         this.imagejsonArray=imagejsonArray;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((ProjectDetailsActivity) context).getWindowManager()
+        ((ProProjectDetailsActivity) context).getWindowManager()
                 .getDefaultDisplay()
                 .getMetrics(displayMetrics);
 
@@ -39,7 +39,7 @@ public class ProsProjectDetailsAdapter extends RecyclerView.Adapter<ProsProjectD
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_images, parent, false);
-        return new ProsProjectDetailsAdapter.MyViewHolder(itemView);
+        return new ProsDetailsImageAdapter.MyViewHolder(itemView);
     }
 
     @Override

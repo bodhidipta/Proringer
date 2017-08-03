@@ -16,23 +16,23 @@ import org.json.JSONException;
  * Created by su on 8/2/17.
  */
 
-public class ProDetailsBusinessHourAdapter extends RecyclerView.Adapter<ProDetailsBusinessHourAdapter.MyViewHolder> {
+public class ProsDetailsBusinessHourAdapter extends RecyclerView.Adapter<ProsDetailsBusinessHourAdapter.MyViewHolder> {
     JSONArray businessHoursJsonArray;
     Context context;
 
-    public ProDetailsBusinessHourAdapter(Context context,JSONArray businessHoursJsonArray){
+    public ProsDetailsBusinessHourAdapter(Context context, JSONArray businessHoursJsonArray){
         this.context=context;
         this.businessHoursJsonArray=businessHoursJsonArray;
     }
 
     @Override
-    public ProDetailsBusinessHourAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProsDetailsBusinessHourAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_business_hours, parent, false);
-        return new ProDetailsBusinessHourAdapter.MyViewHolder(itemView);
+        return new ProsDetailsBusinessHourAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ProDetailsBusinessHourAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProsDetailsBusinessHourAdapter.MyViewHolder holder, int position) {
 
         try {
             holder.tv_day.setText(businessHoursJsonArray.getJSONObject(position).getString("day"));

@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProProjectDetailsActivity;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -118,7 +118,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
         holder.main_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mcontext, ProjectDetailsActivity.class);
+                Intent intent=new Intent(mcontext, ProProjectDetailsActivity.class);
                 try {
                     intent.putExtra("pros_id",""+jsonInfoArray.getJSONObject(position).getString("pros_id"));
                 } catch (JSONException e) {

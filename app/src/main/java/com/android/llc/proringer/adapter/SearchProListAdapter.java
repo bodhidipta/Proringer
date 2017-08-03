@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProProjectDetailsActivity;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -136,7 +136,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
         holder.main_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mcontext, ProjectDetailsActivity.class);
+                Intent intent = new Intent(mcontext, ProProjectDetailsActivity.class);
                 mcontext.startActivity(intent);
             }
         });

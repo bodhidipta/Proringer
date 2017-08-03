@@ -14,23 +14,23 @@ import org.json.JSONException;
  * Created by su on 8/2/17.
  */
 
-public class ProDetailsServiceAdapter extends RecyclerView.Adapter<ProDetailsServiceAdapter.MyViewHolder> {
+public class ProsDetailsServiceAdapter extends RecyclerView.Adapter<ProsDetailsServiceAdapter.MyViewHolder> {
     JSONArray serviceJsonArray;
     Context context;
 
-    public ProDetailsServiceAdapter(Context context, JSONArray serviceJsonArray){
+    public ProsDetailsServiceAdapter(Context context, JSONArray serviceJsonArray){
         this.context=context;
         this.serviceJsonArray=serviceJsonArray;
     }
 
     @Override
-    public ProDetailsServiceAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProsDetailsServiceAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_service, parent, false);
-        return new ProDetailsServiceAdapter.MyViewHolder(itemView);
+        return new ProsDetailsServiceAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ProDetailsServiceAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProsDetailsServiceAdapter.MyViewHolder holder, int position) {
         try {
             holder.tv_name.setText(serviceJsonArray.getJSONObject(position).getString("service_name"));
         } catch (JSONException e) {

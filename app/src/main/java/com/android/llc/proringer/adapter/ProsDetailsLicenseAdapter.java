@@ -13,22 +13,22 @@ import org.json.JSONArray;
  * Created by su on 8/3/17.
  */
 
-public class ProDetailsLicenseAdapter extends RecyclerView.Adapter<ProDetailsLicenseAdapter.MyViewHolder> {
+public class ProsDetailsLicenseAdapter extends RecyclerView.Adapter<ProsDetailsLicenseAdapter.MyViewHolder> {
     Context context;
     JSONArray licenseJsonArray;
-    public  ProDetailsLicenseAdapter(Context context,JSONArray licenseJsonArray){
+    public ProsDetailsLicenseAdapter(Context context, JSONArray licenseJsonArray){
         this.context=context;
         this.licenseJsonArray=licenseJsonArray;
     }
 
     @Override
-    public ProDetailsLicenseAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProsDetailsLicenseAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_license, parent, false);
-        return new ProDetailsLicenseAdapter.MyViewHolder(itemView);
+        return new ProsDetailsLicenseAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ProDetailsLicenseAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProsDetailsLicenseAdapter.MyViewHolder holder, int position) {
 
         try {
             holder.tv_category_name.setText(licenseJsonArray.getJSONObject(position).getString("category_name"));
