@@ -395,6 +395,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
 
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/tv_business_hour"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 

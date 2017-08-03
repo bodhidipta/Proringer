@@ -38,7 +38,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
     ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,
             tv_user_name,tv_address,tv_city_state_zipcode,tv_business_since,tv_no_of_employee
             ,tv_proringer_awarded,tv_business_review,tv_last_verified_on,view_all_service_area
-            ,tv_no_of_project_value,tv_no_of_picture_value;
+            ,tv_no_of_project_value,tv_no_of_picture_value,tv_business_hour;
     RatingBar rbar;
     ProDetailsServiceAdapter proDetailsService;
     ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
@@ -64,6 +64,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         tv_user_name= (ProRegularTextView) findViewById(R.id.tv_user_name);
         tv_address= (ProRegularTextView) findViewById(R.id.tv_address);
         tv_city_state_zipcode= (ProRegularTextView) findViewById(R.id.tv_city_state_zipcode);
+        tv_business_hour= (ProRegularTextView) findViewById(R.id.tv_business_hour);
 
         tv_business_since= (ProRegularTextView) findViewById(R.id.tv_business_since);
         tv_no_of_employee= (ProRegularTextView) findViewById(R.id.tv_no_of_employee);
@@ -175,8 +176,18 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                     proDetailsService =new ProDetailsServiceAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("services"));
                     rcv_service.setAdapter(proDetailsService);
 
-                    proDetailsBusinessHourAdapter=new ProDetailsBusinessHourAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("bussiness_hours"));
-                    rcv_business_hour.setAdapter(proDetailsBusinessHourAdapter);
+                    if(infoJsonObject.getString("business_hour").equals("0")){
+                        rcv_business_hour.setVisibility(View.VISIBLE);
+                        tv_business_hour.setVisibility(View.GONE);
+                        proDetailsBusinessHourAdapter=new ProDetailsBusinessHourAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("bussiness_hours"));
+                        rcv_business_hour.setAdapter(proDetailsBusinessHourAdapter);
+                    }else {
+                        rcv_business_hour.setVisibility(View.GONE);
+                        tv_business_hour.setVisibility(View.VISIBLE);
+                        tv_business_hour.setText("Always Open");
+                    }
+
+
 
                     proDetailsServiceAreaAdapter=new ProDetailsServiceAreaAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("service_area"));
                     rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
@@ -200,10 +211,8 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                     prosProjectDetailsAdapter=new ProsProjectDetailsAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("project_gallery"));
                     rcv_project_gallery.setAdapter(prosProjectDetailsAdapter);
 
-                    if (!infoArrayJsonObject.getString("acheivement").equals(""))
-                        Glide.with(ProjectDetailsActivity.this).load(infoArrayJsonObject.getString("acheivement")).centerCrop().into(img_achievements);
-
-
+                    if (!infoArrayJsonObject.getString("achievement").equals(""))
+                        Glide.with(ProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement")).centerCrop().into(img_achievements);
 
 
                 } catch (JSONException e) {
