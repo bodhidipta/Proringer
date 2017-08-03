@@ -302,6 +302,7 @@
                         android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_show_more_describetion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
