@@ -30,7 +30,7 @@ import org.json.JSONObject;
  */
 
 public class ProjectDetailsActivity extends AppCompatActivity {
-    ImageView img_back, img_top, img_profile;
+    ImageView img_back, img_top, img_profile,img_achievements;
     String pros_id = "";
     RecyclerView rcv_service,rcv_business_hour,rcv_service_area,rcv_license,rcv_project_gallery;
     JSONObject jsonObject = null;
@@ -54,6 +54,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         img_back = (ImageView) findViewById(R.id.img_back);
         img_top = (ImageView) findViewById(R.id.img_top);
         img_profile = (ImageView) findViewById(R.id.img_profile);
+        img_achievements = (ImageView) findViewById(R.id.img_achievements);
 
         tv_review_btn = (ProRegularTextView) findViewById(R.id.tv_review_btn);
         tv_review_value= (ProRegularTextView) findViewById(R.id.tv_review_value);
@@ -198,6 +199,11 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
                     prosProjectDetailsAdapter=new ProsProjectDetailsAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("project_gallery"));
                     rcv_project_gallery.setAdapter(prosProjectDetailsAdapter);
+
+                    if (!infoArrayJsonObject.getString("acheivement").equals(""))
+                        Glide.with(ProjectDetailsActivity.this).load(infoJsonObject.getString("acheivement")).centerCrop().into(img_achievements);
+
+
 
 
                 } catch (JSONException e) {
