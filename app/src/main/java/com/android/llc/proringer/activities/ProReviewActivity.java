@@ -168,7 +168,7 @@ public class ProReviewActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog(ProReviewActivity.this);
-                pgDialog.setTitle("Add ReviewA");
+                pgDialog.setTitle("Add Review");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Adding Review.Please wait...");
                 pgDialog.show();
