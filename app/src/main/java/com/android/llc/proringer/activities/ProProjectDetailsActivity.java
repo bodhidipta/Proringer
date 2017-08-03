@@ -49,7 +49,6 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     RatingBar rbar;
     ProsDetailsServiceAdapter proDetailsService;
     ProsDetailsBusinessHourAdapter prosDetailsBusinessHourAdapter;
-    ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter;
     ProsDetailsLicenseAdapter prosDetailsLicenseAdapter;
     ProsDetailsImageAdapter prosDetailsImageAdapter;
 
@@ -190,11 +189,12 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                             }
 
 
-                                                                                                            proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
+                                                                                                            ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
                                                                                                                 @Override
                                                                                                                 public void onItemPassed(int position, String value) {
                                                                                                                     try {
                                                                                                                         if (value.equalsIgnoreCase("more")) {
+
                                                                                                                             showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
                                                                                                                         }
                                                                                                                     } catch (JSONException e) {
