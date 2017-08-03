@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
@@ -54,6 +55,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     ProsDetailsImageAdapter prosDetailsImageAdapter;
 
     JSONObject infoArrayJsonObject = null;
+    JSONObject infoJsonObject=null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,9 +110,20 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         findViewById(R.id.tv_review_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProProjectDetailsActivity.this, ProReviewActivity.class);
-                intent.putExtra("pros_id", pros_id);
-                startActivity(intent);
+                try {
+                    if (infoJsonObject != null) {
+
+                        Intent intent = new Intent(ProProjectDetailsActivity.this, ProReviewActivity.class);
+                        intent.putExtra("pros_id", pros_id);
+                        intent.putExtra("img", infoJsonObject.getString("profile_image"));
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(ProProjectDetailsActivity.this,"Details Page Loading problem",Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -151,7 +164,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                         try {
                                                                                                             jsonObject = new JSONObject(message);
                                                                                                             infoArrayJsonObject = jsonObject.getJSONObject("info_array");
-                                                                                                            JSONObject infoJsonObject = infoArrayJsonObject.getJSONObject("info");
+                                                                                                            infoJsonObject= infoArrayJsonObject.getJSONObject("info");
 
 
                                                                                                             if (!infoJsonObject.getString("header_image").equals(""))

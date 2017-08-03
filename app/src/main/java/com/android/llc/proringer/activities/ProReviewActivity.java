@@ -17,6 +17,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,9 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.bumptech.glide.Glide;
+
+import static com.android.llc.proringer.R.id.img_top;
 
 /**
  * Created by su on 8/1/17.
@@ -35,9 +39,10 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class ProReviewActivity extends AppCompatActivity {
     TextView tv_terms_guidelines;
     RatingBar ratBar_review;
-    String pros_id="",review_rate="0";
+    String pros_id="",img="",review_rate="0";
     ProRegularEditText project_description_text;
     ProgressDialog pgDialog;
+    ImageView img_profile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,11 +55,19 @@ public class ProReviewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         project_description_text= (ProRegularEditText) findViewById(R.id.project_description_text);
+        img_profile= (ImageView) findViewById(R.id.img_profile);
 
 
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
+            img = getIntent().getExtras().getString("img");
         }
+
+
+        if (!img.equals(""))
+            Glide.with(ProReviewActivity.this).load(img).centerCrop().into(img_profile);
+
+
 
         tv_terms_guidelines= (TextView) findViewById(R.id.tv_terms_guidelines);
         tv_terms_guidelines.setMovementMethod(LinkMovementMethod.getInstance());
