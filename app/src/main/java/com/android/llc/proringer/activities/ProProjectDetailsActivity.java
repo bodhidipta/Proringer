@@ -17,11 +17,11 @@ import com.android.llc.proringer.adapter.ProsDetailsLicenseAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsServiceAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsImageAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -228,11 +228,11 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                     pgDialog1.dismiss();
             }
         },
-                "56"
-//                ProApplication.getInstance().getUserId()
+//                "56"
+                ProApplication.getInstance().getUserId()
                 ,
-//                pros_id
-                "82"
+                pros_id
+//                "82"
         );
     }
 }
