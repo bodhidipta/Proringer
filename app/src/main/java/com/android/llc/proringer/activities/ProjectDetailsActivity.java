@@ -201,7 +201,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                     rcv_project_gallery.setAdapter(prosProjectDetailsAdapter);
 
                     if (!infoArrayJsonObject.getString("acheivement").equals(""))
-                        Glide.with(ProjectDetailsActivity.this).load(infoJsonObject.getString("acheivement")).centerCrop().into(img_achievements);
+                        Glide.with(ProjectDetailsActivity.this).load(infoArrayJsonObject.getString("acheivement")).centerCrop().into(img_achievements);
 
 
 

@@ -728,7 +728,6 @@
 
 
                     <ImageView
-                        android:background="@color/colorTextBlack"
                         android:id="@+id/img_achievements"
                         android:layout_width="match_parent"
                         android:layout_height="60dp" />
