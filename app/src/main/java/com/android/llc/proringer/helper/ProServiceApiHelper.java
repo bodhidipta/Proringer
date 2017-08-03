@@ -94,6 +94,9 @@ public class ProServiceApiHelper {
     private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
     private String proIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
 
+    private String proReplyReview="http://esolz.co.in/lab6/proringer_latest/app_homeowner_replyreview";
+    private String proIndividual_portfolio_image="http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
+
 
 
 
