@@ -2800,7 +2800,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("pro_id",":-"+params[1]);
                         Logger.printMessage("review_rate",":-"+params[2]);
                         Logger.printMessage("review_message",":-"+params[3]);
-                        Logger.printMessage("registrationAPI",registrationAPI);
+                        Logger.printMessage("proAddReview",proAddReview);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
