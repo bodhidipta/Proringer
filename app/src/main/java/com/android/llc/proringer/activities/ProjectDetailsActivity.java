@@ -176,10 +176,10 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                     proDetailsService =new ProDetailsServiceAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("services"));
                     rcv_service.setAdapter(proDetailsService);
 
-                    if(infoJsonObject.getString("business_hour").equals("0")){
+                    if(infoJsonObject.getString("business_hour").trim().equals("0")){
                         rcv_business_hour.setVisibility(View.VISIBLE);
                         tv_business_hour.setVisibility(View.GONE);
-                        proDetailsBusinessHourAdapter=new ProDetailsBusinessHourAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("bussiness_hours"));
+                        proDetailsBusinessHourAdapter=new ProDetailsBusinessHourAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("business_hours"));
                         rcv_business_hour.setAdapter(proDetailsBusinessHourAdapter);
                     }else {
                         rcv_business_hour.setVisibility(View.GONE);
