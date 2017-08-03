@@ -94,7 +94,7 @@ public class ProServiceApiHelper {
     private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
     private String proIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
 
-    private String proReplyReview="http://esolz.co.in/lab6/proringer_latest/app_homeowner_replyreview";
+    private String proAddReview="http://esolz.co.in/lab6/proringer_latest/app_homeowner_addreview";
     private String proIndividual_portfolio_image="http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
 
 
@@ -2764,6 +2764,86 @@ public class ProServiceApiHelper {
         } else
             callback.onError("No internet connection found. Please check your internet connection.");
     }
+
+
+
+    /**
+     * For add review of user
+     *
+     * @param callback
+     * @param params
+     */
+
+    public void addReview(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+
+                        RequestBody body = new FormBody.Builder()
+                                .add("user_id", params[0])
+                                .add("pro_id", params[1])
+                                .add("review_rate", params[2])
+                                .add("review_message", params[3])
+                                .build();
+
+                        Logger.printMessage("user_id",":-"+params[0]);
+                        Logger.printMessage("pro_id",":-"+params[1]);
+                        Logger.printMessage("review_rate",":-"+params[2]);
+                        Logger.printMessage("review_message",":-"+params[3]);
+                        Logger.printMessage("registrationAPI",registrationAPI);
+
+
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Request request = new Request.Builder()
+                                .url(proAddReview)
+                                .post(body)
+                                .build();
+
+                        Response resposne = client.newCall(request).execute();
+                        String response_string = resposne.body().string();
+                        JSONObject mainResponseObj = new JSONObject(response_string);
+                        if (mainResponseObj.getBoolean("response")) {
+                            exception = "";
+                            return mainResponseObj.getString("message");
+                        } else {
+                            exception = "true";
+                            return mainResponseObj.getString("message");
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
 
 
     /**

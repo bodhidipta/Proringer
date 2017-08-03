@@ -117,12 +117,13 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
         }
+
         tv_review_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(ProProjectDetailsActivity.this, ProReviewActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(ProProjectDetailsActivity.this, ProReviewActivity.class);
+                intent.putExtra("pros_id",pros_id);
+                startActivity(intent);
             }
         });
 

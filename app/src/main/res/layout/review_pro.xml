@@ -115,7 +115,7 @@
                 android:textSize="14sp" />
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:id="@+id/change_password"
+                android:id="@+id/tv_post_review"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginBottom="10dp"
