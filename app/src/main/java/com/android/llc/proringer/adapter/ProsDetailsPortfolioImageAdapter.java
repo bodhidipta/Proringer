@@ -10,27 +10,24 @@ import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProProjectDetailsActivity;
-import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 /**
  * Created by su on 8/3/17.
  */
 
-public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsImageAdapter.MyViewHolder> {
+public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsDetailsPortfolioImageAdapter.MyViewHolder> {
     Context context;
-    JSONArray imageJsonArray;
+    JSONArray portfolioInfoArray;
     int height;
     int width;
-    ProProjectDetailsActivity.onOptionSelected callback;
 
-    public ProsDetailsImageAdapter(Context context, JSONArray imageJsonArray,ProProjectDetailsActivity.onOptionSelected callback){
+    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray){
         this.context=context;
-        this.imageJsonArray=imageJsonArray;
-        this.callback=callback;
+        this.portfolioInfoArray=portfolioInfoArray;
+
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((ProProjectDetailsActivity) context).getWindowManager()
@@ -39,40 +36,32 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
 
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
+
     }
+
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_images, parent, false);
-        return new ProsDetailsImageAdapter.MyViewHolder(itemView);
+        return new ProsDetailsPortfolioImageAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.img.getLayoutParams().width = (width-30)/5;
-        holder.img.getLayoutParams().height = (width-30)/5;
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        holder.img.getLayoutParams().width = (width-30);
+        holder.img.getLayoutParams().height = (height-30)/2;
         try {
-            if (!imageJsonArray.getJSONObject(position).getString("portfolio_image").equals(""))
-                Glide.with(context).load(imageJsonArray.getJSONObject(position).getString("portfolio_image")).centerCrop().into(holder.img);
+            if (!portfolioInfoArray.getJSONObject(position).getString("portfolio_img").equals(""))
+                Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).centerCrop().into(holder.img);
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
-
-        holder.img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    callback.onItemPassed(position, imageJsonArray.getJSONObject(position).getString("portfolio_id"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return imageJsonArray.length();
+        return portfolioInfoArray.length();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
