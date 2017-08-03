@@ -16,6 +16,7 @@ import com.android.llc.proringer.adapter.ProDetailsBusinessHourAdapter;
 import com.android.llc.proringer.adapter.ProDetailsLicenseAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
+import com.android.llc.proringer.adapter.ProsProjectDetailsAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -31,17 +32,19 @@ import org.json.JSONObject;
 public class ProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back, img_top, img_profile;
     String pros_id = "";
-    RecyclerView rcv_service,rcv_business_hour,rcv_service_area,rcv_license;
+    RecyclerView rcv_service,rcv_business_hour,rcv_service_area,rcv_license,rcv_project_gallery;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1;
     ProRegularTextView tv_review_btn,tv_review_value,tv_rate_value,tv_about,tv_company_name,
             tv_user_name,tv_address,tv_city_state_zipcode,tv_business_since,tv_no_of_employee
-            ,tv_proringer_awarded,tv_business_review,tv_last_verified_on,view_all_service_area;
+            ,tv_proringer_awarded,tv_business_review,tv_last_verified_on,view_all_service_area
+            ,tv_no_of_project_value,tv_no_of_picture_value;
     RatingBar rbar;
     ProDetailsServiceAdapter proDetailsService;
     ProDetailsBusinessHourAdapter proDetailsBusinessHourAdapter;
     ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter;
     ProDetailsLicenseAdapter proDetailsLicenseAdapter;
+    ProsProjectDetailsAdapter prosProjectDetailsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +70,9 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         tv_business_review= (ProRegularTextView) findViewById(R.id.tv_business_review);
         tv_last_verified_on= (ProRegularTextView) findViewById(R.id.tv_last_verified_on);
         view_all_service_area= (ProRegularTextView) findViewById(R.id.view_all_service_area);
+        tv_no_of_project_value= (ProRegularTextView) findViewById(R.id.tv_no_of_project_value);
+        tv_no_of_picture_value= (ProRegularTextView) findViewById(R.id.tv_no_of_picture_value);
+
 
         rbar= (RatingBar) findViewById(R.id.rbar);
 
@@ -81,6 +87,10 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
         rcv_license= (RecyclerView) findViewById(R.id.rcv_license);
         rcv_license.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+
+        rcv_project_gallery= (RecyclerView) findViewById(R.id.rcv_project_gallery);
+        rcv_project_gallery.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
 
@@ -181,6 +191,13 @@ public class ProjectDetailsActivity extends AppCompatActivity {
 
                     proDetailsLicenseAdapter=new ProDetailsLicenseAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("licence"));
                     rcv_license.setAdapter(proDetailsLicenseAdapter);
+
+                    tv_no_of_project_value.setText(infoArrayJsonObject.getString("total_project"));
+                    tv_no_of_picture_value.setText(infoArrayJsonObject.getString("total_picture"));
+
+
+                    prosProjectDetailsAdapter=new ProsProjectDetailsAdapter(ProjectDetailsActivity.this,infoArrayJsonObject.getJSONArray("project_gallery"));
+                    rcv_project_gallery.setAdapter(prosProjectDetailsAdapter);
 
 
                 } catch (JSONException e) {
