@@ -332,6 +332,13 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         scrollView.getLayoutParams().width = (width - 30);
 //        scrollView.getLayoutParams().height = (height-30)/2;
 
+        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
         tv_show_describetion.setText(msg);
         dialog.show();
     }
@@ -347,9 +354,16 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         RecyclerView rcv_show_service_area = (RecyclerView) dialog.findViewById(R.id.rcv_show_service_area);
         rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProProjectDetailsActivity.this, 2));
 
+        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
 
         ProDetailsServiceAreaDialogAdapter proDetailsServiceAreaDialogAdapter=new ProDetailsServiceAreaDialogAdapter(ProProjectDetailsActivity.this,serviceAreaJsonArray);
-        rcv_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
+        rcv_show_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
