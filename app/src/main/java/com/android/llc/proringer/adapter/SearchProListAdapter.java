@@ -136,7 +136,13 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
         holder.main_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mcontext, ProProjectDetailsActivity.class);
+
+                Intent intent=new Intent(mcontext, ProProjectDetailsActivity.class);
+                try {
+                    intent.putExtra("pros_id",""+jsonInfoArray.getJSONObject(position).getString("pros_id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 mcontext.startActivity(intent);
             }
         });

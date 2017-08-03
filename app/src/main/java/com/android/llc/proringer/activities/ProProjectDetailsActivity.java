@@ -116,6 +116,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
+            Logger.printMessage("ProProjectDetailsActivity_proid",""+pros_id);
         }
 
         tv_review_btn.setOnClickListener(new View.OnClickListener() {
