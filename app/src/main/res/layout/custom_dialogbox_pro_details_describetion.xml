@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LLMain"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:orientation="vertical">
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="About"
+            android:textSize="18sp" />
 
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="About"
-                android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/img_cancel_dialog"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_cross_dialog" />
 
-            <ImageView
-                android:id="@+id/img_cancel_dialog"
-                android:layout_width="?actionBarSize"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:padding="15dp"
-                android:src="@drawable/ic_cross_dialog" />
+    </RelativeLayout>
 
-        </RelativeLayout>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/tv_show_describetion"
@@ -38,6 +38,6 @@
             android:layout_height="wrap_content"
             android:padding="10dp" />
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</LinearLayout>

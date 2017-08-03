@@ -15,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 
@@ -319,7 +320,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
-        ScrollView scrollView = (ScrollView) dialog.findViewById(R.id.scrollView);
+        LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
         ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
 
 
@@ -329,7 +330,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        scrollView.getLayoutParams().width = (width - 30);
+        LLMain.getLayoutParams().width = (width - 30);
 //        scrollView.getLayoutParams().height = (height-30)/2;
 
         dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
