@@ -324,6 +324,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:gravity="left"
+                    android:maxLines="5"
                     android:text="hbjdsjhfdghjngdbfjjgdbhgfjgdbjgjgdbjnjgdbjhjgdbdfjgdbdfhjgdbfdjgdbfdhbjgdbhfjgdbfdhjgdbdhjgdbhjfjgdbfdhjgdbhfhjgdbhfdjgdbfdhjgdbfhjgdbhfdjgdbfdhjgd"
                     android:textColor="@color/colorHeader"
                     android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
