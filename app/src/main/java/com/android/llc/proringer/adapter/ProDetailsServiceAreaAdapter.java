@@ -1,12 +1,14 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ProProjectDetailsActivity;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
@@ -19,10 +21,11 @@ import org.json.JSONException;
 public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetailsServiceAreaAdapter.MyViewHolder> {
     JSONArray serviceAreaJsonArray;
     Context context;
-
-    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray){
+    ProProjectDetailsActivity.onOptionSelected callback;
+    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray,ProProjectDetailsActivity.onOptionSelected callback){
         this.context=context;
         this.serviceAreaJsonArray=serviceJsonArray;
+        this.callback=callback;
     }
 
     @Override
@@ -32,17 +35,37 @@ public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetail
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         try {
-            holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("city_services"));
+            if(position==13){
+                holder.tv_name.setText("More...");
+                holder.tv_name.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+            }else {
+                holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("city_services"));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        holder.tv_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    if(position==13) {
+                        callback.onItemPassed(position,"More");
+                    }
+                    else {
+                        callback.onItemPassed(position,"");
+                    }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return serviceAreaJsonArray.length();
+            if (serviceAreaJsonArray.length()>=14){
+            return 14;
+            }else {
+                return serviceAreaJsonArray.length();
+            }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

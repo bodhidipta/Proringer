@@ -20,6 +20,7 @@ import android.widget.ScrollView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
+import com.android.llc.proringer.adapter.ProDetailsServiceAreaDialogAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsBusinessHourAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsImageAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsLicenseAdapter;
@@ -119,7 +120,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                 try {
                     if (infoArrayJsonObject != null && !infoArrayJsonObject.getJSONObject("about").getString("description").trim().equals("")) {
 
-                        showDescribetion(infoArrayJsonObject.getJSONObject("about").getString("description"));
+                        showDescribetionDialog(infoArrayJsonObject.getJSONObject("about").getString("description"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -189,7 +190,18 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                             }
 
 
-                                                                                                            proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"));
+                                                                                                            proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
+                                                                                                                @Override
+                                                                                                                public void onItemPassed(int position, String value) {
+                                                                                                                    try {
+                                                                                                                        if (value.equalsIgnoreCase("more")) {
+                                                                                                                            showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
+                                                                                                                        }
+                                                                                                                    } catch (JSONException e) {
+                                                                                                                        e.printStackTrace();
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            });
                                                                                                             rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
 
                                                                                                             JSONObject company_infoJsonOBJ = infoArrayJsonObject.getJSONObject("company_info");
@@ -299,7 +311,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     }
 
 
-    private void showDescribetion(String msg) {
+    private void showDescribetionDialog(String msg) {
         final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
@@ -321,6 +333,33 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 //        scrollView.getLayoutParams().height = (height-30)/2;
 
         tv_show_describetion.setText(msg);
+        dialog.show();
+    }
+
+    private void showServiceAreaDialog(JSONArray serviceAreaJsonArray) {
+        final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                    dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialogbox_pro_details_service_area);
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        RecyclerView rcv_show_service_area = (RecyclerView) dialog.findViewById(R.id.rcv_show_service_area);
+        rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProProjectDetailsActivity.this, 2));
+
+
+        ProDetailsServiceAreaDialogAdapter proDetailsServiceAreaDialogAdapter=new ProDetailsServiceAreaDialogAdapter(ProProjectDetailsActivity.this,serviceAreaJsonArray);
+        rcv_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        rcv_show_service_area.getLayoutParams().width = (width - 30);
+//        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
+
         dialog.show();
     }
 
