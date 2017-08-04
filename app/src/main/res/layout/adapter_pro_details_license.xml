@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="State of Ohio"
         android:textColor="@color/colorTextDark"
-        android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
         android:id="@+id/tv_licence_no"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="456667-jmkhjkfds"
         android:textColor="@color/colorTextDark"
-        android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Expires: "
             android:textColor="@color/colorTextDark"
-            android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="06-28-19"
             android:textColor="@color/colorTextDark"
-            android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
     </LinearLayout>
 

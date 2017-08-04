@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="8am-5pm"
         android:textColor="@color/colorTextDark"
-        android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -24,6 +24,6 @@
         android:layout_height="wrap_content"
         android:text="Monday"
         android:textColor="@color/colorTextDark"
-        android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
 </LinearLayout>
