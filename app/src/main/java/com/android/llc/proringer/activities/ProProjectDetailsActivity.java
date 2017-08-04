@@ -95,7 +95,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.tv_review_name).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.tv_view_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(ProProjectDetailsActivity.this,ProsReviewAllListActivity.class);
