@@ -1,18 +1,25 @@
 package com.android.llc.proringer.adapter;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
 import org.json.JSONArray;
@@ -38,7 +45,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
     }
 
     @Override
-    public void onBindViewHolder(ProsReviewAllAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final ProsReviewAllAdapter.MyViewHolder holder, final int position) {
         try {
 
             if (!jsonInfoArray.getJSONObject(position).getString("profile_img").equals(""))
@@ -63,12 +70,58 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                     }
                 }
             });
-
-
             holder.tv_review_comment.setText(jsonInfoArray.getJSONObject(position).getString("rater_description"));
 
-            Log.i("count",""+holder.tv_review_comment.getLineCount());
+            holder.tv_review_comment.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    holder.tv_review_comment.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    int lineCount = holder.tv_review_comment.getLineCount();
+                    Log.d("count", "Number of lines is " + lineCount);
 
+                    if (lineCount>1){
+
+                        /**
+                         * Contact us spannable text with click listener
+                         */
+                        String contactTextOne = null;
+                        try {
+                            if(jsonInfoArray.getJSONObject(position).getString("rater_description").trim().length()>=60) {
+                                contactTextOne = jsonInfoArray.getJSONObject(position).getString("rater_description").substring(0, 60) + "....";
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        String contactTextClick = "Read Full Review";
+
+
+                        Spannable word1 = new SpannableString(contactTextOne);
+
+                        word1.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                        holder.tv_review_comment.setText(word1);
+
+                        Spannable word2 = new SpannableString(contactTextClick);
+
+                        ClickableSpan myClickableSpan = new ClickableSpan() {
+                            @Override
+                            public void onClick(View widget) {
+                                // There is the OnCLick. put your intent to Register class here
+                                widget.invalidate();
+                                Logger.printMessage("SpanHello", "click");
+                            }
+
+                            @Override
+                            public void updateDrawState(TextPaint ds) {
+                                ds.setColor(context.getResources().getColor(R.color.colorAccent));
+                                ds.setUnderlineText(false);
+                            }
+                        };
+                        word2.setSpan(myClickableSpan, 0, contactTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        holder.tv_review_comment.append(word2);
+                    }
+                }
+            });
 
             if (jsonInfoArray.getJSONObject(position).getInt("review_reply")==0){
                 holder.CardViewReply.setVisibility(View.GONE);
@@ -78,6 +131,63 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 holder.tv_review_reply_by.setText(((ProsReviewAllListActivity)context).pros_company_name);
                 holder.tv_review_reply_on_date.setText("responded on "+jsonInfoArray.getJSONObject(position).getString("review_reply_date"));
                 holder.tv_review_reply.setText(jsonInfoArray.getJSONObject(position).getString("review_reply_content"));
+
+
+
+                holder.tv_review_reply.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        holder.tv_review_reply.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        int lineCount = holder.tv_review_reply.getLineCount();
+                        Log.d("count", "Number of lines is " + lineCount);
+
+                        if (lineCount>1){
+
+                            /**
+                             * Contact us spannable text with click listener
+                             */
+                            String contactTextOne = null;
+                            try {
+                                if(jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim().length()>=60) {
+                                    contactTextOne = jsonInfoArray.getJSONObject(position).getString("review_reply_content").substring(0, 60) + "....";
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String contactTextClick = "Read Full Response";
+
+
+                            Spannable word1 = new SpannableString(contactTextOne);
+
+                            word1.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                            holder.tv_review_reply.setText(word1);
+
+                            Spannable word2 = new SpannableString(contactTextClick);
+
+                            ClickableSpan myClickableSpan = new ClickableSpan() {
+                                @Override
+                                public void onClick(View widget) {
+                                    // There is the OnCLick. put your intent to Register class here
+                                    widget.invalidate();
+                                    Logger.printMessage("SpanHello", "click");
+                                }
+
+                                @Override
+                                public void updateDrawState(TextPaint ds) {
+                                    ds.setColor(context.getResources().getColor(R.color.colorAccent));
+                                    ds.setUnderlineText(false);
+                                }
+                            };
+                            word2.setSpan(myClickableSpan, 0, contactTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            holder.tv_review_reply.append(word2);
+                        }
+                    }
+                });
+
+
+
+
             }
 
             if(position==jsonInfoArray.length()-1){
@@ -107,7 +217,9 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             tv_name= (ProRegularTextView) itemView.findViewById(R.id.tv_name);
             tv_review_date= (ProRegularTextView) itemView.findViewById(R.id.tv_review_date);
             tv_report= (ProRegularTextView) itemView.findViewById(R.id.tv_report);
+
             tv_review_comment= (ProRegularTextView) itemView.findViewById(R.id.tv_review_comment);
+            tv_review_comment.setMovementMethod(LinkMovementMethod.getInstance());
 
             CardViewReply= (CardView) itemView.findViewById(R.id.CardViewReply);
 
