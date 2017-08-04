@@ -24,7 +24,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
     String pros_id="";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
-    ProgressDialog pgDialog1;
+    ProgressDialog pgDialog;
     JSONArray jsonInfoReviewArray;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,17 +65,17 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog1 = new ProgressDialog(ProsReviewAllListActivity.this);
-                pgDialog1.setTitle("Pros Review");
-                pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting local pros review list.Please wait...");
-                pgDialog1.show();
+                pgDialog = new ProgressDialog(ProsReviewAllListActivity.this);
+                pgDialog.setTitle("Pros Review");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Getting local pros review list.Please wait...");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 try {
                     JSONObject jsonObject=new JSONObject(message);
@@ -98,8 +98,8 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         }, ProApplication.getInstance().getUserId()
                 ,pros_id

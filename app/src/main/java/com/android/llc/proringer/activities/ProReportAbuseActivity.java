@@ -21,7 +21,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
 public class ProReportAbuseActivity extends AppCompatActivity {
     String  review_report_id="";
-    ProgressDialog pgDialog1=null;
+    ProgressDialog pgDialog=null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,17 +66,17 @@ public class ProReportAbuseActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog1 = new ProgressDialog(ProReportAbuseActivity.this);
-                pgDialog1.setTitle("Pros Report Abuse");
-                pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Please wait...");
-                pgDialog1.show();
+                pgDialog = new ProgressDialog(ProReportAbuseActivity.this);
+                pgDialog.setTitle("Pros Report Abuse");
+                pgDialog.setCancelable(false);
+                pgDialog.setMessage("Please wait...");
+                pgDialog.show();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
 
                 new AlertDialog.Builder(ProReportAbuseActivity.this)
                         .setTitle("Pros Report Abuse")
@@ -92,8 +92,8 @@ public class ProReportAbuseActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
                 new AlertDialog.Builder(ProReportAbuseActivity.this)
                         .setTitle("Pros Report Abuse")
                         .setMessage("" + error)
