@@ -12,6 +12,7 @@ import com.android.llc.proringer.R;
  */
 
 public class ProReportAbuseActivity extends AppCompatActivity {
+    String  review_report_id="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,10 @@ public class ProReportAbuseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getIntent().getExtras() != null) {
+            review_report_id = getIntent().getExtras().getString("review_report_id");
+        }
 
     }
 

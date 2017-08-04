@@ -1,6 +1,7 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ProReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
@@ -35,7 +37,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
     }
 
     @Override
-    public void onBindViewHolder(ProsReviewAllAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProsReviewAllAdapter.MyViewHolder holder, final int position) {
         try {
 
             if (!jsonInfoArray.getJSONObject(position).getString("profile_img").equals(""))
@@ -49,9 +51,15 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             holder.tv_report.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    try {
 
+                        Intent intent=new Intent(context,ProReportAbuseActivity.class);
+                        intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
+                        context.startActivity(intent);
 
-
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
                 }
             });
             holder.tv_review_comment.setText(jsonInfoArray.getJSONObject(position).getString("rater_description"));
