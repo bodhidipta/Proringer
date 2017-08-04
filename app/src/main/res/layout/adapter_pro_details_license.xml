@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Roofing"
         android:textColor="@color/colorTextDark"
-        android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
         android:id="@+id/tv_licence_issuer"
