@@ -95,6 +95,15 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.tv_review_name).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ProProjectDetailsActivity.this,ProsReviewAllListActivity.class);
+                intent.putExtra("pros_id", pros_id);
+                startActivity(intent);
+            }
+        });
+
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
