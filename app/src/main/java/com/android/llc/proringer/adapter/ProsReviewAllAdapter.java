@@ -39,7 +39,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
         try {
 
             if (!jsonInfoArray.getJSONObject(position).getString("profile_img").equals(""))
-                Glide.with(context).load(jsonInfoArray.getJSONObject(position).getString("profile_image")).centerCrop().into(holder.img_profile);
+                Glide.with(context).load(jsonInfoArray.getJSONObject(position).getString("profile_img")).centerCrop().into(holder.img_profile);
 
             holder.rbar.setRating(Float.parseFloat(jsonInfoArray.getJSONObject(position).getString("avg_rating")));
 
@@ -49,6 +49,8 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             holder.tv_report.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
 
                 }
             });
