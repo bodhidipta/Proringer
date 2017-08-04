@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -35,11 +35,18 @@ public class ProReportAbuseActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             review_report_id = getIntent().getExtras().getString("review_report_id");
         }
-        if(((ProRegularEditText)findViewById(R.id.pro_review_description_text)).getText().toString().trim().equals("")){
-            ((ProRegularEditText)findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
-        }else {
-            submitReviewReport();
-        }
+
+        findViewById(R.id.pro_review_report_continue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(((ProRegularEditText)findViewById(R.id.pro_review_description_text)).getText().toString().trim().equals("")){
+                    ((ProRegularEditText)findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
+                }else {
+                    submitReviewReport();
+                }
+            }
+        });
     }
 
     @Override
