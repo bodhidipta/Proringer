@@ -79,7 +79,7 @@ public class ProServiceApiHelper {
 
     private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_contact_us";
     private String myProjectDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_delete";
-    private String myProjectdetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_details?user_id=";
+    private String myProjectDetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_details?user_id=";
     private String favoriteProsListAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros?user_id=";
 
     private String favoriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
@@ -88,14 +88,18 @@ public class ProServiceApiHelper {
     private String termsOfUseAPI = "http://esolz.co.in/lab6/proringer_latest/app_term";
     private String privacyPolicyAPI = "http://esolz.co.in/lab6/proringer_latest/app_privacy_policy";
 
-    private String proslistingAPI = "http://esolz.co.in/lab6/proringer_latest/app_serch_result_project?user_id=";
+    private String prosListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_serch_result_project?user_id=";
 
     private String favouriteProAdddeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pro_adddelete";
     private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
-    private String proIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
+    private String prosIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
 
-    private String proAddReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_addreview";
-    private String proIndividualPortfolioImageAPI="http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
+    private String prosAddReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_addreview";
+    private String prosIndividualPortfolioImageAPI="http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
+
+
+    private String prosAllReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_allreview";
+    private String prosReportReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_reportreview";
 
 
 
@@ -1510,7 +1514,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String ApiOption = myProjectdetailsAPI + "" + ProApplication.getInstance().getUserId()+"&project_id="+params[0];
+                        String ApiOption = myProjectDetailsAPI + "" + ProApplication.getInstance().getUserId()+"&project_id="+params[0];
                         Logger.printMessage("myProjectdetailsAPI",ApiOption);
 
                         Request request = new Request.Builder()
@@ -2510,11 +2514,11 @@ public class ProServiceApiHelper {
                         Logger.printMessage("user_id",":-"+params[0]);
                         Logger.printMessage("category_search", ":-"+params[1]);
                         Logger.printMessage("zip_search",":-"+ params[2]);
-                        Logger.printMessage("proslistingAPI",proslistingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2]);
+                        Logger.printMessage("prosListingAPI",prosListingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2]);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(proslistingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2])
+                                .url(prosListingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2])
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -2716,13 +2720,13 @@ public class ProServiceApiHelper {
                         Logger.printMessage("pro_id",":-"+params[1]);
 
 
-                        String proIndividualListAPI = proIndividualListingAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1];
+                        String prosIndividualListAPI = prosIndividualListingAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1];
 
-                        Logger.printMessage("proIndividualListAPI",proIndividualListAPI);
+                        Logger.printMessage("prosIndividualListAPI",prosIndividualListAPI);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(proIndividualListAPI)
+                                .url(prosIndividualListAPI)
                                 .build();
 
 
@@ -2730,7 +2734,7 @@ public class ProServiceApiHelper {
                         Response response = okHttpClient.newCall(request).execute();
                         String responseString = response.body().string();
 
-                        Logger.printMessage("proIndividualDetails", responseString);
+                        Logger.printMessage("prosIndividualDetails", responseString);
 
                         JSONObject responseJsonObj = new JSONObject(responseString);
                         if (responseJsonObj.getBoolean("response")) {
@@ -2800,13 +2804,13 @@ public class ProServiceApiHelper {
                         Logger.printMessage("pro_id",":-"+params[1]);
                         Logger.printMessage("review_rate",":-"+params[2]);
                         Logger.printMessage("review_message",":-"+params[3]);
-                        Logger.printMessage("proAddReview",proAddReviewAPI);
+                        Logger.printMessage("prosAddReview",prosAddReviewAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Request request = new Request.Builder()
-                                .url(proAddReviewAPI)
+                                .url(prosAddReviewAPI)
                                 .post(body)
                                 .build();
 
@@ -2870,11 +2874,11 @@ public class ProServiceApiHelper {
 
                         Logger.printMessage("portfolio_id",":-"+params[0]);
 
-                        Logger.printMessage("proIndividualPortfolioImageAPI",proIndividualPortfolioImageAPI + "?"+"portfolio_id="+params[0]);
+                        Logger.printMessage("prosIndividualPortfolioImageAPI",prosIndividualPortfolioImageAPI + "?"+"portfolio_id="+params[0]);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(proIndividualPortfolioImageAPI + "?"+"portfolio_id="+params[0])
+                                .url(prosIndividualPortfolioImageAPI + "?"+"portfolio_id="+params[0])
                                 .build();
 
                         Response response = okHttpClient.newCall(request).execute();
