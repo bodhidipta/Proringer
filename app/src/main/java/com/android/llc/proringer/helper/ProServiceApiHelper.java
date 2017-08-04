@@ -2699,7 +2699,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getProIndividualListing(final getApiProcessCallback callback, String... params) {
+    public void getProsIndividualListing(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2778,7 +2778,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void addReview(final getApiProcessCallback callback, String... params) {
+    public void prosAddReview(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2850,6 +2850,82 @@ public class ProServiceApiHelper {
 
 
     /**
+     * get all review listing of pros
+     *
+     * @param callback
+     * @param params
+     */
+    public void getProsAllReview(final getApiProcessCallback callback, String... params) {
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Logger.printMessage("user_id",":-"+params[0]);
+                        Logger.printMessage("pro_id",":-"+params[1]);
+                        Logger.printMessage("start_from",":-"+params[2]);
+                        Logger.printMessage("perpage",":-"+params[3]);
+
+                        Logger.printMessage("prosAllReviewAPI",prosAllReviewAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1]+"&start_from="+params[2]+"&perpage="+params[3]);
+
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(prosAllReviewAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1]+"&start_from="+params[2]+"&perpage="+params[3])
+                                .build();
+
+                        Response response = okHttpClient.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("prosAllReviewAPIDetails", responseString);
+
+                        JSONObject responseJsonObj = new JSONObject(responseString);
+                        if (responseJsonObj.getBoolean("response")) {
+                            return responseString;
+                        } else {
+                            exception = responseJsonObj.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(final String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        try {
+                            callback.onComplete(s);
+                        } catch (Exception io) {
+                            callback.onError(io.getMessage());
+                        }
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else
+            callback.onError("No internet connection found. Please check your internet connection.");
+    }
+
+
+
+
+    /**
      * get portfolio image listing
      *
      * @param callback
@@ -2918,6 +2994,86 @@ public class ProServiceApiHelper {
         } else
             callback.onError("No internet connection found. Please check your internet connection.");
     }
+
+
+
+
+    /**
+     * For add report review of user
+     *
+     * @param callback
+     * @param params
+     */
+
+    public void addReviewReportAbuse(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+
+                        RequestBody body = new FormBody.Builder()
+                                .add("user_id", params[0])
+                                .add("review_report_id", params[1])
+                                .add("report_comment", params[2])
+                                .build();
+
+                        Logger.printMessage("user_id",":-"+params[0]);
+                        Logger.printMessage("review_report_id",":-"+params[1]);
+                        Logger.printMessage("report_comment",":-"+params[2]);
+                        Logger.printMessage("prosReportReviewAPI",prosReportReviewAPI);
+
+
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Request request = new Request.Builder()
+                                .url(prosReportReviewAPI)
+                                .post(body)
+                                .build();
+
+                        Response resposne = client.newCall(request).execute();
+                        String response_string = resposne.body().string();
+                        JSONObject mainResponseObj = new JSONObject(response_string);
+                        if (mainResponseObj.getBoolean("response")) {
+                            exception = "";
+                            return mainResponseObj.getString("message");
+                        } else {
+                            exception = "true";
+                            return mainResponseObj.getString("message");
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
+
 
 
     /**

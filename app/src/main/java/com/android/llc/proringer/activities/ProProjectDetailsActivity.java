@@ -145,7 +145,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     }
 
     public void setDataProListDetails() {
-        ProServiceApiHelper.getInstance(ProProjectDetailsActivity.this).getProIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProProjectDetailsActivity.this).getProsIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                     @Override
                                                                                                     public void onStart() {
                                                                                                         pgDialog1 = new ProgressDialog(ProProjectDetailsActivity.this);

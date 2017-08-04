@@ -177,7 +177,7 @@ public class ProReviewActivity extends AppCompatActivity {
     }
 
     public void postReview(){
-        ProServiceApiHelper.getInstance(ProReviewActivity.this).addReview(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 pgDialog = new ProgressDialog(ProReviewActivity.this);
