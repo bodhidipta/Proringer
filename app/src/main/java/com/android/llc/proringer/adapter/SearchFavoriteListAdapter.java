@@ -121,6 +121,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
                 Intent intent=new Intent(mcontext, ProProjectDetailsActivity.class);
                 try {
                     intent.putExtra("pros_id",""+jsonInfoArray.getJSONObject(position).getString("pros_id"));
+                    intent.putExtra("pros_company_name",""+jsonInfoArray.getJSONObject(position).getString("pros_company_name"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

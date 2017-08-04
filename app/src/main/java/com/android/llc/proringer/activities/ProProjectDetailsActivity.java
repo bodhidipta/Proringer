@@ -44,7 +44,7 @@ import org.json.JSONObject;
 
 public class ProProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back, img_top, img_profile, img_achievements;
-    String pros_id = "";
+    String pros_id = "",pros_company_name="";
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
     JSONObject jsonObject = null;
     ProgressDialog pgDialog1, pgDialog2;
@@ -99,6 +99,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(ProProjectDetailsActivity.this,ProsReviewAllListActivity.class);
+                intent.putExtra("pros_company_name", pros_company_name);
                 intent.putExtra("pros_id", pros_id);
                 startActivity(intent);
             }
@@ -114,7 +115,10 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
+            pros_company_name = getIntent().getExtras().getString("pros_company_name");
         }
+
+        ((ProRegularTextView)findViewById(R.id.tv_toolbar)).setText(pros_company_name);
 
         findViewById(R.id.tv_review_btn).setOnClickListener(new View.OnClickListener() {
             @Override

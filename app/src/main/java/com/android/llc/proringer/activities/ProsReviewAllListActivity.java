@@ -12,6 +12,8 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsReviewAllAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +23,7 @@ import org.json.JSONObject;
  */
 
 public class ProsReviewAllListActivity extends AppCompatActivity {
-    String pros_id="";
+    String pros_id="",pros_company_name="";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
     ProgressDialog pgDialog;
@@ -40,7 +42,11 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
+            pros_company_name = getIntent().getExtras().getString("pros_company_name");
         }
+
+        ((ProRegularTextView)findViewById(R.id.tv_toolbar)).setText(pros_company_name);
+
 
         rcv_review_all= (RecyclerView) findViewById(R.id.rcv_review_all);
         rcv_review_all.setLayoutManager(new LinearLayoutManager(ProsReviewAllListActivity.this));
