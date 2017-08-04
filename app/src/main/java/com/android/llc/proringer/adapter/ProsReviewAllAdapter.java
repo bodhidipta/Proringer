@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,11 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                     }
                 }
             });
+
+
             holder.tv_review_comment.setText(jsonInfoArray.getJSONObject(position).getString("rater_description"));
+
+            Log.i("count",""+holder.tv_review_comment.getLineCount());
 
 
             if (jsonInfoArray.getJSONObject(position).getInt("review_reply")==0){
