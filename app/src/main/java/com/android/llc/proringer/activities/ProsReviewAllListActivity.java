@@ -23,7 +23,7 @@ import org.json.JSONObject;
  */
 
 public class ProsReviewAllListActivity extends AppCompatActivity {
-    String pros_id="",pros_company_name="";
+    public String pros_id="",pros_company_name="";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
     ProgressDialog pgDialog;

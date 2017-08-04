@@ -75,7 +75,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             }
             else {
                 holder.CardViewReply.setVisibility(View.VISIBLE);
-                holder.tv_review_reply_by.setText("hbfdjnfdjnkdf");
+                holder.tv_review_reply_by.setText(((ProsReviewAllListActivity)context).pros_company_name);
                 holder.tv_review_reply_on_date.setText("responded on "+jsonInfoArray.getJSONObject(position).getString("review_reply_date"));
                 holder.tv_review_reply.setText(jsonInfoArray.getJSONObject(position).getString("review_reply_content"));
             }
