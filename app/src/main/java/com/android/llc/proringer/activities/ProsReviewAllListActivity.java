@@ -94,7 +94,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
                         prosReviewAllAdapter=new ProsReviewAllAdapter(ProsReviewAllListActivity.this,jsonInfoReviewArray);
                         rcv_review_all.setAdapter(prosReviewAllAdapter);
                     }else {
-                        prosReviewAllAdapter.NotifyMeInLazzyLoad(jsonInfoReviewArray);
+                        prosReviewAllAdapter.NotifyMeInLazyLoad(jsonInfoReviewArray);
                     }
 
                 } catch (JSONException e) {

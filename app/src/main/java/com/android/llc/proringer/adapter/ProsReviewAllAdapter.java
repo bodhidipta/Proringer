@@ -231,7 +231,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
         }
     }
 
-    public void  NotifyMeInLazzyLoad(JSONArray jsonInfoArray){
+    public void  NotifyMeInLazyLoad(JSONArray jsonInfoArray){
         this.jsonInfoArray=jsonInfoArray;
         notifyDataSetChanged();
     }
