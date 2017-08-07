@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
@@ -30,7 +30,7 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((ProProjectDetailsActivity) context).getWindowManager()
+        ((ProsProjectDetailsActivity) context).getWindowManager()
                 .getDefaultDisplay()
                 .getMetrics(displayMetrics);
 

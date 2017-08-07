@@ -17,7 +17,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProReportAbuseActivity;
+import com.android.llc.proringer.activities.ProsReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -61,7 +61,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 public void onClick(View view) {
                     try {
 
-                        Intent intent=new Intent(context,ProReportAbuseActivity.class);
+                        Intent intent=new Intent(context,ProsReportAbuseActivity.class);
                         intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
                         context.startActivity(intent);
 

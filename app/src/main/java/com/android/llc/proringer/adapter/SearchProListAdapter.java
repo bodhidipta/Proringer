@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -137,7 +137,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent(mcontext, ProProjectDetailsActivity.class);
+                Intent intent=new Intent(mcontext, ProsProjectDetailsActivity.class);
                 try {
                     intent.putExtra("pros_id",""+jsonInfoArray.getJSONObject(position).getString("pros_id"));
                     intent.putExtra("pros_company_name",""+jsonInfoArray.getJSONObject(position).getString("pros_company_name"));

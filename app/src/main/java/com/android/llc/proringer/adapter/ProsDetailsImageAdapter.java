@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProProjectDetailsActivity;
-import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
+import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
@@ -25,15 +24,15 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
     JSONArray imageJsonArray;
     int height;
     int width;
-    ProProjectDetailsActivity.onOptionSelected callback;
+    ProsProjectDetailsActivity.onOptionSelected callback;
 
-    public ProsDetailsImageAdapter(Context context, JSONArray imageJsonArray,ProProjectDetailsActivity.onOptionSelected callback){
+    public ProsDetailsImageAdapter(Context context, JSONArray imageJsonArray,ProsProjectDetailsActivity.onOptionSelected callback){
         this.context=context;
         this.imageJsonArray=imageJsonArray;
         this.callback=callback;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((ProProjectDetailsActivity) context).getWindowManager()
+        ((ProsProjectDetailsActivity) context).getWindowManager()
                 .getDefaultDisplay()
                 .getMetrics(displayMetrics);
 

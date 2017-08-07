@@ -19,7 +19,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
  * Created by su on 8/4/17.
  */
 
-public class ProReportAbuseActivity extends AppCompatActivity {
+public class ProsReportAbuseActivity extends AppCompatActivity {
     String  review_report_id="";
     ProgressDialog pgDialog=null;
     @Override
@@ -63,10 +63,10 @@ public class ProReportAbuseActivity extends AppCompatActivity {
     }
     public void submitReviewReport(){
 
-        ProServiceApiHelper.getInstance(ProReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(ProReportAbuseActivity.this);
+                pgDialog = new ProgressDialog(ProsReportAbuseActivity.this);
                 pgDialog.setTitle("Pros Report Abuse");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Please wait...");
@@ -78,7 +78,7 @@ public class ProReportAbuseActivity extends AppCompatActivity {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder(ProReportAbuseActivity.this)
+                new AlertDialog.Builder(ProsReportAbuseActivity.this)
                         .setTitle("Pros Report Abuse")
                         .setMessage("" + message)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -94,7 +94,7 @@ public class ProReportAbuseActivity extends AppCompatActivity {
             public void onError(String error) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
-                new AlertDialog.Builder(ProReportAbuseActivity.this)
+                new AlertDialog.Builder(ProsReportAbuseActivity.this)
                         .setTitle("Pros Report Abuse")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {

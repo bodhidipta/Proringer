@@ -2,7 +2,6 @@ package com.android.llc.proringer.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -16,7 +15,6 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -27,16 +25,13 @@ import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
-import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
-
-import static com.android.llc.proringer.R.id.img_top;
 
 /**
  * Created by su on 8/1/17.
  */
 
-public class ProReviewActivity extends AppCompatActivity {
+public class ProsReviewActivity extends AppCompatActivity {
     TextView tv_terms_guidelines;
     RatingBar ratBar_review;
     String pros_id="",img="",review_rate="0";
@@ -65,7 +60,7 @@ public class ProReviewActivity extends AppCompatActivity {
 
 
         if (!img.equals(""))
-            Glide.with(ProReviewActivity.this).load(img).centerCrop().into(img_profile);
+            Glide.with(ProsReviewActivity.this).load(img).centerCrop().into(img_profile);
 
 
 
@@ -153,7 +148,7 @@ public class ProReviewActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(review_rate.equals("0")){
-                    Toast.makeText(ProReviewActivity.this,"Please select rat",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProsReviewActivity.this,"Please select rat",Toast.LENGTH_LONG).show();
                 }
                 else {
                     if(project_description_text.getText().toString().trim().equals("")){
@@ -177,10 +172,10 @@ public class ProReviewActivity extends AppCompatActivity {
     }
 
     public void postReview(){
-        ProServiceApiHelper.getInstance(ProReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(ProReviewActivity.this);
+                pgDialog = new ProgressDialog(ProsReviewActivity.this);
                 pgDialog.setTitle("Add Review");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Adding Review.Please wait...");
@@ -192,7 +187,7 @@ public class ProReviewActivity extends AppCompatActivity {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder(ProReviewActivity.this)
+                new AlertDialog.Builder(ProsReviewActivity.this)
                         .setTitle("Add Review")
                         .setMessage("" + message)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -209,7 +204,7 @@ public class ProReviewActivity extends AppCompatActivity {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder(ProReviewActivity.this)
+                new AlertDialog.Builder(ProsReviewActivity.this)
                         .setTitle("Add Review")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {

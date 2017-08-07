@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
@@ -21,8 +21,8 @@ import org.json.JSONException;
 public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetailsServiceAreaAdapter.MyViewHolder> {
     JSONArray serviceAreaJsonArray;
     Context context;
-    ProProjectDetailsActivity.onOptionSelected callback;
-    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray,ProProjectDetailsActivity.onOptionSelected callback){
+    ProsProjectDetailsActivity.onOptionSelected callback;
+    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray,ProsProjectDetailsActivity.onOptionSelected callback){
         this.context=context;
         this.serviceAreaJsonArray=serviceJsonArray;
         this.callback=callback;

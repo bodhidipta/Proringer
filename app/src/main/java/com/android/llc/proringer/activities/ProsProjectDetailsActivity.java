@@ -17,7 +17,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
@@ -42,7 +41,7 @@ import org.json.JSONObject;
  * Created by su on 7/12/17.
  */
 
-public class ProProjectDetailsActivity extends AppCompatActivity {
+public class ProsProjectDetailsActivity extends AppCompatActivity {
     ImageView img_back, img_top, img_profile, img_achievements;
     String pros_id = "",pros_company_name="";
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
@@ -70,13 +69,13 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         rbar = (RatingBar) findViewById(R.id.rbar);
 
         rcv_service = (RecyclerView) findViewById(R.id.rcv_service);
-        rcv_service.setLayoutManager(new GridLayoutManager(ProProjectDetailsActivity.this, 2));
+        rcv_service.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
         rcv_business_hour = (RecyclerView) findViewById(R.id.rcv_business_hour);
-        rcv_business_hour.setLayoutManager(new LinearLayoutManager(ProProjectDetailsActivity.this));
+        rcv_business_hour.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this));
 
         rcv_service_area = (RecyclerView) findViewById(R.id.rcv_service_area);
-        rcv_service_area.setLayoutManager(new GridLayoutManager(ProProjectDetailsActivity.this, 2));
+        rcv_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
         rcv_license = (RecyclerView) findViewById(R.id.rcv_license);
         rcv_license.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -98,7 +97,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         findViewById(R.id.tv_view_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ProProjectDetailsActivity.this,ProsReviewAllListActivity.class);
+                Intent intent=new Intent(ProsProjectDetailsActivity.this,ProsReviewAllListActivity.class);
                 intent.putExtra("pros_company_name", pros_company_name);
                 intent.putExtra("pros_id", pros_id);
                 startActivity(intent);
@@ -126,13 +125,13 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                 try {
                     if (infoJsonObject != null) {
 
-                        Intent intent = new Intent(ProProjectDetailsActivity.this, ProReviewActivity.class);
+                        Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsReviewActivity.class);
                         intent.putExtra("pros_id", pros_id);
                         intent.putExtra("img", infoJsonObject.getString("profile_image"));
                         startActivity(intent);
                     }
                     else {
-                        Toast.makeText(ProProjectDetailsActivity.this,"Details Page Loading problem",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProsProjectDetailsActivity.this,"Details Page Loading problem",Toast.LENGTH_LONG).show();
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
@@ -158,10 +157,10 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     }
 
     public void setDataProListDetails() {
-        ProServiceApiHelper.getInstance(ProProjectDetailsActivity.this).getProsIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProsIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                     @Override
                                                                                                     public void onStart() {
-                                                                                                        pgDialog1 = new ProgressDialog(ProProjectDetailsActivity.this);
+                                                                                                        pgDialog1 = new ProgressDialog(ProsProjectDetailsActivity.this);
                                                                                                         pgDialog1.setTitle("Local Pros Details");
                                                                                                         pgDialog1.setCancelable(false);
                                                                                                         pgDialog1.setMessage("Getting local pros details.Please wait...");
@@ -181,11 +180,11 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 
 
                                                                                                             if (!infoJsonObject.getString("header_image").equals(""))
-                                                                                                                Glide.with(ProProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
+                                                                                                                Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
 
 
                                                                                                             if (!infoJsonObject.getString("profile_image").equals(""))
-                                                                                                                Glide.with(ProProjectDetailsActivity.this).load(infoJsonObject.getString("profile_image")).centerCrop().into(img_profile);
+                                                                                                                Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("profile_image")).centerCrop().into(img_profile);
 
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_company_name)).setText(infoJsonObject.getString("company_name"));
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_user_name)).setText(infoJsonObject.getString("user_name"));
@@ -201,13 +200,13 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
-                                                                                                            proDetailsService = new ProsDetailsServiceAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"));
+                                                                                                            proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"));
                                                                                                             rcv_service.setAdapter(proDetailsService);
 
                                                                                                             if (infoJsonObject.getString("business_hour").trim().equals("0")) {
                                                                                                                 rcv_business_hour.setVisibility(View.VISIBLE);
                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setVisibility(View.GONE);
-                                                                                                                prosDetailsBusinessHourAdapter = new ProsDetailsBusinessHourAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("business_hours"));
+                                                                                                                prosDetailsBusinessHourAdapter = new ProsDetailsBusinessHourAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("business_hours"));
                                                                                                                 rcv_business_hour.setAdapter(prosDetailsBusinessHourAdapter);
                                                                                                             } else {
                                                                                                                 rcv_business_hour.setVisibility(View.GONE);
@@ -216,7 +215,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                             }
 
 
-                                                                                                            ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
+                                                                                                            ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
                                                                                                                 @Override
                                                                                                                 public void onItemPassed(int position, String value) {
                                                                                                                     try {
@@ -240,14 +239,14 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_last_verified_on)).setText(company_infoJsonOBJ.getString("last_verified_on"));
 
 
-                                                                                                            prosDetailsLicenseAdapter = new ProsDetailsLicenseAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("licence"));
+                                                                                                            prosDetailsLicenseAdapter = new ProsDetailsLicenseAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("licence"));
                                                                                                             rcv_license.setAdapter(prosDetailsLicenseAdapter);
 
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_no_of_project_value)).setText(infoArrayJsonObject.getString("total_project"));
                                                                                                             ((ProRegularTextView) findViewById(R.id.tv_no_of_picture_value)).setText(infoArrayJsonObject.getString("total_picture"));
 
 
-                                                                                                            prosDetailsImageAdapter = new ProsDetailsImageAdapter(ProProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("project_gallery"), new onOptionSelected() {
+                                                                                                            prosDetailsImageAdapter = new ProsDetailsImageAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("project_gallery"), new onOptionSelected() {
                                                                                                                 @Override
                                                                                                                 public void onItemPassed(int position, String value) {
                                                                                                                     showImagePortFolioDialog(value);
@@ -256,7 +255,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                                                                                                             rcv_project_gallery.setAdapter(prosDetailsImageAdapter);
 
                                                                                                             if (!infoArrayJsonObject.getString("achievement").equals(""))
-                                                                                                                Glide.with(ProProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement")).centerCrop().into(img_achievements);
+                                                                                                                Glide.with(ProsProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement")).centerCrop().into(img_achievements);
 
 
                                                                                                         } catch (JSONException e) {
@@ -282,10 +281,10 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 
     public void showImagePortFolioDialog(String portfolio_id) {
 
-        ProServiceApiHelper.getInstance(ProProjectDetailsActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog2 = new ProgressDialog(ProProjectDetailsActivity.this);
+                pgDialog2 = new ProgressDialog(ProsProjectDetailsActivity.this);
                 pgDialog2.setTitle("Portfolio Images");
                 pgDialog2.setCancelable(false);
                 pgDialog2.setMessage("Getting Portfolio Images list.Please wait...");
@@ -302,7 +301,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                     JSONArray portfolioInfoArray = portfolioObj.getJSONArray("info_array");
 
 
-                    final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
+                    final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
                     dialog.setContentView(R.layout.custom_dialogbox_portfolio);
@@ -310,9 +309,9 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
                     RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
-                    rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                    rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
-                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProProjectDetailsActivity.this, portfolioInfoArray);
+                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectDetailsActivity.this, portfolioInfoArray);
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
                     dialog.show();
 
@@ -339,7 +338,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
 
 
     private void showDescribetionDialog(String msg) {
-        final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
+        final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialogbox_pro_details_describetion);
@@ -371,7 +370,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
     }
 
     private void showServiceAreaDialog(JSONArray serviceAreaJsonArray) {
-        final Dialog dialog = new Dialog(ProProjectDetailsActivity.this);
+        final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialogbox_pro_details_service_area);
@@ -379,7 +378,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
         RecyclerView rcv_show_service_area = (RecyclerView) dialog.findViewById(R.id.rcv_show_service_area);
-        rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProProjectDetailsActivity.this, 2));
+        rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
         dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -389,7 +388,7 @@ public class ProProjectDetailsActivity extends AppCompatActivity {
         });
 
 
-        ProDetailsServiceAreaDialogAdapter proDetailsServiceAreaDialogAdapter=new ProDetailsServiceAreaDialogAdapter(ProProjectDetailsActivity.this,serviceAreaJsonArray);
+        ProDetailsServiceAreaDialogAdapter proDetailsServiceAreaDialogAdapter=new ProDetailsServiceAreaDialogAdapter(ProsProjectDetailsActivity.this,serviceAreaJsonArray);
         rcv_show_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
