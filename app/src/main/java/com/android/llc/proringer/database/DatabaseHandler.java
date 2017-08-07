@@ -39,7 +39,7 @@ public class DatabaseHandler extends ProDatabase {
         mContext = context;
     }
 
-    public void insertIntoDatbase(String date, String userId, String datalist, onCompleteProcess listener) {
+    public void insertIntoDatabase(String date, String userId, String dataList, onCompleteProcess listener) {
         SQLiteDatabase db = null;
         try {
             db = this.getReadableDatabase();
@@ -59,7 +59,7 @@ public class DatabaseHandler extends ProDatabase {
 
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(DatabaseConstant.SYNC_DATE, "" + date);
-                contentValues.put(DatabaseConstant.USERDATA, "" + datalist);
+                contentValues.put(DatabaseConstant.USERDATA, "" + dataList);
 
                 db = this.getWritableDatabase();
                 int res = db.update(DatabaseConstant.TABLE_USER_INFO, contentValues, DatabaseConstant.USER_ID + "=?", new String[]{userId});
@@ -73,7 +73,7 @@ public class DatabaseHandler extends ProDatabase {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(DatabaseConstant.USER_ID, "" + userId);
                 contentValues.put(DatabaseConstant.SYNC_DATE, "" + date);
-                contentValues.put(DatabaseConstant.USERDATA, "" + datalist);
+                contentValues.put(DatabaseConstant.USERDATA, "" + dataList);
                 db = this.getWritableDatabase();
                 long res = db.insert(DatabaseConstant.TABLE_USER_INFO, null, contentValues);
                 Logger.printMessage(TAG, "result insert " + res);

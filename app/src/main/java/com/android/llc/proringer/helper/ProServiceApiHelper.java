@@ -620,7 +620,7 @@ public class ProServiceApiHelper {
                     if (exception.equals("")) {
                         try {
                             String datetody = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                            DatabaseHandler.getInstance(mcontext).insertIntoDatbase(
+                            DatabaseHandler.getInstance(mcontext).insertIntoDatabase(
                                     datetody,
                                     ProApplication.getInstance().getUserId(),
                                     s,
