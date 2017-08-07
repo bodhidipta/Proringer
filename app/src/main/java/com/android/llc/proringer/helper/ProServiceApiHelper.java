@@ -619,9 +619,9 @@ public class ProServiceApiHelper {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
                         try {
-                            String datetody = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                            String dateToday = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                             DatabaseHandler.getInstance(mcontext).insertIntoDatabase(
-                                    datetody,
+                                    dateToday,
                                     ProApplication.getInstance().getUserId(),
                                     s,
                                     new DatabaseHandler.onCompleteProcess() {
