@@ -178,6 +178,7 @@ public class UserInformationFragment extends Fragment {
                     public void onSuccess(String... s) {
 
                         Logger.printMessage("database","Yes");
+                        Logger.printMessage("success","s:--"+s);
                         /**
                          * User data already found in database
                          */
