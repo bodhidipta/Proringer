@@ -739,6 +739,7 @@
 
 
                     <ImageView
+                        android:scaleType="fitXY"
                         android:layout_marginTop="10dp"
                         android:id="@+id/img_achievements"
                         android:layout_width="match_parent"
