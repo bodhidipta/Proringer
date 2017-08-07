@@ -2,6 +2,7 @@ package com.android.llc.proringer.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -108,6 +109,11 @@ public class ProsReviewActivity extends AppCompatActivity {
                 // There is the OnCLick. put your intent to Register class here
                 widget.invalidate();
                 Logger.printMessage("SpanHello", "click");
+
+                Intent intent = new Intent(ProsReviewActivity.this, TermsPrivacyActivity.class);
+                intent.putExtra("value", "term");
+                startActivity(intent);
+
             }
 
             @Override
