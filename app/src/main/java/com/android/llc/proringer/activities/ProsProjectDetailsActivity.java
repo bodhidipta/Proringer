@@ -356,6 +356,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
         int width = displayMetrics.widthPixels;
 
         LLMain.getLayoutParams().width = (width - 30);
+        LLMain.getLayoutParams().height = (width - 30);
 //        scrollView.getLayoutParams().height = (height-30)/2;
 
         dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
@@ -398,6 +399,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
         int width = displayMetrics.widthPixels;
 
         rcv_show_service_area.getLayoutParams().width = (width - 30);
+        rcv_show_service_area.getLayoutParams().height = (width - 30);
 //        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
 
         dialog.show();
