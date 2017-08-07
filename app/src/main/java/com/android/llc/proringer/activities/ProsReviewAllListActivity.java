@@ -1,13 +1,21 @@
 package com.android.llc.proringer.activities;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsReviewAllAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -112,6 +120,45 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
                 ,""+from
                 ,""+perPage
         );
-
     }
+
+
+    public void showReviewReplyResponseDescribetionDialog(String title,String describetion) {
+        final Dialog dialog = new Dialog(ProsReviewAllListActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                    dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialogbox_pro_review_describetion);
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
+
+        ProRegularTextView tv_tittle = (ProRegularTextView) dialog.findViewById(R.id.tv_tittle);
+        ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
+
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        LLMain.getLayoutParams().width = (width - 30);
+        LLMain.getLayoutParams().height = (width - 30);
+//        scrollView.getLayoutParams().height = (height-30)/2;
+
+        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        tv_tittle.setText(title);
+        tv_show_describetion.setText(describetion);
+        dialog.show();
+    }
+
+
+
 }

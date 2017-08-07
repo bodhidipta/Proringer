@@ -109,6 +109,11 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                 // There is the OnCLick. put your intent to Register class here
                                 widget.invalidate();
                                 Logger.printMessage("SpanHello", "click");
+                                try {
+                                    ((ProsReviewAllListActivity)context).showReviewReplyResponseDescribetionDialog("Review",jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                             @Override
@@ -171,6 +176,12 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                     // There is the OnCLick. put your intent to Register class here
                                     widget.invalidate();
                                     Logger.printMessage("SpanHello", "click");
+                                    try {
+                                        ((ProsReviewAllListActivity)context).showReviewReplyResponseDescribetionDialog("Reply",jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim());
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
 
                                 @Override
@@ -224,6 +235,8 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             CardViewReply= (CardView) itemView.findViewById(R.id.CardViewReply);
 
             tv_review_reply= (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply);
+            tv_review_reply.setMovementMethod(LinkMovementMethod.getInstance());
+
             tv_review_reply_by= (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply_by);
             tv_review_reply_on_date= (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply_on_date);
 
