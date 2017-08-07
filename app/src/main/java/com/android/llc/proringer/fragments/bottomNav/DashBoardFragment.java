@@ -17,6 +17,8 @@ import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
+import com.koushiklibrary.JSONPerser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,9 +123,6 @@ public class DashBoardFragment extends Fragment {
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
-
                 try {
                     JSONObject jsonObject=new JSONObject(message);
                     JSONArray jsonInfoArray=jsonObject.getJSONArray("info_array");
@@ -143,7 +142,7 @@ public class DashBoardFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                getUpdateUserData();
             }
 
             @Override
@@ -155,22 +154,22 @@ public class DashBoardFragment extends Fragment {
     }
 
     private void getUpdateUserData() {
+
         ProServiceApiHelper.getInstance(getActivity()).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-
             }
 
             @Override
             public void onComplete(String message) {
-
-
-
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
 
             @Override
             public void onError(String error) {
-
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
             }
         });
     }
