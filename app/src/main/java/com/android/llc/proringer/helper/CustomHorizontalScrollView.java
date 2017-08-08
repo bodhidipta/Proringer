@@ -21,32 +21,40 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
 
     @Override
     public boolean fullScroll(int direction) {
+        Logger.printMessage("fullScroll","fullScroll");
         return super.fullScroll(direction);
     }
 
     @Override
     public boolean arrowScroll(int direction) {
+        Logger.printMessage("arrowScroll","arrowScroll");
         return super.arrowScroll(direction);
     }
 
     @Override
     public void scrollTo(int x, int y) {
+        Logger.printMessage("scrollTo","scrollTo");
         super.scrollTo(x, y);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Logger.printMessage("onTouchEvent","onTouchEvent");
+
+
         return super.onTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Logger.printMessage("onInterceptTouchEvent","onInterceptTouchEvent");
         return super.onInterceptTouchEvent(ev);
     }
 
 
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
+        Logger.printMessage("onOverScrolled","onOverScrolled");
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
     }
 
