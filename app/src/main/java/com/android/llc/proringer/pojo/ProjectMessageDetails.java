@@ -1,10 +1,10 @@
 package com.android.llc.proringer.pojo;
 
 /**
- * Created by su on 7/29/17.
+ * Created by su on 8/8/17.
  */
 
-public class ProjectMessage {
+public class ProjectMessageDetails {
     boolean isOpen=false;
 
     public boolean isOpen() {

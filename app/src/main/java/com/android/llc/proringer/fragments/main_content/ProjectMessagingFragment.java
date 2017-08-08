@@ -16,6 +16,10 @@ import com.android.llc.proringer.activities.IndividualMessageActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
+import com.android.llc.proringer.pojo.ProjectMessage;
+import com.android.llc.proringer.pojo.ProjectMessageDetails;
+
+import java.util.ArrayList;
 
 /**
  * Created by bodhidipta on 13/06/17.
@@ -37,6 +41,7 @@ import com.android.llc.proringer.helper.onItemClick;
 public class ProjectMessagingFragment extends Fragment {
     RelativeLayout detailed_project_search;
     RecyclerView message_list;
+    ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
 
     @Nullable
     @Override
@@ -47,11 +52,20 @@ public class ProjectMessagingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        projectMessageDetailsArrayList=new ArrayList<>();
+
+        for (int i=0;i<15;i++){
+          ProjectMessageDetails projectMessageDetails=new ProjectMessageDetails();
+            projectMessageDetails.setIsOpen(false);
+            projectMessageDetailsArrayList.add(projectMessageDetails);
+        }
+
         detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
 
         message_list = (RecyclerView) view.findViewById(R.id.message_list);
         message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
-        message_list.setAdapter(new ProjectDetailedMessageAdapter((LandScreenActivity)getActivity(), new onItemClick() {
+        message_list.setAdapter(new ProjectDetailedMessageAdapter((LandScreenActivity)getActivity(),projectMessageDetailsArrayList, new onItemClick() {
             @Override
             public void onItemClick(int position) {
                 startActivity(new Intent((LandScreenActivity)getActivity(), IndividualMessageActivity.class));

@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
+import com.android.llc.proringer.pojo.ProjectMessageDetails;
+
+import java.util.ArrayList;
 
 /**
  * Created by bodhidipta on 13/06/17.
@@ -32,18 +35,20 @@ import com.android.llc.proringer.helper.onItemClick;
 
 public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> {
     Context mcontext = null;
+    ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
     private onItemClick listener;
     DisplayMetrics displayMetrics;
 
-    public ProjectDetailedMessageAdapter(Context mcontext, onItemClick callback) {
+    public ProjectDetailedMessageAdapter(Context mcontext,ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, onItemClick callback) {
         this.mcontext = mcontext;
+        this.projectMessageDetailsArrayList=projectMessageDetailsArrayList;
         listener = callback;
         displayMetrics = mcontext.getResources().getDisplayMetrics();
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return projectMessageDetailsArrayList.size();
     }
 
     @Override

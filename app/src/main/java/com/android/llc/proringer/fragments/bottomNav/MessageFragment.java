@@ -38,7 +38,6 @@ import java.util.ArrayList;
 public class MessageFragment extends Fragment {
     private RecyclerView project_message_list;
     private ProjectMessageAdapter adapter;
-
     ArrayList<ProjectMessage> projectMessageArrayList;
 
     @Nullable
@@ -55,9 +54,10 @@ public class MessageFragment extends Fragment {
 
         for (int i=0;i<15;i++){
             ProjectMessage projectMessage=new ProjectMessage();
-            projectMessage.setIsopen(false);
+            projectMessage.setIsOpen(false);
             projectMessageArrayList.add(projectMessage);
         }
+
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
         project_message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
