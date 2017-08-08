@@ -5,7 +5,7 @@ package com.android.llc.proringer.pojo;
  */
 
 public class ProjectMessageDetails {
-    boolean isOpen=false;
+    boolean isOpen;
 
     public boolean isOpen() {
         return isOpen;

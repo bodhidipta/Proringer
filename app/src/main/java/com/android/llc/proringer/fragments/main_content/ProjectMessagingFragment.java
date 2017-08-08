@@ -56,7 +56,7 @@ public class ProjectMessagingFragment extends Fragment {
         projectMessageDetailsArrayList=new ArrayList<>();
 
         for (int i=0;i<15;i++){
-          ProjectMessageDetails projectMessageDetails=new ProjectMessageDetails();
+            ProjectMessageDetails projectMessageDetails=new ProjectMessageDetails();
             projectMessageDetails.setIsOpen(false);
             projectMessageDetailsArrayList.add(projectMessageDetails);
         }
