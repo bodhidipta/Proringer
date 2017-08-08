@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -82,6 +83,45 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         else {
             holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }
+
+        holder.horizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
+            float x1=0,x2=0;
+            float MIN_DISTANCE=0;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = event.getX();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = event.getX();
+                        float deltaX = x2 - x1;
+
+                        if (Math.abs(deltaX) > MIN_DISTANCE)
+                        {
+                            // Left to Right swipe action
+                            if (x2 > x1)
+                            {
+                                Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
+                            }
+
+                            // Right to left swipe action
+                            else
+                            {
+                                Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
+                            }
+
+                        }
+                        else
+                        {
+                            // consider as something else - a screen tap for example
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 
