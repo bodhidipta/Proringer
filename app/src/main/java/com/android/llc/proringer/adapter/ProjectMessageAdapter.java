@@ -79,7 +79,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         else {
             holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }
-
     }
 
     @Override
