@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -13,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.helper.CustomHorizontalScrollView;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
 
@@ -82,19 +80,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }
 
-
-        holder.horizontalScrollView.setOnScrollChangedListener(new CustomHorizontalScrollView.OnScrollChangedListener() {
-            @Override
-            public void onScrollStart() {
-                //Toast.makeText(mcontext,"start position",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onScrollEnd() {
-                Toast.makeText(mcontext,"end position",Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
     @Override
@@ -106,14 +91,14 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         View flag;
         RelativeLayout RLMain_container;
         LinearLayout LLDelete;
-        CustomHorizontalScrollView horizontalScrollView;
+        HorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
             RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
             LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
-            horizontalScrollView= (CustomHorizontalScrollView) itemView.findViewById(R.id.scrollview);
+            horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
         }
     }
 

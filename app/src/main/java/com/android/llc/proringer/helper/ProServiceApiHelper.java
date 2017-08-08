@@ -2650,7 +2650,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         String dashAPI = homeownerDashboardAPI + "?user_id=" + ProApplication.getInstance().getUserId();
                         Request request = new Request.Builder()
