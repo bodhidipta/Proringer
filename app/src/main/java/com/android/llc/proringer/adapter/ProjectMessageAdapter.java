@@ -11,11 +11,10 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.OnSwipeTouchListener;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
-import com.android.llc.proringer.utils.Logger;
 
 import java.util.ArrayList;
 
@@ -83,43 +82,20 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         }
 
 
-        holder.horizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
-            float x1=0,x2=0;
-            float MIN_DISTANCE=0;
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction())
-                {
-                    case MotionEvent.ACTION_DOWN:
-                        x1 = event.getX();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        x2 = event.getX();
-                        float deltaX = x2 - x1;
-
-                        if (Math.abs(deltaX) > MIN_DISTANCE)
-                        {
-                            // Left to Right swipe action
-                            if (x2 > x1)
-                            {
-                                Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
-                            }
-
-                            // Right to left swipe action
-                            else
-                            {
-                                Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
-
-                            }
-                        }
-                        else
-                        {
-                            // consider as something else - a screen tap for example
-                        }
-                        break;
-                }
-                return false;
+        holder.horizontalScrollView.setOnTouchListener(new OnSwipeTouchListener(mcontext) {
+            public void onSwipeTop() {
+                Toast.makeText(mcontext, "top", Toast.LENGTH_SHORT).show();
             }
+            public void onSwipeRight() {
+                Toast.makeText(mcontext, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(mcontext, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                Toast.makeText(mcontext, "bottom", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
     }
