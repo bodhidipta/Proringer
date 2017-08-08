@@ -116,7 +116,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                                     Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
                                     return true;
                                 }
-                                return true;
                             } else {
                                 //not long enough swipe...
                                 return false;
