@@ -2,14 +2,20 @@ package com.android.llc.proringer.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
+import com.android.llc.proringer.utils.Logger;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 
 import java.util.ArrayList;
@@ -35,11 +41,13 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     private Context mcontext;
     private onItemClick listener;
     ArrayList<ProjectMessage> projectMessageArrayList;
+    DisplayMetrics displayMetrics;
 
     public ProjectMessageAdapter(Context mcontext,ArrayList<ProjectMessage> projectMessageArrayList, onItemClick calback) {
         this.mcontext = mcontext;
         listener = calback;
         this.projectMessageArrayList=projectMessageArrayList;
+        displayMetrics = mcontext.getResources().getDisplayMetrics();
     }
 
     @Override
@@ -49,13 +57,17 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        holder.RLMain_container.getLayoutParams().width =displayMetrics.widthPixels;
+
+
         if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
         } else {
             holder.flag.setVisibility(View.INVISIBLE);
         }
 
-        holder.main_container.setOnClickListener(new View.OnClickListener() {
+        holder.RLMain_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick(position);
@@ -70,14 +82,16 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
     class ViewHolder extends RecyclerView.ViewHolder {
         View flag;
-        SwipeRevealLayout swipe_layout;
-        RelativeLayout main_container;
+        RelativeLayout RLMain_container;
+        LinearLayout LLDelete;
+        HorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
-            swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout);
-            main_container = (RelativeLayout) itemView.findViewById(R.id.main_container);
+            RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
+            LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
+            horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
         }
     }
 
