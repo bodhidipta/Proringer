@@ -4,20 +4,14 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
-import com.android.llc.proringer.utils.Logger;
-import com.chauthai.swipereveallayout.SwipeRevealLayout;
-
 import java.util.ArrayList;
 
 /**
