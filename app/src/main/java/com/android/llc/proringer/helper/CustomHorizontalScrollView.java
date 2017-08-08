@@ -16,45 +16,39 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     public interface OnScrollChangedListener {
         // Developer must implement these methods.
         void onScrollStart();
+
         void onScrollEnd();
     }
 
-    @Override
-    public boolean fullScroll(int direction) {
-        Logger.printMessage("fullScroll","fullScroll");
-        return super.fullScroll(direction);
-    }
-
-    @Override
-    public boolean arrowScroll(int direction) {
-        Logger.printMessage("arrowScroll","arrowScroll");
-        return super.arrowScroll(direction);
-    }
 
     @Override
     public void scrollTo(int x, int y) {
-        Logger.printMessage("scrollTo","scrollTo");
+        Logger.printMessage("scrollTo", "scrollTo");
         super.scrollTo(x, y);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Logger.printMessage("onTouchEvent","onTouchEvent");
-
-
+        Logger.printMessage("onTouchEvent", "onTouchEvent");
+        int action = ev.getActionMasked();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                Logger.printMessage("check_release","Action was CANCEL");
+                break;
+        }
         return super.onTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Logger.printMessage("onInterceptTouchEvent","onInterceptTouchEvent");
+        Logger.printMessage("onInterceptTouchEvent", "onInterceptTouchEvent");
         return super.onInterceptTouchEvent(ev);
     }
 
 
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
-        Logger.printMessage("onOverScrolled","onOverScrolled");
+        Logger.printMessage("onOverScrolled", "onOverScrolled");
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
     }
 
@@ -115,24 +109,22 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         // Grab the last child placed in the ScrollView, we need it to determinate the bottom position.
-        View view = (View) getChildAt(getChildCount()-1);
+        View view = (View) getChildAt(getChildCount() - 1);
 
         // Calculate the scroll diff
-        int diff1 = (view.getRight()-(getWidth()+getScrollX()));
+        int diff1 = (view.getRight() - (getWidth() + getScrollX()));
 
         // if diff is zero, then the bottom has been reached
-        if( diff1 == 0 )
-        {
+        if (diff1 == 0) {
             // notify that we have reached the bottom
-            Logger.printMessage("Scroll_LOG_TAG", "MyScrollView: right most has been reached" );
+            Logger.printMessage("Scroll_LOG_TAG", "MyScrollView: right most has been reached");
         }
 
 
         // if diff is zero, then the bottom has been reached
-        if( diff1 ==view.getRight())
-        {
+        if (diff1 == view.getRight()) {
             // notify that we have reached the bottom
-            Logger.printMessage("Scroll_LOG_TAG", "MyScrollView: left most has been reached" );
+            Logger.printMessage("Scroll_LOG_TAG", "MyScrollView: left most has been reached");
         }
 
         super.onScrollChanged(l, t, oldl, oldt);
