@@ -103,25 +103,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                             if (x2 > x1)
                             {
                                 Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
-
-                                Logger.printMessage("position","position:"+position);
-                                Logger.printMessage("start","start");
-
-                                if(projectMessageArrayList.get(position).isOpen()){
-
-                                    projectMessageArrayList.get(position).setIsOpen(false);
-                                }
-                                else {
-                                    projectMessageArrayList.get(position).setIsOpen(true);
-                                }
-
-                                notifyDataSetChanged();
-
-
-                                for (int i =0;i<projectMessageArrayList.size();i++)
-                                {
-                                    Logger.printMessage("isopen","["+i+"]"+projectMessageArrayList.get(i).isOpen());
-                                }
                             }
 
                             // Right to left swipe action
@@ -129,36 +110,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                             {
                                 Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
 
-                                Logger.printMessage("position","position:"+position);
-                                Logger.printMessage("start","start");
-
-                                if(!projectMessageArrayList.get(position).isOpen()){
-
-                                    projectMessageArrayList.get(position).setIsOpen(true);
-                                }
-
-
-                                for (int i =0;i<projectMessageArrayList.size();i++)
-                                {
-                                    if (i!=position)
-                                    {
-                                        if (projectMessageArrayList.get(i).isOpen())
-                                        {
-                                            projectMessageArrayList.get(i).setIsOpen(false);
-
-                                            notifyItemChanged(i);
-
-                                            break;
-                                        }
-                                    }
-                                }
-
-                                for (int i =0;i<projectMessageArrayList.size();i++)
-                                {
-                                    Logger.printMessage("isopen","["+i+"]"+projectMessageArrayList.get(i).isOpen());
-                                }
                             }
-
                         }
                         else
                         {
