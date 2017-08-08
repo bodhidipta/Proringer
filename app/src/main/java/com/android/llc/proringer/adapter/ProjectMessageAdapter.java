@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.CustomHorizontalScrollView;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
 
@@ -82,51 +83,17 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         }
 
 
-
-        holder.horizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
-            private int min_distance = 100;
-            private float downX, downY, upX, upY;
+        holder.horizontalScrollView.setOnScrollChangedListener(new CustomHorizontalScrollView.OnScrollChangedListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction())
-                {
+            public void onScrollStart() {
+                //Toast.makeText(mcontext,"start position",Toast.LENGTH_SHORT).show();
+            }
 
-                    case MotionEvent.ACTION_DOWN: {
-                        downX = event.getX();
-                        downY = event.getY();
-                        return true;
-                    }
-
-                    case MotionEvent.ACTION_UP: {
-                        upX = event.getX();
-                        upY = event.getY();
-
-                        float deltaX = downX - upX;
-                        float deltaY = downY - upY;
-
-                        //HORIZONTAL SCROLL
-                        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                            if (Math.abs(deltaX) > min_distance) {
-                                // left or right
-                                if (deltaX < 0) {
-                                    Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
-                                    return true;
-                                }
-                                if (deltaX > 0) {
-                                    Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
-                                    return true;
-                                }
-                            } else {
-                                //not long enough swipe...
-                                return false;
-                            }
-                        }
-                    }
-                }
-                return false;
+            @Override
+            public void onScrollEnd() {
+                Toast.makeText(mcontext,"end position",Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
@@ -139,14 +106,14 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         View flag;
         RelativeLayout RLMain_container;
         LinearLayout LLDelete;
-        HorizontalScrollView horizontalScrollView;
+        CustomHorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
             RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
             LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
-            horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
+            horizontalScrollView= (CustomHorizontalScrollView) itemView.findViewById(R.id.scrollview);
         }
     }
 
