@@ -85,39 +85,44 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         }
 
         holder.horizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
-            float x1=0,x2=0;
-            float MIN_DISTANCE=0;
+            private int min_distance = 100;
+            private float downX, downY, upX, upY;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction())
                 {
-                    case MotionEvent.ACTION_DOWN:
-                        x1 = event.getX();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        x2 = event.getX();
-                        float deltaX = x2 - x1;
 
-                        if (Math.abs(deltaX) > MIN_DISTANCE)
-                        {
-                            // Left to Right swipe action
-                            if (x2 > x1)
-                            {
-                                Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
+                    case MotionEvent.ACTION_DOWN: {
+                        downX = event.getX();
+                        downY = event.getY();
+                        return true;
+                    }
+
+                    case MotionEvent.ACTION_UP: {
+                        upX = event.getX();
+                        upY = event.getY();
+
+                        float deltaX = downX - upX;
+                        float deltaY = downY - upY;
+
+                        //HORIZONTAL SCROLL
+                        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                            if (Math.abs(deltaX) > min_distance) {
+                                // left or right
+                                if (deltaX < 0) {
+                                    Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
+                                    return true;
+                                }
+                                if (deltaX > 0) {
+                                    Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
+                                    return true;
+                                }
+                            } else {
+                                //not long enough swipe...
+                                return false;
                             }
-
-                            // Right to left swipe action
-                            else
-                            {
-                                Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
-                            }
-
                         }
-                        else
-                        {
-                            // consider as something else - a screen tap for example
-                        }
-                        break;
+                    }
                 }
                 return false;
             }
