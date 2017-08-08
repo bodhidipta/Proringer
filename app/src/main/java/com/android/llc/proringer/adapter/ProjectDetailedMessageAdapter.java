@@ -86,7 +86,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         }
 
 
-        holder.horizontalScrollView.setOnTouchListener(new OnSwipeTouchListener(mcontext) {
+        holder.horizontalScrollView.setOnTouchListener(new OnSwipeTouchListener((mcontext)) {
             public void onSwipeTop() {
                 Toast.makeText(mcontext, "top", Toast.LENGTH_SHORT).show();
             }
