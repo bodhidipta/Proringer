@@ -4,14 +4,19 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
+import com.android.llc.proringer.utils.Logger;
+
 import java.util.ArrayList;
 
 /**
@@ -67,6 +72,104 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                 listener.onItemClick(position);
             }
         });
+
+        if(!projectMessageArrayList.get(position).isOpen()){
+
+            //holder.horizontalScrollView.invalidate();
+            holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_LEFT);
+        }
+        else {
+            holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+        }
+
+
+        holder.horizontalScrollView.setOnTouchListener(new View.OnTouchListener() {
+            float x1=0,x2=0;
+            float MIN_DISTANCE=0;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = event.getX();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = event.getX();
+                        float deltaX = x2 - x1;
+
+                        if (Math.abs(deltaX) > MIN_DISTANCE)
+                        {
+                            // Left to Right swipe action
+                            if (x2 > x1)
+                            {
+                                Toast.makeText(mcontext, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
+
+                                Logger.printMessage("position","position:"+position);
+                                Logger.printMessage("start","start");
+
+                                if(projectMessageArrayList.get(position).isOpen()){
+
+                                    projectMessageArrayList.get(position).setIsOpen(false);
+                                }
+                                else {
+                                    projectMessageArrayList.get(position).setIsOpen(true);
+                                }
+
+                                notifyDataSetChanged();
+
+
+                                for (int i =0;i<projectMessageArrayList.size();i++)
+                                {
+                                    Logger.printMessage("isopen","["+i+"]"+projectMessageArrayList.get(i).isOpen());
+                                }
+                            }
+
+                            // Right to left swipe action
+                            else
+                            {
+                                Toast.makeText(mcontext, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
+
+                                Logger.printMessage("position","position:"+position);
+                                Logger.printMessage("start","start");
+
+                                if(!projectMessageArrayList.get(position).isOpen()){
+
+                                    projectMessageArrayList.get(position).setIsOpen(true);
+                                }
+
+
+                                for (int i =0;i<projectMessageArrayList.size();i++)
+                                {
+                                    if (i!=position)
+                                    {
+                                        if (projectMessageArrayList.get(i).isOpen())
+                                        {
+                                            projectMessageArrayList.get(i).setIsOpen(false);
+
+                                            notifyItemChanged(i);
+
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                for (int i =0;i<projectMessageArrayList.size();i++)
+                                {
+                                    Logger.printMessage("isopen","["+i+"]"+projectMessageArrayList.get(i).isOpen());
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            // consider as something else - a screen tap for example
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
