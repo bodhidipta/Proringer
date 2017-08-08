@@ -2,9 +2,11 @@ package com.android.llc.proringer.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -31,10 +33,12 @@ import com.android.llc.proringer.helper.onItemClick;
 public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> {
     Context mcontext = null;
     private onItemClick listener;
+    DisplayMetrics displayMetrics;
 
     public ProjectDetailedMessageAdapter(Context mcontext, onItemClick callback) {
         this.mcontext = mcontext;
         listener = callback;
+        displayMetrics = mcontext.getResources().getDisplayMetrics();
     }
 
     @Override
@@ -49,16 +53,18 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 
     @Override
     public void onBindViewHolder(ProjectDetailedMessageAdapter.ViewHolder holder, final int position) {
+
+        holder.RLMain_container.getLayoutParams().width =displayMetrics.widthPixels;
+
         if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
         } else {
             holder.flag.setVisibility(View.INVISIBLE);
         }
-        holder.cont_main.setOnClickListener(new View.OnClickListener() {
+        holder.RLMain_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick(position);
-
             }
         });
     }
@@ -66,14 +72,18 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 
     class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout more;
-        RelativeLayout cont_main;
+        RelativeLayout RLMain_container;
+        LinearLayout LLDelete;
         View flag;
+        HorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
             more = (LinearLayout) itemView.findViewById(R.id.more);
-            cont_main = (RelativeLayout) itemView.findViewById(R.id.cont_main);
+            RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
+            LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
+            horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
         }
     }
 }
