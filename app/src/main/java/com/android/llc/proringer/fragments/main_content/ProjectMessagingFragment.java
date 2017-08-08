@@ -10,15 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.IndividualMessageActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
-import com.android.llc.proringer.pojo.ProjectMessage;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
-
 import java.util.ArrayList;
 
 /**
