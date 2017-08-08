@@ -13,6 +13,7 @@ import com.android.llc.proringer.utils.Logger;
  */
 
 public class CustomHorizontalScrollView extends HorizontalScrollView {
+
     public interface OnScrollChangedListener {
         // Developer must implement these methods.
         void onScrollStart();
@@ -96,14 +97,6 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     public void setScrollTaskInterval(int scrollTaskInterval) {
         this.scrollTaskInterval = scrollTaskInterval;
     }
-
-    //void onScrollStart() {
-    //    System.out.println("Scroll started...");
-    //}
-
-    //void onScrollEnd() {
-    //    System.out.println("Scroll ended...");
-    //}
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
