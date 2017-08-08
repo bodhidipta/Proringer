@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -13,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.helper.OnSwipeTouchListener;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
 
@@ -85,22 +83,6 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }
 
-
-        holder.horizontalScrollView.setOnTouchListener(new OnSwipeTouchListener((mcontext)) {
-            public void onSwipeTop() {
-                Toast.makeText(mcontext, "top", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeRight() {
-                Toast.makeText(mcontext, "right", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeLeft() {
-                Toast.makeText(mcontext, "left", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeBottom() {
-                Toast.makeText(mcontext, "bottom", Toast.LENGTH_SHORT).show();
-            }
-
-        });
     }
 
 

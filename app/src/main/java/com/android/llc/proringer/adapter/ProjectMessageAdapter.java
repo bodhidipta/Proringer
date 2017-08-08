@@ -4,16 +4,14 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.helper.OnSwipeTouchListener;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
 
@@ -81,44 +79,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         else {
             holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }
-
-
-        holder.horizontalScrollView.setOnTouchListener(new OnSwipeTouchListener(mcontext){
-            @Override
-            public void onSwipeRight() {
-                super.onSwipeRight();
-            }
-
-            @Override
-            public void onSwipeLeft() {
-                super.onSwipeLeft();
-            }
-
-            @Override
-            public void onSwipeUp() {
-                super.onSwipeUp();
-            }
-
-            @Override
-            public void onSwipeDown() {
-                super.onSwipeDown();
-            }
-
-            @Override
-            public void onClick() {
-                super.onClick();
-            }
-
-            @Override
-            public void onDoubleClick() {
-                super.onDoubleClick();
-            }
-
-            @Override
-            public void onLongClick() {
-                super.onLongClick();
-            }
-        });
 
     }
 
