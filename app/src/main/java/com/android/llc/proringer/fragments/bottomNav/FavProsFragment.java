@@ -53,7 +53,7 @@ public class FavProsFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
@@ -102,8 +102,14 @@ public class FavProsFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
+
+                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                    view.findViewById(R.id.LLMain).setVisibility(View.GONE);
+                    view.findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                }
+
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("FavProsFragment Error")
+                        .setTitle("FavPros Error")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

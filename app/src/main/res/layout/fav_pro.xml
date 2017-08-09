@@ -5,48 +5,81 @@
     android:background="@color/colorBGblueShade"
     android:orientation="vertical">
 
-    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-        android:id="@+id/tv_empty_show"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorLightBrick"
-        android:gravity="center"
-        android:text="You have not added any pros to your favorite."
-        android:textColor="@color/colorTextDark"
-        android:textSize="14sp" />
-
     <LinearLayout
-        android:id="@+id/find_local_pros"
+        android:id="@+id/LLMain"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorGreen"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/fav_pro_white" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="SEARCH LOCAL PROS"
-            android:textColor="@color/colorPrimary"
+            android:id="@+id/tv_empty_show"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorLightBrick"
+            android:gravity="center"
+            android:text="You have not added any pros to your favorite."
+            android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/find_local_pros"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorGreen"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/fav_pro_white" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="SEARCH LOCAL PROS"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pros_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/pros_list"
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/LLNetworkDisconnection"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect"
+            />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextBlack"
+            android:text="Check Your Network Connection"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>
