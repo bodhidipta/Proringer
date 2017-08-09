@@ -95,7 +95,7 @@ public class MyProjectsFragment extends Fragment {
                 }
 
                 new AlertDialog.Builder((LandScreenActivity)getActivity())
-                        .setTitle("MyProjectsFragment Error")
+                        .setTitle("My Projects Load Error")
                         .setMessage("" + error)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

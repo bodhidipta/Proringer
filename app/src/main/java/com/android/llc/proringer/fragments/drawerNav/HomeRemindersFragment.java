@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
@@ -86,6 +88,8 @@ public class HomeRemindersFragment extends Fragment {
     RelativeLayout RLsq_ft,RLGraage,RLPrototype,RLBasement,RLLot_size,RLAge_of_roof,RLAge_of_ac,RLAge_of_furance,RLAge_water_heater,RLAge_window;
     ProRegularTextView tv_sq_ft,tv_graage,tv_prototype,tv_basement,tv_lot_size,tv_age_of_roof,tv_age_of_ac,tv_age_of_furance,tv_age_water_heater,tv_age_window;
 
+    LinearLayout LLNetworkDisconnection;
+    NestedScrollView nested_scroll_main;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +100,8 @@ public class HomeRemindersFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        nested_scroll_main= (NestedScrollView) view.findViewById(R.id.nested_scroll_main);
+        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         RLsq_ft = (RelativeLayout) view.findViewById(R.id.RLsq_ft);
         RLGraage = (RelativeLayout) view.findViewById(R.id.RLGraage);
@@ -762,6 +768,15 @@ public class HomeRemindersFragment extends Fragment {
                     public void onError(String error) {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
+
+
+                        if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                            nested_scroll_main.setVisibility(View.GONE);
+                            LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                        }
+
+
+
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Home Schedule Option Error")
                                 .setMessage("" + error)
@@ -960,7 +975,6 @@ public class HomeRemindersFragment extends Fragment {
         );
     }
 
-
     private void showImagePickerOption() {
         new AlertDialog.Builder((LandScreenActivity)getActivity())
                 .setCancelable(true)
@@ -1051,7 +1065,6 @@ public class HomeRemindersFragment extends Fragment {
         super.setInitialSavedState(state);
     }
 
-
     //file uri to real location in filesystem
     public String getRealPathFromURI(Uri contentURI) {
         Cursor cursor = ((LandScreenActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
@@ -1064,5 +1077,4 @@ public class HomeRemindersFragment extends Fragment {
             return cursor.getString(idx);
         }
     }
-
 }
