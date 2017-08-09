@@ -1,9 +1,11 @@
 package com.android.llc.proringer.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +23,8 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.NetworkUtil;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,11 +55,19 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
 
         rcv_location_suggestion = (RecyclerView) findViewById(R.id.rcv_location_suggestion);
         rcv_location_suggestion.setLayoutManager(new LinearLayoutManager(TakeGooglePlacePredictionActivity.this));
-
-
         locationText = (EditText) findViewById(R.id.edt_location);
-
         Erase=(ImageView)findViewById(R.id.Erase);
+
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(TakeGooglePlacePredictionActivity.this)) {
+            findViewById(R.id.RLMain).setVisibility(View.VISIBLE);
+            findViewById(R.id.LLNetworkDisconnection).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.RLMain).setVisibility(View.GONE);
+            findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+        }
+
+
         Erase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,6 +225,20 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_location_finder, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem register = menu.findItem(R.id.action_Done);
+        if(NetworkUtil.getInstance().isNetworkAvailable(TakeGooglePlacePredictionActivity.this))
+        {
+            register.setVisible(true);
+        }
+        else
+        {
+            register.setVisible(false);
+        }
         return true;
     }
 
