@@ -88,6 +88,12 @@ public class MyProjectsFragment extends Fragment {
             public void onError(String error) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
+
+                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                    project_list.setVisibility(View.GONE);
+                    view.findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                }
+
                 new AlertDialog.Builder((LandScreenActivity)getActivity())
                         .setTitle("MyProjectsFragment Error")
                         .setMessage("" + error)
