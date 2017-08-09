@@ -55,6 +55,7 @@ public class MessageFragment extends Fragment {
         for (int i=0;i<15;i++){
             ProjectMessage projectMessage=new ProjectMessage();
             projectMessage.setIsOpen(false);
+            projectMessage.setTagName("view "+i);
             projectMessageArrayList.add(projectMessage);
         }
 

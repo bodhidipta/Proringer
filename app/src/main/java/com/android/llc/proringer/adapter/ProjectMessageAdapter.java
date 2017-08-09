@@ -1,15 +1,20 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
+
 import java.util.ArrayList;
 
 /**
@@ -33,11 +38,12 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     private Context mcontext;
     private onItemClick listener;
     ArrayList<ProjectMessage> projectMessageArrayList;
+    private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
-    public ProjectMessageAdapter(Context mcontext,ArrayList<ProjectMessage> projectMessageArrayList, onItemClick calback) {
+    public ProjectMessageAdapter(Context mcontext, ArrayList<ProjectMessage> projectMessageArrayList, onItemClick calback) {
         this.mcontext = mcontext;
         listener = calback;
-        this.projectMessageArrayList=projectMessageArrayList;
+        this.projectMessageArrayList = projectMessageArrayList;
     }
 
     @Override
@@ -47,6 +53,19 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        if (projectMessageArrayList != null && 0 <= position && position < projectMessageArrayList.size()) {
+            final String data = projectMessageArrayList.get(position).getTagName();
+
+            // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
+            // put an unique string id as value, can be any string which uniquely define the data
+            binderHelper.bind(holder.swipe_layout, data);
+
+            // Bind your data here
+            holder.bind(data);
+        }
+
+
         if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
         } else {
@@ -63,19 +82,57 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
     @Override
     public int getItemCount() {
-        return projectMessageArrayList.size();
+        if (projectMessageArrayList == null) {
+            return 0;
+        } else {
+            return projectMessageArrayList.size();
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         View flag;
         SwipeRevealLayout swipe_layout;
         RelativeLayout main_container;
+        LinearLayout delete_layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
             swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout);
             main_container = (RelativeLayout) itemView.findViewById(R.id.main_container);
+            delete_layout = (LinearLayout) itemView.findViewById(R.id.delete_layout);
+        }
+
+
+        public void bind(String data) {
+            delete_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    projectMessageArrayList.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                }
+            });
+
+            //textView.setText(data);
         }
     }
+
+
+
+    /**
+     * Only if you need to restore open/close state when the orientation is changed.
+     * Call this method in {@link android.app.Activity#onSaveInstanceState(Bundle)}
+     */
+    public void saveStates(Bundle outState) {
+        binderHelper.saveStates(outState);
+    }
+
+    /**
+     * Only if you need to restore open/close state when the orientation is changed.
+     * Call this method in {@link android.app.Activity#onRestoreInstanceState(Bundle)}
+     */
+    public void restoreStates(Bundle inState) {
+        binderHelper.restoreStates(inState);
+    }
+
 }
