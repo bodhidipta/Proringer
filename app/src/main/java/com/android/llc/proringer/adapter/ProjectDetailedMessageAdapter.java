@@ -2,17 +2,13 @@ package com.android.llc.proringer.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.helper.ObservableHorizontalScrollView;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
 
@@ -37,15 +33,13 @@ import java.util.ArrayList;
 
 public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> {
     Context mcontext = null;
-    ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
     private onItemClick listener;
-    DisplayMetrics displayMetrics;
+    ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
 
     public ProjectDetailedMessageAdapter(Context mcontext,ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, onItemClick callback) {
         this.mcontext = mcontext;
         this.projectMessageDetailsArrayList=projectMessageDetailsArrayList;
         listener = callback;
-        displayMetrics = mcontext.getResources().getDisplayMetrics();
     }
 
     @Override
@@ -60,47 +54,31 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 
     @Override
     public void onBindViewHolder(ProjectDetailedMessageAdapter.ViewHolder holder, final int position) {
-
-        holder.RLMain_container.getLayoutParams().width =displayMetrics.widthPixels;
-
         if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
         } else {
             holder.flag.setVisibility(View.INVISIBLE);
         }
-        holder.RLMain_container.setOnClickListener(new View.OnClickListener() {
+        holder.cont_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick(position);
+
             }
         });
-
-        if(!projectMessageDetailsArrayList.get(position).isOpen()){
-
-            //holder.horizontalScrollView.invalidate();
-            holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_LEFT);
-        }
-        else {
-            holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
-        }
-
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout more;
-        RelativeLayout RLMain_container;
-        LinearLayout LLDelete;
+        RelativeLayout cont_main;
         View flag;
-        ObservableHorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
             more = (LinearLayout) itemView.findViewById(R.id.more);
-            RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
-            LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
-            horizontalScrollView= (ObservableHorizontalScrollView) itemView.findViewById(R.id.scrollview);
+            cont_main = (RelativeLayout) itemView.findViewById(R.id.cont_main);
         }
     }
 }

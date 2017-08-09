@@ -1,155 +1,148 @@
-<com.android.llc.proringer.helper.ObservableHorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollview"
+<com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true"
-    android:scrollbars="none">
+    android:layout_height="90dp"
+    app:dragEdge="right"
+    app:mode="same_level">
 
     <LinearLayout
+        android:id="@+id/delete_layout"
         android:layout_width="wrap_content"
-        android:layout_height="90dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/RLMain_container"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/more"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:background="@color/colorBGblueShade"
+            android:background="@color/colorHeader"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingRight="5dp"
-            android:weightSum="2">
-
-            <View
-                android:id="@+id/flag"
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorAccent"
-                android:visibility="gone" />
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/prof_img"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:layout_toRightOf="@+id/flag"
-                android:background="@color/colorGreen" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_more" />
 
-
-            <LinearLayout
-                android:id="@+id/name_cont"
+            <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/prof_img"
-                android:orientation="horizontal"
-                android:paddingTop="15dp"
-                android:weightSum="2">
-
-                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:text="Project name"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14sp" />
-
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".7"
-                    android:gravity="right"
-                    android:text="Date"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/des_cont"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/name_cont"
-                android:layout_toRightOf="@+id/prof_img"
-                android:paddingRight="10dp">
-
-                <ImageView
-                    android:id="@+id/attached"
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_attachment" />
-
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/attached"
-                    android:maxLines="2"
-                    android:text="Description of the message .......dfgdf aksdjlf "
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/colorLightGray" />
-            </RelativeLayout>
-
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/LLDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/more"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorHeader"
                 android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_more" />
-
-                <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="More"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="#ff002a"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_cancel_white" />
-
-                <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Delete"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
+                android:text="More"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="#ff002a"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_cancel_white" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Delete"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
 
-</com.android.llc.proringer.helper.ObservableHorizontalScrollView>
+    <RelativeLayout
+        android:id="@+id/cont_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBGblueShade"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingRight="5dp"
+        android:weightSum="2">
+
+        <View
+            android:id="@+id/flag"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/prof_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/flag"
+            android:background="@color/colorGreen" />
+
+
+        <LinearLayout
+            android:id="@+id/name_cont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/prof_img"
+            android:orientation="horizontal"
+            android:paddingTop="15dp"
+            android:weightSum="2">
+
+            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:text="Project name"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:gravity="right"
+                android:text="Date"
+                android:textColor="@color/colorTextDark"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/des_cont"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/name_cont"
+            android:layout_toRightOf="@+id/prof_img"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:id="@+id/attached"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_attachment" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="        Description of the message .......dfgdf aksdjlf "
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorLightGray" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>
