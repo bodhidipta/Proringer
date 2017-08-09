@@ -231,7 +231,7 @@ public class PostProjectFragment extends Fragment {
 
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Error")
+                        .setTitle("Load Error")
                         .setMessage("" + error)
                         .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override

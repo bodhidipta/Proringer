@@ -110,7 +110,7 @@ public class MyProjectsFragment extends Fragment {
                 }
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("My Projects Load Error")
+                        .setTitle("Load Error")
                         .setMessage("" + error)
                         .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override

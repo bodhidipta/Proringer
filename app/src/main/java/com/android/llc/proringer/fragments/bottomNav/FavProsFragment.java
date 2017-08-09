@@ -129,7 +129,7 @@ public class FavProsFragment extends Fragment {
                 }
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Favorite Pros Load Error")
+                        .setTitle("Load Error")
                         .setMessage("" + error)
                         .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override

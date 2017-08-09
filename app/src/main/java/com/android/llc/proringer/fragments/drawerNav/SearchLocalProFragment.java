@@ -141,7 +141,7 @@ public class SearchLocalProFragment extends Fragment {
 
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Pros Load Error")
+                        .setTitle("Load Error")
                         .setMessage("" + error)
                         .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override

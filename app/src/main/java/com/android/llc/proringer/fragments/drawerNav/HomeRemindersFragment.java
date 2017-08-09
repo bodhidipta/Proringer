@@ -781,7 +781,7 @@ public class HomeRemindersFragment extends Fragment {
 
 
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Home Schedule Option Error")
+                                .setTitle("Load Error")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                                     @Override
@@ -874,6 +874,32 @@ public class HomeRemindersFragment extends Fragment {
                     public void onError(String error) {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
+
+
+                        if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                            nested_scroll_main.setVisibility(View.GONE);
+                            LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                        }
+
+
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Load Error")
+                                .setMessage("" + error)
+                                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        getOptionList();
+
+                                    }
+                                })
+                                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+
                     }
                 });
     }

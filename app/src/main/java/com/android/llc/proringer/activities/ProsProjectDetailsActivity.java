@@ -294,7 +294,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
                                                                                                         }
 
                                                                                                         new AlertDialog.Builder(ProsProjectDetailsActivity.this)
-                                                                                                                .setTitle("Pros Details Load Error")
+                                                                                                                .setTitle("Load Error")
                                                                                                                 .setMessage("" + error)
                                                                                                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                                                                                                                     @Override

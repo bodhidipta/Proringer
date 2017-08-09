@@ -162,7 +162,7 @@ public class PostProjectActivity extends AppCompatActivity {
             LLNetworkDisconnection.setVisibility(View.VISIBLE);
 
             new AlertDialog.Builder(PostProjectActivity.this)
-                    .setTitle("Error")
+                    .setTitle("Load Error")
                     .setMessage("No internet connection found. Please check your internet connection.")
                     .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                         @Override

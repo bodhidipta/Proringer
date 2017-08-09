@@ -179,7 +179,7 @@ public class NotificationsFragment extends Fragment {
                         }
 
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Notification Load Error")
+                                .setTitle("Load Error")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                                     @Override
