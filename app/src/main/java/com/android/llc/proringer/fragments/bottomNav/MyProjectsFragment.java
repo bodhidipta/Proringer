@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
@@ -39,6 +41,8 @@ import java.util.List;
 
 public class MyProjectsFragment extends Fragment {
     ProgressDialog pgDialog;
+    RecyclerView project_list;
+    LinearLayout no_project_available,LLNetworkDisconnection;
 
     @Nullable
     @Override
@@ -49,8 +53,19 @@ public class MyProjectsFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final RecyclerView project_list = (RecyclerView) view.findViewById(R.id.project_list);
+
+        no_project_available= (LinearLayout) view.findViewById(R.id.no_project_available);
+        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        project_list=(RecyclerView) view.findViewById(R.id.project_list);
         project_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+
+        loadList();
+    }
+
+    public void loadList()
+    {
+        project_list.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
 
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
             @Override
@@ -73,15 +88,15 @@ public class MyProjectsFragment extends Fragment {
                         @Override
                         public void onItemPassed(int position, String value) {
                             ProApplication.getInstance().setDataSelected((ProjectPostedData) projectList.get(position));
-                                    if(ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("A")
-                                            ||ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("Y")){
-                                        ((LandScreenActivity) getActivity()).transactMyProjectsDetails();
-                                    }
+                            if(ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("A")
+                                    ||ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("Y")){
+                                ((LandScreenActivity) getActivity()).transactMyProjectsDetails();
+                            }
 
                         }
                     }));
                 else
-                    view.findViewById(R.id.no_project_available).setVisibility(View.VISIBLE);
+                    no_project_available.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -91,27 +106,31 @@ public class MyProjectsFragment extends Fragment {
 
                 if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
                     project_list.setVisibility(View.GONE);
-                    view.findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
-                new AlertDialog.Builder((LandScreenActivity)getActivity())
+                new AlertDialog.Builder(getActivity())
                         .setTitle("My Projects Load Error")
                         .setMessage("" + error)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                loadList();
+
                             }
                         })
-                        .show();
+                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         });
 
     }
-
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }
-
-
 }

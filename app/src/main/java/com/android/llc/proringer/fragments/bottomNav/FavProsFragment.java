@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.llc.proringer.R;
@@ -46,6 +47,8 @@ public class FavProsFragment extends Fragment {
     private RecyclerView pros_list;
     ProgressDialog pgDialog;
     SearchFavoriteListAdapter searchFavoriteListAdapter;
+    LinearLayout LLMain,LLNetworkDisconnection;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,11 +59,28 @@ public class FavProsFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        LLMain= (LinearLayout) view.findViewById(R.id.LLMain);
+        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+
         view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
 
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
 
+        view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LandScreenActivity)(LandScreenActivity)getActivity()).transactSearchLocalPros();
+            }
+        });
+
+        loadList();
+    }
+
+    public void loadList(){
+
+        LLMain.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
 
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
@@ -104,30 +124,31 @@ public class FavProsFragment extends Fragment {
 
 
                 if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
-                    view.findViewById(R.id.LLMain).setVisibility(View.GONE);
-                    view.findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                    LLMain.setVisibility(View.GONE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Favorite Pros Load Error")
                         .setMessage("" + error)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                loadList();
+
                             }
                         })
-                        .show();
-
+                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         });
 
-        view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((LandScreenActivity)(LandScreenActivity)getActivity()).transactSearchLocalPros();
-            }
-        });
+
     }
 
     public interface onOptionSelected {

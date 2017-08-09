@@ -69,7 +69,7 @@ public class SearchLocalProFragment extends Fragment {
         LLMain= (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
-        setListAdapter();
+        loadList();
 
     }
 
@@ -78,7 +78,11 @@ public class SearchLocalProFragment extends Fragment {
     }
 
 
-    public void setListAdapter() {
+    public void loadList() {
+
+        LLMain.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
+
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -135,18 +139,24 @@ public class SearchLocalProFragment extends Fragment {
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
+
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Pros Error")
+                        .setTitle("Pros Load Error")
                         .setMessage("" + error)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                loadList();
+
                             }
                         })
-                        .show();
-
-
+                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         }, ProApplication.getInstance().getUserId(), category_search, zip_search);
     }
@@ -194,7 +204,7 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                                      @Override
                                                                                                                      public void onClick(DialogInterface dialog, int which) {
                                                                                                                          dialog.dismiss();
-                                                                                                                         setListAdapter();
+                                                                                                                         loadList();
                                                                                                                      }
                                                                                                                  })
                                                                                                                  .setCancelable(false)
@@ -264,7 +274,7 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                      @Override
                                                                                                      public void onClick(DialogInterface dialog, int which) {
                                                                                                          dialog.dismiss();
-                                                                                                         setListAdapter();
+                                                                                                         loadList();
 
                                                                                                      }
                                                                                                  })

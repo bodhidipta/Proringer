@@ -194,7 +194,7 @@ public class NotificationsFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                     }
-                                });
+                                }).show();
 
                     }
                 });

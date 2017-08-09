@@ -796,7 +796,7 @@ public class HomeRemindersFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                     }
-                                });
+                                }).show();
                     }
                 });
     }
