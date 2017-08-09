@@ -2,10 +2,12 @@ package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,6 +78,9 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
     }
     public void loadReviewList(int from,int perPage){
 
+        findViewById(R.id.RLMain).setVisibility(View.VISIBLE);
+        findViewById(R.id.LLNetworkDisconnection).setVisibility(View.GONE);
+
         ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -114,6 +119,29 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
             public void onError(String error) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
+
+                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                    findViewById(R.id.RLMain).setVisibility(View.GONE);
+                    findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                }
+
+//                new AlertDialog.Builder(ProsReviewAllListActivity.this)
+//                        .setTitle("Error")
+//                        .setMessage(""+error)
+//                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                                loadReviewList(0,10);
+//                            }
+//                        })
+//                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        }).show();
+
             }
         }, ProApplication.getInstance().getUserId()
                 ,pros_id
