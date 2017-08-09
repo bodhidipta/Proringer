@@ -2,11 +2,14 @@ package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +20,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
@@ -56,10 +60,18 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
     JSONObject infoArrayJsonObject = null;
     JSONObject infoJsonObject=null;
 
+    RelativeLayout RLCollapsingImage;
+    LinearLayout LLNetworkDisconnection;
+    NestedScrollView nested_scroll_main;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details_pro);
+
+        RLCollapsingImage= (RelativeLayout) findViewById(R.id.RLCollapsingImage);
+        nested_scroll_main= (NestedScrollView) findViewById(R.id.nested_scroll_main);
+        LLNetworkDisconnection= (LinearLayout) findViewById(R.id.LLNetworkDisconnection);
 
         img_back = (ImageView) findViewById(R.id.img_back);
         img_top = (ImageView) findViewById(R.id.img_top);
@@ -157,6 +169,11 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
     }
 
     public void setDataProListDetails() {
+
+        RLCollapsingImage.setVisibility(View.VISIBLE);
+        nested_scroll_main.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
+
         ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProsIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                     @Override
                                                                                                     public void onStart() {
@@ -268,6 +285,31 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
                                                                                                     public void onError(String error) {
                                                                                                         if (pgDialog1 != null && pgDialog1.isShowing())
                                                                                                             pgDialog1.dismiss();
+
+
+                                                                                                        if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                                                                                                            RLCollapsingImage.setVisibility(View.GONE);
+                                                                                                            nested_scroll_main.setVisibility(View.GONE);
+                                                                                                            LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                                                                                                        }
+
+                                                                                                        new AlertDialog.Builder(ProsProjectDetailsActivity.this)
+                                                                                                                .setTitle("Pros Details Load Error")
+                                                                                                                .setMessage("" + error)
+                                                                                                                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                                                                                                                    @Override
+                                                                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                                                                        dialog.dismiss();
+                                                                                                                        setDataProListDetails();
+
+                                                                                                                    }
+                                                                                                                })
+                                                                                                                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                                                                                                                    @Override
+                                                                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                                                                        dialog.dismiss();
+                                                                                                                    }
+                                                                                                                }).show();
                                                                                                     }
                                                                                                 },
 //                "56"
@@ -335,7 +377,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }
-
 
     private void showDescribetionDialog(String msg) {
         final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);

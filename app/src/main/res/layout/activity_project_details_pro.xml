@@ -19,6 +19,8 @@
 
 
             <RelativeLayout
+                android:id="@+id/RLCollapsingImage"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="206dp"
                 android:background="@color/colorLightGray"
@@ -116,6 +118,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -400,12 +403,12 @@
                             android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
 
                         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_marginTop="10dp"
                             android:id="@+id/tv_business_hour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:textColor="@color/colorTextDark"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -718,10 +721,10 @@
                         android:background="@color/colorLightGray" />
 
                     <android.support.v7.widget.RecyclerView
-                        android:layout_marginTop="10dp"
                         android:id="@+id/rcv_project_gallery"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:layout_width="wrap_content"
@@ -739,11 +742,11 @@
 
 
                     <ImageView
-                        android:scaleType="fitXY"
-                        android:layout_marginTop="10dp"
                         android:id="@+id/img_achievements"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="fitXY" />
 
                 </LinearLayout>
 
@@ -825,5 +828,32 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/LLNetworkDisconnection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Check Your Network Connection"
+            android:textColor="@color/colorTextBlack" />
+
+
+    </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>
