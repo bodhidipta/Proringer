@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.llc.proringer.R;
@@ -50,6 +51,7 @@ public class SearchLocalProFragment extends Fragment {
     ProgressDialog pgDialog2;
     ProgressDialog pgDialog3;
     SearchProListAdapter searchProListAdapter;
+    LinearLayout LLMain,LLNetworkDisconnection;
 
     @Nullable
     @Override
@@ -62,6 +64,10 @@ public class SearchLocalProFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+
+
+        LLMain= (LinearLayout) view.findViewById(R.id.LLMain);
+        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         setListAdapter();
 
@@ -122,6 +128,25 @@ public class SearchLocalProFragment extends Fragment {
             public void onError(String error) {
                 if (pgDialog1 != null && pgDialog1.isShowing())
                     pgDialog1.dismiss();
+
+
+                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                    LLMain.setVisibility(View.GONE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Pros Error")
+                        .setMessage("" + error)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
+
+
             }
         }, ProApplication.getInstance().getUserId(), category_search, zip_search);
     }
