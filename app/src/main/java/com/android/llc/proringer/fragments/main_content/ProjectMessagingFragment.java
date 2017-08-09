@@ -41,6 +41,7 @@ public class ProjectMessagingFragment extends Fragment {
     RelativeLayout detailed_project_search;
     RecyclerView message_list;
     ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
+    ProjectDetailedMessageAdapter projectDetailedMessageAdapter;
 
     @Nullable
     @Override
@@ -65,11 +66,34 @@ public class ProjectMessagingFragment extends Fragment {
 
         message_list = (RecyclerView) view.findViewById(R.id.message_list);
         message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
-        message_list.setAdapter(new ProjectDetailedMessageAdapter((LandScreenActivity)getActivity(),projectMessageDetailsArrayList, new onItemClick() {
+        projectDetailedMessageAdapter=new ProjectDetailedMessageAdapter((LandScreenActivity)getActivity(),projectMessageDetailsArrayList, new onItemClick() {
             @Override
             public void onItemClick(int position) {
                 startActivity(new Intent((LandScreenActivity)getActivity(), IndividualMessageActivity.class));
             }
-        }));
+        });
+        message_list.setAdapter(projectDetailedMessageAdapter);
     }
+
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//
+//        // Only if you need to restore open/close state when
+//        // the orientation is changed
+//        if (projectDetailedMessageAdapter != null) {
+//            projectDetailedMessageAdapter.saveStates(outState);
+//        }
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        // Only if you need to restore open/close state when
+//        // the orientation is changed
+//        if (projectDetailedMessageAdapter != null) {
+//            projectDetailedMessageAdapter.restoreStates(savedInstanceState);
+//        }
+//    }
 }
