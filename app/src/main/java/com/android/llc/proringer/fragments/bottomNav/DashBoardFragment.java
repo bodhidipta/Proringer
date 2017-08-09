@@ -1,14 +1,19 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -47,6 +52,8 @@ public class DashBoardFragment extends Fragment {
     ProLightTextView tv_address;
     ProgressDialog pgDialog;
 
+    LinearLayout LLNetworkDisconnection;
+    NestedScrollView nested_scroll_main;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +63,9 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        nested_scroll_main= (NestedScrollView) view.findViewById(R.id.nested_scroll_main);
 
         profile_pic = (ImageView) view.findViewById(R.id.profile_pic);
         tv_name = (ProRegularTextView) view.findViewById(R.id.tv_name);
@@ -111,6 +121,10 @@ public class DashBoardFragment extends Fragment {
     }
 
     private void plotUserInformation() {
+
+        nested_scroll_main.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
+
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -149,6 +163,33 @@ public class DashBoardFragment extends Fragment {
             public void onError(String error) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
+
+
+
+                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                    nested_scroll_main.setVisibility(View.GONE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+
+
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Dash Board Load Error")
+                        .setMessage("" + error)
+                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                plotUserInformation();
+
+                            }
+                        })
+                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         });
     }
