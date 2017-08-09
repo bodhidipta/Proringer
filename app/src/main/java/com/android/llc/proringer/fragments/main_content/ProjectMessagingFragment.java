@@ -16,6 +16,8 @@ import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
+
 import java.util.ArrayList;
 
 /**
@@ -55,6 +57,7 @@ public class ProjectMessagingFragment extends Fragment {
         for (int i=0;i<15;i++){
             ProjectMessageDetails projectMessageDetails=new ProjectMessageDetails();
             projectMessageDetails.setIsOpen(false);
+            projectMessageDetails.setTagName("view "+i);
             projectMessageDetailsArrayList.add(projectMessageDetails);
         }
 
@@ -69,5 +72,4 @@ public class ProjectMessagingFragment extends Fragment {
             }
         }));
     }
-
 }
