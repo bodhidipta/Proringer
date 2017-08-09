@@ -47,10 +47,10 @@ import java.util.LinkedList;
 
 public class PostProjectFragment extends Fragment {
     private ProgressBar progress_posting;
-    private ProRegularTextView selected_service_category, service_request_category, pro_request_category, selected_service_property;
+    private ProRegularTextView selected_service_category, service_request_category, selected_service_property;
     private RecyclerView pro_service_listing;
     private LinearLayout content_post_form_submit, container_registration, container_project_description;
-    private RelativeLayout container_location, container_add_photoes;
+    private RelativeLayout container_location;
     private ProgressDialog pgDialog = null;
     private PostProjectServiceAndOtherListAdapter adapter = null;
     private PostProjectCategoryGridAdapter gridAdapter = null;
@@ -80,7 +80,6 @@ public class PostProjectFragment extends Fragment {
         progress_posting = (ProgressBar) view.findViewById(R.id.progress_posting);
         selected_service_category = (ProRegularTextView) view.findViewById(R.id.selected_service_category);
         service_request_category = (ProRegularTextView) view.findViewById(R.id.service_request_category);
-        pro_request_category = (ProRegularTextView) view.findViewById(R.id.pro_request_category);
         selected_service_property = (ProRegularTextView) view.findViewById(R.id.selected_service_property);
 
         pro_service_listing = (RecyclerView) view.findViewById(R.id.pro_service_listing);
@@ -90,7 +89,6 @@ public class PostProjectFragment extends Fragment {
         container_registration = (LinearLayout) view.findViewById(R.id.container_registration);
         container_project_description = (LinearLayout) view.findViewById(R.id.container_project_description);
         container_location = (RelativeLayout) view.findViewById(R.id.container_location);
-        container_add_photoes = (RelativeLayout) view.findViewById(R.id.container_add_photoes);
 
         if (ProApplication.getInstance().equals("")) {
             progress_posting.setMax(10);
