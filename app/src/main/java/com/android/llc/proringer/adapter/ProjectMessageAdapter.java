@@ -3,7 +3,9 @@ package com.android.llc.proringer.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -12,8 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.ObservableHorizontalScrollView;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
+import com.android.llc.proringer.utils.Logger;
 
 import java.util.ArrayList;
 
@@ -79,6 +83,10 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         else {
             holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
         }
+
+
+
+
     }
 
     @Override
@@ -90,16 +98,14 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         View flag;
         RelativeLayout RLMain_container;
         LinearLayout LLDelete;
-        HorizontalScrollView horizontalScrollView;
+        ObservableHorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             flag = (View) itemView.findViewById(R.id.flag);
             RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
             LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
-            horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
+            horizontalScrollView= (ObservableHorizontalScrollView) itemView.findViewById(R.id.scrollview);
         }
     }
-
-
 }

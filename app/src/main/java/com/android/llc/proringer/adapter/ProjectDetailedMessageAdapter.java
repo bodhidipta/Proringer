@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.ObservableHorizontalScrollView;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
 
@@ -91,7 +92,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         RelativeLayout RLMain_container;
         LinearLayout LLDelete;
         View flag;
-        HorizontalScrollView horizontalScrollView;
+        ObservableHorizontalScrollView horizontalScrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -99,7 +100,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             more = (LinearLayout) itemView.findViewById(R.id.more);
             RLMain_container = (RelativeLayout) itemView.findViewById(R.id.RLMain_container);
             LLDelete = (LinearLayout) itemView.findViewById(R.id.LLDelete);
-            horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
+            horizontalScrollView= (ObservableHorizontalScrollView) itemView.findViewById(R.id.scrollview);
         }
     }
 }
