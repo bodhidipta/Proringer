@@ -67,6 +67,8 @@ public class PostProjectFragment extends Fragment {
             step9option = "Lets get acquainted",
             step10option = "WE SENT YOUR PROJECT TO THE PROS!";
 
+    LinearLayout LLMain,LLNetworkDisconnection;
+
 
     @Nullable
     @Override
@@ -77,6 +79,10 @@ public class PostProjectFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        LLMain= (LinearLayout) view.findViewById(R.id.LLMain);
+        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+
         progress_posting = (ProgressBar) view.findViewById(R.id.progress_posting);
         selected_service_category = (ProRegularTextView) view.findViewById(R.id.selected_service_category);
         service_request_category = (ProRegularTextView) view.findViewById(R.id.service_request_category);
@@ -96,55 +102,7 @@ public class PostProjectFragment extends Fragment {
             progress_posting.setMax(9);
         }
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
-            @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
-                progress_posting.setProgress(step);
-                gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity)getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
-                    @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
-                        if (step == 0) {
-                            step1Option = data.getCategory_name();
-                            selectedId = data.getId();
-                            selectService(data.getId());
-                        }
-                    }
-                });
-                pro_service_listing.setAdapter(gridAdapter);
-
-            }
-
-            @Override
-            public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
-
-                new AlertDialog.Builder((LandScreenActivity)getActivity())
-                        .setTitle("Error")
-                        .setMessage("" + error)
-                        .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-
-            }
-
-            @Override
-            public void onStartFetch() {
-                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
-                pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Getting Preparing category list.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
-
-            }
-        });
+        listPostProject();
 
         view.findViewById(R.id.continue_image_section).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,6 +181,72 @@ public class PostProjectFragment extends Fragment {
             public void onClick(View v) {
                 ((LandScreenActivity) getActivity()).toggleToolBar(false);
                 ((LandScreenActivity) getActivity()).redirectToDashBoard();
+
+            }
+        });
+    }
+
+    public void listPostProject(){
+
+        LLMain.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
+
+        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+            @Override
+            public void onStartFetch() {
+                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                pgDialog.setTitle("Preparing category");
+                pgDialog.setMessage("Getting Preparing category list.Please wait...");
+                pgDialog.setCancelable(false);
+                pgDialog.show();
+            }
+
+            @Override
+            public void onComplete(LinkedList<ProCategoryData> listdata) {
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
+                progress_posting.setProgress(step);
+                gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity)getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
+                    @Override
+                    public void onSelectItemClick(int position, ProCategoryData data) {
+                        if (step == 0) {
+                            step1Option = data.getCategory_name();
+                            selectedId = data.getId();
+                            selectService(data.getId());
+                        }
+                    }
+                });
+                pro_service_listing.setAdapter(gridAdapter);
+            }
+
+            @Override
+            public void onError(String error) {
+                if (pgDialog != null && pgDialog.isShowing())
+                    pgDialog.dismiss();
+
+                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                    LLMain.setVisibility(View.GONE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Error")
+                        .setMessage("" + error)
+                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                listPostProject();
+
+                            }
+                        })
+                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
 
             }
         });

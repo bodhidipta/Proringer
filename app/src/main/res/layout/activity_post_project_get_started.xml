@@ -38,68 +38,100 @@
             android:src="@drawable/ic_home" />
     </android.support.v7.widget.Toolbar>
 
-    <ProgressBar
-        android:id="@+id/progress_posting"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:max="10"
-        android:progress="0"
-        android:progressTint="@color/colorAccent" />
-
     <LinearLayout
-        android:id="@+id/title_lebel_container"
+        android:id="@+id/LLMain"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progress_posting"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:max="10"
+            android:progress="0"
+            android:progressTint="@color/colorAccent" />
+
+        <LinearLayout
+            android:id="@+id/title_lebel_container"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/selected_service_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorHeader"
+                android:gravity="center"
+                android:text="Selected type"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/service_request_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="What kind of service do you need?"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/pro_request_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="What kind of service do you need?"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:id="@+id/selected_service_category"
+            android:id="@+id/selected_service_property"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorHeader"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:text="Selected type"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:text="Sub property description"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp"
             android:visibility="gone" />
 
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:id="@+id/service_request_category"
+        <FrameLayout
+            android:id="@+id/container_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="What kind of service do you need?"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:visibility="gone" />
-
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-            android:id="@+id/pro_request_category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="What kind of service do you need?"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
-    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-        android:id="@+id/selected_service_property"
+    <LinearLayout
+        android:id="@+id/LLNetworkDisconnection"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Sub property description"
-        android:textColor="@color/colorTextDark"
-        android:textSize="14sp"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <FrameLayout
-        android:id="@+id/container_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Check Your Network Connection"
+            android:textColor="@color/colorTextBlack" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

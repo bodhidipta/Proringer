@@ -29,6 +29,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.NetworkUtil;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class PostProjectActivity extends AppCompatActivity {
     public AddressData selectedAddressData = null;
     private InputMethodManager keyboard;
 
-    public String first_name="", last_name="", email="", password="", confirm_password="";
+    public String first_name = "", last_name = "", email = "", password = "", confirm_password = "";
 
     /**
      * NEW FLOW VARS
@@ -109,7 +110,7 @@ public class PostProjectActivity extends AppCompatActivity {
      * For Service and other listing
      */
     public boolean isForth = true;
-
+    LinearLayout LLMain, LLNetworkDisconnection;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,6 +120,9 @@ public class PostProjectActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        LLMain = (LinearLayout) findViewById(R.id.LLMain);
+        LLNetworkDisconnection = (LinearLayout) findViewById(R.id.LLNetworkDisconnection);
 
         fragmentPushList = new ArrayList<>();
 
@@ -151,14 +155,38 @@ public class PostProjectActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        changeFragmentNext(1);
+        if (NetworkUtil.getInstance().isNetworkAvailable(PostProjectActivity.this)) {
+            changeFragmentNext(1);
+        } else {
+            LLMain.setVisibility(View.GONE);
+            LLNetworkDisconnection.setVisibility(View.VISIBLE);
 
+            new AlertDialog.Builder(PostProjectActivity.this)
+                    .setTitle("Error")
+                    .setMessage("No internet connection found. Please check your internet connection.")
+                    .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            changeFragmentNext(1);
 
+                        }
+                    })
+                    .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
+            if(LLNetworkDisconnection.getVisibility()==View.VISIBLE){
+                finish();
+            }
             performBack();
         return super.onOptionsItemSelected(item);
     }
@@ -169,7 +197,7 @@ public class PostProjectActivity extends AppCompatActivity {
         Logger.printMessage("pop_up", "pop up");
         decreaseStep();
         closeKeypad();
-        isForth=false;
+        isForth = false;
         if (fragmentPushList.size() >= 1) {
             if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryListFragment.class.getCanonicalName())) {
                 finish();
@@ -231,25 +259,25 @@ public class PostProjectActivity extends AppCompatActivity {
 
     public void completePostProject() {
 
-        Logger.printMessage("@registrationPostPro","selectedCategory :"+selectedCategory.getId());
-        Logger.printMessage("@registrationPostPro","selectedService :"+selectedService.getId());
-        Logger.printMessage("@registrationPostPro","service_look_type :"+service_look_type);
-        Logger.printMessage("@registrationPostPro","property_type :"+property_type);
-        Logger.printMessage("@registrationPostPro","project_stage :"+project_stage);
-        Logger.printMessage("@registrationPostPro","timeframe_id :"+timeframe_id);
-        Logger.printMessage("@registrationPostPro","mCurrentPhotoPath :"+mCurrentPhotoPath);
-        Logger.printMessage("@registrationPostPro","project_description_text :"+project_description_text);
-        Logger.printMessage("@registrationPostPro","selectedAddressData.getZip_code() :"+selectedAddressData.getZip_code());
-        Logger.printMessage("@registrationPostPro","selectedAddressData.getCity() :"+selectedAddressData.getCity());
-        Logger.printMessage("@registrationPostPro","selectedAddressData.getState_code() :"+selectedAddressData.getState_code());
-        Logger.printMessage("@registrationPostPro","selectedAddressData.getCountry_code() :"+selectedAddressData.getCountry_code());
-        Logger.printMessage("@registrationPostPro","selectedAddressData.getLatitude() :"+selectedAddressData.getLatitude());
-        Logger.printMessage("@registrationPostPro"," selectedAddressData.getLongitude() :"+ selectedAddressData.getLongitude());
-        Logger.printMessage("@registrationPostPro"," selectedAddressData.getLongitude() :"+ selectedAddressData.getLongitude());
-        Logger.printMessage("@registrationPostPro"," first_name :"+ first_name);
-        Logger.printMessage("@registrationPostPro","last_name:"+last_name);
-        Logger.printMessage("@registrationPostPro","email:"+email);
-        Logger.printMessage("@registrationPostPro","confirm_password:"+confirm_password);
+        Logger.printMessage("@registrationPostPro", "selectedCategory :" + selectedCategory.getId());
+        Logger.printMessage("@registrationPostPro", "selectedService :" + selectedService.getId());
+        Logger.printMessage("@registrationPostPro", "service_look_type :" + service_look_type);
+        Logger.printMessage("@registrationPostPro", "property_type :" + property_type);
+        Logger.printMessage("@registrationPostPro", "project_stage :" + project_stage);
+        Logger.printMessage("@registrationPostPro", "timeframe_id :" + timeframe_id);
+        Logger.printMessage("@registrationPostPro", "mCurrentPhotoPath :" + mCurrentPhotoPath);
+        Logger.printMessage("@registrationPostPro", "project_description_text :" + project_description_text);
+        Logger.printMessage("@registrationPostPro", "selectedAddressData.getZip_code() :" + selectedAddressData.getZip_code());
+        Logger.printMessage("@registrationPostPro", "selectedAddressData.getCity() :" + selectedAddressData.getCity());
+        Logger.printMessage("@registrationPostPro", "selectedAddressData.getState_code() :" + selectedAddressData.getState_code());
+        Logger.printMessage("@registrationPostPro", "selectedAddressData.getCountry_code() :" + selectedAddressData.getCountry_code());
+        Logger.printMessage("@registrationPostPro", "selectedAddressData.getLatitude() :" + selectedAddressData.getLatitude());
+        Logger.printMessage("@registrationPostPro", " selectedAddressData.getLongitude() :" + selectedAddressData.getLongitude());
+        Logger.printMessage("@registrationPostPro", " selectedAddressData.getLongitude() :" + selectedAddressData.getLongitude());
+        Logger.printMessage("@registrationPostPro", " first_name :" + first_name);
+        Logger.printMessage("@registrationPostPro", "last_name:" + last_name);
+        Logger.printMessage("@registrationPostPro", "email:" + email);
+        Logger.printMessage("@registrationPostPro", "confirm_password:" + confirm_password);
         ProServiceApiHelper.getInstance(PostProjectActivity.this).postProject(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
@@ -270,7 +298,7 @@ public class PostProjectActivity extends AppCompatActivity {
                         step++;
                         progress_posting.setProgress(step);
                         selected_service_property.setText("" + step10option);
-                        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())){
+                        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())) {
                             ((PostProjectRegistrationAndFinalizeFragment) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())).showProjectPosted();
 
                         }
@@ -335,6 +363,8 @@ public class PostProjectActivity extends AppCompatActivity {
     }
 
     public void changeFragmentNext(int next) {
+        LLMain.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
         switch (next) {
             case 1:
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
@@ -350,7 +380,7 @@ public class PostProjectActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                isForth=true;
+                isForth = true;
                 FragmentTransaction transaction2 = fragmentManager.beginTransaction();
                 transaction2.replace(R.id.container_fragment, new ServiceAndOtherListFragment(), "" + ServiceAndOtherListFragment.class.getCanonicalName());
                 transaction2.addToBackStack("" + ServiceAndOtherListFragment.class.getCanonicalName());
@@ -500,7 +530,7 @@ public class PostProjectActivity extends AppCompatActivity {
                 ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).step > 0) {
             ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).performBack();
         } else {
-            isForth=true;
+            isForth = true;
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + ServiceAndOtherListFragment.class.getCanonicalName())).commit();
             fragmentManager.popBackStack("" + ServiceAndOtherListFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentPushList.remove(fragmentPushList.size() - 1);
