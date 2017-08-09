@@ -128,6 +128,7 @@ public class DashBoardFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
+
                 pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
                 pgDialog.setTitle("My Dashboard");
                 pgDialog.setMessage("My Dashboard page loading.Please wait...");
@@ -153,10 +154,11 @@ public class DashBoardFragment extends Fragment {
                     tv_active_projects.setText(jsonInfoArray.getJSONObject(0).getString("total_active_project"));
                     tv_favorite_pros.setText(jsonInfoArray.getJSONObject(0).getString("total_fav_pro"));
 
+                    getUpdateUserData();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                getUpdateUserData();
             }
 
             @Override
