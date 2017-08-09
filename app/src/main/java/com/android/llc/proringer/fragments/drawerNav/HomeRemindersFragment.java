@@ -445,6 +445,10 @@ public class HomeRemindersFragment extends Fragment {
     }
 
     private void getOptionList() {
+
+        nested_scroll_main.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
+
         ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getHomeSchedularOptionList(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
@@ -774,7 +778,6 @@ public class HomeRemindersFragment extends Fragment {
                             nested_scroll_main.setVisibility(View.GONE);
                             LLNetworkDisconnection.setVisibility(View.VISIBLE);
                         }
-
 
 
                         new AlertDialog.Builder(getActivity())
