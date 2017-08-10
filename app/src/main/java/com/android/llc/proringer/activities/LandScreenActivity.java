@@ -235,10 +235,10 @@ public class LandScreenActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + DashBoardFragment.class.getCanonicalName())).commit();
             fragmentManager.popBackStack("" + DashBoardFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        FragmentTransaction trasaction = fragmentManager.beginTransaction();
-        trasaction.replace(R.id.fragment_container, new DashBoardFragment(), "" + DashBoardFragment.class.getCanonicalName());
-        trasaction.addToBackStack("" + DashBoardFragment.class.getCanonicalName());
-        trasaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, new DashBoardFragment(), "" + DashBoardFragment.class.getCanonicalName());
+        transaction.addToBackStack("" + DashBoardFragment.class.getCanonicalName());
+        transaction.commit();
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
     }
 
@@ -255,10 +255,10 @@ public class LandScreenActivity extends AppCompatActivity {
             fragmentManager.popBackStack("" + MyProjectsFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
-        FragmentTransaction trasaction = fragmentManager.beginTransaction();
-        trasaction.replace(R.id.fragment_container, new MyProjectsFragment(), "" + MyProjectsFragment.class.getCanonicalName());
-        trasaction.addToBackStack("" + MyProjectsFragment.class.getCanonicalName());
-        trasaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, new MyProjectsFragment(), "" + MyProjectsFragment.class.getCanonicalName());
+        transaction.addToBackStack("" + MyProjectsFragment.class.getCanonicalName());
+        transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
         for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
@@ -282,10 +282,10 @@ public class LandScreenActivity extends AppCompatActivity {
             fragmentManager.popBackStack("" + MyProjectDetailsFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
-        FragmentTransaction trasaction = fragmentManager.beginTransaction();
-        trasaction.replace(R.id.fragment_container, new MyProjectDetailsFragment(), "" + MyProjectDetailsFragment.class.getCanonicalName());
-        trasaction.addToBackStack("" + MyProjectDetailsFragment.class.getCanonicalName());
-        trasaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, new MyProjectDetailsFragment(), "" + MyProjectDetailsFragment.class.getCanonicalName());
+        transaction.addToBackStack("" + MyProjectDetailsFragment.class.getCanonicalName());
+        transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
         for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
@@ -308,10 +308,10 @@ public class LandScreenActivity extends AppCompatActivity {
             fragmentManager.popBackStack("" + NotificationsFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
-        FragmentTransaction trasaction = fragmentManager.beginTransaction();
-        trasaction.replace(R.id.fragment_container, new NotificationsFragment(), "" + NotificationsFragment.class.getCanonicalName());
-        trasaction.addToBackStack("" + NotificationsFragment.class.getCanonicalName());
-        trasaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, new NotificationsFragment(), "" + NotificationsFragment.class.getCanonicalName());
+        transaction.addToBackStack("" + NotificationsFragment.class.getCanonicalName());
+        transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
         for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
@@ -330,10 +330,10 @@ public class LandScreenActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + FavProsFragment.class.getCanonicalName())).commit();
             fragmentManager.popBackStack("" + FavProsFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        FragmentTransaction trasaction = fragmentManager.beginTransaction();
-        trasaction.replace(R.id.fragment_container, new FavProsFragment(), "" + FavProsFragment.class.getCanonicalName());
-        trasaction.addToBackStack("" + FavProsFragment.class.getCanonicalName());
-        trasaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, new FavProsFragment(), "" + FavProsFragment.class.getCanonicalName());
+        transaction.addToBackStack("" + FavProsFragment.class.getCanonicalName());
+        transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
         for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
@@ -352,10 +352,10 @@ public class LandScreenActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + MessageFragment.class.getCanonicalName())).commit();
             fragmentManager.popBackStack("" + MessageFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        FragmentTransaction trasaction = fragmentManager.beginTransaction();
-        trasaction.replace(R.id.fragment_container, new MessageFragment(), "" + MessageFragment.class.getCanonicalName());
-        trasaction.addToBackStack("" + MessageFragment.class.getCanonicalName());
-        trasaction.commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, new MessageFragment(), "" + MessageFragment.class.getCanonicalName());
+        transaction.addToBackStack("" + MessageFragment.class.getCanonicalName());
+        transaction.commit();
 
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
 
