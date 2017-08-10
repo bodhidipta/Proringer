@@ -250,9 +250,9 @@ public class SearchLocationFragment extends Fragment {
                             Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
                             if (innerObj.getString("zipcode").trim().equals("")) {
-                                zip_code_text.setText("");
+                                zip_code_text.setHint("");
                             } else {
-                                zip_code_text.setText(innerObj.getString("zipcode") + "");
+                                zip_code_text.setHint(innerObj.getString("zipcode") + "");
                             }
                         } catch (JSONException jse) {
                             jse.printStackTrace();

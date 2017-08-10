@@ -2161,7 +2161,7 @@ public class ProServiceApiHelper {
                     OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                     try {
-                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address="+ params[0]+"&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
                         Logger.printMessage("searchLocationAPI", "" + searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)
