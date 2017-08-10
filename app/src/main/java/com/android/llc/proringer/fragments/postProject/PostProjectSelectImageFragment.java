@@ -124,6 +124,7 @@ public class PostProjectSelectImageFragment extends Fragment {
         }
 
     }
+
     public String getRealPathFromURI(Uri contentURI) {
         Cursor cursor = ((PostProjectActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {

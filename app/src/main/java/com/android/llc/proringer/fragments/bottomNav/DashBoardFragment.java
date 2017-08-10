@@ -2,7 +2,13 @@ package com.android.llc.proringer.fragments.bottomNav;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
@@ -16,17 +22,29 @@ import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.activities.PostProjectActivity;
+import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.ImageTakerActivityCamera;
+import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.PermissionController;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.koushiklibrary.JSONPerser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by bodhidipta on 10/06/17.
@@ -47,6 +65,11 @@ import org.json.JSONObject;
  */
 
 public class DashBoardFragment extends Fragment {
+
+    private static final int REQUEST_IMAGE_CAPTURE = 5;
+    private static final int PICK_IMAGE = 3;
+    private String mCurrentPhotoPath = "";
+
     ImageView profile_pic;
     ProRegularTextView tv_name,tv_active_projects,tv_favorite_pros;
     ProLightTextView tv_address;
@@ -116,6 +139,14 @@ public class DashBoardFragment extends Fragment {
             public void onClick(View view) {
                 ((LandScreenActivity)getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.INVITE_FRIEND);
+            }
+        });
+        view.findViewById(R.id.img_upload).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent((LandScreenActivity)getActivity(), PermissionController.class);
+                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
+                startActivityForResult(intent, 200);
             }
         });
     }
@@ -215,6 +246,81 @@ public class DashBoardFragment extends Fragment {
                     pgDialog.dismiss();
             }
         });
+    }
+
+    public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
+        try {
+            Logger.printMessage("resultCode", "requestCode " + requestCode + " &b resultcode :: " + resultCode);
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (data != null) {
+                            mCurrentPhotoPath = data.getExtras().get("data").toString();
+                            Logger.printMessage("image****", "" + mCurrentPhotoPath);
+                        }
+                    }
+                }, 800);
+            } else if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+                Logger.printMessage("image****", "" + data.getData());
+                try {
+                    Uri uri = data.getData();
+                    File dataFile = new File(getRealPathFromURI(uri));
+                    if (!dataFile.exists())
+                        Logger.printMessage("image****", "data file does not exists");
+                    mCurrentPhotoPath = dataFile.getAbsolutePath();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (requestCode == 200 && resultCode == RESULT_OK) {
+                showImagePickerOption();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getRealPathFromURI(Uri contentURI) {
+        Cursor cursor = ((PostProjectActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            // Source is Dropbox or other similar local file path
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
+
+    private void showImagePickerOption() {
+        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                .setCancelable(true)
+                .setTitle("Property image")
+                .setMessage("please choose image source type.")
+                .setPositiveButton("Gallery", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_PICK);
+                        if (intent.resolveActivity(((LandScreenActivity)getActivity()).getPackageManager()) != null) {
+                            intent.setType("image/*");
+                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+                        }
+                    }
+                })
+                .setNegativeButton("Camera", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        ProConstant.cameraRequested = true;
+                        startActivityForResult(new Intent(getActivity(), ImageTakerActivityCamera.class), REQUEST_IMAGE_CAPTURE);
+                    }
+                })
+                .create()
+                .show();
     }
 
 }
