@@ -40,9 +40,9 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
     ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
-    public ProjectDetailedMessageAdapter(Context mcontext,ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, onItemClick callback) {
+    public ProjectDetailedMessageAdapter(Context mcontext, ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, onItemClick callback) {
         this.mcontext = mcontext;
-        this.projectMessageDetailsArrayList=projectMessageDetailsArrayList;
+        this.projectMessageDetailsArrayList = projectMessageDetailsArrayList;
         listener = callback;
     }
 
@@ -71,7 +71,6 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         }
 
 
-
         if (position % 3 == 0) {
             holder.flag.setVisibility(View.VISIBLE);
         } else {
@@ -91,7 +90,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         View flag;
         SwipeRevealLayout swipe_layout;
         RelativeLayout main_container;
-        LinearLayout LLDelete,LLMore;
+        LinearLayout LLDelete, LLMore;
 
         public ViewHolder(View itemView) {
             super(itemView);

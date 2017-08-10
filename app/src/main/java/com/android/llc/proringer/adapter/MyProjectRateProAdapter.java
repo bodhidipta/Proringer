@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -20,7 +21,7 @@ public class MyProjectRateProAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public MyProjectRateProAdapter(Context context) {
         this.mcontext = context;
-        check_divider=true;
+        check_divider = true;
     }
 
     @Override
@@ -41,9 +42,9 @@ public class MyProjectRateProAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             case 2:
                 ViewHolder2 viewHolder2 = (ViewHolder2) holder;
-                if(check_divider) {
+                if (check_divider) {
                     viewHolder2.View_SplitHorLine.setVisibility(View.VISIBLE);
-                    check_divider=false;
+                    check_divider = false;
                 }
                 break;
         }
@@ -69,11 +70,12 @@ public class MyProjectRateProAdapter extends RecyclerView.Adapter<RecyclerView.V
     class ViewHolder2 extends RecyclerView.ViewHolder {
         ProRegularTextView tv_name, tv_description;
         View View_SplitHorLine;
+
         public ViewHolder2(View itemView) {
             super(itemView);
             tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
             tv_description = (ProRegularTextView) itemView.findViewById(R.id.tv_description);
-            View_SplitHorLine=itemView.findViewById(R.id.View_SplitHorLine);
+            View_SplitHorLine = itemView.findViewById(R.id.View_SplitHorLine);
         }
     }
 

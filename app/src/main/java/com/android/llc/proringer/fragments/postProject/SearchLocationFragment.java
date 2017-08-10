@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
@@ -22,9 +23,11 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +59,7 @@ public class SearchLocationFragment extends Fragment {
         location_list = (RecyclerView) view.findViewById(R.id.location_list);
         loading_progress = (ProgressBar) view.findViewById(R.id.loading_progress);
         error_progress = (ImageView) view.findViewById(R.id.error_progress);
-        location_list.setLayoutManager(new LinearLayoutManager((PostProjectActivity)getActivity()));
+        location_list.setLayoutManager(new LinearLayoutManager((PostProjectActivity) getActivity()));
 
         addressDataList = new ArrayList<>();
 
@@ -64,8 +67,8 @@ public class SearchLocationFragment extends Fragment {
             plotUserInformation();
         } else {
             //////////set current location zip code////
-            Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getCurrentLatLng()[0]);
-            Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getCurrentLatLng()[1]);
+            Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCurrentLatLng()[0]);
+            Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCurrentLatLng()[1]);
             getCurrentLocationZip();
         }
 
@@ -116,7 +119,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
     private void searchLocationWithZip(String key) {
-        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
                 addressDataList = listdata;
@@ -129,7 +132,7 @@ public class SearchLocationFragment extends Fragment {
 
                 if (addressDataList != null && addressDataList.size() > 0) {
                     if (zip_search_adapter == null) {
-                        zip_search_adapter = new PostProjectLocationListAdapter((PostProjectActivity)getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
+                        zip_search_adapter = new PostProjectLocationListAdapter((PostProjectActivity) getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
                             public void onSelect(int pos, AddressData data) {
                                 ((PostProjectActivity) getActivity()).selectedAddressData = data;
@@ -159,14 +162,14 @@ public class SearchLocationFragment extends Fragment {
                 loading_progress.setVisibility(View.VISIBLE);
                 error_progress.setVisibility(View.GONE);
             }
-        },key);
+        }, key);
     }
 
     public void getCurrentLocationZip() {
-        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
+                pgDialog = new ProgressDialog((PostProjectActivity) getActivity());
                 pgDialog.setTitle("Current Location zipCode");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Loading your current location.Please wait...");
@@ -229,7 +232,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
     private void plotUserInformation() {
-        DatabaseHandler.getInstance((PostProjectActivity)getActivity()).getUserInfo(
+        DatabaseHandler.getInstance((PostProjectActivity) getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
@@ -244,12 +247,11 @@ public class SearchLocationFragment extends Fragment {
                             JSONArray info_arr = mainObject.getJSONArray("info_array");
                             JSONObject innerObj = info_arr.getJSONObject(0);
 
-                            Logger.printMessage("zipCode","zipCode:-"+innerObj.getString("zipcode"));
+                            Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
-                            if (innerObj.getString("zipcode").trim().equals("")){
+                            if (innerObj.getString("zipcode").trim().equals("")) {
                                 zip_code_text.setText("");
-                            }
-                            else {
+                            } else {
                                 zip_code_text.setText(innerObj.getString("zipcode") + "");
                             }
                         } catch (JSONException jse) {

@@ -10,13 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.IndividualMessageActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
-import com.chauthai.swipereveallayout.ViewBinderHelper;
 
 import java.util.ArrayList;
 
@@ -53,23 +53,23 @@ public class ProjectMessagingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        projectMessageDetailsArrayList=new ArrayList<>();
+        projectMessageDetailsArrayList = new ArrayList<>();
 
-        for (int i=0;i<15;i++){
-            ProjectMessageDetails projectMessageDetails=new ProjectMessageDetails();
+        for (int i = 0; i < 15; i++) {
+            ProjectMessageDetails projectMessageDetails = new ProjectMessageDetails();
             projectMessageDetails.setIsOpen(false);
-            projectMessageDetails.setTagName("view "+i);
+            projectMessageDetails.setTagName("view " + i);
             projectMessageDetailsArrayList.add(projectMessageDetails);
         }
 
         detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
 
         message_list = (RecyclerView) view.findViewById(R.id.message_list);
-        message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
-        projectDetailedMessageAdapter=new ProjectDetailedMessageAdapter((LandScreenActivity)getActivity(),projectMessageDetailsArrayList, new onItemClick() {
+        message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
+        projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), projectMessageDetailsArrayList, new onItemClick() {
             @Override
             public void onItemClick(int position) {
-                startActivity(new Intent((LandScreenActivity)getActivity(), IndividualMessageActivity.class));
+                startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));
             }
         });
         message_list.setAdapter(projectDetailedMessageAdapter);

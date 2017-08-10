@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,9 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.adapter.SpinnerAdapter;
 import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.BottomSheetGlobalList;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -82,14 +79,15 @@ public class HomeRemindersFragment extends Fragment {
     private static final int PICK_IMAGE = 3;
     String mCurrentPhotoPath = "";
 
-    String selected_sq_ft_id="0",selected_graage_id="0",selected_prototype_id="0",selected_basement_id="0",selected_lot_size_id="0",
-            selected_age_of_roof_id="0",selected_age_of_ac_id="0",selected_age_of_furance_id="0",selected_age_water_heater_id="0",selected_age_window_id="0";
+    String selected_sq_ft_id = "0", selected_graage_id = "0", selected_prototype_id = "0", selected_basement_id = "0", selected_lot_size_id = "0",
+            selected_age_of_roof_id = "0", selected_age_of_ac_id = "0", selected_age_of_furance_id = "0", selected_age_water_heater_id = "0", selected_age_window_id = "0";
 
-    RelativeLayout RLsq_ft,RLGraage,RLPrototype,RLBasement,RLLot_size,RLAge_of_roof,RLAge_of_ac,RLAge_of_furance,RLAge_water_heater,RLAge_window;
-    ProRegularTextView tv_sq_ft,tv_graage,tv_prototype,tv_basement,tv_lot_size,tv_age_of_roof,tv_age_of_ac,tv_age_of_furance,tv_age_water_heater,tv_age_window;
+    RelativeLayout RLsq_ft, RLGraage, RLPrototype, RLBasement, RLLot_size, RLAge_of_roof, RLAge_of_ac, RLAge_of_furance, RLAge_water_heater, RLAge_window;
+    ProRegularTextView tv_sq_ft, tv_graage, tv_prototype, tv_basement, tv_lot_size, tv_age_of_roof, tv_age_of_ac, tv_age_of_furance, tv_age_water_heater, tv_age_window;
 
     LinearLayout LLNetworkDisconnection;
     NestedScrollView nested_scroll_main;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -100,8 +98,8 @@ public class HomeRemindersFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        nested_scroll_main= (NestedScrollView) view.findViewById(R.id.nested_scroll_main);
-        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        nested_scroll_main = (NestedScrollView) view.findViewById(R.id.nested_scroll_main);
+        LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         RLsq_ft = (RelativeLayout) view.findViewById(R.id.RLsq_ft);
         RLGraage = (RelativeLayout) view.findViewById(R.id.RLGraage);
@@ -114,16 +112,16 @@ public class HomeRemindersFragment extends Fragment {
         RLAge_water_heater = (RelativeLayout) view.findViewById(R.id.RLAge_water_heater);
         RLAge_window = (RelativeLayout) view.findViewById(R.id.RLAge_window);
 
-        tv_sq_ft= (ProRegularTextView) view.findViewById(R.id.tv_sq_ft);
-        tv_graage= (ProRegularTextView) view.findViewById(R.id.tv_graage);
-        tv_prototype= (ProRegularTextView) view.findViewById(R.id.tv_prototype);
-        tv_basement= (ProRegularTextView) view.findViewById(R.id.tv_basement);
-        tv_lot_size= (ProRegularTextView) view.findViewById(R.id.tv_lot_size);
-        tv_age_of_roof= (ProRegularTextView) view.findViewById(R.id.tv_age_of_roof);
-        tv_age_of_ac= (ProRegularTextView) view.findViewById(R.id.tv_age_of_ac);
-        tv_age_of_furance= (ProRegularTextView) view.findViewById(R.id.tv_age_of_furance);
-        tv_age_water_heater= (ProRegularTextView) view.findViewById(R.id.tv_age_water_heater);
-        tv_age_window= (ProRegularTextView) view.findViewById(R.id.tv_age_window);
+        tv_sq_ft = (ProRegularTextView) view.findViewById(R.id.tv_sq_ft);
+        tv_graage = (ProRegularTextView) view.findViewById(R.id.tv_graage);
+        tv_prototype = (ProRegularTextView) view.findViewById(R.id.tv_prototype);
+        tv_basement = (ProRegularTextView) view.findViewById(R.id.tv_basement);
+        tv_lot_size = (ProRegularTextView) view.findViewById(R.id.tv_lot_size);
+        tv_age_of_roof = (ProRegularTextView) view.findViewById(R.id.tv_age_of_roof);
+        tv_age_of_ac = (ProRegularTextView) view.findViewById(R.id.tv_age_of_ac);
+        tv_age_of_furance = (ProRegularTextView) view.findViewById(R.id.tv_age_of_furance);
+        tv_age_water_heater = (ProRegularTextView) view.findViewById(R.id.tv_age_water_heater);
+        tv_age_window = (ProRegularTextView) view.findViewById(R.id.tv_age_window);
 
 
         year_build = (ProRegularTextView) view.findViewById(R.id.year_build);
@@ -143,7 +141,7 @@ public class HomeRemindersFragment extends Fragment {
         add_propert_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent((LandScreenActivity)getActivity(), PermissionController.class);
+                Intent intent = new Intent((LandScreenActivity) getActivity(), PermissionController.class);
                 intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
                 startActivityForResult(intent, 200);
             }
@@ -160,10 +158,10 @@ public class HomeRemindersFragment extends Fragment {
         year_build.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -197,10 +195,10 @@ public class HomeRemindersFragment extends Fragment {
         ac_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -233,10 +231,10 @@ public class HomeRemindersFragment extends Fragment {
         last_water_heater_flush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -268,10 +266,10 @@ public class HomeRemindersFragment extends Fragment {
         last_chimney_sweep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -303,10 +301,10 @@ public class HomeRemindersFragment extends Fragment {
         last_test_for_radon_gas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -338,10 +336,10 @@ public class HomeRemindersFragment extends Fragment {
         Smoke_detector_battery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -373,10 +371,10 @@ public class HomeRemindersFragment extends Fragment {
         co_detector_battery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -408,10 +406,10 @@ public class HomeRemindersFragment extends Fragment {
         last_gutter_clean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View dialoglayout = LayoutInflater.from((LandScreenActivity)getActivity()).inflate(R.layout.dialog_date_picker, null);
+                View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity)getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -449,11 +447,11 @@ public class HomeRemindersFragment extends Fragment {
         nested_scroll_main.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getHomeSchedularOptionList(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getHomeSchedularOptionList(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                         pgDialog.setTitle("Home Schedule");
                         pgDialog.setMessage("Getting option data for Home Schedule.Please wait...");
                         pgDialog.setCancelable(false);
@@ -486,13 +484,13 @@ public class HomeRemindersFragment extends Fragment {
                                 @Override
                                 public void onClick(View view) {
 
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(sqftvalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(sqftvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_sq_ft.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("square_footage").get(position));
-                                            selected_sq_ft_id=idList.get("square_footage").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("square_footage").get(position));
+                                            selected_sq_ft_id = idList.get("square_footage").get(position);
                                         }
                                     });
 
@@ -516,13 +514,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLGraage.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(garagevalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(garagevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_graage.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("garage").get(position));
-                                            selected_graage_id=idList.get("garage").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("garage").get(position));
+                                            selected_graage_id = idList.get("garage").get(position);
                                         }
                                     });
                                 }
@@ -545,13 +543,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLBasement.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(basementvalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(basementvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_basement.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("basement").get(position));
-                                            selected_basement_id=idList.get("basement").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("basement").get(position));
+                                            selected_basement_id = idList.get("basement").get(position);
                                         }
                                     });
                                 }
@@ -574,13 +572,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLLot_size.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(lot_sizevalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(lot_sizevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_lot_size.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("lot_size").get(position));
-                                            selected_lot_size_id=idList.get("lot_size").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("lot_size").get(position));
+                                            selected_lot_size_id = idList.get("lot_size").get(position);
                                         }
                                     });
                                 }
@@ -603,13 +601,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLAge_of_roof.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(age_of_roofvalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(age_of_roofvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_of_roof.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("age_of_roof").get(position));
-                                            selected_age_of_roof_id=idList.get("age_of_roof").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("age_of_roof").get(position));
+                                            selected_age_of_roof_id = idList.get("age_of_roof").get(position);
                                         }
                                     });
                                 }
@@ -633,12 +631,12 @@ public class HomeRemindersFragment extends Fragment {
                                 @Override
                                 public void onClick(View view) {
 
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(age_of_acvalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(age_of_acvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_of_ac.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("age_of_ac").get(position));
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("age_of_ac").get(position));
                                         }
                                     });
                                 }
@@ -662,13 +660,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLAge_of_furance.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(age_of_furnancevalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(age_of_furnancevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_of_furance.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("age_of_furnance").get(position));
-                                            selected_age_of_furance_id=idList.get("age_of_furnance").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("age_of_furnance").get(position));
+                                            selected_age_of_furance_id = idList.get("age_of_furnance").get(position);
                                         }
                                     });
                                 }
@@ -691,13 +689,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLAge_water_heater.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(age_of_water_heatervalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(age_of_water_heatervalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_water_heater.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("age_of_water_heater").get(position));
-                                            selected_age_water_heater_id=idList.get("age_of_water_heater").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("age_of_water_heater").get(position));
+                                            selected_age_water_heater_id = idList.get("age_of_water_heater").get(position);
                                         }
                                     });
                                 }
@@ -720,13 +718,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLAge_window.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(age_of_windowsvalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(age_of_windowsvalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_age_window.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("age_of_windows").get(position));
-                                            selected_age_window_id=idList.get("age_of_windows").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("age_of_windows").get(position));
+                                            selected_age_window_id = idList.get("age_of_windows").get(position);
                                         }
                                     });
                                 }
@@ -749,13 +747,13 @@ public class HomeRemindersFragment extends Fragment {
                             RLPrototype.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity)getActivity()).showSiteSelectionDialog(property_typevalue, new BottomSheetGlobalList.onOptionSelected() {
+                                    BottomSheetGlobalList.getInstatnce((LandScreenActivity) getActivity()).showSiteSelectionDialog(property_typevalue, new BottomSheetGlobalList.onOptionSelected() {
                                         @Override
                                         public void onItemPassed(int position, String value) {
                                             tv_prototype.setText(value);
-                                            Logger.printMessage("value",""+value);
-                                            Logger.printMessage("id",""+idList.get("property_type").get(position));
-                                            selected_prototype_id=idList.get("property_type").get(position);
+                                            Logger.printMessage("value", "" + value);
+                                            Logger.printMessage("id", "" + idList.get("property_type").get(position));
+                                            selected_prototype_id = idList.get("property_type").get(position);
                                         }
                                     });
                                 }
@@ -774,7 +772,7 @@ public class HomeRemindersFragment extends Fragment {
                             pgDialog.dismiss();
 
 
-                        if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                        if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                             nested_scroll_main.setVisibility(View.GONE);
                             LLNetworkDisconnection.setVisibility(View.VISIBLE);
                         }
@@ -802,12 +800,13 @@ public class HomeRemindersFragment extends Fragment {
     }
 
     private void setOptions() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getHomeSchedularValuesList(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getHomeSchedularValuesList(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
 
                     }
+
                     @Override
                     public void onComplete(String message) {
                         try {
@@ -818,35 +817,34 @@ public class HomeRemindersFragment extends Fragment {
 
 //                            tv_sq_ft.setText(valueList.get("square_footage").indexOf(options.getJSONObject("square_footage").getString("value").trim()));
                             tv_sq_ft.setText(options.getJSONObject("square_footage").getString("value").trim());
-                            selected_sq_ft_id=options.getJSONObject("square_footage").getString("id").trim();
+                            selected_sq_ft_id = options.getJSONObject("square_footage").getString("id").trim();
 //                            tv_graage.setText(valueList.get("garage").indexOf(options.getJSONObject("garage").getString("value").trim()));
                             tv_graage.setText(options.getJSONObject("garage").getString("value").trim());
-                            selected_graage_id=options.getJSONObject("garage").getString("id").trim();
+                            selected_graage_id = options.getJSONObject("garage").getString("id").trim();
 //                            tv_prototype.setText(valueList.get("property_type").indexOf(options.getJSONObject("property_type").getString("value").trim()));
                             tv_prototype.setText(options.getJSONObject("property_type").getString("value").trim());
-                            selected_prototype_id=options.getJSONObject("property_type").getString("id").trim();
+                            selected_prototype_id = options.getJSONObject("property_type").getString("id").trim();
 //                            tv_basement.setText(valueList.get("basement").indexOf(options.getJSONObject("basement").getString("value").trim()));
                             tv_basement.setText(options.getJSONObject("basement").getString("value").trim());
-                            selected_basement_id=options.getJSONObject("basement").getString("id").trim();
+                            selected_basement_id = options.getJSONObject("basement").getString("id").trim();
 //                            tv_lot_size.setText(valueList.get("lot_size").indexOf(options.getJSONObject("lot_size").getString("value").trim()));
                             tv_lot_size.setText(options.getJSONObject("lot_size").getString("value").trim());
-                            selected_lot_size_id=options.getJSONObject("lot_size").getString("id").trim();
+                            selected_lot_size_id = options.getJSONObject("lot_size").getString("id").trim();
 //                            tv_age_of_roof.setText(valueList.get("age_of_roof").indexOf(options.getJSONObject("roof_age").getString("value").trim()));
                             tv_age_of_roof.setText(options.getJSONObject("roof_age").getString("value").trim());
-                            selected_age_of_roof_id=options.getJSONObject("roof_age").getString("id").trim();
+                            selected_age_of_roof_id = options.getJSONObject("roof_age").getString("id").trim();
 //                            tv_age_of_ac.setText(valueList.get("age_of_ac").indexOf(options.getJSONObject("a/c_age").getString("value").trim()));
                             tv_age_of_ac.setText(options.getJSONObject("a/c_age").getString("value").trim());
-                            selected_age_of_ac_id=options.getJSONObject("a/c_age").getString("id").trim();
+                            selected_age_of_ac_id = options.getJSONObject("a/c_age").getString("id").trim();
 //                            tv_age_of_furance.setText(valueList.get("age_of_furnance").indexOf(options.getJSONObject("furnance_age").getString("value").trim()));
                             tv_age_of_furance.setText(options.getJSONObject("furnance_age").getString("value").trim());
-                            selected_age_of_furance_id=options.getJSONObject("furnance_age").getString("id").trim();
+                            selected_age_of_furance_id = options.getJSONObject("furnance_age").getString("id").trim();
 //                            tv_age_water_heater.setText(valueList.get("age_of_water_heater").indexOf(options.getJSONObject("water_heater_age").getString("value").trim()));
                             tv_age_water_heater.setText(options.getJSONObject("water_heater_age").getString("value").trim());
-                            selected_age_water_heater_id=options.getJSONObject("water_heater_age").getString("id").trim();
+                            selected_age_water_heater_id = options.getJSONObject("water_heater_age").getString("id").trim();
 //                            tv_age_window.setText(valueList.get("age_of_windows").indexOf(options.getJSONObject("window_age").getString("value").trim()));
                             tv_age_window.setText(options.getJSONObject("window_age").getString("value").trim());
-                            selected_age_window_id=options.getJSONObject("window_age").getString("id").trim();
-
+                            selected_age_window_id = options.getJSONObject("window_age").getString("id").trim();
 
 
                             ac_filter.setText(options.getString("filter_change").trim());
@@ -860,7 +858,7 @@ public class HomeRemindersFragment extends Fragment {
                             last_gutter_clean.setText(options.getString("gutter_clean").trim());
 
                             if (!options.getString("property_picture").trim().equals(""))
-                                Glide.with((LandScreenActivity)getActivity()).load(options.getString("property_picture").trim()).centerCrop().into(property_image);
+                                Glide.with((LandScreenActivity) getActivity()).load(options.getString("property_picture").trim()).centerCrop().into(property_image);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -876,7 +874,7 @@ public class HomeRemindersFragment extends Fragment {
                             pgDialog.dismiss();
 
 
-                        if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                        if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                             nested_scroll_main.setVisibility(View.GONE);
                             LLNetworkDisconnection.setVisibility(View.VISIBLE);
                         }
@@ -905,7 +903,7 @@ public class HomeRemindersFragment extends Fragment {
     }
 
     private void updateOptions() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateHomeSchedularOptions(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateHomeSchedularOptions(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
@@ -920,7 +918,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onComplete(String message) {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Update Home Scheduler")
                                 .setMessage("Successfully updated Home scheduler options.")
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -937,7 +935,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onError(String error) {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Update Error")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
@@ -1005,7 +1003,7 @@ public class HomeRemindersFragment extends Fragment {
     }
 
     private void showImagePickerOption() {
-        new AlertDialog.Builder((LandScreenActivity)getActivity())
+        new AlertDialog.Builder((LandScreenActivity) getActivity())
                 .setCancelable(true)
                 .setTitle("Property image")
                 .setMessage("please choose image source type.")
@@ -1014,7 +1012,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         Intent intent = new Intent(Intent.ACTION_PICK);
-                        if (intent.resolveActivity(((LandScreenActivity)getActivity()).getPackageManager()) != null) {
+                        if (intent.resolveActivity(((LandScreenActivity) getActivity()).getPackageManager()) != null) {
                             intent.setType("image/*");
                             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
@@ -1026,7 +1024,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         ProConstant.cameraRequested = true;
-                        startActivityForResult(new Intent((LandScreenActivity)getActivity(), ImageTakerActivityCamera.class), REQUEST_IMAGE_CAPTURE);
+                        startActivityForResult(new Intent((LandScreenActivity) getActivity(), ImageTakerActivityCamera.class), REQUEST_IMAGE_CAPTURE);
                     }
                 })
                 .create()
@@ -1044,7 +1042,7 @@ public class HomeRemindersFragment extends Fragment {
                         if (data != null) {
                             mCurrentPhotoPath = data.getExtras().get("data").toString();
                             Logger.printMessage("image****", "" + mCurrentPhotoPath);
-                            Glide.with((LandScreenActivity)getActivity()).load("file://" + mCurrentPhotoPath).into(new GlideDrawableImageViewTarget(property_image) {
+                            Glide.with((LandScreenActivity) getActivity()).load("file://" + mCurrentPhotoPath).into(new GlideDrawableImageViewTarget(property_image) {
                                 @Override
                                 public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
                                     super.onResourceReady(resource, animation);
@@ -1061,7 +1059,7 @@ public class HomeRemindersFragment extends Fragment {
                     if (!dataFile.exists())
                         Logger.printMessage("image****", "data file does not exists");
                     mCurrentPhotoPath = dataFile.getAbsolutePath();
-                    Glide.with((LandScreenActivity)getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(property_image) {
+                    Glide.with((LandScreenActivity) getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(property_image) {
                         /**
                          * {@inheritDoc}
                          * If no {@link GlideAnimation} is given or if the animation does not set the
@@ -1096,7 +1094,7 @@ public class HomeRemindersFragment extends Fragment {
 
     //file uri to real location in filesystem
     public String getRealPathFromURI(Uri contentURI) {
-        Cursor cursor = ((LandScreenActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
+        Cursor cursor = ((LandScreenActivity) getActivity()).getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {
             // Source is Dropbox or other similar local file path
             return contentURI.getPath();

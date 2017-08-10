@@ -67,7 +67,7 @@ public class PostProjectFragment extends Fragment {
             step9option = "Lets get acquainted",
             step10option = "WE SENT YOUR PROJECT TO THE PROS!";
 
-    LinearLayout LLMain,LLNetworkDisconnection;
+    LinearLayout LLMain, LLNetworkDisconnection;
 
 
     @Nullable
@@ -80,8 +80,8 @@ public class PostProjectFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LLMain= (LinearLayout) view.findViewById(R.id.LLMain);
-        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
+        LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         progress_posting = (ProgressBar) view.findViewById(R.id.progress_posting);
         selected_service_category = (ProRegularTextView) view.findViewById(R.id.selected_service_category);
@@ -186,15 +186,15 @@ public class PostProjectFragment extends Fragment {
         });
     }
 
-    public void listPostProject(){
+    public void listPostProject() {
 
         LLMain.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                 pgDialog.setTitle("Preparing category");
                 pgDialog.setMessage("Getting Preparing category list.Please wait...");
                 pgDialog.setCancelable(false);
@@ -206,7 +206,7 @@ public class PostProjectFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
                 progress_posting.setProgress(step);
-                gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity)getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
+                gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 0) {
@@ -224,7 +224,7 @@ public class PostProjectFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
@@ -253,7 +253,7 @@ public class PostProjectFragment extends Fragment {
     }
 
     private void selectService(String id) {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
@@ -265,7 +265,7 @@ public class PostProjectFragment extends Fragment {
                 progress_posting.setProgress(step);
 
 
-                adapter = new PostProjectServiceAndOtherListAdapter((LandScreenActivity)getActivity(), listdata, PostProjectServiceAndOtherListAdapter.TYPE_LIST, new PostProjectServiceAndOtherListAdapter.onClickItem() {
+                adapter = new PostProjectServiceAndOtherListAdapter((LandScreenActivity) getActivity(), listdata, PostProjectServiceAndOtherListAdapter.TYPE_LIST, new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         if (step == 1) {
@@ -349,7 +349,7 @@ public class PostProjectFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder((LandScreenActivity)getActivity())
+                new AlertDialog.Builder((LandScreenActivity) getActivity())
                         .setTitle("Error")
                         .setMessage("" + error)
                         .setCancelable(false)
@@ -365,7 +365,7 @@ public class PostProjectFragment extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                 pgDialog.setTitle("Preparing category");
                 pgDialog.setMessage("Getting Preparing category list.Please wait...");
                 pgDialog.setCancelable(false);

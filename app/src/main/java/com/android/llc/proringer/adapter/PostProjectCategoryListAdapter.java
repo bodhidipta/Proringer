@@ -5,10 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import java.util.LinkedList;
 
 /**
@@ -20,7 +21,7 @@ public class PostProjectCategoryListAdapter extends RecyclerView.Adapter<Recycle
     LinkedList<String> proCategoryDatasSortedList;
     private onClickItem listener;
 
-    public PostProjectCategoryListAdapter(Context mcontext, LinkedList<String> proCategoryDatasSortedList,onClickItem listener) {
+    public PostProjectCategoryListAdapter(Context mcontext, LinkedList<String> proCategoryDatasSortedList, onClickItem listener) {
         this.mcontext = mcontext;
         this.proCategoryDatasSortedList = proCategoryDatasSortedList;
         this.listener = listener;
@@ -50,31 +51,31 @@ public class PostProjectCategoryListAdapter extends RecyclerView.Adapter<Recycle
         // Just as an example, return 0 or 2 depending on position
         // Note that unlike in ListView adapters, types don't have to be contiguous
         if (proCategoryDatasSortedList.get(position).equalsIgnoreCase("A")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("B")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("C")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("D")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("E")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("F")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("G")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("H")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("I")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("J")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("K")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("L")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("M")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("N")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("O")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("P")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("Q")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("R")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("S")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("T")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("U")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("V")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("W")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("X")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("Y")
-                ||proCategoryDatasSortedList.get(position).equalsIgnoreCase("Z")) {
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("B")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("C")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("D")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("E")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("F")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("G")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("H")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("I")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("J")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("K")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("L")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("M")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("N")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("O")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("P")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("Q")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("R")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("S")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("T")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("U")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("V")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("W")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("X")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("Y")
+                || proCategoryDatasSortedList.get(position).equalsIgnoreCase("Z")) {
             return 1;
         } else {
             return 2;

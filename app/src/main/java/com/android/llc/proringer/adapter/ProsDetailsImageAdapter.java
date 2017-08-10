@@ -26,10 +26,10 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
     int width;
     ProsProjectDetailsActivity.onOptionSelected callback;
 
-    public ProsDetailsImageAdapter(Context context, JSONArray imageJsonArray,ProsProjectDetailsActivity.onOptionSelected callback){
-        this.context=context;
-        this.imageJsonArray=imageJsonArray;
-        this.callback=callback;
+    public ProsDetailsImageAdapter(Context context, JSONArray imageJsonArray, ProsProjectDetailsActivity.onOptionSelected callback) {
+        this.context = context;
+        this.imageJsonArray = imageJsonArray;
+        this.callback = callback;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((ProsProjectDetailsActivity) context).getWindowManager()
@@ -39,6 +39,7 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_images, parent, false);
@@ -47,13 +48,12 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.img.getLayoutParams().width = (width-30)/5;
-        holder.img.getLayoutParams().height = (width-30)/5;
+        holder.img.getLayoutParams().width = (width - 30) / 5;
+        holder.img.getLayoutParams().height = (width - 30) / 5;
         try {
             if (!imageJsonArray.getJSONObject(position).getString("portfolio_image").equals(""))
                 Glide.with(context).load(imageJsonArray.getJSONObject(position).getString("portfolio_image")).centerCrop().into(holder.img);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -76,9 +76,10 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            img= (ImageView) itemView.findViewById(R.id.img);
+            img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
@@ -23,6 +24,7 @@ import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -49,10 +51,10 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
     SearchLocalProFragment.onOptionSelected callback;
 
 
-    public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray,SearchLocalProFragment.onOptionSelected callback ) {
+    public SearchProListAdapter(Context mcontext, JSONArray jsonInfoArray, SearchLocalProFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.jsonInfoArray = jsonInfoArray;
-        this.callback=callback;
+        this.callback = callback;
     }
 
     @Override
@@ -137,10 +139,10 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent(mcontext, ProsProjectDetailsActivity.class);
+                Intent intent = new Intent(mcontext, ProsProjectDetailsActivity.class);
                 try {
-                    intent.putExtra("pros_id",""+jsonInfoArray.getJSONObject(position).getString("pros_id"));
-                    intent.putExtra("pros_company_name",""+jsonInfoArray.getJSONObject(position).getString("pros_company_name"));
+                    intent.putExtra("pros_id", "" + jsonInfoArray.getJSONObject(position).getString("pros_id"));
+                    intent.putExtra("pros_company_name", "" + jsonInfoArray.getJSONObject(position).getString("pros_company_name"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -152,7 +154,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             @Override
             public void onClick(View view) {
                 try {
-                    callback.onItemPassed(jsonInfoArray.getJSONObject(position).getString("pros_id"),jsonInfoArray.getJSONObject(position).getString("pro_status"));
+                    callback.onItemPassed(jsonInfoArray.getJSONObject(position).getString("pros_id"), jsonInfoArray.getJSONObject(position).getString("pro_status"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -199,8 +201,8 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
         }
     }
 
-    public void refreshData(JSONArray jsonInfoArray){
-        this.jsonInfoArray=jsonInfoArray;
+    public void refreshData(JSONArray jsonInfoArray) {
+        this.jsonInfoArray = jsonInfoArray;
         notifyDataSetChanged();
     }
 }

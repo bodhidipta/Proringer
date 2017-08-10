@@ -8,13 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.fragments.bottomNav.MyProjectsFragment;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
+
 import java.util.List;
 
 /**

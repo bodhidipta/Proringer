@@ -6,10 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.IOException;
-
-import static android.R.attr.version;
-
 /**
  * Created by bodhidipta on 24/06/17.
  * <!-- * Copyright (c) 2017, The Proringer-->

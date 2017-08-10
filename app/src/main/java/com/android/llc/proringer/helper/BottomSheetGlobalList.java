@@ -3,7 +3,6 @@ package com.android.llc.proringer.helper;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.HomeReminderBottomSheetAdapter;
+
 import java.util.List;
 
 /**
@@ -40,7 +40,7 @@ public class BottomSheetGlobalList {
     private BottomSheetGlobalList() {
     }
 
-    public void showSiteSelectionDialog(final List<String> itemValueList,onOptionSelected callback) {
+    public void showSiteSelectionDialog(final List<String> itemValueList, onOptionSelected callback) {
         listener = callback;
 
         view = LayoutInflater.from(dialogContext).inflate(R.layout.dialog_bottom_sheet, null);
@@ -71,7 +71,7 @@ public class BottomSheetGlobalList {
         rcv = (RecyclerView) dialog.findViewById(R.id.rcv);
         rcv.setLayoutManager(new LinearLayoutManager(dialogContext));
 
-        HomeReminderBottomSheetAdapter homeReminderBottomSheetAdapter = new HomeReminderBottomSheetAdapter(dialogContext, itemValueList,dialog, listener);
+        HomeReminderBottomSheetAdapter homeReminderBottomSheetAdapter = new HomeReminderBottomSheetAdapter(dialogContext, itemValueList, dialog, listener);
         rcv.setAdapter(homeReminderBottomSheetAdapter);
 
     }

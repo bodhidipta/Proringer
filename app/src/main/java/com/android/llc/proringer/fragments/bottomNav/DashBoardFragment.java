@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.activities.PostProjectActivity;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.ImageTakerActivityCamera;
@@ -44,6 +44,7 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
@@ -73,12 +74,13 @@ public class DashBoardFragment extends Fragment {
     private String mCurrentPhotoPath = "";
 
     ImageView profile_pic;
-    ProRegularTextView tv_name,tv_active_projects,tv_favorite_pros;
+    ProRegularTextView tv_name, tv_active_projects, tv_favorite_pros;
     ProLightTextView tv_address;
     ProgressDialog pgDialog;
 
     LinearLayout LLNetworkDisconnection;
     NestedScrollView nested_scroll_main;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -89,8 +91,8 @@ public class DashBoardFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
-        nested_scroll_main= (NestedScrollView) view.findViewById(R.id.nested_scroll_main);
+        LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        nested_scroll_main = (NestedScrollView) view.findViewById(R.id.nested_scroll_main);
 
         profile_pic = (ImageView) view.findViewById(R.id.profile_pic);
         tv_name = (ProRegularTextView) view.findViewById(R.id.tv_name);
@@ -110,7 +112,7 @@ public class DashBoardFragment extends Fragment {
         view.findViewById(R.id.userInformation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((LandScreenActivity)getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);  // Well CREATE_PROJECT will reset bottom nav bar to nothing selected !!!
+                ((LandScreenActivity) getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);  // Well CREATE_PROJECT will reset bottom nav bar to nothing selected !!!
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.USER_INFORMATION);
 
             }
@@ -118,28 +120,28 @@ public class DashBoardFragment extends Fragment {
         view.findViewById(R.id.login_settings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((LandScreenActivity)getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                ((LandScreenActivity) getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.LOGIN_SETTINGS);
             }
         });
         view.findViewById(R.id.notification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((LandScreenActivity)getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                ((LandScreenActivity) getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.NOTIFICATION);
             }
         });
         view.findViewById(R.id.home_schedule).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((LandScreenActivity)getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                ((LandScreenActivity) getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.HOME_SCHEDUL);
             }
         });
         view.findViewById(R.id.invite_a_friend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((LandScreenActivity)getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                ((LandScreenActivity) getActivity()).bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.INVITE_FRIEND);
             }
         });
@@ -170,8 +172,8 @@ public class DashBoardFragment extends Fragment {
             @Override
             public void onComplete(String message) {
                 try {
-                    JSONObject jsonObject=new JSONObject(message);
-                    JSONArray jsonInfoArray=jsonObject.getJSONArray("info_array");
+                    JSONObject jsonObject = new JSONObject(message);
+                    JSONArray jsonInfoArray = jsonObject.getJSONArray("info_array");
 
                     if (!jsonInfoArray.getJSONObject(0).getString("profile_img").equals(""))
                         Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
@@ -179,8 +181,8 @@ public class DashBoardFragment extends Fragment {
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 
                     tv_address.setText(jsonInfoArray.getJSONObject(0).getString("city")
-                            +","+jsonInfoArray.getJSONObject(0).getString("state_code")
-                            +" "+jsonInfoArray.getJSONObject(0).getString("zipcode"));
+                            + "," + jsonInfoArray.getJSONObject(0).getString("state_code")
+                            + " " + jsonInfoArray.getJSONObject(0).getString("zipcode"));
 
                     tv_active_projects.setText(jsonInfoArray.getJSONObject(0).getString("total_active_project"));
                     tv_favorite_pros.setText(jsonInfoArray.getJSONObject(0).getString("total_fav_pro"));
@@ -198,12 +200,10 @@ public class DashBoardFragment extends Fragment {
                     pgDialog.dismiss();
 
 
-
-                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     nested_scroll_main.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
-
 
 
                 new AlertDialog.Builder(getActivity())
@@ -351,7 +351,7 @@ public class DashBoardFragment extends Fragment {
                 .show();
     }
 
-    private void showUploadImage(){
+    private void showUploadImage() {
 
         dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -362,13 +362,13 @@ public class DashBoardFragment extends Fragment {
 
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int widthLcl = (int) (displayMetrics.widthPixels*0.7f);
-        int heightLcl = (int) (displayMetrics.heightPixels*0.7f);
+        int widthLcl = (int) (displayMetrics.widthPixels * 0.7f);
+        int heightLcl = (int) (displayMetrics.heightPixels * 0.7f);
 
-        RelativeLayout RLMain= (RelativeLayout) dialog.findViewById(R.id.RLMain);
+        RelativeLayout RLMain = (RelativeLayout) dialog.findViewById(R.id.RLMain);
 
-        RLMain.getLayoutParams().width =widthLcl;
-        RLMain.getLayoutParams().height =heightLcl;
+        RLMain.getLayoutParams().width = widthLcl;
+        RLMain.getLayoutParams().height = heightLcl;
 
         dialog.show();
 
@@ -376,11 +376,59 @@ public class DashBoardFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(mCurrentPhotoPath.trim().equals("")){
-                    Toast.makeText(getActivity(),"Please choose Image",Toast.LENGTH_SHORT).show();
-                }
-                else {
+                if (mCurrentPhotoPath.trim().equals("")) {
+                    Toast.makeText(getActivity(), "Please choose Image", Toast.LENGTH_SHORT).show();
+                } else {
+                    ProServiceApiHelper.getInstance(getActivity()).upLoadProfileImage(new ProServiceApiHelper.getApiProcessCallback() {
+                        @Override
+                        public void onStart() {
+                            pgDialog = new ProgressDialog(getActivity());
+                            pgDialog.setTitle("Image Upload");
+                            pgDialog.setMessage("uploading.Please wait...");
+                            pgDialog.setCancelable(false);
+                            pgDialog.show();
+                        }
 
+                        @Override
+                        public void onComplete(String message) {
+                            if (pgDialog != null && pgDialog.isShowing())
+                                pgDialog.dismiss();
+
+                            dialog.dismiss();
+
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("" + "Upload Image")
+                                    .setMessage("" + message)
+                                    .setCancelable(false)
+                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            plotUserInformation();
+                                        }
+                                    })
+                                    .show();
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            if (pgDialog != null && pgDialog.isShowing())
+                                pgDialog.dismiss();
+
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("" + "Upload Image")
+                                    .setMessage("" + error)
+                                    .setCancelable(false)
+                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }, ProApplication.getInstance().getUserId(), mCurrentPhotoPath);
                 }
             }
         });
@@ -400,15 +448,14 @@ public class DashBoardFragment extends Fragment {
                 startActivityForResult(intent, 200);
             }
         });
-         dialog.findViewById(R.id.img_cancel).setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.img_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((ImageView) dialog.findViewById(R.id.img_temp)).setImageResource(android.R.color.transparent);
                 dialog.findViewById(R.id.img_select).setVisibility(View.VISIBLE);
                 dialog.findViewById(R.id.img_cancel).setVisibility(View.GONE);
-                mCurrentPhotoPath="";
+                mCurrentPhotoPath = "";
             }
         });
-
     }
 }

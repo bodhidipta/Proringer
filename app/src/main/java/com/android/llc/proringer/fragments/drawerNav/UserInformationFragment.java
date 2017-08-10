@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
@@ -21,6 +22,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +48,7 @@ public class UserInformationFragment extends Fragment {
     private ProLightEditText first_name, last_name, contact, zip_code, city, state;
     ProRegularTextView tv_search_by_location;
     RelativeLayout RLSearchByLocation;
-    ProgressDialog pgDialog=null;
+    ProgressDialog pgDialog = null;
 
     @Nullable
     @Override
@@ -62,13 +64,13 @@ public class UserInformationFragment extends Fragment {
         contact = (ProLightEditText) view.findViewById(R.id.contact);
 
         RLSearchByLocation = (RelativeLayout) view.findViewById(R.id.RLSearchByLocation);
-        tv_search_by_location= (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
+        tv_search_by_location = (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
 
         RLSearchByLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i=new Intent(getActivity(), TakeGooglePlacePredictionActivity.class);
+                Intent i = new Intent(getActivity(), TakeGooglePlacePredictionActivity.class);
                 startActivityForResult(i, 1);
             }
         });
@@ -154,9 +156,8 @@ public class UserInformationFragment extends Fragment {
                     "",
                     "",
                     "");
-        }
-        else {
-            new android.support.v7.app.AlertDialog.Builder((LandScreenActivity)getActivity())
+        } else {
+            new android.support.v7.app.AlertDialog.Builder((LandScreenActivity) getActivity())
                     .setTitle("Updating  Error")
                     .setMessage("Please Choose the correct address which will contains zip code")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -171,14 +172,14 @@ public class UserInformationFragment extends Fragment {
 
 
     private void plotUserInformation() {
-        DatabaseHandler.getInstance((LandScreenActivity)getActivity()).getUserInfo(
+        DatabaseHandler.getInstance((LandScreenActivity) getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
                     public void onSuccess(String... s) {
 
-                        Logger.printMessage("database","Yes");
-                        Logger.printMessage("success","s:--"+s);
+                        Logger.printMessage("database", "Yes");
+                        Logger.printMessage("success", "s:--" + s);
                         /**
                          * User data already found in database
                          */
@@ -207,7 +208,7 @@ public class UserInformationFragment extends Fragment {
                         /**
                          * No user data found on database or something went wrong
                          */
-                        Logger.printMessage("@dashBoard", "on database data not exists:--"+s);
+                        Logger.printMessage("@dashBoard", "on database data not exists:--" + s);
 
                     }
                 });
@@ -218,15 +219,15 @@ public class UserInformationFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
 
                 Bundle extras = data.getBundleExtra("data");
                 if (extras != null) {
 
-                    Logger.printMessage("selectedPlace","--->"+extras.getString("selectedPlace"));
-                    Logger.printMessage("zip","--->"+extras.getString("zip"));
-                    Logger.printMessage("city","--->"+extras.getString("city"));
-                    Logger.printMessage("state","--->"+extras.getString("state"));
+                    Logger.printMessage("selectedPlace", "--->" + extras.getString("selectedPlace"));
+                    Logger.printMessage("zip", "--->" + extras.getString("zip"));
+                    Logger.printMessage("city", "--->" + extras.getString("city"));
+                    Logger.printMessage("state", "--->" + extras.getString("state"));
 
                     tv_search_by_location.setText(extras.getString("selectedPlace"));
                     zip_code.setText(extras.getString("zip"));

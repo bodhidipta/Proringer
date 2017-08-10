@@ -82,9 +82,9 @@ public class LoginSettingsFragment extends Fragment {
         view.findViewById(R.id.show_password).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     current_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                }else if (event.getAction()==MotionEvent.ACTION_UP){
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     current_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     current_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
@@ -119,11 +119,11 @@ public class LoginSettingsFragment extends Fragment {
      * Update current email address ,upon succeeding log out current user to re login
      */
     private void updateCurrentEmail() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateUserEmail(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserEmail(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                         pgDialog.setTitle("Change Email");
                         pgDialog.setMessage("Updating new email address.Please wait...");
                         pgDialog.setCancelable(false);
@@ -135,7 +135,7 @@ public class LoginSettingsFragment extends Fragment {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
 
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Email")
                                 .setMessage("" + message)
                                 .setCancelable(false)
@@ -144,8 +144,8 @@ public class LoginSettingsFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                         ProApplication.getInstance().logOut();
-                                        startActivity(new Intent((LandScreenActivity)getActivity(), GetStartedActivity.class));
-                                        ((LandScreenActivity)getActivity()).finish();
+                                        startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
+                                        ((LandScreenActivity) getActivity()).finish();
                                     }
                                 })
                                 .show();
@@ -157,7 +157,7 @@ public class LoginSettingsFragment extends Fragment {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
 
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Email Error")
                                 .setMessage("" + error)
                                 .setCancelable(false)
@@ -205,11 +205,11 @@ public class LoginSettingsFragment extends Fragment {
      * Update password , on success log out current profile to re login
      */
     private void updatePassword() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateUserPassword(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserPassword(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                         pgDialog.setTitle("Change Password");
                         pgDialog.setMessage("Updating new password.Please wait...");
                         pgDialog.setCancelable(false);
@@ -221,7 +221,7 @@ public class LoginSettingsFragment extends Fragment {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
 
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Password")
                                 .setMessage("" + message)
                                 .setCancelable(false)
@@ -230,8 +230,8 @@ public class LoginSettingsFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                         ProApplication.getInstance().logOut();
-                                        startActivity(new Intent((LandScreenActivity)getActivity(), GetStartedActivity.class));
-                                        ((LandScreenActivity)getActivity()).finish();
+                                        startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
+                                        ((LandScreenActivity) getActivity()).finish();
                                     }
                                 })
                                 .show();
@@ -242,7 +242,7 @@ public class LoginSettingsFragment extends Fragment {
                         if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
 
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Password Error")
                                 .setMessage("" + error)
                                 .setCancelable(false)

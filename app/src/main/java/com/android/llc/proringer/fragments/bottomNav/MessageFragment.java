@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
 import com.android.llc.proringer.adapter.ProjectMessageAdapter;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
@@ -49,21 +48,21 @@ public class MessageFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        projectMessageArrayList=new ArrayList<>();
+        projectMessageArrayList = new ArrayList<>();
 
 
-        for (int i=0;i<15;i++){
-            ProjectMessage projectMessage=new ProjectMessage();
+        for (int i = 0; i < 15; i++) {
+            ProjectMessage projectMessage = new ProjectMessage();
             projectMessage.setIsOpen(false);
-            projectMessage.setTagName("view "+i);
+            projectMessage.setTagName("view " + i);
             projectMessageArrayList.add(projectMessage);
         }
 
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
-        project_message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+        project_message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
 
-        adapter = new ProjectMessageAdapter((LandScreenActivity)getActivity(),projectMessageArrayList, new onItemClick() {
+        adapter = new ProjectMessageAdapter((LandScreenActivity) getActivity(), projectMessageArrayList, new onItemClick() {
             @Override
             public void onItemClick(int pos) {
                 ((LandScreenActivity) getActivity()).toggleToolBar(true);

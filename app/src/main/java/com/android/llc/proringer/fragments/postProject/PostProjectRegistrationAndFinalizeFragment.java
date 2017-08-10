@@ -40,7 +40,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         password = (ProLightEditText) view.findViewById(R.id.password);
         confirm_password = (ProLightEditText) view.findViewById(R.id.confirm_password);
         zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
-        content_post_form_submit = (LinearLayout)view.findViewById(R.id.content_post_form_submit);
+        content_post_form_submit = (LinearLayout) view.findViewById(R.id.content_post_form_submit);
 
 
         if (ProApplication.getInstance().getUserId().equals("")) {
@@ -55,11 +55,11 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         view.findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ProApplication.getInstance().getUserId().equals("")){
-                    startActivity(new Intent((PostProjectActivity)getActivity(), PostedFinishActivity.class));
-                    ((PostProjectActivity)getActivity()).finish();
-                }else{
-                    ((PostProjectActivity)getActivity()).finish();
+                if (ProApplication.getInstance().getUserId().equals("")) {
+                    startActivity(new Intent((PostProjectActivity) getActivity(), PostedFinishActivity.class));
+                    ((PostProjectActivity) getActivity()).finish();
+                } else {
+                    ((PostProjectActivity) getActivity()).finish();
                 }
 
             }
@@ -74,7 +74,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
                     ((PostProjectActivity) getActivity()).last_name = last_name.getText().toString().trim();
                     ((PostProjectActivity) getActivity()).email = email.getText().toString().trim();
                     ((PostProjectActivity) getActivity()).confirm_password = confirm_password.getText().toString().trim();
-                    synchronized (new Object()){
+                    synchronized (new Object()) {
                         ((PostProjectActivity) getActivity()).completePostProject();
                     }
 
@@ -148,7 +148,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         }
     }
 
-    public void showProjectPosted(){
+    public void showProjectPosted() {
         content_post_form_submit.setVisibility(View.VISIBLE);
     }
 }

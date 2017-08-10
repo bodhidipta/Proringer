@@ -47,7 +47,7 @@ public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<
     @Override
     public PostProjectServiceAndOtherListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.post_project_category_row, parent, false));
+        return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.post_project_category_row, parent, false));
     }
 
     @Override
@@ -55,11 +55,11 @@ public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<
 
         holder.item_.setText(itemList.get(position).getCategory_name());
         holder.item_.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onSelectItemClick(position, itemList.get(position));
-                }
-            });
+            @Override
+            public void onClick(View v) {
+                listener.onSelectItemClick(position, itemList.get(position));
+            }
+        });
 
 
     }
@@ -72,7 +72,6 @@ public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<
             item_ = (ProRegularTextView) itemView.findViewById(R.id.item_);
         }
     }
-
 
 
     public void updateList(LinkedList<ProCategoryData> list) {

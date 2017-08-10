@@ -47,10 +47,10 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         ////change////////
-        if(viewType==1){
+        if (viewType == 1) {
             return new ViewHolderReceiver(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_receiver, parent, false));
 
-        }else {
+        } else {
             return new ViewHolderSender(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_sender, parent, false));
         }
 
@@ -61,7 +61,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         switch (holder.getItemViewType()) {
             case 1:
-                ViewHolderReceiver viewHolderReceiver = (ViewHolderReceiver)holder;
+                ViewHolderReceiver viewHolderReceiver = (ViewHolderReceiver) holder;
 
                 if (dataList.get(position).isDateVisible()) {
                     viewHolderReceiver.date_header.setVisibility(View.VISIBLE);
@@ -86,7 +86,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 break;
 
             case 2:
-                ViewHolderSender viewHolderSender = (ViewHolderSender)holder;
+                ViewHolderSender viewHolderSender = (ViewHolderSender) holder;
 
 
                 if (dataList.get(position).isDateVisible()) {
@@ -100,7 +100,6 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 } else {
                     viewHolderSender.date_header.setVisibility(View.GONE);
                 }
-
 
 
                 if (dataList.get(position).ismessage()) {
@@ -156,8 +155,8 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public int getItemViewType(int position) {
         if (dataList.get(position).isSender()) {
-                return  2;
-        }else {
+            return 2;
+        } else {
             return 1;
         }
     }

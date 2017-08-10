@@ -24,9 +24,9 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
     int height;
     int width;
 
-    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray){
-        this.context=context;
-        this.portfolioInfoArray=portfolioInfoArray;
+    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray) {
+        this.context = context;
+        this.portfolioInfoArray = portfolioInfoArray;
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -48,13 +48,12 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.img.getLayoutParams().width = (width-30);
-        holder.img.getLayoutParams().height = (height-30)/2;
+        holder.img.getLayoutParams().width = (width - 30);
+        holder.img.getLayoutParams().height = (height - 30) / 2;
         try {
             if (!portfolioInfoArray.getJSONObject(position).getString("portfolio_img").equals(""))
                 Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).centerCrop().into(holder.img);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -66,9 +65,10 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            img= (ImageView) itemView.findViewById(R.id.img);
+            img = (ImageView) itemView.findViewById(R.id.img);
         }
     }
 }

@@ -184,10 +184,10 @@ public class PostProjectActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
-            if(LLNetworkDisconnection.getVisibility()==View.VISIBLE){
+            if (LLNetworkDisconnection.getVisibility() == View.VISIBLE) {
                 finish();
             }
-            performBack();
+        performBack();
         return super.onOptionsItemSelected(item);
     }
 

@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
-
 import java.util.ArrayList;
 
 /**
@@ -69,10 +68,10 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
 //            spinertitle = (OpenSansLightTextView) convertView.findViewById(R.id.txtspinemwnu);
 //            spinertitle.setVisibility(View.GONE);
 //        } else {
-            spinertitle = (ProRegularTextView) convertView.findViewById(R.id.txtspinemwnu);
-            spinertitle.setVisibility(View.VISIBLE);
-            spinertitle.setText(option_list.get(position));
-     //   }
+        spinertitle = (ProRegularTextView) convertView.findViewById(R.id.txtspinemwnu);
+        spinertitle.setVisibility(View.VISIBLE);
+        spinertitle.setText(option_list.get(position));
+        //   }
 
 
         return convertView;

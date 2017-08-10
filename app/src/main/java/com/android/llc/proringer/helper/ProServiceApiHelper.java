@@ -3,6 +3,7 @@ package com.android.llc.proringer.helper;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.pojo.AddressData;
@@ -11,8 +12,10 @@ import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +26,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,8 +58,8 @@ public class ProServiceApiHelper {
     private static Context mcontext;
     private onProCategoryListener listener;
 
-    private String currentLat="";
-    private String currentLng="";
+    private String currentLat = "";
+    private String currentLng = "";
 
 
     private final String categoryAPI = "http://esolz.co.in/lab6/proringer_latest/app_categorylist";
@@ -94,14 +98,14 @@ public class ProServiceApiHelper {
     private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
     private String prosIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
 
-    private String prosAddReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_addreview";
-    private String prosIndividualPortfolioImageAPI="http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
+    private String prosAddReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_addreview";
+    private String prosIndividualPortfolioImageAPI = "http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
 
 
-    private String prosAllReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_allreview";
-    private String prosReportReviewAPI="http://esolz.co.in/lab6/proringer_latest/app_homeowner_reportreview";
+    private String prosAllReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_allreview";
+    private String prosReportReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_reportreview";
 
-
+    private String profileImageAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_profileimg";
 
 
     public static ProServiceApiHelper getInstance(Context context) {
@@ -114,14 +118,14 @@ public class ProServiceApiHelper {
     private ProServiceApiHelper() {
     }
 
-    public void setCurrentLatLng(String currentLat,String currentLng){
-        this.currentLat=currentLat;
-        this.currentLng=currentLng;
+    public void setCurrentLatLng(String currentLat, String currentLng) {
+        this.currentLat = currentLat;
+        this.currentLng = currentLng;
     }
 
-    public String[] getCurrentLatLng(){
-        String str[]={
-                currentLat,currentLng
+    public String[] getCurrentLatLng() {
+        String str[] = {
+                currentLat, currentLng
         };
         return str;
     }
@@ -151,7 +155,7 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("categoryAPI",""+categoryAPI);
+                        Logger.printMessage("categoryAPI", "" + categoryAPI);
 
                         Request request = new Request.Builder()
                                 .get()
@@ -223,7 +227,7 @@ public class ProServiceApiHelper {
                     callback.onStartFetch();
                     apiSer = serviceAPI + "?parent_category=" + params[0];
 
-                    Logger.printMessage("apiSer",""+apiSer);
+                    Logger.printMessage("apiSer", "" + apiSer);
 
                     categoryList = new LinkedList<>();
                 }
@@ -312,12 +316,12 @@ public class ProServiceApiHelper {
                                 .add("zipcode", params[4])
                                 .build();
 
-                        Logger.printMessage("f_name",":-"+params[0]);
-                        Logger.printMessage("l_name",":-"+params[1]);
-                        Logger.printMessage("email_id",":-"+params[2]);
-                        Logger.printMessage("password",":-"+params[3]);
-                        Logger.printMessage("zipcode",":-"+params[4]);
-                        Logger.printMessage("registrationAPI",registrationAPI);
+                        Logger.printMessage("f_name", ":-" + params[0]);
+                        Logger.printMessage("l_name", ":-" + params[1]);
+                        Logger.printMessage("email_id", ":-" + params[2]);
+                        Logger.printMessage("password", ":-" + params[3]);
+                        Logger.printMessage("zipcode", ":-" + params[4]);
+                        Logger.printMessage("registrationAPI", registrationAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
@@ -390,11 +394,11 @@ public class ProServiceApiHelper {
                                 .add("user_type", "H")
                                 .build();
 
-                        Logger.printMessage("email",":-"+params[0]);
-                        Logger.printMessage("password",":-"+params[1]);
-                        Logger.printMessage("device_type",":-"+"a");
-                        Logger.printMessage("user_type",":-"+"H");
-                        Logger.printMessage("loginAPI",loginAPI);
+                        Logger.printMessage("email", ":-" + params[0]);
+                        Logger.printMessage("password", ":-" + params[1]);
+                        Logger.printMessage("device_type", ":-" + "a");
+                        Logger.printMessage("user_type", ":-" + "H");
+                        Logger.printMessage("loginAPI", loginAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
@@ -411,7 +415,7 @@ public class ProServiceApiHelper {
                         if (mainResponseObj.getBoolean("response")) {
                             exception = "";
                             JSONObject jsonInfo = mainResponseObj.getJSONObject("info_array");
-                            ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"),jsonInfo.getString("zipcode"));
+                            ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"), jsonInfo.getString("zipcode"));
                             return mainResponseObj.getString("message");
                         } else {
                             exception = "true";
@@ -467,8 +471,8 @@ public class ProServiceApiHelper {
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_email", params[0]).build();
 
-                        Logger.printMessage("user_email",":-"+params[0]);
-                        Logger.printMessage("forgetPasswordAPI",forgetPasswordAPI);
+                        Logger.printMessage("user_email", ":-" + params[0]);
+                        Logger.printMessage("forgetPasswordAPI", forgetPasswordAPI);
 
                         Request request = new Request.Builder()
                                 .url(forgetPasswordAPI)
@@ -532,9 +536,9 @@ public class ProServiceApiHelper {
                                 .add("user_reset_code", params[0])
                                 .add("new_password", params[1]).build();
 
-                        Logger.printMessage("user_reset_code",":-"+params[0]);
-                        Logger.printMessage("new_password",":-"+params[1]);
-                        Logger.printMessage("resetPasswordAPI",resetPasswordAPI);
+                        Logger.printMessage("user_reset_code", ":-" + params[0]);
+                        Logger.printMessage("new_password", ":-" + params[1]);
+                        Logger.printMessage("resetPasswordAPI", resetPasswordAPI);
 
                         Request request = new Request.Builder()
                                 .url(resetPasswordAPI)
@@ -542,7 +546,7 @@ public class ProServiceApiHelper {
                                 .build();
                         Response response = okHttpClient.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("forgetPassw",responseString);
+                        Logger.printMessage("forgetPassw", responseString);
                         JSONObject mainresposne = new JSONObject(responseString);
                         if (mainresposne.getBoolean("response")) {
                             return mainresposne.getString("message");
@@ -595,7 +599,7 @@ public class ProServiceApiHelper {
                         String userIfoAPI = getUserInformationAPI + "?user_id=" + ProApplication.getInstance().getUserId();
 
                         Logger.printMessage("userInfo", ProApplication.getInstance().getUserId());
-                        Logger.printMessage("userIfoAPI",""+userIfoAPI);
+                        Logger.printMessage("userIfoAPI", "" + userIfoAPI);
 
                         Request request = new Request.Builder()
                                 .url(userIfoAPI)
@@ -673,21 +677,19 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id",":-"+ProApplication.getInstance().getUserId());
-                        Logger.printMessage("f_name",":-"+params[0]);
-                        Logger.printMessage("l_name",":-"+params[1]);
-                        Logger.printMessage("address",":-"+params[2]);
-                        Logger.printMessage("city",":-"+params[3]);
-                        Logger.printMessage("country",":-"+params[4]);
-                        Logger.printMessage("state",":-"+params[5]);
-                        Logger.printMessage("zipcode",":-"+params[6]);
-                        Logger.printMessage("phone",":-"+params[7]);
-                        Logger.printMessage("details",":-"+params[8]);
-                        Logger.printMessage("latitude",":-"+params[9]);
-                        Logger.printMessage("longitude",":-"+params[10]);
-                        Logger.printMessage("updateUserInformationAPI",updateUserInformationAPI);
-
-
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("f_name", ":-" + params[0]);
+                        Logger.printMessage("l_name", ":-" + params[1]);
+                        Logger.printMessage("address", ":-" + params[2]);
+                        Logger.printMessage("city", ":-" + params[3]);
+                        Logger.printMessage("country", ":-" + params[4]);
+                        Logger.printMessage("state", ":-" + params[5]);
+                        Logger.printMessage("zipcode", ":-" + params[6]);
+                        Logger.printMessage("phone", ":-" + params[7]);
+                        Logger.printMessage("details", ":-" + params[8]);
+                        Logger.printMessage("latitude", ":-" + params[9]);
+                        Logger.printMessage("longitude", ":-" + params[10]);
+                        Logger.printMessage("updateUserInformationAPI", updateUserInformationAPI);
 
 
                         RequestBody requestBody = new FormBody.Builder()
@@ -731,7 +733,7 @@ public class ProServiceApiHelper {
                 protected void onPostExecute(final String s) {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
-                        Logger.printMessage("successfullyUpdateMSQL","YES");
+                        Logger.printMessage("successfullyUpdateMSQL", "YES");
                         try {
                             callback.onComplete(s);
                             getUserInformation(callback);
@@ -776,12 +778,11 @@ public class ProServiceApiHelper {
                                 .add("user_type", "H")
                                 .build();
 
-                        Logger.printMessage("user_id",":-"+ ProApplication.getInstance().getUserId());
-                        Logger.printMessage("emailid",":-"+params[0]);
-                        Logger.printMessage("conf_emailid",":-"+params[1]);
-                        Logger.printMessage("user_type",":-"+"H");
-                        Logger.printMessage("changeUserEmailAPI",changeUserEmailAPI);
-
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("emailid", ":-" + params[0]);
+                        Logger.printMessage("conf_emailid", ":-" + params[1]);
+                        Logger.printMessage("user_type", ":-" + "H");
+                        Logger.printMessage("changeUserEmailAPI", changeUserEmailAPI);
 
 
                         Request request = new Request.Builder()
@@ -849,12 +850,12 @@ public class ProServiceApiHelper {
                                 .add("user_type", "H")
                                 .build();
 
-                        Logger.printMessage("user_id",":-"+ProApplication.getInstance().getUserId());
-                        Logger.printMessage("curr_pass",":-"+params[0]);
-                        Logger.printMessage("new_pass",":-"+params[1]);
-                        Logger.printMessage("conf_pass",":-"+params[2]);
-                        Logger.printMessage("user_type","H");
-                        Logger.printMessage("changeUserPasswordAPI",changeUserPasswordAPI);
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("curr_pass", ":-" + params[0]);
+                        Logger.printMessage("new_pass", ":-" + params[1]);
+                        Logger.printMessage("conf_pass", ":-" + params[2]);
+                        Logger.printMessage("user_type", "H");
+                        Logger.printMessage("changeUserPasswordAPI", changeUserPasswordAPI);
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
@@ -920,7 +921,7 @@ public class ProServiceApiHelper {
                                 .url(notificationAPI)
                                 .build();
 
-                        Logger.printMessage("notificationAPI",notificationAPI);
+                        Logger.printMessage("notificationAPI", notificationAPI);
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
@@ -985,7 +986,7 @@ public class ProServiceApiHelper {
                 protected void onPreExecute() {
                     super.onPreExecute();
                     callback.onStart();
-            }
+                }
 
                 @Override
                 protected String doInBackground(String... params) {
@@ -1004,17 +1005,16 @@ public class ProServiceApiHelper {
                                 .add("mobile_project_replies", params[7])
                                 .build();
 
-                        Logger.printMessage("user_id",":-"+ProApplication.getInstance().getUserId());
-                        Logger.printMessage("email_newsletter",":-"+params[0]);
-                        Logger.printMessage("email_chat_msg",":-"+params[1]);
-                        Logger.printMessage("email_tips_article",":-"+params[2]);
-                        Logger.printMessage("email_project_replies",":-"+params[3]);
-                        Logger.printMessage("mobile_newsletter",":-"+params[4]);
-                        Logger.printMessage("mobile_chat_msg",":-"+params[5]);
-                        Logger.printMessage("mobile_article",":-"+params[6]);
-                        Logger.printMessage("mobile_project_replies",":-"+params[7]);
-                        Logger.printMessage("updateNotificationDetailsAPI",updateNotificationDetailsAPI);
-
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("email_newsletter", ":-" + params[0]);
+                        Logger.printMessage("email_chat_msg", ":-" + params[1]);
+                        Logger.printMessage("email_tips_article", ":-" + params[2]);
+                        Logger.printMessage("email_project_replies", ":-" + params[3]);
+                        Logger.printMessage("mobile_newsletter", ":-" + params[4]);
+                        Logger.printMessage("mobile_chat_msg", ":-" + params[5]);
+                        Logger.printMessage("mobile_article", ":-" + params[6]);
+                        Logger.printMessage("mobile_project_replies", ":-" + params[7]);
+                        Logger.printMessage("updateNotificationDetailsAPI", updateNotificationDetailsAPI);
 
 
                         Request request = new Request.Builder()
@@ -1149,7 +1149,7 @@ public class ProServiceApiHelper {
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("home_svhe",responseString);
+                        Logger.printMessage("home_svhe", responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
                             return responseString;
@@ -1325,12 +1325,12 @@ public class ProServiceApiHelper {
                                 .add("conf_emailid", params[3])
                                 .build();
 
-                        Logger.printMessage("user_id",":-"+ProApplication.getInstance().getUserId());
-                        Logger.printMessage("first_name",":-"+params[0]);
-                        Logger.printMessage("last_name",":-"+params[1]);
-                        Logger.printMessage("email",":-"+params[2]);
-                        Logger.printMessage("conf_emailid",":-"+params[3]);
-                        Logger.printMessage("inviteFriendsAPI",inviteFriendsAPI);
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("first_name", ":-" + params[0]);
+                        Logger.printMessage("last_name", ":-" + params[1]);
+                        Logger.printMessage("email", ":-" + params[2]);
+                        Logger.printMessage("conf_emailid", ":-" + params[3]);
+                        Logger.printMessage("inviteFriendsAPI", inviteFriendsAPI);
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
@@ -1514,8 +1514,8 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String ApiOption = myProjectDetailsAPI + "" + ProApplication.getInstance().getUserId()+"&project_id="+params[0];
-                        Logger.printMessage("myProjectdetailsAPI",ApiOption);
+                        String ApiOption = myProjectDetailsAPI + "" + ProApplication.getInstance().getUserId() + "&project_id=" + params[0];
+                        Logger.printMessage("myProjectdetailsAPI", ApiOption);
 
                         Request request = new Request.Builder()
                                 .get()
@@ -1524,7 +1524,7 @@ public class ProServiceApiHelper {
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("home_svhe", "" +responseString);
+                        Logger.printMessage("home_svhe", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
                             return responseString;
@@ -1683,7 +1683,7 @@ public class ProServiceApiHelper {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         String ApiOption = faqInformationAPI;
-                        Logger.printMessage("faqInformation",ApiOption);
+                        Logger.printMessage("faqInformation", ApiOption);
 
                         Request request = new Request.Builder()
                                 .get()
@@ -1692,7 +1692,7 @@ public class ProServiceApiHelper {
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("home_svhe",""+responseString);
+                        Logger.printMessage("home_svhe", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
                             return responseString;
@@ -1722,7 +1722,6 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
-
 
 
     /**
@@ -1747,7 +1746,7 @@ public class ProServiceApiHelper {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         String ApiOption = termsOfUseAPI;
-                        Logger.printMessage("termsOfUseAPI",ApiOption);
+                        Logger.printMessage("termsOfUseAPI", ApiOption);
 
                         Request request = new Request.Builder()
                                 .get()
@@ -1756,7 +1755,7 @@ public class ProServiceApiHelper {
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("home_svhe",""+responseString);
+                        Logger.printMessage("home_svhe", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
                             return responseString;
@@ -1786,7 +1785,6 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
-
 
 
     /**
@@ -1811,7 +1809,7 @@ public class ProServiceApiHelper {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         String ApiOption = privacyPolicyAPI;
-                        Logger.printMessage("privacyPolicyAPI",ApiOption);
+                        Logger.printMessage("privacyPolicyAPI", ApiOption);
 
                         Request request = new Request.Builder()
                                 .get()
@@ -1820,7 +1818,7 @@ public class ProServiceApiHelper {
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
-                        Logger.printMessage("home_svhe",""+responseString);
+                        Logger.printMessage("home_svhe", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
                         if (jsonObject.getBoolean("response")) {
                             return responseString;
@@ -1850,7 +1848,6 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
-
 
 
     /**
@@ -1884,13 +1881,13 @@ public class ProServiceApiHelper {
                                 .add("contact_info", params[4])
                                 .build();
 
-                        Logger.printMessage("fname",":-"+ params[0]);
-                        Logger.printMessage("lname",":-"+ params[1]);
-                        Logger.printMessage("email",":-"+ params[2]);
-                        Logger.printMessage("phonenumber",":-"+ params[3]);
-                        Logger.printMessage("contact_info",":-"+ params[4]);
+                        Logger.printMessage("fname", ":-" + params[0]);
+                        Logger.printMessage("lname", ":-" + params[1]);
+                        Logger.printMessage("email", ":-" + params[2]);
+                        Logger.printMessage("phonenumber", ":-" + params[3]);
+                        Logger.printMessage("contact_info", ":-" + params[4]);
 
-                        Logger.printMessage("contactUsAPI",contactUsAPI);
+                        Logger.printMessage("contactUsAPI", contactUsAPI);
 
 
                         Request request = new Request.Builder()
@@ -1935,8 +1932,6 @@ public class ProServiceApiHelper {
     }
 
 
-
-
     /**
      * delete my project
      *
@@ -1959,9 +1954,9 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("project_id",":-"+params[1]);
-                        Logger.printMessage("myProjectDeleteAPI",myProjectDeleteAPI);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("project_id", ":-" + params[1]);
+                        Logger.printMessage("myProjectDeleteAPI", myProjectDeleteAPI);
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", params[0])
@@ -2032,7 +2027,7 @@ public class ProServiceApiHelper {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         String FavProListAPI = favoriteProsListAPI + ProApplication.getInstance().getUserId();
-                        Logger.printMessage("favoriteProsListAPI",FavProListAPI);
+                        Logger.printMessage("favoriteProsListAPI", FavProListAPI);
                         Request request = new Request.Builder()
                                 .get()
                                 .url(FavProListAPI)
@@ -2071,7 +2066,6 @@ public class ProServiceApiHelper {
     }
 
 
-
     /**
      * delete my project
      *
@@ -2099,9 +2093,9 @@ public class ProServiceApiHelper {
                                 .add("favourite_id", params[1])
                                 .build();
 
-                        Logger.printMessage("user_id",":--"+ params[0]);
-                        Logger.printMessage("favourite_id",":--"+ params[1]);
-                        Logger.printMessage("favoriteProsDeleteAPI",favoriteProsDeleteAPI);
+                        Logger.printMessage("user_id", ":--" + params[0]);
+                        Logger.printMessage("favourite_id", ":--" + params[1]);
+                        Logger.printMessage("favoriteProsDeleteAPI", favoriteProsDeleteAPI);
 
                         Request request = new Request.Builder()
                                 .post(requestBody)
@@ -2150,7 +2144,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void getSearchArea(final onSearchZipCallback callback,String... params) {
+    public void getSearchArea(final onSearchZipCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2168,7 +2162,7 @@ public class ProServiceApiHelper {
 
                     try {
                         String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Logger.printMessage("searchLocationAPI", "" + searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)
                                 .build();
@@ -2294,9 +2288,9 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String geocodenotiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[0]+","+ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[1]
-                                +"&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("geocode",geocodenotiAPI);
+                        String geocodenotiAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[0] + "," + ProServiceApiHelper.getInstance(mcontext).getCurrentLatLng()[1]
+                                + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        Logger.printMessage("geocode", geocodenotiAPI);
                         Request request = new Request.Builder()
                                 .get()
                                 .url(geocodenotiAPI)
@@ -2335,7 +2329,7 @@ public class ProServiceApiHelper {
     }
 
 
-    public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback,String... params) {
+    public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2353,7 +2347,7 @@ public class ProServiceApiHelper {
 
                     try {
                         String searchLocalProject = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Logger.printMessage("searchLocationAPI", "" + searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)
                                 .build();
@@ -2374,24 +2368,24 @@ public class ProServiceApiHelper {
 
                                 JSONObject innerIncer = predictions.getJSONObject(i);
 
-                                    if (innerIncer.has("terms") &&
-                                            innerIncer.getJSONArray("terms").length() > 0) {
+                                if (innerIncer.has("terms") &&
+                                        innerIncer.getJSONArray("terms").length() > 0) {
 
-                                        /**
-                                         * loop through address component
-                                         * for country and state
-                                         */
+                                    /**
+                                     * loop through address component
+                                     * for country and state
+                                     */
 
-                                        JSONArray terms = innerIncer.getJSONArray("terms");
+                                    JSONArray terms = innerIncer.getJSONArray("terms");
 
-                                        for (int j = 0; j < terms.length(); j++) {
-                                            if (terms.getJSONObject(j).getString("value").contains("United States") ||
-                                                    terms.getJSONObject(j).getString("value").contains("Canada")) {
-                                                addressList.add(innerIncer.getString("description"));
-                                              break;
-                                            }
+                                    for (int j = 0; j < terms.length(); j++) {
+                                        if (terms.getJSONObject(j).getString("value").contains("United States") ||
+                                                terms.getJSONObject(j).getString("value").contains("Canada")) {
+                                            addressList.add(innerIncer.getString("description"));
+                                            break;
                                         }
                                     }
+                                }
                             }
                         }
 
@@ -2428,7 +2422,7 @@ public class ProServiceApiHelper {
      * @param callback
      */
 
-    public void getZipLocationStateAPI(final getApiProcessCallback callback,String... params) {
+    public void getZipLocationStateAPI(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2447,7 +2441,7 @@ public class ProServiceApiHelper {
                     try {
                         String query = URLEncoder.encode(params[0], "utf-8");
                         String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Logger.printMessage("searchLocationAPI", "" + searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)
                                 .build();
@@ -2460,7 +2454,7 @@ public class ProServiceApiHelper {
                         if (mainRes.getString("status").equalsIgnoreCase("OK")) {
                             return responseString;
                         } else {
-                            exception =mainRes.getString("status");
+                            exception = mainRes.getString("status");
                             return exception;
                         }
                     } catch (Exception e) {
@@ -2487,9 +2481,9 @@ public class ProServiceApiHelper {
     }
 
 
-
     /**
      * get Location List code  using google api
+     *
      * @param callback
      * @param params
      */
@@ -2511,14 +2505,14 @@ public class ProServiceApiHelper {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("category_search", ":-"+params[1]);
-                        Logger.printMessage("zip_search",":-"+ params[2]);
-                        Logger.printMessage("prosListingAPI",prosListingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2]);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("category_search", ":-" + params[1]);
+                        Logger.printMessage("zip_search", ":-" + params[2]);
+                        Logger.printMessage("prosListingAPI", prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2]);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(prosListingAPI+params[0]+"&category_search="+params[1]+"&zip_search="+params[2])
+                                .url(prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2])
                                 .build();
 
                         Response response = client.newCall(request).execute();
@@ -2581,9 +2575,9 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("pro_id",":-"+params[1]);
-                        Logger.printMessage("updateUserInformationAPI",favouriteProAdddeleteAPI);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("pro_id", ":-" + params[1]);
+                        Logger.printMessage("updateUserInformationAPI", favouriteProAdddeleteAPI);
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", params[0])
@@ -2631,7 +2625,6 @@ public class ProServiceApiHelper {
     }
 
 
-
     /**
      * get DashBoard details
      *
@@ -2658,7 +2651,7 @@ public class ProServiceApiHelper {
                                 .url(dashAPI)
                                 .build();
 
-                        Logger.printMessage("homeownerDashboardAPI",dashAPI);
+                        Logger.printMessage("homeownerDashboardAPI", dashAPI);
 
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
@@ -2716,19 +2709,18 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("pro_id",":-"+params[1]);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("pro_id", ":-" + params[1]);
 
 
-                        String prosIndividualListAPI = prosIndividualListingAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1];
+                        String prosIndividualListAPI = prosIndividualListingAPI + "?" + "user_id=" + params[0] + "&pro_id=" + params[1];
 
-                        Logger.printMessage("prosIndividualListAPI",prosIndividualListAPI);
+                        Logger.printMessage("prosIndividualListAPI", prosIndividualListAPI);
 
                         Request request = new Request.Builder()
                                 .get()
                                 .url(prosIndividualListAPI)
                                 .build();
-
 
 
                         Response response = okHttpClient.newCall(request).execute();
@@ -2770,7 +2762,6 @@ public class ProServiceApiHelper {
     }
 
 
-
     /**
      * For add review of user
      *
@@ -2800,11 +2791,11 @@ public class ProServiceApiHelper {
                                 .add("review_message", params[3])
                                 .build();
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("pro_id",":-"+params[1]);
-                        Logger.printMessage("review_rate",":-"+params[2]);
-                        Logger.printMessage("review_message",":-"+params[3]);
-                        Logger.printMessage("prosAddReview",prosAddReviewAPI);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("pro_id", ":-" + params[1]);
+                        Logger.printMessage("review_rate", ":-" + params[2]);
+                        Logger.printMessage("review_message", ":-" + params[3]);
+                        Logger.printMessage("prosAddReview", prosAddReviewAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
@@ -2872,16 +2863,16 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("pro_id",":-"+params[1]);
-                        Logger.printMessage("start_from",":-"+params[2]);
-                        Logger.printMessage("perpage",":-"+params[3]);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("pro_id", ":-" + params[1]);
+                        Logger.printMessage("start_from", ":-" + params[2]);
+                        Logger.printMessage("perpage", ":-" + params[3]);
 
-                        Logger.printMessage("prosAllReviewAPI",prosAllReviewAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1]+"&start_from="+params[2]+"&perpage="+params[3]);
+                        Logger.printMessage("prosAllReviewAPI", prosAllReviewAPI + "?" + "user_id=" + params[0] + "&pro_id=" + params[1] + "&start_from=" + params[2] + "&perpage=" + params[3]);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(prosAllReviewAPI + "?"+"user_id="+params[0]+"&pro_id="+params[1]+"&start_from="+params[2]+"&perpage="+params[3])
+                                .url(prosAllReviewAPI + "?" + "user_id=" + params[0] + "&pro_id=" + params[1] + "&start_from=" + params[2] + "&perpage=" + params[3])
                                 .build();
 
                         Response response = okHttpClient.newCall(request).execute();
@@ -2923,8 +2914,6 @@ public class ProServiceApiHelper {
     }
 
 
-
-
     /**
      * get portfolio image listing
      *
@@ -2948,13 +2937,13 @@ public class ProServiceApiHelper {
                     try {
                         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        Logger.printMessage("portfolio_id",":-"+params[0]);
+                        Logger.printMessage("portfolio_id", ":-" + params[0]);
 
-                        Logger.printMessage("prosIndividualPortfolioImageAPI",prosIndividualPortfolioImageAPI + "?"+"portfolio_id="+params[0]);
+                        Logger.printMessage("prosIndividualPortfolioImageAPI", prosIndividualPortfolioImageAPI + "?" + "portfolio_id=" + params[0]);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(prosIndividualPortfolioImageAPI + "?"+"portfolio_id="+params[0])
+                                .url(prosIndividualPortfolioImageAPI + "?" + "portfolio_id=" + params[0])
                                 .build();
 
                         Response response = okHttpClient.newCall(request).execute();
@@ -2996,8 +2985,6 @@ public class ProServiceApiHelper {
     }
 
 
-
-
     /**
      * For add report review of user
      *
@@ -3026,10 +3013,10 @@ public class ProServiceApiHelper {
                                 .add("report_comment", params[2])
                                 .build();
 
-                        Logger.printMessage("user_id",":-"+params[0]);
-                        Logger.printMessage("review_report_id",":-"+params[1]);
-                        Logger.printMessage("report_comment",":-"+params[2]);
-                        Logger.printMessage("prosReportReviewAPI",prosReportReviewAPI);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("review_report_id", ":-" + params[1]);
+                        Logger.printMessage("report_comment", ":-" + params[2]);
+                        Logger.printMessage("prosReportReviewAPI", prosReportReviewAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
@@ -3043,7 +3030,7 @@ public class ProServiceApiHelper {
                         String response_string = resposne.body().string();
                         JSONObject mainResponseObj = new JSONObject(response_string);
 
-                        Logger.printMessage("reportReviewResponseObj",""+mainResponseObj);
+                        Logger.printMessage("reportReviewResponseObj", "" + mainResponseObj);
 
                         if (mainResponseObj.getBoolean("response")) {
                             exception = "";
@@ -3077,6 +3064,106 @@ public class ProServiceApiHelper {
     }
 
 
+    /**
+     * UpLoad Profile Image
+     *
+     * @param callback
+     * @param params
+     */
+
+    public void upLoadProfileImage(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+                File upload_temp;
+
+                @Override
+                protected void onPreExecute() {
+
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                    try {
+                        if (!params[1].equals("")) {
+                            try {
+                                Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[1]);
+                                Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
+                                upload_temp = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
+                                upload_temp.createNewFile();
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                                byte[] bitmapdata = bos.toByteArray();
+
+                                FileOutputStream fos = new FileOutputStream(upload_temp);
+                                fos.write(bitmapdata);
+                                fos.flush();
+                                fos.close();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                return null;
+                            }
+
+                        }
+                        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+                        MultipartBody.Builder requestBody = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("user_id", params[0]);
+                        if (upload_temp != null) {
+                            Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
+                            requestBody.addFormDataPart("profile_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
+                        } else {
+                            requestBody.addFormDataPart("profile_image", "");
+
+                        }
+
+                        Request request = new Request.Builder()
+                                .post(requestBody.build())
+                                .url(profileImageAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.
+
+                    executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+
+    }
 
 
     /**

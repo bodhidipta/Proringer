@@ -13,6 +13,7 @@ public class ObservableHorizontalScrollView extends HorizontalScrollView {
 
     public interface OnScrollListener {
         public void onScrollChanged(ObservableHorizontalScrollView scrollView, int x, int y, int oldX, int oldY);
+
         public void onEndScroll(ObservableHorizontalScrollView scrollView);
     }
 
@@ -86,6 +87,7 @@ public class ObservableHorizontalScrollView extends HorizontalScrollView {
     public OnScrollListener getOnScrollListener() {
         return mOnScrollListener;
     }
+
     public void setOnScrollListener(OnScrollListener mOnEndScrollListener) {
         this.mOnScrollListener = mOnEndScrollListener;
     }

@@ -118,7 +118,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     }
 
 
-
     /**
      * Only if you need to restore open/close state when the orientation is changed.
      * Call this method in {@link android.app.Activity#onSaveInstanceState(Bundle)}

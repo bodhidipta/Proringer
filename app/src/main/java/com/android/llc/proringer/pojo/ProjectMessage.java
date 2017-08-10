@@ -5,7 +5,7 @@ package com.android.llc.proringer.pojo;
  */
 
 public class ProjectMessage {
-    String tagName="";
+    String tagName = "";
 
     public String getTagName() {
         return tagName;

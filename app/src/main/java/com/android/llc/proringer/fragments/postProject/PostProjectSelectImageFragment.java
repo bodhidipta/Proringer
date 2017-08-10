@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.appconstant.ProConstant;
@@ -25,7 +26,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+
 import java.io.File;
+
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -37,10 +40,11 @@ public class PostProjectSelectImageFragment extends Fragment {
     private static final int PICK_IMAGE = 3;
     private String mCurrentPhotoPath = "";
     private ImageView image_pager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.content_post_project_image,container,false);
+        return inflater.inflate(R.layout.content_post_project_image, container, false);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class PostProjectSelectImageFragment extends Fragment {
         view.findViewById(R.id.add_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent((PostProjectActivity)getActivity(), PermissionController.class);
+                Intent intent = new Intent((PostProjectActivity) getActivity(), PermissionController.class);
                 intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
                 startActivityForResult(intent, 200);
             }
@@ -62,7 +66,7 @@ public class PostProjectSelectImageFragment extends Fragment {
                 /**
                  * fragment calling
                  */
-                ((PostProjectActivity) getActivity()).mCurrentPhotoPath=mCurrentPhotoPath;
+                ((PostProjectActivity) getActivity()).mCurrentPhotoPath = mCurrentPhotoPath;
                 ((PostProjectActivity) getActivity()).increaseStep();
                 ((PostProjectActivity) getActivity()).changeFragmentNext(4);
             }
@@ -97,7 +101,7 @@ public class PostProjectSelectImageFragment extends Fragment {
                     if (!dataFile.exists())
                         Logger.printMessage("image****", "data file does not exists");
                     mCurrentPhotoPath = dataFile.getAbsolutePath();
-                    Glide.with((PostProjectActivity)getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(image_pager) {
+                    Glide.with((PostProjectActivity) getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(image_pager) {
                         /**
                          * {@inheritDoc}
                          * If no {@link GlideAnimation} is given or if the animation does not set the
@@ -126,7 +130,7 @@ public class PostProjectSelectImageFragment extends Fragment {
     }
 
     public String getRealPathFromURI(Uri contentURI) {
-        Cursor cursor = ((PostProjectActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
+        Cursor cursor = ((PostProjectActivity) getActivity()).getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {
             // Source is Dropbox or other similar local file path
             return contentURI.getPath();
@@ -138,7 +142,7 @@ public class PostProjectSelectImageFragment extends Fragment {
     }
 
     private void showImagePickerOption() {
-        new AlertDialog.Builder((PostProjectActivity)getActivity())
+        new AlertDialog.Builder((PostProjectActivity) getActivity())
                 .setCancelable(true)
                 .setTitle("Property image")
                 .setMessage("please choose image source type.")
@@ -147,7 +151,7 @@ public class PostProjectSelectImageFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         Intent intent = new Intent(Intent.ACTION_PICK);
-                        if (intent.resolveActivity(((PostProjectActivity)getActivity()).getPackageManager()) != null) {
+                        if (intent.resolveActivity(((PostProjectActivity) getActivity()).getPackageManager()) != null) {
                             intent.setType("image/*");
                             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 

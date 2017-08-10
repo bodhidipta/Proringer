@@ -22,10 +22,11 @@ public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetail
     JSONArray serviceAreaJsonArray;
     Context context;
     ProsProjectDetailsActivity.onOptionSelected callback;
-    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray,ProsProjectDetailsActivity.onOptionSelected callback){
-        this.context=context;
-        this.serviceAreaJsonArray=serviceJsonArray;
-        this.callback=callback;
+
+    public ProDetailsServiceAreaAdapter(Context context, JSONArray serviceJsonArray, ProsProjectDetailsActivity.onOptionSelected callback) {
+        this.context = context;
+        this.serviceAreaJsonArray = serviceJsonArray;
+        this.callback = callback;
     }
 
     @Override
@@ -37,10 +38,10 @@ public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetail
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         try {
-            if(position==13){
+            if (position == 13) {
                 holder.tv_name.setText("More...");
                 holder.tv_name.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-            }else {
+            } else {
                 holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("city_services"));
             }
         } catch (JSONException e) {
@@ -49,30 +50,30 @@ public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetail
         holder.tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if(position==13) {
-                        callback.onItemPassed(position,"More");
-                    }
-                    else {
-                        callback.onItemPassed(position,"");
-                    }
+                if (position == 13) {
+                    callback.onItemPassed(position, "More");
+                } else {
+                    callback.onItemPassed(position, "");
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-            if (serviceAreaJsonArray.length()>=14){
+        if (serviceAreaJsonArray.length() >= 14) {
             return 14;
-            }else {
-                return serviceAreaJsonArray.length();
-            }
+        } else {
+            return serviceAreaJsonArray.length();
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView tv_name;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_name= (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
         }
     }
 }

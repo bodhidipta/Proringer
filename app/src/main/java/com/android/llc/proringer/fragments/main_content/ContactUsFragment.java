@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -57,22 +58,21 @@ public class ContactUsFragment extends Fragment {
                 if (email.getText().toString().trim().equals("")) {
                     email.setError("Email name can not be blank.");
 
-                    if(phonenumber.getText().toString().trim().equals("")){
+                    if (phonenumber.getText().toString().trim().equals("")) {
                         phonenumber.setError("Phone number name can not be blank.");
                         phonenumber.requestFocus();
-                    }
-                    else {
-                        if (contact_info.getText().toString().trim().equals("")){
+                    } else {
+                        if (contact_info.getText().toString().trim().equals("")) {
                             contact_info.setError("Phone number name can not be blank.");
                             contact_info.requestFocus();
-                        }else {
+                        } else {
                             getSubmitParams();
                         }
                     }
 
                 } else {
-                        email.setError("Invalid email address.");
-                        email.requestFocus();
+                    email.setError("Invalid email address.");
+                    email.requestFocus();
                 }
             }
         }

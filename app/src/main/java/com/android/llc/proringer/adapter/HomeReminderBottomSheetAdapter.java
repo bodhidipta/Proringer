@@ -11,7 +11,6 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.BottomSheetGlobalList;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,10 +23,10 @@ public class HomeReminderBottomSheetAdapter extends RecyclerView.Adapter<HomeRem
     private BottomSheetGlobalList.onOptionSelected callback;
     BottomSheetDialog dialog;
 
-    public HomeReminderBottomSheetAdapter(Context context, List<String> arrayList,BottomSheetDialog dialog, BottomSheetGlobalList.onOptionSelected callback) {
+    public HomeReminderBottomSheetAdapter(Context context, List<String> arrayList, BottomSheetDialog dialog, BottomSheetGlobalList.onOptionSelected callback) {
         this.context = context;
         this.arrayList = arrayList;
-        this.dialog=dialog;
+        this.dialog = dialog;
         this.callback = callback;
     }
 

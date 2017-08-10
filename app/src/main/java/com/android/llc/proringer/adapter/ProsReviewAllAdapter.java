@@ -1,4 +1,5 @@
 package com.android.llc.proringer.adapter;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -16,12 +17,14 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -33,11 +36,12 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
     Context context;
     JSONArray jsonInfoArray;
 
-    public ProsReviewAllAdapter(Context context,JSONArray jsonInfoArray){
-        this.context=context;
-        this.jsonInfoArray=jsonInfoArray;
+    public ProsReviewAllAdapter(Context context, JSONArray jsonInfoArray) {
+        this.context = context;
+        this.jsonInfoArray = jsonInfoArray;
 
     }
+
     @Override
     public ProsReviewAllAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pros_review_all, parent, false);
@@ -61,11 +65,11 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 public void onClick(View view) {
                     try {
 
-                        Intent intent=new Intent(context,ProsReportAbuseActivity.class);
+                        Intent intent = new Intent(context, ProsReportAbuseActivity.class);
                         intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
                         context.startActivity(intent);
 
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
@@ -79,14 +83,14 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                     int lineCount = holder.tv_review_comment.getLineCount();
                     Log.d("count", "Number of lines is " + lineCount);
 
-                    if (lineCount>1){
+                    if (lineCount > 1) {
 
                         /**
                          * Contact us spannable text with click listener
                          */
                         String contactTextOne = null;
                         try {
-                            if(jsonInfoArray.getJSONObject(position).getString("rater_description").trim().length()>=60) {
+                            if (jsonInfoArray.getJSONObject(position).getString("rater_description").trim().length() >= 60) {
                                 contactTextOne = jsonInfoArray.getJSONObject(position).getString("rater_description").substring(0, 60) + "....";
                             }
                         } catch (JSONException e) {
@@ -110,7 +114,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                 widget.invalidate();
                                 Logger.printMessage("SpanHello", "click");
                                 try {
-                                    ((ProsReviewAllListActivity)context).showReviewReplyResponseDescribetionDialog("Review",jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
+                                    ((ProsReviewAllListActivity) context).showReviewReplyResponseDescribetionDialog("Review", jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -128,15 +132,13 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 }
             });
 
-            if (jsonInfoArray.getJSONObject(position).getInt("review_reply")==0){
+            if (jsonInfoArray.getJSONObject(position).getInt("review_reply") == 0) {
                 holder.CardViewReply.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 holder.CardViewReply.setVisibility(View.VISIBLE);
-                holder.tv_review_reply_by.setText(((ProsReviewAllListActivity)context).pros_company_name);
-                holder.tv_review_reply_on_date.setText("responded on "+jsonInfoArray.getJSONObject(position).getString("review_reply_date"));
+                holder.tv_review_reply_by.setText(((ProsReviewAllListActivity) context).pros_company_name);
+                holder.tv_review_reply_on_date.setText("responded on " + jsonInfoArray.getJSONObject(position).getString("review_reply_date"));
                 holder.tv_review_reply.setText(jsonInfoArray.getJSONObject(position).getString("review_reply_content"));
-
 
 
                 holder.tv_review_reply.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -146,14 +148,14 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                         int lineCount = holder.tv_review_reply.getLineCount();
                         Log.d("count", "Number of lines is " + lineCount);
 
-                        if (lineCount>1){
+                        if (lineCount > 1) {
 
                             /**
                              * Contact us spannable text with click listener
                              */
                             String contactTextOne = null;
                             try {
-                                if(jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim().length()>=60) {
+                                if (jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim().length() >= 60) {
                                     contactTextOne = jsonInfoArray.getJSONObject(position).getString("review_reply_content").substring(0, 60) + "....";
                                 }
                             } catch (JSONException e) {
@@ -177,7 +179,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                     widget.invalidate();
                                     Logger.printMessage("SpanHello", "click");
                                     try {
-                                        ((ProsReviewAllListActivity)context).showReviewReplyResponseDescribetionDialog("Reply",jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim());
+                                        ((ProsReviewAllListActivity) context).showReviewReplyResponseDescribetionDialog("Reply", jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -197,12 +199,10 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 });
 
 
-
-
             }
 
-            if(position==jsonInfoArray.length()-1){
-                ((ProsReviewAllListActivity)context).loadReviewList(jsonInfoArray.length(),10);
+            if (position == jsonInfoArray.length() - 1) {
+                ((ProsReviewAllListActivity) context).loadReviewList(jsonInfoArray.length(), 10);
             }
 
         } catch (JSONException e) {
@@ -216,36 +216,37 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ProRegularTextView tv_name,tv_review_date,tv_report,tv_review_comment,tv_review_reply,tv_review_reply_by,tv_review_reply_on_date;
+        ProRegularTextView tv_name, tv_review_date, tv_report, tv_review_comment, tv_review_reply, tv_review_reply_by, tv_review_reply_on_date;
         RatingBar rbar;
         ImageView img_profile;
         CardView CardViewReply;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            img_profile= (ImageView) itemView.findViewById(R.id.img_profile);
+            img_profile = (ImageView) itemView.findViewById(R.id.img_profile);
 
-            tv_name= (ProRegularTextView) itemView.findViewById(R.id.tv_name);
-            tv_review_date= (ProRegularTextView) itemView.findViewById(R.id.tv_review_date);
-            tv_report= (ProRegularTextView) itemView.findViewById(R.id.tv_report);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_review_date = (ProRegularTextView) itemView.findViewById(R.id.tv_review_date);
+            tv_report = (ProRegularTextView) itemView.findViewById(R.id.tv_report);
 
-            tv_review_comment= (ProRegularTextView) itemView.findViewById(R.id.tv_review_comment);
+            tv_review_comment = (ProRegularTextView) itemView.findViewById(R.id.tv_review_comment);
             tv_review_comment.setMovementMethod(LinkMovementMethod.getInstance());
 
-            CardViewReply= (CardView) itemView.findViewById(R.id.CardViewReply);
+            CardViewReply = (CardView) itemView.findViewById(R.id.CardViewReply);
 
-            tv_review_reply= (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply);
+            tv_review_reply = (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply);
             tv_review_reply.setMovementMethod(LinkMovementMethod.getInstance());
 
-            tv_review_reply_by= (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply_by);
-            tv_review_reply_on_date= (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply_on_date);
+            tv_review_reply_by = (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply_by);
+            tv_review_reply_on_date = (ProRegularTextView) itemView.findViewById(R.id.tv_review_reply_on_date);
 
-            rbar= (RatingBar) itemView.findViewById(R.id.rbar);
+            rbar = (RatingBar) itemView.findViewById(R.id.rbar);
         }
     }
 
-    public void  NotifyMeInLazyLoad(JSONArray jsonInfoArray){
-        this.jsonInfoArray=jsonInfoArray;
+    public void NotifyMeInLazyLoad(JSONArray jsonInfoArray) {
+        this.jsonInfoArray = jsonInfoArray;
         notifyDataSetChanged();
     }
 }

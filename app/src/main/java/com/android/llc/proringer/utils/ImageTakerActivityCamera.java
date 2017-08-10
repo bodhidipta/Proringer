@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-
 import com.android.llc.proringer.BuildConfig;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProConstant;
@@ -123,18 +122,17 @@ public class ImageTakerActivityCamera extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        Log.i("image Taker", "requestCode : " + requestCode+" resultCode "+resultCode);
+        Log.i("image Taker", "requestCode : " + requestCode + " resultCode " + resultCode);
 
-        if (REQUEST_IMAGE_CAPTURE == requestCode && resultCode==RESULT_OK) {
+        if (REQUEST_IMAGE_CAPTURE == requestCode && resultCode == RESULT_OK) {
             if (finalFile != null) {
                 findViewById(R.id.tutorial).setVisibility(View.GONE);
                 Glide.with(getApplicationContext()).load(finalFile).fitCenter().into(profileimage);
             }
-        }else if (resultCode==RESULT_CANCELED){
+        } else if (resultCode == RESULT_CANCELED) {
             onBackPressed();
         }
 

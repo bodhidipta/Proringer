@@ -9,7 +9,7 @@ public class AddressData {
     private String state_code = "";
     private String country_code = "";
     private String zip_code = "";
-    private String city="";
+    private String city = "";
     private String latitude = "";
     private String longitude = "";
 

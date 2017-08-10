@@ -38,7 +38,7 @@ import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 
-public class LandScreenActivity extends AppCompatActivity{
+public class LandScreenActivity extends AppCompatActivity {
 
     ImageView nav_toggle;
     private DrawerLayout mDrawer;

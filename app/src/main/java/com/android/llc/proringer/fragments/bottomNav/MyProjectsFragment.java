@@ -19,6 +19,7 @@ import com.android.llc.proringer.adapter.ProjectListingAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectPostedData;
+
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ import java.util.List;
 public class MyProjectsFragment extends Fragment {
     ProgressDialog pgDialog;
     RecyclerView project_list;
-    LinearLayout no_project_available,LLNetworkDisconnection;
+    LinearLayout no_project_available, LLNetworkDisconnection;
 
     @Nullable
     @Override
@@ -54,23 +55,22 @@ public class MyProjectsFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        no_project_available= (LinearLayout) view.findViewById(R.id.no_project_available);
-        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
-        project_list=(RecyclerView) view.findViewById(R.id.project_list);
-        project_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+        no_project_available = (LinearLayout) view.findViewById(R.id.no_project_available);
+        LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        project_list = (RecyclerView) view.findViewById(R.id.project_list);
+        project_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
         loadList();
     }
 
-    public void loadList()
-    {
+    public void loadList() {
         project_list.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                 pgDialog.setTitle("My Projects");
                 pgDialog.setCancelable(false);
                 pgDialog.setMessage("Getting MyProject list.Please wait...");
@@ -84,12 +84,12 @@ public class MyProjectsFragment extends Fragment {
                     pgDialog.dismiss();
 
                 if (projectList != null && projectList.size() > 0)
-                    project_list.setAdapter(new ProjectListingAdapter((LandScreenActivity)getActivity(), projectList, new onOptionSelected() {
+                    project_list.setAdapter(new ProjectListingAdapter((LandScreenActivity) getActivity(), projectList, new onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, String value) {
                             ProApplication.getInstance().setDataSelected((ProjectPostedData) projectList.get(position));
-                            if(ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("A")
-                                    ||ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("Y")){
+                            if (ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("A")
+                                    || ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("Y")) {
                                 ((LandScreenActivity) getActivity()).transactMyProjectsDetails();
                             }
 
@@ -104,7 +104,7 @@ public class MyProjectsFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     project_list.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
@@ -130,6 +130,7 @@ public class MyProjectsFragment extends Fragment {
         });
 
     }
+
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }

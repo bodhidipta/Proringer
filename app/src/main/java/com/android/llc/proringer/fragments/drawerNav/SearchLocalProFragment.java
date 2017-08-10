@@ -51,7 +51,7 @@ public class SearchLocalProFragment extends Fragment {
     ProgressDialog pgDialog2;
     ProgressDialog pgDialog3;
     SearchProListAdapter searchProListAdapter;
-    LinearLayout LLMain,LLNetworkDisconnection;
+    LinearLayout LLMain, LLNetworkDisconnection;
 
     @Nullable
     @Override
@@ -63,11 +63,11 @@ public class SearchLocalProFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
-        pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+        pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
 
-        LLMain= (LinearLayout) view.findViewById(R.id.LLMain);
-        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
+        LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         loadList();
 
@@ -83,10 +83,10 @@ public class SearchLocalProFragment extends Fragment {
         LLMain.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog1 = new ProgressDialog((LandScreenActivity)getActivity());
+                pgDialog1 = new ProgressDialog((LandScreenActivity) getActivity());
                 pgDialog1.setTitle("Local Pros");
                 pgDialog1.setCancelable(false);
                 pgDialog1.setMessage("Getting local pros list.Please wait...");
@@ -107,10 +107,10 @@ public class SearchLocalProFragment extends Fragment {
 
                         if (searchProListAdapter == null) {
 
-                            searchProListAdapter = new SearchProListAdapter((LandScreenActivity)getActivity(), info_array, new onOptionSelected() {
+                            searchProListAdapter = new SearchProListAdapter((LandScreenActivity) getActivity(), info_array, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(String value, String addorDelete) {
-                                    Logger.printMessage("value",":--"+value);
+                                    Logger.printMessage("value", ":--" + value);
                                     if (addorDelete.trim().equals("Y")) {
                                         deleteFavPro(value);
                                     } else {
@@ -134,7 +134,7 @@ public class SearchLocalProFragment extends Fragment {
                     pgDialog1.dismiss();
 
 
-                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
@@ -163,15 +163,15 @@ public class SearchLocalProFragment extends Fragment {
 
     public void deleteFavPro(final String pros_id) {
 
-        TextView title = new TextView((LandScreenActivity)getActivity());
+        TextView title = new TextView((LandScreenActivity) getActivity());
         title.setText("Are you sure you want to remove from favorites?");
 //                title.setBackgroundResource(R.drawable.gradient);
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
-        title.setTextColor(((LandScreenActivity)getActivity()).getResources().getColor(R.color.colorTextBlack));
+        title.setTextColor(((LandScreenActivity) getActivity()).getResources().getColor(R.color.colorTextBlack));
         title.setTextSize(18);
 
-        new AlertDialog.Builder((LandScreenActivity)getActivity())
+        new AlertDialog.Builder((LandScreenActivity) getActivity())
                 .setCustomTitle(title)
 
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -180,55 +180,55 @@ public class SearchLocalProFragment extends Fragment {
                         dialog.dismiss();
                         ///////////delete from favorite list
                         try {
-                            ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                                                     @Override
-                                                                                                     public void onStart() {
-                                                                                                         pgDialog2 = new ProgressDialog((LandScreenActivity)getActivity());
-                                                                                                         pgDialog2.setTitle("Delete Favorite pros");
-                                                                                                         pgDialog2.setMessage("project is deleting.Please wait....");
-                                                                                                         pgDialog2.setCancelable(false);
-                                                                                                         pgDialog2.show();
+                            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                                                          @Override
+                                                                                                                          public void onStart() {
+                                                                                                                              pgDialog2 = new ProgressDialog((LandScreenActivity) getActivity());
+                                                                                                                              pgDialog2.setTitle("Delete Favorite pros");
+                                                                                                                              pgDialog2.setMessage("project is deleting.Please wait....");
+                                                                                                                              pgDialog2.setCancelable(false);
+                                                                                                                              pgDialog2.show();
 
-                                                                                                     }
+                                                                                                                          }
 
-                                                                                                     @Override
-                                                                                                     public void onComplete(String message) {
+                                                                                                                          @Override
+                                                                                                                          public void onComplete(String message) {
 
-                                                                                                         if (pgDialog2 != null && pgDialog2.isShowing())
-                                                                                                             pgDialog2.dismiss();
+                                                                                                                              if (pgDialog2 != null && pgDialog2.isShowing())
+                                                                                                                                  pgDialog2.dismiss();
 
-                                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                                                                                                 .setTitle("Delete Favorite pros")
-                                                                                                                 .setMessage("" + message)
-                                                                                                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                                     @Override
-                                                                                                                     public void onClick(DialogInterface dialog, int which) {
-                                                                                                                         dialog.dismiss();
-                                                                                                                         loadList();
-                                                                                                                     }
-                                                                                                                 })
-                                                                                                                 .setCancelable(false)
-                                                                                                                 .show();
-                                                                                                     }
+                                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                                                      .setTitle("Delete Favorite pros")
+                                                                                                                                      .setMessage("" + message)
+                                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                                          @Override
+                                                                                                                                          public void onClick(DialogInterface dialog, int which) {
+                                                                                                                                              dialog.dismiss();
+                                                                                                                                              loadList();
+                                                                                                                                          }
+                                                                                                                                      })
+                                                                                                                                      .setCancelable(false)
+                                                                                                                                      .show();
+                                                                                                                          }
 
-                                                                                                     @Override
-                                                                                                     public void onError(String error) {
-                                                                                                         if (pgDialog2 != null && pgDialog2.isShowing())
-                                                                                                             pgDialog2.dismiss();
+                                                                                                                          @Override
+                                                                                                                          public void onError(String error) {
+                                                                                                                              if (pgDialog2 != null && pgDialog2.isShowing())
+                                                                                                                                  pgDialog2.dismiss();
 
-                                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                                                                                                 .setTitle("Delete Fav pros")
-                                                                                                                 .setMessage("" + error)
-                                                                                                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                                     @Override
-                                                                                                                     public void onClick(DialogInterface dialog, int which) {
-                                                                                                                         dialog.dismiss();
-                                                                                                                     }
-                                                                                                                 })
-                                                                                                                 .setCancelable(false)
-                                                                                                                 .show();
-                                                                                                     }
-                                                                                                 },
+                                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                                                      .setTitle("Delete Fav pros")
+                                                                                                                                      .setMessage("" + error)
+                                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                                          @Override
+                                                                                                                                          public void onClick(DialogInterface dialog, int which) {
+                                                                                                                                              dialog.dismiss();
+                                                                                                                                          }
+                                                                                                                                      })
+                                                                                                                                      .setCancelable(false)
+                                                                                                                                      .show();
+                                                                                                                          }
+                                                                                                                      },
                                     ProApplication.getInstance().getUserId(),
                                     pros_id
                             );
@@ -249,58 +249,58 @@ public class SearchLocalProFragment extends Fragment {
 
     public void addFavPro(final String pros_id) {
         try {
-            ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                                     @Override
-                                                                                     public void onStart() {
-                                                                                         pgDialog3 = new ProgressDialog((LandScreenActivity)getActivity());
-                                                                                         pgDialog3.setTitle("Add Favorite pros");
-                                                                                         pgDialog3.setMessage("A project is adding.Please wait....");
-                                                                                         pgDialog3.setCancelable(false);
-                                                                                         pgDialog3.show();
+            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                                          @Override
+                                                                                                          public void onStart() {
+                                                                                                              pgDialog3 = new ProgressDialog((LandScreenActivity) getActivity());
+                                                                                                              pgDialog3.setTitle("Add Favorite pros");
+                                                                                                              pgDialog3.setMessage("A project is adding.Please wait....");
+                                                                                                              pgDialog3.setCancelable(false);
+                                                                                                              pgDialog3.show();
 
-                                                                                     }
+                                                                                                          }
 
-                                                                                     @Override
-                                                                                     public void onComplete(String message) {
+                                                                                                          @Override
+                                                                                                          public void onComplete(String message) {
 
-                                                                                         if (pgDialog3 != null && pgDialog3.isShowing())
-                                                                                             pgDialog3.dismiss();
+                                                                                                              if (pgDialog3 != null && pgDialog3.isShowing())
+                                                                                                                  pgDialog3.dismiss();
 
 
-                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                                                                                 .setTitle("Add Favorite pros")
-                                                                                                 .setMessage("" + message)
-                                                                                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                     @Override
-                                                                                                     public void onClick(DialogInterface dialog, int which) {
-                                                                                                         dialog.dismiss();
-                                                                                                         loadList();
+                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                                      .setTitle("Add Favorite pros")
+                                                                                                                      .setMessage("" + message)
+                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                          @Override
+                                                                                                                          public void onClick(DialogInterface dialog, int which) {
+                                                                                                                              dialog.dismiss();
+                                                                                                                              loadList();
 
-                                                                                                     }
-                                                                                                 })
-                                                                                                 .setCancelable(false)
-                                                                                                 .show();
-                                                                                     }
+                                                                                                                          }
+                                                                                                                      })
+                                                                                                                      .setCancelable(false)
+                                                                                                                      .show();
+                                                                                                          }
 
-                                                                                     @Override
-                                                                                     public void onError(String error) {
-                                                                                         if (pgDialog3 != null && pgDialog3.isShowing())
-                                                                                             pgDialog3.dismiss();
+                                                                                                          @Override
+                                                                                                          public void onError(String error) {
+                                                                                                              if (pgDialog3 != null && pgDialog3.isShowing())
+                                                                                                                  pgDialog3.dismiss();
 
-                                                                                         new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                                                                                 .setTitle("Add Fav pros")
-                                                                                                 .setMessage("" + error)
-                                                                                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                     @Override
-                                                                                                     public void onClick(DialogInterface dialog, int which) {
-                                                                                                         dialog.dismiss();
-                                                                                                     }
-                                                                                                 })
-                                                                                                 .setCancelable(false)
-                                                                                                 .show();
+                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                                      .setTitle("Add Fav pros")
+                                                                                                                      .setMessage("" + error)
+                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                          @Override
+                                                                                                                          public void onClick(DialogInterface dialog, int which) {
+                                                                                                                              dialog.dismiss();
+                                                                                                                          }
+                                                                                                                      })
+                                                                                                                      .setCancelable(false)
+                                                                                                                      .show();
 
-                                                                                     }
-                                                                                 },
+                                                                                                          }
+                                                                                                      },
                     ProApplication.getInstance().getUserId(),
                     pros_id
             );

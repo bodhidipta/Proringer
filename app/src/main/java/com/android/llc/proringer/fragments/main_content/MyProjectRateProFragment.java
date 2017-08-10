@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.MyProjectRateProAdapter;
@@ -19,6 +20,7 @@ import com.android.llc.proringer.adapter.MyProjectRateProAdapter;
 public class MyProjectRateProFragment extends Fragment {
     RecyclerView recyclerView;
     MyProjectRateProAdapter myProjectRateProAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,10 +30,10 @@ public class MyProjectRateProFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView= (RecyclerView) view.findViewById(R.id.rcv_);
-        recyclerView.setLayoutManager(new LinearLayoutManager((LandScreenActivity)getActivity()));
+        recyclerView = (RecyclerView) view.findViewById(R.id.rcv_);
+        recyclerView.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
-        myProjectRateProAdapter=new MyProjectRateProAdapter((LandScreenActivity)getActivity());
+        myProjectRateProAdapter = new MyProjectRateProAdapter((LandScreenActivity) getActivity());
         recyclerView.setAdapter(myProjectRateProAdapter);
     }
 }

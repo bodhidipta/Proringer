@@ -69,7 +69,7 @@ public class MyProjectDetailsFragment extends Fragment {
         img_description.setText(ProApplication.getInstance().getDataSelected().getProject_name());
 
         if (!ProApplication.getInstance().getDataSelected().getProject_image().equals(""))
-            Glide.with((LandScreenActivity)getActivity()).load(ProApplication.getInstance().getDataSelected().getProject_image()).centerCrop().into(img_project);
+            Glide.with((LandScreenActivity) getActivity()).load(ProApplication.getInstance().getDataSelected().getProject_image()).centerCrop().into(img_project);
 
         Logger.printMessage("project_status", "" + ProApplication.getInstance().getDataSelected().getProject_status());
 
@@ -90,7 +90,7 @@ public class MyProjectDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                TextView title = new TextView((LandScreenActivity)getActivity());
+                TextView title = new TextView((LandScreenActivity) getActivity());
                 title.setText("Are you sure you want to close and remove this project?");
 //                title.setBackgroundResource(R.drawable.gradient);
                 title.setPadding(10, 10, 10, 10);
@@ -99,7 +99,7 @@ public class MyProjectDetailsFragment extends Fragment {
                 title.setTextSize(18);
 
 
-                new AlertDialog.Builder((LandScreenActivity)getActivity())
+                new AlertDialog.Builder((LandScreenActivity) getActivity())
                         .setCustomTitle(title)
                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -167,61 +167,61 @@ public class MyProjectDetailsFragment extends Fragment {
     }
 
     public void delete() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                           @Override
-                                                                           public void onStart() {
-                                                                               pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
-                                                                               pgDialog.setTitle("My project");
-                                                                               pgDialog.setMessage("Project is deleting.Please wait...");
-                                                                               pgDialog.setCancelable(false);
-                                                                               pgDialog.show();
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                                @Override
+                                                                                                public void onStart() {
+                                                                                                    pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
+                                                                                                    pgDialog.setTitle("My project");
+                                                                                                    pgDialog.setMessage("Project is deleting.Please wait...");
+                                                                                                    pgDialog.setCancelable(false);
+                                                                                                    pgDialog.show();
 
-                                                                           }
+                                                                                                }
 
-                                                                           @Override
-                                                                           public void onComplete(String message) {
+                                                                                                @Override
+                                                                                                public void onComplete(String message) {
 
 //                                                                          itemList.remove(position);
 //                                                                          notifyItemRemoved(position);
 
-                                                                               if (pgDialog != null && pgDialog.isShowing())
-                                                                                   pgDialog.dismiss();
+                                                                                                    if (pgDialog != null && pgDialog.isShowing())
+                                                                                                        pgDialog.dismiss();
 
 
-                                                                               new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                                                                       .setTitle("Delete My project")
-                                                                                       .setMessage("" + message)
-                                                                                       .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                           @Override
-                                                                                           public void onClick(DialogInterface dialog, int which) {
-                                                                                               dialog.dismiss();
-                                                                                               ((LandScreenActivity) getActivity()).toggleToolBar(false);
-                                                                                               ((LandScreenActivity) getActivity()).transactMyProjects();
-                                                                                           }
-                                                                                       })
-                                                                                       .setCancelable(false)
-                                                                                       .show();
-                                                                           }
+                                                                                                    new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                            .setTitle("Delete My project")
+                                                                                                            .setMessage("" + message)
+                                                                                                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                @Override
+                                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                                    dialog.dismiss();
+                                                                                                                    ((LandScreenActivity) getActivity()).toggleToolBar(false);
+                                                                                                                    ((LandScreenActivity) getActivity()).transactMyProjects();
+                                                                                                                }
+                                                                                                            })
+                                                                                                            .setCancelable(false)
+                                                                                                            .show();
+                                                                                                }
 
-                                                                           @Override
-                                                                           public void onError(String error) {
-                                                                               if (pgDialog != null && pgDialog.isShowing())
-                                                                                   pgDialog.dismiss();
+                                                                                                @Override
+                                                                                                public void onError(String error) {
+                                                                                                    if (pgDialog != null && pgDialog.isShowing())
+                                                                                                        pgDialog.dismiss();
 
-                                                                               new AlertDialog.Builder((LandScreenActivity)getActivity())
-                                                                                       .setTitle("My project deleting Error")
-                                                                                       .setMessage("" + error)
-                                                                                       .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                           @Override
-                                                                                           public void onClick(DialogInterface dialog, int which) {
-                                                                                               dialog.dismiss();
-                                                                                           }
-                                                                                       })
-                                                                                       .setCancelable(false)
-                                                                                       .show();
+                                                                                                    new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                            .setTitle("My project deleting Error")
+                                                                                                            .setMessage("" + error)
+                                                                                                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                @Override
+                                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                                    dialog.dismiss();
+                                                                                                                }
+                                                                                                            })
+                                                                                                            .setCancelable(false)
+                                                                                                            .show();
 
-                                                                           }
-                                                                       },
+                                                                                                }
+                                                                                            },
                 ProApplication.getInstance().getUserId(),
                 ProApplication.getInstance().getDataSelected().getId());
     }

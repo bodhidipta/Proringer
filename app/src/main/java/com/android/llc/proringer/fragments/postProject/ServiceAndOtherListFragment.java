@@ -53,13 +53,13 @@ public class ServiceAndOtherListFragment extends Fragment {
 
 
     public void selectService(String id) {
-        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                ((PostProjectActivity) (PostProjectActivity)getActivity()).serviceListing = listdata;
+                ((PostProjectActivity) (PostProjectActivity) getActivity()).serviceListing = listdata;
                 initAdapter(listdata);
 
             }
@@ -69,7 +69,7 @@ public class ServiceAndOtherListFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder((PostProjectActivity)getActivity())
+                new AlertDialog.Builder((PostProjectActivity) getActivity())
                         .setTitle("Error")
                         .setMessage("" + error)
                         .setCancelable(false)
@@ -85,7 +85,7 @@ public class ServiceAndOtherListFragment extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
+                pgDialog = new ProgressDialog((PostProjectActivity) getActivity());
                 pgDialog.setTitle("Preparing service");
                 pgDialog.setMessage("Getting service list.Please wait...");
                 pgDialog.setCancelable(false);
@@ -96,12 +96,12 @@ public class ServiceAndOtherListFragment extends Fragment {
     }
 
     private void initAdapter(LinkedList<ProCategoryData> itemData) {
-        adapter = new PostProjectServiceAndOtherListAdapter((PostProjectActivity)getActivity(),
+        adapter = new PostProjectServiceAndOtherListAdapter((PostProjectActivity) getActivity(),
                 itemData, PostProjectServiceAndOtherListAdapter.TYPE_LIST,
                 new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
-                        ((PostProjectActivity) getActivity()).isForth=true;
+                        ((PostProjectActivity) getActivity()).isForth = true;
                         if (step == 0) {
                             step++;
 

@@ -1,12 +1,8 @@
 package com.android.llc.proringer.utils;
 
-import android.app.usage.NetworkStats;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
-import android.net.NetworkInfo;
-
-import java.net.NetworkInterface;
 
 /**
  * Created by bodhidipta on 19/06/17.

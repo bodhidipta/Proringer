@@ -52,7 +52,7 @@ public class InviteAFriendFragment extends Fragment {
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         email = (ProLightEditText) view.findViewById(R.id.email);
         confirm_email = (ProLightEditText) view.findViewById(R.id.confirm_email);
-        invited_submit=(ProRegularTextView)view.findViewById(R.id.invited_submit);
+        invited_submit = (ProRegularTextView) view.findViewById(R.id.invited_submit);
         invited_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,11 +91,11 @@ public class InviteAFriendFragment extends Fragment {
     }
 
     private void getSubmitParams() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).inviteFriends(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).inviteFriends(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog=new ProgressDialog((LandScreenActivity)getActivity());
+                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                         pgDialog.setTitle("Invite Friend");
                         pgDialog.setMessage("Inviting friend.Please wait...");
                         pgDialog.setCancelable(false);
@@ -104,9 +104,9 @@ public class InviteAFriendFragment extends Fragment {
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog!=null && pgDialog.isShowing())
+                        if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Invite Friend")
                                 .setMessage("" + message)
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -122,9 +122,9 @@ public class InviteAFriendFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog!=null && pgDialog.isShowing())
+                        if (pgDialog != null && pgDialog.isShowing())
                             pgDialog.dismiss();
-                        new AlertDialog.Builder((LandScreenActivity)getActivity())
+                        new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Invite Friend Error")
                                 .setMessage("" + error)
                                 .setPositiveButton("retry", new DialogInterface.OnClickListener() {
@@ -149,7 +149,7 @@ public class InviteAFriendFragment extends Fragment {
                 confirm_email.getText().toString().trim());
     }
 
-    private void resetForm(){
+    private void resetForm() {
         first_name.setText("");
         last_name.setText("");
         email.setText("");

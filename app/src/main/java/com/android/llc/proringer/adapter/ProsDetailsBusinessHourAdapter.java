@@ -20,9 +20,9 @@ public class ProsDetailsBusinessHourAdapter extends RecyclerView.Adapter<ProsDet
     JSONArray businessHoursJsonArray;
     Context context;
 
-    public ProsDetailsBusinessHourAdapter(Context context, JSONArray businessHoursJsonArray){
-        this.context=context;
-        this.businessHoursJsonArray=businessHoursJsonArray;
+    public ProsDetailsBusinessHourAdapter(Context context, JSONArray businessHoursJsonArray) {
+        this.context = context;
+        this.businessHoursJsonArray = businessHoursJsonArray;
     }
 
     @Override
@@ -50,11 +50,12 @@ public class ProsDetailsBusinessHourAdapter extends RecyclerView.Adapter<ProsDet
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ProRegularTextView tv_day,tv_time;
+        ProRegularTextView tv_day, tv_time;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_day= (ProRegularTextView) itemView.findViewById(R.id.tv_day);
-            tv_time= (ProRegularTextView) itemView.findViewById(R.id.tv_time);
+            tv_day = (ProRegularTextView) itemView.findViewById(R.id.tv_day);
+            tv_time = (ProRegularTextView) itemView.findViewById(R.id.tv_time);
         }
     }
 }

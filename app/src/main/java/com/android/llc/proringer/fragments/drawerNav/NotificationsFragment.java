@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ScrollingView;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +41,7 @@ public class NotificationsFragment extends Fragment {
     ProgressDialog pgDialog;
     ScrollView ScrollViewMAin;
     LinearLayout LLNetworkDisconnection;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,8 +52,9 @@ public class NotificationsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ScrollViewMAin= (ScrollView) view.findViewById(R.id.ScrollViewMAin);
-        LLNetworkDisconnection= (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);;
+        ScrollViewMAin = (ScrollView) view.findViewById(R.id.ScrollViewMAin);
+        LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+        ;
 
         email_newsletter = (SwitchHelper) view.findViewById(R.id.email_newsletter);
         email_chat_msg = (SwitchHelper) view.findViewById(R.id.email_chat_msg);
@@ -139,11 +140,11 @@ public class NotificationsFragment extends Fragment {
         ScrollViewMAin.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getUserNotification(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserNotification(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
                         pgDialog.setTitle("Notification");
                         pgDialog.setCancelable(false);
                         pgDialog.setMessage("Getting Notification data.Please wait...");
@@ -173,7 +174,7 @@ public class NotificationsFragment extends Fragment {
                             pgDialog.dismiss();
 
 
-                        if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
+                        if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                             ScrollViewMAin.setVisibility(View.GONE);
                             LLNetworkDisconnection.setVisibility(View.VISIBLE);
                         }
@@ -201,7 +202,7 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void setChangeNotification() {
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).updateUserNotification(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserNotification(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

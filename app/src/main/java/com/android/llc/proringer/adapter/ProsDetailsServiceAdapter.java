@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -18,9 +20,9 @@ public class ProsDetailsServiceAdapter extends RecyclerView.Adapter<ProsDetailsS
     JSONArray serviceJsonArray;
     Context context;
 
-    public ProsDetailsServiceAdapter(Context context, JSONArray serviceJsonArray){
-        this.context=context;
-        this.serviceJsonArray=serviceJsonArray;
+    public ProsDetailsServiceAdapter(Context context, JSONArray serviceJsonArray) {
+        this.context = context;
+        this.serviceJsonArray = serviceJsonArray;
     }
 
     @Override
@@ -45,9 +47,10 @@ public class ProsDetailsServiceAdapter extends RecyclerView.Adapter<ProsDetailsS
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView tv_name;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_name= (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
         }
     }
 }

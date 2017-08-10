@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
@@ -20,6 +21,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -48,12 +50,12 @@ public class CateGoryListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         category_listing = (RecyclerView) view.findViewById(R.id.category_listing);
-        category_listing.setLayoutManager(new GridLayoutManager((PostProjectActivity)getActivity(), 3));
+        category_listing.setLayoutManager(new GridLayoutManager((PostProjectActivity) getActivity(), 3));
 
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
 
-        ProServiceApiHelper.getInstance((PostProjectActivity)getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
                 if (pgDialog != null && pgDialog.isShowing())
@@ -104,7 +106,7 @@ public class CateGoryListFragment extends Fragment {
                 });
 
 
-                gridAdapter = new PostProjectCategoryGridAdapter((PostProjectActivity)getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
+                gridAdapter = new PostProjectCategoryGridAdapter((PostProjectActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         ((PostProjectActivity) getActivity()).selectedCategory = data;
@@ -126,7 +128,7 @@ public class CateGoryListFragment extends Fragment {
                 if (pgDialog != null && pgDialog.isShowing())
                     pgDialog.dismiss();
 
-                new AlertDialog.Builder((PostProjectActivity)getActivity())
+                new AlertDialog.Builder((PostProjectActivity) getActivity())
                         .setTitle("Error")
                         .setMessage("" + error)
                         .setCancelable(false)
@@ -142,7 +144,7 @@ public class CateGoryListFragment extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((PostProjectActivity)getActivity());
+                pgDialog = new ProgressDialog((PostProjectActivity) getActivity());
                 pgDialog.setTitle("Preparing category");
                 pgDialog.setMessage("Getting category list.Please wait...");
                 pgDialog.setCancelable(false);
@@ -159,9 +161,9 @@ public class CateGoryListFragment extends Fragment {
 //                if(((ProRegularTextView)view.findViewById(R.id.see_all_categories)).
 //                        getText().toString().trim().equalsIgnoreCase("See All categories"))
 //                {
-                category_listing.setLayoutManager(new LinearLayoutManager((PostProjectActivity)getActivity()));
+                category_listing.setLayoutManager(new LinearLayoutManager((PostProjectActivity) getActivity()));
 
-                listAdapter = new PostProjectCategoryListAdapter((PostProjectActivity)getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
+                listAdapter = new PostProjectCategoryListAdapter((PostProjectActivity) getActivity(), proCategoryDatasSortedList, new PostProjectCategoryListAdapter.onClickItem() {
                     @Override
                     public void onSelectItemClick(int position, String data) {
 
@@ -204,65 +206,60 @@ public class CateGoryListFragment extends Fragment {
 
 
                         int displayedposition = llm.findFirstVisibleItemPosition();
-                        Logger.printMessage("psition",""+displayedposition);
+                        Logger.printMessage("psition", "" + displayedposition);
 
 
-                        if (proCategoryDatasSortedList.get(displayedposition).startsWith("A")){
+                        if (proCategoryDatasSortedList.get(displayedposition).startsWith("A")) {
                             item_header.setText("A");
-                        }
-                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("B")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("B")) {
                             item_header.setText("B");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("C")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("C")) {
                             item_header.setText("C");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("D")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("D")) {
                             item_header.setText("D");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("E")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("E")) {
                             item_header.setText("E");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("F")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("F")) {
                             item_header.setText("F");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("G")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("G")) {
                             item_header.setText("G");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("H")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("H")) {
                             item_header.setText("H");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("I")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("I")) {
                             item_header.setText("I");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("J")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("J")) {
                             item_header.setText("J");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("K")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("K")) {
                             item_header.setText("K");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("L")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("L")) {
                             item_header.setText("L");
-                        } else if(proCategoryDatasSortedList.get(displayedposition).startsWith("M")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("M")) {
                             item_header.setText("M");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("N")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("N")) {
                             item_header.setText("N");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("O")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("O")) {
                             item_header.setText("O");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("P")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("P")) {
                             item_header.setText("P");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("Q")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("Q")) {
                             item_header.setText("Q");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("R")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("R")) {
                             item_header.setText("R");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("S")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("S")) {
                             item_header.setText("S");
-                        }
-                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("T")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("T")) {
                             item_header.setText("T");
-                        }
-                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("U")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("U")) {
                             item_header.setText("U");
-                        }
-                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("V")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("V")) {
                             item_header.setText("V");
-                        }
-                        else if(proCategoryDatasSortedList.get(displayedposition).startsWith("W")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("W")) {
                             item_header.setText("W");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("X")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("X")) {
                             item_header.setText("X");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("Y")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("Y")) {
                             item_header.setText("Y");
-                        }else if(proCategoryDatasSortedList.get(displayedposition).startsWith("Z")){
+                        } else if (proCategoryDatasSortedList.get(displayedposition).startsWith("Z")) {
                             item_header.setText("Z");
                         }
                     }
