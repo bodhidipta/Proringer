@@ -1224,6 +1224,29 @@ public class ProServiceApiHelper {
                             }
 
                         }
+
+                        Logger.printMessage("user_id","-->"+ProApplication.getInstance().getUserId());
+                        Logger.printMessage("year_build","-->"+params[0]);
+                        Logger.printMessage("footage","-->"+params[1]);
+                        Logger.printMessage("garage","-->"+params[2]);
+                        Logger.printMessage("property_type","-->"+params[3]);
+                        Logger.printMessage("basement","-->"+params[4]);
+                        Logger.printMessage("size","-->"+params[5]);
+                        Logger.printMessage("roof_age","-->"+params[6]);
+                        Logger.printMessage("ac_age","-->"+params[7]);
+                        Logger.printMessage("furnance_age","-->"+params[8]);
+                        Logger.printMessage("filter_change","-->"+params[9]);
+                        Logger.printMessage("water_heater_age","-->"+params[10]);
+                        Logger.printMessage("window_age","-->"+params[11]);
+                        Logger.printMessage("water_heater_flush","-->"+params[12]);
+                        Logger.printMessage("chimney_sweep","-->"+params[13]);
+                        Logger.printMessage("last_radon_gas","-->"+params[14]);
+                        Logger.printMessage("smoke_detector","-->"+params[15]);
+                        Logger.printMessage("co_detector","-->"+params[16]);
+                        Logger.printMessage("gutter_clean","-->"+params[17]);
+
+
+
                         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                         MultipartBody.Builder requestBody = new MultipartBody.Builder()
                                 .setType(MultipartBody.FORM)

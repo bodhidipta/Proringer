@@ -362,8 +362,8 @@ public class DashBoardFragment extends Fragment {
 
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int widthLcl = (int) (displayMetrics.widthPixels * 0.7f);
-        int heightLcl = (int) (displayMetrics.heightPixels * 0.7f);
+        int widthLcl = (int) (displayMetrics.widthPixels * 0.8f);
+        int heightLcl = (int) (displayMetrics.heightPixels * 0.6f);
 
         RelativeLayout RLMain = (RelativeLayout) dialog.findViewById(R.id.RLMain);
 
