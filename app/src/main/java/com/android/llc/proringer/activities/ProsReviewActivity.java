@@ -35,7 +35,7 @@ import com.bumptech.glide.Glide;
 public class ProsReviewActivity extends AppCompatActivity {
     TextView tv_terms_guidelines;
     RatingBar ratBar_review;
-    String pros_id="",img="",review_rate="0";
+    String pros_id = "", img = "", review_rate = "0";
     ProRegularEditText project_description_text;
     ProgressDialog pgDialog;
     ImageView img_profile;
@@ -50,8 +50,8 @@ public class ProsReviewActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        project_description_text= (ProRegularEditText) findViewById(R.id.project_description_text);
-        img_profile= (ImageView) findViewById(R.id.img_profile);
+        project_description_text = (ProRegularEditText) findViewById(R.id.project_description_text);
+        img_profile = (ImageView) findViewById(R.id.img_profile);
 
 
         if (getIntent().getExtras() != null) {
@@ -64,8 +64,7 @@ public class ProsReviewActivity extends AppCompatActivity {
             Glide.with(ProsReviewActivity.this).load(img).centerCrop().into(img_profile);
 
 
-
-        tv_terms_guidelines= (TextView) findViewById(R.id.tv_terms_guidelines);
+        tv_terms_guidelines = (TextView) findViewById(R.id.tv_terms_guidelines);
         tv_terms_guidelines.setMovementMethod(LinkMovementMethod.getInstance());
 
 //        ratBar_review= (RatingBar) findViewById(R.id.ratBar_review);
@@ -73,16 +72,16 @@ public class ProsReviewActivity extends AppCompatActivity {
 //        LayerDrawable starst = (LayerDrawable) ratBar_review.getProgressDrawable();
 //        ProApplication.SetRatingColor(starst);
 
-        ratBar_review=(RatingBar)findViewById(R.id.ratBar_review);
+        ratBar_review = (RatingBar) findViewById(R.id.ratBar_review);
 
-        ratBar_review.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
+        ratBar_review.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(),Float.toString(rating),Toast.LENGTH_LONG).show();
-                review_rate=Float.toString(rating);
+                Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
+                review_rate = Float.toString(rating);
             }
 
         });
@@ -94,7 +93,7 @@ public class ProsReviewActivity extends AppCompatActivity {
         String termsTextOne = "By submitting a review,I acknowledge that I have appect the";
         String termsTextClick = " Terms of use ";
         String reviewGuidelineTextTwo = "and the";
-        String reviewGuidelinesClick=" Review Guidelines.";
+        String reviewGuidelinesClick = " Review Guidelines.";
 
 
         Spannable word1 = new SpannableString(termsTextOne);
@@ -153,14 +152,12 @@ public class ProsReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(review_rate.equals("0")){
-                    Toast.makeText(ProsReviewActivity.this,"Please select rat",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    if(project_description_text.getText().toString().trim().equals("")){
+                if (review_rate.equals("0")) {
+                    Toast.makeText(ProsReviewActivity.this, "Please select rat", Toast.LENGTH_LONG).show();
+                } else {
+                    if (project_description_text.getText().toString().trim().equals("")) {
                         project_description_text.setError("Please enter project description");
-                    }
-                    else {
+                    } else {
                         postReview();
                     }
                 }
@@ -177,7 +174,7 @@ public class ProsReviewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void postReview(){
+    public void postReview() {
         ProServiceApiHelper.getInstance(ProsReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -221,6 +218,6 @@ public class ProsReviewActivity extends AppCompatActivity {
                         })
                         .show();
             }
-        },ProApplication.getInstance().getUserId(),pros_id,review_rate,project_description_text.getText().toString().trim());
+        }, ProApplication.getInstance().getUserId(), pros_id, review_rate, project_description_text.getText().toString().trim());
     }
 }

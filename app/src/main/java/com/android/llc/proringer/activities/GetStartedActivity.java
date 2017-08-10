@@ -66,7 +66,7 @@ public class GetStartedActivity extends AppCompatActivity implements
 
     private static final String TAG = "GetStartedActivity";
     private static final long INTERVAL = 1000 * 10;//// Update location every 6 second
-    private static final long FASTEST_INTERVAL = 1000*5;
+    private static final long FASTEST_INTERVAL = 1000 * 5;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
@@ -98,7 +98,6 @@ public class GetStartedActivity extends AppCompatActivity implements
         mLocationRequest.setInterval(INTERVAL);
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
 
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)

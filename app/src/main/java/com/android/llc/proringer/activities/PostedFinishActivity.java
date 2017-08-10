@@ -12,6 +12,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -21,7 +22,8 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  */
 
 public class PostedFinishActivity extends AppCompatActivity {
-    ProRegularTextView mail_resent,contact;
+    ProRegularTextView mail_resent, contact;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +121,7 @@ public class PostedFinishActivity extends AppCompatActivity {
         findViewById(R.id.confirm_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PostedFinishActivity.this,LogInActivity.class));
+                startActivity(new Intent(PostedFinishActivity.this, LogInActivity.class));
                 finish();
             }
         });

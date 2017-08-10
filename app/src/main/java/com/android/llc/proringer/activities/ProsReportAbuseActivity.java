@@ -20,8 +20,9 @@ import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
  */
 
 public class ProsReportAbuseActivity extends AppCompatActivity {
-    String  review_report_id="";
-    ProgressDialog pgDialog=null;
+    String review_report_id = "";
+    ProgressDialog pgDialog = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +41,9 @@ public class ProsReportAbuseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(((ProRegularEditText)findViewById(R.id.pro_review_description_text)).getText().toString().trim().equals("")){
-                    ((ProRegularEditText)findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
-                }else {
+                if (((ProRegularEditText) findViewById(R.id.pro_review_description_text)).getText().toString().trim().equals("")) {
+                    ((ProRegularEditText) findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
+                } else {
                     submitReviewReport();
                 }
             }
@@ -61,52 +62,53 @@ public class ProsReportAbuseActivity extends AppCompatActivity {
         setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
     }
-    public void submitReviewReport(){
+
+    public void submitReviewReport() {
 
         ProServiceApiHelper.getInstance(ProsReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
-            @Override
-            public void onStart() {
-                pgDialog = new ProgressDialog(ProsReportAbuseActivity.this);
-                pgDialog.setTitle("Pros Report Abuse");
-                pgDialog.setCancelable(false);
-                pgDialog.setMessage("Please wait...");
-                pgDialog.show();
-            }
+                                                                                               @Override
+                                                                                               public void onStart() {
+                                                                                                   pgDialog = new ProgressDialog(ProsReportAbuseActivity.this);
+                                                                                                   pgDialog.setTitle("Pros Report Abuse");
+                                                                                                   pgDialog.setCancelable(false);
+                                                                                                   pgDialog.setMessage("Please wait...");
+                                                                                                   pgDialog.show();
+                                                                                               }
 
-            @Override
-            public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                                                                                               @Override
+                                                                                               public void onComplete(String message) {
+                                                                                                   if (pgDialog != null && pgDialog.isShowing())
+                                                                                                       pgDialog.dismiss();
 
-                new AlertDialog.Builder(ProsReportAbuseActivity.this)
-                        .setTitle("Pros Report Abuse")
-                        .setMessage("" + message)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .show();
-            }
+                                                                                                   new AlertDialog.Builder(ProsReportAbuseActivity.this)
+                                                                                                           .setTitle("Pros Report Abuse")
+                                                                                                           .setMessage("" + message)
+                                                                                                           .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                                                                               @Override
+                                                                                                               public void onClick(DialogInterface dialogInterface, int i) {
+                                                                                                                   dialogInterface.dismiss();
+                                                                                                               }
+                                                                                                           })
+                                                                                                           .show();
+                                                                                               }
 
-            @Override
-            public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
-                new AlertDialog.Builder(ProsReportAbuseActivity.this)
-                        .setTitle("Pros Report Abuse")
-                        .setMessage("" + error)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        }, ProApplication.getInstance().getUserId()
-        ,review_report_id
-        ,(((ProRegularEditText)findViewById(R.id.pro_review_description_text)).getText().toString().trim()));
+                                                                                               @Override
+                                                                                               public void onError(String error) {
+                                                                                                   if (pgDialog != null && pgDialog.isShowing())
+                                                                                                       pgDialog.dismiss();
+                                                                                                   new AlertDialog.Builder(ProsReportAbuseActivity.this)
+                                                                                                           .setTitle("Pros Report Abuse")
+                                                                                                           .setMessage("" + error)
+                                                                                                           .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                                                                               @Override
+                                                                                                               public void onClick(DialogInterface dialogInterface, int i) {
+                                                                                                                   dialogInterface.dismiss();
+                                                                                                               }
+                                                                                                           })
+                                                                                                           .show();
+                                                                                               }
+                                                                                           }, ProApplication.getInstance().getUserId()
+                , review_report_id
+                , (((ProRegularEditText) findViewById(R.id.pro_review_description_text)).getText().toString().trim()));
     }
 }

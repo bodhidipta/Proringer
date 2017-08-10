@@ -199,7 +199,7 @@ public class SignUpActivity extends AppCompatActivity {
         findViewById(R.id.confirm_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignUpActivity.this, LogInActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -209,7 +209,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-            finish();
+        finish();
     }
 
     private void validateRegistration() {
@@ -267,45 +267,45 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void callRegisteration() {
         ProServiceApiHelper.getInstance(SignUpActivity.this).getUserRegistered(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                           @Override
-                                                                           public void onStart() {
-                                                                               pgDialog = new ProgressDialog(SignUpActivity.this);
-                                                                               pgDialog.setTitle("Registering");
-                                                                               pgDialog.setMessage("Please wait...");
-                                                                               pgDialog.setCancelable(false);
-                                                                               pgDialog.show();
+                                                                                   @Override
+                                                                                   public void onStart() {
+                                                                                       pgDialog = new ProgressDialog(SignUpActivity.this);
+                                                                                       pgDialog.setTitle("Registering");
+                                                                                       pgDialog.setMessage("Please wait...");
+                                                                                       pgDialog.setCancelable(false);
+                                                                                       pgDialog.show();
 
-                                                                           }
+                                                                                   }
 
-                                                                           @Override
-                                                                           public void onComplete(String message) {
-                                                                               if (pgDialog != null && pgDialog.isShowing())
-                                                                                   pgDialog.dismiss();
+                                                                                   @Override
+                                                                                   public void onComplete(String message) {
+                                                                                       if (pgDialog != null && pgDialog.isShowing())
+                                                                                           pgDialog.dismiss();
 
-                                                                               email_confirmed.setText(email.getText().toString().trim());
+                                                                                       email_confirmed.setText(email.getText().toString().trim());
 
-                                                                               findViewById(R.id.header_image).setVisibility(View.VISIBLE);
-                                                                               findViewById(R.id.header_text).setVisibility(View.GONE);
-                                                                               getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                                                                                       findViewById(R.id.header_image).setVisibility(View.VISIBLE);
+                                                                                       findViewById(R.id.header_text).setVisibility(View.GONE);
+                                                                                       getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-                                                                               try {
-                                                                                   keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-                                                                               } catch (Exception e) {
-                                                                                   e.printStackTrace();
-                                                                               }
+                                                                                       try {
+                                                                                           keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+                                                                                       } catch (Exception e) {
+                                                                                           e.printStackTrace();
+                                                                                       }
 
 
-                                                                               showDialog("Registration ", "" + message);
+                                                                                       showDialog("Registration ", "" + message);
 
-                                                                           }
+                                                                                   }
 
-                                                                           @Override
-                                                                           public void onError(String error) {
-                                                                               if (pgDialog != null && pgDialog.isShowing())
-                                                                                   pgDialog.dismiss();
-                                                                               showErrorDialog("Registration error", "" + error);
-                                                                           }
-                                                                       },
+                                                                                   @Override
+                                                                                   public void onError(String error) {
+                                                                                       if (pgDialog != null && pgDialog.isShowing())
+                                                                                           pgDialog.dismiss();
+                                                                                       showErrorDialog("Registration error", "" + error);
+                                                                                   }
+                                                                               },
                 first_name.getText().toString().trim(),
                 last_name.getText().toString().trim(),
                 email.getText().toString().trim(),

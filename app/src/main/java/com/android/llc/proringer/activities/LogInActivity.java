@@ -89,7 +89,7 @@ public class LogInActivity extends AppCompatActivity {
 
                                     ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
 
-                                    Intent intent=new Intent(LogInActivity.this, LandScreenActivity.class);
+                                    Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                     finish();

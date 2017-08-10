@@ -2,12 +2,10 @@ package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,11 +31,12 @@ import org.json.JSONObject;
  */
 
 public class ProsReviewAllListActivity extends AppCompatActivity {
-    public String pros_id="",pros_company_name="";
+    public String pros_id = "", pros_company_name = "";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
     ProgressDialog pgDialog;
     JSONArray jsonInfoReviewArray;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,20 +47,20 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        jsonInfoReviewArray=new JSONArray();
+        jsonInfoReviewArray = new JSONArray();
 
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
             pros_company_name = getIntent().getExtras().getString("pros_company_name");
         }
 
-        ((ProRegularTextView)findViewById(R.id.tv_toolbar)).setText(pros_company_name);
+        ((ProRegularTextView) findViewById(R.id.tv_toolbar)).setText(pros_company_name);
 
 
-        rcv_review_all= (RecyclerView) findViewById(R.id.rcv_review_all);
+        rcv_review_all = (RecyclerView) findViewById(R.id.rcv_review_all);
         rcv_review_all.setLayoutManager(new LinearLayoutManager(ProsReviewAllListActivity.this));
 
-        loadReviewList(0,10);
+        loadReviewList(0, 10);
     }
 
     @Override
@@ -76,54 +75,55 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
     }
-    public void loadReviewList(int from,int perPage){
+
+    public void loadReviewList(int from, int perPage) {
 
         findViewById(R.id.RLMain).setVisibility(View.VISIBLE);
         findViewById(R.id.LLNetworkDisconnection).setVisibility(View.GONE);
 
         ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReview(new ProServiceApiHelper.getApiProcessCallback() {
-            @Override
-            public void onStart() {
-                pgDialog = new ProgressDialog(ProsReviewAllListActivity.this);
-                pgDialog.setTitle("Pros Review");
-                pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting local pros review list.Please wait...");
-                pgDialog.show();
-            }
+                                                                                             @Override
+                                                                                             public void onStart() {
+                                                                                                 pgDialog = new ProgressDialog(ProsReviewAllListActivity.this);
+                                                                                                 pgDialog.setTitle("Pros Review");
+                                                                                                 pgDialog.setCancelable(false);
+                                                                                                 pgDialog.setMessage("Getting local pros review list.Please wait...");
+                                                                                                 pgDialog.show();
+                                                                                             }
 
-            @Override
-            public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                                                                                             @Override
+                                                                                             public void onComplete(String message) {
+                                                                                                 if (pgDialog != null && pgDialog.isShowing())
+                                                                                                     pgDialog.dismiss();
 
-                try {
-                    JSONObject jsonObject=new JSONObject(message);
-                    JSONArray info_array= jsonObject.getJSONArray("info_array");
+                                                                                                 try {
+                                                                                                     JSONObject jsonObject = new JSONObject(message);
+                                                                                                     JSONArray info_array = jsonObject.getJSONArray("info_array");
 
-                    for (int i=0;i<info_array.length();i++){
-                        jsonInfoReviewArray.put(info_array.getJSONObject(i));
-                    }
-                    if(prosReviewAllAdapter==null){
-                        prosReviewAllAdapter=new ProsReviewAllAdapter(ProsReviewAllListActivity.this,jsonInfoReviewArray);
-                        rcv_review_all.setAdapter(prosReviewAllAdapter);
-                    }else {
-                        prosReviewAllAdapter.NotifyMeInLazyLoad(jsonInfoReviewArray);
-                    }
+                                                                                                     for (int i = 0; i < info_array.length(); i++) {
+                                                                                                         jsonInfoReviewArray.put(info_array.getJSONObject(i));
+                                                                                                     }
+                                                                                                     if (prosReviewAllAdapter == null) {
+                                                                                                         prosReviewAllAdapter = new ProsReviewAllAdapter(ProsReviewAllListActivity.this, jsonInfoReviewArray);
+                                                                                                         rcv_review_all.setAdapter(prosReviewAllAdapter);
+                                                                                                     } else {
+                                                                                                         prosReviewAllAdapter.NotifyMeInLazyLoad(jsonInfoReviewArray);
+                                                                                                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+                                                                                                 } catch (JSONException e) {
+                                                                                                     e.printStackTrace();
+                                                                                                 }
+                                                                                             }
 
-            @Override
-            public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                                                                                             @Override
+                                                                                             public void onError(String error) {
+                                                                                                 if (pgDialog != null && pgDialog.isShowing())
+                                                                                                     pgDialog.dismiss();
 
-                if(error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")){
-                    findViewById(R.id.RLMain).setVisibility(View.GONE);
-                    findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
-                }
+                                                                                                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                                                                                                     findViewById(R.id.RLMain).setVisibility(View.GONE);
+                                                                                                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                                                                                                 }
 
 //                new AlertDialog.Builder(ProsReviewAllListActivity.this)
 //                        .setTitle("Error")
@@ -142,16 +142,16 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 //                            }
 //                        }).show();
 
-            }
-        }, ProApplication.getInstance().getUserId()
-                ,pros_id
-                ,""+from
-                ,""+perPage
+                                                                                             }
+                                                                                         }, ProApplication.getInstance().getUserId()
+                , pros_id
+                , "" + from
+                , "" + perPage
         );
     }
 
 
-    public void showReviewReplyResponseDescribetionDialog(String title,String describetion) {
+    public void showReviewReplyResponseDescribetionDialog(String title, String describetion) {
         final Dialog dialog = new Dialog(ProsReviewAllListActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
@@ -186,7 +186,6 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         tv_show_describetion.setText(describetion);
         dialog.show();
     }
-
 
 
 }

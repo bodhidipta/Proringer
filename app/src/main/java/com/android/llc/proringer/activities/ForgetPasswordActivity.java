@@ -62,20 +62,19 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         confirm_password = (ProLightEditText) findViewById(R.id.confirm_password);
 
 
-
-        tv_contact_us= (ProRegularTextView) findViewById(R.id.tv_contact_us);
+        tv_contact_us = (ProRegularTextView) findViewById(R.id.tv_contact_us);
 
         tv_contact_us.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(ForgetPasswordActivity.this,ContactUsActivity.class));
+                startActivity(new Intent(ForgetPasswordActivity.this, ContactUsActivity.class));
             }
         });
 
         findViewById(R.id.resend_confirmation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ForgetPasswordActivity.this,ResendConfirmationActivity.class));
+                startActivity(new Intent(ForgetPasswordActivity.this, ResendConfirmationActivity.class));
             }
         });
 

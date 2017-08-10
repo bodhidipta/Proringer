@@ -1,11 +1,9 @@
 package com.android.llc.proringer.activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -28,19 +27,20 @@ import com.android.llc.proringer.utils.NetworkUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
  * Created by su on 8/1/17.
  */
 
-public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
+public class TakeGooglePlacePredictionActivity extends AppCompatActivity {
 
     ImageView Erase;
     RecyclerView rcv_location_suggestion;
     EditText locationText;
-    String selectedPlace = "",city="",state="",zip_code="";
-    boolean AfterPrressNoCallTextChangerListener=false;
+    String selectedPlace = "", city = "", state = "", zip_code = "";
+    boolean AfterPrressNoCallTextChangerListener = false;
     private PlaceCustomListAdapter placeCustomListAdapter;
 
     @Override
@@ -51,12 +51,12 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(""+getResources().getString(R.string.select_address));
+        getSupportActionBar().setTitle("" + getResources().getString(R.string.select_address));
 
         rcv_location_suggestion = (RecyclerView) findViewById(R.id.rcv_location_suggestion);
         rcv_location_suggestion.setLayoutManager(new LinearLayoutManager(TakeGooglePlacePredictionActivity.this));
         locationText = (EditText) findViewById(R.id.edt_location);
-        Erase=(ImageView)findViewById(R.id.Erase);
+        Erase = (ImageView) findViewById(R.id.Erase);
 
 
         if (NetworkUtil.getInstance().isNetworkAvailable(TakeGooglePlacePredictionActivity.this)) {
@@ -86,20 +86,19 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!AfterPrressNoCallTextChangerListener) {
+                if (!AfterPrressNoCallTextChangerListener) {
                     fetch_LocationSuggession(s.toString().trim());
-                }else {
-                    AfterPrressNoCallTextChangerListener=false;
+                } else {
+                    AfterPrressNoCallTextChangerListener = false;
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(locationText.getText().length()>0)
-                {
+                if (locationText.getText().length() > 0) {
                     Erase.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     Erase.setVisibility(View.GONE);
                 }
             }
@@ -114,15 +113,15 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
             @Override
             public void onComplete(ArrayList<String> listData) {
 
-                if (listData.size()>0){
-                    placeCustomListAdapter=new PlaceCustomListAdapter(TakeGooglePlacePredictionActivity.this, listData, new TakeGooglePlacePredictionActivity.onOptionSelected() {
+                if (listData.size() > 0) {
+                    placeCustomListAdapter = new PlaceCustomListAdapter(TakeGooglePlacePredictionActivity.this, listData, new TakeGooglePlacePredictionActivity.onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, ArrayList<String> stringArrayList) {
 
-                            AfterPrressNoCallTextChangerListener=true;
+                            AfterPrressNoCallTextChangerListener = true;
 
                             locationText.setText(stringArrayList.get(position));
-                            selectedPlace=stringArrayList.get(position);
+                            selectedPlace = stringArrayList.get(position);
                             rcv_location_suggestion.setVisibility(View.GONE);
                             getZipCityState();
 
@@ -130,7 +129,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
                     });
                     rcv_location_suggestion.setVisibility(View.VISIBLE);
                     rcv_location_suggestion.setAdapter(placeCustomListAdapter);
-                }else {
+                } else {
                     rcv_location_suggestion.setVisibility(View.GONE);
                 }
 
@@ -148,10 +147,10 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
             public void onStartFetch() {
 
             }
-        },place);
+        }, place);
     }
 
-    public void getZipCityState(){
+    public void getZipCityState() {
         ProServiceApiHelper.getInstance(TakeGooglePlacePredictionActivity.this).getZipLocationStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -178,7 +177,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
                         if (innerIncer.has("address_components") &&
                                 innerIncer.getJSONArray("address_components").length() > 0) {
 
-                            Logger.printMessage("address_components",""+innerIncer.getJSONArray("address_components"));
+                            Logger.printMessage("address_components", "" + innerIncer.getJSONArray("address_components"));
 
                             JSONArray address_components = innerIncer.getJSONArray("address_components");
 
@@ -192,17 +191,17 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
 
                                     for (int k = 0; k < types.length(); k++) {
                                         if (types.getString(k).equals("administrative_area_level_2")) {
-                                            city=address_components.getJSONObject(j).getString("short_name");
-                                            Logger.printMessage("city","-->"+city);
+                                            city = address_components.getJSONObject(j).getString("short_name");
+                                            Logger.printMessage("city", "-->" + city);
                                         }
                                         if (types.getString(k).equals("administrative_area_level_1")) {
-                                            state=address_components.getJSONObject(j).getString("short_name");
-                                            Logger.printMessage("state","-->"+state);
+                                            state = address_components.getJSONObject(j).getString("short_name");
+                                            Logger.printMessage("state", "-->" + state);
                                         }
 
                                         if (types.getString(k).equals("postal_code")) {
-                                            zip_code=address_components.getJSONObject(j).getString("short_name");
-                                            Logger.printMessage("zip_code","-->"+zip_code);
+                                            zip_code = address_components.getJSONObject(j).getString("short_name");
+                                            Logger.printMessage("zip_code", "-->" + zip_code);
                                         }
                                     }
                                 }
@@ -214,11 +213,12 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onError(String error) {
 
             }
-        },selectedPlace);
+        }, selectedPlace);
     }
 
 
@@ -231,12 +231,9 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem register = menu.findItem(R.id.action_Done);
-        if(NetworkUtil.getInstance().isNetworkAvailable(TakeGooglePlacePredictionActivity.this))
-        {
+        if (NetworkUtil.getInstance().isNetworkAvailable(TakeGooglePlacePredictionActivity.this)) {
             register.setVisible(true);
-        }
-        else
-        {
+        } else {
             register.setVisible(false);
         }
         return true;
@@ -273,7 +270,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
             BD.putString("state", state);
 
             i.putExtra("data", BD);
-            setResult(Activity.RESULT_OK,i);
+            setResult(Activity.RESULT_OK, i);
 
             //setResult(-1, i);
             try {
@@ -294,7 +291,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity{
     }
 
     public interface onOptionSelected {
-        void onItemPassed(int position,ArrayList<String> stringArrayList);
+        void onItemPassed(int position, ArrayList<String> stringArrayList);
     }
 
 }
