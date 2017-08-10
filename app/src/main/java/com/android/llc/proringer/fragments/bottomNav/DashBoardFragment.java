@@ -30,15 +30,9 @@ import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.koushiklibrary.JSONPerser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
@@ -141,7 +135,7 @@ public class DashBoardFragment extends Fragment {
         view.findViewById(R.id.img_upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent((LandScreenActivity)getActivity(), PermissionController.class);
+                Intent intent = new Intent(getActivity(), PermissionController.class);
                 intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
                 startActivityForResult(intent, 200);
             }
@@ -153,11 +147,11 @@ public class DashBoardFragment extends Fragment {
         nested_scroll_main.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity)getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
 
-                pgDialog = new ProgressDialog((LandScreenActivity)getActivity());
+                pgDialog = new ProgressDialog(getActivity());
                 pgDialog.setTitle("My Dashboard");
                 pgDialog.setMessage("My Dashboard page loading.Please wait...");
                 pgDialog.setCancelable(false);
@@ -171,7 +165,7 @@ public class DashBoardFragment extends Fragment {
                     JSONArray jsonInfoArray=jsonObject.getJSONArray("info_array");
 
                     if (!jsonInfoArray.getJSONObject(0).getString("profile_img").equals(""))
-                        Glide.with((LandScreenActivity)getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
+                        Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
 
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 
@@ -280,7 +274,7 @@ public class DashBoardFragment extends Fragment {
     }
 
     public String getRealPathFromURI(Uri contentURI) {
-        Cursor cursor = ((PostProjectActivity)getActivity()).getContentResolver().query(contentURI, null, null, null, null);
+        Cursor cursor = (getActivity()).getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {
             // Source is Dropbox or other similar local file path
             return contentURI.getPath();
@@ -292,7 +286,7 @@ public class DashBoardFragment extends Fragment {
     }
 
     private void showImagePickerOption() {
-        new AlertDialog.Builder((LandScreenActivity)getActivity())
+        new AlertDialog.Builder(getActivity())
                 .setCancelable(true)
                 .setTitle("Property image")
                 .setMessage("please choose image source type.")
@@ -301,7 +295,7 @@ public class DashBoardFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         Intent intent = new Intent(Intent.ACTION_PICK);
-                        if (intent.resolveActivity(((LandScreenActivity)getActivity()).getPackageManager()) != null) {
+                        if (intent.resolveActivity((getActivity()).getPackageManager()) != null) {
                             intent.setType("image/*");
                             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
