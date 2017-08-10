@@ -1,9 +1,11 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,11 +14,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.PostProjectActivity;
@@ -30,6 +37,10 @@ import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +67,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class DashBoardFragment extends Fragment {
-
+    Dialog dialog;
     private static final int REQUEST_IMAGE_CAPTURE = 5;
     private static final int PICK_IMAGE = 3;
     private String mCurrentPhotoPath = "";
@@ -135,9 +146,7 @@ public class DashBoardFragment extends Fragment {
         view.findViewById(R.id.img_upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PermissionController.class);
-                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
-                startActivityForResult(intent, 200);
+                showUploadImage();
             }
         });
     }
@@ -249,6 +258,15 @@ public class DashBoardFragment extends Fragment {
                         if (data != null) {
                             mCurrentPhotoPath = data.getExtras().get("data").toString();
                             Logger.printMessage("image****", "" + mCurrentPhotoPath);
+
+                            Glide.with(getActivity()).load("file://" + mCurrentPhotoPath).into(new GlideDrawableImageViewTarget((ImageView) dialog.findViewById(R.id.img_temp)) {
+                                @Override
+                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                                    super.onResourceReady(resource, animation);
+                                }
+                            });
+                            dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
+                            dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
                         }
                     }
                 }, 800);
@@ -260,6 +278,25 @@ public class DashBoardFragment extends Fragment {
                     if (!dataFile.exists())
                         Logger.printMessage("image****", "data file does not exists");
                     mCurrentPhotoPath = dataFile.getAbsolutePath();
+
+                    Glide.with(getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget((ImageView) dialog.findViewById(R.id.img_temp)) {
+                        /**
+                         * {@inheritDoc}
+                         * If no {@link GlideAnimation} is given or if the animation does not set the
+                         * {@link Drawable} on the view, the drawable is set using
+                         * {@link ImageView#setImageDrawable(Drawable)}.
+                         *
+                         * @param resource  {@inheritDoc}
+                         * @param animation {@inheritDoc}
+                         */
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                            super.onResourceReady(resource, animation);
+                        }
+                    });
+                    dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
+                    dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -314,4 +351,64 @@ public class DashBoardFragment extends Fragment {
                 .show();
     }
 
+    private void showUploadImage(){
+
+        dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // Include dialog.xml file
+        dialog.setContentView(R.layout.dialog_upload_image);
+        // Set dialog title
+        //dialog.setTitle("Profile Image Upload");
+
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int widthLcl = (int) (displayMetrics.widthPixels*0.7f);
+        int heightLcl = (int) (displayMetrics.heightPixels*0.7f);
+
+        RelativeLayout RLMain= (RelativeLayout) dialog.findViewById(R.id.RLMain);
+
+        RLMain.getLayoutParams().width =widthLcl;
+        RLMain.getLayoutParams().height =heightLcl;
+
+        dialog.show();
+
+        dialog.findViewById(R.id.tv_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(mCurrentPhotoPath.trim().equals("")){
+                    Toast.makeText(getActivity(),"Please choose Image",Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                }
+            }
+        });
+        dialog.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.findViewById(R.id.img_select).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), PermissionController.class);
+                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
+                startActivityForResult(intent, 200);
+            }
+        });
+         dialog.findViewById(R.id.img_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ImageView) dialog.findViewById(R.id.img_temp)).setImageResource(android.R.color.transparent);
+                dialog.findViewById(R.id.img_select).setVisibility(View.VISIBLE);
+                dialog.findViewById(R.id.img_cancel).setVisibility(View.GONE);
+                mCurrentPhotoPath="";
+            }
+        });
+
+    }
 }

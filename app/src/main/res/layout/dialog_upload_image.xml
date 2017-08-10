@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RLMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:gravity="center"
+        android:text="UpLoad Image"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="18sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+    <LinearLayout
+        android:id="@+id/LLOkCancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="OK"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/LLOkCancel"
+        android:layout_below="@+id/tv_title">
+
+        <View
+            android:id="@+id/view_line_one"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorTextBlack" />
+
+        <ImageView
+            android:id="@+id/img_temp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view_line_one" />
+
+        <ImageView
+            android:id="@+id/img_select"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_photo_camera_upload" />
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_cross_dialog"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
