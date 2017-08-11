@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
@@ -128,18 +127,16 @@ public class LandScreenActivity extends AppCompatActivity {
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactSearchLocalPros();
                         break;
-                    case  NavigationHandler.ACCOUNT:
+                    case NavigationHandler.ACCOUNT:
 
                         toggleProMapSearch(false);
 
                         findViewById(R.id.LLSupport).setVisibility(View.GONE);
                         findViewById(R.id.LLAbout).setVisibility(View.GONE);
 
-                        if(findViewById(R.id.LLAccount).getVisibility()==View.VISIBLE)
-                        {
+                        if (findViewById(R.id.LLAccount).getVisibility() == View.VISIBLE) {
                             findViewById(R.id.LLAccount).setVisibility(View.GONE);
-                        }
-                        else {
+                        } else {
                             findViewById(R.id.LLAccount).setVisibility(View.VISIBLE);
                         }
                         break;
@@ -181,11 +178,9 @@ public class LandScreenActivity extends AppCompatActivity {
                         findViewById(R.id.LLAccount).setVisibility(View.GONE);
                         findViewById(R.id.LLAbout).setVisibility(View.GONE);
 
-                        if(findViewById(R.id.LLSupport).getVisibility()==View.VISIBLE)
-                        {
+                        if (findViewById(R.id.LLSupport).getVisibility() == View.VISIBLE) {
                             findViewById(R.id.LLSupport).setVisibility(View.GONE);
-                        }
-                        else {
+                        } else {
                             findViewById(R.id.LLSupport).setVisibility(View.VISIBLE);
                         }
                         break;
@@ -196,11 +191,9 @@ public class LandScreenActivity extends AppCompatActivity {
                         findViewById(R.id.LLAccount).setVisibility(View.GONE);
                         findViewById(R.id.LLSupport).setVisibility(View.GONE);
 
-                        if(findViewById(R.id.LLAbout).getVisibility()==View.VISIBLE)
-                        {
+                        if (findViewById(R.id.LLAbout).getVisibility() == View.VISIBLE) {
                             findViewById(R.id.LLAbout).setVisibility(View.GONE);
-                        }
-                        else {
+                        } else {
                             findViewById(R.id.LLAbout).setVisibility(View.VISIBLE);
                         }
                         break;
@@ -209,6 +202,30 @@ public class LandScreenActivity extends AppCompatActivity {
                         ProApplication.getInstance().logOut();
                         startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
                         finish();
+                        break;
+
+                    case NavigationHandler.Email_Support:
+                        break;
+
+                    case NavigationHandler.Faq:
+                        startActivity(new Intent(LandScreenActivity.this,FaqActivity.class));
+                        break;
+
+                    case NavigationHandler.Provider_Feedback:
+                        break;
+
+                    case NavigationHandler.Terms_Of_Service:
+
+                        Intent intent_terms = new Intent(LandScreenActivity.this, TermsPrivacyActivity.class);
+                        intent_terms.putExtra("value", "term");
+                        startActivity(intent_terms);
+                        break;
+
+                    case NavigationHandler.Privacy_Policy:
+
+                        Intent intent_policy = new Intent(LandScreenActivity.this, TermsPrivacyActivity.class);
+                        intent_policy.putExtra("value", "policy");
+                        startActivity(intent_policy);
                         break;
                 }
             }

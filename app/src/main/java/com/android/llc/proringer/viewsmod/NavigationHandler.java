@@ -50,9 +50,9 @@ public class NavigationHandler {
             ABOUT = "abt",
             Email_Support = "email_support",
             Faq = "faq",
-            ProviderFeedback = "provider_feedback",
-            Terms = "terms",
-            PrivacyPolicy = "privacy_policy",
+            Provider_Feedback = "provider_feedback",
+            Terms_Of_Service = "terms_of_service",
+            Privacy_Policy = "privacy_policy",
             LOGOUT = "logout";
 
     public static NavigationHandler getInstance() {
@@ -140,21 +140,21 @@ public class NavigationHandler {
         RLProviderFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                highlightTag(ProviderFeedback);
+                highlightTag(Provider_Feedback);
             }
         });
 
         RLTerms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                highlightTag(Terms);
+                highlightTag(Terms_Of_Service);
             }
         });
 
         RLPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                highlightTag(PrivacyPolicy);
+                highlightTag(Privacy_Policy);
             }
         });
 
@@ -596,9 +596,9 @@ public class NavigationHandler {
                 RLPrivacyPolicy.setBackgroundColor(Color.TRANSPARENT);
                 break;
 
-            case ProviderFeedback:
+            case Provider_Feedback:
 
-                listener.onClickItem(ProviderFeedback);
+                listener.onClickItem(Provider_Feedback);
 
                 RLProviderFeedback.setBackgroundColor(Color.parseColor("#656565"));
 
@@ -631,9 +631,9 @@ public class NavigationHandler {
 
                 break;
 
-            case Terms:
+            case Terms_Of_Service:
 
-                listener.onClickItem(Terms);
+                listener.onClickItem(Terms_Of_Service);
 
                 RLTerms.setBackgroundColor(Color.parseColor("#656565"));
 
@@ -666,9 +666,9 @@ public class NavigationHandler {
 
                 break;
 
-            case PrivacyPolicy:
+            case Privacy_Policy:
 
-                listener.onClickItem(PrivacyPolicy);
+                listener.onClickItem(Privacy_Policy);
 
                 RLPrivacyPolicy.setBackgroundColor(Color.parseColor("#656565"));
 

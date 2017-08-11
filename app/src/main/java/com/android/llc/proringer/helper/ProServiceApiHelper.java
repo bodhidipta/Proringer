@@ -1686,7 +1686,7 @@ public class ProServiceApiHelper {
 
 
     /**
-     * FaqFragment Information
+     * FaqActivity Information
      *
      * @param callback
      */

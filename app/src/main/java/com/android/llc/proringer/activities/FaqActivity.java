@@ -1,13 +1,12 @@
-package com.android.llc.proringer.fragments.main_content;
+package com.android.llc.proringer.activities;
 
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
@@ -22,32 +21,30 @@ import org.json.JSONObject;
  * Created by su on 7/19/17.
  */
 
-public class FaqFragment extends Fragment {
+public class FaqActivity extends AppCompatActivity {
     LinearLayout linear_main_container;
     ProgressDialog pgDialog;
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_faq, container, false);
-    }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_faq);
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Faq");
 
-        linear_main_container = (LinearLayout) view.findViewById(R.id.linear_main_container);
 
-        ProServiceApiHelper.getInstance(getActivity()).getFaqInformation(new ProServiceApiHelper.faqCallback() {
+        linear_main_container = (LinearLayout)findViewById(R.id.linear_main_container);
+
+        ProServiceApiHelper.getInstance(FaqActivity.this).getFaqInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(getActivity());
+                pgDialog = new ProgressDialog(FaqActivity.this);
                 pgDialog.setTitle("Faq");
                 pgDialog.setMessage("Fag page loading Please wait...");
                 pgDialog.setCancelable(false);
@@ -70,7 +67,7 @@ public class FaqFragment extends Fragment {
                         for (int i = 0; i < faqArray.length(); i++) {
                             LinearLayout.LayoutParams lparams1 = new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            ProRegularTextView tv1 = new ProRegularTextView(getActivity());
+                            ProRegularTextView tv1 = new ProRegularTextView(FaqActivity.this);
                             tv1.setLayoutParams(lparams1);
                             tv1.setText(faqArray.getJSONObject(i).getString("question"));
 
@@ -84,7 +81,7 @@ public class FaqFragment extends Fragment {
                             LinearLayout.LayoutParams lparams2 = new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                             lparams2.setMargins(0, 20, 0, 0);
-                            ProRegularTextView tv2 = new ProRegularTextView(getActivity());
+                            ProRegularTextView tv2 = new ProRegularTextView(FaqActivity.this);
                             tv2.setLayoutParams(lparams2);
                             tv2.setText(faqArray.getJSONObject(i).getString("answer"));
 
@@ -110,7 +107,13 @@ public class FaqFragment extends Fragment {
             }
         });
 
-        linear_main_container = (LinearLayout) view.findViewById(R.id.linear_main_container);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
