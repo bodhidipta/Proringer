@@ -129,7 +129,12 @@ public class LandScreenActivity extends AppCompatActivity {
                         transactSearchLocalPros();
                         break;
                     case  NavigationHandler.ACCOUNT:
+
                         toggleProMapSearch(false);
+
+                        findViewById(R.id.LLSupport).setVisibility(View.GONE);
+                        findViewById(R.id.LLAbout).setVisibility(View.GONE);
+
                         if(findViewById(R.id.LLAccount).getVisibility()==View.VISIBLE)
                         {
                             findViewById(R.id.LLAccount).setVisibility(View.GONE);
@@ -172,6 +177,10 @@ public class LandScreenActivity extends AppCompatActivity {
                     case NavigationHandler.SUPPORT:
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+
+                        findViewById(R.id.LLAccount).setVisibility(View.GONE);
+                        findViewById(R.id.LLAbout).setVisibility(View.GONE);
+
                         if(findViewById(R.id.LLSupport).getVisibility()==View.VISIBLE)
                         {
                             findViewById(R.id.LLSupport).setVisibility(View.GONE);
@@ -183,6 +192,10 @@ public class LandScreenActivity extends AppCompatActivity {
                     case NavigationHandler.ABOUT:
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+
+                        findViewById(R.id.LLAccount).setVisibility(View.GONE);
+                        findViewById(R.id.LLSupport).setVisibility(View.GONE);
+
                         if(findViewById(R.id.LLAbout).getVisibility()==View.VISIBLE)
                         {
                             findViewById(R.id.LLAbout).setVisibility(View.GONE);

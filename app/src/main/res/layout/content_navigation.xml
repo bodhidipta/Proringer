@@ -75,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorHeader"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -254,13 +255,14 @@
             android:id="@+id/LLSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorHeader"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/RLEmailSupport"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/colorHeader"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp">
 
@@ -281,9 +283,9 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/RLFaq"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/colorHeader"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp">
 
@@ -304,9 +306,9 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/RLProviderFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/colorHeader"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp">
 
@@ -365,12 +367,14 @@
             android:id="@+id/LLAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorHeader"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/RLTerms"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/colorHeader"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp">
 
@@ -391,9 +395,9 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/RLPrivacyPolicy"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/colorHeader"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp">
 
