@@ -2,6 +2,7 @@ package com.android.llc.proringer.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -212,6 +213,17 @@ public class LandScreenActivity extends AppCompatActivity {
                         break;
 
                     case NavigationHandler.Provider_Feedback:
+
+                        String[] TO = {"feedback@proringer.com"};
+                        Uri uri = Uri.parse("mailto:feedback@proringer.com")
+                                .buildUpon()
+                                .appendQueryParameter("subject", "Support")
+                                .appendQueryParameter("body", "I think \n \n \n Proringer mobile app v1.0.1")
+                                .build();
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
                         break;
 
                     case NavigationHandler.Terms_Of_Service:
