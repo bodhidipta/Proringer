@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
@@ -70,6 +71,47 @@ public class LandScreenActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
+
+        findViewById(R.id.account_cont).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(findViewById(R.id.LLAccount).getVisibility()==View.VISIBLE)
+                {
+                    findViewById(R.id.LLAccount).setVisibility(View.GONE);
+                }
+                else {
+                    findViewById(R.id.LLAccount).setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        findViewById(R.id.support_cont).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(findViewById(R.id.LLSupport).getVisibility()==View.VISIBLE)
+                {
+                    findViewById(R.id.LLSupport).setVisibility(View.GONE);
+                }
+                else {
+                    findViewById(R.id.LLSupport).setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        findViewById(R.id.about_cont).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(findViewById(R.id.LLAbout).getVisibility()==View.VISIBLE)
+                {
+                    findViewById(R.id.LLAbout).setVisibility(View.GONE);
+                }
+                else {
+                    findViewById(R.id.LLAbout).setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
         /**

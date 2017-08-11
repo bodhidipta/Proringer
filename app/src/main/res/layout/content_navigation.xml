@@ -46,9 +46,9 @@
             android:background="@color/colorPrimary" />
 
         <LinearLayout
+            android:id="@+id/account_cont"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@color/colorHeader"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="10dp">
@@ -57,20 +57,20 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_settings_white" />
+                android:src="@drawable/ic_settings" />
 
             <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="Account"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorTextDark"
                 android:textSize="14sp"
-
                 />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LLAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorHeader"
@@ -256,6 +256,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/LLSupport"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -365,6 +366,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LLAbout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
