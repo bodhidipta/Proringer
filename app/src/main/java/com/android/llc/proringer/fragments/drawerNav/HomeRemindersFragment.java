@@ -998,7 +998,6 @@ public class HomeRemindersFragment extends Fragment {
                 co_detector_battery.getText().toString().trim(),
                 last_gutter_clean.getText().toString().trim(),
                 mCurrentPhotoPath
-
         );
     }
 

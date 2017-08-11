@@ -1270,6 +1270,7 @@ public class ProServiceApiHelper {
                                 .addFormDataPart("co_detector", "" + params[16])
                                 .addFormDataPart("gutter_clean", "" + params[17]);
                         if (upload_temp != null) {
+                            Logger.printMessage("photo_param","-->"+upload_temp.getAbsolutePath());
                             Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
                             requestBody.addFormDataPart("property_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
                         }

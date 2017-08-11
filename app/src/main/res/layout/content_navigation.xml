@@ -222,32 +222,113 @@
             android:layout_height="1px"
             android:background="@color/colorPrimary" />
 
+
         <LinearLayout
-            android:id="@+id/support_cont"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/nav_selecter"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/support_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/ic_support" />
-
-            <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
-                android:id="@+id/support_text"
+            <LinearLayout
+                android:id="@+id/support_cont"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="56dp"
                 android:gravity="center_vertical"
-                android:text="Support"
-                android:textColor="@color/colorTextDark"
-                android:textSize="14sp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
 
-                />
+                <ImageView
+                    android:id="@+id/support_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_support" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
+                    android:id="@+id/support_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Support"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="15dp"
+                    android:background="@color/colorHeader"
+                    android:paddingRight="10dp">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Email Support"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_chevron_right_white" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/colorHeader">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="FAQ"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_chevron_right_white" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/colorHeader">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Provide Feedback"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_chevron_right_white" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <View
@@ -282,6 +363,59 @@
 
                 />
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingLeft="15dp"
+                android:background="@color/colorHeader"
+                android:paddingRight="10dp">
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Terms Of Service"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_chevron_right_white" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:background="@color/colorHeader">
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Privacy Policy"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_chevron_right_white" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="60dp" />
