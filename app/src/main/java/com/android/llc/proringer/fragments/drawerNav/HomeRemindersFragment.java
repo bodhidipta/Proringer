@@ -168,7 +168,7 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
                             year_build.setText(new SimpleDateFormat("yyyy").format(date));
 
 
@@ -205,8 +205,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            ac_filter.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            ac_filter.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -241,8 +241,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            last_water_heater_flush.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            last_water_heater_flush.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -276,8 +276,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            last_chimney_sweep.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            last_chimney_sweep.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -311,8 +311,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            last_test_for_radon_gas.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            last_test_for_radon_gas.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -346,8 +346,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            Smoke_detector_battery.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            Smoke_detector_battery.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -381,8 +381,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            co_detector_battery.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            co_detector_battery.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -416,8 +416,8 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("" + dPicker.getDayOfMonth() + "/" + (dPicker.getMonth() + 1) + "/" + dPicker.getYear());
-                            last_gutter_clean.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+                            Date date = new SimpleDateFormat("dd-MM-yyyy").parse("" + dPicker.getDayOfMonth() + "-" + (dPicker.getMonth() + 1) + "-" + dPicker.getYear());
+                            last_gutter_clean.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
