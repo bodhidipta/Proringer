@@ -206,6 +206,17 @@ public class LandScreenActivity extends AppCompatActivity {
                         break;
 
                     case NavigationHandler.Email_Support:
+
+                        String[] TOSuppory = {"support@proringer.com"};
+                        Uri uriSupport = Uri.parse("mailto:support@proringer.com")
+                                .buildUpon()
+                                .appendQueryParameter("subject", "Support")
+                                .appendQueryParameter("body", "I think \n \n \n Proringer mobile app v1.0.1")
+                                .build();
+                        Intent emailSupportIntent = new Intent(Intent.ACTION_SENDTO, uriSupport);
+                        emailSupportIntent.putExtra(Intent.EXTRA_EMAIL, TOSuppory);
+                        startActivity(Intent.createChooser(emailSupportIntent, "Send mail..."));
+
                         break;
 
                     case NavigationHandler.Faq:
@@ -214,15 +225,15 @@ public class LandScreenActivity extends AppCompatActivity {
 
                     case NavigationHandler.Provider_Feedback:
 
-                        String[] TO = {"feedback@proringer.com"};
-                        Uri uri = Uri.parse("mailto:feedback@proringer.com")
+                        String[] TOFeedback = {"feedback@proringer.com"};
+                        Uri uriFeedback = Uri.parse("mailto:feedback@proringer.com")
                                 .buildUpon()
-                                .appendQueryParameter("subject", "Support")
+                                .appendQueryParameter("subject", "Leave Feedback")
                                 .appendQueryParameter("body", "I think \n \n \n Proringer mobile app v1.0.1")
                                 .build();
-                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        Intent emailFeedbackIntent = new Intent(Intent.ACTION_SENDTO, uriFeedback);
+                        emailFeedbackIntent.putExtra(Intent.EXTRA_EMAIL, TOFeedback);
+                        startActivity(Intent.createChooser(emailFeedbackIntent, "Send mail..."));
 
                         break;
 
