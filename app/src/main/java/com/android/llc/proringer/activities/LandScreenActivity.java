@@ -73,47 +73,6 @@ public class LandScreenActivity extends AppCompatActivity {
         toggle.syncState();
 
 
-
-        findViewById(R.id.account_cont).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(findViewById(R.id.LLAccount).getVisibility()==View.VISIBLE)
-                {
-                    findViewById(R.id.LLAccount).setVisibility(View.GONE);
-                }
-                else {
-                    findViewById(R.id.LLAccount).setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        findViewById(R.id.support_cont).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(findViewById(R.id.LLSupport).getVisibility()==View.VISIBLE)
-                {
-                    findViewById(R.id.LLSupport).setVisibility(View.GONE);
-                }
-                else {
-                    findViewById(R.id.LLSupport).setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        findViewById(R.id.about_cont).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(findViewById(R.id.LLAbout).getVisibility()==View.VISIBLE)
-                {
-                    findViewById(R.id.LLAbout).setVisibility(View.GONE);
-                }
-                else {
-                    findViewById(R.id.LLAbout).setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-
         /**
          * Bottom nav bar handling
          */
@@ -169,6 +128,16 @@ public class LandScreenActivity extends AppCompatActivity {
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
                         transactSearchLocalPros();
                         break;
+                    case  NavigationHandler.ACCOUNT:
+                        toggleProMapSearch(false);
+                        if(findViewById(R.id.LLAccount).getVisibility()==View.VISIBLE)
+                        {
+                            findViewById(R.id.LLAccount).setVisibility(View.GONE);
+                        }
+                        else {
+                            findViewById(R.id.LLAccount).setVisibility(View.VISIBLE);
+                        }
+                        break;
                     case NavigationHandler.USER_INFORMATION:
                         closeDrawer();
                         toggleProMapSearch(false);
@@ -203,10 +172,24 @@ public class LandScreenActivity extends AppCompatActivity {
                     case NavigationHandler.SUPPORT:
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                        if(findViewById(R.id.LLSupport).getVisibility()==View.VISIBLE)
+                        {
+                            findViewById(R.id.LLSupport).setVisibility(View.GONE);
+                        }
+                        else {
+                            findViewById(R.id.LLSupport).setVisibility(View.VISIBLE);
+                        }
                         break;
                     case NavigationHandler.ABOUT:
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                        if(findViewById(R.id.LLAbout).getVisibility()==View.VISIBLE)
+                        {
+                            findViewById(R.id.LLAbout).setVisibility(View.GONE);
+                        }
+                        else {
+                            findViewById(R.id.LLAbout).setVisibility(View.VISIBLE);
+                        }
                         break;
                     case NavigationHandler.LOGOUT:
                         closeDrawer();

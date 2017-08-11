@@ -32,13 +32,14 @@ public class NavigationHandler {
     private OnHandleInput listener = null;
     private static NavigationHandler instance = null;
 
-    private LinearLayout find_local_pros_cont, support_cont, about_cont;
-    private ImageView find_local_pros_img, support_img, about_img;
-    private ProBoldTextView find_local_pros_text, support_text, about_text;
+    private LinearLayout find_local_pros_cont, account_cont, support_cont, about_cont;
+    private ImageView find_local_pros_img, account_img, support_img, about_img;
+    private ProBoldTextView find_local_pros_text, account_text, support_text, about_text;
 
-    private RelativeLayout userInformation, login_settings, notification, home_scheduler, invite_friend, log_out;
+    private RelativeLayout userInformation, login_settings, notification, home_scheduler, invite_friend, log_out,RLEmailSupport;
 
     public static final String FIND_LOCAL_PROS = "find_local_pros",
+            ACCOUNT = "account",
             USER_INFORMATION = "user_info",
             LOGIN_SETTINGS = "login_sett",
             NOTIFICATION = "noti",
@@ -46,6 +47,7 @@ public class NavigationHandler {
             INVITE_FRIEND = "invite_fr",
             SUPPORT = "support",
             ABOUT = "abt",
+            Email_Support = "email_support",
             LOGOUT = "logout";
 
     public static NavigationHandler getInstance() {
@@ -53,11 +55,17 @@ public class NavigationHandler {
             instance = new NavigationHandler();
         return instance;
     }
-    public void init(View view,OnHandleInput listener){
+
+    public void init(View view, OnHandleInput listener) {
         inflatedView = view;
+
         find_local_pros_cont = (LinearLayout) view.findViewById(R.id.find_local_pros_cont);
         find_local_pros_img = (ImageView) view.findViewById(R.id.find_local_pros_img);
         find_local_pros_text = (ProBoldTextView) view.findViewById(R.id.find_local_pros_text);
+
+        account_cont = (LinearLayout) view.findViewById(R.id.account_cont);
+        account_img = (ImageView) view.findViewById(R.id.account_img);
+        account_text = (ProBoldTextView) view.findViewById(R.id.account_text);
 
         support_cont = (LinearLayout) view.findViewById(R.id.support_cont);
         support_img = (ImageView) view.findViewById(R.id.support_img);
@@ -67,12 +75,13 @@ public class NavigationHandler {
         about_img = (ImageView) view.findViewById(R.id.about_img);
         about_text = (ProBoldTextView) view.findViewById(R.id.about_text);
 
-        userInformation = (RelativeLayout) view.findViewById(R.id.userInformation);
+        RLEmailSupport = (RelativeLayout) view.findViewById(R.id.RLEmailSupport);
         login_settings = (RelativeLayout) view.findViewById(R.id.login_settings);
         notification = (RelativeLayout) view.findViewById(R.id.notification);
         home_scheduler = (RelativeLayout) view.findViewById(R.id.home_scheduler);
         invite_friend = (RelativeLayout) view.findViewById(R.id.invite_friend);
         log_out = (RelativeLayout) view.findViewById(R.id.log_out);
+        RLEmailSupport = (RelativeLayout) view.findViewById(R.id.RLEmailSupport);
 
         find_local_pros_cont.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,21 +89,24 @@ public class NavigationHandler {
                 highlightTag(FIND_LOCAL_PROS);
             }
         });
-
+        account_cont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                highlightTag(ACCOUNT);
+            }
+        });
         support_cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 highlightTag(SUPPORT);
             }
         });
-
         about_cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 highlightTag(ABOUT);
             }
         });
-
         userInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,21 +114,24 @@ public class NavigationHandler {
             }
         });
 
-
+        RLEmailSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                highlightTag(Email_Support);
+            }
+        });
         login_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 highlightTag(LOGIN_SETTINGS);
             }
         });
-
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 highlightTag(NOTIFICATION);
             }
         });
-
         home_scheduler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,9 +166,16 @@ public class NavigationHandler {
         switch (tag) {
             case FIND_LOCAL_PROS:
 
+                listener.onClickItem(FIND_LOCAL_PROS);
+
                 find_local_pros_cont.setBackgroundColor(Color.parseColor("#656565"));
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro_white);
                 find_local_pros_text.setTextColor(Color.WHITE);
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
@@ -168,16 +190,23 @@ public class NavigationHandler {
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
-                listener.onClickItem(FIND_LOCAL_PROS);
+
                 break;
-            case USER_INFORMATION:
-                listener.onClickItem(USER_INFORMATION);
+
+            case ACCOUNT:
+                listener.onClickItem(ACCOUNT);
+
                 userInformation.setBackgroundColor(Color.parseColor("#656565"));
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                account_cont.setBackgroundColor(Color.parseColor("#656565"));
+                account_img.setBackgroundResource(R.drawable.ic_settings_white);
+                account_text.setTextColor(Color.WHITE);
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
@@ -191,6 +220,36 @@ public class NavigationHandler {
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
+                log_out.setBackgroundColor(Color.TRANSPARENT);
+                break;
+
+            case USER_INFORMATION:
+                listener.onClickItem(USER_INFORMATION);
+                userInformation.setBackgroundColor(Color.parseColor("#656565"));
+
+                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
+                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
+                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
+
+                support_cont.setBackgroundColor(Color.TRANSPARENT);
+                support_img.setBackgroundResource(R.drawable.ic_support);
+                support_text.setTextColor(Color.parseColor("#505050"));
+
+                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
+                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
+                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                login_settings.setBackgroundColor(Color.TRANSPARENT);
+                notification.setBackgroundColor(Color.TRANSPARENT);
+                home_scheduler.setBackgroundColor(Color.TRANSPARENT);
+                invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case LOGIN_SETTINGS:
@@ -201,6 +260,11 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
+
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
@@ -213,6 +277,7 @@ public class NavigationHandler {
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case NOTIFICATION:
@@ -223,6 +288,11 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
+
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
@@ -235,6 +305,7 @@ public class NavigationHandler {
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case HOME_SCHEDUL:
@@ -244,6 +315,10 @@ public class NavigationHandler {
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
@@ -257,6 +332,7 @@ public class NavigationHandler {
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case INVITE_FRIEND:
@@ -271,6 +347,11 @@ public class NavigationHandler {
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
@@ -279,10 +360,16 @@ public class NavigationHandler {
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case SUPPORT:
                 listener.onClickItem(SUPPORT);
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
                 support_cont.setBackgroundColor(Color.parseColor("#656565"));
                 support_img.setBackgroundResource(R.drawable.ic_support_white);
                 support_text.setTextColor(Color.WHITE);
@@ -300,13 +387,19 @@ public class NavigationHandler {
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case ABOUT:
                 listener.onClickItem(ABOUT);
+
                 about_cont.setBackgroundColor(Color.parseColor("#656565"));
                 about_img.setBackgroundResource(R.drawable.ic_about_white);
                 about_text.setTextColor(Color.WHITE);
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
@@ -321,6 +414,7 @@ public class NavigationHandler {
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
                 log_out.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case LOGOUT:
@@ -331,6 +425,39 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
+                support_cont.setBackgroundColor(Color.TRANSPARENT);
+                support_img.setBackgroundResource(R.drawable.ic_support);
+                support_text.setTextColor(Color.parseColor("#505050"));
+
+                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
+                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
+                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                userInformation.setBackgroundColor(Color.TRANSPARENT);
+                login_settings.setBackgroundColor(Color.TRANSPARENT);
+                notification.setBackgroundColor(Color.TRANSPARENT);
+                home_scheduler.setBackgroundColor(Color.TRANSPARENT);
+                RLEmailSupport.setBackgroundColor(Color.TRANSPARENT);
+                invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                break;
+
+            case Email_Support:
+
+                listener.onClickItem(LOGOUT);
+                RLEmailSupport.setBackgroundColor(Color.parseColor("#656565"));
+
+                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
+                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
+                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                account_cont.setBackgroundColor(Color.TRANSPARENT);
+                account_img.setBackgroundResource(R.drawable.ic_settings);
+                account_text.setTextColor(Color.parseColor("#505050"));
+
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
@@ -344,7 +471,10 @@ public class NavigationHandler {
                 notification.setBackgroundColor(Color.TRANSPARENT);
                 home_scheduler.setBackgroundColor(Color.TRANSPARENT);
                 invite_friend.setBackgroundColor(Color.TRANSPARENT);
+                log_out.setBackgroundColor(Color.TRANSPARENT);
+
                 break;
+
             default:
 
         }
