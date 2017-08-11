@@ -109,10 +109,18 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
         findViewById(R.id.tv_view_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsReviewAllListActivity.class);
-                intent.putExtra("pros_company_name", pros_company_name);
-                intent.putExtra("pros_id", pros_id);
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsReviewAllListActivity.class);
+                    intent.putExtra("pros_company_name", pros_company_name);
+                    intent.putExtra("pros_id", pros_id);
+                    intent.putExtra("total_avg_review", infoArrayJsonObject.getString("total_avg_review"));
+                    intent.putExtra("img", infoJsonObject.getString("profile_image"));
+                    intent.putExtra("total_review", infoArrayJsonObject.getString("total_review"));
+                    startActivity(intent);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
 

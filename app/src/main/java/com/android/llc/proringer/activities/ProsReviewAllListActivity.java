@@ -2,6 +2,7 @@ package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,13 +15,17 @@ import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsReviewAllAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,11 +36,12 @@ import org.json.JSONObject;
  */
 
 public class ProsReviewAllListActivity extends AppCompatActivity {
-    public String pros_id = "", pros_company_name = "";
+    public String pros_id = "", pros_company_name = "",img="",total_avg_review="",total_review="";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
     ProgressDialog pgDialog;
     JSONArray jsonInfoReviewArray;
+    ImageView img_profile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,9 +55,15 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
         jsonInfoReviewArray = new JSONArray();
 
+        img_profile= (ImageView) findViewById(R.id.img_profile);
+
+
         if (getIntent().getExtras() != null) {
             pros_id = getIntent().getExtras().getString("pros_id");
+            img = getIntent().getExtras().getString("img");
             pros_company_name = getIntent().getExtras().getString("pros_company_name");
+            total_avg_review = getIntent().getExtras().getString("total_avg_review");
+            total_review = getIntent().getExtras().getString("total_review");
         }
 
         ((ProRegularTextView) findViewById(R.id.tv_toolbar)).setText(pros_company_name);
@@ -59,6 +71,34 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
         rcv_review_all = (RecyclerView) findViewById(R.id.rcv_review_all);
         rcv_review_all.setLayoutManager(new LinearLayoutManager(ProsReviewAllListActivity.this));
+
+        if (!img.trim().equals(""))
+            Glide.with(ProsReviewAllListActivity.this).load(img).centerCrop().into(img_profile);
+
+        ((ProRegularTextView)findViewById(R.id.tv_rate_value)).setText(total_avg_review);
+        ((RatingBar)findViewById(R.id.rbar)).setRating(Float.parseFloat(total_avg_review));
+        ((ProRegularTextView) findViewById(R.id.tv_review_value)).setText(total_review);
+
+
+        findViewById(R.id.tv_review_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (!pros_id.trim().equals("")) {
+
+                        Intent intent = new Intent(ProsReviewAllListActivity.this, ProsReviewActivity.class);
+                        intent.putExtra("pros_id", pros_id);
+                        intent.putExtra("img",img);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(ProsReviewAllListActivity.this, "Details Page Loading problem", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
 
         loadReviewList(0, 10);
     }
