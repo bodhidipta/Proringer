@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 
 public class FaqActivity extends AppCompatActivity {
     LinearLayout linear_main_container;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
 
 
     @Override
@@ -38,23 +39,20 @@ public class FaqActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Faq");
 
+        myLoader=new MyLoader(FaqActivity.this);
 
         linear_main_container = (LinearLayout)findViewById(R.id.linear_main_container);
 
         ProServiceApiHelper.getInstance(FaqActivity.this).getFaqInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(FaqActivity.this);
-                pgDialog.setTitle("Faq");
-                pgDialog.setMessage("Fag page loading Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String s) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 try {
                     JSONObject jsonObject = new JSONObject(s);
@@ -102,8 +100,8 @@ public class FaqActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         });
 

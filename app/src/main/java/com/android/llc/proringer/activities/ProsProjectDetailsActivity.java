@@ -32,6 +32,7 @@ import com.android.llc.proringer.adapter.ProsDetailsLicenseAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsServiceAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -50,7 +51,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
     String pros_id = "", pros_company_name = "";
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
     JSONObject jsonObject = null;
-    ProgressDialog pgDialog1, pgDialog2;
+    MyLoader myLoader=null;
     RatingBar rbar;
     ProsDetailsServiceAdapter proDetailsService;
     ProsDetailsBusinessHourAdapter prosDetailsBusinessHourAdapter;
@@ -95,6 +96,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
 
         rcv_project_gallery = (RecyclerView) findViewById(R.id.rcv_project_gallery);
         rcv_project_gallery.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        myLoader=new MyLoader(ProsProjectDetailsActivity.this);
 
 
         findViewById(R.id.LLViewAll).setVisibility(View.GONE);
@@ -184,17 +187,13 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProsIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                       @Override
                                                                                                       public void onStart() {
-                                                                                                          pgDialog1 = new ProgressDialog(ProsProjectDetailsActivity.this);
-                                                                                                          pgDialog1.setTitle("Local Pros Details");
-                                                                                                          pgDialog1.setCancelable(false);
-                                                                                                          pgDialog1.setMessage("Getting local pros details.Please wait...");
-                                                                                                          pgDialog1.show();
+                                                                                                          myLoader.showLoader();
                                                                                                       }
 
                                                                                                       @Override
                                                                                                       public void onComplete(String message) {
-                                                                                                          if (pgDialog1 != null && pgDialog1.isShowing())
-                                                                                                              pgDialog1.dismiss();
+                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                              myLoader.dismissLoader();
 
                                                                                                           Logger.printMessage("message", "" + message);
                                                                                                           try {
@@ -290,8 +289,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
 
                                                                                                       @Override
                                                                                                       public void onError(String error) {
-                                                                                                          if (pgDialog1 != null && pgDialog1.isShowing())
-                                                                                                              pgDialog1.dismiss();
+                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                              myLoader.dismissLoader();
 
 
                                                                                                           if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
@@ -333,18 +332,13 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog2 = new ProgressDialog(ProsProjectDetailsActivity.this);
-                pgDialog2.setTitle("Portfolio Images");
-                pgDialog2.setCancelable(false);
-                pgDialog2.setMessage("Getting Portfolio Images list.Please wait...");
-                pgDialog2.show();
+               myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog2 != null && pgDialog2.isShowing())
-                    pgDialog2.dismiss();
-
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 try {
                     JSONObject portfolioObj = new JSONObject(message);
                     JSONArray portfolioInfoArray = portfolioObj.getJSONArray("info_array");
@@ -373,8 +367,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog2 != null && pgDialog2.isShowing())
-                    pgDialog2.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         }, portfolio_id);
 

@@ -19,6 +19,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 
@@ -47,9 +48,8 @@ public class SearchLocalProFragment extends Fragment {
     private RecyclerView pros_list;
     String category_search = "";
     String zip_search = "";
-    ProgressDialog pgDialog1;
-    ProgressDialog pgDialog2;
-    ProgressDialog pgDialog3;
+    MyLoader myLoader=null;
+
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
 
@@ -69,6 +69,8 @@ public class SearchLocalProFragment extends Fragment {
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
+        myLoader=new MyLoader(getActivity());
+
         loadList();
 
     }
@@ -86,17 +88,13 @@ public class SearchLocalProFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog1 = new ProgressDialog((LandScreenActivity) getActivity());
-                pgDialog1.setTitle("Local Pros");
-                pgDialog1.setCancelable(false);
-                pgDialog1.setMessage("Getting local pros list.Please wait...");
-                pgDialog1.show();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 try {
                     JSONObject jsonObject = new JSONObject(message);
@@ -130,8 +128,8 @@ public class SearchLocalProFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog1 != null && pgDialog1.isShowing())
-                    pgDialog1.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
 
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
@@ -183,19 +181,14 @@ public class SearchLocalProFragment extends Fragment {
                             ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                                           @Override
                                                                                                                           public void onStart() {
-                                                                                                                              pgDialog2 = new ProgressDialog((LandScreenActivity) getActivity());
-                                                                                                                              pgDialog2.setTitle("Delete Favorite pros");
-                                                                                                                              pgDialog2.setMessage("project is deleting.Please wait....");
-                                                                                                                              pgDialog2.setCancelable(false);
-                                                                                                                              pgDialog2.show();
-
+                                                                                                                             myLoader.showLoader();
                                                                                                                           }
 
                                                                                                                           @Override
                                                                                                                           public void onComplete(String message) {
 
-                                                                                                                              if (pgDialog2 != null && pgDialog2.isShowing())
-                                                                                                                                  pgDialog2.dismiss();
+                                                                                                                              if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                                  myLoader.dismissLoader();
 
                                                                                                                               new AlertDialog.Builder((LandScreenActivity) getActivity())
                                                                                                                                       .setTitle("Delete Favorite pros")
@@ -213,8 +206,8 @@ public class SearchLocalProFragment extends Fragment {
 
                                                                                                                           @Override
                                                                                                                           public void onError(String error) {
-                                                                                                                              if (pgDialog2 != null && pgDialog2.isShowing())
-                                                                                                                                  pgDialog2.dismiss();
+                                                                                                                              if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                                  myLoader.dismissLoader();
 
                                                                                                                               new AlertDialog.Builder((LandScreenActivity) getActivity())
                                                                                                                                       .setTitle("Delete Fav pros")
@@ -252,19 +245,15 @@ public class SearchLocalProFragment extends Fragment {
             ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                           @Override
                                                                                                           public void onStart() {
-                                                                                                              pgDialog3 = new ProgressDialog((LandScreenActivity) getActivity());
-                                                                                                              pgDialog3.setTitle("Add Favorite pros");
-                                                                                                              pgDialog3.setMessage("A project is adding.Please wait....");
-                                                                                                              pgDialog3.setCancelable(false);
-                                                                                                              pgDialog3.show();
+                                                                                                             myLoader.showLoader();
 
                                                                                                           }
 
                                                                                                           @Override
                                                                                                           public void onComplete(String message) {
 
-                                                                                                              if (pgDialog3 != null && pgDialog3.isShowing())
-                                                                                                                  pgDialog3.dismiss();
+                                                                                                              if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                  myLoader.dismissLoader();
 
 
                                                                                                               new AlertDialog.Builder((LandScreenActivity) getActivity())
@@ -284,8 +273,8 @@ public class SearchLocalProFragment extends Fragment {
 
                                                                                                           @Override
                                                                                                           public void onError(String error) {
-                                                                                                              if (pgDialog3 != null && pgDialog3.isShowing())
-                                                                                                                  pgDialog3.dismiss();
+                                                                                                              if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                  myLoader.dismissLoader();
 
                                                                                                               new AlertDialog.Builder((LandScreenActivity) getActivity())
                                                                                                                       .setTitle("Add Fav pros")

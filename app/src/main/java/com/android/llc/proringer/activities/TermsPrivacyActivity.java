@@ -1,6 +1,6 @@
 package com.android.llc.proringer.activities;
 
-import android.app.ProgressDialog;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,12 +10,11 @@ import android.text.Html;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +23,7 @@ import org.json.JSONObject;
  */
 
 public class TermsPrivacyActivity extends AppCompatActivity {
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
     ProRegularTextView tv_title;
     LinearLayout main_container;
 
@@ -39,6 +38,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myLoader=new MyLoader(TermsPrivacyActivity.this);
 
         main_container = (LinearLayout) findViewById(R.id.main_container);
 
@@ -67,17 +68,13 @@ public class TermsPrivacyActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getTermsOfUseInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(TermsPrivacyActivity.this);
-                pgDialog.setTitle("Terms of Use");
-                pgDialog.setMessage("Terms of Use page loading.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
+               myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String s) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 Logger.printMessage("message", "" + s);
 
@@ -101,8 +98,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         });
     }
@@ -111,18 +108,13 @@ public class TermsPrivacyActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getPrivacyPolicyInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(TermsPrivacyActivity.this);
-                pgDialog.setTitle("Privacy Policy");
-                pgDialog.setMessage("Privacy Policy page loading.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
+               myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String s) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
-
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 Logger.printMessage("message", "" + s);
 
                 try {
@@ -148,8 +140,8 @@ public class TermsPrivacyActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         });
     }

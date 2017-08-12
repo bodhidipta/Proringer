@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -28,7 +29,7 @@ import com.bumptech.glide.Glide;
  */
 
 public class MyProjectDetailsFragment extends Fragment {
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
     ProRegularTextView tv_posted_in, tv_project, tv_service, tv_type, tv_property, tv_status, tv_start, img_description;
     ImageView img_project;
     LinearLayout LL_Active;
@@ -67,6 +68,8 @@ public class MyProjectDetailsFragment extends Fragment {
         tv_status.setText(ProApplication.getInstance().getDataSelected().getProject_stage());
         tv_start.setText(ProApplication.getInstance().getDataSelected().getProject_timeframe_name());
         img_description.setText(ProApplication.getInstance().getDataSelected().getProject_name());
+
+        myLoader=new MyLoader(getActivity());
 
         if (!ProApplication.getInstance().getDataSelected().getProject_image().equals(""))
             Glide.with((LandScreenActivity) getActivity()).load(ProApplication.getInstance().getDataSelected().getProject_image()).centerCrop().into(img_project);
@@ -170,11 +173,7 @@ public class MyProjectDetailsFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                 @Override
                                                                                                 public void onStart() {
-                                                                                                    pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                                                                                                    pgDialog.setTitle("My project");
-                                                                                                    pgDialog.setMessage("Project is deleting.Please wait...");
-                                                                                                    pgDialog.setCancelable(false);
-                                                                                                    pgDialog.show();
+                                                                                                    myLoader.showLoader();
 
                                                                                                 }
 
@@ -184,8 +183,8 @@ public class MyProjectDetailsFragment extends Fragment {
 //                                                                          itemList.remove(position);
 //                                                                          notifyItemRemoved(position);
 
-                                                                                                    if (pgDialog != null && pgDialog.isShowing())
-                                                                                                        pgDialog.dismiss();
+                                                                                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                        myLoader.dismissLoader();
 
 
                                                                                                     new AlertDialog.Builder((LandScreenActivity) getActivity())
@@ -205,8 +204,8 @@ public class MyProjectDetailsFragment extends Fragment {
 
                                                                                                 @Override
                                                                                                 public void onError(String error) {
-                                                                                                    if (pgDialog != null && pgDialog.isShowing())
-                                                                                                        pgDialog.dismiss();
+                                                                                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                        myLoader.dismissLoader();
 
                                                                                                     new AlertDialog.Builder((LandScreenActivity) getActivity())
                                                                                                             .setTitle("My project deleting Error")

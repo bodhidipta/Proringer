@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
@@ -21,7 +22,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
 public class ProsReportAbuseActivity extends AppCompatActivity {
     String review_report_id = "";
-    ProgressDialog pgDialog = null;
+    MyLoader myLoader = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class ProsReportAbuseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myLoader=new MyLoader(ProsReportAbuseActivity.this);
 
         if (getIntent().getExtras() != null) {
             review_report_id = getIntent().getExtras().getString("review_report_id");
@@ -68,17 +71,13 @@ public class ProsReportAbuseActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                @Override
                                                                                                public void onStart() {
-                                                                                                   pgDialog = new ProgressDialog(ProsReportAbuseActivity.this);
-                                                                                                   pgDialog.setTitle("Pros Report Abuse");
-                                                                                                   pgDialog.setCancelable(false);
-                                                                                                   pgDialog.setMessage("Please wait...");
-                                                                                                   pgDialog.show();
+                                                                                                  myLoader.showLoader();
                                                                                                }
 
                                                                                                @Override
                                                                                                public void onComplete(String message) {
-                                                                                                   if (pgDialog != null && pgDialog.isShowing())
-                                                                                                       pgDialog.dismiss();
+                                                                                                   if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                       myLoader.dismissLoader();
 
                                                                                                    new AlertDialog.Builder(ProsReportAbuseActivity.this)
                                                                                                            .setTitle("Pros Report Abuse")
@@ -94,8 +93,9 @@ public class ProsReportAbuseActivity extends AppCompatActivity {
 
                                                                                                @Override
                                                                                                public void onError(String error) {
-                                                                                                   if (pgDialog != null && pgDialog.isShowing())
-                                                                                                       pgDialog.dismiss();
+                                                                                                   if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                       myLoader.dismissLoader();
+
                                                                                                    new AlertDialog.Builder(ProsReportAbuseActivity.this)
                                                                                                            .setTitle("Pros Report Abuse")
                                                                                                            .setMessage("" + error)

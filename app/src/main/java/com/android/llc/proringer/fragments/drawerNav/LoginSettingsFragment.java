@@ -19,6 +19,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.GetStartedActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -43,7 +44,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class LoginSettingsFragment extends Fragment {
     private ProRegularTextView current_email, update_email, change_password;
     private ProLightEditText new_email, confirm_new_email, current_password, new_password, confirm_new_password;
-    private ProgressDialog pgDialog = null;
+    private MyLoader myLoader = null;
     private boolean isShown = false;
 
     @Nullable
@@ -66,6 +67,8 @@ public class LoginSettingsFragment extends Fragment {
         current_password = (ProLightEditText) view.findViewById(R.id.current_password);
         new_password = (ProLightEditText) view.findViewById(R.id.new_password);
         confirm_new_password = (ProLightEditText) view.findViewById(R.id.confirm_new_password);
+
+        myLoader=new MyLoader(getActivity());
 
         update_email.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,17 +126,13 @@ public class LoginSettingsFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                        pgDialog.setTitle("Change Email");
-                        pgDialog.setMessage("Updating new email address.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                      myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Email")
@@ -154,8 +153,8 @@ public class LoginSettingsFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Email Error")
@@ -209,17 +208,13 @@ public class LoginSettingsFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                        pgDialog.setTitle("Change Password");
-                        pgDialog.setMessage("Updating new password.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                        myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Password")
@@ -239,8 +234,8 @@ public class LoginSettingsFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Change Password Error")

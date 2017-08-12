@@ -19,6 +19,7 @@ import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
@@ -44,7 +45,7 @@ public class SearchLocationFragment extends Fragment {
     ProgressBar loading_progress;
     ImageView error_progress;
     public boolean outer_block_check = false;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
 
     @Nullable
     @Override
@@ -62,6 +63,8 @@ public class SearchLocationFragment extends Fragment {
         location_list.setLayoutManager(new LinearLayoutManager((PostProjectActivity) getActivity()));
 
         addressDataList = new ArrayList<>();
+
+        myLoader=new MyLoader(getActivity());
 
         if (!ProApplication.getInstance().getUserId().equals("")) {
             plotUserInformation();
@@ -169,17 +172,14 @@ public class SearchLocationFragment extends Fragment {
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog((PostProjectActivity) getActivity());
-                pgDialog.setTitle("Current Location zipCode");
-                pgDialog.setCancelable(false);
-                pgDialog.setMessage("Loading your current location.Please wait...");
-                pgDialog.show();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+
                 try {
                     JSONObject jsonObject = new JSONObject(message);
                     JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
@@ -225,8 +225,8 @@ public class SearchLocationFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         });
     }

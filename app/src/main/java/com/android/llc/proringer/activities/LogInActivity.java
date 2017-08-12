@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -39,7 +40,7 @@ public class LogInActivity extends AppCompatActivity {
     private ProSemiBoldTextView sign_up;
     private ProSemiBoldTextView log_in;
     private ProLightEditText email, password;
-    private ProgressDialog pgDialog = null;
+    private MyLoader myLoader = null;
 
 
     @Override
@@ -50,6 +51,8 @@ public class LogInActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myLoader=new MyLoader(LogInActivity.this);
 
 
         findViewById(R.id.forget_password).setOnClickListener(new View.OnClickListener() {
@@ -75,17 +78,13 @@ public class LogInActivity extends AppCompatActivity {
                             new ProServiceApiHelper.getApiProcessCallback() {
                                 @Override
                                 public void onStart() {
-                                    pgDialog = new ProgressDialog(LogInActivity.this);
-                                    pgDialog.setTitle("Signing In");
-                                    pgDialog.setMessage("Please wait...");
-                                    pgDialog.setCancelable(false);
-                                    pgDialog.show();
+                                    myLoader.showLoader();
                                 }
 
                                 @Override
                                 public void onComplete(String message) {
-                                    if (pgDialog != null && pgDialog.isShowing())
-                                        pgDialog.dismiss();
+                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                        myLoader.dismissLoader();
 
                                     ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
 
@@ -97,8 +96,9 @@ public class LogInActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(String error) {
-                                    if (pgDialog != null && pgDialog.isShowing())
-                                        pgDialog.dismiss();
+                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                        myLoader.dismissLoader();
+
                                     new AlertDialog.Builder(LogInActivity.this)
                                             .setTitle("Sign in error")
                                             .setMessage("" + error)

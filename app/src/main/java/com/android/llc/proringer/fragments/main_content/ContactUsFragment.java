@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
@@ -21,7 +22,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
 public class ContactUsFragment extends Fragment {
     ProLightEditText first_name, last_name, email, phonenumber, contact_info;
-    ProgressDialog pgDialog;
+    MyLoader myLoader;
 
     @Nullable
     @Override
@@ -83,17 +84,14 @@ public class ContactUsFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog(getActivity());
-                        pgDialog.setTitle("Contact Us");
-                        pgDialog.setMessage("Your contact address is sending to us.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                      myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Contact Us")
                                 .setMessage("" + message)
@@ -110,8 +108,9 @@ public class ContactUsFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("Contact Us Error")
                                 .setMessage("" + error)

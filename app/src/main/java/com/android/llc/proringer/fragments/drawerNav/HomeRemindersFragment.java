@@ -25,6 +25,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.BottomSheetGlobalList;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.ImageTakerActivityCamera;
 import com.android.llc.proringer.utils.Logger;
@@ -68,7 +69,7 @@ public class HomeRemindersFragment extends Fragment {
 
     private HashMap<String, ArrayList<String>> idList;
     private HashMap<String, ArrayList<String>> valueList;
-    private ProgressDialog pgDialog = null;
+    private MyLoader myLoader = null;
     private ProRegularTextView year_build, ac_filter, last_water_heater_flush,
             last_chimney_sweep, last_test_for_radon_gas, Smoke_detector_battery,
             co_detector_battery, last_gutter_clean;
@@ -137,6 +138,8 @@ public class HomeRemindersFragment extends Fragment {
         update_data = (ProRegularTextView) view.findViewById(R.id.update_data);
 
         property_image = (ImageView) view.findViewById(R.id.property_image);
+
+        myLoader=new MyLoader(getActivity());
 
         add_propert_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -451,11 +454,7 @@ public class HomeRemindersFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                        pgDialog.setTitle("Home Schedule");
-                        pgDialog.setMessage("Getting option data for Home Schedule.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                      myLoader.showLoader();
                     }
 
                     @Override
@@ -768,9 +767,8 @@ public class HomeRemindersFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
-
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                             nested_scroll_main.setVisibility(View.GONE);
@@ -864,15 +862,14 @@ public class HomeRemindersFragment extends Fragment {
                             e.printStackTrace();
                         }
 
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
                     }
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
-
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                             nested_scroll_main.setVisibility(View.GONE);
@@ -907,17 +904,14 @@ public class HomeRemindersFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog(getActivity());
-                        pgDialog.setTitle("Home Reminder");
-                        pgDialog.setMessage("Updating details.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                      myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Update Home Scheduler")
                                 .setMessage("Successfully updated Home scheduler options.")
@@ -933,8 +927,9 @@ public class HomeRemindersFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Update Error")
                                 .setMessage("" + error)

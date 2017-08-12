@@ -28,6 +28,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.ImageTakerActivityCamera;
 import com.android.llc.proringer.utils.Logger;
@@ -76,7 +77,7 @@ public class DashBoardFragment extends Fragment {
     ImageView profile_pic;
     ProRegularTextView tv_name, tv_active_projects, tv_favorite_pros;
     ProLightTextView tv_address;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
 
     LinearLayout LLNetworkDisconnection;
     NestedScrollView nested_scroll_main;
@@ -99,6 +100,8 @@ public class DashBoardFragment extends Fragment {
         tv_active_projects = (ProRegularTextView) view.findViewById(R.id.tv_active_projects);
         tv_favorite_pros = (ProRegularTextView) view.findViewById(R.id.tv_favorite_pros);
         tv_address = (ProLightTextView) view.findViewById(R.id.tv_address);
+
+        myLoader=new MyLoader(getActivity());
 
         view.findViewById(R.id.post_project).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,12 +168,7 @@ public class DashBoardFragment extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-
-                pgDialog = new ProgressDialog(getActivity());
-                pgDialog.setTitle("My Dashboard");
-                pgDialog.setMessage("My Dashboard page loading.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
+                myLoader.showLoader();
             }
 
             @Override
@@ -200,8 +198,8 @@ public class DashBoardFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
 
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
@@ -240,14 +238,14 @@ public class DashBoardFragment extends Fragment {
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         });
     }
@@ -421,17 +419,13 @@ public class DashBoardFragment extends Fragment {
             ProServiceApiHelper.getInstance(getActivity()).upLoadProfileImage(new ProServiceApiHelper.getApiProcessCallback() {
                 @Override
                 public void onStart() {
-                    pgDialog = new ProgressDialog(getActivity());
-                    pgDialog.setTitle("Image Upload");
-                    pgDialog.setMessage("uploading.Please wait...");
-                    pgDialog.setCancelable(false);
-                    pgDialog.show();
+                    myLoader.isMyLoaderShowing();
                 }
 
                 @Override
                 public void onComplete(String message) {
-                    if (pgDialog != null && pgDialog.isShowing())
-                        pgDialog.dismiss();
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
 
                     //dialog.dismiss();
 
@@ -451,9 +445,8 @@ public class DashBoardFragment extends Fragment {
 
                 @Override
                 public void onError(String error) {
-                    if (pgDialog != null && pgDialog.isShowing())
-                        pgDialog.dismiss();
-
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
                     new AlertDialog.Builder(getActivity())
                             .setTitle("" + "Upload Image")
                             .setMessage("" + error)

@@ -21,6 +21,7 @@ import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
@@ -51,7 +52,7 @@ public class PostProjectFragment extends Fragment {
     private RecyclerView pro_service_listing;
     private LinearLayout content_post_form_submit, container_registration, container_project_description;
     private RelativeLayout container_location;
-    private ProgressDialog pgDialog = null;
+    MyLoader myLoader = null;
     private PostProjectServiceAndOtherListAdapter adapter = null;
     private PostProjectCategoryGridAdapter gridAdapter = null;
     private LinkedList<ProCategoryData> serviceListing = null;
@@ -82,6 +83,8 @@ public class PostProjectFragment extends Fragment {
 
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+
+        myLoader=new MyLoader(getActivity());
 
         progress_posting = (ProgressBar) view.findViewById(R.id.progress_posting);
         selected_service_category = (ProRegularTextView) view.findViewById(R.id.selected_service_category);
@@ -194,17 +197,13 @@ public class PostProjectFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Getting Preparing category list.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 progress_posting.setProgress(step);
                 gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
@@ -221,9 +220,8 @@ public class PostProjectFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
-
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
@@ -256,8 +254,8 @@ public class PostProjectFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 serviceListing = listdata;
                 ((LandScreenActivity) getActivity()).toggleToolBar(true);
                 pro_service_listing.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -346,8 +344,8 @@ public class PostProjectFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 new AlertDialog.Builder((LandScreenActivity) getActivity())
                         .setTitle("Error")
@@ -365,12 +363,7 @@ public class PostProjectFragment extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Getting Preparing category list.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
-
+                myLoader.showLoader();
             }
         }, id);
     }
@@ -494,8 +487,6 @@ public class PostProjectFragment extends Fragment {
             content_post_form_submit.setVisibility(View.GONE);
 
         }
-
-
     }
 
 }

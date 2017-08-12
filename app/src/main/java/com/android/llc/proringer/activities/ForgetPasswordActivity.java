@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -40,7 +41,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class ForgetPasswordActivity extends AppCompatActivity {
     private ProRegularTextView header_text;
     private ProLightEditText email, request_code, password, confirm_password;
-    private ProgressDialog pgDialog = null;
+    private MyLoader myLoader = null;
     ProRegularTextView tv_contact_us;
 
 
@@ -60,6 +61,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         request_code = (ProLightEditText) findViewById(R.id.request_code);
         password = (ProLightEditText) findViewById(R.id.password);
         confirm_password = (ProLightEditText) findViewById(R.id.confirm_password);
+
+        myLoader=new MyLoader(ForgetPasswordActivity.this);
 
 
         tv_contact_us = (ProRegularTextView) findViewById(R.id.tv_contact_us);
@@ -85,25 +88,23 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     ProServiceApiHelper.getInstance(ForgetPasswordActivity.this).forgetPassword(email.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
-                            pgDialog = new ProgressDialog(ForgetPasswordActivity.this);
-                            pgDialog.setTitle("Requesting password");
-                            pgDialog.setMessage("Requesting password reset code to your registered email address.Please wait...");
-                            pgDialog.setCancelable(false);
-                            pgDialog.show();
+                            myLoader.showLoader();
                         }
 
                         @Override
                         public void onComplete(String message) {
-                            if (pgDialog != null && pgDialog.isShowing())
-                                pgDialog.dismiss();
+                            if (myLoader != null && myLoader.isMyLoaderShowing())
+                                myLoader.dismissLoader();
+
                             findViewById(R.id.pre_submit_email).setVisibility(View.GONE);
                             header_text.setText("RESET PASSWORD");
                         }
 
                         @Override
                         public void onError(String error) {
-                            if (pgDialog != null && pgDialog.isShowing())
-                                pgDialog.dismiss();
+                            if (myLoader != null && myLoader.isMyLoaderShowing())
+                                myLoader.dismissLoader();
+
                             new AlertDialog.Builder(ForgetPasswordActivity.this)
                                     .setTitle("Request password error")
                                     .setMessage("" + error)
@@ -151,17 +152,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                         new ProServiceApiHelper.getApiProcessCallback() {
                                             @Override
                                             public void onStart() {
-                                                pgDialog = new ProgressDialog(ForgetPasswordActivity.this);
-                                                pgDialog.setTitle("Resetting password");
-                                                pgDialog.setMessage("Please wait...");
-                                                pgDialog.setCancelable(false);
-                                                pgDialog.show();
+                                                myLoader.showLoader();
                                             }
 
                                             @Override
                                             public void onComplete(String message) {
-                                                if (pgDialog != null && pgDialog.isShowing())
-                                                    pgDialog.dismiss();
+                                                if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                    myLoader.dismissLoader();
+
                                                 new AlertDialog.Builder(ForgetPasswordActivity.this)
                                                         .setTitle("Reset password success")
                                                         .setMessage("" + message)
@@ -179,8 +177,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
                                             @Override
                                             public void onError(String error) {
-                                                if (pgDialog != null && pgDialog.isShowing())
-                                                    pgDialog.dismiss();
+                                                if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                    myLoader.dismissLoader();
+
                                                 new AlertDialog.Builder(ForgetPasswordActivity.this)
                                                         .setTitle("Reset password error")
                                                         .setMessage("" + error)

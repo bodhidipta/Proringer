@@ -25,6 +25,7 @@ import com.android.llc.proringer.fragments.postProject.PostProjectRegistrationAn
 import com.android.llc.proringer.fragments.postProject.PostProjectSelectImageFragment;
 import com.android.llc.proringer.fragments.postProject.SearchLocationFragment;
 import com.android.llc.proringer.fragments.postProject.ServiceAndOtherListFragment;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.pojo.ProCategoryData;
@@ -62,7 +63,7 @@ public class PostProjectActivity extends AppCompatActivity {
 
     private ProgressBar progress_posting;
     public ProRegularTextView selected_service_category, pro_request_category, selected_service_property;
-    private ProgressDialog pgDialog = null;
+    private MyLoader myLoader = null;
 
     ArrayList<String> fragmentPushList;
 
@@ -120,6 +121,8 @@ public class PostProjectActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myLoader=new MyLoader(PostProjectActivity.this);
 
         LLMain = (LinearLayout) findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) findViewById(R.id.LLNetworkDisconnection);
@@ -282,18 +285,13 @@ public class PostProjectActivity extends AppCompatActivity {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog(PostProjectActivity.this);
-                        pgDialog.setTitle("Post Project");
-                        pgDialog.setMessage("Post project uploading.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
-
+                        myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         step++;
                         progress_posting.setProgress(step);
@@ -309,8 +307,8 @@ public class PostProjectActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
                         showErrorDialog("Project post error", "" + error);
                     }
                 },

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
@@ -37,7 +38,7 @@ public class ProsReviewActivity extends AppCompatActivity {
     RatingBar ratBar_review;
     String pros_id = "", img = "", review_rate = "0";
     ProRegularEditText project_description_text;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
     ImageView img_profile;
 
     @Override
@@ -52,6 +53,7 @@ public class ProsReviewActivity extends AppCompatActivity {
 
         project_description_text = (ProRegularEditText) findViewById(R.id.project_description_text);
         img_profile = (ImageView) findViewById(R.id.img_profile);
+        myLoader=new MyLoader(ProsReviewActivity.this);
 
 
         if (getIntent().getExtras() != null) {
@@ -178,17 +180,13 @@ public class ProsReviewActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(ProsReviewActivity.this);
-                pgDialog.setTitle("Add Review");
-                pgDialog.setCancelable(false);
-                pgDialog.setMessage("Adding Review.Please wait...");
-                pgDialog.show();
+              myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 new AlertDialog.Builder(ProsReviewActivity.this)
                         .setTitle("Add Review")
@@ -204,8 +202,8 @@ public class ProsReviewActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 new AlertDialog.Builder(ProsReviewActivity.this)
                         .setTitle("Add Review")

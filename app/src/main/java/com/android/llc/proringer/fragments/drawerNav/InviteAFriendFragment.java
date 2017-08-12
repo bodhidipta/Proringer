@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -37,7 +38,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class InviteAFriendFragment extends Fragment {
     ProLightEditText first_name, last_name, email, confirm_email;
     ProRegularTextView invited_submit;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
 
     @Nullable
     @Override
@@ -59,6 +60,8 @@ public class InviteAFriendFragment extends Fragment {
                 validateInvite();
             }
         });
+
+        myLoader=new MyLoader(getActivity());
 
     }
 
@@ -95,17 +98,14 @@ public class InviteAFriendFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                        pgDialog.setTitle("Invite Friend");
-                        pgDialog.setMessage("Inviting friend.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                        myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Invite Friend")
                                 .setMessage("" + message)
@@ -122,8 +122,9 @@ public class InviteAFriendFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder((LandScreenActivity) getActivity())
                                 .setTitle("Invite Friend Error")
                                 .setMessage("" + error)

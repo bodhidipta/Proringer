@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsReviewAllAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
@@ -39,7 +40,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
     public String pros_id = "", pros_company_name = "",img="",total_avg_review="",total_review="";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
     JSONArray jsonInfoReviewArray;
     ImageView img_profile;
 
@@ -54,6 +55,8 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         jsonInfoReviewArray = new JSONArray();
+
+        myLoader=new MyLoader(ProsReviewAllListActivity.this);
 
         img_profile= (ImageView) findViewById(R.id.img_profile);
 
@@ -124,17 +127,13 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReview(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                              @Override
                                                                                              public void onStart() {
-                                                                                                 pgDialog = new ProgressDialog(ProsReviewAllListActivity.this);
-                                                                                                 pgDialog.setTitle("Pros Review");
-                                                                                                 pgDialog.setCancelable(false);
-                                                                                                 pgDialog.setMessage("Getting local pros review list.Please wait...");
-                                                                                                 pgDialog.show();
+                                                                                                myLoader.showLoader();
                                                                                              }
 
                                                                                              @Override
                                                                                              public void onComplete(String message) {
-                                                                                                 if (pgDialog != null && pgDialog.isShowing())
-                                                                                                     pgDialog.dismiss();
+                                                                                                 if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                     myLoader.dismissLoader();
 
                                                                                                  try {
                                                                                                      JSONObject jsonObject = new JSONObject(message);
@@ -157,8 +156,8 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
                                                                                              @Override
                                                                                              public void onError(String error) {
-                                                                                                 if (pgDialog != null && pgDialog.isShowing())
-                                                                                                     pgDialog.dismiss();
+                                                                                                 if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                     myLoader.dismissLoader();
 
                                                                                                  if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                                                                                                      findViewById(R.id.RLMain).setVisibility(View.GONE);

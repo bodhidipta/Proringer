@@ -18,6 +18,7 @@ import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -48,7 +49,7 @@ public class UserInformationFragment extends Fragment {
     private ProLightEditText first_name, last_name, contact, zip_code, city, state;
     ProRegularTextView tv_search_by_location;
     RelativeLayout RLSearchByLocation;
-    ProgressDialog pgDialog = null;
+    MyLoader myLoader = null;
 
     @Nullable
     @Override
@@ -62,6 +63,8 @@ public class UserInformationFragment extends Fragment {
         first_name = (ProLightEditText) view.findViewById(R.id.first_name);
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         contact = (ProLightEditText) view.findViewById(R.id.contact);
+
+        myLoader=new MyLoader(getActivity());
 
         RLSearchByLocation = (RelativeLayout) view.findViewById(R.id.RLSearchByLocation);
         tv_search_by_location = (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
@@ -108,23 +111,19 @@ public class UserInformationFragment extends Fragment {
                     new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
-                            pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                            pgDialog.setTitle("User Information");
-                            pgDialog.setMessage("Updating user information.Please wait...");
-                            pgDialog.setCancelable(false);
-                            pgDialog.show();
+                            myLoader.showLoader();
                         }
 
                         @Override
                         public void onComplete(String message) {
-                            if (pgDialog != null && pgDialog.isShowing())
-                                pgDialog.dismiss();
+                            if (myLoader != null && myLoader.isMyLoaderShowing())
+                                myLoader.dismissLoader();
                         }
 
                         @Override
                         public void onError(String error) {
-                            if (pgDialog != null && pgDialog.isShowing())
-                                pgDialog.dismiss();
+                            if (myLoader != null && myLoader.isMyLoaderShowing())
+                                myLoader.dismissLoader();
                             new AlertDialog.Builder((LandScreenActivity) getActivity())
                                     .setTitle("Error updating information")
                                     .setMessage("" + error)

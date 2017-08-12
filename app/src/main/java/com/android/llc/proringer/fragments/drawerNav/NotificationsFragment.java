@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.SwitchHelper;
@@ -38,7 +39,7 @@ import com.android.llc.proringer.viewsmod.SwitchHelper;
 
 public class NotificationsFragment extends Fragment {
     private SwitchHelper email_newsletter, email_chat_msg, email_tips_artcl, email_prjct_rspnse, mobile_newsletter, mobile_chat_msg, mobile_tips_artcl, mobile_prjct_rspnse;
-    ProgressDialog pgDialog;
+    MyLoader myLoader;
     ScrollView ScrollViewMAin;
     LinearLayout LLNetworkDisconnection;
 
@@ -73,6 +74,8 @@ public class NotificationsFragment extends Fragment {
         mobile_chat_msg.setState(ProApplication.getInstance().getUserNotification().isMobile_chat_msg());
         mobile_tips_artcl.setState(ProApplication.getInstance().getUserNotification().isMobile_tips_article());
         mobile_prjct_rspnse.setState(ProApplication.getInstance().getUserNotification().isMobile_project_replies());
+
+        myLoader=new MyLoader(getActivity());
 
         getNotificationState();
 
@@ -144,17 +147,13 @@ public class NotificationsFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                        pgDialog.setTitle("Notification");
-                        pgDialog.setCancelable(false);
-                        pgDialog.setMessage("Getting Notification data.Please wait...");
-                        pgDialog.show();
+                        myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
                         email_newsletter.setState(ProApplication.getInstance().getUserNotification().isEmail_newsletter());
                         email_chat_msg.setState(ProApplication.getInstance().getUserNotification().isEmail_chat_msg());
@@ -169,9 +168,8 @@ public class NotificationsFragment extends Fragment {
 
                     @Override
                     public void onError(String error) {
-
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
 
 
                         if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {

@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -54,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
     private ProSemiBoldTextView complete_submit;
     private LinearLayout main_content;
-    private ProgressDialog pgDialog = null;
+    private MyLoader myLoader = null;
     private InputMethodManager keyboard;
     private RelativeLayout container_confirm;
     private ProRegularTextView email_confirmed, contact, mail_resent;
@@ -88,6 +89,8 @@ public class SignUpActivity extends AppCompatActivity {
         mail_resent = (ProRegularTextView) findViewById(R.id.mail_resent);
         contact.setMovementMethod(LinkMovementMethod.getInstance());
         mail_resent.setMovementMethod(LinkMovementMethod.getInstance());
+
+        myLoader=new MyLoader(SignUpActivity.this);
 
         findViewById(R.id.terms_of_use).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -269,19 +272,14 @@ public class SignUpActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(SignUpActivity.this).getUserRegistered(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                    @Override
                                                                                    public void onStart() {
-                                                                                       pgDialog = new ProgressDialog(SignUpActivity.this);
-                                                                                       pgDialog.setTitle("Registering");
-                                                                                       pgDialog.setMessage("Please wait...");
-                                                                                       pgDialog.setCancelable(false);
-                                                                                       pgDialog.show();
+                                                                                       myLoader.showLoader();
 
                                                                                    }
 
                                                                                    @Override
                                                                                    public void onComplete(String message) {
-                                                                                       if (pgDialog != null && pgDialog.isShowing())
-                                                                                           pgDialog.dismiss();
-
+                                                                                       if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                           myLoader.dismissLoader();
                                                                                        email_confirmed.setText(email.getText().toString().trim());
 
                                                                                        findViewById(R.id.header_image).setVisibility(View.VISIBLE);
@@ -301,8 +299,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                                                                                    @Override
                                                                                    public void onError(String error) {
-                                                                                       if (pgDialog != null && pgDialog.isShowing())
-                                                                                           pgDialog.dismiss();
+                                                                                       if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                           myLoader.dismissLoader();
                                                                                        showErrorDialog("Registration error", "" + error);
                                                                                    }
                                                                                },

@@ -17,6 +17,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 
@@ -41,7 +42,7 @@ import java.util.List;
  */
 
 public class MyProjectsFragment extends Fragment {
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
     RecyclerView project_list;
     LinearLayout no_project_available, LLNetworkDisconnection;
 
@@ -60,6 +61,8 @@ public class MyProjectsFragment extends Fragment {
         project_list = (RecyclerView) view.findViewById(R.id.project_list);
         project_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
+        myLoader=new MyLoader(getActivity());
+
         loadList();
     }
 
@@ -70,18 +73,14 @@ public class MyProjectsFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog((LandScreenActivity) getActivity());
-                pgDialog.setTitle("My Projects");
-                pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting MyProject list.Please wait...");
-                pgDialog.show();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(final List projectList) {
 
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 if (projectList != null && projectList.size() > 0)
                     project_list.setAdapter(new ProjectListingAdapter((LandScreenActivity) getActivity(), projectList, new onOptionSelected() {
@@ -101,8 +100,8 @@ public class MyProjectsFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     project_list.setVisibility(View.GONE);

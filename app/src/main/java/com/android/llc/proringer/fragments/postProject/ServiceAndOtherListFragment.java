@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 
@@ -25,7 +26,7 @@ import java.util.LinkedList;
  */
 
 public class ServiceAndOtherListFragment extends Fragment {
-    private ProgressDialog pgDialog;
+    private MyLoader myLoader=null;
     private RecyclerView service_list;
     private PostProjectServiceAndOtherListAdapter adapter;
     public int step = 0;
@@ -43,6 +44,8 @@ public class ServiceAndOtherListFragment extends Fragment {
         service_list = (RecyclerView) view.findViewById(R.id.service_list);
         service_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        myLoader=new MyLoader(getActivity());
+
         if (((PostProjectActivity) getActivity()).isForth)
             selectService(((PostProjectActivity) getActivity()).selectedCategory.getId());
         else {
@@ -56,8 +59,8 @@ public class ServiceAndOtherListFragment extends Fragment {
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 ((PostProjectActivity) (PostProjectActivity) getActivity()).serviceListing = listdata;
                 initAdapter(listdata);
@@ -66,8 +69,8 @@ public class ServiceAndOtherListFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 new AlertDialog.Builder((PostProjectActivity) getActivity())
                         .setTitle("Error")
@@ -85,12 +88,7 @@ public class ServiceAndOtherListFragment extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((PostProjectActivity) getActivity());
-                pgDialog.setTitle("Preparing service");
-                pgDialog.setMessage("Getting service list.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
-
+                myLoader.showLoader();
             }
         }, id);
     }

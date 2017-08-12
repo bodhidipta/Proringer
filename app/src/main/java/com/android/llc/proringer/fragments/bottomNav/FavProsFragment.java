@@ -19,6 +19,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchFavoriteListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 
 import org.json.JSONArray;
@@ -45,7 +46,7 @@ import org.json.JSONObject;
 
 public class FavProsFragment extends Fragment {
     private RecyclerView pros_list;
-    ProgressDialog pgDialog;
+    MyLoader myLoader=null;
     SearchFavoriteListAdapter searchFavoriteListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
 
@@ -67,6 +68,8 @@ public class FavProsFragment extends Fragment {
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
+        myLoader=new MyLoader(getActivity());
+
         view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,17 +88,13 @@ public class FavProsFragment extends Fragment {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                pgDialog = new ProgressDialog(getActivity());
-                pgDialog.setTitle("Favorite Pros");
-                pgDialog.setCancelable(false);
-                pgDialog.setMessage("Getting Favorite Pros list.Please wait...");
-                pgDialog.show();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 try {
                     JSONObject jsonObject = new JSONObject(message);
 
@@ -119,8 +118,8 @@ public class FavProsFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
 
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
@@ -178,12 +177,7 @@ public class FavProsFragment extends Fragment {
                             ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteFavoritePro(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                                       @Override
                                                                                                                       public void onStart() {
-
-                                                                                                                          pgDialog.setTitle("Delete Favorite pros");
-                                                                                                                          pgDialog.setMessage("Favorite pros deleting.Please wait...");
-                                                                                                                          pgDialog.setCancelable(false);
-                                                                                                                          pgDialog.show();
-
+                                                                                                                          myLoader.showLoader();
                                                                                                                       }
 
                                                                                                                       @Override
@@ -191,9 +185,8 @@ public class FavProsFragment extends Fragment {
 
                                                                                                                           searchFavoriteListAdapter.notifyMe(pos);
 
-                                                                                                                          if (pgDialog != null && pgDialog.isShowing())
-                                                                                                                              pgDialog.dismiss();
-
+                                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                              myLoader.dismissLoader();
 
                                                                                                                           new AlertDialog.Builder(getActivity())
                                                                                                                                   .setTitle("Delete Favorite pros")
@@ -210,8 +203,8 @@ public class FavProsFragment extends Fragment {
 
                                                                                                                       @Override
                                                                                                                       public void onError(String error) {
-                                                                                                                          if (pgDialog != null && pgDialog.isShowing())
-                                                                                                                              pgDialog.dismiss();
+                                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                              myLoader.dismissLoader();
 
                                                                                                                           new AlertDialog.Builder((LandScreenActivity) getActivity())
                                                                                                                                   .setTitle("Delete Fav pros")
