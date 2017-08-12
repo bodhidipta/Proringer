@@ -68,7 +68,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class DashBoardFragment extends Fragment {
-    Dialog dialog;
+    //Dialog dialog;
     private static final int REQUEST_IMAGE_CAPTURE = 5;
     private static final int PICK_IMAGE = 3;
     private String mCurrentPhotoPath = "";
@@ -148,7 +148,11 @@ public class DashBoardFragment extends Fragment {
         view.findViewById(R.id.img_upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showUploadImage();
+
+                Intent intent = new Intent(getActivity(), PermissionController.class);
+                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
+                startActivityForResult(intent, 200);
+                //showUploadImage();
             }
         });
     }
@@ -259,14 +263,16 @@ public class DashBoardFragment extends Fragment {
                             mCurrentPhotoPath = data.getExtras().get("data").toString();
                             Logger.printMessage("image****", "" + mCurrentPhotoPath);
 
-                            Glide.with(getActivity()).load("file://" + mCurrentPhotoPath).into(new GlideDrawableImageViewTarget((ImageView) dialog.findViewById(R.id.img_temp)) {
-                                @Override
-                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                                    super.onResourceReady(resource, animation);
-                                }
-                            });
-                            dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
-                            dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
+                            loadProfileImage();
+
+//                            Glide.with(getActivity()).load("file://" + mCurrentPhotoPath).into(new GlideDrawableImageViewTarget((ImageView) dialog.findViewById(R.id.img_temp)) {
+//                                @Override
+//                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+//                                    super.onResourceReady(resource, animation);
+//                                }
+//                            });
+                           // dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
+                          //  dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
                         }
                     }
                 }, 800);
@@ -279,23 +285,25 @@ public class DashBoardFragment extends Fragment {
                         Logger.printMessage("image****", "data file does not exists");
                     mCurrentPhotoPath = dataFile.getAbsolutePath();
 
-                    Glide.with(getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget((ImageView) dialog.findViewById(R.id.img_temp)) {
-                        /**
-                         * {@inheritDoc}
-                         * If no {@link GlideAnimation} is given or if the animation does not set the
-                         * {@link Drawable} on the view, the drawable is set using
-                         * {@link ImageView#setImageDrawable(Drawable)}.
-                         *
-                         * @param resource  {@inheritDoc}
-                         * @param animation {@inheritDoc}
-                         */
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                            super.onResourceReady(resource, animation);
-                        }
-                    });
-                    dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
-                    dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
+                    loadProfileImage();
+
+//                    Glide.with(getActivity()).load(uri).fitCenter().into(new GlideDrawableImageViewTarget((ImageView) dialog.findViewById(R.id.img_temp)) {
+//                        /**
+//                         * {@inheritDoc}
+//                         * If no {@link GlideAnimation} is given or if the animation does not set the
+//                         * {@link Drawable} on the view, the drawable is set using
+//                         * {@link ImageView#setImageDrawable(Drawable)}.
+//                         *
+//                         * @param resource  {@inheritDoc}
+//                         * @param animation {@inheritDoc}
+//                         */
+//                        @Override
+//                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+//                            super.onResourceReady(resource, animation);
+//                        }
+//                    });
+                   // dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
+                   // dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -351,111 +359,115 @@ public class DashBoardFragment extends Fragment {
                 .show();
     }
 
-    private void showUploadImage() {
+//    private void showUploadImage() {
+//
+//        dialog = new Dialog(getActivity());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        // Include dialog.xml file
+//        dialog.setContentView(R.layout.dialog_upload_image);
+//        // Set dialog title
+//        //dialog.setTitle("Profile Image Upload");
+//
+//        final DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int widthLcl = (int) (displayMetrics.widthPixels * 0.8f);
+//        int heightLcl = (int) (displayMetrics.heightPixels * 0.6f);
+//
+//        RelativeLayout RLMain = (RelativeLayout) dialog.findViewById(R.id.RLMain);
+//
+//        RLMain.getLayoutParams().width = widthLcl;
+//        RLMain.getLayoutParams().height = heightLcl;
+//
+//        dialog.show();
+//
+//        dialog.findViewById(R.id.tv_ok).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
+//        dialog.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        dialog.findViewById(R.id.img_select).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(getActivity(), PermissionController.class);
+//                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
+//                startActivityForResult(intent, 200);
+//            }
+//        });
+//        dialog.findViewById(R.id.img_cancel).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ((ImageView) dialog.findViewById(R.id.img_temp)).setImageResource(android.R.color.transparent);
+//                dialog.findViewById(R.id.img_select).setVisibility(View.VISIBLE);
+//                dialog.findViewById(R.id.img_cancel).setVisibility(View.GONE);
+//                mCurrentPhotoPath = "";
+//            }
+//        });
+//    }
 
-        dialog = new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // Include dialog.xml file
-        dialog.setContentView(R.layout.dialog_upload_image);
-        // Set dialog title
-        //dialog.setTitle("Profile Image Upload");
-
-        final DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int widthLcl = (int) (displayMetrics.widthPixels * 0.8f);
-        int heightLcl = (int) (displayMetrics.heightPixels * 0.6f);
-
-        RelativeLayout RLMain = (RelativeLayout) dialog.findViewById(R.id.RLMain);
-
-        RLMain.getLayoutParams().width = widthLcl;
-        RLMain.getLayoutParams().height = heightLcl;
-
-        dialog.show();
-
-        dialog.findViewById(R.id.tv_ok).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (mCurrentPhotoPath.trim().equals("")) {
-                    Toast.makeText(getActivity(), "Please choose Image", Toast.LENGTH_SHORT).show();
-                } else {
-                    ProServiceApiHelper.getInstance(getActivity()).upLoadProfileImage(new ProServiceApiHelper.getApiProcessCallback() {
-                        @Override
-                        public void onStart() {
-                            pgDialog = new ProgressDialog(getActivity());
-                            pgDialog.setTitle("Image Upload");
-                            pgDialog.setMessage("uploading.Please wait...");
-                            pgDialog.setCancelable(false);
-                            pgDialog.show();
-                        }
-
-                        @Override
-                        public void onComplete(String message) {
-                            if (pgDialog != null && pgDialog.isShowing())
-                                pgDialog.dismiss();
-
-                            dialog.dismiss();
-
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("" + "Upload Image")
-                                    .setMessage("" + message)
-                                    .setCancelable(false)
-                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            plotUserInformation();
-                                        }
-                                    })
-                                    .show();
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            if (pgDialog != null && pgDialog.isShowing())
-                                pgDialog.dismiss();
-
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("" + "Upload Image")
-                                    .setMessage("" + error)
-                                    .setCancelable(false)
-                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-
-                                        }
-                                    })
-                                    .show();
-                        }
-                    }, ProApplication.getInstance().getUserId(), mCurrentPhotoPath);
+    public void loadProfileImage(){
+        if (mCurrentPhotoPath.trim().equals("")) {
+            Toast.makeText(getActivity(), "Please choose Image", Toast.LENGTH_SHORT).show();
+        } else {
+            ProServiceApiHelper.getInstance(getActivity()).upLoadProfileImage(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+                    pgDialog = new ProgressDialog(getActivity());
+                    pgDialog.setTitle("Image Upload");
+                    pgDialog.setMessage("uploading.Please wait...");
+                    pgDialog.setCancelable(false);
+                    pgDialog.show();
                 }
-            }
-        });
-        dialog.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
 
-        dialog.findViewById(R.id.img_select).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                @Override
+                public void onComplete(String message) {
+                    if (pgDialog != null && pgDialog.isShowing())
+                        pgDialog.dismiss();
 
-                Intent intent = new Intent(getActivity(), PermissionController.class);
-                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
-                startActivityForResult(intent, 200);
-            }
-        });
-        dialog.findViewById(R.id.img_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((ImageView) dialog.findViewById(R.id.img_temp)).setImageResource(android.R.color.transparent);
-                dialog.findViewById(R.id.img_select).setVisibility(View.VISIBLE);
-                dialog.findViewById(R.id.img_cancel).setVisibility(View.GONE);
-                mCurrentPhotoPath = "";
-            }
-        });
+                    //dialog.dismiss();
+
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("" + "Upload Image")
+                            .setMessage("" + message)
+                            .setCancelable(false)
+                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    plotUserInformation();
+                                }
+                            })
+                            .show();
+                }
+
+                @Override
+                public void onError(String error) {
+                    if (pgDialog != null && pgDialog.isShowing())
+                        pgDialog.dismiss();
+
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("" + "Upload Image")
+                            .setMessage("" + error)
+                            .setCancelable(false)
+                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+
+                                }
+                            })
+                            .show();
+                }
+            }, ProApplication.getInstance().getUserId(), mCurrentPhotoPath);
+        }
     }
 }
