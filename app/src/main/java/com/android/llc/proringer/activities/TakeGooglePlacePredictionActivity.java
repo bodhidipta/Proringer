@@ -190,7 +190,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity {
                                     JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
 
                                     for (int k = 0; k < types.length(); k++) {
-                                        if (types.getString(k).equals("administrative_area_level_2")) {
+                                        if (types.getString(k).equals("locality")) {
                                             city = address_components.getJSONObject(j).getString("short_name");
                                             Logger.printMessage("city", "-->" + city);
                                         }
