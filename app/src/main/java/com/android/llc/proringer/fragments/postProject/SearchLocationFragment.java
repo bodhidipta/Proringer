@@ -1,6 +1,5 @@
 package com.android.llc.proringer.fragments.postProject;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
@@ -24,9 +24,11 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,15 +37,15 @@ import java.util.List;
  */
 
 public class SearchLocationFragment extends Fragment {
-    List<AddressData> addressDataList;
-    ProRegularEditText zip_code_text;
 
+    private List<AddressData> addressDataList;
+    private ProRegularEditText zip_code_text;
     private PostProjectLocationListAdapter zip_search_adapter = null;
-    RecyclerView location_list;
-    ProgressBar loading_progress;
-    ImageView error_progress;
-    public boolean outer_block_check = false;
-    MyLoader myLoader=null;
+    private RecyclerView location_list;
+    private ProgressBar loading_progress;
+    private ImageView error_progress;
+    private boolean outer_block_check = false;
+    private MyLoader myLoader = null;
 
     @Nullable
     @Override
@@ -62,10 +64,10 @@ public class SearchLocationFragment extends Fragment {
 
         addressDataList = new ArrayList<>();
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
-
-        ((PostProjectActivity) getActivity()).selectedAddressData =null;
+        zip_search_adapter = null;
+        ((PostProjectActivity) getActivity()).selectedAddressData = null;
 
         if (!ProApplication.getInstance().getUserId().equals("")) {
             plotUserInformation();
@@ -110,18 +112,17 @@ public class SearchLocationFragment extends Fragment {
                  * fragment calling
                  */
 
-                if(addressDataList!=null & addressDataList.size()>0) {
+                if (addressDataList != null & addressDataList.size() > 0) {
 
                     if (((PostProjectActivity) getActivity()).selectedAddressData == null) {
                         //zip_code_text.setError("Please enter a valid zip code to continue.");
-                        Toast.makeText(getActivity(),"Please choose a location from list to continue.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Please choose a location from list to continue.", Toast.LENGTH_SHORT).show();
                     } else {
                         ((PostProjectActivity) getActivity()).closeKeypad();
                         ((PostProjectActivity) getActivity()).increaseStep();
                         ((PostProjectActivity) getActivity()).changeFragmentNext(6);
                     }
-                }
-                else {
+                } else {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
                 }
             }
