@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -48,7 +50,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  * -->
  */
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements MyCustomAlertListener{
     private ProBoldTextView sign_in;
     private RelativeLayout sign_up_with_facebook;
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
@@ -291,8 +293,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                                                            e.printStackTrace();
                                                                                        }
 
-
-                                                                                       showDialog("Registration ", "" + message);
+                                                                                       CustomAlert customAlert = new CustomAlert(SignUpActivity.this,"Registration ", "" + message, SignUpActivity.this);
+                                                                                       customAlert.createNormalAlert("ok",1);
 
                                                                                    }
 
@@ -300,7 +302,9 @@ public class SignUpActivity extends AppCompatActivity {
                                                                                    public void onError(String error) {
                                                                                        if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                            myLoader.dismissLoader();
-                                                                                       showErrorDialog("Registration error", "" + error);
+
+                                                                                       CustomAlert customAlert = new CustomAlert(SignUpActivity.this, "Registration error", "" + error, SignUpActivity.this);
+                                                                                       customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                                                                                    }
                                                                                },
                 first_name.getText().toString().trim(),
@@ -310,43 +314,6 @@ public class SignUpActivity extends AppCompatActivity {
                 zip_code.getText().toString().trim()
         );
     }
-
-    private void showDialog(String title, String message) {
-        new AlertDialog.Builder(SignUpActivity.this)
-                .setTitle("" + title)
-                .setMessage("" + message)
-                .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        container_confirm.setVisibility(View.VISIBLE);
-                    }
-                })
-                .show();
-    }
-
-    private void showErrorDialog(String title, String message) {
-        new AlertDialog.Builder(SignUpActivity.this)
-                .setTitle("" + title)
-                .setMessage("" + message)
-                .setCancelable(false)
-                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        validateRegistration();
-                    }
-                })
-                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-    }
-
 
     boolean isAlphanumeric(String str) {
         for (int i = 0; i < str.length(); i++) {
@@ -364,5 +331,15 @@ public class SignUpActivity extends AppCompatActivity {
             onBackPressed();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if(result.equalsIgnoreCase("ok") && i==1){
+            container_confirm.setVisibility(View.VISIBLE);
+        }
+        else if(result.equalsIgnoreCase("retry") && i==1){
+            validateRegistration();
+        }
     }
 }
