@@ -113,7 +113,7 @@ public class SearchLocationFragment extends Fragment {
 
                     if (((PostProjectActivity) getActivity()).selectedAddressData == null) {
                         //zip_code_text.setError("Please enter a valid zip code to continue.");
-                        Toast.makeText(getActivity(),"Please choose a location from list below to continue.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"Please choose a location from list to continue.",Toast.LENGTH_SHORT).show();
                     } else {
                         ((PostProjectActivity) getActivity()).closeKeypad();
                         ((PostProjectActivity) getActivity()).increaseStep();
