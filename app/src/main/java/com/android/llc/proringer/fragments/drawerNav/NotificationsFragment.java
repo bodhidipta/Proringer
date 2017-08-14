@@ -12,6 +12,8 @@ import android.widget.ScrollView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -34,7 +36,7 @@ import com.android.llc.proringer.viewsmod.SwitchHelper;
  * limitations under the License.
  */
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends Fragment implements MyCustomAlertListener{
     private SwitchHelper email_newsletter, email_chat_msg, email_tips_artcl, email_prjct_rspnse, mobile_newsletter, mobile_chat_msg, mobile_tips_artcl, mobile_prjct_rspnse;
     MyLoader myLoader;
     ScrollView ScrollViewMAin;
@@ -174,24 +176,8 @@ public class NotificationsFragment extends Fragment {
                             LLNetworkDisconnection.setVisibility(View.VISIBLE);
                         }
 
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle("Load Error")
-                                .setMessage("" + error)
-                                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        getNotificationState();
-
-                                    }
-                                })
-                                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
-
+                        CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, NotificationsFragment.this);
+                        customAlert.getListenerRetryCancelFromNormalAlert();
                     }
                 });
     }
@@ -227,4 +213,10 @@ public class NotificationsFragment extends Fragment {
     }
 
 
+    @Override
+    public void callbackForAlert(String result) {
+        if (result.equalsIgnoreCase("retry")){
+            getNotificationState();
+        }
+    }
 }

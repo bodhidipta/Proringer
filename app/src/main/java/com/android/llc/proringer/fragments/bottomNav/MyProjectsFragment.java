@@ -1,21 +1,20 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectPostedData;
@@ -40,7 +39,7 @@ import java.util.List;
  * -->
  */
 
-public class MyProjectsFragment extends Fragment {
+public class MyProjectsFragment extends Fragment implements MyCustomAlertListener{
     MyLoader myLoader=null;
     RecyclerView project_list;
     LinearLayout no_project_available, LLNetworkDisconnection;
@@ -107,26 +106,17 @@ public class MyProjectsFragment extends Fragment {
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Load Error")
-                        .setMessage("" + error)
-                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                loadList();
 
-                            }
-                        })
-                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error,MyProjectsFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert();
             }
         });
 
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        loadList();
     }
 
     public interface onOptionSelected {
