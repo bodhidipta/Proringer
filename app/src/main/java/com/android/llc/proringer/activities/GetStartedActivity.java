@@ -11,13 +11,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.GetStartedTutorial;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -55,7 +55,7 @@ import java.util.Date;
 public class GetStartedActivity extends AppCompatActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener,MyCustomAlertListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private ViewPager get_started_pager;
@@ -221,21 +221,9 @@ public class GetStartedActivity extends AppCompatActivity implements
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.title_location_permission)
-                        .setMessage(R.string.text_location_permission)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(GetStartedActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
-                        .create()
-                        .show();
 
+                CustomAlert customAlert = new CustomAlert(GetStartedActivity.this,getResources().getString(R.string.title_location_permission), getResources().getString(R.string.text_location_permission),GetStartedActivity.this);
+                customAlert.createNormalAlert();
 
             } else {
                 // No explanation needed, we can request the permission.
@@ -426,6 +414,15 @@ public class GetStartedActivity extends AppCompatActivity implements
                     Logger.printMessage(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
                 }
             }
+        }
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        if (result.equalsIgnoreCase("ok")){
+            ActivityCompat.requestPermissions(GetStartedActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
         }
     }
 }

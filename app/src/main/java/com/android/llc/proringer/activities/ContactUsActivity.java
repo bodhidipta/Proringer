@@ -1,10 +1,7 @@
 package com.android.llc.proringer.activities;
 
-
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
@@ -109,23 +106,9 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        new AlertDialog.Builder(ContactUsActivity.this)
-                                .setTitle("Contact Us Error")
-                                .setMessage("" + error)
-                                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        validateContactUs();
-                                    }
-                                })
-                                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
+
+                        CustomAlert customAlert = new CustomAlert(ContactUsActivity.this, "Contact Us Error", "" + error, ContactUsActivity.this);
+                        customAlert.getListenerRetryCancelFromNormalAlert();
                     }
                 },
                 first_name.getText().toString().trim(),
@@ -155,6 +138,9 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
     public void callbackForAlert(String result) {
         if(result.equalsIgnoreCase("ok")){
             resetForm();
+        }
+        else if (result.equalsIgnoreCase("retry")){
+            validateContactUs();
         }
     }
 }

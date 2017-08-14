@@ -24,6 +24,8 @@ import com.android.llc.proringer.fragments.postProject.PostProjectRegistrationAn
 import com.android.llc.proringer.fragments.postProject.PostProjectSelectImageFragment;
 import com.android.llc.proringer.fragments.postProject.SearchLocationFragment;
 import com.android.llc.proringer.fragments.postProject.ServiceAndOtherListFragment;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.AddressData;
@@ -31,7 +33,6 @@ import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -53,7 +54,7 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class PostProjectActivity extends AppCompatActivity {
+public class PostProjectActivity extends AppCompatActivity implements MyCustomAlertListener {
 
     public FragmentManager fragmentManager = null;
 
@@ -163,6 +164,8 @@ public class PostProjectActivity extends AppCompatActivity {
             LLMain.setVisibility(View.GONE);
             LLNetworkDisconnection.setVisibility(View.VISIBLE);
 
+
+
             new AlertDialog.Builder(PostProjectActivity.this)
                     .setTitle("Load Error")
                     .setMessage("No internet connection found. Please check your internet connection.")
@@ -239,26 +242,6 @@ public class PostProjectActivity extends AppCompatActivity {
     }
 
 
-    private void showErrorDialog(String title, String message) {
-        new AlertDialog.Builder(PostProjectActivity.this)
-                .setTitle("" + title)
-                .setMessage("" + message)
-                .setCancelable(false)
-                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-    }
-
     public void completePostProject() {
 
         Logger.printMessage("@registrationPostPro", "selectedCategory :" + selectedCategory.getId());
@@ -307,7 +290,9 @@ public class PostProjectActivity extends AppCompatActivity {
                     public void onError(String error) {
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
-                        showErrorDialog("Project post error", "" + error);
+
+                        CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Project post error", "" + error, PostProjectActivity.this);
+                        customAlert.getListenerRetryCancelFromNormalAlert();
                     }
                 },
                 selectedCategory.getId(),
@@ -531,6 +516,13 @@ public class PostProjectActivity extends AppCompatActivity {
             fragmentManager.popBackStack("" + ServiceAndOtherListFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentPushList.remove(fragmentPushList.size() - 1);
 
+        }
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        if (result.equalsIgnoreCase("retry")){
+            completePostProject();
         }
     }
 }

@@ -42,26 +42,26 @@ public class CustomAlert {
 
 
 
-    public void getListenerOKCancelFromNormalAlert(){
+    public void getListenerRetryCancelFromNormalAlert(){
         new AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         /////////take listener event///////////////
-                        ml.callbackForAlert("ok");
+                        ml.callbackForAlert("retry");
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
                         /////////take listener event///////////////
-                        ml.callbackForAlert("cancel");
+                        ml.callbackForAlert("abort");
                     }
                 })
                 .create()

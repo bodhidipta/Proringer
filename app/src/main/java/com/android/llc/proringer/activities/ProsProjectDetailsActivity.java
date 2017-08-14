@@ -31,6 +31,8 @@ import com.android.llc.proringer.adapter.ProsDetailsLicenseAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsServiceAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.helper.ShowMyDialog;
@@ -46,7 +48,7 @@ import org.json.JSONObject;
  * Created by su on 7/12/17.
  */
 
-public class ProsProjectDetailsActivity extends AppCompatActivity {
+public class ProsProjectDetailsActivity extends AppCompatActivity implements MyCustomAlertListener {
     ImageView img_back, img_top, img_profile, img_achievements;
     String pros_id = "", pros_company_name = "";
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
@@ -300,23 +302,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
                                                                                                               LLNetworkDisconnection.setVisibility(View.VISIBLE);
                                                                                                           }
 
-                                                                                                          new AlertDialog.Builder(ProsProjectDetailsActivity.this)
-                                                                                                                  .setTitle("Load Error")
-                                                                                                                  .setMessage("" + error)
-                                                                                                                  .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                                                                                                      @Override
-                                                                                                                      public void onClick(DialogInterface dialog, int which) {
-                                                                                                                          dialog.dismiss();
-                                                                                                                          setDataProListDetails();
-
-                                                                                                                      }
-                                                                                                                  })
-                                                                                                                  .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                                                                                                      @Override
-                                                                                                                      public void onClick(DialogInterface dialog, int which) {
-                                                                                                                          dialog.dismiss();
-                                                                                                                      }
-                                                                                                                  }).show();
+                                                                                                          CustomAlert customAlert = new CustomAlert(ProsProjectDetailsActivity.this, "Contact Us Error", "" + error, ProsProjectDetailsActivity.this);
+                                                                                                          customAlert.getListenerRetryCancelFromNormalAlert();
                                                                                                       }
                                                                                                   },
 //                "56"
@@ -374,6 +361,13 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
         }, portfolio_id);
 
 
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        if (result.equalsIgnoreCase("retry")){
+            setDataProListDetails();
+        }
     }
 
     public interface onOptionSelected {

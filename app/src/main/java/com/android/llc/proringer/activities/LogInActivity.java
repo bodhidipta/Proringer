@@ -1,16 +1,16 @@
 package com.android.llc.proringer.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -34,7 +34,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  * -->
  */
 
-public class LogInActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity implements MyCustomAlertListener{
     private ProSemiBoldTextView sign_up;
     private ProSemiBoldTextView log_in;
     private ProLightEditText email, password;
@@ -97,24 +97,8 @@ public class LogInActivity extends AppCompatActivity {
                                     if (myLoader != null && myLoader.isMyLoaderShowing())
                                         myLoader.dismissLoader();
 
-                                    new AlertDialog.Builder(LogInActivity.this)
-                                            .setTitle("Sign in error")
-                                            .setMessage("" + error)
-                                            .setCancelable(false)
-                                            .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();
-                                                    log_in.performClick();
-                                                }
-                                            })
-                                            .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();
-                                                }
-                                            })
-                                            .show();
+                                    CustomAlert customAlert = new CustomAlert(LogInActivity.this, "Sign in error", "" + error, LogInActivity.this);
+                                    customAlert.getListenerRetryCancelFromNormalAlert();
                                 }
                             },
                             email.getText().toString().trim(),
@@ -143,5 +127,12 @@ public class LogInActivity extends AppCompatActivity {
     public void onBackPressed() {
         setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        if (result.equalsIgnoreCase("retry")) {
+            log_in.performClick();
+        }
     }
 }

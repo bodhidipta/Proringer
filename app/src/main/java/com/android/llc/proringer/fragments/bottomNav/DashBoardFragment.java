@@ -22,9 +22,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.ImageTakerActivityCamera;
@@ -65,7 +68,7 @@ import static android.app.Activity.RESULT_OK;
  * -->
  */
 
-public class DashBoardFragment extends Fragment {
+public class DashBoardFragment extends Fragment implements MyCustomAlertListener {
     //Dialog dialog;
     private static final int REQUEST_IMAGE_CAPTURE = 5;
     private static final int PICK_IMAGE = 3;
@@ -205,23 +208,8 @@ public class DashBoardFragment extends Fragment {
                 }
 
 
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Load Error")
-                        .setMessage("" + error)
-                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                plotUserInformation();
-
-                            }
-                        })
-                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error,DashBoardFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert();
             }
         });
     }
@@ -426,18 +414,8 @@ public class DashBoardFragment extends Fragment {
 
                     //dialog.dismiss();
 
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("" + "Upload Image")
-                            .setMessage("" + message)
-                            .setCancelable(false)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    plotUserInformation();
-                                }
-                            })
-                            .show();
+                    CustomAlert customAlert = new CustomAlert(getActivity(), "" + "Upload Image", "" + message, DashBoardFragment.this);
+                    customAlert.createNormalAlert();
                 }
 
                 @Override
@@ -458,6 +436,16 @@ public class DashBoardFragment extends Fragment {
                             .show();
                 }
             }, ProApplication.getInstance().getUserId(), mCurrentPhotoPath);
+        }
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        if (result.equalsIgnoreCase("retry")) {
+            plotUserInformation();
+        }
+        if (result.equalsIgnoreCase("ok")){
+            plotUserInformation();
         }
     }
 }
