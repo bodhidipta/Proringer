@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -35,11 +34,13 @@ import com.android.llc.proringer.fragments.drawerNav.UserInformationFragment;
 import com.android.llc.proringer.fragments.main_content.MyProjectDetailsFragment;
 import com.android.llc.proringer.fragments.main_content.MyProjectRateProFragment;
 import com.android.llc.proringer.fragments.main_content.ProjectMessagingFragment;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 
-public class LandScreenActivity extends AppCompatActivity {
+public class LandScreenActivity extends AppCompatActivity implements MyCustomAlertListener {
 
     ImageView nav_toggle;
     private DrawerLayout mDrawer;
@@ -283,20 +284,10 @@ public class LandScreenActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            new AlertDialog.Builder(LandScreenActivity.this)
-                    .setMessage("Do you want to exit application?")
-                    .setPositiveButton("Abort", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    finish();
-                }
-            }).show();
+
+            CustomAlert customAlert = new CustomAlert(LandScreenActivity.this, "", "Do you want to exit application?", LandScreenActivity.this);
+            customAlert.getListenerRetryCancelFromNormalAlert("Yes","Abort",1);
+
         }
     }
 
@@ -708,4 +699,10 @@ public class LandScreenActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("Yes") && i==1){
+            finish();
+        }
+    }
 }
