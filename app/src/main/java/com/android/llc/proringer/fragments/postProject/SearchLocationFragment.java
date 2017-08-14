@@ -66,6 +66,7 @@ public class SearchLocationFragment extends Fragment {
 
 
         ((PostProjectActivity) getActivity()).selectedAddressData =null;
+
         if (!ProApplication.getInstance().getUserId().equals("")) {
             plotUserInformation();
         } else {
