@@ -1,12 +1,10 @@
 package com.android.llc.proringer.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -164,25 +162,8 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             LLMain.setVisibility(View.GONE);
             LLNetworkDisconnection.setVisibility(View.VISIBLE);
 
-
-
-            new AlertDialog.Builder(PostProjectActivity.this)
-                    .setTitle("Load Error")
-                    .setMessage("No internet connection found. Please check your internet connection.")
-                    .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            changeFragmentNext(1);
-
-                        }
-                    })
-                    .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
+            CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Load Error", "No internet connection found. Please check your internet connection.", PostProjectActivity.this);
+            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
         }
     }
 
@@ -523,6 +504,9 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
     public void callbackForAlert(String result, int i) {
         if (result.equalsIgnoreCase("retry")&&i==1){
             completePostProject();
+        }
+        if (result.equalsIgnoreCase("retry")&&i==2){
+            changeFragmentNext(1);
         }
     }
 }
