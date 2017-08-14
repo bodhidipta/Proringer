@@ -276,7 +276,6 @@ public class PostProjectActivity extends AppCompatActivity {
         Logger.printMessage("@registrationPostPro", "selectedAddressData.getCountry_code() :" + selectedAddressData.getCountry_code());
         Logger.printMessage("@registrationPostPro", "selectedAddressData.getLatitude() :" + selectedAddressData.getLatitude());
         Logger.printMessage("@registrationPostPro", " selectedAddressData.getLongitude() :" + selectedAddressData.getLongitude());
-        Logger.printMessage("@registrationPostPro", " selectedAddressData.getLongitude() :" + selectedAddressData.getLongitude());
         Logger.printMessage("@registrationPostPro", " first_name :" + first_name);
         Logger.printMessage("@registrationPostPro", "last_name:" + last_name);
         Logger.printMessage("@registrationPostPro", "email:" + email);
