@@ -223,7 +223,7 @@ public class GetStartedActivity extends AppCompatActivity implements
                 // sees the explanation, try again to request the permission.
 
                 CustomAlert customAlert = new CustomAlert(GetStartedActivity.this,getResources().getString(R.string.title_location_permission), getResources().getString(R.string.text_location_permission),GetStartedActivity.this);
-                customAlert.createNormalAlert();
+                customAlert.createNormalAlert("ok",1);
 
             } else {
                 // No explanation needed, we can request the permission.
@@ -418,8 +418,8 @@ public class GetStartedActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("ok")){
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("ok") && i==1){
             ActivityCompat.requestPermissions(GetStartedActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);

@@ -292,7 +292,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Project post error", "" + error, PostProjectActivity.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert();
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                     }
                 },
                 selectedCategory.getId(),
@@ -520,8 +520,8 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("retry")){
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry")&&i==1){
             completePostProject();
         }
     }

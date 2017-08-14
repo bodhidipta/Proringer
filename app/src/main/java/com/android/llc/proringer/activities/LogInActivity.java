@@ -98,7 +98,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
                                         myLoader.dismissLoader();
 
                                     CustomAlert customAlert = new CustomAlert(LogInActivity.this, "Sign in error", "" + error, LogInActivity.this);
-                                    customAlert.getListenerRetryCancelFromNormalAlert();
+                                    customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                                 }
                             },
                             email.getText().toString().trim(),
@@ -130,8 +130,8 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("retry")) {
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry")&&i==1) {
             log_in.performClick();
         }
     }

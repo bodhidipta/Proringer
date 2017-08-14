@@ -303,7 +303,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                           }
 
                                                                                                           CustomAlert customAlert = new CustomAlert(ProsProjectDetailsActivity.this, "Contact Us Error", "" + error, ProsProjectDetailsActivity.this);
-                                                                                                          customAlert.getListenerRetryCancelFromNormalAlert();
+                                                                                                          customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                                                                                                       }
                                                                                                   },
 //                "56"
@@ -364,11 +364,12 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("retry")){
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry")&&i==1){
             setDataProListDetails();
         }
     }
+
 
     public interface onOptionSelected {
         void onItemPassed(int position, String value);

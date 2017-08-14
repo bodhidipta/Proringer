@@ -108,15 +108,18 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
 
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error,MyProjectsFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert();
+                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
             }
         });
 
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        loadList();
+    public void callbackForAlert(String result, int i) {
+
+        if (result.equalsIgnoreCase("retry")&&i==1) {
+            loadList();
+        }
     }
 
     public interface onOptionSelected {

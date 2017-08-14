@@ -24,16 +24,16 @@ public class CustomAlert {
         this.ml = ml;
     }
 
-    public void createNormalAlert(){
+    public void createNormalAlert(final String positiveTitle,final int checkValue){
         new AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(positiveTitle, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        ml.callbackForAlert("ok");
+                        ml.callbackForAlert(positiveTitle,checkValue);
                     }
                 })
                 .create()
@@ -42,26 +42,26 @@ public class CustomAlert {
 
 
 
-    public void getListenerRetryCancelFromNormalAlert(){
+    public void getListenerRetryCancelFromNormalAlert(final String positiveTitle,final String negativeTitle,final int checkValue){
         new AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("retry", new DialogInterface.OnClickListener() {
+                .setPositiveButton(positiveTitle, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         /////////take listener event///////////////
-                        ml.callbackForAlert("retry");
+                        ml.callbackForAlert(positiveTitle,checkValue);
                     }
                 })
-                .setNegativeButton("abort", new DialogInterface.OnClickListener() {
+                .setNegativeButton(negativeTitle, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
                         /////////take listener event///////////////
-                        ml.callbackForAlert("abort");
+                        ml.callbackForAlert(negativeTitle,checkValue);
                     }
                 })
                 .create()

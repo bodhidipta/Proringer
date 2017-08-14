@@ -6,5 +6,5 @@ package com.android.llc.proringer.helper;
 
 public interface MyCustomAlertListener {
     // you can define any parameter as per your requirement
-    public void callbackForAlert(String result);
+    public void callbackForAlert(String result,int i);
 }

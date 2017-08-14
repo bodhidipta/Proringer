@@ -108,7 +108,7 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Invite Friend", "" + message, InviteAFriendFragment.this);
-                        customAlert.createNormalAlert();
+                        customAlert.createNormalAlert("ok",1);
                     }
 
                     @Override
@@ -117,7 +117,7 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Invite Friend Error", "" + error, InviteAFriendFragment.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert();
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
 
                     }
                 },
@@ -135,11 +135,11 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("ok")){
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("ok") && i==1){
             resetForm();
         }
-        else if(result.equalsIgnoreCase("retry")){
+        else if(result.equalsIgnoreCase("retry") && i==1){
             validateInvite();
         }
     }

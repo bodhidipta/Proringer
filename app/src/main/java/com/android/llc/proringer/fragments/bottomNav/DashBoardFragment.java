@@ -204,7 +204,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error,DashBoardFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert();
+                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
             }
         });
     }
@@ -410,7 +410,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                     //dialog.dismiss();
 
                     CustomAlert customAlert = new CustomAlert(getActivity(), "" + "Upload Image", "" + message, DashBoardFragment.this);
-                    customAlert.createNormalAlert();
+                    customAlert.createNormalAlert("ok",1);
                 }
 
                 @Override
@@ -435,11 +435,11 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("retry")) {
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry") && i==1) {
             plotUserInformation();
         }
-        if (result.equalsIgnoreCase("ok")){
+        if (result.equalsIgnoreCase("ok") && i==1){
             plotUserInformation();
         }
     }

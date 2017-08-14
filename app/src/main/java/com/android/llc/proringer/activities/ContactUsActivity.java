@@ -98,7 +98,7 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(ContactUsActivity.this, "Contact Us", "" + message, ContactUsActivity.this);
-                        customAlert.createNormalAlert();
+                        customAlert.createNormalAlert("ok",1);
                     }
 
                     @Override
@@ -108,7 +108,7 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
 
 
                         CustomAlert customAlert = new CustomAlert(ContactUsActivity.this, "Contact Us Error", "" + error, ContactUsActivity.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert();
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                     }
                 },
                 first_name.getText().toString().trim(),
@@ -135,11 +135,12 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
     }
 
     @Override
-    public void callbackForAlert(String result) {
-        if(result.equalsIgnoreCase("ok")){
+    public void callbackForAlert(String result, int i) {
+
+        if(result.equalsIgnoreCase("ok")&&i==1){
             resetForm();
         }
-        else if (result.equalsIgnoreCase("retry")){
+        else if (result.equalsIgnoreCase("retry")&&i==1){
             validateContactUs();
         }
     }

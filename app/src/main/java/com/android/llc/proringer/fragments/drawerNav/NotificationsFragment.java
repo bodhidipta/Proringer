@@ -177,7 +177,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
                         }
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, NotificationsFragment.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert();
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                     }
                 });
     }
@@ -212,10 +212,9 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
         );
     }
 
-
     @Override
-    public void callbackForAlert(String result) {
-        if (result.equalsIgnoreCase("retry")){
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry") && i==1){
             getNotificationState();
         }
     }
