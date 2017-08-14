@@ -79,9 +79,9 @@ public class SearchLocationFragment extends Fragment {
         zip_code_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
-                    zip_code_text.setHint("");
+                    zip_code_text.setText("");
                 else
-                    zip_code_text.setHint(ProApplication.getInstance().getZipCode());
+                    zip_code_text.setText(ProApplication.getInstance().getZipCode());
             }
         });
 
@@ -142,7 +142,7 @@ public class SearchLocationFragment extends Fragment {
 
                 if (addressDataList != null && addressDataList.size() > 0) {
                     if (zip_search_adapter == null) {
-                        zip_search_adapter = new PostProjectLocationListAdapter((PostProjectActivity) getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
+                        zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
                             public void onSelect(int pos, AddressData data) {
                                 ((PostProjectActivity) getActivity()).selectedAddressData = data;
@@ -216,8 +216,8 @@ public class SearchLocationFragment extends Fragment {
                                         Logger.printMessage("types", "" + jsonArrayType.get(0));
 
                                         if (jsonArrayType.get(0).equals("postal_code")) {
-                                            zip_code_text.setHint(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
-                                            searchLocationWithZip(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
+                                            zip_code_text.setText(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
+                                            searchLocationWithZip(zip_code_text.getText().toString());
                                             outer_block_check = true;
                                             break;
                                         }
@@ -258,10 +258,10 @@ public class SearchLocationFragment extends Fragment {
                             Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
                             if (innerObj.getString("zipcode").trim().equals("")) {
-                                zip_code_text.setHint("");
+                                zip_code_text.setText("");
                             } else {
-                                zip_code_text.setHint(innerObj.getString("zipcode") + "");
-                                searchLocationWithZip(innerObj.getString("zipcode") + "");
+                                zip_code_text.setText(innerObj.getString("zipcode") + "");
+                                searchLocationWithZip(zip_code_text.getText().toString());
                             }
                         } catch (JSONException jse) {
                             jse.printStackTrace();
