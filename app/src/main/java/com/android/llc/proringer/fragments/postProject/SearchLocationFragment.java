@@ -177,7 +177,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
     public void getCurrentLocationZip() {
-        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();
@@ -241,7 +241,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
     private void plotUserInformation() {
-        DatabaseHandler.getInstance((PostProjectActivity) getActivity()).getUserInfo(
+        DatabaseHandler.getInstance(getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
