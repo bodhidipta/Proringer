@@ -138,7 +138,7 @@ public class SearchLocationFragment extends Fragment {
                 loading_progress.setVisibility(View.GONE);
                 error_progress.setVisibility(View.GONE);
 
-                Logger.printMessage("addressDataList", "" + addressDataList);
+                Logger.printMessage("addressDataList", "" + addressDataList.size());
 
                 if (addressDataList != null && addressDataList.size() > 0) {
                     if (zip_search_adapter == null) {
