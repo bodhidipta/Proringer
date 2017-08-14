@@ -1,20 +1,19 @@
 package com.android.llc.proringer.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -38,7 +37,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * -->
  */
 
-public class ForgetPasswordActivity extends AppCompatActivity {
+public class ForgetPasswordActivity extends AppCompatActivity implements MyCustomAlertListener {
     private ProRegularTextView header_text;
     private ProLightEditText email, request_code, password, confirm_password;
     private MyLoader myLoader = null;
@@ -98,19 +97,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
                             closeKeypad();
 
-                            new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                    .setTitle("forgot")
-                                    .setMessage("" + message)
-                                    .setCancelable(false)
-                                    .setNegativeButton("ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            findViewById(R.id.pre_submit_email).setVisibility(View.GONE);
-                                            header_text.setText("RESET PASSWORD");
-                                        }
-                                    })
-                                    .show();
+
+                            CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "forgot", "" + message, ForgetPasswordActivity.this);
+                            customAlert.createNormalAlert("ok",1);
+
                         }
 
                         @Override
@@ -118,24 +108,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 
-                            new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                    .setTitle("Request password error")
-                                    .setMessage("" + error)
-                                    .setCancelable(false)
-                                    .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            findViewById(R.id.submit_email).performClick();
-                                        }
-                                    })
-                                    .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .show();
+                            CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "Request password error", "" + error, ForgetPasswordActivity.this);
+                            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+
                         }
                     });
 
@@ -175,18 +150,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
                                                 closeKeypad();
 
-                                                new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                                        .setTitle("Reset password success")
-                                                        .setMessage("" + message)
-                                                        .setCancelable(false)
-                                                        .setNegativeButton("ok", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                                finish();
-                                                            }
-                                                        })
-                                                        .show();
+                                                CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "forgot", "" + message, ForgetPasswordActivity.this);
+                                                customAlert.createNormalAlert("ok",2);
+
                                             }
 
                                             @Override
@@ -194,24 +160,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                                 if (myLoader != null && myLoader.isMyLoaderShowing())
                                                     myLoader.dismissLoader();
 
-                                                new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                                        .setTitle("Reset password error")
-                                                        .setMessage("" + error)
-                                                        .setCancelable(false)
-                                                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                                findViewById(R.id.submit_email).performClick();
-                                                            }
-                                                        })
-                                                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .show();
+                                                CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "Reset password error", "" + error, ForgetPasswordActivity.this);
+                                                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
                                             }
                                         }
                                 );
@@ -238,6 +188,23 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("ok") && i==1){
+            findViewById(R.id.pre_submit_email).setVisibility(View.GONE);
+            header_text.setText("RESET PASSWORD");
+        }
+        else if (result.equalsIgnoreCase("ok") && i==2){
+            finish();
+        }
+        else if (result.equalsIgnoreCase("retry")&&i==1){
+            findViewById(R.id.submit_email).performClick();
+        }
+        else if (result.equalsIgnoreCase("retry")&&i==2){
+            findViewById(R.id.submit_email).performClick();
         }
     }
 }
