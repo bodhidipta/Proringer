@@ -16,15 +16,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
+import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -64,7 +63,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             /**
              * Read more spannable text with click listener
              */
-            String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description");
+            final String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description");
             Logger.printMessage("contactTextOne", "" + contactTextOne);
             String contactTextClick = " Read more..";
 
@@ -81,7 +80,8 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
                     public void onClick(View widget) {
                         // There is the OnCLick. put your intent to Register class here
                         widget.invalidate();
-                        Logger.printMessage("SpanHello", "click");
+                        new ShowMyDialog(mcontext).showDescribetionDialog("description",contactTextOne);
+                        Logger.printMessage("Details", "click");
                     }
 
                     @Override

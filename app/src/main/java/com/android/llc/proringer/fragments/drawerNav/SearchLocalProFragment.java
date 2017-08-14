@@ -105,7 +105,7 @@ public class SearchLocalProFragment extends Fragment {
 
                         if (searchProListAdapter == null) {
 
-                            searchProListAdapter = new SearchProListAdapter((LandScreenActivity) getActivity(), info_array, new onOptionSelected() {
+                            searchProListAdapter = new SearchProListAdapter(getActivity(), info_array, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(String value, String addorDelete) {
                                     Logger.printMessage("value", ":--" + value);

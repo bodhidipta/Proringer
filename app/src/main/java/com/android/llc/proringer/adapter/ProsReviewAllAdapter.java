@@ -21,6 +21,7 @@ import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
+import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
@@ -113,8 +114,13 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                 // There is the OnCLick. put your intent to Register class here
                                 widget.invalidate();
                                 Logger.printMessage("SpanHello", "click");
+
+
+
+
+
                                 try {
-                                    ((ProsReviewAllListActivity) context).showReviewReplyResponseDescribetionDialog("Review", jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
+                                    new ShowMyDialog(context).showDescribetionDialog("Review", jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -179,7 +185,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                     widget.invalidate();
                                     Logger.printMessage("SpanHello", "click");
                                     try {
-                                        ((ProsReviewAllListActivity) context).showReviewReplyResponseDescribetionDialog("Reply", jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim());
+                                        new ShowMyDialog(context).showDescribetionDialog("Reply", jsonInfoArray.getJSONObject(position).getString("review_reply_content").trim());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

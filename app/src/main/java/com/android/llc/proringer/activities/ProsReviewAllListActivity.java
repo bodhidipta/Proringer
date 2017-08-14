@@ -189,42 +189,4 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         );
     }
 
-
-    public void showReviewReplyResponseDescribetionDialog(String title, String describetion) {
-        final Dialog dialog = new Dialog(ProsReviewAllListActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                    dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialogbox_pro_review_describetion);
-        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
-        LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
-
-        ProRegularTextView tv_tittle = (ProRegularTextView) dialog.findViewById(R.id.tv_tittle);
-        ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
-
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        LLMain.getLayoutParams().width = (width - 30);
-        LLMain.getLayoutParams().height = (width - 30);
-//        scrollView.getLayoutParams().height = (height-30)/2;
-
-        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        tv_tittle.setText(title);
-        tv_show_describetion.setText(describetion);
-        dialog.show();
-    }
-
-
 }

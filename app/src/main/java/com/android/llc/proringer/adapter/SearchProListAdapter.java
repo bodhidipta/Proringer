@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
+import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -78,7 +79,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             /**
              * Read more spannable text with click listener
              */
-            String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description");
+            final String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description");
             Logger.printMessage("contactTextOne", "" + contactTextOne);
             String contactTextClick = " Read more..";
 
@@ -96,6 +97,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
                         // There is the OnCLick. put your intent to Register class here
                         widget.invalidate();
                         Logger.printMessage("SpanHello", "click");
+                        new ShowMyDialog(mcontext).showDescribetionDialog("description",contactTextOne);
                     }
 
                     @Override
