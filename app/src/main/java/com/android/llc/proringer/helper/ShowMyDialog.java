@@ -28,7 +28,7 @@ public class ShowMyDialog {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialogbox_pro_review_describetion);
+        dialog.setContentView(R.layout.custom_dialogbox_describetion);
         //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 

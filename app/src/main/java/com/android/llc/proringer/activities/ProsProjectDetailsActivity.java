@@ -34,6 +34,7 @@ import com.android.llc.proringer.adapter.ProsDetailsServiceAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
@@ -167,7 +168,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
                 try {
                     if (infoArrayJsonObject != null && !infoArrayJsonObject.getJSONObject("about").getString("description").trim().equals("")) {
 
-                        showDescribetionDialog(infoArrayJsonObject.getJSONObject("about").getString("description"));
+                       // showDescribetionDialog(infoArrayJsonObject.getJSONObject("about").getString("description"));
+                        new ShowMyDialog(ProsProjectDetailsActivity.this).showDescribetionDialog("About",infoArrayJsonObject.getJSONObject("about").getString("description"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -377,39 +379,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity {
 
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
-    }
-
-    private void showDescribetionDialog(String msg) {
-        final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                    dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialogbox_pro_details_describetion);
-        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
-        LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
-        ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
-
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        LLMain.getLayoutParams().width = (width - 30);
-        LLMain.getLayoutParams().height = (width - 30);
-//        scrollView.getLayoutParams().height = (height-30)/2;
-
-        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        tv_show_describetion.setText(msg);
-        dialog.show();
     }
 
     private void showServiceAreaDialog(JSONArray serviceAreaJsonArray) {
