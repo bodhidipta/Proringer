@@ -1,10 +1,9 @@
 package com.android.llc.proringer.activities;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -21,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -31,7 +32,7 @@ import com.bumptech.glide.Glide;
  * Created by su on 8/1/17.
  */
 
-public class ProsReviewActivity extends AppCompatActivity {
+public class ProsReviewActivity extends AppCompatActivity implements MyCustomAlertListener{
     TextView tv_terms_guidelines;
     RatingBar ratBar_review;
     String pros_id = "", img = "", review_rate = "0";
@@ -186,16 +187,9 @@ public class ProsReviewActivity extends AppCompatActivity {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                new AlertDialog.Builder(ProsReviewActivity.this)
-                        .setTitle("Add Review")
-                        .setMessage("" + message)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .show();
+                CustomAlert customAlert = new CustomAlert(ProsReviewActivity.this, "Add Review", "" + message, ProsReviewActivity.this);
+                customAlert.createNormalAlert("ok",1);
+
             }
 
             @Override
@@ -203,17 +197,15 @@ public class ProsReviewActivity extends AppCompatActivity {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                new AlertDialog.Builder(ProsReviewActivity.this)
-                        .setTitle("Add Review")
-                        .setMessage("" + error)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .show();
+                CustomAlert customAlert = new CustomAlert(ProsReviewActivity.this, "Add Review", "" + error, ProsReviewActivity.this);
+                customAlert.createNormalAlert("ok",2);
+
             }
         }, ProApplication.getInstance().getUserId(), pros_id, review_rate, project_description_text.getText().toString().trim());
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+
     }
 }
