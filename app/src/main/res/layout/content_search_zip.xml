@@ -25,6 +25,7 @@
                 android:gravity="center"
                 android:inputType="text"
                 android:maxLength="6"
+                android:text="10001"
                 android:padding="4dp"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />

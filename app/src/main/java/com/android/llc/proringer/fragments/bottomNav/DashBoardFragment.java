@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
@@ -417,18 +418,10 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                 public void onError(String error) {
                     if (myLoader != null && myLoader.isMyLoaderShowing())
                         myLoader.dismissLoader();
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("" + "Upload Image")
-                            .setMessage("" + error)
-                            .setCancelable(false)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
 
-                                }
-                            })
-                            .show();
+                    CustomAlert customAlert = new CustomAlert(getActivity(), "Contact Us", "" + error, DashBoardFragment.this);
+                    customAlert.createNormalAlert("ok",2);
+
                 }
             }, ProApplication.getInstance().getUserId(), mCurrentPhotoPath);
         }

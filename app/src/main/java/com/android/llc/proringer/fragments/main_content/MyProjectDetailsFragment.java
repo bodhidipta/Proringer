@@ -187,7 +187,7 @@ public class MyProjectDetailsFragment extends Fragment {
 
 
                                                                                                     new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                                                                                            .setTitle("Delete My project")
+                                                                                                            .setTitle("Project deleted")
                                                                                                             .setMessage("" + message)
                                                                                                             .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                                                                                                 @Override
