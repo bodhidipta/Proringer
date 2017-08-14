@@ -1,6 +1,5 @@
 package com.android.llc.proringer.fragments.postProject;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +16,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectCategoryListAdapter;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
@@ -32,7 +32,7 @@ import java.util.LinkedList;
 
 public class CateGoryListFragment extends Fragment {
     RecyclerView category_listing;
-    ProgressDialog pgDialog;
+    MyLoader myLoader;
     PostProjectCategoryGridAdapter gridAdapter;
     PostProjectCategoryListAdapter listAdapter;
     LinkedList<String> proCategoryDatasSortedList;
@@ -55,11 +55,13 @@ public class CateGoryListFragment extends Fragment {
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
         item_header = (ProRegularTextView) view.findViewById(R.id.item_header);
 
+        myLoader=new MyLoader(getActivity());
+
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
 
                 listdataMain = listdata;
@@ -125,8 +127,8 @@ public class CateGoryListFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (pgDialog != null && pgDialog.isShowing())
-                    pgDialog.dismiss();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
 
                 new AlertDialog.Builder((PostProjectActivity) getActivity())
                         .setTitle("Error")
@@ -144,12 +146,7 @@ public class CateGoryListFragment extends Fragment {
 
             @Override
             public void onStartFetch() {
-                pgDialog = new ProgressDialog((PostProjectActivity) getActivity());
-                pgDialog.setTitle("Preparing category");
-                pgDialog.setMessage("Getting category list.Please wait...");
-                pgDialog.setCancelable(false);
-                pgDialog.show();
-
+               myLoader.showLoader();
             }
         });
 

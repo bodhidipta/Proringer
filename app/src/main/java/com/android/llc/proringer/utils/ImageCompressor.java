@@ -1,6 +1,5 @@
 package com.android.llc.proringer.utils;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -489,7 +488,6 @@ public class ImageCompressor {
     }
 
     class ImageCompressionAsyncTask extends AsyncTask<String, Void, String> {
-        ProgressDialog mProgressDialog;
 
         public ImageCompressionAsyncTask(Context context) {
 
@@ -514,6 +512,4 @@ public class ImageCompressor {
 
         }
     }
-
-
 }

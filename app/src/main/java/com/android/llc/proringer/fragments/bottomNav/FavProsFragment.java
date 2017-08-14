@@ -1,6 +1,5 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

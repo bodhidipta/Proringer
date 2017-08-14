@@ -1,6 +1,5 @@
 package com.android.llc.proringer.activities;
 
-import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,6 +1,6 @@
 package com.android.llc.proringer.activities;
 
-import android.app.ProgressDialog;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,8 +11,10 @@ import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 
@@ -20,9 +22,9 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
  * Created by su on 7/19/17.
  */
 
-public class ContactUsActivity extends AppCompatActivity {
+public class ContactUsActivity extends AppCompatActivity implements MyCustomAlertListener{
     ProLightEditText first_name, last_name, email, phonenumber;
-    ProgressDialog pgDialog;
+    MyLoader myLoader;
     EditText contact_info;
 
     @Override
@@ -34,6 +36,8 @@ public class ContactUsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        myLoader=new MyLoader(ContactUsActivity.this);
 
 
         first_name = (ProLightEditText) findViewById(R.id.first_name);
@@ -88,35 +92,23 @@ public class ContactUsActivity extends AppCompatActivity {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                        pgDialog = new ProgressDialog(ContactUsActivity.this);
-                        pgDialog.setTitle("Contact Us");
-                        pgDialog.setMessage("Your contact address is sending to us.Please wait...");
-                        pgDialog.setCancelable(false);
-                        pgDialog.show();
+                        myLoader.showLoader();
                     }
 
                     @Override
                     public void onComplete(String message) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
-                        new AlertDialog.Builder(ContactUsActivity.this)
-                                .setTitle("Contact Us")
-                                .setMessage("" + message)
-                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        resetForm();
-                                    }
-                                })
-                                .setCancelable(false)
-                                .show();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
+                        CustomAlert customAlert = new CustomAlert(ContactUsActivity.this, "Contact Us", "" + message, ContactUsActivity.this);
+                        customAlert.createNormalAlert();
                     }
 
                     @Override
                     public void onError(String error) {
-                        if (pgDialog != null && pgDialog.isShowing())
-                            pgDialog.dismiss();
+                        if (myLoader != null && myLoader.isMyLoaderShowing())
+                            myLoader.dismissLoader();
+
                         new AlertDialog.Builder(ContactUsActivity.this)
                                 .setTitle("Contact Us Error")
                                 .setMessage("" + error)
@@ -157,5 +149,12 @@ public class ContactUsActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void callbackForAlert(String result) {
+        if(result.equalsIgnoreCase("ok")){
+            resetForm();
+        }
     }
 }
