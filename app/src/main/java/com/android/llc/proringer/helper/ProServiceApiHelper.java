@@ -2256,7 +2256,7 @@ public class ProServiceApiHelper {
                                             data.setLongitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lng"));
                                             addressList.add(data);
                                         } else {
-                                            callback.onError("Error re pagla !");
+                                            exception = "No value of this zip code";
                                         }
                                     }
                                 } else {
@@ -2326,7 +2326,7 @@ public class ProServiceApiHelper {
                         if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
                             return responseString;
                         } else {
-                            exception = jsonObject.getString("message");
+                            exception = jsonObject.getString("error_message");
                             return exception;
                         }
 
