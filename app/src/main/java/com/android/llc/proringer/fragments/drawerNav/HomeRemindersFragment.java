@@ -163,8 +163,8 @@ public class HomeRemindersFragment extends Fragment {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
                 dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
+
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
