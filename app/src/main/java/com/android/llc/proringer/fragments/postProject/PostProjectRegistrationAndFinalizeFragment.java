@@ -124,6 +124,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
 
         view.findViewById(R.id.content_post_form_submit).setVisibility(View.GONE);
+
         view.findViewById(R.id.container_registration).setVisibility(View.GONE);
 
         if (ProApplication.getInstance().getUserId().equals("")) {
