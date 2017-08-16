@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -44,7 +47,7 @@ import org.json.JSONObject;
  * limitations under the License.
  */
 
-public class UserInformationFragment extends Fragment {
+public class UserInformationFragment extends Fragment implements MyCustomAlertListener{
     private ProLightEditText first_name, last_name, contact, zip_code, city, state;
     ProRegularTextView tv_search_by_location;
     RelativeLayout RLSearchByLocation;
@@ -123,24 +126,9 @@ public class UserInformationFragment extends Fragment {
                         public void onError(String error) {
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
-                            new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                    .setTitle("Error updating information")
-                                    .setMessage("" + error)
-                                    .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            updateUserInformation();
-                                        }
-                                    })
-                                    .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .show();
 
+                            CustomAlert customAlert = new CustomAlert(getActivity(), "Error updating information", "" + error, UserInformationFragment.this);
+                            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                         }
                     },
                     first_name.getText().toString().trim(),
@@ -155,16 +143,9 @@ public class UserInformationFragment extends Fragment {
                     "",
                     "");
         } else {
-            new android.support.v7.app.AlertDialog.Builder((LandScreenActivity) getActivity())
-                    .setTitle("Updating  Error")
-                    .setMessage("Please Choose the correct address which will contains zip code")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    })
-                    .show();
+
+            CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code", UserInformationFragment.this);
+            customAlert.createNormalAlert("ok",1);
         }
     }
 
@@ -234,6 +215,13 @@ public class UserInformationFragment extends Fragment {
                 }
 
             }
+        }
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry") && i==1){
+            updateUserInformation();
         }
     }
 }
