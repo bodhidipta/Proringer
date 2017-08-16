@@ -207,7 +207,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                         break;
 
                     case NavigationHandler.Email_Support:
-
+                        closeDrawer();
                         String[] TOSuppory = {"support@proringer.com"};
                         Uri uriSupport = Uri.parse("mailto:support@proringer.com")
                                 .buildUpon()
@@ -221,11 +221,12 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                         break;
 
                     case NavigationHandler.Faq:
+                        closeDrawer();
                         startActivity(new Intent(LandScreenActivity.this,FaqActivity.class));
                         break;
 
                     case NavigationHandler.Provider_Feedback:
-
+                        closeDrawer();
                         String[] TOFeedback = {"feedback@proringer.com"};
                         Uri uriFeedback = Uri.parse("mailto:feedback@proringer.com")
                                 .buildUpon()
@@ -239,14 +240,14 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                         break;
 
                     case NavigationHandler.Terms_Of_Service:
-
+                        closeDrawer();
                         Intent intent_terms = new Intent(LandScreenActivity.this, TermsPrivacyActivity.class);
                         intent_terms.putExtra("value", "term");
                         startActivity(intent_terms);
                         break;
 
                     case NavigationHandler.Privacy_Policy:
-
+                        closeDrawer();
                         Intent intent_policy = new Intent(LandScreenActivity.this, TermsPrivacyActivity.class);
                         intent_policy.putExtra("value", "policy");
                         startActivity(intent_policy);
