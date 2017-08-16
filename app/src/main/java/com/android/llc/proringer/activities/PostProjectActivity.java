@@ -267,6 +267,9 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 
                         closeKeypad();
 
+                        CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Post Project", "" + message, PostProjectActivity.this);
+                        customAlert.createNormalAlert("ok",1);
+
                         isSubmitPostProject=true;
                     }
 
@@ -511,8 +514,11 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         if (result.equalsIgnoreCase("retry")&&i==1){
             completePostProject();
         }
-        if (result.equalsIgnoreCase("retry")&&i==2){
+        else if (result.equalsIgnoreCase("retry")&&i==2){
             changeFragmentNext(1);
+        }
+        else if(result.equalsIgnoreCase("ok")&&i==1){
+
         }
     }
 }
