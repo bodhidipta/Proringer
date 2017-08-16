@@ -27,20 +27,45 @@
 
 
     <ScrollView
+        android:id="@+id/ScrollViewMAin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
         <LinearLayout
-            android:padding="10dp"
-            android:orientation="vertical"
             android:id="@+id/main_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"></LinearLayout>
 
     </ScrollView>
 
+
+    <LinearLayout
+        android:id="@+id/LLNetworkDisconnection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Check Your Network Connection"
+            android:textColor="@color/colorTextBlack" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

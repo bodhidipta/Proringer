@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.llc.proringer.R;
@@ -142,6 +143,11 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             public void onError(String error) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
+
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                    findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
+                    findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                }
             }
         });
     }

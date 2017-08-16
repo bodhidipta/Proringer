@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.MyLoader;
@@ -29,7 +31,7 @@ public class FaqActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_faq);
+        setContentView(R.layout.faq_activity);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -37,6 +39,7 @@ public class FaqActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Faq");
+
 
         myLoader=new MyLoader(FaqActivity.this);
 
@@ -101,6 +104,11 @@ public class FaqActivity extends AppCompatActivity {
             public void onError(String error) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
+
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                    findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
+                    findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                }
             }
         });
 

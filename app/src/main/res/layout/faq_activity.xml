@@ -24,7 +24,8 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        android:id="@+id/ScrollViewMAin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBGblueShade"
@@ -39,6 +40,33 @@
             android:orientation="vertical"></LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/LLNetworkDisconnection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect"
+            />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextBlack"
+            android:text="Check Your Network Connection"/>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
 
