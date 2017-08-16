@@ -170,44 +170,14 @@
                     android:textSize="14sp" />
 
                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/terms_and_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="By Signing in up with ProRinger you agree with our  "
+                    android:text="hbdhfhfhfdhf"
                     android:textColor="@color/colorTextDark"
                     android:textSize="12sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp">
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/terms_of_use"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Terms of Use"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="12sp" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" and "
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="12sp" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/privacy_policy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Privacy Policy"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
