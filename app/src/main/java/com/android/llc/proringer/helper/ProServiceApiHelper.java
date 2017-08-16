@@ -1420,7 +1420,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
-
+                    Logger.printMessage("@user_id", "user_id:" + ProApplication.getInstance().getUserId());
                     try {
                         if (!params[6].equals("")) {
                             try {
