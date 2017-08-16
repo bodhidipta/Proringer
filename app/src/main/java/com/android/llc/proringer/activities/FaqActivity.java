@@ -69,6 +69,7 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
                         for (int i = 0; i < faqArray.length(); i++) {
                             LinearLayout.LayoutParams lparams1 = new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            lparams1.setMargins(0, 20, 0, 0);
                             ProRegularTextView tv1 = new ProRegularTextView(FaqActivity.this);
                             tv1.setLayoutParams(lparams1);
                             tv1.setText(faqArray.getJSONObject(i).getString("question"));
@@ -82,7 +83,7 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
 
                             LinearLayout.LayoutParams lparams2 = new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            lparams2.setMargins(0, 20, 0, 0);
+                            lparams2.setMargins(0, 10, 0, 0);
                             ProRegularTextView tv2 = new ProRegularTextView(FaqActivity.this);
                             tv2.setLayoutParams(lparams2);
                             tv2.setText(faqArray.getJSONObject(i).getString("answer"));
