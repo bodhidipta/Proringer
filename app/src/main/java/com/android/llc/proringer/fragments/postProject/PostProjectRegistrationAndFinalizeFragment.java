@@ -53,8 +53,14 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         email = (ProLightEditText) view.findViewById(R.id.email);
         password = (ProLightEditText) view.findViewById(R.id.password);
         confirm_password = (ProLightEditText) view.findViewById(R.id.confirm_password);
+
         zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
+        zip_code.setEnabled(false);
+        zip_code.setClickable(false);
+
         content_post_form_submit = (LinearLayout) view.findViewById(R.id.content_post_form_submit);
+
+
 
         terms_and_policy = (ProRegularTextView) view.findViewById(R.id.terms_and_policy);
         terms_and_policy.setMovementMethod(LinkMovementMethod.getInstance());
@@ -132,6 +138,8 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
  * IF no user is login then visible registration process or visible last part
  */
             view.findViewById(R.id.container_registration).setVisibility(View.VISIBLE);
+            zip_code.setText(((PostProjectActivity)getActivity()).selectedAddressData.getZip_code());
+
         } else {
             view.findViewById(R.id.content_post_form_submit).setVisibility(View.VISIBLE);
         }
