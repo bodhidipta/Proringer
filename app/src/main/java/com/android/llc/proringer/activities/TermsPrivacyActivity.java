@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -23,7 +25,7 @@ import org.json.JSONObject;
  * Created by su on 7/27/17.
  */
 
-public class TermsPrivacyActivity extends AppCompatActivity {
+public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomAlertListener {
     MyLoader myLoader=null;
     ProRegularTextView tv_title;
     LinearLayout main_container;
@@ -102,6 +104,9 @@ public class TermsPrivacyActivity extends AppCompatActivity {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
+                CustomAlert customAlert = new CustomAlert(TermsPrivacyActivity.this, "Terms Of Use", "" + error, TermsPrivacyActivity.this);
+                customAlert.createNormalAlert("ok",1);
+
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
@@ -149,11 +154,19 @@ public class TermsPrivacyActivity extends AppCompatActivity {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
+                CustomAlert customAlert = new CustomAlert(TermsPrivacyActivity.this, "Privacy Policy", "" + error, TermsPrivacyActivity.this);
+                customAlert.createNormalAlert("ok",2);
+
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
                 }
             }
         });
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+
     }
 }

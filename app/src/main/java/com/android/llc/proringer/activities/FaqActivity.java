@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -23,7 +25,7 @@ import org.json.JSONObject;
  * Created by su on 7/19/17.
  */
 
-public class FaqActivity extends AppCompatActivity {
+public class FaqActivity extends AppCompatActivity implements MyCustomAlertListener{
     LinearLayout linear_main_container;
     MyLoader myLoader=null;
 
@@ -105,6 +107,9 @@ public class FaqActivity extends AppCompatActivity {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
+                CustomAlert customAlert = new CustomAlert(FaqActivity.this, "Faq", "" + error, FaqActivity.this);
+                customAlert.createNormalAlert("ok",1);
+
                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
@@ -120,5 +125,10 @@ public class FaqActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+
     }
 }
