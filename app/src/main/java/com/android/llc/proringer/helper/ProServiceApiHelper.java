@@ -1,9 +1,11 @@
 package com.android.llc.proringer.helper;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.pojo.AddressData;
@@ -203,7 +205,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -282,7 +284,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -361,7 +363,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -441,7 +443,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -507,7 +509,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, email);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
     /**
@@ -573,7 +575,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, request_code, password);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
     /**
@@ -651,7 +653,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
     /**
@@ -747,7 +749,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
     /**
@@ -817,7 +819,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -889,7 +891,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -967,7 +969,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -1050,7 +1052,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1112,7 +1114,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1176,7 +1178,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1313,7 +1315,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1392,7 +1394,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1511,7 +1513,7 @@ public class ProServiceApiHelper {
                     executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1576,7 +1578,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -1680,7 +1682,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -1743,7 +1745,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -1806,7 +1808,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -1869,7 +1871,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -1950,7 +1952,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }
@@ -2023,7 +2025,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2085,7 +2087,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2157,7 +2159,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2287,7 +2289,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2348,7 +2350,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2435,7 +2437,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2500,7 +2502,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2570,7 +2572,7 @@ public class ProServiceApiHelper {
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2645,7 +2647,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
 
@@ -2705,7 +2707,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2782,7 +2784,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
 
@@ -2859,7 +2861,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -2934,7 +2936,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
 
@@ -3005,7 +3007,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
     }
 
 
@@ -3083,7 +3085,7 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
 
@@ -3184,7 +3186,7 @@ public class ProServiceApiHelper {
                     executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
-            callback.onError("No internet connection found. Please check your internet connection.");
+            callback.onError(Resources.getSystem().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
 
     }

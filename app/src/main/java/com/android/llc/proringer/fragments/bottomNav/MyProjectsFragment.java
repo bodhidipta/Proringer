@@ -101,7 +101,7 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     project_list.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }

@@ -107,7 +107,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                 CustomAlert customAlert = new CustomAlert(TermsPrivacyActivity.this, "Terms Of Use", "" + error, TermsPrivacyActivity.this);
                 customAlert.createNormalAlert("ok",1);
 
-                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
                 }
@@ -157,7 +157,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                 CustomAlert customAlert = new CustomAlert(TermsPrivacyActivity.this, "Privacy Policy", "" + error, TermsPrivacyActivity.this);
                 customAlert.createNormalAlert("ok",2);
 
-                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
                 }

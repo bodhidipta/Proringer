@@ -159,16 +159,6 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         fragmentManager = getSupportFragmentManager();
 
         changeFragmentNext(1);
-
-        if (NetworkUtil.getInstance().isNetworkAvailable(PostProjectActivity.this)) {
-
-        } else {
-            LLMain.setVisibility(View.GONE);
-            LLNetworkDisconnection.setVisibility(View.VISIBLE);
-
-            CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Load Error", "No internet connection found. Please check your internet connection.", PostProjectActivity.this);
-            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
-        }
     }
 
     @Override

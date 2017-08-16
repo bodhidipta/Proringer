@@ -151,7 +151,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
                                                                                                  if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                                      myLoader.dismissLoader();
 
-                                                                                                 if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                                                                                                 if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                                                                                                      findViewById(R.id.RLMain).setVisibility(View.GONE);
                                                                                                      findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
                                                                                                  }

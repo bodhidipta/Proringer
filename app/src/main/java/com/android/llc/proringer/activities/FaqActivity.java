@@ -110,7 +110,7 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
                 CustomAlert customAlert = new CustomAlert(FaqActivity.this, "Faq", "" + error, FaqActivity.this);
                 customAlert.createNormalAlert("ok",1);
 
-                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
                     findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
                 }
