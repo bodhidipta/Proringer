@@ -1,7 +1,5 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +11,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.GetStartedActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
@@ -40,7 +39,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * limitations under the License.
  */
 
-public class LoginSettingsFragment extends Fragment {
+public class LoginSettingsFragment extends Fragment implements MyCustomAlertListener{
     private ProRegularTextView current_email, update_email, change_password;
     private ProLightEditText new_email, confirm_new_email, current_password, new_password, confirm_new_password;
     private MyLoader myLoader = null;
@@ -133,21 +132,8 @@ public class LoginSettingsFragment extends Fragment {
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                .setTitle("Change Email")
-                                .setMessage("" + message)
-                                .setCancelable(false)
-                                .setPositiveButton("Re-login", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        ProApplication.getInstance().logOut();
-                                        startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
-                                        ((LandScreenActivity) getActivity()).finish();
-                                    }
-                                })
-                                .show();
-
+                        CustomAlert customAlert = new CustomAlert(getActivity(), "Change Email", "" + message, LoginSettingsFragment.this);
+                        customAlert.createNormalAlert("Re-login",1);
                     }
 
                     @Override
@@ -155,25 +141,8 @@ public class LoginSettingsFragment extends Fragment {
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                .setTitle("Change Email Error")
-                                .setMessage("" + error)
-                                .setCancelable(false)
-                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        update_email.performClick();
-                                    }
-                                })
-                                .setNegativeButton("Abort", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
-
+                        CustomAlert customAlert = new CustomAlert(getActivity(), "Contact Us Error", "" + error, LoginSettingsFragment.this);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                     }
                 },
                 new_email.getText().toString().trim(),
@@ -215,20 +184,8 @@ public class LoginSettingsFragment extends Fragment {
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                .setTitle("Change Password")
-                                .setMessage("" + message)
-                                .setCancelable(false)
-                                .setPositiveButton("Re-login", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        ProApplication.getInstance().logOut();
-                                        startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
-                                        ((LandScreenActivity) getActivity()).finish();
-                                    }
-                                })
-                                .show();
+                        CustomAlert customAlert = new CustomAlert(getActivity(), "Change Password", "" + message, LoginSettingsFragment.this);
+                        customAlert.createNormalAlert("Re-login",2);
                     }
 
                     @Override
@@ -236,28 +193,37 @@ public class LoginSettingsFragment extends Fragment {
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                .setTitle("Change Password Error")
-                                .setMessage("" + error)
-                                .setCancelable(false)
-                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        change_password.performClick();
-                                    }
-                                })
-                                .setNegativeButton("Abort", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
+
+                        CustomAlert customAlert = new CustomAlert(getActivity(), "Change Password Error", "" + error, LoginSettingsFragment.this);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
+
                     }
                 },
                 current_password.getText().toString().trim(),
                 new_password.getText().toString().trim(),
                 confirm_new_password.getText().toString().trim());
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("Re-login") && i==1){
+
+            ProApplication.getInstance().logOut();
+            startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
+            ((LandScreenActivity) getActivity()).finish();
+        }
+        else if(result.equalsIgnoreCase("Re-login") && i==2){
+
+            ProApplication.getInstance().logOut();
+            startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
+            ((LandScreenActivity) getActivity()).finish();
+        }
+
+        else if(result.equalsIgnoreCase("retry") && i==1){
+            update_email.performClick();
+        }
+        else if (result.equalsIgnoreCase("retry") && i==2){
+            change_password.performClick();
+        }
     }
 }
