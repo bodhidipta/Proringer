@@ -1,8 +1,6 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
