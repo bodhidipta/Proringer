@@ -111,7 +111,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
      * For Service and other listing
      */
     public boolean isForth = true;
-    LinearLayout LLMain, LLNetworkDisconnection;
+    public LinearLayout LLMain, LLNetworkDisconnection;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,8 +158,10 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 
         fragmentManager = getSupportFragmentManager();
 
+        changeFragmentNext(1);
+
         if (NetworkUtil.getInstance().isNetworkAvailable(PostProjectActivity.this)) {
-            changeFragmentNext(1);
+
         } else {
             LLMain.setVisibility(View.GONE);
             LLNetworkDisconnection.setVisibility(View.VISIBLE);

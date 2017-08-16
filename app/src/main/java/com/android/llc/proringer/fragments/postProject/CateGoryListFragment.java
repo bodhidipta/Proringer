@@ -16,6 +16,8 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectCategoryListAdapter;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
@@ -30,7 +32,7 @@ import java.util.LinkedList;
  * Created by su on 7/13/17.
  */
 
-public class CateGoryListFragment extends Fragment {
+public class CateGoryListFragment extends Fragment implements MyCustomAlertListener {
     RecyclerView category_listing;
     MyLoader myLoader;
     PostProjectCategoryGridAdapter gridAdapter;
@@ -57,98 +59,8 @@ public class CateGoryListFragment extends Fragment {
 
         myLoader=new MyLoader(getActivity());
 
-        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
-            @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
 
-
-                listdataMain = listdata;
-
-                proCategoryDatasSortedList = new LinkedList<String>();
-                for (int d = 0; d < listdata.size(); d++) {
-                    proCategoryDatasSortedList.add(listdata.get(d).getCategory_name());
-                }
-
-
-                addAlphabetHeader('A');
-                addAlphabetHeader('B');
-                addAlphabetHeader('C');
-                addAlphabetHeader('D');
-                addAlphabetHeader('E');
-                addAlphabetHeader('F');
-                addAlphabetHeader('G');
-                addAlphabetHeader('H');
-                addAlphabetHeader('I');
-                addAlphabetHeader('J');
-                addAlphabetHeader('K');
-                addAlphabetHeader('L');
-                addAlphabetHeader('M');
-                addAlphabetHeader('N');
-                addAlphabetHeader('O');
-                addAlphabetHeader('P');
-                addAlphabetHeader('Q');
-                addAlphabetHeader('R');
-                addAlphabetHeader('S');
-                addAlphabetHeader('T');
-                addAlphabetHeader('U');
-                addAlphabetHeader('V');
-                addAlphabetHeader('W');
-                addAlphabetHeader('X');
-                addAlphabetHeader('Y');
-                addAlphabetHeader('Z');
-
-
-                Collections.sort(proCategoryDatasSortedList, new Comparator<String>() {
-                    @Override
-                    public int compare(String text1, String text2) {
-                        return text1.compareToIgnoreCase(text2);
-                    }
-                });
-
-
-                gridAdapter = new PostProjectCategoryGridAdapter((PostProjectActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
-                    @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
-                        ((PostProjectActivity) getActivity()).selectedCategory = data;
-                        ((PostProjectActivity) getActivity()).setHeaderCategory();
-                        ((PostProjectActivity) getActivity()).increaseStep();
-                        /**
-                         * fragment calling
-                         */
-                        ((PostProjectActivity) getActivity()).changeFragmentNext(2);
-
-                    }
-                });
-                category_listing.setAdapter(gridAdapter);
-
-            }
-
-            @Override
-            public void onError(String error) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
-
-                new AlertDialog.Builder((PostProjectActivity) getActivity())
-                        .setTitle("Error")
-                        .setMessage("" + error)
-                        .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-
-            }
-
-            @Override
-            public void onStartFetch() {
-               myLoader.showLoader();
-            }
-        });
+        loadCatList();
 
         view.findViewById(R.id.see_all_categories).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,12 +206,113 @@ public class CateGoryListFragment extends Fragment {
         });
     }
 
+
+    public void loadCatList(){
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+            @Override
+            public void onComplete(LinkedList<ProCategoryData> listdata) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+
+
+                listdataMain = listdata;
+
+                proCategoryDatasSortedList = new LinkedList<String>();
+                for (int d = 0; d < listdata.size(); d++) {
+                    proCategoryDatasSortedList.add(listdata.get(d).getCategory_name());
+                }
+
+
+                addAlphabetHeader('A');
+                addAlphabetHeader('B');
+                addAlphabetHeader('C');
+                addAlphabetHeader('D');
+                addAlphabetHeader('E');
+                addAlphabetHeader('F');
+                addAlphabetHeader('G');
+                addAlphabetHeader('H');
+                addAlphabetHeader('I');
+                addAlphabetHeader('J');
+                addAlphabetHeader('K');
+                addAlphabetHeader('L');
+                addAlphabetHeader('M');
+                addAlphabetHeader('N');
+                addAlphabetHeader('O');
+                addAlphabetHeader('P');
+                addAlphabetHeader('Q');
+                addAlphabetHeader('R');
+                addAlphabetHeader('S');
+                addAlphabetHeader('T');
+                addAlphabetHeader('U');
+                addAlphabetHeader('V');
+                addAlphabetHeader('W');
+                addAlphabetHeader('X');
+                addAlphabetHeader('Y');
+                addAlphabetHeader('Z');
+
+
+                Collections.sort(proCategoryDatasSortedList, new Comparator<String>() {
+                    @Override
+                    public int compare(String text1, String text2) {
+                        return text1.compareToIgnoreCase(text2);
+                    }
+                });
+
+
+                gridAdapter = new PostProjectCategoryGridAdapter((PostProjectActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
+                    @Override
+                    public void onSelectItemClick(int position, ProCategoryData data) {
+                        ((PostProjectActivity) getActivity()).selectedCategory = data;
+                        ((PostProjectActivity) getActivity()).setHeaderCategory();
+                        ((PostProjectActivity) getActivity()).increaseStep();
+                        /**
+                         * fragment calling
+                         */
+                        ((PostProjectActivity) getActivity()).changeFragmentNext(2);
+
+                    }
+                });
+                category_listing.setAdapter(gridAdapter);
+
+            }
+
+            @Override
+            public void onError(String error) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+
+
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                    ((PostProjectActivity)getActivity()).LLMain.setVisibility(View.GONE);
+                    ((PostProjectActivity)getActivity()).LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+
+
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", ""+error,CateGoryListFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+
+            }
+
+            @Override
+            public void onStartFetch() {
+                myLoader.showLoader();
+            }
+        });
+    }
+
     public void addAlphabetHeader(char a) {
         for (int p = 0; p < proCategoryDatasSortedList.size(); p++) {
             if (proCategoryDatasSortedList.get(p).toUpperCase().charAt(0) == a) {
                 proCategoryDatasSortedList.add("" + a);
                 break;
             }
+        }
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry") && i==1){
+            loadCatList();
         }
     }
 }
