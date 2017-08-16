@@ -1,10 +1,8 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,12 +12,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
 import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
@@ -45,7 +44,7 @@ import java.util.LinkedList;
  * limitations under the License.
  */
 
-public class PostProjectFragment extends Fragment {
+public class PostProjectFragment extends Fragment implements MyCustomAlertListener {
     private ProgressBar progress_posting;
     private ProRegularTextView selected_service_category, service_request_category, selected_service_property;
     private RecyclerView pro_service_listing;
@@ -227,24 +226,8 @@ public class PostProjectFragment extends Fragment {
                 }
 
 
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Load Error")
-                        .setMessage("" + error)
-                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                listPostProject();
-
-                            }
-                        })
-                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, PostProjectFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
             }
         });
     }
@@ -346,18 +329,8 @@ public class PostProjectFragment extends Fragment {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                new AlertDialog.Builder((LandScreenActivity) getActivity())
-                        .setTitle("Error")
-                        .setMessage("" + error)
-                        .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Contact Us", "" + error, PostProjectFragment.this);
+                customAlert.createNormalAlert("ok",1);
             }
 
             @Override
@@ -488,4 +461,10 @@ public class PostProjectFragment extends Fragment {
         }
     }
 
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry") && i==1){
+            listPostProject();
+        }
+    }
 }
