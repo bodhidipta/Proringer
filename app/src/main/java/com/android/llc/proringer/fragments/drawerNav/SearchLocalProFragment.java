@@ -15,9 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -43,7 +46,7 @@ import org.json.JSONObject;
  * limitations under the License.
  */
 
-public class SearchLocalProFragment extends Fragment {
+public class SearchLocalProFragment extends Fragment implements MyCustomAlertListener{
     private RecyclerView pros_list;
     String category_search = "";
     String zip_search = "";
@@ -72,6 +75,19 @@ public class SearchLocalProFragment extends Fragment {
 
         loadList();
 
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry") && i==1){
+            loadList();
+        }
+        else if(result.equalsIgnoreCase("ok") && i==1){
+            loadList();
+        }
+        else if(result.equalsIgnoreCase("ok") && i==3){
+            loadList();
+        }
     }
 
     public interface onOptionSelected {
@@ -136,24 +152,9 @@ public class SearchLocalProFragment extends Fragment {
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
 
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Load Error")
-                        .setMessage("" + error)
-                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                loadList();
-
-                            }
-                        })
-                        .setNegativeButton("abort", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
             }
         }, ProApplication.getInstance().getUserId(), category_search, zip_search);
     }
@@ -189,18 +190,8 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                                               if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                                                                   myLoader.dismissLoader();
 
-                                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                                                                                                                      .setTitle("Delete Favorite pros")
-                                                                                                                                      .setMessage("" + message)
-                                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                                                          @Override
-                                                                                                                                          public void onClick(DialogInterface dialog, int which) {
-                                                                                                                                              dialog.dismiss();
-                                                                                                                                              loadList();
-                                                                                                                                          }
-                                                                                                                                      })
-                                                                                                                                      .setCancelable(false)
-                                                                                                                                      .show();
+                                                                                                                              CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + message, SearchLocalProFragment.this);
+                                                                                                                              customAlert.createNormalAlert("ok",1);
                                                                                                                           }
 
                                                                                                                           @Override
@@ -208,17 +199,8 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                                               if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                                                                   myLoader.dismissLoader();
 
-                                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                                                                                                                      .setTitle("Delete Fav pros")
-                                                                                                                                      .setMessage("" + error)
-                                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                                                          @Override
-                                                                                                                                          public void onClick(DialogInterface dialog, int which) {
-                                                                                                                                              dialog.dismiss();
-                                                                                                                                          }
-                                                                                                                                      })
-                                                                                                                                      .setCancelable(false)
-                                                                                                                                      .show();
+                                                                                                                              CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + error, SearchLocalProFragment.this);
+                                                                                                                              customAlert.createNormalAlert("ok",2);
                                                                                                                           }
                                                                                                                       },
                                     ProApplication.getInstance().getUserId(),
@@ -255,19 +237,8 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                                   myLoader.dismissLoader();
 
 
-                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                                                                                                      .setTitle("Add Favorite pros")
-                                                                                                                      .setMessage("" + message)
-                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                                          @Override
-                                                                                                                          public void onClick(DialogInterface dialog, int which) {
-                                                                                                                              dialog.dismiss();
-                                                                                                                              loadList();
-
-                                                                                                                          }
-                                                                                                                      })
-                                                                                                                      .setCancelable(false)
-                                                                                                                      .show();
+                                                                                                              CustomAlert customAlert = new CustomAlert(getActivity(), "Add Favorite pros", "" + message, SearchLocalProFragment.this);
+                                                                                                              customAlert.createNormalAlert("ok",3);
                                                                                                           }
 
                                                                                                           @Override
@@ -275,18 +246,8 @@ public class SearchLocalProFragment extends Fragment {
                                                                                                               if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                                                   myLoader.dismissLoader();
 
-                                                                                                              new AlertDialog.Builder((LandScreenActivity) getActivity())
-                                                                                                                      .setTitle("Add Fav pros")
-                                                                                                                      .setMessage("" + error)
-                                                                                                                      .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                                                                                                          @Override
-                                                                                                                          public void onClick(DialogInterface dialog, int which) {
-                                                                                                                              dialog.dismiss();
-                                                                                                                          }
-                                                                                                                      })
-                                                                                                                      .setCancelable(false)
-                                                                                                                      .show();
-
+                                                                                                              CustomAlert customAlert = new CustomAlert(getActivity(), "Add Favorite pros", "" + error, SearchLocalProFragment.this);
+                                                                                                              customAlert.createNormalAlert("ok",4);
                                                                                                           }
                                                                                                       },
                     ProApplication.getInstance().getUserId(),
