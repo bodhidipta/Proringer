@@ -2205,8 +2205,8 @@ public class ProServiceApiHelper {
 
                             for (int i = 0; i < results.length(); i++) {
 
-                                JSONObject innerIncer = results.getJSONObject(i);
-                                if (innerIncer.getJSONArray("types").toString().contains("postal_code")) {
+                                JSONObject outerJsonObj = results.getJSONObject(i);
+                                if (outerJsonObj.getJSONArray("types").toString().contains("postal_code")) {
 
                                     String city = "";
                                     String country = "";
@@ -2216,10 +2216,10 @@ public class ProServiceApiHelper {
                                      * loop through address component
                                      * for country and state
                                      */
-                                    if (innerIncer.has("address_components") &&
-                                            innerIncer.getJSONArray("address_components").length() > 0) {
+                                    if (outerJsonObj.has("address_components") &&
+                                            outerJsonObj.getJSONArray("address_components").length() > 0) {
 
-                                        JSONArray address_components = innerIncer.getJSONArray("address_components");
+                                        JSONArray address_components = outerJsonObj.getJSONArray("address_components");
 
                                         for (int j = 0; j < address_components.length(); j++) {
 
@@ -2246,14 +2246,14 @@ public class ProServiceApiHelper {
                                         }
                                         if (country.equals("CA") || country.equals("US")) {
                                             AddressData data = new AddressData(
-                                                    innerIncer.getString("formatted_address"),
+                                                    outerJsonObj.getString("formatted_address"),
                                                     state_code,
                                                     country,
                                                     params[0]
                                             );
                                             data.setCity(city);
-                                            data.setLatitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lat"));
-                                            data.setLongitude(innerIncer.getJSONObject("geometry").getJSONObject("location").getString("lng"));
+                                            data.setLatitude(outerJsonObj.getJSONObject("geometry").getJSONObject("location").getString("lat"));
+                                            data.setLongitude(outerJsonObj.getJSONObject("geometry").getJSONObject("location").getString("lng"));
                                             addressList.add(data);
                                         } else {
                                             exception = "No value of this zip code";
