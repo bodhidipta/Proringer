@@ -14,8 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -27,7 +30,7 @@ import com.bumptech.glide.Glide;
  * Created by su on 7/17/17.
  */
 
-public class MyProjectDetailsFragment extends Fragment {
+public class MyProjectDetailsFragment extends Fragment{
     MyLoader myLoader=null;
     ProRegularTextView tv_posted_in, tv_project, tv_service, tv_type, tv_property, tv_status, tv_start, img_description;
     ImageView img_project;
@@ -99,7 +102,6 @@ public class MyProjectDetailsFragment extends Fragment {
                 title.setGravity(Gravity.CENTER);
                 title.setTextColor(getResources().getColor(R.color.colorTextBlack));
                 title.setTextSize(18);
-
 
                 new AlertDialog.Builder((LandScreenActivity) getActivity())
                         .setCustomTitle(title)
