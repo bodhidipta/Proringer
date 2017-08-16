@@ -326,7 +326,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("registrationAPI", registrationAPI);
 
 
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Request request = new Request.Builder()
                                 .url(registrationAPI)
@@ -403,7 +403,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("loginAPI", loginAPI);
 
 
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Request request = new Request.Builder()
                                 .url(loginAPI)
@@ -469,7 +469,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_email", params[0]).build();
 
@@ -533,7 +533,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_reset_code", params[0])
                                 .add("new_password", params[1]).build();
@@ -597,7 +597,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
                         String userIfoAPI = getUserInformationAPI + "?user_id=" + ProApplication.getInstance().getUserId();
 
                         Logger.printMessage("userInfo", ProApplication.getInstance().getUserId());
@@ -677,7 +677,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
                         Logger.printMessage("f_name", ":-" + params[0]);
@@ -772,7 +772,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", ProApplication.getInstance().getUserId())
                                 .add("emailid", params[0])
@@ -843,7 +843,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", ProApplication.getInstance().getUserId())
                                 .add("curr_pass", params[0])
@@ -915,7 +915,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         String notificationAPI = getNotificationDetailsAPI + "?user_id=" + ProApplication.getInstance().getUserId();
                         Request request = new Request.Builder()
@@ -993,7 +993,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("user_id", ProApplication.getInstance().getUserId())
@@ -2599,7 +2599,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("pro_id", ":-" + params[1]);
@@ -2733,7 +2733,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("pro_id", ":-" + params[1]);
@@ -2824,7 +2824,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("prosAddReview", prosAddReviewAPI);
 
 
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Request request = new Request.Builder()
                                 .url(prosAddReviewAPI)
@@ -2887,7 +2887,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("pro_id", ":-" + params[1]);
@@ -2961,7 +2961,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Logger.printMessage("portfolio_id", ":-" + params[0]);
 
@@ -3045,7 +3045,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("prosReportReviewAPI", prosReportReviewAPI);
 
 
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(2000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                         Request request = new Request.Builder()
                                 .url(prosReportReviewAPI)
