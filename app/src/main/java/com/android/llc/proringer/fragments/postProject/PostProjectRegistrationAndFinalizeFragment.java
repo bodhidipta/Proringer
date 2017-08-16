@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.activities.PostedFinishActivity;
-import com.android.llc.proringer.activities.SignUpActivity;
 import com.android.llc.proringer.activities.TermsPrivacyActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.utils.Logger;
@@ -35,7 +34,6 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
     private LinearLayout content_post_form_submit;
 
     ProRegularTextView terms_and_policy;
-
 
 
     @Nullable
@@ -61,7 +59,6 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         content_post_form_submit = (LinearLayout) view.findViewById(R.id.content_post_form_submit);
 
 
-
         terms_and_policy = (ProRegularTextView) view.findViewById(R.id.terms_and_policy);
         terms_and_policy.setMovementMethod(LinkMovementMethod.getInstance());
         /**
@@ -71,7 +68,6 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         String TextTermsClick = "Terms of Use ";
         String TextTwo = "and ";
         String TextPolicyClick = "Privacy Policy";
-
 
 
         Spannable word1 = new SpannableString(TextOne);
@@ -105,7 +101,6 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         terms_and_policy.append(word3);
 
 
-
         Spannable word4 = new SpannableString(TextPolicyClick);
         ClickableSpan myClickablePolicySpan = new ClickableSpan() {
             @Override
@@ -128,20 +123,20 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         terms_and_policy.append(word4);
 
 
-
-
-
-
+        view.findViewById(R.id.content_post_form_submit).setVisibility(View.GONE);
+        view.findViewById(R.id.container_registration).setVisibility(View.GONE);
 
         if (ProApplication.getInstance().getUserId().equals("")) {
 /**
  * IF no user is login then visible registration process or visible last part
  */
             view.findViewById(R.id.container_registration).setVisibility(View.VISIBLE);
-            zip_code.setText(((PostProjectActivity)getActivity()).selectedAddressData.getZip_code());
+            zip_code.setText(((PostProjectActivity) getActivity()).selectedAddressData.getZip_code());
 
         } else {
-            view.findViewById(R.id.content_post_form_submit).setVisibility(View.VISIBLE);
+            if (((PostProjectActivity) getActivity()).completePostProject()) {
+                view.findViewById(R.id.content_post_form_submit).setVisibility(View.VISIBLE);
+            }
         }
 
         view.findViewById(R.id.close_project).setOnClickListener(new View.OnClickListener() {

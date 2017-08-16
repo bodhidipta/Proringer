@@ -58,6 +58,8 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 
     boolean back = false;
 
+    public boolean isSubmitPostProject=false;
+
 
     private ProgressBar progress_posting;
     public ProRegularTextView selected_service_category, pro_request_category, selected_service_property;
@@ -223,7 +225,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
     }
 
 
-    public void completePostProject() {
+    public boolean completePostProject() {
 
         Logger.printMessage("@registrationPostPro", "selectedCategory :" + selectedCategory.getId());
         Logger.printMessage("@registrationPostPro", "selectedService :" + selectedService.getId());
@@ -255,8 +257,8 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        step++;
-                        progress_posting.setProgress(step);
+                        //step++;
+                        //progress_posting.setProgress(step);
                         selected_service_property.setText("" + step10option);
                         if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())) {
                             ((PostProjectRegistrationAndFinalizeFragment) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())).showProjectPosted();
@@ -265,12 +267,15 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 
                         closeKeypad();
 
+                        isSubmitPostProject=true;
                     }
 
                     @Override
                     public void onError(String error) {
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
+
+                        isSubmitPostProject=true;
 
                         CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Project post error", "" + error, PostProjectActivity.this);
                         customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
@@ -316,6 +321,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
          .add("email_id", params[16])
          .add("password", params[17])
          */
+        return isSubmitPostProject;
     }
 
     public void setHeaderCategory() {
