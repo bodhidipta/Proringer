@@ -101,6 +101,11 @@ public class TermsPrivacyActivity extends AppCompatActivity {
             public void onError(String error) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
+
+                if (error.equalsIgnoreCase("No internet connection found. Please check your internet connection.")) {
+                    findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
+                    findViewById(R.id.LLNetworkDisconnection).setVisibility(View.VISIBLE);
+                }
             }
         });
     }
