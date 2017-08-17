@@ -34,7 +34,7 @@
         android:background="@color/colorHeader"/>
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
@@ -43,8 +43,6 @@
             android:id="@+id/tv_show_describetion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:gravity="fill_horizontal"
             android:padding="10dp" />
 
     </ScrollView>

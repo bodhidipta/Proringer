@@ -4,12 +4,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
@@ -57,7 +60,13 @@ public class ShowMyDialog {
         });
 
         tv_tittle.setText(title);
-        tv_show_describetion.setText(describetion);
+        Logger.printMessage("@@K-",ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify), Html.FROM_HTML_MODE_LEGACY));
+        }else {
+            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify)));
+
+        }
         dialog.show();
     }
 
