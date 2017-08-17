@@ -19,8 +19,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.ProsReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -33,7 +36,7 @@ import org.json.JSONException;
  * Created by su on 8/4/17.
  */
 
-public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdapter.MyViewHolder> {
+public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdapter.MyViewHolder> implements MyCustomAlertListener{
     Context context;
     JSONArray jsonInfoArray;
 
@@ -65,9 +68,15 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 @Override
                 public void onClick(View view) {
                     try {
-                        Intent intent = new Intent(context, ProsReportAbuseActivity.class);
-                        intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
-                        context.startActivity(intent);
+                        if(jsonInfoArray.getJSONObject(position).getString("review_report_status").trim().equals("0")) {
+                            Intent intent = new Intent(context, ProsReportAbuseActivity.class);
+                            intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
+                            context.startActivity(intent);
+                        }else {
+
+                            CustomAlert customAlert = new CustomAlert(context, "Contact Us","Sorry! You have already added a report for this review", ProsReviewAllAdapter.this);
+                            customAlert.createNormalAlert("ok",1);
+                        }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -217,6 +226,10 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
     @Override
     public int getItemCount() {
         return jsonInfoArray.length();
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

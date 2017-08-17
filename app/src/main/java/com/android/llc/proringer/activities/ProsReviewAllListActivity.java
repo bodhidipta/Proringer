@@ -93,9 +93,6 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        loadReviewList(0, 10);
     }
 
     @Override
@@ -109,6 +106,13 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
     public void onBackPressed() {
         setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadReviewList(0, 10);
+
     }
 
     public void loadReviewList(int from, int perPage) {
