@@ -69,5 +69,4 @@ public class ShowMyDialog {
         }
         dialog.show();
     }
-
 }
