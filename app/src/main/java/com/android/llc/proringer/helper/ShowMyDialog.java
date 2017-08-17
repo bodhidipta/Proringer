@@ -38,7 +38,7 @@ public class ShowMyDialog {
         LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
 
         ProRegularTextView tv_tittle = (ProRegularTextView) dialog.findViewById(R.id.tv_tittle);
-        ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
+        JustifyTextView tv_show_describetion = (JustifyTextView) dialog.findViewById(R.id.tv_show_describetion);
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -60,13 +60,16 @@ public class ShowMyDialog {
         });
 
         tv_tittle.setText(title);
-        Logger.printMessage("@@K-",ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify), Html.FROM_HTML_MODE_LEGACY));
-        }else {
-            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify)));
 
-        }
+        tv_show_describetion.setText(describetion);
+
+        Logger.printMessage("@@K-",ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify));
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify), Html.FROM_HTML_MODE_LEGACY));
+//        }else {
+//            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify)));
+//
+//        }
         dialog.show();
     }
 }
