@@ -1,6 +1,5 @@
 package com.android.llc.proringer.activities;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -88,7 +87,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
                                                                                                        myLoader.dismissLoader();
 
                                                                                                    CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse","" + error, ProsReportAbuseActivity.this);
-                                                                                                   customAlert.createNormalAlert("Ok",1);
+                                                                                                   customAlert.createNormalAlert("Ok",2);
 
                                                                                                }
                                                                                            }, ProApplication.getInstance().getUserId()
@@ -99,5 +98,8 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
     @Override
     public void callbackForAlert(String result, int i) {
 
+        if(result.equalsIgnoreCase("ok") && i==1){
+            finish();
+        }
     }
 }

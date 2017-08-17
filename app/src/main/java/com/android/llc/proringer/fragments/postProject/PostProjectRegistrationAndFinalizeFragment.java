@@ -30,7 +30,9 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  */
 
 public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
-    private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
+    private ProLightEditText first_name, last_name, email, password, confirm_password
+//            , zip_code
+            ;
     private LinearLayout content_post_form_submit;
 
     ProRegularTextView terms_and_policy;
@@ -52,9 +54,9 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
         password = (ProLightEditText) view.findViewById(R.id.password);
         confirm_password = (ProLightEditText) view.findViewById(R.id.confirm_password);
 
-        zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
-        zip_code.setEnabled(false);
-        zip_code.setClickable(false);
+        //zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
+        //zip_code.setEnabled(false);
+        //zip_code.setClickable(false);
 
         content_post_form_submit = (LinearLayout) view.findViewById(R.id.content_post_form_submit);
 
@@ -132,7 +134,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
  * IF no user is login then visible registration process or visible last part
  */
             view.findViewById(R.id.container_registration).setVisibility(View.VISIBLE);
-            zip_code.setText(((PostProjectActivity) getActivity()).selectedAddressData.getZip_code());
+            //zip_code.setText(((PostProjectActivity) getActivity()).selectedAddressData.getZip_code());
 
         } else {
             if (((PostProjectActivity) getActivity()).completePostProject()) {
@@ -203,12 +205,12 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
                                     if (confirm_password.getText().toString().trim().length() > 6 &&
                                             confirm_password.getText().toString().trim().matches(".*[^0-9].*")) {
-                                        if (zip_code.getText().toString().trim().equals("")) {
-                                            zip_code.setError("Please enter Zip.");
-                                            return false;
-                                        } else {
+//                                        if (zip_code.getText().toString().trim().equals("")) {
+//                                            zip_code.setError("Please enter Zip.");
+//                                            return false;
+//                                        } else {
                                             return true;
-                                        }
+//                                        }
                                     } else {
 
                                         if (confirm_password.getText().toString().trim().length() < 6) {
