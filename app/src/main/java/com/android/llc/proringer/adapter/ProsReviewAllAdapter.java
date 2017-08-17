@@ -65,11 +65,9 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 @Override
                 public void onClick(View view) {
                     try {
-
                         Intent intent = new Intent(context, ProsReportAbuseActivity.class);
                         intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
                         context.startActivity(intent);
-
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
