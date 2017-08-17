@@ -39,14 +39,21 @@
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
-        <com.android.llc.proringer.helper.JustifyTextView
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_margin="10dp"
             android:id="@+id/tv_show_describetion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:lineSpacingMultiplier="1.1"
             />
+
+        <!--<com.android.llc.proringer.helper.JustifyTextView-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:id="@+id/tv_show_describetion"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+            <!--android:lineSpacingMultiplier="1.1"-->
+            <!--/>-->
 
     </ScrollView>
 
