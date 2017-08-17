@@ -63,7 +63,7 @@ public class ShowMyDialog {
 
         tv_show_describetion.setText(describetion);
 
-        Logger.printMessage("@@K-",ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify));
+       // Logger.printMessage("@@K-",ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify));
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //            tv_show_describetion.setText(Html.fromHtml(ViewHelper.SetParaAlign(describetion,ViewHelper.P_Justify), Html.FROM_HTML_MODE_LEGACY));
 //        }else {
