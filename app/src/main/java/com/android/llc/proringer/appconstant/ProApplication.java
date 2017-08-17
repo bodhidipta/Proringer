@@ -8,6 +8,8 @@ import android.graphics.drawable.LayerDrawable;
 
 import com.android.llc.proringer.pojo.NotificationData;
 import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by bodhidipta on 09/06/17.
@@ -40,6 +42,7 @@ public class ProApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         instance = this;
         userPreference = getSharedPreferences("USER_PREFERENCE", MODE_PRIVATE);
         notificationPreference = getSharedPreferences("NOTIFICATION_PREFERENCE", MODE_PRIVATE);

@@ -39,6 +39,9 @@ import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 
 public class LandScreenActivity extends AppCompatActivity implements MyCustomAlertListener {
 
@@ -57,6 +60,14 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        Fabric.with(this,new Crashlytics());
+
+        // TODO: Move this to where you establish a user session
+        logUser();
+
+
         setContentView(R.layout.activity_land_screen);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         back_toolbar = (Toolbar) findViewById(R.id.back_toolbar);
@@ -706,4 +717,14 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             finish();
         }
     }
+
+
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.setUserIdentifier("12345");
+        Crashlytics.setUserEmail("user@fabric.io");
+        Crashlytics.setUserName("Test User");
+    }
+
 }
