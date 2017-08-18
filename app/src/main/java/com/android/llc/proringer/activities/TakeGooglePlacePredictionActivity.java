@@ -17,17 +17,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapter;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 /**
@@ -122,6 +119,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity {
 
                             locationText.setText(stringArrayList.get(position));
                             selectedPlace = stringArrayList.get(position);
+                            Logger.printMessage("selectedPlace",selectedPlace);
                             rcv_location_suggestion.setVisibility(View.GONE);
                             getZipCityState();
 

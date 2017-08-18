@@ -51,20 +51,20 @@
                         android:hint="@string/location"
                         android:inputType="textCapSentences"
                         android:maxLines="1"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="55dp" />
+                        android:paddingStart="5dp"
+                        android:paddingEnd="42dp" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <ImageView
                     android:id="@+id/Erase"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:padding="8dp"
-                    android:src="@drawable/ic_vector_erase"
-                    android:visibility="gone" />
+                    android:src="@drawable/ic_cross_dialog"
+                    android:visibility="visible" />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

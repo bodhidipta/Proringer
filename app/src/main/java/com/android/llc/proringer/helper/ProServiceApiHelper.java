@@ -2407,7 +2407,8 @@ public class ProServiceApiHelper {
                                     for (int j = 0; j < terms.length(); j++) {
                                         if (terms.getJSONObject(j).getString("value").contains("United States") ||
                                                 terms.getJSONObject(j).getString("value").contains("Canada")) {
-                                            addressList.add(innerIncer.getString("description"));
+                                            Logger.printMessage("secondary_text",""+innerIncer.getJSONObject("structured_formatting").getString("secondary_text"));
+                                            addressList.add(innerIncer.getJSONObject("structured_formatting").getString("secondary_text"));
                                             break;
                                         }
                                     }
@@ -2415,7 +2416,6 @@ public class ProServiceApiHelper {
                             }
                         }
 
-                        Logger.printMessage("location", "" + responseString);
                         return responseString;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -2427,6 +2427,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
+                    Logger.printMessage("location",s);
                     if (exception.equals("")) {
                         if (addressList != null && addressList.size() > 0)
                             callback.onComplete(addressList);
