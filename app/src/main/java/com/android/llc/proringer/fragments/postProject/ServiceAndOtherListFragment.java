@@ -17,6 +17,7 @@ import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.utils.Logger;
 
 import java.util.LinkedList;
 
@@ -46,6 +47,7 @@ public class ServiceAndOtherListFragment extends Fragment {
         myLoader=new MyLoader(getActivity());
 
         if (((PostProjectActivity) getActivity()).isForth)
+
             selectService(((PostProjectActivity) getActivity()).selectedCategory.getId());
         else {
             step = 5;
@@ -102,6 +104,7 @@ public class ServiceAndOtherListFragment extends Fragment {
                         if (step == 0) {
                             step++;
 
+                            Logger.printMessage("change_me","change_me");
                             ((PostProjectActivity) getActivity()).selectedService = data;
                             ((PostProjectActivity) getActivity()).increaseStep();
 

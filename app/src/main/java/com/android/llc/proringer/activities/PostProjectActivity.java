@@ -423,7 +423,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         } else if (progressStep == 2) {
             pro_request_category.setVisibility(View.GONE);
             selected_service_category.setVisibility(View.VISIBLE);
-            selected_service_category.setText(selectedCategory.getCategory_name());
+            selected_service_category.setText(selectedService.getCategory_name());
             selected_service_property.setVisibility(View.VISIBLE);
 
             selected_service_property.setText("" + step2option);

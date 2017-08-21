@@ -59,7 +59,7 @@
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/selected_service_category"

@@ -26,6 +26,7 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
 
 /**
@@ -39,11 +40,14 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
     ProRegularEditText project_description_text;
     MyLoader myLoader=null;
     ImageView img_profile;
+    ProRegularTextView tv_rate_name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_pro);
+
+        tv_rate_name= (ProRegularTextView) findViewById(R.id.tv_rate_name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,6 +87,23 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
                 // TODO Auto-generated method stub
                 Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
                 review_rate = Float.toString(rating);
+
+                if(rating<=1.0)
+                {
+                    tv_rate_name.setText("Poor");
+                }
+                else if(rating<=2.0){
+                    tv_rate_name.setText("Fair");
+                }
+                else if(rating<=3.0){
+                    tv_rate_name.setText("Good");
+                }
+                else  if(rating<=4.0){
+                    tv_rate_name.setText("Excellent!");
+                }
+                if(rating<=5){
+                    tv_rate_name.setText("Super Star");
+                }
             }
 
         });
