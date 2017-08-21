@@ -169,7 +169,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
 
-                        if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
+                        if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                             ScrollViewMAin.setVisibility(View.GONE);
                             LLNetworkDisconnection.setVisibility(View.VISIBLE);
                         }

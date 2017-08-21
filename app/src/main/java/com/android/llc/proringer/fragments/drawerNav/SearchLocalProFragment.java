@@ -147,7 +147,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     myLoader.dismissLoader();
 
 
-                if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
+                if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
@@ -166,7 +166,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 //                title.setBackgroundResource(R.drawable.gradient);
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
-        title.setTextColor(((LandScreenActivity) getActivity()).getResources().getColor(R.color.colorTextBlack));
+        title.setTextColor(getActivity().getResources().getColor(R.color.colorTextBlack));
         title.setTextSize(18);
 
         new AlertDialog.Builder((LandScreenActivity) getActivity())

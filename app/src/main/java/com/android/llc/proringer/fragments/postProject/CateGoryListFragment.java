@@ -279,7 +279,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
                     myLoader.dismissLoader();
 
 
-                if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
+                if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     ((PostProjectActivity)getActivity()).LLMain.setVisibility(View.GONE);
                     ((PostProjectActivity)getActivity()).LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }

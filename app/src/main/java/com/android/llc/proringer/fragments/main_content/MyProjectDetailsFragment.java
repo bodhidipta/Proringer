@@ -96,7 +96,7 @@ public class MyProjectDetailsFragment extends Fragment{
 //                title.setBackgroundResource(R.drawable.gradient);
                 title.setPadding(10, 10, 10, 10);
                 title.setGravity(Gravity.CENTER);
-                title.setTextColor(getResources().getColor(R.color.colorTextBlack));
+                title.setTextColor(getActivity().getResources().getColor(R.color.colorTextBlack));
                 title.setTextSize(18);
 
                 new AlertDialog.Builder((LandScreenActivity) getActivity())

@@ -73,7 +73,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
 
         Spannable word1 = new SpannableString(TextOne);
-        word1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorTextDark)), 0, TextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        word1.setSpan(new ForegroundColorSpan(getActivity().getResources().getColor(R.color.colorTextDark)), 0, TextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         terms_and_policy.setText(word1);
 
         Spannable word2 = new SpannableString(TextTermsClick);
@@ -90,7 +90,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
             @Override
             public void updateDrawState(TextPaint ds) {
-                ds.setColor(getResources().getColor(R.color.colorAccent));
+                ds.setColor(getActivity().getResources().getColor(R.color.colorAccent));
                 ds.setUnderlineText(false);
             }
         };
@@ -99,7 +99,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
 
         Spannable word3 = new SpannableString(TextTwo);
-        word3.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorTextDark)), 0, TextTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        word3.setSpan(new ForegroundColorSpan(getActivity().getResources().getColor(R.color.colorTextDark)), 0, TextTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         terms_and_policy.append(word3);
 
 
@@ -117,7 +117,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
             @Override
             public void updateDrawState(TextPaint ds) {
-                ds.setColor(getResources().getColor(R.color.colorAccent));
+                ds.setColor(getActivity().getResources().getColor(R.color.colorAccent));
                 ds.setUnderlineText(false);
             }
         };
