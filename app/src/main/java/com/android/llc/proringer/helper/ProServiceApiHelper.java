@@ -2325,7 +2325,7 @@ public class ProServiceApiHelper {
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
                         JSONObject jsonObject = new JSONObject(responseString);
-                        Logger.printMessage("jsonObject",""+jsonObject);
+                       // Logger.printMessage("jsonObject",""+jsonObject);
                         if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
                             return responseString;
                         } else {
