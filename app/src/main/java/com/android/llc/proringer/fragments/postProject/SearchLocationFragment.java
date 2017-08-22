@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
@@ -46,7 +45,6 @@ public class SearchLocationFragment extends Fragment {
     private MyLoader myLoader = null;
     TextWatcher textWatcher = null;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,16 +58,14 @@ public class SearchLocationFragment extends Fragment {
         location_list = (RecyclerView) view.findViewById(R.id.location_list);
         loading_progress = (ProgressBar) view.findViewById(R.id.loading_progress);
         error_progress = (ImageView) view.findViewById(R.id.error_progress);
-        location_list.setLayoutManager(new LinearLayoutManager((PostProjectActivity) getActivity()));
+        location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         addressDataList = new ArrayList<>();
         myLoader = new MyLoader(getActivity());
         zip_search_adapter = null;
         ((PostProjectActivity) getActivity()).selectedAddressData = null;
-
         Logger.printMessage("onCreate", "onCreate");
-
 
         textWatcher = new TextWatcher() {
             @Override
@@ -84,13 +80,9 @@ public class SearchLocationFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 4) {
-                    Logger.printMessage("SelectedAddressData-->", "null");
-                    ((PostProjectActivity) getActivity()).selectedAddressData = null;
-                    addressDataList.clear();
-                } else if (s.toString().length() > 4) {
+                if (s.toString().length() > 4) {
                     Logger.printMessage("GreaterThan4", "" + s.toString().length());
-                    searchLocationWithZip(s.toString());
+                    searchLocationUsingZip(s.toString());
                 }
             }
         };
@@ -100,6 +92,7 @@ public class SearchLocationFragment extends Fragment {
             plotUserInformation();
         } else {
             //////////set current location zip code////
+            Logger.printMessage("not login", "not login");
             Logger.printMessage("Lat", "" + ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCurrentLatLng()[0]);
             Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCurrentLatLng()[1]);
             getCurrentLocationZip();
@@ -127,15 +120,11 @@ public class SearchLocationFragment extends Fragment {
                  */
 
                 if (addressDataList != null & addressDataList.size() > 0) {
-
-                    if (((PostProjectActivity) getActivity()).selectedAddressData == null) {
-                        //zip_code_text.setError("Please enter a valid zip code to continue.");
-                        Toast.makeText(getActivity(), "Please choose a location from list to continue.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        ((PostProjectActivity) getActivity()).closeKeypad();
-                        ((PostProjectActivity) getActivity()).increaseStep();
-                        ((PostProjectActivity) getActivity()).changeFragmentNext(6);
-                    }
+                    ((PostProjectActivity) getActivity()).closeKeypad();
+                    ((PostProjectActivity) getActivity()).increaseStep();
+                    ((PostProjectActivity) getActivity()).changeFragmentNext(6);
+                    zip_code_text.setText("");
+                    addressDataList.clear();
                 } else {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
                 }
@@ -145,74 +134,107 @@ public class SearchLocationFragment extends Fragment {
     }
 
 
-    private void searchLocationWithZip(String key) {
+    private void searchLocationUsingZipFirstTime(String key) {
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
-                addressDataList = listdata;
-
-                loading_progress.setVisibility(View.GONE);
-                error_progress.setVisibility(View.GONE);
-
-                Logger.printMessage("addressDataList", "" + addressDataList.size());
-
-                if (addressDataList != null && addressDataList.size() > 0) {
+                try {
                     addressDataList = listdata;
+                    Logger.printMessage("addressDataList", "" + addressDataList.size());
 
-                    if (addressDataList.get(0).getCountry_code().equals("US") ||
-                            addressDataList.get(0).getCountry_code().equals("CA")) {
-                        ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
-                    } else {
-                        ((PostProjectActivity) getActivity()).selectedAddressData = null;
+                    if (addressDataList != null && addressDataList.size() > 0) {
+                        if (addressDataList.get(0).getCountry_code().equals("US") ||
+                                addressDataList.get(0).getCountry_code().equals("CA")) {
+                            ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
+                        }
                     }
-
-                    if (zip_search_adapter == null) {
-                        zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
-                            @Override
-                            public void onSelect(int pos, AddressData data) {
-                                //((PostProjectActivity) getActivity()).selectedAddressData = data;
-                            }
-                        });
-                        location_list.setAdapter(zip_search_adapter);
-                    } else {
-                        zip_search_adapter.updateData(listdata);
-                    }
+                }catch (Exception e){
+                    Logger.printMessage("Exception",""+e.getMessage());
+                    addressDataList.clear();
                 }
             }
 
             @Override
             public void onError(String error) {
                 Logger.printMessage("error", "" + error);
-
-                if (zip_search_adapter != null) {
-                    addressDataList.clear();
-                    zip_search_adapter.updateData(addressDataList);
-                }
-                loading_progress.setVisibility(View.GONE);
-                error_progress.setVisibility(View.VISIBLE);
-
+                addressDataList.clear();
             }
 
             @Override
             public void onStartFetch() {
+                addressDataList.clear();
+            }
+        }, key);
+    }
+
+    private void searchLocationUsingZip(String key) {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+            @Override
+            public void onComplete(List<AddressData> listdata) {
+
+                try {
+                    addressDataList = listdata;
+                    Logger.printMessage("addressDataList", "" + addressDataList.size());
+
+                    loading_progress.setVisibility(View.GONE);
+                    error_progress.setVisibility(View.GONE);
+
+                    if (addressDataList != null && addressDataList.size() > 0) {
+                        if (addressDataList.get(0).getCountry_code().equals("US") ||
+                                addressDataList.get(0).getCountry_code().equals("CA")) {
+                            ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
+
+                            if (zip_search_adapter == null) {
+                                zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
+                                    @Override
+                                    public void onSelect(int pos, AddressData data) {
+                                        //((PostProjectActivity) getActivity()).selectedAddressData = data;
+                                    }
+                                });
+                                location_list.setAdapter(zip_search_adapter);
+                            } else {
+                                zip_search_adapter.updateData(listdata);
+                            }
+                        }
+                    }
+                }catch (Exception e){
+                    Logger.printMessage("Exception",""+e.getMessage());
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                Logger.printMessage("error", "" + error);
+                addressDataList.clear();
+
+                if (zip_search_adapter != null) {
+                    zip_search_adapter.updateData(addressDataList);
+                }
+                loading_progress.setVisibility(View.GONE);
+                error_progress.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onStartFetch() {
+                addressDataList.clear();
                 loading_progress.setVisibility(View.VISIBLE);
                 error_progress.setVisibility(View.GONE);
             }
         }, key);
     }
 
+    ////////////////////If the user offline then this function called first for current zip/////////////////////
     public void getCurrentLocationZip() {
         ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                //myLoader.showLoader();
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-//                if (myLoader != null && myLoader.isMyLoaderShowing())
-//                    myLoader.dismissLoader();
-
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 try {
                     JSONObject jsonObject = new JSONObject(message);
                     JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
@@ -243,7 +265,7 @@ public class SearchLocationFragment extends Fragment {
 
                                         if (jsonArrayType.get(0).equals("postal_code")) {
                                             zip_code_text.setText(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
-                                            searchLocationWithZip(zip_code_text.getText().toString());
+                                            searchLocationUsingZipFirstTime(zip_code_text.getText().toString());
                                             outer_block_check = true;
                                             break;
                                         }
@@ -254,16 +276,17 @@ public class SearchLocationFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Logger.printMessage("JSONException",""+e.getMessage());
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
                 }
             }
 
             @Override
             public void onError(String error) {
-
                 Logger.printMessage("error", "" + error);
-
-//                if (myLoader != null && myLoader.isMyLoaderShowing())
-//                    myLoader.dismissLoader();
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         });
     }
@@ -290,7 +313,7 @@ public class SearchLocationFragment extends Fragment {
                                 zip_code_text.setText("");
                             } else {
                                 zip_code_text.setText(innerObj.getString("zipcode") + "");
-                                searchLocationWithZip(zip_code_text.getText().toString());
+                                searchLocationUsingZipFirstTime(zip_code_text.getText().toString());
                             }
                         } catch (JSONException jse) {
                             jse.printStackTrace();
@@ -303,7 +326,6 @@ public class SearchLocationFragment extends Fragment {
                          * No user data found on database or something went wrong
                          */
                         Logger.printMessage("@dashBoard", "on database data not exists");
-
                     }
                 });
     }
