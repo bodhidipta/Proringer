@@ -92,7 +92,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         rcv_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
         rcv_license = (RecyclerView) findViewById(R.id.rcv_license);
-        rcv_license.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rcv_license.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this,2));
 
 
         rcv_project_gallery = (RecyclerView) findViewById(R.id.rcv_project_gallery);

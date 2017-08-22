@@ -144,7 +144,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                 NavigationHandler.getInstance().highlightTag(NavigationHandler.INVITE_FRIEND);
             }
         });
-        view.findViewById(R.id.img_upload).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.profile_pic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
