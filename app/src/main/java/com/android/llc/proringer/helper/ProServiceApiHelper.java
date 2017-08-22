@@ -2300,13 +2300,13 @@ public class ProServiceApiHelper {
      */
     public void getZipCodeUsingGoogleApi(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
-            new AsyncTask<String, Void, String>() {
-
+            new AsyncTask<String, Void, String>() {;
                 String exception = "";
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
+                    callback.onStart();
                 }
 
                 @Override

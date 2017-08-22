@@ -10,10 +10,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
@@ -44,7 +44,8 @@ public class SearchLocationFragment extends Fragment {
     private ImageView error_progress;
     private boolean outer_block_check = false;
     private MyLoader myLoader = null;
-    TextWatcher textWatcher=null;
+    TextWatcher textWatcher = null;
+
 
     @Nullable
     @Override
@@ -61,14 +62,16 @@ public class SearchLocationFragment extends Fragment {
         error_progress = (ImageView) view.findViewById(R.id.error_progress);
         location_list.setLayoutManager(new LinearLayoutManager((PostProjectActivity) getActivity()));
 
+
         addressDataList = new ArrayList<>();
         myLoader = new MyLoader(getActivity());
-
-
         zip_search_adapter = null;
         ((PostProjectActivity) getActivity()).selectedAddressData = null;
 
-        textWatcher=new TextWatcher() {
+        Logger.printMessage("onCreate", "onCreate");
+
+
+        textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -81,18 +84,17 @@ public class SearchLocationFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().length()<=4){
-                    Logger.printMessage("SelectedAddressData-->","null");
+                if (s.toString().length() <= 4) {
+                    Logger.printMessage("SelectedAddressData-->", "null");
                     ((PostProjectActivity) getActivity()).selectedAddressData = null;
                     addressDataList.clear();
-                }
-                else if(s.toString().length()>4)
-                {
-                    Logger.printMessage("GreaterThan4",""+s.toString().length());
+                } else if (s.toString().length() > 4) {
+                    Logger.printMessage("GreaterThan4", "" + s.toString().length());
                     searchLocationWithZip(s.toString());
                 }
             }
         };
+        zip_code_text.addTextChangedListener(textWatcher);
 
         if (!ProApplication.getInstance().getUserId().equals("")) {
             plotUserInformation();
@@ -133,7 +135,6 @@ public class SearchLocationFragment extends Fragment {
                         ((PostProjectActivity) getActivity()).closeKeypad();
                         ((PostProjectActivity) getActivity()).increaseStep();
                         ((PostProjectActivity) getActivity()).changeFragmentNext(6);
-                        zip_code_text.removeTextChangedListener(textWatcher);
                     }
                 } else {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
@@ -143,34 +144,6 @@ public class SearchLocationFragment extends Fragment {
 
     }
 
-
-    private void searchLocationWithZipFirstTime(String key) {
-        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
-            @Override
-            public void onComplete(List<AddressData> listdata) {
-
-                addressDataList = listdata;
-                Logger.printMessage("addressDataList", "" + addressDataList.size());
-
-                if (addressDataList.get(0).getCountry_code().equals("US") ||
-                        addressDataList.get(0).getCountry_code().equals("CA")) {
-                    ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
-                }
-                else {
-                    ((PostProjectActivity) getActivity()).selectedAddressData=null;
-                }
-            }
-
-            @Override
-            public void onError(String error) {
-                Logger.printMessage("error", "" +error);
-            }
-
-            @Override
-            public void onStartFetch() {
-            }
-        }, key);
-    }
 
     private void searchLocationWithZip(String key) {
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
@@ -184,6 +157,14 @@ public class SearchLocationFragment extends Fragment {
                 Logger.printMessage("addressDataList", "" + addressDataList.size());
 
                 if (addressDataList != null && addressDataList.size() > 0) {
+                    addressDataList = listdata;
+
+//                    if (addressDataList.get(0).getCountry_code().equals("US") ||
+//                            addressDataList.get(0).getCountry_code().equals("CA")) {
+//                        ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
+//                    } else {
+//                        ((PostProjectActivity) getActivity()).selectedAddressData = null;
+//                    }
                     if (zip_search_adapter == null) {
                         zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
@@ -191,7 +172,6 @@ public class SearchLocationFragment extends Fragment {
                                 ((PostProjectActivity) getActivity()).selectedAddressData = data;
                             }
                         });
-
                         location_list.setAdapter(zip_search_adapter);
                     } else {
                         zip_search_adapter.updateData(listdata);
@@ -201,8 +181,7 @@ public class SearchLocationFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-
-                Logger.printMessage("error", "" +error);
+                Logger.printMessage("error", "" + error);
 
                 if (zip_search_adapter != null) {
                     addressDataList.clear();
@@ -210,6 +189,7 @@ public class SearchLocationFragment extends Fragment {
                 }
                 loading_progress.setVisibility(View.GONE);
                 error_progress.setVisibility(View.VISIBLE);
+
             }
 
             @Override
@@ -224,13 +204,13 @@ public class SearchLocationFragment extends Fragment {
         ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                myLoader.showLoader();
+                //myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
+//                if (myLoader != null && myLoader.isMyLoaderShowing())
+//                    myLoader.dismissLoader();
 
                 try {
                     JSONObject jsonObject = new JSONObject(message);
@@ -279,10 +259,10 @@ public class SearchLocationFragment extends Fragment {
             @Override
             public void onError(String error) {
 
-                Logger.printMessage("error", "" +error);
+                Logger.printMessage("error", "" + error);
 
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
+//                if (myLoader != null && myLoader.isMyLoaderShowing())
+//                    myLoader.dismissLoader();
             }
         });
     }
@@ -309,9 +289,7 @@ public class SearchLocationFragment extends Fragment {
                                 zip_code_text.setText("");
                             } else {
                                 zip_code_text.setText(innerObj.getString("zipcode") + "");
-
-                                searchLocationWithZipFirstTime(zip_code_text.getText().toString());
-                                //searchLocationWithZip(zip_code_text.getText().toString());
+                                searchLocationWithZip(zip_code_text.getText().toString());
                             }
                         } catch (JSONException jse) {
                             jse.printStackTrace();
@@ -327,17 +305,5 @@ public class SearchLocationFragment extends Fragment {
 
                     }
                 });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        zip_code_text.addTextChangedListener(textWatcher);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        zip_code_text.removeTextChangedListener(textWatcher);
     }
 }
