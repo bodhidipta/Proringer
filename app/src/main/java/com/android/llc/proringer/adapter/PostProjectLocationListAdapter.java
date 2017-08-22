@@ -35,7 +35,7 @@ public class PostProjectLocationListAdapter extends RecyclerView.Adapter<PostPro
     private Context mcontext;
     private List<AddressData> addressList;
     private onItemelcted listener;
-    private String selected_address = "";
+
 
     public PostProjectLocationListAdapter(Context mcontext, List<AddressData> addressList, onItemelcted call) {
         this.mcontext = mcontext;
@@ -55,13 +55,17 @@ public class PostProjectLocationListAdapter extends RecyclerView.Adapter<PostPro
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (selected_address.equals("")) {
-            holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#ffffff"));
-            holder.txtspinemwnu.setTextColor(Color.parseColor("#333333"));
-        } else {
-            holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#505050"));
-            holder.txtspinemwnu.setTextColor(Color.parseColor("#ffffff"));
-        }
+//        if (selected_address.equals("")) {
+//            holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#ffffff"));
+//            holder.txtspinemwnu.setTextColor(Color.parseColor("#333333"));
+//        } else {
+//            holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#505050"));
+//            holder.txtspinemwnu.setTextColor(Color.parseColor("#ffffff"));
+//        }
+
+        holder.txtspinemwnu.setBackgroundColor(Color.parseColor("#ffffff"));
+        holder.txtspinemwnu.setTextColor(Color.parseColor("#333333"));
+
         holder.txtspinemwnu.setText(addressList.get(position).getFormatted_address());
 
         holder.txtspinemwnu.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +73,7 @@ public class PostProjectLocationListAdapter extends RecyclerView.Adapter<PostPro
             public void onClick(View v) {
                 if (addressList.get(position).getCountry_code().equals("US") ||
                         addressList.get(position).getCountry_code().equals("CA")) {
-                    selected_address = addressList.get(position).getFormatted_address();
+                    //selected_address = addressList.get(position).getFormatted_address();
                     listener.onSelect(position, addressList.get(position));
                     notifyDataSetChanged();
                 } else {
@@ -96,7 +100,7 @@ public class PostProjectLocationListAdapter extends RecyclerView.Adapter<PostPro
 
     public void updateData(List<AddressData> list) {
         addressList = list;
-        selected_address = "";
+        //selected_address = "";
         notifyDataSetChanged();
     }
 }

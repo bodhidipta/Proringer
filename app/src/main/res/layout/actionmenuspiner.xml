@@ -5,23 +5,37 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-        android:id="@+id/txtspinemwnu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+    <LinearLayout
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#ffffff"
-        android:gravity="center"
-        android:lines="1"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_placeholder"/>
+
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/txtspinemwnu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:lines="1"
         android:text="spinner"
         android:textColor="#333333"
         android:textSize="14sp" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

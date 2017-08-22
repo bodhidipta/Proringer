@@ -159,17 +159,18 @@ public class SearchLocationFragment extends Fragment {
                 if (addressDataList != null && addressDataList.size() > 0) {
                     addressDataList = listdata;
 
-//                    if (addressDataList.get(0).getCountry_code().equals("US") ||
-//                            addressDataList.get(0).getCountry_code().equals("CA")) {
-//                        ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
-//                    } else {
-//                        ((PostProjectActivity) getActivity()).selectedAddressData = null;
-//                    }
+                    if (addressDataList.get(0).getCountry_code().equals("US") ||
+                            addressDataList.get(0).getCountry_code().equals("CA")) {
+                        ((PostProjectActivity) getActivity()).selectedAddressData = addressDataList.get(0);
+                    } else {
+                        ((PostProjectActivity) getActivity()).selectedAddressData = null;
+                    }
+
                     if (zip_search_adapter == null) {
                         zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                             @Override
                             public void onSelect(int pos, AddressData data) {
-                                ((PostProjectActivity) getActivity()).selectedAddressData = data;
+                                //((PostProjectActivity) getActivity()).selectedAddressData = data;
                             }
                         });
                         location_list.setAdapter(zip_search_adapter);
