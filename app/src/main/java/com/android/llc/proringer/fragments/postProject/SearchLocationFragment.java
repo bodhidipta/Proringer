@@ -86,6 +86,7 @@ public class SearchLocationFragment extends Fragment {
                 }
             }
         };
+        zip_code_text.addTextChangedListener(textWatcher);
 
         if (!ProApplication.getInstance().getUserId().equals("")) {
             plotUserInformation();
@@ -122,7 +123,6 @@ public class SearchLocationFragment extends Fragment {
                     ((PostProjectActivity) getActivity()).closeKeypad();
                     ((PostProjectActivity) getActivity()).increaseStep();
                     ((PostProjectActivity) getActivity()).changeFragmentNext(6);
-                    zip_code_text.setText("");
                     addressDataList.clear();
                 } else {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
@@ -229,8 +229,10 @@ public class SearchLocationFragment extends Fragment {
 
             @Override
             public void onComplete(String message) {
+                //Logger.printMessage("message",message);
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
+
                 try {
                     JSONObject jsonObject = new JSONObject(message);
                     JSONArray jsonArrayResults = jsonObject.getJSONArray("results");
@@ -248,6 +250,7 @@ public class SearchLocationFragment extends Fragment {
                              */
                             if (jsonArrayResults.getJSONObject(i).has("address_components") &&
                                     jsonArrayResults.getJSONObject(i).getJSONArray("address_components").length() > 0) {
+
                                 JSONArray jsonArrayAddressComponents = jsonArrayResults.getJSONObject(i).getJSONArray("address_components");
 
                                 for (int j = 0; j < jsonArrayAddressComponents.length(); j++) {
@@ -257,14 +260,12 @@ public class SearchLocationFragment extends Fragment {
                                             ) {
 
                                         JSONArray jsonArrayType = jsonArrayAddressComponents.getJSONObject(j).getJSONArray("types");
-//                                        Logger.printMessage("types", "" + jsonArrayType.get(0));
+                                        Logger.printMessage("types", "" + jsonArrayType.get(0));
 
                                         if (jsonArrayType.get(0).equals("postal_code")) {
                                             Logger.printMessage("postal_code_get",""+jsonArrayType.get(0));
                                             zip_code_text.setText(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
-                                            zip_code_text.addTextChangedListener(textWatcher);
                                             searchLocationUsingZipFirstTime(zip_code_text.getText().toString());
-                                            Logger.printMessage("addTextChangedListener","addTextChangedListener");
                                             outer_block_check = true;
                                             break;
                                         }else {
@@ -280,8 +281,6 @@ public class SearchLocationFragment extends Fragment {
                     Logger.printMessage("JSONException",""+e.getMessage());
                     if (myLoader != null && myLoader.isMyLoaderShowing())
                         myLoader.dismissLoader();
-                    zip_code_text.addTextChangedListener(textWatcher);
-                    Logger.printMessage("addTextChangedListener","addTextChangedListener");
                 }
             }
 
@@ -290,8 +289,6 @@ public class SearchLocationFragment extends Fragment {
                 Logger.printMessage("error", "" + error);
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
-                zip_code_text.addTextChangedListener(textWatcher);
-                Logger.printMessage("addTextChangedListener","addTextChangedListener");
             }
         });
     }
@@ -321,12 +318,8 @@ public class SearchLocationFragment extends Fragment {
                                 Logger.printMessage("key_in","key_in");
                                 searchLocationUsingZipFirstTime(zip_code_text.getText().toString());
                             }
-                            zip_code_text.addTextChangedListener(textWatcher);
-                            Logger.printMessage("addTextChangedListener","addTextChangedListener");
                         } catch (JSONException jse) {
                             jse.printStackTrace();
-                            zip_code_text.addTextChangedListener(textWatcher);
-                            Logger.printMessage("addTextChangedListener","addTextChangedListener");
                         }
                     }
 
@@ -336,8 +329,6 @@ public class SearchLocationFragment extends Fragment {
                          * No user data found on database or something went wrong
                          */
                         Logger.printMessage("@dashBoard", "on database data not exists");
-                        zip_code_text.addTextChangedListener(textWatcher);
-                        Logger.printMessage("addTextChangedListener","addTextChangedListener");
                     }
                 });
     }
