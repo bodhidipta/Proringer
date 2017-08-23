@@ -694,6 +694,13 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             findViewById(R.id.search_local_pro_header).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.search_local_pro_header_map).setVisibility(View.VISIBLE);
+            findViewById(R.id.search_local_pro_header_map).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent searchIntent=new Intent(LandScreenActivity.this,SearchNearProActivity.class);
+                    startActivity(searchIntent);
+                }
+            });
             findViewById(R.id.search_local_pro_header).setVisibility(View.GONE);
         }
     }
