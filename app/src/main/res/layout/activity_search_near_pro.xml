@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Terms"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:id="@+id/ScrollViewMAin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBGblueShade"
+        android:padding="10dp"
+        android:scrollbars="none"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linear_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/edt_zip"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_selecter"
+                android:gravity="center"
+                android:hint="Zip Code"
+                android:inputType="textEmailAddress"
+                android:padding="5dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/LLCurrentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textSize="16sp">
+
+                <ImageView
+                    android:id="@+id/search_local_pro_header_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/ic_search_map_white" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Use Current Location"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/LLNetworkDisconnection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect" />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Check Your Network Connection"
+            android:textColor="@color/colorTextBlack" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

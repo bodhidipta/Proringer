@@ -17,6 +17,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
@@ -47,7 +48,6 @@ import org.json.JSONObject;
 public class SearchLocalProFragment extends Fragment implements MyCustomAlertListener{
     private RecyclerView pros_list;
     String category_search = "";
-    String zip_search = "";
     MyLoader myLoader=null;
 
     SearchProListAdapter searchProListAdapter;
@@ -65,26 +65,25 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
-
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         myLoader=new MyLoader(getActivity());
 
-        loadList();
+        plotUserInformation();
 
     }
 
     @Override
     public void callbackForAlert(String result, int i) {
         if (result.equalsIgnoreCase("retry") && i==1){
-            loadList();
+            plotUserInformation();
         }
         else if(result.equalsIgnoreCase("ok") && i==1){
-            loadList();
+            plotUserInformation();
         }
         else if(result.equalsIgnoreCase("ok") && i==3){
-            loadList();
+            plotUserInformation();
         }
     }
 
@@ -93,7 +92,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     }
 
 
-    public void loadList() {
+    public void loadList(String zip) {
 
         LLMain.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
@@ -154,7 +153,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
 
             }
-        }, ProApplication.getInstance().getUserId(), category_search, zip_search);
+        }, ProApplication.getInstance().getUserId(), category_search, zip);
     }
 
     public void deleteFavPro(final String pros_id) {
@@ -255,4 +254,43 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             e.printStackTrace();
         }
     }
+
+    private void plotUserInformation() {
+        DatabaseHandler.getInstance(getActivity()).getUserInfo(
+                ProApplication.getInstance().getUserId(),
+                new DatabaseHandler.onQueryCompleteListener() {
+                    @Override
+                    public void onSuccess(String... s) {
+                        /**
+                         * User data already found in database
+                         */
+
+                        Logger.printMessage("@dashBoard", "on database data exists");
+                        try {
+                            JSONObject mainObject = new JSONObject(s[0]);
+                            JSONArray info_arr = mainObject.getJSONArray("info_array");
+                            JSONObject innerObj = info_arr.getJSONObject(0);
+
+                            Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
+
+                            if (innerObj.getString("zipcode").trim().equals("")) {
+                               loadList("");
+                            } else {
+                                loadList(innerObj.getString("zipcode"));
+                            }
+                        } catch (JSONException jse) {
+                            jse.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String s) {
+                        /**
+                         * No user data found on database or something went wrong
+                         */
+                        Logger.printMessage("@dashBoard", "on database data not exists");
+                    }
+                });
+    }
+
 }
