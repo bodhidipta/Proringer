@@ -50,7 +50,7 @@ public class PostProjectLocationListAdapter extends RecyclerView.Adapter<PostPro
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.actionmenuspiner, parent, false));
+        return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.place_child_list, parent, false));
     }
 
     @Override
