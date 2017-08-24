@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
@@ -50,6 +49,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     private RecyclerView pros_list;
     String category_search = "";
     MyLoader myLoader = null;
+    boolean firstTimeLoad=false;
 
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
@@ -276,6 +276,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                 ProServiceApiHelper.getInstance(getActivity()).setSearchZip(innerObj.getString("zipcode"));
                                 loadList();
                             }
+                            firstTimeLoad=true;
                         } catch (JSONException jse) {
                             jse.printStackTrace();
                         }
@@ -294,6 +295,11 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     @Override
     public void onResume() {
         super.onResume();
-        plotUserInformation();
+        if (firstTimeLoad){
+            loadList();
+        }
+        else {
+            plotUserInformation();
+        }
     }
 }
