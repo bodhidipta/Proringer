@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
@@ -45,10 +46,10 @@ import org.json.JSONObject;
  * limitations under the License.
  */
 
-public class SearchLocalProFragment extends Fragment implements MyCustomAlertListener{
+public class SearchLocalProFragment extends Fragment implements MyCustomAlertListener {
     private RecyclerView pros_list;
     String category_search = "";
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
 
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
@@ -68,7 +69,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         plotUserInformation();
 
@@ -76,13 +77,11 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             plotUserInformation();
-        }
-        else if(result.equalsIgnoreCase("ok") && i==1){
+        } else if (result.equalsIgnoreCase("ok") && i == 1) {
             plotUserInformation();
-        }
-        else if(result.equalsIgnoreCase("ok") && i==3){
+        } else if (result.equalsIgnoreCase("ok") && i == 3) {
             plotUserInformation();
         }
     }
@@ -92,7 +91,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     }
 
 
-    public void loadList(String zip) {
+    public void loadList() {
 
         LLMain.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
@@ -150,10 +149,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 }
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
 
             }
-        }, ProApplication.getInstance().getUserId(), category_search, zip);
+        }, ProApplication.getInstance().getUserId(), category_search);
     }
 
     public void deleteFavPro(final String pros_id) {
@@ -178,7 +177,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                             ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                                           @Override
                                                                                                                           public void onStart() {
-                                                                                                                             myLoader.showLoader();
+                                                                                                                              myLoader.showLoader();
                                                                                                                           }
 
                                                                                                                           @Override
@@ -188,7 +187,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                                                                                                                   myLoader.dismissLoader();
 
                                                                                                                               CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + message, SearchLocalProFragment.this);
-                                                                                                                              customAlert.createNormalAlert("ok",1);
+                                                                                                                              customAlert.createNormalAlert("ok", 1);
                                                                                                                           }
 
                                                                                                                           @Override
@@ -197,7 +196,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                                                                                                                   myLoader.dismissLoader();
 
                                                                                                                               CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + error, SearchLocalProFragment.this);
-                                                                                                                              customAlert.createNormalAlert("ok",2);
+                                                                                                                              customAlert.createNormalAlert("ok", 2);
                                                                                                                           }
                                                                                                                       },
                                     ProApplication.getInstance().getUserId(),
@@ -223,7 +222,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                           @Override
                                                                                                           public void onStart() {
-                                                                                                             myLoader.showLoader();
+                                                                                                              myLoader.showLoader();
 
                                                                                                           }
 
@@ -235,7 +234,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
 
                                                                                                               CustomAlert customAlert = new CustomAlert(getActivity(), "Add Favorite pros", "" + message, SearchLocalProFragment.this);
-                                                                                                              customAlert.createNormalAlert("ok",3);
+                                                                                                              customAlert.createNormalAlert("ok", 3);
                                                                                                           }
 
                                                                                                           @Override
@@ -244,7 +243,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                                                                                                   myLoader.dismissLoader();
 
                                                                                                               CustomAlert customAlert = new CustomAlert(getActivity(), "Add Favorite pros", "" + error, SearchLocalProFragment.this);
-                                                                                                              customAlert.createNormalAlert("ok",4);
+                                                                                                              customAlert.createNormalAlert("ok", 4);
                                                                                                           }
                                                                                                       },
                     ProApplication.getInstance().getUserId(),
@@ -274,9 +273,11 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                             Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
                             if (innerObj.getString("zipcode").trim().equals("")) {
-                               loadList("");
+                                ProServiceApiHelper.getInstance(getActivity()).setSearchZip("");
+                                loadList();
                             } else {
-                                loadList(innerObj.getString("zipcode"));
+                                ProServiceApiHelper.getInstance(getActivity()).setSearchZip(innerObj.getString("zipcode"));
+                                loadList();
                             }
                         } catch (JSONException jse) {
                             jse.printStackTrace();

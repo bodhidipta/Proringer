@@ -62,6 +62,7 @@ public class ProServiceApiHelper {
 
     private String currentLat = "";
     private String currentLng = "";
+    private String searchZip="";
 
 
     private final String categoryAPI = "http://esolz.co.in/lab6/proringer_latest/app_categorylist";
@@ -123,6 +124,10 @@ public class ProServiceApiHelper {
     public void setCurrentLatLng(String currentLat, String currentLng) {
         this.currentLat = currentLat;
         this.currentLng = currentLng;
+    }
+
+    public void setSearchZip(String searchZip){
+        this.searchZip=searchZip;
     }
 
     public String[] getCurrentLatLng() {
@@ -2535,7 +2540,7 @@ public class ProServiceApiHelper {
 
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("category_search", ":-" + params[1]);
-                        Logger.printMessage("zip_search", ":-" + params[2]);
+                        Logger.printMessage("zip_search", ":-" + searchZip);
                         Logger.printMessage("prosListingAPI", prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2]);
 
                         Request request = new Request.Builder()
