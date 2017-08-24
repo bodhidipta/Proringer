@@ -2541,11 +2541,11 @@ public class ProServiceApiHelper {
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("category_search", ":-" + params[1]);
                         Logger.printMessage("zip_search", ":-" + searchZip);
-                        Logger.printMessage("prosListingAPI", prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2]);
+                        Logger.printMessage("prosListingAPI", prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + searchZip);
 
                         Request request = new Request.Builder()
                                 .get()
-                                .url(prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2])
+                                .url(prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + searchZip)
                                 .build();
 
                         Response response = client.newCall(request).execute();

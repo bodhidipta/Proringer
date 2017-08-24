@@ -44,12 +44,12 @@ public class SearchNearProActivity extends AppCompatActivity {
         myLoader = new MyLoader(SearchNearProActivity.this);
 
 
-        ((EditText)findViewById(R.id.edt_zip)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        ((EditText) findViewById(R.id.edt_zip)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Logger.printMessage("edit","Enter pressed");
-                    ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(((EditText)findViewById(R.id.edt_zip)).getText().toString());
-
+                    Logger.printMessage("edit", "Enter pressed");
+                    ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(((EditText) findViewById(R.id.edt_zip)).getText().toString());
+                    finish();
                 }
                 return false;
             }
@@ -114,21 +114,22 @@ public class SearchNearProActivity extends AppCompatActivity {
                                         Logger.printMessage("types", "" + jsonArrayType.get(0));
 
                                         if (jsonArrayType.get(0).equals("postal_code")) {
-                                            Logger.printMessage("postal_code_get",""+jsonArrayType.get(0));
+                                            Logger.printMessage("postal_code_get", "" + jsonArrayType.get(0));
                                             ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
                                             outer_block_check = true;
                                             break;
-                                        }else {
-                                            Logger.printMessage("postal_code",""+jsonArrayType.get(0));
+                                        } else {
+                                            Logger.printMessage("postal_code", "" + jsonArrayType.get(0));
                                         }
                                     }
                                 }
                             }
                         }
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Logger.printMessage("JSONException",""+e.getMessage());
+                    Logger.printMessage("JSONException", "" + e.getMessage());
                     if (myLoader != null && myLoader.isMyLoaderShowing())
                         myLoader.dismissLoader();
                 }

@@ -70,9 +70,6 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
         myLoader = new MyLoader(getActivity());
-
-        plotUserInformation();
-
     }
 
     @Override
@@ -294,4 +291,9 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        plotUserInformation();
+    }
 }
