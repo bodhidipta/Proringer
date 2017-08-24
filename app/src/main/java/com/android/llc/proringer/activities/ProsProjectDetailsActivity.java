@@ -1,6 +1,7 @@
 package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -338,11 +340,23 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    WindowManager windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+                    windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+
+                    int height = displayMetrics.heightPixels;
+                    int width = displayMetrics.widthPixels;
+
+                    dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().width = (width - 30);
+                    dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().height = height/2;
+                //        scrollView.getLayoutParams().height = (height-30)/2;
+
                     RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
                     rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
                     ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectDetailsActivity.this, portfolioInfoArray);
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
+
                     dialog.show();
 
 
