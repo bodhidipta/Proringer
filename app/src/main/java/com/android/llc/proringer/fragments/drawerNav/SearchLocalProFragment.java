@@ -49,7 +49,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     private RecyclerView pros_list;
     String category_search = "";
     MyLoader myLoader = null;
-    boolean firstTimeLoad=false;
+    boolean firstTimeLoad=true;
 
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
@@ -110,9 +110,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     if (jsonObject.has("info_array")) {
 
                         JSONArray info_array = jsonObject.getJSONArray("info_array");
+                        Logger.printMessage("info_array",""+info_array);
 
                         if (searchProListAdapter == null) {
-
+                            Logger.printMessage("searchProListAdapter","null");
                             searchProListAdapter = new SearchProListAdapter(getActivity(), info_array, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(String value, String addorDelete) {
@@ -126,6 +127,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                             });
                             pros_list.setAdapter(searchProListAdapter);
                         } else {
+                            Logger.printMessage("searchProListAdapter","not null");
                             searchProListAdapter.refreshData(info_array);
                         }
                     }
@@ -139,10 +141,15 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-
                 if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+                if (searchProListAdapter!=null){
+                    Logger.printMessage("searchProListAdapter","not null");
+
+                    JSONArray jarr_info_array = new JSONArray();
+                    searchProListAdapter.refreshData(jarr_info_array);
                 }
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
@@ -276,7 +283,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                 ProServiceApiHelper.getInstance(getActivity()).setSearchZip(innerObj.getString("zipcode"));
                                 loadList();
                             }
-                            firstTimeLoad=true;
+                            firstTimeLoad=false;
                         } catch (JSONException jse) {
                             jse.printStackTrace();
                         }
@@ -296,10 +303,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     public void onResume() {
         super.onResume();
         if (firstTimeLoad){
-            loadList();
+            plotUserInformation();
         }
         else {
-            plotUserInformation();
+            loadList();
         }
     }
 }
