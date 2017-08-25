@@ -42,7 +42,7 @@
             android:name=".activities.LandScreenActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".activities.SignUpActivity"
             android:configChanges="orientation|screenSize"

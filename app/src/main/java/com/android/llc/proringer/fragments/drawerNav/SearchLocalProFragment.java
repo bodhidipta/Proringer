@@ -94,6 +94,8 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             @Override
             public void onClick(View view) {
                 edt_search.setText("");
+                category_search="";
+                loadList();
             }
         });
 
@@ -102,7 +104,6 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                     Logger.printMessage("search_category",edt_search.getText().toString());
                     loadList();
-                    edt_search.setText(category_search);
                 }
                 return false;
             }
@@ -111,13 +112,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         mySearchTextWatcher = new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                category_search=s.toString().trim();
-                if(category_search.length()>0){
-                    img_clear.setVisibility(View.VISIBLE);
-                }else {
-                    img_clear.setVisibility(View.GONE);
-                }
-                //loadCategoryList();
+
             }
 
             @Override
@@ -128,6 +123,13 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // your logic here
+                category_search=s.toString().trim();
+                if(category_search.length()>0){
+                    img_clear.setVisibility(View.VISIBLE);
+                }else {
+                    img_clear.setVisibility(View.GONE);
+                }
+                //loadCategoryList();
             }
         };
         edt_search.addTextChangedListener(mySearchTextWatcher);
