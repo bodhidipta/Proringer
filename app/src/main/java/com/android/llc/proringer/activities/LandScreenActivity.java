@@ -61,7 +61,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        
         Fabric.with(this,new Crashlytics());
 
         // TODO: Move this to where you establish a user session
