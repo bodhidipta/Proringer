@@ -136,7 +136,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             public void onClick(View v) {
                 if (!ProApplication.getInstance().getUserId().equals("")) {
                     Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 }else
@@ -190,7 +190,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryListFragment.class.getCanonicalName())) {
                 if (!ProApplication.getInstance().getUserId().equals("")) {
                     Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 }else
