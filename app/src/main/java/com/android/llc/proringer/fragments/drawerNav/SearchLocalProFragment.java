@@ -1,6 +1,8 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,14 +12,19 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.adapter.ProCategoryListAdapter;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
@@ -25,12 +32,14 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.LinkedList;
 
 /**
  * Created by bodhidipta on 21/06/17.
@@ -58,6 +67,9 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
     TextWatcher mySearchTextWatcher;
+    PopupWindow popupWindow;
+    ImageView img_clear;
+    ProCategoryListAdapter proCategoryListAdapter;
 
     @Nullable
     @Override
@@ -75,12 +87,37 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
         edt_search = (ProRegularEditText) view.findViewById(R.id.edt_search);
         myLoader = new MyLoader(getActivity());
+        img_clear= (ImageView) view.findViewById(R.id.img_clear);
+        img_clear.setVisibility(View.GONE);
+
+        img_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edt_search.setText("");
+            }
+        });
+
+        edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    Logger.printMessage("search_category",edt_search.getText().toString());
+                    loadList();
+                    edt_search.setText(category_search);
+                }
+                return false;
+            }
+        });
 
         mySearchTextWatcher = new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                category_search=s.toString();
-                loadList();
+                category_search=s.toString().trim();
+                if(category_search.length()>0){
+                    img_clear.setVisibility(View.VISIBLE);
+                }else {
+                    img_clear.setVisibility(View.GONE);
+                }
+                //loadCategoryList();
             }
 
             @Override
@@ -105,12 +142,18 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         } else if (result.equalsIgnoreCase("ok") && i == 3) {
             plotUserInformation();
         }
+//        if (result.equalsIgnoreCase("retry") && i==2){
+//            loadCategoryList();
+//        }
     }
 
     public interface onOptionSelected {
-        void onItemPassed(String value, String addorDelete);
+        void onItemPassed(String value,  String addorDelete);
     }
 
+    public interface onOptionSelectedCategory {
+        void onItemPassed(int position,ProCategoryData proCategoryData);
+    }
 
     public void loadList() {
 
@@ -332,4 +375,79 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             loadList();
         }
     }
+
+    public void loadCategoryList(){
+
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+            @Override
+            public void onStartFetch() {
+                myLoader.showLoader();
+            }
+
+            @Override
+            public void onComplete(LinkedList<ProCategoryData> listdata) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+
+                showDialog(edt_search,listdata);
+            }
+
+            @Override
+            public void onError(String error) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+                if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
+                    LLMain.setVisibility(View.GONE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+
+
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
+            }
+        });
+    }
+
+    private void showDialog(View v, LinkedList<ProCategoryData> listdata) {
+
+        if (popupWindow == null) {
+            popupWindow = new PopupWindow(getActivity());
+            // Closes the popup window when touch outside.
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setFocusable(false);
+            // Removes default background.
+            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            View dailogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_category, null);
+
+            RecyclerView rcv_ = (RecyclerView) dailogView.findViewById(R.id.rcv_);
+            rcv_.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            proCategoryListAdapter = new ProCategoryListAdapter(getActivity(), listdata, new onOptionSelectedCategory() {
+
+                @Override
+                public void onItemPassed(int position, ProCategoryData proCategoryData) {
+                    Logger.printMessage("position-->"+position,"value-->"+proCategoryData.getCategory_name());
+
+                    popupWindow.dismiss();
+                }
+            });
+
+            rcv_.setAdapter(proCategoryListAdapter);
+            // some other visual settings
+            popupWindow.setFocusable(false);
+            popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+            popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+
+            // set the list view as pop up window content
+            popupWindow.setContentView(dailogView);
+            popupWindow.showAsDropDown(v, -5, 0);
+
+
+        } else {
+            popupWindow.showAsDropDown(v, -5, 0);
+            proCategoryListAdapter.setRefresh(listdata);
+        }
+    }
+
 }
