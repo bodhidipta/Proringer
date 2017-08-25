@@ -7,12 +7,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchProListAdapter;
@@ -23,6 +26,7 @@ import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,10 +53,11 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     private RecyclerView pros_list;
     String category_search = "";
     MyLoader myLoader = null;
-    boolean firstTimeLoad=true;
-
+    boolean firstTimeLoad = true;
+    ProRegularEditText edt_search;
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
+    TextWatcher mySearchTextWatcher;
 
     @Nullable
     @Override
@@ -68,8 +73,27 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
-
+        edt_search = (ProRegularEditText) view.findViewById(R.id.edt_search);
         myLoader = new MyLoader(getActivity());
+
+        mySearchTextWatcher = new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                category_search=s.toString();
+                loadList();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // your logic here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // your logic here
+            }
+        };
+        edt_search.addTextChangedListener(mySearchTextWatcher);
     }
 
     @Override
@@ -110,10 +134,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     if (jsonObject.has("info_array")) {
 
                         JSONArray info_array = jsonObject.getJSONArray("info_array");
-                        Logger.printMessage("info_array",""+info_array);
+                        Logger.printMessage("info_array", "" + info_array);
 
                         if (searchProListAdapter == null) {
-                            Logger.printMessage("searchProListAdapter","null");
+                            Logger.printMessage("searchProListAdapter", "null");
                             searchProListAdapter = new SearchProListAdapter(getActivity(), info_array, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(String value, String addorDelete) {
@@ -127,7 +151,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                             });
                             pros_list.setAdapter(searchProListAdapter);
                         } else {
-                            Logger.printMessage("searchProListAdapter","not null");
+                            Logger.printMessage("searchProListAdapter", "not null");
                             searchProListAdapter.refreshData(info_array);
                         }
                     }
@@ -145,8 +169,8 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
-                if (searchProListAdapter!=null){
-                    Logger.printMessage("searchProListAdapter","not null");
+                if (searchProListAdapter != null) {
+                    Logger.printMessage("searchProListAdapter", "not null");
 
                     JSONArray jarr_info_array = new JSONArray();
                     searchProListAdapter.refreshData(jarr_info_array);
@@ -283,7 +307,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                 ProServiceApiHelper.getInstance(getActivity()).setSearchZip(innerObj.getString("zipcode"));
                                 loadList();
                             }
-                            firstTimeLoad=false;
+                            firstTimeLoad = false;
                         } catch (JSONException jse) {
                             jse.printStackTrace();
                         }
@@ -302,10 +326,9 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     @Override
     public void onResume() {
         super.onResume();
-        if (firstTimeLoad){
+        if (firstTimeLoad) {
             plotUserInformation();
-        }
-        else {
+        } else {
             loadList();
         }
     }
