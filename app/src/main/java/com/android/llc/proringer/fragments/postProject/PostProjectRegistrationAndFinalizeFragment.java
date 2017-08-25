@@ -329,8 +329,8 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment impleme
                                     customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                                 }
                             },
-                            email.getText().toString().trim(),
-                            password.getText().toString().trim());
+                            ((EditText)dialog.findViewById(R.id.edt_email)).getText().toString().trim(),
+                            ((EditText)dialog.findViewById(R.id.edt_password)).getText().toString().trim());
                 }
             }
         });
