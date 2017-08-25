@@ -1,6 +1,10 @@
 package com.android.llc.proringer.fragments.postProject;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,32 +14,45 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.DisplayMetrics;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.activities.LogInActivity;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.activities.PostedFinishActivity;
 import com.android.llc.proringer.activities.TermsPrivacyActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 
 /**
  * Created by su on 7/13/17.
  */
 
-public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
+public class PostProjectRegistrationAndFinalizeFragment extends Fragment implements MyCustomAlertListener{
     private ProLightEditText first_name, last_name, email, password, confirm_password
 //            , zip_code
             ;
     private LinearLayout content_post_form_submit;
 
     ProRegularTextView terms_and_policy;
+    ProSemiBoldTextView tv_ok;
+    private MyLoader myLoader = null;
 
 
     @Nullable
@@ -63,6 +80,8 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
 
         terms_and_policy = (ProRegularTextView) view.findViewById(R.id.terms_and_policy);
         terms_and_policy.setMovementMethod(LinkMovementMethod.getInstance());
+
+        myLoader=new MyLoader(getActivity());
         /**
          * Contact us spannable text with click listener
          */
@@ -155,7 +174,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.tv_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateRegistration()) {
@@ -169,10 +188,16 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
                     }
 
                 }
-
             }
         });
 
+        view.findViewById(R.id.tv_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loginDialog();
+            }
+        });
     }
 
     private boolean validateRegistration() {
@@ -237,8 +262,85 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment {
             }
         }
     }
-
     public void showProjectPosted() {
         content_post_form_submit.setVisibility(View.VISIBLE);
+    }
+
+
+    public void loginDialog(){
+
+        final Dialog  dialog=new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_login);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
+
+        ProRegularTextView tv_tittle = (ProRegularTextView) dialog.findViewById(R.id.tv_tittle);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        LLMain.getLayoutParams().width = (width - 30);
+        LLMain.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
+//        scrollView.getLayoutParams().height = (height-30)/2;
+
+        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok= (ProSemiBoldTextView) dialog.findViewById(R.id.tv_ok);
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((EditText)dialog.findViewById(R.id.edt_email)).getText().toString().trim().equals("")) {
+                    ((EditText)dialog.findViewById(R.id.edt_email)).setError("Please enter your email address.");
+                } else if (((EditText)dialog.findViewById(R.id.edt_password)).getText().toString().trim().equals("")) {
+                    ((EditText)dialog.findViewById(R.id.edt_password)).setError("Please enter password.");
+                } else {
+                    ProServiceApiHelper.getInstance(getActivity()).getUserLoggedIn(
+                            new ProServiceApiHelper.getApiProcessCallback() {
+                                @Override
+                                public void onStart() {
+                                    myLoader.showLoader();
+                                }
+
+                                @Override
+                                public void onComplete(String message) {
+                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                        myLoader.dismissLoader();
+
+                                    ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
+                                }
+
+                                @Override
+                                public void onError(String error) {
+                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                        myLoader.dismissLoader();
+
+                                    CustomAlert customAlert = new CustomAlert(getActivity(), "Sign in error", "" + error, PostProjectRegistrationAndFinalizeFragment.this);
+                                    customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                                }
+                            },
+                            email.getText().toString().trim(),
+                            password.getText().toString().trim());
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("retry")&&i==1) {
+            tv_ok.performClick();
+        }
     }
 }

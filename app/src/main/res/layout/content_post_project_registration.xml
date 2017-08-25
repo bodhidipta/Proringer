@@ -159,7 +159,7 @@
                     <!--android:textSize="14sp" />-->
 
                 <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                    android:id="@+id/register"
+                    android:id="@+id/tv_register"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginBottom="10dp"
@@ -176,7 +176,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="LOGIN AND POST PROJECT"

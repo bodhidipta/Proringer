@@ -49,7 +49,7 @@ public class ShowMyDialog {
         int width = displayMetrics.widthPixels;
 
         LLMain.getLayoutParams().width = (width - 30);
-        LLMain.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;;
+        LLMain.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
 //        scrollView.getLayoutParams().height = (height-30)/2;
 
         dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
