@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -57,6 +58,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
     String mLastUpdateTime;
+    RelativeLayout RL_SetCancel;
 
 
     @Override
@@ -69,10 +71,21 @@ public class SearchNearProActivity extends AppCompatActivity implements
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Search Near");
+        RL_SetCancel= (RelativeLayout) findViewById(R.id.RL_SetCancel);
+        RL_SetCancel.setVisibility(View.VISIBLE);
 
         myLoader = new MyLoader(SearchNearProActivity.this);
 
-
+        findViewById(R.id.edt_zip).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View arg0, boolean hasfocus) {
+                if (hasfocus) {
+                    Logger.printMessage("TAG", "e1 focused");
+                } else {
+                    Logger.printMessage("TAG", "e1 not focused");
+                }
+            }
+        });
 
         Logger.printMessage(TAG, "onCreate ...............................");
         //show error dialog if GoolglePlayServices not available

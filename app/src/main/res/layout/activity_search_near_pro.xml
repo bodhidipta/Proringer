@@ -23,68 +23,92 @@
 
     </android.support.v7.widget.Toolbar>
 
-
-    <ScrollView
-        android:id="@+id/ScrollViewMAin"
+    <RelativeLayout
+        android:id="@+id/RL_main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorBGblueShade"
-        android:padding="10dp"
-        android:scrollbars="none"
-        android:visibility="visible">
+        android:orientation="vertical"
+        >
+
+        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:layout_margin="10dp"
+            android:id="@+id/edt_zip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_selecter"
+            android:gravity="center"
+            android:hint="Zip Code"
+            android:inputType="textEmailAddress"
+            android:maxLength="6"
+            android:padding="5dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp"
+            />
 
         <LinearLayout
-            android:id="@+id/linear_main_container"
+            android:layout_margin="10dp"
+            android:id="@+id/LLCurrentLocation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@+id/edt_zip"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textSize="16sp">
 
-            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
-                android:id="@+id/edt_zip"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_selecter"
-                android:gravity="center"
-                android:hint="Zip Code"
-                android:inputType="textEmailAddress"
-                android:padding="5dp"
-                android:maxLength="6"
-                android:textColor="@color/colorTextDark"
-                android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/search_local_pro_header_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:src="@drawable/ic_search_map_white" />
 
-            <LinearLayout
-                android:id="@+id/LLCurrentLocation"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:textSize="16sp">
-
-                <ImageView
-                    android:id="@+id/search_local_pro_header_map"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:src="@drawable/ic_search_map_white" />
-
-                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                    android:id="@+id/tv_current_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Use Current Location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
+            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                android:id="@+id/tv_current_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Use Current Location"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
         </LinearLayout>
 
-    </ScrollView>
+        <RelativeLayout
+            android:id="@+id/RL_SetCancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/cardview_dark_background">
+
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/tv_cancel"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:text="CANCEL"
+                android:padding="10dp"
+                android:textColor="@color/colorDarkGray"
+                android:layout_height="wrap_content" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/tv_search"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:text="SET SELECTION"
+                android:textColor="@color/colorAccent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/LLNetworkDisconnection"
