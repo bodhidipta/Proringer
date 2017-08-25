@@ -134,7 +134,15 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (!ProApplication.getInstance().getUserId().equals("")) {
+                    Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
+                }else
+                {
+                    finish();
+                }
             }
         });
 
@@ -180,7 +188,15 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         isForth = false;
         if (fragmentPushList.size() >= 1) {
             if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryListFragment.class.getCanonicalName())) {
-                finish();
+                if (!ProApplication.getInstance().getUserId().equals("")) {
+                    Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
+                }else
+                {
+                    finish();
+                }
             } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherListFragment.class.getCanonicalName())) {
 
                 performServiceListingBack();

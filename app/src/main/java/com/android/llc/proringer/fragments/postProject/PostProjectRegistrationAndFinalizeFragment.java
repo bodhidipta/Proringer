@@ -168,6 +168,9 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment impleme
                     startActivity(new Intent((PostProjectActivity) getActivity(), PostedFinishActivity.class));
                     ((PostProjectActivity) getActivity()).finish();
                 } else {
+                    Intent intent = new Intent(getActivity(), LandScreenActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
                     ((PostProjectActivity) getActivity()).finish();
                 }
 
@@ -318,6 +321,17 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment impleme
                                         myLoader.dismissLoader();
 
                                     ProApplication.getInstance().setUserEmail(email.getText().toString().trim());
+
+
+                                    ((PostProjectActivity) getActivity()).first_name = "";
+                                    ((PostProjectActivity) getActivity()).last_name = "";
+                                    ((PostProjectActivity) getActivity()).email = "";
+                                    ((PostProjectActivity) getActivity()).confirm_password = "";
+                                    synchronized (new Object()) {
+                                        ((PostProjectActivity) getActivity()).completePostProject();
+                                    }
+
+                                    dialog.dismiss();
                                 }
 
                                 @Override
