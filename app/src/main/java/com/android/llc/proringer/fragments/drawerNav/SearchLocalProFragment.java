@@ -90,6 +90,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         img_clear= (ImageView) view.findViewById(R.id.img_clear);
         img_clear.setVisibility(View.GONE);
 
+
         img_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -371,6 +372,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     @Override
     public void onResume() {
         super.onResume();
+        category_search="";
         if (firstTimeLoad) {
             plotUserInformation();
         } else {
