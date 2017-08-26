@@ -1,7 +1,6 @@
 package com.android.llc.proringer.activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -15,17 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -35,9 +34,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -48,7 +49,7 @@ import java.util.Date;
 public class SearchNearProActivity extends AppCompatActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,MyCustomAlertListener {
+        GoogleApiClient.OnConnectionFailedListener, MyCustomAlertListener {
 
     private boolean outer_block_check = false;
     private MyLoader myLoader = null;
@@ -64,6 +65,8 @@ public class SearchNearProActivity extends AppCompatActivity implements
     RelativeLayout RL_SetCancel;
     private InputMethodManager keyboard;
 
+    ProLightEditText edt_zip;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,23 +78,15 @@ public class SearchNearProActivity extends AppCompatActivity implements
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Search Near");
-        RL_SetCancel= (RelativeLayout) findViewById(R.id.RL_SetCancel);
+        RL_SetCancel = (RelativeLayout) findViewById(R.id.RL_SetCancel);
         RL_SetCancel.setVisibility(View.VISIBLE);
+
+        edt_zip = (ProLightEditText) findViewById(R.id.edt_zip);
 
         keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         myLoader = new MyLoader(SearchNearProActivity.this);
 
-        findViewById(R.id.edt_zip).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View arg0, boolean hasfocus) {
-                if (hasfocus) {
-                    Logger.printMessage("TAG", "e1 focused");
-                } else {
-                    Logger.printMessage("TAG", "e1 not focused");
-                }
-            }
-        });
 
         Logger.printMessage(TAG, "onCreate ...............................");
         //show error dialog if GoolglePlayServices not available
@@ -110,12 +105,23 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        ((EditText) findViewById(R.id.edt_zip)).setOnKeyListener(new View.OnKeyListener() {
+        edt_zip.setOnKeyboardListener(new ProLightEditText.KeyboardListener() {
+            @Override
+            public void onStateChanged(ProLightEditText keyboardEditText, boolean showing) {
+                if (showing) {
+                    Logger.printMessage(TAG, "showing");
+                } else {
+                    Logger.printMessage(TAG, "hide");
+                }
+            }
+        });
+
+        edt_zip.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (
                         (event.getAction() == KeyEvent.ACTION_DOWN)
                                 || (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Logger.printMessage("search_category",  ((EditText) findViewById(R.id.edt_zip)).getText().toString());
+                    Logger.printMessage("search_category", ((EditText) findViewById(R.id.edt_zip)).getText().toString());
                     closeKeypad();
                     ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(((EditText) findViewById(R.id.edt_zip)).getText().toString());
                     finish();
@@ -264,6 +270,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
             }
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -344,8 +351,8 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
 
-                CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this,getResources().getString(R.string.title_location_permission), getResources().getString(R.string.text_location_permission),SearchNearProActivity.this);
-                customAlert.createNormalAlert("ok",1);
+                CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this, getResources().getString(R.string.title_location_permission), getResources().getString(R.string.text_location_permission), SearchNearProActivity.this);
+                customAlert.createNormalAlert("ok", 1);
 
             } else {
                 // No explanation needed, we can request the permission.
@@ -398,7 +405,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             ActivityCompat.requestPermissions(SearchNearProActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
@@ -423,17 +430,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks whether a hardware keyboard is available
-        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-            Logger.printMessage("Yes", "Yes");
-        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            Logger.printMessage("No", "No");
-        }
-    }
     public void closeKeypad() {
         try {
             keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
