@@ -1,7 +1,9 @@
 package com.android.llc.proringer.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,6 +62,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
     Location mCurrentLocation;
     String mLastUpdateTime;
     RelativeLayout RL_SetCancel;
+    private InputMethodManager keyboard;
 
 
     @Override
@@ -73,6 +77,8 @@ public class SearchNearProActivity extends AppCompatActivity implements
         ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Search Near");
         RL_SetCancel= (RelativeLayout) findViewById(R.id.RL_SetCancel);
         RL_SetCancel.setVisibility(View.VISIBLE);
+
+        keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         myLoader = new MyLoader(SearchNearProActivity.this);
 
@@ -104,13 +110,16 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 .addOnConnectionFailedListener(this)
                 .build();
 
-
-        ((EditText) findViewById(R.id.edt_zip)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Logger.printMessage("ZipTaken",((EditText) findViewById(R.id.edt_zip)).getText().toString());
+        ((EditText) findViewById(R.id.edt_zip)).setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (
+                        (event.getAction() == KeyEvent.ACTION_DOWN)
+                                || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Logger.printMessage("search_category",  ((EditText) findViewById(R.id.edt_zip)).getText().toString());
+                    closeKeypad();
                     ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(((EditText) findViewById(R.id.edt_zip)).getText().toString());
                     finish();
+                    return true;
                 }
                 return false;
             }
@@ -411,6 +420,25 @@ public class SearchNearProActivity extends AppCompatActivity implements
                     "Provider: " + mCurrentLocation.getProvider());
         } else {
             Logger.printMessage(TAG, "location is null ...............");
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks whether a hardware keyboard is available
+        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+            Logger.printMessage("Yes", "Yes");
+        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+            Logger.printMessage("No", "No");
+        }
+    }
+    public void closeKeypad() {
+        try {
+            keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

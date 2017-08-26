@@ -1,6 +1,8 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,11 +19,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProCategoryListAdapter;
@@ -35,6 +38,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,6 +74,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     PopupWindow popupWindow;
     ImageView img_clear;
     ProCategoryListAdapter proCategoryListAdapter;
+    private InputMethodManager keyboard;
 
     @Nullable
     @Override
@@ -87,24 +92,30 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
         edt_search = (ProRegularEditText) view.findViewById(R.id.edt_search);
         myLoader = new MyLoader(getActivity());
-        img_clear= (ImageView) view.findViewById(R.id.img_clear);
+        img_clear = (ImageView) view.findViewById(R.id.img_clear);
         img_clear.setVisibility(View.GONE);
 
+        keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         img_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 edt_search.setText("");
-                category_search="";
+                category_search = "";
                 loadList();
             }
         });
 
-        edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Logger.printMessage("search_category",edt_search.getText().toString());
+
+        edt_search.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (
+                        (event.getAction() == KeyEvent.ACTION_DOWN)
+                                || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Logger.printMessage("search_category", edt_search.getText().toString());
+                    closeKeypad();
                     loadList();
+                    return true;
                 }
                 return false;
             }
@@ -124,10 +135,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // your logic here
-                category_search=s.toString().trim();
-                if(category_search.length()>0){
+                category_search = s.toString().trim();
+                if (category_search.length() > 0) {
                     img_clear.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     img_clear.setVisibility(View.GONE);
                 }
                 //loadCategoryList();
@@ -151,11 +162,11 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     }
 
     public interface onOptionSelected {
-        void onItemPassed(String value,  String addorDelete);
+        void onItemPassed(String value, String addorDelete);
     }
 
     public interface onOptionSelectedCategory {
-        void onItemPassed(int position,ProCategoryData proCategoryData);
+        void onItemPassed(int position, ProCategoryData proCategoryData);
     }
 
     public void loadList() {
@@ -372,7 +383,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     @Override
     public void onResume() {
         super.onResume();
-        category_search="";
+        category_search = "";
         if (firstTimeLoad) {
             plotUserInformation();
         } else {
@@ -380,7 +391,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         }
     }
 
-    public void loadCategoryList(){
+    public void loadCategoryList() {
 
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
@@ -393,7 +404,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                showDialog(edt_search,listdata);
+                showDialog(edt_search, listdata);
             }
 
             @Override
@@ -407,7 +418,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 2);
             }
         });
     }
@@ -431,7 +442,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
                 @Override
                 public void onItemPassed(int position, ProCategoryData proCategoryData) {
-                    Logger.printMessage("position-->"+position,"value-->"+proCategoryData.getCategory_name());
+                    Logger.printMessage("position-->" + position, "value-->" + proCategoryData.getCategory_name());
 
                     popupWindow.dismiss();
                 }
@@ -454,4 +465,11 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         }
     }
 
+    public void closeKeypad() {
+        try {
+            keyboard.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

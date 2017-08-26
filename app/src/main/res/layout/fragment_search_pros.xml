@@ -57,7 +57,9 @@
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:singleLine="true"
+                android:maxLines="1"
                 android:hint="search..."
+                android:inputType="text"
                 android:textColorHint="@color/colorTextDark"
                 android:textSize="14sp" />
 
