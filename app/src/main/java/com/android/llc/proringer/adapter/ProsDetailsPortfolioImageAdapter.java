@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.bumptech.glide.Glide;
-
 import org.json.JSONArray;
 
 /**
