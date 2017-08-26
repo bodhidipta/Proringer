@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -49,7 +48,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, MyCustomAlertListener {
 
-    private boolean outer_block_check = false;
     private MyLoader myLoader = null;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -147,14 +145,15 @@ public class SearchNearProActivity extends AppCompatActivity implements
         ProServiceApiHelper.getInstance(SearchNearProActivity.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-                myLoader.showLoader();
+               // myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
+                boolean outer_block_check = false;
                 //Logger.printMessage("message",message);
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
+//                if (myLoader != null && myLoader.isMyLoaderShowing())
+//                    myLoader.dismissLoader();
 
                 try {
                     JSONObject jsonObject = new JSONObject(message);
@@ -201,16 +200,16 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Logger.printMessage("JSONException", "" + e.getMessage());
-                    if (myLoader != null && myLoader.isMyLoaderShowing())
-                        myLoader.dismissLoader();
+//                    if (myLoader != null && myLoader.isMyLoaderShowing())
+//                        myLoader.dismissLoader();
                 }
             }
 
             @Override
             public void onError(String error) {
                 Logger.printMessage("error", "" + error);
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
+//                if (myLoader != null && myLoader.isMyLoaderShowing())
+//                    myLoader.dismissLoader();
             }
         });
     }
@@ -454,6 +453,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
                 Logger.printMessage("error", "" + error);
+                closeKeypad();
                 CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this, "ERROR",error, SearchNearProActivity.this);
                 customAlert.createNormalAlert("ok", 2);
             }
