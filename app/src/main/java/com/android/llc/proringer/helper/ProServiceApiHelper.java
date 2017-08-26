@@ -2267,7 +2267,7 @@ public class ProServiceApiHelper {
                                         }
                                     }
                                 } else {
-                                    exception = "Please enter postal code.";
+                                    exception = "Please enter valid postal code.";
                                 }
                             }
                         }
