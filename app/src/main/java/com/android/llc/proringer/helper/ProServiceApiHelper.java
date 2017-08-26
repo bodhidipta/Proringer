@@ -2263,7 +2263,7 @@ public class ProServiceApiHelper {
                                             data.setLongitude(outerJsonObj.getJSONObject("geometry").getJSONObject("location").getString("lng"));
                                             addressList.add(data);
                                         } else {
-                                            exception = "No value of this zip code";
+                                            exception = "This Zip code does not belongs to the USA or CANADA";
                                         }
                                     }
                                 } else {

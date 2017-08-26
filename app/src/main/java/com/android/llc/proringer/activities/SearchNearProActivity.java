@@ -120,17 +120,14 @@ public class SearchNearProActivity extends AppCompatActivity implements
                         (event.getAction() == KeyEvent.ACTION_DOWN)
                                 || (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     Logger.printMessage("search_category", edt_zip.getText().toString().trim());
-                    closeKeypad();
                     searchLocationUsingZip(edt_zip.getText().toString().trim());
-                    ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(edt_zip.getText().toString());
-                    finish();
                     return true;
                 }
                 return false;
             }
         });
 
-        findViewById(R.id.tv_current_location).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.LLCurrentLocation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getCurrentLocationZip();
@@ -445,11 +442,18 @@ public class SearchNearProActivity extends AppCompatActivity implements
         ProServiceApiHelper.getInstance(SearchNearProActivity.this).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
-                Logger.printMessage("listdata",""+listdata.size());
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+                Logger.printMessage("listData",""+listdata.size());
+                closeKeypad();
+                ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(edt_zip.getText().toString());
+                finish();
             }
 
             @Override
             public void onError(String error) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
                 Logger.printMessage("error", "" + error);
                 CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this, "ERROR",error, SearchNearProActivity.this);
                 customAlert.createNormalAlert("ok", 2);
@@ -457,7 +461,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
             @Override
             public void onStartFetch() {
-
+                myLoader.showLoader();
             }
         }, key);
     }
