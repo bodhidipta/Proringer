@@ -54,7 +54,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final String TAG = "SearchNearProActivity";
-    private static final long INTERVAL = 1000 * 10;//// Update location every 10 second
+    private static final long INTERVAL = 1000 * 100;//// Update location every 10 second
     private static final long FASTEST_INTERVAL = 1000 * 1;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -187,7 +187,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
                                         if (jsonArrayType.get(0).equals("postal_code")) {
                                             Logger.printMessage("postal_code_get", "" + jsonArrayType.get(0));
-                                            ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
+                                            searchLocationUsingZip(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
                                             outer_block_check = true;
                                             break;
                                         } else {
@@ -197,7 +197,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
                                 }
                             }
                         }
-                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
