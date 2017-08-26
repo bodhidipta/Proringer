@@ -115,9 +115,10 @@ public class SearchNearProActivity extends AppCompatActivity implements
         edt_zip.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (
-                        (event.getAction() == KeyEvent.ACTION_DOWN)
-                                || (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Logger.printMessage("search_category", edt_zip.getText().toString().trim());
+//                        (event.getAction() == KeyEvent.ACTION_DOWN)
+//                                ||
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Logger.printMessage("zip", edt_zip.getText().toString());
                     searchLocationUsingZip(edt_zip.getText().toString().trim());
                     return true;
                 }
@@ -129,6 +130,21 @@ public class SearchNearProActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 getCurrentLocationZip();
+            }
+        });
+
+        findViewById(R.id.tv_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Logger.printMessage("zip", edt_zip.getText().toString());
+                searchLocationUsingZip(edt_zip.getText().toString().trim());
+            }
+        });
+
+        findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               closeKeypad();
             }
         });
     }
