@@ -1,10 +1,8 @@
 package com.android.llc.proringer.helper;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
@@ -14,10 +12,8 @@ import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +24,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
