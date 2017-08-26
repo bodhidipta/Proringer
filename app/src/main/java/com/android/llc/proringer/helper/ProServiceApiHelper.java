@@ -3107,7 +3107,6 @@ public class ProServiceApiHelper {
 
                 @Override
                 protected void onPreExecute() {
-
                     super.onPreExecute();
                     callback.onStart();
                 }
@@ -3183,9 +3182,7 @@ public class ProServiceApiHelper {
                         callback.onError(s);
                     }
                 }
-            }.
-
-                    executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));

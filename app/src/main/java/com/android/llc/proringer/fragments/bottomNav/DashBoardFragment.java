@@ -215,6 +215,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
         ProServiceApiHelper.getInstance(getActivity()).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
+                myLoader.showLoader();
             }
 
             @Override
