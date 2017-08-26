@@ -103,12 +103,17 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
         edt_zip.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+                edt_zip.setError(null);
                 if (
 //                        (event.getAction() == KeyEvent.ACTION_DOWN)
 //                                ||
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     Logger.printMessage("zip", edt_zip.getText().toString());
-                    searchLocationUsingZip(edt_zip.getText().toString().trim());
+                    if (edt_zip.getText().toString().length()>4) {
+                        searchLocationUsingZip(edt_zip.getText().toString().trim());
+                    }else {
+                        edt_zip.setError("zip code length would be more than four");
+                    }
                     return true;
                 }
                 return false;
@@ -126,7 +131,11 @@ public class SearchNearProActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 Logger.printMessage("zip", edt_zip.getText().toString());
-                searchLocationUsingZip(edt_zip.getText().toString().trim());
+                if (edt_zip.getText().toString().length()>4) {
+                    searchLocationUsingZip(edt_zip.getText().toString().trim());
+                }else {
+                    edt_zip.setError("zip code length would be more than four");
+                }
             }
         });
 
