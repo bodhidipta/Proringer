@@ -101,17 +101,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        edt_zip.setOnKeyboardListener(new ProLightEditText.KeyboardListener() {
-            @Override
-            public void onStateChanged(ProLightEditText keyboardEditText, boolean showing) {
-                if (showing) {
-                    Logger.printMessage(TAG, "showing");
-                } else {
-                    Logger.printMessage(TAG, "hide");
-                }
-            }
-        });
-
         edt_zip.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (
@@ -229,7 +218,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
             }
         });
     }
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Logger.printMessage(TAG, "onConnected - isConnected ...............: " + mGoogleApiClient.isConnected());
@@ -263,7 +251,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
         updateUI();
     }
-
 
     @Override
     public void onStart() {
@@ -450,7 +437,6 @@ public class SearchNearProActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
     }
-
 
     private void searchLocationUsingZip(String key) {
         ProServiceApiHelper.getInstance(SearchNearProActivity.this).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
