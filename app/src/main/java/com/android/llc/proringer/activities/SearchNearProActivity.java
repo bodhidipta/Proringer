@@ -2,7 +2,6 @@ package com.android.llc.proringer.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,12 +16,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.pojo.AddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -34,13 +33,12 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by su on 8/23/17.
@@ -121,9 +119,10 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 if (
                         (event.getAction() == KeyEvent.ACTION_DOWN)
                                 || (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Logger.printMessage("search_category", ((EditText) findViewById(R.id.edt_zip)).getText().toString());
+                    Logger.printMessage("search_category", edt_zip.getText().toString().trim());
                     closeKeypad();
-                    ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(((EditText) findViewById(R.id.edt_zip)).getText().toString());
+                    searchLocationUsingZip(edt_zip.getText().toString().trim());
+                    ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(edt_zip.getText().toString());
                     finish();
                     return true;
                 }
@@ -410,6 +409,9 @@ public class SearchNearProActivity extends AppCompatActivity implements
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         }
+        else if (result.equalsIgnoreCase("ok") && i==2){
+
+        }
     }
 
     private void updateUI() {
@@ -437,4 +439,27 @@ public class SearchNearProActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
     }
+
+
+    private void searchLocationUsingZip(String key) {
+        ProServiceApiHelper.getInstance(SearchNearProActivity.this).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+            @Override
+            public void onComplete(List<AddressData> listdata) {
+                Logger.printMessage("listdata",""+listdata.size());
+            }
+
+            @Override
+            public void onError(String error) {
+                Logger.printMessage("error", "" + error);
+                CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this, "ERROR",error, SearchNearProActivity.this);
+                customAlert.createNormalAlert("ok", 2);
+            }
+
+            @Override
+            public void onStartFetch() {
+
+            }
+        }, key);
+    }
+
 }

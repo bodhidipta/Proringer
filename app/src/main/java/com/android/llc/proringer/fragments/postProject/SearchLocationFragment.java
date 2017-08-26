@@ -166,7 +166,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
     private void searchLocationUsingZip(String key) {
-        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
 
