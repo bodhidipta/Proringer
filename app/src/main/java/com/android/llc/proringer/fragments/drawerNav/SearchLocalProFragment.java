@@ -383,6 +383,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     @Override
     public void onResume() {
         super.onResume();
+        edt_search.setText("");
         category_search = "";
         if (firstTimeLoad) {
             plotUserInformation();
