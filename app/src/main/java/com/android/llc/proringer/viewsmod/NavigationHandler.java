@@ -32,7 +32,7 @@ public class NavigationHandler {
     private OnHandleInput listener = null;
     private static NavigationHandler instance = null;
 
-    private LinearLayout find_local_pros_cont, account_cont, support_cont, about_cont;
+    private LinearLayout find_local_pros_cont, account_cont, support_cont, about_cont,LLAccount,LLSupport,LLAbout;
     private ImageView find_local_pros_img, account_img, support_img, about_img;
     private ProBoldTextView find_local_pros_text, account_text, support_text, about_text;
 
@@ -91,6 +91,10 @@ public class NavigationHandler {
         RLProviderFeedback = (RelativeLayout) view.findViewById(R.id.RLProviderFeedback);
         RLTerms = (RelativeLayout) view.findViewById(R.id.RLTerms);
         RLPrivacyPolicy = (RelativeLayout) view.findViewById(R.id.RLPrivacyPolicy);
+
+        LLAccount= (LinearLayout) view.findViewById(R.id.LLAccount);
+        LLSupport= (LinearLayout) view.findViewById(R.id.LLSupport);
+        LLAbout= (LinearLayout) view.findViewById(R.id.LLAbout);
 
 
         find_local_pros_cont.setOnClickListener(new View.OnClickListener() {
@@ -240,13 +244,21 @@ public class NavigationHandler {
             case ACCOUNT:
                 listener.onClickItem(ACCOUNT);
 
-                //userInformation.setBackgroundColor(Color.parseColor("#656565"));
+                LLSupport.setVisibility(View.GONE);
+                LLAbout.setVisibility(View.GONE);
+
+                if (LLAccount.getVisibility() == View.VISIBLE) {
+                    LLAccount.setVisibility(View.GONE);
+                } else {
+                    LLAccount.setVisibility(View.VISIBLE);
+                }
+
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
-                account_cont.setBackgroundColor(Color.parseColor("#656565"));
+                account_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
                 account_img.setBackgroundResource(R.drawable.ic_settings_white);
                 account_text.setTextColor(Color.WHITE);
 
@@ -254,12 +266,9 @@ public class NavigationHandler {
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
                 about_cont.setBackgroundColor(Color.TRANSPARENT);
-                about_img.setBackgroundResource(R.drawable.ic_search_pro);
+                about_img.setBackgroundResource(R.drawable.ic_about);
                 about_text.setTextColor(Color.parseColor("#505050"));
 
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -282,18 +291,17 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
-                account_cont.setBackgroundColor(Color.TRANSPARENT);
-                account_img.setBackgroundResource(R.drawable.ic_settings);
-                account_text.setTextColor(Color.parseColor("#505050"));
-
+                account_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                account_img.setBackgroundResource(R.drawable.ic_settings_white);
+                account_text.setTextColor(Color.WHITE);
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
 
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
                 notification.setBackgroundColor(Color.TRANSPARENT);
@@ -314,18 +322,18 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
-                account_cont.setBackgroundColor(Color.TRANSPARENT);
-                account_img.setBackgroundResource(R.drawable.ic_settings);
-                account_text.setTextColor(Color.parseColor("#505050"));
-
+                account_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                account_img.setBackgroundResource(R.drawable.ic_settings_white);
+                account_text.setTextColor(Color.WHITE);
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
+
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 notification.setBackgroundColor(Color.TRANSPARENT);
@@ -346,18 +354,18 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
-                account_cont.setBackgroundColor(Color.TRANSPARENT);
-                account_img.setBackgroundResource(R.drawable.ic_settings);
-                account_text.setTextColor(Color.parseColor("#505050"));
-
+                account_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                account_img.setBackgroundResource(R.drawable.ic_settings_white);
+                account_text.setTextColor(Color.WHITE);
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
+
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -378,17 +386,17 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
-                account_cont.setBackgroundColor(Color.TRANSPARENT);
-                account_img.setBackgroundResource(R.drawable.ic_settings);
-                account_text.setTextColor(Color.parseColor("#505050"));
+                account_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                account_img.setBackgroundResource(R.drawable.ic_settings_white);
+                account_text.setTextColor(Color.WHITE);
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -409,18 +417,17 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
+                account_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                account_img.setBackgroundResource(R.drawable.ic_settings_white);
+                account_text.setTextColor(Color.WHITE);
+
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
                 support_text.setTextColor(Color.parseColor("#505050"));
 
-
-                account_cont.setBackgroundColor(Color.TRANSPARENT);
-                account_img.setBackgroundResource(R.drawable.ic_settings);
-                account_text.setTextColor(Color.parseColor("#505050"));
-
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -436,11 +443,20 @@ public class NavigationHandler {
             case SUPPORT:
                 listener.onClickItem(SUPPORT);
 
+                LLAccount.setVisibility(View.GONE);
+                LLAbout.setVisibility(View.GONE);
+
+                if (LLSupport.getVisibility() == View.VISIBLE) {
+                    LLSupport.setVisibility(View.GONE);
+                } else {
+                    LLSupport.setVisibility(View.VISIBLE);
+                }
+
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
                 account_text.setTextColor(Color.parseColor("#505050"));
 
-                support_cont.setBackgroundColor(Color.parseColor("#656565"));
+                support_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
                 support_img.setBackgroundResource(R.drawable.ic_support_white);
                 support_text.setTextColor(Color.WHITE);
 
@@ -467,7 +483,16 @@ public class NavigationHandler {
             case ABOUT:
                 listener.onClickItem(ABOUT);
 
-                about_cont.setBackgroundColor(Color.parseColor("#656565"));
+                LLAccount.setVisibility(View.GONE);
+                LLSupport.setVisibility(View.GONE);
+
+                if (LLAbout.getVisibility() == View.VISIBLE) {
+                    LLAbout.setVisibility(View.GONE);
+                } else {
+                    LLAbout.setVisibility(View.VISIBLE);
+                }
+
+                about_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
                 about_img.setBackgroundResource(R.drawable.ic_about_white);
                 about_text.setTextColor(Color.WHITE);
 
@@ -503,18 +528,6 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
 
-                account_cont.setBackgroundColor(Color.TRANSPARENT);
-                account_img.setBackgroundResource(R.drawable.ic_settings);
-                account_text.setTextColor(Color.parseColor("#505050"));
-
-                support_cont.setBackgroundColor(Color.TRANSPARENT);
-                support_img.setBackgroundResource(R.drawable.ic_support);
-                support_text.setTextColor(Color.parseColor("#505050"));
-
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
-
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
                 notification.setBackgroundColor(Color.TRANSPARENT);
@@ -533,21 +546,21 @@ public class NavigationHandler {
 
                 RLEmailSupport.setBackgroundColor(Color.parseColor("#656565"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
-
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
                 account_text.setTextColor(Color.parseColor("#505050"));
 
-                support_cont.setBackgroundColor(Color.TRANSPARENT);
-                support_img.setBackgroundResource(R.drawable.ic_support);
-                support_text.setTextColor(Color.parseColor("#505050"));
+                support_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                support_img.setBackgroundResource(R.drawable.ic_support_white);
+                support_text.setTextColor(Color.WHITE);
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -568,21 +581,21 @@ public class NavigationHandler {
 
                 RLFaq.setBackgroundColor(Color.parseColor("#656565"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
-
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
                 account_text.setTextColor(Color.parseColor("#505050"));
 
-                support_cont.setBackgroundColor(Color.TRANSPARENT);
-                support_img.setBackgroundResource(R.drawable.ic_support);
-                support_text.setTextColor(Color.parseColor("#505050"));
+                support_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                support_img.setBackgroundResource(R.drawable.ic_support_white);
+                support_text.setTextColor(Color.WHITE);
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -602,21 +615,22 @@ public class NavigationHandler {
 
                 RLProviderFeedback.setBackgroundColor(Color.parseColor("#656565"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
-
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
                 account_text.setTextColor(Color.parseColor("#505050"));
 
-                support_cont.setBackgroundColor(Color.TRANSPARENT);
-                support_img.setBackgroundResource(R.drawable.ic_support);
-                support_text.setTextColor(Color.parseColor("#505050"));
+                support_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                support_img.setBackgroundResource(R.drawable.ic_support_white);
+                support_text.setTextColor(Color.WHITE);
 
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
+                about_cont.setBackgroundColor(Color.TRANSPARENT);
+                about_img.setBackgroundResource(R.drawable.ic_about);
+                about_text.setTextColor(Color.parseColor("#505050"));
+
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -637,9 +651,9 @@ public class NavigationHandler {
 
                 RLTerms.setBackgroundColor(Color.parseColor("#656565"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                about_img.setBackgroundResource(R.drawable.ic_about_white);
+                about_text.setTextColor(Color.WHITE);
 
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
@@ -652,6 +666,7 @@ public class NavigationHandler {
                 find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
                 find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+
 
                 userInformation.setBackgroundColor(Color.TRANSPARENT);
                 login_settings.setBackgroundColor(Color.TRANSPARENT);
@@ -672,9 +687,9 @@ public class NavigationHandler {
 
                 RLPrivacyPolicy.setBackgroundColor(Color.parseColor("#656565"));
 
-                find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);
-                find_local_pros_text.setTextColor(Color.parseColor("#505050"));
+                about_cont.setBackgroundColor(Color.parseColor("#7c7c7c"));
+                about_img.setBackgroundResource(R.drawable.ic_about_white);
+                about_text.setTextColor(Color.WHITE);
 
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);

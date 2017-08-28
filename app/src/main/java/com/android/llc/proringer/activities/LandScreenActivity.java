@@ -141,17 +141,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                         transactSearchLocalPros();
                         break;
                     case NavigationHandler.ACCOUNT:
-
                         toggleProMapSearch(false);
-
-                        findViewById(R.id.LLSupport).setVisibility(View.GONE);
-                        findViewById(R.id.LLAbout).setVisibility(View.GONE);
-
-                        if (findViewById(R.id.LLAccount).getVisibility() == View.VISIBLE) {
-                            findViewById(R.id.LLAccount).setVisibility(View.GONE);
-                        } else {
-                            findViewById(R.id.LLAccount).setVisibility(View.VISIBLE);
-                        }
                         break;
                     case NavigationHandler.USER_INFORMATION:
                         closeDrawer();
@@ -187,28 +177,10 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                     case NavigationHandler.SUPPORT:
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
-
-                        findViewById(R.id.LLAccount).setVisibility(View.GONE);
-                        findViewById(R.id.LLAbout).setVisibility(View.GONE);
-
-                        if (findViewById(R.id.LLSupport).getVisibility() == View.VISIBLE) {
-                            findViewById(R.id.LLSupport).setVisibility(View.GONE);
-                        } else {
-                            findViewById(R.id.LLSupport).setVisibility(View.VISIBLE);
-                        }
                         break;
                     case NavigationHandler.ABOUT:
                         toggleProMapSearch(false);
                         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
-
-                        findViewById(R.id.LLAccount).setVisibility(View.GONE);
-                        findViewById(R.id.LLSupport).setVisibility(View.GONE);
-
-                        if (findViewById(R.id.LLAbout).getVisibility() == View.VISIBLE) {
-                            findViewById(R.id.LLAbout).setVisibility(View.GONE);
-                        } else {
-                            findViewById(R.id.LLAbout).setVisibility(View.VISIBLE);
-                        }
                         break;
                     case NavigationHandler.LOGOUT:
                         closeDrawer();
