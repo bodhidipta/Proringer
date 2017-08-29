@@ -71,7 +71,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity {
 
                 locationText.setText("");
                 Erase.setVisibility(View.GONE);
-                fetch_LocationSuggession("");
+                fetch_LocationSuggestion("");
                 rcv_location_suggestion.setVisibility(View.GONE);
             }
         });
@@ -84,7 +84,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!AfterPrressNoCallTextChangerListener) {
-                    fetch_LocationSuggession(s.toString().trim());
+                    fetch_LocationSuggestion(s.toString().trim());
                 } else {
                     AfterPrressNoCallTextChangerListener = false;
                 }
@@ -103,7 +103,7 @@ public class TakeGooglePlacePredictionActivity extends AppCompatActivity {
     }
 
 
-    public void fetch_LocationSuggession(String place) {
+    public void fetch_LocationSuggestion(String place) {
 
         ProServiceApiHelper.getInstance(TakeGooglePlacePredictionActivity.this).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
