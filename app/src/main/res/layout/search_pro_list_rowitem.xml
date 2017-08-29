@@ -96,6 +96,7 @@
                         android:textSize="12sp" />
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:paddingLeft="5dp"
                         android:id="@+id/tv_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
