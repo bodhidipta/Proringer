@@ -705,6 +705,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                     Logger.printMessage("back_stack", "Removed *****" + SearchLocalProFragment.class.getCanonicalName());
                     SearchLocalProFragment fragment=(SearchLocalProFragment)fragmentManager.findFragmentByTag("" + SearchLocalProFragment.class.getCanonicalName());
                     fragment.loadList();
+                    Logger.printMessage("LoadListFromActivity","YES");
                 }
 
             }
