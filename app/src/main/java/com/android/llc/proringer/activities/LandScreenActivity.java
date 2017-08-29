@@ -446,6 +446,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
      * Fragment transaction for Search Local Pros
      */
     public void transactSearchLocalPros() {
+        local_pros_search_zip="";
         toggleToolBar(false);
         toggleProMapSearch(true);
         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);

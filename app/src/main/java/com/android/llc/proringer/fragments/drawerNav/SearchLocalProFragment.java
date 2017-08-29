@@ -63,7 +63,6 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     private RecyclerView pros_list;
     String category_search = "";
     MyLoader myLoader = null;
-    boolean firstTimeLoad = true;
     ProRegularEditText edt_search;
     SearchProListAdapter searchProListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
@@ -362,7 +361,6 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                                 ((LandScreenActivity)getActivity()).local_pros_search_zip=innerObj.getString("zipcode");
                                 loadList();
                             }
-                            firstTimeLoad = false;
                         } catch (JSONException jse) {
                             jse.printStackTrace();
                         }
@@ -383,7 +381,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         super.onResume();
         edt_search.setText("");
         category_search = "";
-        if (firstTimeLoad) {
+        if (((LandScreenActivity)getActivity()).local_pros_search_zip.trim().equals("")) {
             plotUserInformation();
         } else {
             loadList();
