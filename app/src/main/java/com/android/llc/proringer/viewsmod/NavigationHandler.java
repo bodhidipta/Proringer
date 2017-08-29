@@ -214,10 +214,13 @@ public class NavigationHandler {
                 find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro_white);
                 find_local_pros_text.setTextColor(Color.WHITE);
 
+                LLSupport.setVisibility(View.GONE);
+                LLAbout.setVisibility(View.GONE);
+                LLAccount.setVisibility(View.GONE);
+
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
                 account_text.setTextColor(Color.parseColor("#505050"));
-
 
                 support_cont.setBackgroundColor(Color.TRANSPARENT);
                 support_img.setBackgroundResource(R.drawable.ic_support);
