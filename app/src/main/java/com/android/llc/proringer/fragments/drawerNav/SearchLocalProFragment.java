@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -104,19 +105,30 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         });
 
 
-        edt_search.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (
-                        (event.getAction() == KeyEvent.ACTION_DOWN)
-                                || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+        edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                     Logger.printMessage("search_category", edt_search.getText().toString());
                     closeKeypad();
                     loadList();
-                    return true;
                 }
                 return false;
             }
         });
+
+//        edt_search.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (
+//                        (event.getAction() == KeyEvent.ACTION_DOWN)
+//                                || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+//                    Logger.printMessage("search_category", edt_search.getText().toString());
+//                    closeKeypad();
+//                    loadList();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         mySearchTextWatcher = new TextWatcher() {
             @Override
