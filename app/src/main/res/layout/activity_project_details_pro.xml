@@ -787,6 +787,7 @@
                     android:visibility="gone"
                     android:id="@+id/tv_contact_pro_btn_unverified"
                     android:layout_width="150dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:background="@color/colorAccent"
