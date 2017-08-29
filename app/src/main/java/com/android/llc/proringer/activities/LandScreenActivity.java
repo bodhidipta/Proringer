@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -698,6 +699,14 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             if (extras != null) {
                 local_pros_search_zip=extras.getString("searchZip");
                 Logger.printMessage("local_pros_search_zip", "--->" + local_pros_search_zip);
+
+
+                if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + SearchLocalProFragment.class.getCanonicalName()) != null) {
+                    Logger.printMessage("back_stack", "Removed *****" + SearchLocalProFragment.class.getCanonicalName());
+                    SearchLocalProFragment fragment=(SearchLocalProFragment)fragmentManager.findFragmentByTag("" + SearchLocalProFragment.class.getCanonicalName());
+                    fragment.loadList();
+                }
+
             }
         }
     }

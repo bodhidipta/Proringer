@@ -142,6 +142,15 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             }
         };
         edt_search.addTextChangedListener(mySearchTextWatcher);
+
+        edt_search.setText("");
+        category_search = "";
+
+        if (((LandScreenActivity)getActivity()).local_pros_search_zip.trim().equals("")) {
+            plotUserInformation();
+        } else {
+            loadList();
+        }
     }
 
     @Override
@@ -374,50 +383,6 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                         Logger.printMessage("@dashBoard", "on database data not exists");
                     }
                 });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        edt_search.setText("");
-        category_search = "";
-        if (((LandScreenActivity)getActivity()).local_pros_search_zip.trim().equals("")) {
-            plotUserInformation();
-        } else {
-            loadList();
-        }
-    }
-
-    public void loadCategoryList() {
-
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
-            @Override
-            public void onStartFetch() {
-                myLoader.showLoader();
-            }
-
-            @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
-
-                showDialog(edt_search, listdata);
-            }
-
-            @Override
-            public void onError(String error) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
-                if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
-                    LLMain.setVisibility(View.GONE);
-                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
-                }
-
-
-                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 2);
-            }
-        });
     }
 
     private void showDialog(View v, LinkedList<ProCategoryData> listdata) {
