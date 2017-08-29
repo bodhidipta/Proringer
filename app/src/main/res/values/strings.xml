@@ -33,5 +33,6 @@
     <string name="location">Location</string>
     <string name="select_address">Select Address</string>
     <string name="no_internet_connection_found_Please_check_your_internet_connection">No internet connection found. Please check your internet connection.</string>
+    <string name="selectAddress">Select Address</string>
 
 </resources>

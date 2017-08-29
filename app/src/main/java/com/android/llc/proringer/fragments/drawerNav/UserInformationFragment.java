@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.activities.TakeGooglePlacePredictionActivity;
+import com.android.llc.proringer.activities.LocationFinder;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -71,7 +71,8 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getActivity(), TakeGooglePlacePredictionActivity.class);
+                //Intent i = new Intent(getActivity(), TakeGooglePlacePredictionActivity.class);
+                Intent i = new Intent(getActivity(), LocationFinder.class);
                 startActivityForResult(i, 1);
             }
         });
