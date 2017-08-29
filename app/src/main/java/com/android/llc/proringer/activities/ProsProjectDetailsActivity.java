@@ -215,6 +215,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
                                                                                                               ((ProRegularTextView) findViewById(R.id.tv_company_name)).setText(infoJsonObject.getString("company_name"));
                                                                                                               ((ProRegularTextView) findViewById(R.id.tv_user_name)).setText(infoJsonObject.getString("user_name"));
+                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_designation)).setText(infoJsonObject.getString("designation"));
                                                                                                               ((ProRegularTextView) findViewById(R.id.tv_address)).setText(infoJsonObject.getString("address"));
                                                                                                               ((ProRegularTextView) findViewById(R.id.tv_city_state_zipcode)).setText(infoJsonObject.getString("city") + ", " + infoJsonObject.getString("state") + " " + infoJsonObject.getString("zipcode"));
 

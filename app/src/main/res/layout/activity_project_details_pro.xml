@@ -253,14 +253,31 @@
                             android:hint="Buuble Granite Roofing Company"
                             android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/tv_user_name"
+                        <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_below="@id/tv_company_name"
-                            android:hint="James Bobblehead"
-                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                            android:orientation="horizontal"
+                            >
 
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="James Bobblehead"
+                                android:textSize="12sp"/>
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_toRightOf="@+id/tv_user_name"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="5dp"
+                                android:id="@+id/tv_designation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="owner"
+                                android:textSize="8sp"/>
+
+                        </RelativeLayout>
                     </RelativeLayout>
 
                     <LinearLayout
@@ -671,9 +688,9 @@
                         android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="Achievements of Proringer"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
