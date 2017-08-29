@@ -158,6 +158,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     img_clear.setVisibility(View.GONE);
                 }
                 if(category_search.length()==0){
+                    closeKeypad();
                     loadList();
                 }
                 //loadCategoryList();
