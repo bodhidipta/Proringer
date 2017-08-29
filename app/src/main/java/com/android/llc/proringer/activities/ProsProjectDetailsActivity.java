@@ -209,6 +209,16 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                               if (!infoJsonObject.getString("header_image").equals(""))
                                                                                                                   Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
 
+                                                                                                              if(infoJsonObject.getString("verified_status").trim().equalsIgnoreCase("Y")){
+                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.GONE);
+                                                                                                                  ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.VISIBLE);
+                                                                                                              }
+                                                                                                              else {
+                                                                                                                  ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.GONE);
+                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.VISIBLE);
+                                                                                                              }
+
+
 
                                                                                                               if (!infoJsonObject.getString("profile_image").equals(""))
                                                                                                                   Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("profile_image")).centerCrop().into(img_profile);
