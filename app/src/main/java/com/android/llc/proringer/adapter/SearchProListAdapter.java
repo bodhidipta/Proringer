@@ -88,7 +88,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
             word1.setSpan(new ForegroundColorSpan(mcontext.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             if (word1.length() > 80) {
-                holder.tv_description.setText(word1.subSequence(1, 60));
+                holder.tv_description.setText(word1.subSequence(0, 40));
 
                 Spannable word2 = new SpannableString(contactTextClick);
                 ClickableSpan myClickableSpan = new ClickableSpan() {
