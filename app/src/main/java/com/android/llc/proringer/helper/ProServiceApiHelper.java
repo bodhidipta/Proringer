@@ -262,7 +262,6 @@ public class ProServiceApiHelper {
                         exception = e.getMessage();
                         return null;
                     }
-
                 }
 
                 @Override
@@ -489,7 +488,6 @@ public class ProServiceApiHelper {
                         exception = e.getMessage();
                         return exception;
                     }
-
                 }
 
                 @Override
@@ -555,7 +553,6 @@ public class ProServiceApiHelper {
                         exception = e.getMessage();
                         return exception;
                     }
-
                 }
 
                 @Override
@@ -611,7 +608,6 @@ public class ProServiceApiHelper {
                         exception = e.getMessage();
                         return exception;
                     }
-
                 }
 
                 @Override
@@ -798,8 +794,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -870,8 +866,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -948,8 +944,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1031,8 +1027,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1093,8 +1089,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1157,8 +1153,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1216,9 +1212,8 @@ public class ProServiceApiHelper {
 
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                return null;
+                                return  e.getMessage();
                             }
-
                         }
 
                         Logger.printMessage("user_id","-->"+ProApplication.getInstance().getUserId());
@@ -1294,8 +1289,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1372,8 +1367,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1435,7 +1430,7 @@ public class ProServiceApiHelper {
 
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                return null;
+                                return e.getMessage();
                             }
 
                         }
@@ -1489,8 +1484,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1556,8 +1551,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1661,8 +1656,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1724,8 +1719,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1787,8 +1782,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1850,8 +1845,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -1930,8 +1925,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2003,8 +1998,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2066,8 +2061,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2137,8 +2132,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2266,8 +2261,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = "Some error occured while searching entered zip. Please search again.";
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2330,8 +2325,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2415,8 +2410,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = "Some error occured while searching entered zip. Please search again.";
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2482,8 +2477,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = "Something error. Please search again.";
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2552,8 +2547,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -2688,8 +2683,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
@@ -3127,9 +3122,8 @@ public class ProServiceApiHelper {
 
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                return null;
+                                return e.getMessage();
                             }
-
                         }
                         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                         MultipartBody.Builder requestBody = new MultipartBody.Builder()
@@ -3163,8 +3157,8 @@ public class ProServiceApiHelper {
                     } catch (Exception e) {
                         e.printStackTrace();
                         exception = e.getMessage();
+                        return exception;
                     }
-                    return null;
                 }
 
                 @Override
