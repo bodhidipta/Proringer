@@ -2,6 +2,7 @@ package com.android.llc.proringer.fragments.drawerNav;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -75,6 +76,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_search_pros, container, false);
     }
 
@@ -468,5 +470,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
