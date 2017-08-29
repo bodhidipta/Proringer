@@ -56,12 +56,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_pros_company_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:paddingRight="30dp"
+                        android:maxLines="1"
                         android:text="Jims Plumbing Service"
                         android:textColor="#231f20"
                         android:textSize="14sp" />
@@ -173,7 +174,6 @@
                     android:id="@+id/tv_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:maxLines="2"
                     android:text="Hello world its blah ! blah blah blah blah blah blah blah blah blah blah blah blah blah blah ah blah blah blah blah blah blah blah blah blah blah blah ah blah blah blah blah blah blah blah blah blah blah blah "
                     android:textColor="@color/colorTextDark"

@@ -67,19 +67,19 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.ratingBar.setMax(5);
         try {
-            holder.ratingBar.setRating(Float.valueOf(jsonInfoArray.getJSONObject(position).getString("pro_avg_review_rating")));
-            holder.tv_pros_company_name.setText(jsonInfoArray.getJSONObject(position).getString("pros_company_name"));
-            holder.tv_category_name.setText(jsonInfoArray.getJSONObject(position).getString("category_name"));
-            holder.tv_address.setText(jsonInfoArray.getJSONObject(position).getString("city")
-                    + "," + jsonInfoArray.getJSONObject(position).getString("state"));
+            holder.ratingBar.setRating(Float.valueOf(jsonInfoArray.getJSONObject(position).getString("pro_avg_review_rating").trim()));
+            holder.tv_pros_company_name.setText(jsonInfoArray.getJSONObject(position).getString("pros_company_name").trim());
+            holder.tv_category_name.setText(jsonInfoArray.getJSONObject(position).getString("category_name").trim());
+            holder.tv_address.setText(jsonInfoArray.getJSONObject(position).getString("city").trim()
+                    + "," + jsonInfoArray.getJSONObject(position).getString("state").trim());
 
-            holder.tv_total_review.setText("(" + jsonInfoArray.getJSONObject(position).getString("total_review") + ")");
+            holder.tv_total_review.setText("(" + jsonInfoArray.getJSONObject(position).getString("total_review").trim() + ")");
 
 
             /**
              * Read more spannable text with click listener
              */
-            final String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description");
+            final String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description").trim();
             Logger.printMessage("contactTextOne", "" + contactTextOne);
             String contactTextClick = " Read more..";
 
@@ -173,7 +173,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
         LinearLayout linear_layout_border;
         RatingBar ratingBar;
         CardView main_container;
-        ProSemiBoldTextView tv_pros_company_name;
+        ProRegularTextView tv_pros_company_name;
         ProRegularTextView tv_category_name, tv_address, tv_verify, tv_total_review, tv_description;
         ImageView img_project, img_verify, img_verify_tick, img_favorite;
 
@@ -183,7 +183,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
 
             main_container = (CardView) itemView.findViewById(R.id.main_container);
 
-            tv_pros_company_name = (ProSemiBoldTextView) itemView.findViewById(R.id.tv_pros_company_name);
+            tv_pros_company_name = (ProRegularTextView) itemView.findViewById(R.id.tv_pros_company_name);
 
             tv_category_name = (ProRegularTextView) itemView.findViewById(R.id.tv_category_name);
             tv_total_review = (ProRegularTextView) itemView.findViewById(R.id.tv_total_review);
