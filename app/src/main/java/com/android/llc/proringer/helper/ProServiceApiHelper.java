@@ -2408,8 +2408,8 @@ public class ProServiceApiHelper {
                                     for (int j = 0; j < terms.length(); j++) {
                                         if (terms.getJSONObject(j).getString("value").contains("United States") ||
                                                 terms.getJSONObject(j).getString("value").contains("Canada")) {
-                                            Logger.printMessage("secondary_text",""+innerIncer.getJSONObject("structured_formatting").getString("secondary_text"));
-                                            addressList.add(innerIncer.getJSONObject("structured_formatting").getString("secondary_text"));
+                                            Logger.printMessage("description",""+innerIncer.getString("description"));
+                                            addressList.add(innerIncer.getString("description"));
                                             break;
                                         }
                                     }
