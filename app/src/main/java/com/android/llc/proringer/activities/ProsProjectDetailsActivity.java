@@ -209,12 +209,18 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                               if (!infoJsonObject.getString("header_image").equals(""))
                                                                                                                   Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
 
+                                                                                                              DisplayMetrics displayMetrics = new DisplayMetrics();
+                                                                                                              getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                                                                                                              int height = displayMetrics.heightPixels;
+                                                                                                              int width = displayMetrics.widthPixels;
+
                                                                                                               if(infoJsonObject.getString("verified_status").trim().equalsIgnoreCase("Y")){
                                                                                                                   ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.GONE);
                                                                                                                   ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.VISIBLE);
                                                                                                               }
                                                                                                               else {
                                                                                                                   ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.GONE);
+                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).getLayoutParams().width=width/2;
                                                                                                                   ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.VISIBLE);
                                                                                                               }
 
