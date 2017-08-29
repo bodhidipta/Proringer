@@ -49,6 +49,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     private DrawerLayout mDrawer;
     public BottomNav bottomNavInstance = null;
 
+    public String local_pros_search_zip="";
+
     private Toolbar toolbar = null;
     private Toolbar back_toolbar = null;
     private ActionBarDrawerToggle toggle = null;
@@ -670,7 +672,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                 @Override
                 public void onClick(View view) {
                     Intent searchIntent=new Intent(LandScreenActivity.this,SearchNearProActivity.class);
-                    startActivity(searchIntent);
+                    startActivityForResult(searchIntent, 41);
+
                 }
             });
             findViewById(R.id.search_local_pro_header).setVisibility(View.GONE);
@@ -688,6 +691,14 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 41) {
+
+            Bundle extras = data.getBundleExtra("data");
+            if (extras != null) {
+                local_pros_search_zip=extras.getString("searchZip");
+                Logger.printMessage("local_pros_search_zip", "--->" + local_pros_search_zip);
+            }
+        }
     }
 
     @Override

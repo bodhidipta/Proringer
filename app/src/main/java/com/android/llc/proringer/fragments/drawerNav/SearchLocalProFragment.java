@@ -235,7 +235,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
 
             }
-        }, ProApplication.getInstance().getUserId(), category_search);
+        }, ProApplication.getInstance().getUserId(), category_search,((LandScreenActivity)getActivity()).local_pros_search_zip);
     }
 
     public void deleteFavPro(final String pros_id) {
@@ -356,10 +356,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                             Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
                             if (innerObj.getString("zipcode").trim().equals("")) {
-                                ProServiceApiHelper.getInstance(getActivity()).setSearchZip("");
+                                ((LandScreenActivity)getActivity()).local_pros_search_zip="";
                                 loadList();
                             } else {
-                                ProServiceApiHelper.getInstance(getActivity()).setSearchZip(innerObj.getString("zipcode"));
+                                ((LandScreenActivity)getActivity()).local_pros_search_zip=innerObj.getString("zipcode");
                                 loadList();
                             }
                             firstTimeLoad = false;

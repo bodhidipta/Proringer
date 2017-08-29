@@ -1,6 +1,8 @@
 package com.android.llc.proringer.activities;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -150,6 +152,13 @@ public class SearchNearProActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+
+            Intent i = new Intent();
+            Bundle BD = new Bundle();
+            BD.putString("searchZip", "");
+            i.putExtra("data", BD);
+            setResult(Activity.RESULT_OK, i);
+
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -455,7 +464,13 @@ public class SearchNearProActivity extends AppCompatActivity implements
                     myLoader.dismissLoader();
                 Logger.printMessage("listData",""+listdata.size());
                 closeKeypad();
-                ProServiceApiHelper.getInstance(SearchNearProActivity.this).setSearchZip(edt_zip.getText().toString());
+
+                Intent i = new Intent();
+                Bundle BD = new Bundle();
+                BD.putString("searchZip", edt_zip.getText().toString());
+                i.putExtra("data", BD);
+                setResult(Activity.RESULT_OK, i);
+
                 finish();
             }
 
@@ -476,4 +491,16 @@ public class SearchNearProActivity extends AppCompatActivity implements
         }, key);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent i = new Intent();
+        Bundle BD = new Bundle();
+        BD.putString("searchZip","");
+        i.putExtra("data", BD);
+        setResult(Activity.RESULT_OK, i);
+
+        finish();
+    }
 }
