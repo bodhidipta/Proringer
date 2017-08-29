@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.widget.EditText;
 
 import com.android.llc.proringer.viewsmod.FontCache;
 
