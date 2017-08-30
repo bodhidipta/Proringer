@@ -244,7 +244,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                                   @Override
                                                                                                                   public void onClick(View view) {
                                                                                                                       try {
-                                                                                                                          if (infoArrayJsonObject.getJSONArray("service_area").length()>14) {
+                                                                                                                          if (infoArrayJsonObject.getJSONArray("service_area").length()>13) {
                                                                                                                               showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
                                                                                                                           }
                                                                                                                       } catch (JSONException e) {
@@ -255,14 +255,14 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                               ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
                                                                                                                   @Override
                                                                                                                   public void onItemPassed(int position, String value) {
-                                                                                                                      try {
-                                                                                                                          if (value.equalsIgnoreCase("more")) {
-
-                                                                                                                              showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
-                                                                                                                          }
-                                                                                                                      } catch (JSONException e) {
-                                                                                                                          e.printStackTrace();
-                                                                                                                      }
+//                                                                                                                      try {
+//                                                                                                                          if (value.equalsIgnoreCase("more")) {
+//
+//                                                                                                                              showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
+//                                                                                                                          }
+//                                                                                                                      } catch (JSONException e) {
+//                                                                                                                          e.printStackTrace();
+//                                                                                                                      }
                                                                                                                   }
                                                                                                               });
                                                                                                               rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
