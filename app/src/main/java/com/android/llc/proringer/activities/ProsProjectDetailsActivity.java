@@ -240,6 +240,17 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                                   ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setText("Always Open");
                                                                                                               }
 
+                                                                                                              findViewById(R.id.view_all_service_area).setOnClickListener(new View.OnClickListener() {
+                                                                                                                  @Override
+                                                                                                                  public void onClick(View view) {
+                                                                                                                      try {
+                                                                                                                          if (infoArrayJsonObject.getJSONArray("service_area").length()>14) {
+                                                                                                                              showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
+                                                                                                                          }
+                                                                                                                      } catch (JSONException e) {
+                                                                                                                          e.printStackTrace();
+                                                                                                                      }                                                                                                                  }
+                                                                                                              });
 
                                                                                                               ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
                                                                                                                   @Override
