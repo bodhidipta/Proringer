@@ -244,12 +244,13 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                                   @Override
                                                                                                                   public void onClick(View view) {
                                                                                                                       try {
-                                                                                                                          if (infoArrayJsonObject.getJSONArray("service_area").length()>13) {
+                                                                                                                          if (infoArrayJsonObject.getJSONArray("service_area").length() > 13) {
                                                                                                                               showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
                                                                                                                           }
                                                                                                                       } catch (JSONException e) {
                                                                                                                           e.printStackTrace();
-                                                                                                                      }                                                                                                                  }
+                                                                                                                      }
+                                                                                                                  }
                                                                                                               });
 
                                                                                                               ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
@@ -378,7 +379,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                             dialog.dismiss();
                         }
                     });
-
 
 
                     dialog.show();
