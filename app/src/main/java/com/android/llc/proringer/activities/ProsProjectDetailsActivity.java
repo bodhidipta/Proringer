@@ -102,15 +102,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         myLoader = new MyLoader(ProsProjectDetailsActivity.this);
 
 
-        findViewById(R.id.LLViewAll).setVisibility(View.GONE);
-
-        findViewById(R.id.view_all_service_area).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findViewById(R.id.LLViewAll).setVisibility(View.VISIBLE);
-            }
-        });
-
         findViewById(R.id.tv_view_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -370,6 +361,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
                 }
 
             }
