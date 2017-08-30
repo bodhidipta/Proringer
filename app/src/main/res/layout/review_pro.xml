@@ -95,7 +95,7 @@
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Excellent!"
+                android:text="Choose review rate"
                 android:textColor="@color/colorTextDark"
                 android:textSize="16sp" />
 

@@ -85,23 +85,27 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
                 review_rate = Float.toString(rating);
+                Logger.printMessage("review_rate",""+review_rate);
+                if(rating==0.0){
+                    tv_rate_name.setText("Choose review rate");
+                }
 
-                if(rating<=1.0)
+                if(rating==1.0)
                 {
                     tv_rate_name.setText("Poor");
                 }
-                else if(rating<=2.0){
+                else if(rating==2.0){
                     tv_rate_name.setText("Fair");
                 }
-                else if(rating<=3.0){
+                else if(rating==3.0){
                     tv_rate_name.setText("Good");
                 }
-                else  if(rating<=4.0){
+                else  if(rating==4.0){
                     tv_rate_name.setText("Excellent!");
                 }
-                if(rating<=5){
+                if(rating==5){
                     tv_rate_name.setText("Super Star");
                 }
             }
