@@ -84,6 +84,34 @@
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
 
+        <!--<RelativeLayout-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp">-->
+
+            <!--<com.android.llc.proringer.viewsmod.edittext.ProLightEditText-->
+                <!--android:id="@+id/address"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/edit_text_selecter"-->
+                <!--android:inputType="text"-->
+                <!--android:padding="10dp"-->
+                <!--android:textColor="@color/colorTextDark"-->
+                <!--android:textSize="14sp" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/Erase"-->
+                <!--android:src="@drawable/ic_cross_dialog"-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:padding="15dp"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_height="50dp" />-->
+
+        <!--</RelativeLayout>-->
+
+
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/tv_search_by_location"
@@ -95,14 +123,6 @@
             android:padding="10dp"
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@drawable/ic_keyboard_arrow_down_24px"/>-->
 
 
         <LinearLayout
@@ -223,6 +243,8 @@
             android:text="SAVE INFORMATION"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp" />
+
+
     </android.support.design.internal.ForegroundLinearLayout>
 
 </ScrollView>

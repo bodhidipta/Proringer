@@ -2344,6 +2344,70 @@ public class ProServiceApiHelper {
         }
     }
 
+    /**
+     * get Location List code  using google api
+     * @param param
+     * @param callback
+     */
+
+    public void getLocationListUsingGoogleAPI(String param, final getApiProcessCallback callback) {
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                    try {
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Request request = new Request.Builder()
+                                .url(searchLocalProject)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        JSONObject mainRes = new JSONObject(responseString);
+
+                        if (mainRes.getString("status").equalsIgnoreCase("OK")) {
+                            return responseString;
+                        } else {
+                            exception = mainRes.getString("status");
+                            return exception;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = "Something error. Please search again.";
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(exception);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, param);
+
+        } else {
+            callback.onError("No internet connection found. Please check your internet connection.");
+        }
+    }
+
+
 
     public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
