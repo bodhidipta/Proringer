@@ -62,7 +62,7 @@ public class LocationFinder extends AppCompatActivity {
             public void onClick(View view) {
                 locationText.setText("");
                 Erase.setVisibility(View.GONE);
-                fetch_LocationSuggession("");
+                fetch_LocationSuggesion("");
                 listviewLocation.setVisibility(View.GONE);
             }
         });
@@ -74,7 +74,7 @@ public class LocationFinder extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetch_LocationSuggession(s);
+                fetch_LocationSuggesion(s);
             }
 
             @Override
@@ -90,7 +90,7 @@ public class LocationFinder extends AppCompatActivity {
         });
     }
 
-    private void fetch_LocationSuggession(final CharSequence url) {
+    private void fetch_LocationSuggesion(final CharSequence url) {
 
         ProServiceApiHelper.getInstance(LocationFinder.this).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
