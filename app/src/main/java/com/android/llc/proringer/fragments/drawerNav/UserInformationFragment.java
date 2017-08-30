@@ -202,7 +202,9 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                     Logger.printMessage("city", "--->" + extras.getString("city"));
                     Logger.printMessage("state", "--->" + extras.getString("state"));
 
-                    tv_search_by_location.setText(extras.getString("selectedPlace").substring(0,extras.getString("selectedPlace").indexOf(",")));
+                    if (!extras.getString("selectedPlace").equals("")) {
+                        tv_search_by_location.setText(extras.getString("selectedPlace").substring(0, extras.getString("selectedPlace").indexOf(",")));
+                    }
                     zip_code.setText(extras.getString("zip"));
                     city.setText(extras.getString("city"));
                     state.setText(extras.getString("state"));

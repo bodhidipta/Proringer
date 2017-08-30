@@ -47,11 +47,10 @@ public class LocationFinder extends AppCompatActivity {
         listviewLocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String Place = (String) parent.getItemAtPosition(position);
-                selectedPlace=Place;
+                selectedPlace = (String) parent.getItemAtPosition(position);
                 Logger.printMessage("selectedPlace",selectedPlace);
                 getZipCityState();
-                locationText.setText(Place);
+                locationText.setText(selectedPlace);
                 listviewLocation.setVisibility(View.GONE);
             }
         });
@@ -62,7 +61,7 @@ public class LocationFinder extends AppCompatActivity {
             public void onClick(View view) {
                 locationText.setText("");
                 Erase.setVisibility(View.GONE);
-                fetch_LocationSuggesion("");
+                fetch_LocationSuggestion("");
                 listviewLocation.setVisibility(View.GONE);
             }
         });
@@ -74,7 +73,7 @@ public class LocationFinder extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetch_LocationSuggesion(s);
+                fetch_LocationSuggestion(s);
             }
 
             @Override
@@ -90,7 +89,7 @@ public class LocationFinder extends AppCompatActivity {
         });
     }
 
-    private void fetch_LocationSuggesion(final CharSequence url) {
+    private void fetch_LocationSuggestion(final CharSequence url) {
 
         ProServiceApiHelper.getInstance(LocationFinder.this).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
@@ -133,9 +132,10 @@ public class LocationFinder extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
+
             Intent i = new Intent();
-            i.putExtra("data", selectedPlace);
             setResult(0, i);
+
             try {
                 InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
                 View view = this.getCurrentFocus();
@@ -150,15 +150,16 @@ public class LocationFinder extends AppCompatActivity {
             return true;
         } else if (id == R.id.action_Done) {
             Intent i = new Intent();
-            Bundle BD = new Bundle();
 
+            Bundle BD = new Bundle();
             BD.putString("selectedPlace", selectedPlace);
             BD.putString("zip", zip_code);
             BD.putString("city", city);
             BD.putString("state", state);
 
             i.putExtra("data", BD);
-            setResult(Activity.RESULT_OK, i);
+            setResult(-1, i);
+
             try {
                 InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
                 View view = this.getCurrentFocus();
