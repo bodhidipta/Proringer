@@ -21,6 +21,7 @@ public class MyLoader {
         pgDialog = new ProgressDialog(context);
         pgDialog.setTitle(title);
         pgDialog.setCancelable(false);
+        pgDialog.setCanceledOnTouchOutside(false);
         pgDialog.setMessage(msg);
     }
 
