@@ -85,31 +85,24 @@
             android:textSize="14sp" />
 
 
-        <RelativeLayout
-            android:id="@+id/RLSearchByLocation"
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_search_by_location"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
-            >
+            android:background="@drawable/edit_text_selecter"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
 
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:id="@+id/tv_search_by_location"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/edit_text_selecter"
-                android:textSize="14sp"
-                android:padding="10dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/colorTextDark"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/ic_keyboard_arrow_down_24px"/>
-        </RelativeLayout>
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:background="@drawable/ic_keyboard_arrow_down_24px"/>-->
 
 
         <LinearLayout
@@ -167,18 +160,18 @@
             android:weightSum="3.2">
 
 
-                <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
-                    android:id="@+id/zip_code"
-                    android:layout_weight=".8"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/edit_text_selecter"
-                    android:hint="Zip code"
-                    android:inputType="text"
-                    android:maxLength="6"
-                    android:padding="10dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp"/>
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/zip_code"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".8"
+                android:background="@drawable/edit_text_selecter"
+                android:hint="Zip code"
+                android:inputType="text"
+                android:maxLength="6"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="0dp"

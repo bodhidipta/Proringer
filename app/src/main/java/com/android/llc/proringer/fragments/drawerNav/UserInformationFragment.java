@@ -46,7 +46,6 @@ import org.json.JSONObject;
 public class UserInformationFragment extends Fragment implements MyCustomAlertListener{
     private ProLightEditText first_name, last_name, contact, zip_code, city, state;
     ProRegularTextView tv_search_by_location;
-    RelativeLayout RLSearchByLocation;
     MyLoader myLoader = null;
 
     @Nullable
@@ -64,10 +63,8 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
 
         myLoader=new MyLoader(getActivity());
 
-        RLSearchByLocation = (RelativeLayout) view.findViewById(R.id.RLSearchByLocation);
         tv_search_by_location = (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
-
-        RLSearchByLocation.setOnClickListener(new View.OnClickListener() {
+        tv_search_by_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
