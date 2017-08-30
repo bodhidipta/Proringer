@@ -339,6 +339,9 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCancelable(false);
+
                     DisplayMetrics displayMetrics = new DisplayMetrics();
                     WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
                     windowManager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -346,15 +349,26 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     int height = displayMetrics.heightPixels;
                     int width = displayMetrics.widthPixels;
 
-                    dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().width = (width - 30);
-                    dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().height = height / 2;
+                    dialog.findViewById(R.id.RLMain).getLayoutParams().width = (width - 30);
+                    dialog.findViewById(R.id.RLMain).getLayoutParams().height = height / 2;
                     //        scrollView.getLayoutParams().height = (height-30)/2;
+
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
                     RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
                     rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
                     ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectDetailsActivity.this, portfolioInfoArray);
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
+
+                    dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
 
                     dialog.show();
 

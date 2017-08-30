@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rcv_portfolio"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RLMain"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    />
+    android:layout_height="match_parent"
+    >
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_portfolio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/img_cancel_dialog"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:padding="15dp"
+        android:src="@drawable/ic_cross_dialog" />
+
+</RelativeLayout>
