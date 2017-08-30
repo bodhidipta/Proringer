@@ -2,7 +2,6 @@ package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -54,7 +53,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
     String pros_id = "", pros_company_name = "";
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
     JSONObject jsonObject = null;
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
     RatingBar rbar;
     ProsDetailsServiceAdapter proDetailsService;
     ProsDetailsBusinessHourAdapter prosDetailsBusinessHourAdapter;
@@ -94,13 +93,13 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         rcv_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
         rcv_license = (RecyclerView) findViewById(R.id.rcv_license);
-        rcv_license.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this,2));
+        rcv_license.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
 
         rcv_project_gallery = (RecyclerView) findViewById(R.id.rcv_project_gallery);
         rcv_project_gallery.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        myLoader=new MyLoader(ProsProjectDetailsActivity.this);
+        myLoader = new MyLoader(ProsProjectDetailsActivity.this);
 
 
         findViewById(R.id.LLViewAll).setVisibility(View.GONE);
@@ -123,8 +122,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     intent.putExtra("img", infoJsonObject.getString("profile_image"));
                     intent.putExtra("total_review", infoArrayJsonObject.getString("total_review"));
                     startActivity(intent);
-                }
-                catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
@@ -170,8 +168,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                 try {
                     if (infoArrayJsonObject != null && !infoArrayJsonObject.getJSONObject("about").getString("description").trim().equals("")) {
 
-                       // showDescribetionDialog(infoArrayJsonObject.getJSONObject("about").getString("description"));
-                        new ShowMyDialog(ProsProjectDetailsActivity.this).showDescribetionDialog("About",infoArrayJsonObject.getJSONObject("about").getString("description"));
+                        // showDescribetionDialog(infoArrayJsonObject.getJSONObject("about").getString("description"));
+                        new ShowMyDialog(ProsProjectDetailsActivity.this).showDescribetionDialog("About", infoArrayJsonObject.getJSONObject("about").getString("description"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -214,16 +212,14 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                               int height = displayMetrics.heightPixels;
                                                                                                               int width = displayMetrics.widthPixels;
 
-                                                                                                              if(infoJsonObject.getString("verified_status").trim().equalsIgnoreCase("Y")){
+                                                                                                              if (infoJsonObject.getString("verified_status").trim().equalsIgnoreCase("Y")) {
                                                                                                                   ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.GONE);
                                                                                                                   ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.VISIBLE);
-                                                                                                              }
-                                                                                                              else {
+                                                                                                              } else {
                                                                                                                   ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.GONE);
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).getLayoutParams().width=width/2;
+                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).getLayoutParams().width = width / 2;
                                                                                                                   ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.VISIBLE);
                                                                                                               }
-
 
 
                                                                                                               if (!infoJsonObject.getString("profile_image").equals(""))
@@ -321,7 +317,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                           }
 
                                                                                                           CustomAlert customAlert = new CustomAlert(ProsProjectDetailsActivity.this, "Contact Us Error", "" + error, ProsProjectDetailsActivity.this);
-                                                                                                          customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                                                                                                          customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                                                                                                       }
                                                                                                   },
 //                "56"
@@ -338,7 +334,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-               myLoader.showLoader();
+                myLoader.showLoader();
             }
 
             @Override
@@ -358,15 +354,15 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
                     DisplayMetrics displayMetrics = new DisplayMetrics();
-                    WindowManager windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+                    WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
                     windowManager.getDefaultDisplay().getMetrics(displayMetrics);
 
                     int height = displayMetrics.heightPixels;
                     int width = displayMetrics.widthPixels;
 
                     dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().width = (width - 30);
-                    dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().height = height/2;
-                //        scrollView.getLayoutParams().height = (height-30)/2;
+                    dialog.findViewById(R.id.rcv_portfolio).getLayoutParams().height = height / 2;
+                    //        scrollView.getLayoutParams().height = (height-30)/2;
 
                     RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
                     rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
@@ -395,7 +391,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry")&&i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             setDataProListDetails();
         }
     }
