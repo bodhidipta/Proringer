@@ -111,7 +111,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 //                                ||
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     Logger.printMessage("zip", edt_zip.getText().toString());
-                    if (edt_zip.getText().toString().length()>4) {
+                    if (edt_zip.getText().toString().trim().length()>4) {
                         searchLocationUsingZip(edt_zip.getText().toString().trim());
                     }else {
                         edt_zip.setError("zip code length would be more than four");
@@ -467,7 +467,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
                 Intent i = new Intent();
                 Bundle BD = new Bundle();
-                BD.putString("searchZip", edt_zip.getText().toString());
+                BD.putString("searchZip", edt_zip.getText().toString().trim());
                 i.putExtra("data", BD);
                 setResult(Activity.RESULT_OK, i);
 
