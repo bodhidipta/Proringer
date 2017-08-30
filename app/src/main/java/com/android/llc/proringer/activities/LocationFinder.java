@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import org.json.JSONArray;
@@ -32,6 +33,7 @@ public class LocationFinder extends AppCompatActivity {
     EditText locationText;
     ImageView Erase;
     ListView listviewLocation;
+    MyLoader myLoader = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,6 +44,8 @@ public class LocationFinder extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(""+getResources().getString(R.string.selectAddress));
         //----------------------
+
+        myLoader=new MyLoader(LocationFinder.this);
 
         listviewLocation = (ListView) findViewById(R.id.suggestion);
         listviewLocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -181,12 +185,16 @@ public class LocationFinder extends AppCompatActivity {
         ProServiceApiHelper.getInstance(LocationFinder.this).getZipLocationStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-
+                myLoader.showLoader();
             }
 
             @Override
             public void onComplete(String message) {
                 try {
+
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
+
                     JSONObject mainRes = new JSONObject(message);
 
                     if (mainRes.getString("status").equalsIgnoreCase("OK") &&
@@ -231,6 +239,8 @@ public class LocationFinder extends AppCompatActivity {
                                             Logger.printMessage("zip_code", "-->" + zip_code);
                                         }
                                     }
+                                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.hideSoftInputFromWindow(locationText.getWindowToken(), 0);
                                 }
                             }
                         }
@@ -238,12 +248,15 @@ public class LocationFinder extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
                 }
             }
 
             @Override
             public void onError(String error) {
-
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
             }
         }, selectedPlace);
     }
