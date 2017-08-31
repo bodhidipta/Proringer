@@ -257,6 +257,19 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             }
         });
 
+
+        findViewById(R.id.img_search_local_pro_header).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleProMapSearch(true);
+                NavigationHandler.getInstance().highlightTag(NavigationHandler.FIND_LOCAL_PROS);
+                bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
+                transactSearchLocalPros();
+            }
+        });
+
+
+
         /**
          * place dashboard fragment when visit first time
          * also highlight bottom navigation selection
