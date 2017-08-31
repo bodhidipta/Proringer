@@ -135,21 +135,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="0.8"
-                android:text="Zip"
-                android:textAllCaps="true"
-                android:textColor="@color/colorTextDark"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1px"
-                android:layout_weight=".1" />
-
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="1.1"
                 android:text="City"
                 android:textAllCaps="true"
@@ -170,6 +155,22 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight=".1" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.8"
+                android:text="Zip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -178,25 +179,6 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:weightSum="3.2">
-
-
-            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
-                android:id="@+id/zip_code"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight=".8"
-                android:background="@drawable/edit_text_selecter"
-                android:hint="Zip code"
-                android:inputType="text"
-                android:maxLength="6"
-                android:padding="10dp"
-                android:textColor="@color/colorTextDark"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1px"
-                android:layout_weight=".1" />
 
             <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
                 android:id="@+id/city"
@@ -226,6 +208,26 @@
                 android:padding="10dp"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight=".1" />
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/zip_code"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".8"
+                android:background="@drawable/edit_text_selecter"
+                android:hint="Zip code"
+                android:inputType="text"
+                android:maxLength="6"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+
         </LinearLayout>
 
         <View
