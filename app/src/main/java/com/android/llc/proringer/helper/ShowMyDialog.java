@@ -6,13 +6,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.text.Html;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
@@ -41,14 +40,7 @@ public class ShowMyDialog {
         ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
 
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        LLMain.getLayoutParams().width = (width - 30);
+        LLMain.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(context)[1] - 30);
         LLMain.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
 //        scrollView.getLayoutParams().height = (height-30)/2;
 

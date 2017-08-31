@@ -14,13 +14,11 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -36,6 +34,7 @@ import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -281,14 +280,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment impleme
 
         ProRegularTextView tv_tittle = (ProRegularTextView) dialog.findViewById(R.id.tv_tittle);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        LLMain.getLayoutParams().width = (width - 30);
+        LLMain.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(getActivity())[1] - 30);
         LLMain.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
 //        scrollView.getLayoutParams().height = (height-30)/2;
 

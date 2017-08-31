@@ -12,10 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -37,6 +35,7 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
 
@@ -355,15 +354,9 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.setCancelable(false);
 
-                    DisplayMetrics displayMetrics = new DisplayMetrics();
-                    WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-                    windowManager.getDefaultDisplay().getMetrics(displayMetrics);
 
-                    int height = displayMetrics.heightPixels;
-                    int width = displayMetrics.widthPixels;
-
-                    dialog.findViewById(R.id.RLMain).getLayoutParams().width = (width - 30);
-                    dialog.findViewById(R.id.RLMain).getLayoutParams().height = height / 2;
+                    dialog.findViewById(R.id.RLMain).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+                    dialog.findViewById(R.id.RLMain).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[0] / 2;
                     //        scrollView.getLayoutParams().height = (height-30)/2;
 
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -433,18 +426,11 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
             }
         });
 
-
         ProDetailsServiceAreaDialogAdapter proDetailsServiceAreaDialogAdapter = new ProDetailsServiceAreaDialogAdapter(ProsProjectDetailsActivity.this, serviceAreaJsonArray);
         rcv_show_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        rcv_show_service_area.getLayoutParams().width = (width - 30);
-        rcv_show_service_area.getLayoutParams().height = (width - 30);
+        rcv_show_service_area.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+        rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
 //        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
 
         dialog.show();
