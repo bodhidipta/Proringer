@@ -136,12 +136,11 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                     tv.setLayoutParams(lparams);
 
                     if (Build.VERSION.SDK_INT >= 24) {
-                        tv.setText(Html.fromHtml(getString(R.string.resend_contact_us), Html.FROM_HTML_MODE_LEGACY));
+                        tv.setText(Html.fromHtml(jsonObject.getString("page_content"), Html.FROM_HTML_MODE_LEGACY));
                     } else {
                         tv.setText(Html.fromHtml(jsonObject.getString("page_content")));
                     }
 
-                    tv.setText(Html.fromHtml(jsonObject.getString("page_content")));
                     main_container.addView(tv);
 
                 } catch (JSONException e) {
