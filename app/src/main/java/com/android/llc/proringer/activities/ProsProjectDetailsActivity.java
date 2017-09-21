@@ -229,7 +229,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
 
-                    if( infoArrayJsonObject.getJSONArray("services").length()>13) {
+                    if( infoArrayJsonObject.getJSONArray("services").length()>14) {
                         ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.VISIBLE);
                     }else {
                         ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.GONE);
@@ -239,7 +239,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         @Override
                         public void onClick(View view) {
                             try {
-                                if (infoArrayJsonObject.getJSONArray("services").length() > 13) {
+                                if (infoArrayJsonObject.getJSONArray("services").length() > 14) {
                                     showServiceDialog(infoArrayJsonObject.getJSONArray("services"));
                                 }
                             } catch (JSONException e) {
@@ -274,7 +274,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setText("Always Open");
                     }
 
-                    if (infoArrayJsonObject.getJSONArray("service_area").length() > 13) {
+                    if (infoArrayJsonObject.getJSONArray("service_area").length() > 14) {
                         findViewById(R.id.view_all_service_area).setVisibility(View.VISIBLE);
                     }
                     else {
@@ -285,7 +285,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         @Override
                         public void onClick(View view) {
                             try {
-                                if (infoArrayJsonObject.getJSONArray("service_area").length() > 13) {
+                                if (infoArrayJsonObject.getJSONArray("service_area").length() > 14) {
                                     showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
                                 }
                             } catch (JSONException e) {
