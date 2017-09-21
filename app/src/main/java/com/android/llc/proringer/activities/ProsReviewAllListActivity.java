@@ -93,6 +93,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -111,8 +112,8 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        jsonInfoReviewArray = new JSONArray();
         loadReviewList(0, 10);
-
     }
 
     public void loadReviewList(int from, int perPage) {
