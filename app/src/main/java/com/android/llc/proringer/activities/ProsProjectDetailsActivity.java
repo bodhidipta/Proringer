@@ -249,7 +249,18 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     });
 
 
-                    proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"));
+                    proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"), new onOptionSelected() {
+                        @Override
+                        public void onItemPassed(int position, String value) {
+                            try {
+                                if (value.equalsIgnoreCase("more")) {
+                                    showServiceDialog(infoArrayJsonObject.getJSONArray("services"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                     rcv_service.setAdapter(proDetailsService);
 
                     if (infoJsonObject.getString("business_hour").trim().equals("0")) {

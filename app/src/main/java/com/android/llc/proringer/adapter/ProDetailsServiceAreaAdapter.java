@@ -38,12 +38,12 @@ public class ProDetailsServiceAreaAdapter extends RecyclerView.Adapter<ProDetail
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         try {
-            if (position == 13) {
-                holder.tv_name.setText("More...");
-                holder.tv_name.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-            } else {
+//            if (position == 13) {
+//                holder.tv_name.setText("More...");
+//                holder.tv_name.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+//            } else {
                 holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("city_services"));
-            }
+            //}
         } catch (JSONException e) {
             e.printStackTrace();
         }
