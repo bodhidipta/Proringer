@@ -62,6 +62,12 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             holder.tv_name.setText(jsonInfoArray.getJSONObject(position).getString("homeowner_name"));
             holder.tv_review_date.setText(jsonInfoArray.getJSONObject(position).getString("date_time"));
 
+            if(jsonInfoArray.getJSONObject(position).getString("review_report_status").trim().equals("0")){
+                holder.tv_report.setVisibility(View.VISIBLE);
+            }else {
+                holder.tv_report.setVisibility(View.GONE);
+            }
+
             holder.tv_report.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
