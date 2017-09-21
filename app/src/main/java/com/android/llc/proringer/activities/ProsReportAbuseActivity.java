@@ -22,6 +22,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
     String review_report_id = "";
     MyLoader myLoader = null;
 
+    ProRegularEditText pro_review_description_text;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        pro_review_description_text=(ProRegularEditText)findViewById(R.id.pro_review_description_text);
 
         myLoader=new MyLoader(ProsReportAbuseActivity.this);
 
@@ -42,10 +44,18 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
             @Override
             public void onClick(View view) {
 
-                if (((ProRegularEditText) findViewById(R.id.pro_review_description_text)).getText().toString().trim().equals("")) {
-                    ((ProRegularEditText) findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
-                } else {
+                String text=pro_review_description_text.getText().toString().trim();
+
+                if ((text.length()>=30)) {
+//                    ((ProRegularEditText) findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
                     submitReviewReport();
+                } else {
+
+                    //Toast.makeText(ProsReportAbuseActivity.this, "Please enter 30 letter", Toast.LENGTH_SHORT).show();
+                    CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse","Please tell us more must be over 30 characters.", ProsReportAbuseActivity.this);
+                    customAlert.createNormalAlert("Ok",3);
+
+
                 }
             }
         });
@@ -69,7 +79,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
         ProServiceApiHelper.getInstance(ProsReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                @Override
                                                                                                public void onStart() {
-                                                                                                  myLoader.showLoader();
+                                                                                                   myLoader.showLoader();
                                                                                                }
 
                                                                                                @Override
