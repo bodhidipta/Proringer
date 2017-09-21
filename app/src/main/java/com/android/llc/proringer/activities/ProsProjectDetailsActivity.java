@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaDialogAdapter;
+import com.android.llc.proringer.adapter.ProDetailsServiceDialogAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsBusinessHourAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsImageAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsLicenseAdapter;
@@ -239,7 +240,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         public void onClick(View view) {
                             try {
                                 if (infoArrayJsonObject.getJSONArray("services").length() > 13) {
-                                    showServiceAreaDialog(infoArrayJsonObject.getJSONArray("services"));
+                                    showServiceDialog(infoArrayJsonObject.getJSONArray("services"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -444,6 +445,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
+        ((ProRegularTextView)dialog.findViewById(R.id.tv_title)).setText("Service Area");
+
         RecyclerView rcv_show_service_area = (RecyclerView) dialog.findViewById(R.id.rcv_show_service_area);
         rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
@@ -456,6 +459,36 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
         ProDetailsServiceAreaDialogAdapter proDetailsServiceAreaDialogAdapter = new ProDetailsServiceAreaDialogAdapter(ProsProjectDetailsActivity.this, serviceAreaJsonArray);
         rcv_show_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
+
+        rcv_show_service_area.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+        rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+//        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
+
+        dialog.show();
+    }
+
+    private void showServiceDialog(JSONArray serviceAreaJsonArray) {
+        final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                    dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialogbox_pro_details_service_area);
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        ((ProRegularTextView)dialog.findViewById(R.id.tv_title)).setText("Service");
+
+        RecyclerView rcv_show_service_area = (RecyclerView) dialog.findViewById(R.id.rcv_show_service_area);
+        rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
+
+        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        ProDetailsServiceDialogAdapter proDetailsServiceDialogAdapter = new ProDetailsServiceDialogAdapter(ProsProjectDetailsActivity.this, serviceAreaJsonArray);
+        rcv_show_service_area.setAdapter(proDetailsServiceDialogAdapter);
 
         rcv_show_service_area.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
         rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
