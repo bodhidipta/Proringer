@@ -82,7 +82,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                     }
                 }
             });
-            holder.tv_review_comment.setText(jsonInfoArray.getJSONObject(position).getString("rater_description"));
+            holder.tv_review_comment.setText(jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
 
             holder.tv_review_comment.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
@@ -99,7 +99,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                         String contactTextOne = null;
                         try {
                             if (jsonInfoArray.getJSONObject(position).getString("rater_description").trim().length() >= 60) {
-                                contactTextOne = jsonInfoArray.getJSONObject(position).getString("rater_description").substring(0, 60) + "....";
+                                contactTextOne = jsonInfoArray.getJSONObject(position).getString("rater_description").trim().substring(0, 60) + "....";
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

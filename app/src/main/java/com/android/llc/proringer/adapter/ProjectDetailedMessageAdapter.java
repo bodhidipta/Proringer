@@ -80,7 +80,6 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             @Override
             public void onClick(View v) {
                 listener.onItemClick(position);
-
             }
         });
     }
