@@ -227,6 +227,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
                     ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
+
+
                     proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"));
                     rcv_service.setAdapter(proDetailsService);
 

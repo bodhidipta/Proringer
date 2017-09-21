@@ -381,6 +381,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 })
                 .show();
     }
+
     public void closeKeypad() {
         try {
             keyboard.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);

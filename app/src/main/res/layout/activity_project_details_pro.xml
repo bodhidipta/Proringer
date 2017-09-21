@@ -337,13 +337,30 @@
                     android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:layout_width="wrap_content"
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Service"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                    android:layout_marginTop="10dp">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/view_all_service"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="View All"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                </RelativeLayout>
 
 
                 <View
