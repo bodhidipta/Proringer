@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProCategoryListAdapter;
@@ -38,9 +39,11 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.LinkedList;
 
 /**
@@ -110,9 +113,8 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     Logger.printMessage("search_category", edt_search.getText().toString());
                     closeKeypad();
                     loadList();
-                }
-                else if((event != null && (actionId == KeyEvent.KEYCODE_DEL))){
-                    if (edt_search.getText().toString().equals("")){
+                } else if ((event != null && (actionId == KeyEvent.KEYCODE_DEL))) {
+                    if (edt_search.getText().toString().equals("")) {
                         Logger.printMessage("search_category", edt_search.getText().toString());
                         closeKeypad();
                         loadList();
@@ -157,7 +159,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 } else {
                     img_clear.setVisibility(View.GONE);
                 }
-                if(category_search.length()==0){
+                if (category_search.length() == 0) {
                     closeKeypad();
                     loadList();
                 }
@@ -170,7 +172,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
         edt_search.addTextChangedListener(mySearchTextWatcher);
 
-        if (((LandScreenActivity)getActivity()).local_pros_search_zip.trim().equals("")) {
+        if (((LandScreenActivity) getActivity()).local_pros_search_zip.trim().equals("")) {
             plotUserInformation();
         } else {
             loadList();
@@ -252,7 +254,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                Logger.printMessage("error",error);
+                Logger.printMessage("error", error);
 
                 if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     LLMain.setVisibility(View.GONE);
@@ -269,7 +271,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
 
             }
-        }, ProApplication.getInstance().getUserId(), category_search,((LandScreenActivity)getActivity()).local_pros_search_zip);
+        }, ProApplication.getInstance().getUserId(), category_search, ((LandScreenActivity) getActivity()).local_pros_search_zip);
     }
 
     public void deleteFavPro(final String pros_id) {
@@ -390,10 +392,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                             Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
                             if (innerObj.getString("zipcode").trim().equals("")) {
-                                ((LandScreenActivity)getActivity()).local_pros_search_zip="";
+                                ((LandScreenActivity) getActivity()).local_pros_search_zip = "";
                                 loadList();
                             } else {
-                                ((LandScreenActivity)getActivity()).local_pros_search_zip=innerObj.getString("zipcode");
+                                ((LandScreenActivity) getActivity()).local_pros_search_zip = innerObj.getString("zipcode");
                                 loadList();
                             }
                         } catch (JSONException jse) {

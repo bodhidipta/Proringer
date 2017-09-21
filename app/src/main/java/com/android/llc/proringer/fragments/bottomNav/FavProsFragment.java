@@ -95,12 +95,12 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
 
         myLoader = new MyLoader(getActivity());
 
-        view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((LandScreenActivity) (LandScreenActivity) getActivity()).transactSearchLocalPros();
-            }
-        });
+//        view.findViewById(R.id.find_local_pros).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((LandScreenActivity) (LandScreenActivity) getActivity()).transactSearchLocalPros();
+//            }
+//        });
 
         img_clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +147,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                     Logger.printMessage("search_category", edt_search.getText().toString());
                     closeKeypad();
-                    loadList();
+                    loadListSearch();
                 }
                 else if((event != null && (actionId == KeyEvent.KEYCODE_DEL))){
                     if (edt_search.getText().toString().equals("")){
@@ -221,6 +221,82 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
+
+                if (searchFavoriteListAdapter != null) {
+                    Logger.printMessage("searchProListAdapter", "not null");
+
+                    JSONArray jarr_info_array = new JSONArray();
+                    searchFavoriteListAdapter.refreshData(jarr_info_array);
+                }
+
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+            }
+        }, ProApplication.getInstance().getUserId(), category_search,((LandScreenActivity)getActivity()).local_pros_search_zip);
+    }
+
+    public void loadListSearch() {
+
+        LLMain.setVisibility(View.VISIBLE);
+        LLNetworkDisconnection.setVisibility(View.GONE);
+
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getProsListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+                myLoader.showLoader();
+            }
+
+            @Override
+            public void onComplete(String message) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+                try {
+                    JSONObject jsonObject = new JSONObject(message);
+
+                    if (jsonObject.has("info_array")) {
+
+                        JSONArray info_array = jsonObject.getJSONArray("info_array");
+
+
+                        Logger.printMessage("info_array", "" + info_array);
+
+                        if (searchFavoriteListAdapter == null) {
+                            Logger.printMessage("favSearchProListAdapter", "null");
+                            searchFavoriteListAdapter = new SearchFavoriteListAdapter((LandScreenActivity) getActivity(), info_array, new onOptionSelected() {
+                                @Override
+                                public void onItemPassed(int position, String value) {
+                                    DeleteFavPro(value, position);
+                                }
+                            });
+                            pros_list.setAdapter(searchFavoriteListAdapter);
+                        } else {
+                            Logger.printMessage("searchProListAdapter", "not null");
+                            searchFavoriteListAdapter.refreshData(info_array);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+
+
+                if (error.equalsIgnoreCase(getActivity().getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
+                    LLMain.setVisibility(View.GONE);
+                    LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                }
+
+                if (searchFavoriteListAdapter != null) {
+                    Logger.printMessage("searchProListAdapter", "not null");
+
+                    JSONArray jarr_info_array = new JSONArray();
+                    searchFavoriteListAdapter.refreshData(jarr_info_array);
+                }
+
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
                 customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
