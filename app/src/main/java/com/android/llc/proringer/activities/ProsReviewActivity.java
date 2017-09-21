@@ -116,7 +116,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
         /**
          * Contact us spannable text with click listener
          */
-        String termsTextOne = "By submitting a review,I acknowledge that I have appect the";
+        String termsTextOne = "By submitting a review, I acknowledge that I have read and agree to the";
         String termsTextClick = " Terms of use ";
         String reviewGuidelineTextTwo = "and the";
         String reviewGuidelinesClick = " Review Guidelines.";
