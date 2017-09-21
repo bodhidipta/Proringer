@@ -184,4 +184,9 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
         jsonInfoArray.remove(pos);
         notifyItemRemoved(pos);
     }
+
+    public void refreshData(JSONArray jsonInfoArray) {
+        this.jsonInfoArray = jsonInfoArray;
+        notifyDataSetChanged();
+    }
 }

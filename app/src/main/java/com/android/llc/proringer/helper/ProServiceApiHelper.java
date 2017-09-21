@@ -2024,7 +2024,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getUserFavoriteProsList(final getApiProcessCallback callback) {
+    public void getUserFavoriteProsList(final getApiProcessCallback callback,String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -2039,9 +2039,16 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
+
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("category_search", ":-" + params[1]);
+                        Logger.printMessage("zip_search", ":-" + params[2]);
+
+                        String FavProListAPI = favoriteProsListAPI + params[0]+"&category_search="+params[1]+"&zip_search="+params[2];
+
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        String FavProListAPI = favoriteProsListAPI + ProApplication.getInstance().getUserId();
+
                         Logger.printMessage("favoriteProsListAPI", FavProListAPI);
                         Request request = new Request.Builder()
                                 .get()
@@ -2074,7 +2081,7 @@ public class ProServiceApiHelper {
                         callback.onError(s);
                     }
                 }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,params);
         } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }

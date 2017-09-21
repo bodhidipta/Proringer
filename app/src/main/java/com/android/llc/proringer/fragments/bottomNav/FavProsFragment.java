@@ -1,5 +1,6 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,21 +8,32 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchFavoriteListAdapter;
+import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.database.DatabaseHandler;
+import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +62,11 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
     MyLoader myLoader = null;
     SearchFavoriteListAdapter searchFavoriteListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
+    String category_search = "";
+    ImageView img_clear;
+    ProRegularEditText edt_search;
+    TextWatcher mySearchTextWatcher;
+    private InputMethodManager keyboard;
 
     @Nullable
     @Override
@@ -63,6 +80,13 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
 
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
+
+        keyboard= (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        img_clear=(ImageView)view.findViewById(R.id.img_clear);
+        img_clear.setVisibility(View.GONE);
+
+        edt_search=(ProRegularEditText)view.findViewById(R.id.edt_search);
 
         view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
 
@@ -78,7 +102,69 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
             }
         });
 
-        loadList();
+        img_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edt_search.setText("");
+                category_search = "";
+            }
+        });
+
+        mySearchTextWatcher = new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // your logic here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // your logic here
+                category_search = s.toString().trim();
+                if (category_search.length() > 0) {
+                    img_clear.setVisibility(View.VISIBLE);
+                } else {
+                    img_clear.setVisibility(View.GONE);
+                }
+                if(category_search.length()==0){
+                    closeKeypad();
+                    loadList();
+                }
+                //loadCategoryList();
+            }
+        };
+        edt_search.addTextChangedListener(mySearchTextWatcher);
+
+        edt_search.setText("");
+        category_search = "";
+
+        edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    Logger.printMessage("search_category", edt_search.getText().toString());
+                    closeKeypad();
+                    loadList();
+                }
+                else if((event != null && (actionId == KeyEvent.KEYCODE_DEL))){
+                    if (edt_search.getText().toString().equals("")){
+                        Logger.printMessage("search_category", edt_search.getText().toString());
+                        closeKeypad();
+                        loadList();
+                    }
+                }
+                return false;
+            }
+        });
+
+        if (((LandScreenActivity)getActivity()).local_pros_search_zip.trim().equals("")) {
+            plotUserInformation();
+        } else {
+            loadList();
+        }
     }
 
     public void loadList() {
@@ -103,14 +189,22 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
 
                         JSONArray info_array = jsonObject.getJSONArray("info_array");
 
-                        searchFavoriteListAdapter = new SearchFavoriteListAdapter((LandScreenActivity) getActivity(), info_array, new onOptionSelected() {
-                            @Override
-                            public void onItemPassed(int position, String value) {
-                                DeleteFavPro(value, position);
-                            }
-                        });
-                        pros_list.setAdapter(searchFavoriteListAdapter);
 
+                        Logger.printMessage("info_array", "" + info_array);
+
+                        if (searchFavoriteListAdapter == null) {
+                            Logger.printMessage("favSearchProListAdapter", "null");
+                            searchFavoriteListAdapter = new SearchFavoriteListAdapter((LandScreenActivity) getActivity(), info_array, new onOptionSelected() {
+                                @Override
+                                public void onItemPassed(int position, String value) {
+                                    DeleteFavPro(value, position);
+                                }
+                            });
+                            pros_list.setAdapter(searchFavoriteListAdapter);
+                        } else {
+                            Logger.printMessage("searchProListAdapter", "not null");
+                            searchFavoriteListAdapter.refreshData(info_array);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -131,9 +225,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
                 customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
-        });
-
-
+        }, ProApplication.getInstance().getUserId(), category_search,((LandScreenActivity)getActivity()).local_pros_search_zip);
     }
 
     @Override
@@ -212,5 +304,52 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                     }
                 })
                 .show();
+    }
+    public void closeKeypad() {
+        try {
+            keyboard.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void plotUserInformation() {
+        DatabaseHandler.getInstance(getActivity()).getUserInfo(
+                ProApplication.getInstance().getUserId(),
+                new DatabaseHandler.onQueryCompleteListener() {
+                    @Override
+                    public void onSuccess(String... s) {
+                        /**
+                         * User data already found in database
+                         */
+
+                        Logger.printMessage("@dashBoard", "on database data exists");
+                        try {
+                            JSONObject mainObject = new JSONObject(s[0]);
+                            JSONArray info_arr = mainObject.getJSONArray("info_array");
+                            JSONObject innerObj = info_arr.getJSONObject(0);
+
+                            Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
+
+                            if (innerObj.getString("zipcode").trim().equals("")) {
+                                ((LandScreenActivity)getActivity()).local_pros_search_zip="";
+                                loadList();
+                            } else {
+                                ((LandScreenActivity)getActivity()).local_pros_search_zip=innerObj.getString("zipcode");
+                                loadList();
+                            }
+                        } catch (JSONException jse) {
+                            jse.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String s) {
+                        /**
+                         * No user data found on database or something went wrong
+                         */
+                        Logger.printMessage("@dashBoard", "on database data not exists");
+                    }
+                });
     }
 }

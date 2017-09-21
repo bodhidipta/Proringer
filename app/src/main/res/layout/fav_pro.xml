@@ -50,6 +50,46 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
+                android:id="@+id/edt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/background_white_with_border"
+                android:paddingLeft="30dp"
+                android:hint="search favorite Pros..."
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColorHint="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="2dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_search_orange" />
+
+            <ImageView
+                android:id="@+id/img_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_cross_circle" />
+        </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/pros_list"
             android:layout_width="match_parent"
