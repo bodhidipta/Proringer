@@ -228,6 +228,25 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
 
+                    if( infoArrayJsonObject.getJSONArray("services").length()>13) {
+                        ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.VISIBLE);
+                    }else {
+                        ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.GONE);
+                    }
+
+                    findViewById(R.id.view_all_service).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try {
+                                if (infoArrayJsonObject.getJSONArray("services").length() > 13) {
+                                    showServiceAreaDialog(infoArrayJsonObject.getJSONArray("services"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
 
                     proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"));
                     rcv_service.setAdapter(proDetailsService);
@@ -241,6 +260,13 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         rcv_business_hour.setVisibility(View.GONE);
                         ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setVisibility(View.VISIBLE);
                         ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setText("Always Open");
+                    }
+
+                    if (infoArrayJsonObject.getJSONArray("service_area").length() > 13) {
+                        findViewById(R.id.view_all_service_area).setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        findViewById(R.id.view_all_service_area).setVisibility(View.GONE);
                     }
 
                     findViewById(R.id.view_all_service_area).setOnClickListener(new View.OnClickListener() {
