@@ -69,9 +69,9 @@ public class HomeRemindersFragment extends Fragment {
     private HashMap<String, ArrayList<String>> idList;
     private HashMap<String, ArrayList<String>> valueList;
     private MyLoader myLoader = null;
-    private ProRegularTextView year_build, ac_filter, last_water_heater_flush,
-            last_chimney_sweep, last_test_for_radon_gas, Smoke_detector_battery,
-            co_detector_battery, last_gutter_clean;
+    private ProRegularTextView tv_year_build, tv_ac_filter, tv_last_water_heater_flush,
+            tv_last_chimney_sweep, tv_last_test_for_radon_gas, tv_Smoke_detector_battery,
+            tv_co_detector_battery, tv_last_gutter_clean;
 
     private ProRegularTextView add_propert_image, update_data;
     private ImageView property_image;
@@ -124,14 +124,14 @@ public class HomeRemindersFragment extends Fragment {
         tv_age_window = (ProRegularTextView) view.findViewById(R.id.tv_age_window);
 
 
-        year_build = (ProRegularTextView) view.findViewById(R.id.year_build);
-        ac_filter = (ProRegularTextView) view.findViewById(R.id.ac_filter);
-        last_water_heater_flush = (ProRegularTextView) view.findViewById(R.id.last_water_heater_flush);
-        last_chimney_sweep = (ProRegularTextView) view.findViewById(R.id.last_chimney_sweep);
-        last_test_for_radon_gas = (ProRegularTextView) view.findViewById(R.id.last_test_for_radon_gas);
-        Smoke_detector_battery = (ProRegularTextView) view.findViewById(R.id.Smoke_detector_battery);
-        co_detector_battery = (ProRegularTextView) view.findViewById(R.id.co_detector_battery);
-        last_gutter_clean = (ProRegularTextView) view.findViewById(R.id.last_gutter_clean);
+        tv_year_build = (ProRegularTextView) view.findViewById(R.id.tv_year_build);
+        tv_ac_filter = (ProRegularTextView) view.findViewById(R.id.tv_ac_filter);
+        tv_last_water_heater_flush = (ProRegularTextView) view.findViewById(R.id.tv_last_water_heater_flush);
+        tv_last_chimney_sweep = (ProRegularTextView) view.findViewById(R.id.tv_last_chimney_sweep);
+        tv_last_test_for_radon_gas = (ProRegularTextView) view.findViewById(R.id.tv_last_test_for_radon_gas);
+        tv_Smoke_detector_battery = (ProRegularTextView) view.findViewById(R.id.tv_Smoke_detector_battery);
+        tv_co_detector_battery = (ProRegularTextView) view.findViewById(R.id.tv_co_detector_battery);
+        tv_last_gutter_clean = (ProRegularTextView) view.findViewById(R.id.tv_last_gutter_clean);
 
         add_propert_image = (ProRegularTextView) view.findViewById(R.id.add_propert_image);
         update_data = (ProRegularTextView) view.findViewById(R.id.update_data);
@@ -157,7 +157,7 @@ public class HomeRemindersFragment extends Fragment {
             }
         });
 
-        year_build.setOnClickListener(new View.OnClickListener() {
+        tv_year_build.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -171,7 +171,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" +  (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            year_build.setText(new SimpleDateFormat("yyyy").format(date));
+                            tv_year_build.setText(new SimpleDateFormat("yyyy").format(date));
 
 
                         } catch (Exception e) {
@@ -185,7 +185,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        year_build.setText("");
+                        tv_year_build.setText("");
 
                     }
                 });
@@ -194,7 +194,7 @@ public class HomeRemindersFragment extends Fragment {
             }
         });
 
-        ac_filter.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.RL_AC_filter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -208,7 +208,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            ac_filter.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_ac_filter.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -221,7 +221,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        ac_filter.setText("");
+                        tv_ac_filter.setText("");
 
                     }
                 });
@@ -230,7 +230,7 @@ public class HomeRemindersFragment extends Fragment {
             }
         });
 
-        last_water_heater_flush.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.tv_last_water_heater_flush).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -244,7 +244,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" +  dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            last_water_heater_flush.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_last_water_heater_flush.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -257,7 +257,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        last_water_heater_flush.setText("");
+                        tv_last_water_heater_flush.setText("");
 
                     }
                 });
@@ -265,7 +265,7 @@ public class HomeRemindersFragment extends Fragment {
                 builder.show();
             }
         });
-        last_chimney_sweep.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.RL_last_chimney_sweep).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -279,7 +279,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            last_chimney_sweep.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_last_chimney_sweep.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -292,7 +292,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        last_chimney_sweep.setText("");
+                        tv_last_chimney_sweep.setText("");
 
                     }
                 });
@@ -300,7 +300,7 @@ public class HomeRemindersFragment extends Fragment {
                 builder.show();
             }
         });
-        last_test_for_radon_gas.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.RL_last_test_for_radon_gas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -314,7 +314,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            last_test_for_radon_gas.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_last_test_for_radon_gas.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -327,7 +327,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        last_test_for_radon_gas.setText("");
+                        tv_last_test_for_radon_gas.setText("");
 
                     }
                 });
@@ -335,7 +335,7 @@ public class HomeRemindersFragment extends Fragment {
                 builder.show();
             }
         });
-        Smoke_detector_battery.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.RL_Smoke_detector_battery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -349,7 +349,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            Smoke_detector_battery.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_Smoke_detector_battery.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -362,7 +362,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        Smoke_detector_battery.setText("");
+                        tv_Smoke_detector_battery.setText("");
 
                     }
                 });
@@ -370,7 +370,7 @@ public class HomeRemindersFragment extends Fragment {
                 builder.show();
             }
         });
-        co_detector_battery.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.RL_co_detector_battery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -384,7 +384,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            co_detector_battery.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_co_detector_battery.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -397,7 +397,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        co_detector_battery.setText("");
+                        tv_co_detector_battery.setText("");
 
                     }
                 });
@@ -405,7 +405,7 @@ public class HomeRemindersFragment extends Fragment {
                 builder.show();
             }
         });
-        last_gutter_clean.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.RL_last_gutter_clean).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
@@ -419,7 +419,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" +  dPicker.getDayOfMonth() + "-" + dPicker.getYear());
-                            last_gutter_clean.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
+                            tv_last_gutter_clean.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -432,7 +432,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        last_gutter_clean.setText("");
+                        tv_last_gutter_clean.setText("");
 
                     }
                 });
@@ -810,7 +810,7 @@ public class HomeRemindersFragment extends Fragment {
                             JSONObject mainres = new JSONObject(message);
                             JSONObject options = mainres.getJSONObject("info_array");
 
-                            year_build.setText(options.getString("year_built"));
+                            tv_year_build.setText(options.getString("year_built"));
 
 //                            tv_sq_ft.setText(valueList.get("square_footage").indexOf(options.getJSONObject("square_footage").getString("value").trim()));
                             tv_sq_ft.setText(options.getJSONObject("square_footage").getString("value").trim());
@@ -844,15 +844,15 @@ public class HomeRemindersFragment extends Fragment {
                             selected_age_window_id = options.getJSONObject("window_age").getString("id").trim();
 
 
-                            ac_filter.setText(options.getString("filter_change").trim());
+                            tv_ac_filter.setText(options.getString("filter_change").trim());
 
-                            last_water_heater_flush.setText(options.getString("water_heater_flush").trim());
-                            last_chimney_sweep.setText(options.getString("chimney_sweep").trim());
+                            tv_last_water_heater_flush.setText(options.getString("water_heater_flush").trim());
+                            tv_last_chimney_sweep.setText(options.getString("chimney_sweep").trim());
 
-                            last_test_for_radon_gas.setText(options.getString("randon_gas").trim());
-                            Smoke_detector_battery.setText(options.getString("smoke_detector").trim());
-                            co_detector_battery.setText(options.getString("co_detector").trim());
-                            last_gutter_clean.setText(options.getString("gutter_clean").trim());
+                            tv_last_test_for_radon_gas.setText(options.getString("randon_gas").trim());
+                            tv_Smoke_detector_battery.setText(options.getString("smoke_detector").trim());
+                            tv_co_detector_battery.setText(options.getString("co_detector").trim());
+                            tv_last_gutter_clean.setText(options.getString("gutter_clean").trim());
 
                             if (!options.getString("property_picture").trim().equals(""))
                                 Glide.with((LandScreenActivity) getActivity()).load(options.getString("property_picture").trim()).centerCrop().into(property_image);
@@ -973,7 +973,7 @@ public class HomeRemindersFragment extends Fragment {
 
 
 
-                year_build.getText().toString().trim(),
+                tv_year_build.getText().toString().trim(),
                 selected_sq_ft_id,
                 selected_graage_id,
                 selected_prototype_id,
@@ -982,15 +982,15 @@ public class HomeRemindersFragment extends Fragment {
                 selected_age_of_roof_id,
                 selected_age_of_ac_id,
                 selected_age_of_furance_id,
-                ac_filter.getText().toString().trim(),
+                tv_ac_filter.getText().toString().trim(),
                 selected_age_water_heater_id,
                 selected_age_window_id,
-                last_water_heater_flush.getText().toString().trim(),
-                last_chimney_sweep.getText().toString().trim(),
-                last_test_for_radon_gas.getText().toString().trim(),
-                Smoke_detector_battery.getText().toString().trim(),
-                co_detector_battery.getText().toString().trim(),
-                last_gutter_clean.getText().toString().trim(),
+                tv_last_water_heater_flush.getText().toString().trim(),
+                tv_last_chimney_sweep.getText().toString().trim(),
+                tv_last_test_for_radon_gas.getText().toString().trim(),
+                tv_Smoke_detector_battery.getText().toString().trim(),
+                tv_co_detector_battery.getText().toString().trim(),
+                tv_last_gutter_clean.getText().toString().trim(),
                 mCurrentPhotoPath
         );
     }

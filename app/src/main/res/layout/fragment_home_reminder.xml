@@ -11,12 +11,12 @@
         android:background="@color/colorBGblueShade"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="101dp"
@@ -83,7 +83,7 @@
                 android:weightSum="2.1">
 
                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/year_build"
+                    android:id="@+id/tv_year_build"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
@@ -109,7 +109,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_sq_ft"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -180,7 +180,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_graage"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -218,7 +218,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_prototype"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -291,7 +291,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_basement"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -329,7 +329,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_lot_size"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -402,7 +402,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_age_of_roof"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -439,7 +439,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_age_of_ac"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -512,7 +512,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_age_of_furance"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -538,16 +538,34 @@
                     android:layout_height="1px"
                     android:layout_weight=".1" />
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/ac_filter"
+                <RelativeLayout
+                    android:id="@+id/RL_AC_filter"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_ac_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -601,7 +619,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_age_water_heater"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -638,7 +656,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:id="@+id/tv_age_window"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/background_white_with_border"
                         android:gravity="center_vertical"
@@ -698,32 +716,70 @@
                 android:orientation="horizontal"
                 android:weightSum="2.1">
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/last_water_heater_flush"
+                <RelativeLayout
+                    android:id="@+id/RL_last_water_heater_flush"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_last_water_heater_flush"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+
+                </RelativeLayout>
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1px"
                     android:layout_weight=".1" />
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/last_chimney_sweep"
+                <RelativeLayout
+                    android:id="@+id/RL_last_chimney_sweep"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_last_chimney_sweep"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -765,32 +821,71 @@
                 android:orientation="horizontal"
                 android:weightSum="2.1">
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/last_test_for_radon_gas"
+                <RelativeLayout
+                    android:id="@+id/RL_last_test_for_radon_gas"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_last_test_for_radon_gas"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+
+                </RelativeLayout>
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1px"
                     android:layout_weight=".1" />
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/Smoke_detector_battery"
+                <RelativeLayout
+                    android:id="@+id/RL_Smoke_detector_battery"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_Smoke_detector_battery"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -832,32 +927,69 @@
                 android:orientation="horizontal"
                 android:weightSum="2.1">
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/co_detector_battery"
+                <RelativeLayout
+                    android:id="@+id/RL_co_detector_battery"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_co_detector_battery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+                </RelativeLayout>
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1px"
                     android:layout_weight=".1" />
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/last_gutter_clean"
+                <RelativeLayout
+                    android:id="@+id/RL_last_gutter_clean"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/background_white_with_border"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
+                    android:background="@android:color/transparent">
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_last_gutter_clean"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_white_with_border"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_calendar_home_scheduler" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
