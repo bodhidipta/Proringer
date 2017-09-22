@@ -472,8 +472,9 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         rcv_show_service_area.setAdapter(proDetailsServiceAreaDialogAdapter);
 
         rcv_show_service_area.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
-        rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
-//        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
+//        rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+        rcv_show_service_area.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
+        //        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
 
         dialog.show();
     }
@@ -502,7 +503,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         rcv_show_service_area.setAdapter(proDetailsServiceDialogAdapter);
 
         rcv_show_service_area.getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
-        rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+//        rcv_show_service_area.getLayoutParams().height = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
+        rcv_show_service_area.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
 //        rcv_show_service_area.getLayoutParams().height = (height-30)/2;
 
         dialog.show();
