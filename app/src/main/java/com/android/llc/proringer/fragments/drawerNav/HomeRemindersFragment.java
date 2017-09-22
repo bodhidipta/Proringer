@@ -185,7 +185,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_year_build.setText("");
+                        //tv_year_build.setText("");
 
                     }
                 });
@@ -221,7 +221,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_ac_filter.setText("");
+                        //tv_ac_filter.setText("");
 
                     }
                 });
@@ -257,7 +257,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_last_water_heater_flush.setText("");
+                        //tv_last_water_heater_flush.setText("");
 
                     }
                 });
@@ -292,7 +292,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_last_chimney_sweep.setText("");
+                        //tv_last_chimney_sweep.setText("");
 
                     }
                 });
@@ -327,7 +327,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_last_test_for_radon_gas.setText("");
+                        //tv_last_test_for_radon_gas.setText("");
 
                     }
                 });
@@ -362,7 +362,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_Smoke_detector_battery.setText("");
+                        //tv_Smoke_detector_battery.setText("");
 
                     }
                 });
@@ -397,7 +397,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_co_detector_battery.setText("");
+                        //tv_co_detector_battery.setText("");
 
                     }
                 });
@@ -432,7 +432,7 @@ public class HomeRemindersFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // info_field_mowing_ermin.setText("" + getString(R.string.no_date));
 
-                        tv_last_gutter_clean.setText("");
+                        //tv_last_gutter_clean.setText("");
 
                     }
                 });
