@@ -27,8 +27,7 @@ import org.json.JSONObject;
 
 public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomAlertListener {
     MyLoader myLoader=null;
-    ProRegularTextView tv_title;
-    LinearLayout main_container;
+    ProRegularTextView tv_title,tv_effective_date,tv_page_content;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +43,8 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
 
         myLoader=new MyLoader(TermsPrivacyActivity.this);
 
-        main_container = (LinearLayout) findViewById(R.id.main_container);
-
+        tv_effective_date = (ProRegularTextView) findViewById(R.id.tv_effective_date);
+        tv_page_content = (ProRegularTextView) findViewById(R.id.tv_page_content);
         tv_title = (ProRegularTextView) findViewById(R.id.tv_title);
 
         if (HeaderString.equalsIgnoreCase("term")) {
@@ -84,15 +83,14 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                 try {
                     JSONObject jsonObject = new JSONObject(s);
 
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    TextView tv = new TextView(TermsPrivacyActivity.this);
-                    tv.setLayoutParams(lparams);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        tv.setText(Html.fromHtml(jsonObject.getString("page_content"), Html.FROM_HTML_MODE_LEGACY));
+                        tv_effective_date.setText(Html.fromHtml(jsonObject.getString("Effective_date"), Html.FROM_HTML_MODE_LEGACY));
+                        tv_page_content.setText(Html.fromHtml(jsonObject.getString("page_content"), Html.FROM_HTML_MODE_LEGACY));
                     } else {
-                        tv.setText(Html.fromHtml(jsonObject.getString("page_content")));
+                        tv_effective_date.setText(Html.fromHtml(jsonObject.getString("Effective_date")));
+                        tv_page_content.setText(Html.fromHtml(jsonObject.getString("page_content")));
                     }
-                    main_container.addView(tv);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -131,17 +129,13 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                 try {
                     JSONObject jsonObject = new JSONObject(s);
 
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    TextView tv = new TextView(TermsPrivacyActivity.this);
-                    tv.setLayoutParams(lparams);
-
-                    if (Build.VERSION.SDK_INT >= 24) {
-                        tv.setText(Html.fromHtml(jsonObject.getString("page_content"), Html.FROM_HTML_MODE_LEGACY));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        tv_effective_date.setText(Html.fromHtml(jsonObject.getString("Effective_date"), Html.FROM_HTML_MODE_LEGACY));
+                        tv_page_content.setText(Html.fromHtml(jsonObject.getString("page_content"), Html.FROM_HTML_MODE_LEGACY));
                     } else {
-                        tv.setText(Html.fromHtml(jsonObject.getString("page_content")));
+                        tv_effective_date.setText(Html.fromHtml(jsonObject.getString("Effective_date")));
+                        tv_page_content.setText(Html.fromHtml(jsonObject.getString("page_content")));
                     }
-
-                    main_container.addView(tv);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
