@@ -66,7 +66,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/background_white_with_border"
                 android:paddingLeft="30dp"
-                android:hint="search favorite Pros..."
+                android:hint="search favorite Pros"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
                 android:singleLine="true"
