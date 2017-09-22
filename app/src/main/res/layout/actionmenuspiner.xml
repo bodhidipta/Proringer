@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/LL_text"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingBottom="10dp"

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.BottomSheetGlobalList;
@@ -39,11 +40,13 @@ public class HomeReminderBottomSheetAdapter extends RecyclerView.Adapter<HomeRem
     @Override
     public void onBindViewHolder(HomeReminderBottomSheetAdapter.MyViewHolder holder, final int position) {
         holder.txtspinemwnu.setText(arrayList.get(position));
-        holder.txtspinemwnu.setOnClickListener(new View.OnClickListener() {
+        holder.LL_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.onItemPassed(position, arrayList.get(position));
-                dialog.dismiss();
+                if (position!=0){
+                    callback.onItemPassed(position, arrayList.get(position));
+                    dialog.dismiss();
+                }
             }
         });
     }
@@ -55,10 +58,12 @@ public class HomeReminderBottomSheetAdapter extends RecyclerView.Adapter<HomeRem
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView txtspinemwnu;
+        LinearLayout LL_text;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             txtspinemwnu = (ProRegularTextView) itemView.findViewById(R.id.txtspinemwnu);
+            LL_text = (LinearLayout) itemView.findViewById(R.id.LL_text);
         }
     }
 }
