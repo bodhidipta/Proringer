@@ -63,36 +63,37 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             /**
              * Read more spannable text with click listener
              */
-            final String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description").trim();
-            Logger.printMessage("contactTextOne", "" + contactTextOne);
-            String contactTextClick = " Read more..";
+//            final String contactTextOne = jsonInfoArray.getJSONObject(position).getString("description").trim();
+//            Logger.printMessage("contactTextOne", "" + contactTextOne);
+//            String contactTextClick = " Read more..";
 
 
-            Spannable word1 = new SpannableString(contactTextOne);
-            word1.setSpan(new ForegroundColorSpan(mcontext.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            //Spannable word1 = new SpannableString(contactTextOne);
+            //word1.setSpan(new ForegroundColorSpan(mcontext.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            if (word1.length() > 80) {
-                holder.tv_description.setText(word1.subSequence(0, 40));
-
-                Spannable word2 = new SpannableString(contactTextClick);
-                ClickableSpan myClickableSpan = new ClickableSpan() {
-                    @Override
-                    public void onClick(View widget) {
-                        // There is the OnCLick. put your intent to Register class here
-                        widget.invalidate();
-                        new ShowMyDialog(mcontext).showDescribetionDialog("description",contactTextOne);
-                        Logger.printMessage("Details", "click");
-                    }
-
-                    @Override
-                    public void updateDrawState(TextPaint ds) {
-                        ds.setColor(mcontext.getResources().getColor(R.color.colorAccent));
-                        ds.setUnderlineText(false);
-                    }
-                };
-                word2.setSpan(myClickableSpan, 0, contactTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.tv_description.append(word2);
-            }
+//            if (word1.length() > 80) {
+//                holder.tv_description.setText(word1.subSequence(0, 40));
+//
+//                Spannable word2 = new SpannableString(contactTextClick);
+//                ClickableSpan myClickableSpan = new ClickableSpan() {
+//                    @Override
+//                    public void onClick(View widget) {
+//                        // There is the OnCLick. put your intent to Register class here
+//                        widget.invalidate();
+//                        new ShowMyDialog(mcontext).showDescribetionDialog("description",contactTextOne);
+//                        Logger.printMessage("Details", "click");
+//                    }
+//
+//                    @Override
+//                    public void updateDrawState(TextPaint ds) {
+//                        ds.setColor(mcontext.getResources().getColor(R.color.colorAccent));
+//                        ds.setUnderlineText(false);
+//                    }
+//                };
+//                word2.setSpan(myClickableSpan, 0, contactTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                holder.tv_description.append(word2);
+//            }
+            holder.tv_description.setText(jsonInfoArray.getJSONObject(position).getString("description").trim());
 
             if (!jsonInfoArray.getJSONObject(position).getString("profile_img").equals(""))
                 Glide.with(mcontext).load(jsonInfoArray.getJSONObject(position).getString("profile_img")).centerCrop().into(holder.img_project);
