@@ -162,7 +162,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                //dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -199,7 +199,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                //dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -235,7 +235,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                //dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -270,7 +270,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                //dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -305,7 +305,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                //dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -340,7 +340,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+               // dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -375,7 +375,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+               // dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -410,7 +410,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-                dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                //dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
