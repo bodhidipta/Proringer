@@ -33,6 +33,27 @@
                 android:layout_height="1px"
                 android:background="@color/colorSelectedDark" />
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Project Replies"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp" />
+
+                <com.android.llc.proringer.viewsmod.SwitchHelper
+                    android:id="@+id/email_prjct_rspnse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="54dp">
@@ -96,25 +117,7 @@
                     android:layout_centerInParent="true" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="54dp">
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="Project Responses"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
-
-                <com.android.llc.proringer.viewsmod.SwitchHelper
-                    android:id="@+id/email_prjct_rspnse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
 
             <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
                 android:layout_width="match_parent"
@@ -129,6 +132,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/colorSelectedDark" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Project Replies"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp" />
+
+                <com.android.llc.proringer.viewsmod.SwitchHelper
+                    android:id="@+id/mobile_prjct_rspnse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -193,25 +216,7 @@
                     android:layout_centerInParent="true" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="54dp">
 
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="Project Responses"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="14sp" />
-
-                <com.android.llc.proringer.viewsmod.SwitchHelper
-                    android:id="@+id/mobile_prjct_rspnse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

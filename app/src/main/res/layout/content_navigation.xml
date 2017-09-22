@@ -51,6 +51,7 @@
             android:layout_height="56dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:background="@color/colorHeader"
             android:paddingLeft="10dp">
 
             <ImageView
@@ -58,7 +59,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/ic_settings" />
+                android:background="@drawable/ic_settings_white" />
 
             <com.android.llc.proringer.viewsmod.textview.ProBoldTextView
                 android:id="@+id/account_text"
@@ -66,7 +67,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="Account"
-                android:textColor="@color/colorTextDark"
+                android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -75,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorHeader"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="vertical">
 
             <RelativeLayout
