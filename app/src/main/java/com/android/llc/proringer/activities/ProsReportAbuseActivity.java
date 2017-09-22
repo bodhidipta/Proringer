@@ -52,7 +52,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
                 } else {
 
                     //Toast.makeText(ProsReportAbuseActivity.this, "Please enter 30 letter", Toast.LENGTH_SHORT).show();
-                    CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse","Please tell us more must be over 30 characters.", ProsReportAbuseActivity.this);
+                    CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Report Abuse","Please tell us more Must be over 30 characters.", ProsReportAbuseActivity.this);
                     customAlert.createNormalAlert("Ok",3);
 
 
