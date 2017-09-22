@@ -129,13 +129,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3.2">
+            android:weightSum="5.2">
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1.1"
+                android:layout_weight="3.2"
                 android:text="City"
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextDark"
@@ -150,7 +150,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1.1"
+                android:layout_weight=".8"
                 android:text="state"
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextDark"
@@ -165,7 +165,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:text="Zip"
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextDark"
@@ -178,13 +178,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:weightSum="3.2">
+            android:weightSum="5.2">
 
             <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
                 android:id="@+id/city"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1.1"
+                android:layout_weight="3.2"
                 android:background="@drawable/edit_text_selecter"
                 android:hint="City"
                 android:inputType="text"
@@ -201,7 +201,7 @@
                 android:id="@+id/state"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1.1"
+                android:layout_weight=".8"
                 android:background="@drawable/edit_text_selecter"
                 android:hint="State"
                 android:inputType="text"
@@ -218,7 +218,7 @@
                 android:id="@+id/zip_code"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight=".8"
+                android:layout_weight="1"
                 android:background="@drawable/edit_text_selecter"
                 android:hint="Zip code"
                 android:inputType="text"
