@@ -347,7 +347,7 @@
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Service"
+                        android:text="Services"
                         android:textColor="@color/colorTextDark"
                         android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
 

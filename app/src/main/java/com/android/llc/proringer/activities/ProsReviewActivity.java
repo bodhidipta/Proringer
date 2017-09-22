@@ -103,7 +103,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
                     tv_rate_name.setText("Good");
                 }
                 else  if(rating==4.0){
-                    tv_rate_name.setText("Excellent!");
+                    tv_rate_name.setText("Excellent");
                 }
                 if(rating==5){
                     tv_rate_name.setText("Super Star");
@@ -117,7 +117,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
          * Contact us spannable text with click listener
          */
         String termsTextOne = "By submitting a review, I acknowledge that I have read and agree to the";
-        String termsTextClick = " Terms of use ";
+        String termsTextClick = " Terms of Use ";
         String reviewGuidelineTextTwo = "and the";
         String reviewGuidelinesClick = " Review Guidelines.";
 

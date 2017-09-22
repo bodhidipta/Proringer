@@ -240,7 +240,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         public void onClick(View view) {
                             try {
                                 if (infoArrayJsonObject.getJSONArray("services").length() > 14) {
-                                    showServiceDialog(infoArrayJsonObject.getJSONArray("services"));
+                                    showServicesDialog(infoArrayJsonObject.getJSONArray("services"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -254,7 +254,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                         public void onItemPassed(int position, String value) {
                             try {
                                 if (value.equalsIgnoreCase("more")) {
-                                    showServiceDialog(infoArrayJsonObject.getJSONArray("services"));
+                                    showServicesDialog(infoArrayJsonObject.getJSONArray("services"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -478,7 +478,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         dialog.show();
     }
 
-    private void showServiceDialog(JSONArray serviceAreaJsonArray) {
+    private void showServicesDialog(JSONArray serviceAreaJsonArray) {
         final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
@@ -486,7 +486,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
-        ((ProRegularTextView)dialog.findViewById(R.id.tv_title)).setText("Service");
+        ((ProRegularTextView)dialog.findViewById(R.id.tv_title)).setText("Services");
 
         RecyclerView rcv_show_service_area = (RecyclerView) dialog.findViewById(R.id.rcv_show_service_area);
         rcv_show_service_area.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
