@@ -45,7 +45,6 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         ////change////////
         if (viewType == 1) {
             return new ViewHolderReceiver(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_receiver, parent, false));
@@ -53,7 +52,6 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             return new ViewHolderSender(LayoutInflater.from(mcontext).inflate(R.layout.indevidual_list_row_sender, parent, false));
         }
-
     }
 
     @Override
@@ -82,7 +80,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     viewHolderReceiver.receiver_image_cont.setVisibility(View.VISIBLE);
                     viewHolderReceiver.receiver_message.setVisibility(View.GONE);
                 }
-                //Glide.with(mcontext).load(dataList.get(position).getImageLink()).centerCrop().into(viewHolderReceiver.receiver_image);
+                Glide.with(mcontext).load(dataList.get(position).getImageLink()).centerCrop().into(viewHolderReceiver.receiver_image);
                 break;
 
             case 2:
