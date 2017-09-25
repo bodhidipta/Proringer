@@ -37,7 +37,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * -->
  */
 
-public class ForgetPasswordActivity extends AppCompatActivity implements MyCustomAlertListener {
+public class ForgotPasswordActivity extends AppCompatActivity implements MyCustomAlertListener {
     private ProRegularTextView header_text;
     private ProLightEditText email, request_code, password, confirm_password;
     private MyLoader myLoader = null;
@@ -47,7 +47,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_forget_password);
+        setContentView(R.layout.acitivity_forgot_password);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,7 +61,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
         password = (ProLightEditText) findViewById(R.id.password);
         confirm_password = (ProLightEditText) findViewById(R.id.confirm_password);
 
-        myLoader = new MyLoader(ForgetPasswordActivity.this);
+        myLoader = new MyLoader(ForgotPasswordActivity.this);
 
 
         tv_contact_us = (ProRegularTextView) findViewById(R.id.tv_contact_us);
@@ -69,14 +69,14 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
         tv_contact_us.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ForgetPasswordActivity.this, ContactUsActivity.class));
+                startActivity(new Intent(ForgotPasswordActivity.this, ContactUsActivity.class));
             }
         });
 
         findViewById(R.id.resend_confirmation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ForgetPasswordActivity.this, ResendConfirmationActivity.class));
+                startActivity(new Intent(ForgotPasswordActivity.this, ResendConfirmationActivity.class));
             }
         });
 
@@ -84,7 +84,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
             @Override
             public void onClick(View v) {
                 if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
-                    ProServiceApiHelper.getInstance(ForgetPasswordActivity.this).forgetPassword(email.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
+                    ProServiceApiHelper.getInstance(ForgotPasswordActivity.this).forgetPassword(email.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
                             myLoader.showLoader();
@@ -98,7 +98,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
                             closeKeypad();
 
 
-                            CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "forgot", "" + message, ForgetPasswordActivity.this);
+                            CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "forgot", "" + message, ForgotPasswordActivity.this);
                             customAlert.createNormalAlert("ok",1);
 
                         }
@@ -108,7 +108,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 
-                            CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "Request password error", "" + error, ForgetPasswordActivity.this);
+                            CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "Request password error", "" + error, ForgotPasswordActivity.this);
                             customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
 
                         }
@@ -134,7 +134,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
                             password.setError("Please enter confirm password.");
                         } else {
                             if (password.getText().toString().trim().equals(confirm_password.getText().toString().trim())) {
-                                ProServiceApiHelper.getInstance(ForgetPasswordActivity.this).resetPassword(
+                                ProServiceApiHelper.getInstance(ForgotPasswordActivity.this).resetPassword(
                                         request_code.getText().toString().trim(),
                                         confirm_password.getText().toString().trim(),
                                         new ProServiceApiHelper.getApiProcessCallback() {
@@ -150,7 +150,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
 
                                                 closeKeypad();
 
-                                                CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "forgot", "" + message, ForgetPasswordActivity.this);
+                                                CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "forgot", "" + message, ForgotPasswordActivity.this);
                                                 customAlert.createNormalAlert("ok",2);
 
                                             }
@@ -160,7 +160,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements MyCusto
                                                 if (myLoader != null && myLoader.isMyLoaderShowing())
                                                     myLoader.dismissLoader();
 
-                                                CustomAlert customAlert = new CustomAlert(ForgetPasswordActivity.this, "Reset password error", "" + error, ForgetPasswordActivity.this);
+                                                CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "Reset password error", "" + error, ForgotPasswordActivity.this);
                                                 customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
                                             }
                                         }

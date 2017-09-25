@@ -56,7 +56,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
         findViewById(R.id.forget_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LogInActivity.this, ForgetPasswordActivity.class));
+                startActivity(new Intent(LogInActivity.this, ForgotPasswordActivity.class));
             }
         });
         sign_up = (ProSemiBoldTextView) findViewById(R.id.sign_up);
