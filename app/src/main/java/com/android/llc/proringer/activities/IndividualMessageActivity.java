@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.IndevidualChatAdapter;
 import com.android.llc.proringer.pojo.ChatPojo;
+import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -36,6 +38,7 @@ import java.util.LinkedList;
 
 public class IndividualMessageActivity extends AppCompatActivity {
     RecyclerView chat_list;
+    ImageView img_background;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class IndividualMessageActivity extends AppCompatActivity {
         chat_list = (RecyclerView) findViewById(R.id.chat_list);
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         LinkedList<ChatPojo> chatList = new LinkedList<>();
+
+        img_background= (ImageView) findViewById(R.id.img_background);
+
+        Glide.with(IndividualMessageActivity.this).load(R.drawable.chat_background).centerCrop().into(img_background);
+
 
         java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.setTime(new Date());
