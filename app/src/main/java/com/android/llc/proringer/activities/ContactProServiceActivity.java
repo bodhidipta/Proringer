@@ -102,7 +102,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         findViewById(R.id.tv_contact_pro).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                validationCheck();
             }
         });
     }
