@@ -189,6 +189,11 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         setDataProListDetails();
     }
 
