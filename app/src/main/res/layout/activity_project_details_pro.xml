@@ -5,817 +5,832 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
+
+    <RelativeLayout
+        android:id="@+id/relative_nestedscrol"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content">
 
-
-            <RelativeLayout
-                android:id="@+id/RLCollapsingImage"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="206dp"
-                android:background="@color/colorLightGray"
-                android:scaleType="centerCrop"
-                android:visibility="visible"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7">
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <ImageView
-                    android:id="@+id/img_top"
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="56dp" />
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin" />
 
                 <RelativeLayout
-                    android:layout_width="200dp"
+                    android:id="@+id/RLToolbar"
+                    android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true">
+                    android:background="@color/colorPrimary"
+                    app:layout_collapseMode="pin">
 
                     <ImageView
-                        android:id="@+id/img_likes"
+                        android:id="@+id/img_back"
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:padding="15dp"
+                        android:src="@drawable/ic_keyboard_arrow_left_black_24px" />
+
+                    <ImageView
+                        android:id="@+id/img_share"
                         android:layout_width="56dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:padding="15dp"
-                        android:src="@drawable/ic_favorite" />
+                        android:src="@drawable/ic_share" />
 
-                    <RelativeLayout
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_toolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:hint="Buuble Granite Roofing Company"
+                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                </RelativeLayout>
+
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scroll_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/app_bar_layout"
+            android:background="@android:color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/RLCollapsingImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="206dp"
+                    android:background="@color/colorLightGray"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7">
+
+                    <ImageView
+                        android:id="@+id/img_top"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toLeftOf="@+id/img_likes">
+                        android:layout_marginTop="3dp" />
 
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:gravity="center"
-                            android:hint="Added to favorite"
-                            android:textSize="12sp" />
+                    <RelativeLayout
+                        android:layout_width="200dp"
+                        android:layout_height="56dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true">
+
+                        <ImageView
+                            android:id="@+id/img_likes"
+                            android:layout_width="56dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:padding="15dp"
+                            android:src="@drawable/ic_favorite" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/img_likes">
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                android:hint="Added to favorite"
+                                android:textSize="12sp" />
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
 
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/RLCollapsingImage">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="100dp">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            card_view:cardElevation="3dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp">
+
+                                <ImageView
+                                    android:id="@+id/img_profile"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="10dp"
+                                    android:background="@color/colorLightGray" />
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/tv_review_btn"
+                                    android:layout_width="100dp"
+                                    android:layout_height="56dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@color/colorAccent"
+                                    android:gravity="center"
+                                    android:text="review pro"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="12sp" />
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginBottom="15dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_toLeftOf="@+id/tv_review_btn"
+                                    android:layout_toRightOf="@+id/img_profile">
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_rate_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="4.55"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="24sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                    <RatingBar
+                                        android:id="@+id/rbar"
+                                        style="@style/Widget.AppCompat.RatingBar.Small"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/tv_rate_value"
+                                        android:layout_marginTop="5dp"
+                                        android:numStars="5"
+                                        android:rating="4.5"
+                                        android:stepSize="0.5" />
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_review_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/rbar"
+                                        android:layout_marginTop="5dp"
+                                        android:text="12"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="12sp" />
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_review_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/rbar"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_toRightOf="@+id/tv_review_value"
+                                        android:text="Review"
+                                        android:textSize="12sp" />
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_view_all"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/rbar"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_toRightOf="@id/tv_review_name"
+                                        android:text="View All"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+
+                            </RelativeLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/tv_company_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Buuble Granite Roofing Company"
+                                    android:textColor="@color/colorTextBlack"
+                                    android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:orientation="horizontal">
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_user_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:hint="James Bobblehead"
+                                        android:textSize="10sp" />
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_designation"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_toRightOf="@+id/tv_user_name"
+                                        android:hint="owner"
+                                        android:textSize="8sp" />
+
+                                </RelativeLayout>
+
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/tv_address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:hint="75021 West High North Divided"
+                                    android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/tv_city_state_zipcode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:hint="Grove City,OH 43123"
+                                    android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            </LinearLayout>
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp">
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="About"
+                                    android:textColor="@color/colorTextDark"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/tv_show_more_describetion"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="View More"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                            </RelativeLayout>
+
+                            <View
+                                android:id="@+id/SplitLine_hor1"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/colorLightGray" />
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_about"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:gravity="left"
+                                android:maxLines="5"
+                                android:text="hbjdsjhfdghjngdbfjjgdbhgfjgdbjgjgdbjnjgdbjhjgdbdfjgdbdfhjgdbfdjgdbfdhbjgdbhfjgdbfdhjgdbdhjgdbhjfjgdbfdhjgdbhfhjgdbhfdjgdbfdhjgdbfhjgdbhfdjgdbfdhjgd"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp">
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Services"
+                                    android:textColor="@color/colorTextDark"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/view_all_service"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="View All"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                            </RelativeLayout>
+
+
+                            <View
+                                android:id="@+id/SplitLine_hor2"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/colorLightGray" />
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rcv_service"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
+
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="Business Hours"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                            <View
+                                android:id="@+id/SplitLine_hor3"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/colorLightGray" />
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rcv_business_hour"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
+
+                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                android:id="@+id/tv_business_hour"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/colorTextDark"
+                                android:textSize="12sp" />
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp">
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Service Area"
+                                    android:textColor="@color/colorTextDark"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:id="@+id/view_all_service_area"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="View All"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                            </RelativeLayout>
+
+                            <View
+                                android:id="@+id/SplitLine_hor4"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/colorLightGray" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/rcv_service_area"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/LLViewAll"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Licence"
+                                    android:textColor="@color/colorTextDark"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <View
+                                    android:id="@+id/SplitLine_hor5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@color/colorLightGray" />
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/rcv_license"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Company info"
+                                    android:textColor="@color/colorTextDark"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <View
+                                    android:id="@+id/SplitLine_hor6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@color/colorLightGray" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:paddingRight="5dp"
+                                        android:text="business_since"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_business_since"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:paddingRight="5dp"
+                                        android:text="No of employee"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_no_of_employee"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:paddingRight="5dp"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:paddingRight="5dp"
+                                        android:text="Proringer_awarded"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_proringer_awarded"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:paddingRight="5dp"
+                                        android:text="Review"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_business_review"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:paddingRight="5dp"
+                                        android:text="Last date on \nproringer verified"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_last_verified_on"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp">
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Project Gallery"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_no_of_picture_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:text="Pictures"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_no_of_picture_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_toLeftOf="@+id/tv_no_of_picture_name"
+                                        android:text="20"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_no_of_project_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_toLeftOf="@+id/tv_no_of_picture_value"
+                                        android:text="Project"
+                                        android:textColor="@color/colorTextDark"
+                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                        android:id="@+id/tv_no_of_project_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_toLeftOf="@+id/tv_no_of_project_name"
+                                        android:text="5"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+                                </RelativeLayout>
+
+                                <View
+                                    android:id="@+id/SplitLine_hor7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@color/colorLightGray" />
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/rcv_project_gallery"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
+
+                                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Achievements of Proringer"
+                                    android:textColor="@color/colorTextDark"
+                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+                                <View
+                                    android:id="@+id/SplitLine_hor8"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@color/colorLightGray" />
+
+                                <ImageView
+                                    android:id="@+id/img_achievements"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginTop="10dp"
+                                    android:scaleType="fitXY" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </RelativeLayout>
 
 
             </RelativeLayout>
 
+        </android.support.v4.widget.NestedScrollView>
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
-
-            <RelativeLayout
-                android:id="@+id/RLToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@color/colorPrimary"
-                app:layout_collapseMode="pin">
-
-                <ImageView
-                    android:id="@+id/img_back"
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_keyboard_arrow_left_black_24px" />
-
-                <ImageView
-                    android:id="@+id/img_share"
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_share" />
-
-
-                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/tv_toolbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:hint="Buuble Granite Roofing Company"
-                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-            </RelativeLayout>
-
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            card_view:cardElevation="3dp">
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
+                android:id="@+id/LLVerified"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                card_view:cardElevation="3dp">
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="2">
+
 
                 <LinearLayout
-                    android:id="@+id/LLVerified"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    android:weightSum="2">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/verified" />
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/verified" />
-
-                        <LinearLayout
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="vertical">
+                            android:text="verified"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="16sp" />
 
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="verified"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="16sp" />
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="business"
-                                android:textAllCaps="true"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
+                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="business"
+                            android:textAllCaps="true"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_contact_pro_btn_verified"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorAccent"
-                        android:gravity="center"
-                        android:text="contact pro"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                    android:id="@+id/tv_contact_pro_btn_unverified"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_contact_pro_btn_verified"
+                    android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="contact pro"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
-
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="100dp">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    card_view:cardElevation="3dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp">
-
-                        <ImageView
-                            android:id="@+id/img_profile"
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="10dp"
-                            android:background="@color/colorLightGray" />
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/tv_review_btn"
-                            android:layout_width="100dp"
-                            android:layout_height="56dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:background="@color/colorAccent"
-                            android:gravity="center"
-                            android:text="review pro"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="12sp" />
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginBottom="15dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_toLeftOf="@+id/tv_review_btn"
-                            android:layout_toRightOf="@+id/img_profile">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_rate_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="4.55"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="24sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                            <RatingBar
-                                android:id="@+id/rbar"
-                                style="@style/Widget.AppCompat.RatingBar.Small"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/tv_rate_value"
-                                android:layout_marginTop="5dp"
-                                android:numStars="5"
-                                android:rating="4.5"
-                                android:stepSize="0.5" />
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_review_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/rbar"
-                                android:layout_marginTop="5dp"
-                                android:text="12"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="12sp" />
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_review_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/rbar"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_toRightOf="@+id/tv_review_value"
-                                android:text="Review"
-                                android:textSize="12sp" />
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_view_all"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/rbar"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_toRightOf="@id/tv_review_name"
-                                android:text="View All"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="12sp" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/tv_company_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="Buuble Granite Roofing Company"
-                            android:textColor="@color/colorTextBlack"
-                            android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_user_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="James Bobblehead"
-                                android:textSize="10sp" />
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_designation"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_marginLeft="2dp"
-                                android:layout_toRightOf="@+id/tv_user_name"
-                                android:hint="owner"
-                                android:textSize="8sp" />
-
-                        </RelativeLayout>
-
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/tv_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:hint="75021 West High North Divided"
-                            android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/tv_city_state_zipcode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:hint="Grove City,OH 43123"
-                            android:textSize="10sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                    </LinearLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="About"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/tv_show_more_describetion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="View More"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                    </RelativeLayout>
-
-                    <View
-                        android:id="@+id/SplitLine_hor1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorLightGray" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_about"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:gravity="left"
-                        android:maxLines="5"
-                        android:text="hbjdsjhfdghjngdbfjjgdbhgfjgdbjgjgdbjnjgdbjhjgdbdfjgdbdfhjgdbfdjgdbfdhbjgdbhfjgdbfdhjgdbdhjgdbhjfjgdbfdhjgdbhfhjgdbhfdjgdbfdhjgdbfhjgdbhfdjgdbfdhjgd"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Services"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/view_all_service"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="View All"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                    </RelativeLayout>
-
-
-                    <View
-                        android:id="@+id/SplitLine_hor2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorLightGray" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rcv_service"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
-
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Business Hours"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                    <View
-                        android:id="@+id/SplitLine_hor3"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorLightGray" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rcv_business_hour"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_business_hour"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="12sp" />
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Service Area"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:id="@+id/view_all_service_area"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:text="View All"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                    </RelativeLayout>
-
-                    <View
-                        android:id="@+id/SplitLine_hor4"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/colorLightGray" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rcv_service_area"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/LLViewAll"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="Licence"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <View
-                            android:id="@+id/SplitLine_hor5"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/colorLightGray" />
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rcv_license"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="Company info"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <View
-                            android:id="@+id/SplitLine_hor6"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/colorLightGray" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingRight="5dp"
-                                android:text="business_since"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_business_since"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingRight="5dp"
-                                android:text="No of employee"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_no_of_employee"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingRight="5dp"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingRight="5dp"
-                                android:text="Proringer_awarded"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_proringer_awarded"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingRight="5dp"
-                                android:text="Review"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_business_review"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingRight="5dp"
-                                android:text="Last date on \nproringer verified"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_last_verified_on"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        </LinearLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp">
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Project Gallery"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_no_of_picture_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="Pictures"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_no_of_picture_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_toLeftOf="@+id/tv_no_of_picture_name"
-                                android:text="20"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_no_of_project_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="20dp"
-                                android:layout_toLeftOf="@+id/tv_no_of_picture_value"
-                                android:text="Project"
-                                android:textColor="@color/colorTextDark"
-                                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                                android:id="@+id/tv_no_of_project_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:layout_toLeftOf="@+id/tv_no_of_project_name"
-                                android:text="5"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-
-                        </RelativeLayout>
-
-                        <View
-                            android:id="@+id/SplitLine_hor7"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/colorLightGray" />
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rcv_project_gallery"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
-
-                        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="Achievements of Proringer"
-                            android:textColor="@color/colorTextDark"
-                            android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
-
-                        <View
-                            android:id="@+id/SplitLine_hor8"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/colorLightGray" />
-
-                        <ImageView
-                            android:id="@+id/img_achievements"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="10dp"
-                            android:scaleType="fitXY" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
-        </RelativeLayout>
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/tv_contact_pro_btn_unverified"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="contact pro"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
-    </android.support.v4.widget.NestedScrollView>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/LLNetworkDisconnection"
