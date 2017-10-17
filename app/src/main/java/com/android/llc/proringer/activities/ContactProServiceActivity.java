@@ -159,11 +159,14 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
     }
 
     public void validationCheck(){
+        edt_description.setError(null);
+        edt_description.clearFocus();
         if (tv_service.getText().toString().equals("")){
             Toast.makeText(ContactProServiceActivity.this,"Please Select Service",Toast.LENGTH_SHORT).show();
         }else {
             if (edt_description.getText().toString().equals("")){
-
+                edt_description.setError("Please enter description");
+                edt_description.setFocusable(true);
             }else {
                 if (contact_info_status.equalsIgnoreCase("N")){
                     additional_msg="0";
