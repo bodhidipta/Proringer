@@ -14,13 +14,11 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.CustomListAdapterDialog;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +31,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
     PopupWindow popupWindow;
     CustomListAdapterDialog customListAdapterDialog = null;
     String services;
-    ProRegularTextView tv_service,tv_terms_guidelines,tv_post_review,tv_title;
+    ProRegularTextView tv_service,tv_terms_guidelines,tv_title;
 
 
     @Override
@@ -44,7 +42,6 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         dropdown=(ImageView)findViewById(R.id.dropdown);
         tv_service=(ProRegularTextView)findViewById(R.id.tv_service);
         tv_terms_guidelines=(ProRegularTextView)findViewById(R.id.tv_terms_guidelines);
-        tv_post_review=(ProRegularTextView)findViewById(R.id.tv_post_review);
         tv_title=(ProRegularTextView)findViewById(R.id.tv_title);
         checkbox_term=(CheckBox)findViewById(R.id.checkbox_term);
 
@@ -79,6 +76,13 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
+            }
+        });
+
+        findViewById(R.id.tv_contact_pro).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
