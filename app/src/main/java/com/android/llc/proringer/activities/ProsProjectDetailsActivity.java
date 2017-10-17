@@ -135,6 +135,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                 intent.putExtra("pros_company_name",pros_company_name);
                 intent.putExtra("services",services.toString());
                 intent.putExtra("contact_info_status",contact_info_status);
+                intent.putExtra("pros_id", pros_id);
                 startActivity(intent);
             }
         });

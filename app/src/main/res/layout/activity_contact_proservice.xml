@@ -120,6 +120,7 @@
 
 
         <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+            android:id="@+id/edt_description"
             android:layout_below="@+id/relative_dropdown"
             android:layout_above="@+id/checkbox_term"
             android:inputType="textMultiLine"

@@ -14,15 +14,24 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.CustomListAdapterDialog;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class ContactProServiceActivity extends AppCompatActivity implements MyCustomAlertListener {
 
@@ -30,9 +39,10 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
     CheckBox checkbox_term;
     PopupWindow popupWindow;
     CustomListAdapterDialog customListAdapterDialog = null;
-    String services,contact_info_status;
+    String services,contact_info_status,pros_contact_service="",additional_msg="0",prosUserId="";
     ProRegularTextView tv_service,tv_terms_guidelines,tv_title;
-
+    ProLightEditText edt_description;
+    MyLoader myLoader = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +55,14 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         tv_title=(ProRegularTextView)findViewById(R.id.tv_title);
         checkbox_term=(CheckBox)findViewById(R.id.checkbox_term);
 
+        edt_description= (ProLightEditText) findViewById(R.id.edt_description);
+
 
         String title=getIntent().getExtras().getString("pros_company_name");
         services=getIntent().getExtras().getString("services");
         contact_info_status=getIntent().getExtras().getString("contact_info_status");
-
+        prosUserId=getIntent().getExtras().getString("pros_id");
+        myLoader = new MyLoader(ContactProServiceActivity.this);
         Logger.printMessage("services",services);
 
         tv_title.setText(title);
@@ -122,6 +135,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
                     try {
                         tv_service.setText(value.getString("service_name"));
+                        pros_contact_service=value.getString("service_id");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -142,5 +156,56 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
     public interface onOptionSelected {
         void onItemPassed(int position, JSONObject value);
+    }
+
+    public void validationCheck(){
+        if (tv_service.getText().toString().equals("")){
+            Toast.makeText(ContactProServiceActivity.this,"Please Select Service",Toast.LENGTH_SHORT).show();
+        }else {
+            if (edt_description.getText().toString().equals("")){
+
+            }else {
+                if (contact_info_status.equalsIgnoreCase("N")){
+                    additional_msg="0";
+                    submit();
+                }else {
+                    if (!checkbox_term.isChecked()){
+                        Toast.makeText(ContactProServiceActivity.this,"Please check checkbox",Toast.LENGTH_SHORT).show();
+                    }else {
+                        additional_msg="1";
+                        submit();
+                    }
+                }
+            }
+        }
+    }
+
+    private void submit(){
+        try {
+            ProServiceApiHelper.getInstance(ContactProServiceActivity.this).contactPro(new ProServiceApiHelper.getApiProcessCallback(){
+
+                @Override
+                public void onStart() {
+                    myLoader.showLoader();
+                }
+
+                @Override
+                public void onComplete(String message) {
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
+
+
+                }
+
+                @Override
+                public void onError(String error) {
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
+
+                }
+            }, ProApplication.getInstance().getUserId(),"H",prosUserId,pros_contact_service, URLEncoder.encode("" + edt_description.toString().trim(), "UTF-8"),additional_msg);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 }

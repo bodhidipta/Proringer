@@ -12,6 +12,8 @@ import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
@@ -102,6 +104,7 @@ public class ProServiceApiHelper {
     private String prosReportReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_reportreview";
 
     private String profileImageAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_profileimg";
+    private String contactProAPI = "http://esolz.co.in/lab6/proringer_latest/contact_pro";
 
 
     public static ProServiceApiHelper getInstance(Context context) {
@@ -3248,6 +3251,85 @@ public class ProServiceApiHelper {
         }
 
     }
+
+
+
+
+    /**
+     * contact pro ..
+     *
+     * @param callback
+     * @param params
+     */
+    public void contactPro(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", params[0])
+                                .add("user_type", params[1])
+                                .add("prosUserId", params[2])
+                                .add("pros_contact_service", params[3])
+                                .add("con_description", params[4])
+                                .add("additional_msg", params[5])
+                                .build();
+
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("user_type", ":-" + params[1]);
+                        Logger.printMessage("prosUserId", ":-" + params[2]);
+                        Logger.printMessage("pros_contact_service", ":-" + params[3]);
+                        Logger.printMessage("con_description", ":-" + params[4]);
+                        Logger.printMessage("additional_msg", ":-" + Integer.parseInt(params[5]));
+
+                        Logger.printMessage("contactProAPI", contactProAPI);
+
+                        Request request = new Request.Builder()
+                                .url(contactProAPI)
+                                .post(requestBody)
+                                .build();
+                        Response response = okHttpClient.newCall(request).execute();
+                        String responseString = response.body().string();
+                        Logger.printMessage("responseString", responseString);
+                        JSONObject mainresposne = new JSONObject(responseString);
+                        if (mainresposne.getBoolean("response")) {
+                            return mainresposne.getString("message");
+                        } else {
+                            exception = mainresposne.getString("message");
+                            return exception;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+    }
+
+
 
 
     /**
