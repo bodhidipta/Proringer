@@ -194,6 +194,8 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
                     if (myLoader != null && myLoader.isMyLoaderShowing())
                         myLoader.dismissLoader();
 
+                    Toast.makeText(ContactProServiceActivity.this,message,Toast.LENGTH_SHORT).show();
+                    finish();
 
                 }
 
