@@ -18,7 +18,7 @@ import com.android.llc.proringer.helper.MyCustomAlertListener;
 public class ContactProServiceActivity extends AppCompatActivity implements MyCustomAlertListener {
 
     ImageView img_cancle,dropdown;
-    TextView tv_service,tv_terms_guidelines,et_btn_submit,tv_post_review,tv_title;
+    TextView tv_service,tv_terms_guidelines,tv_post_review,tv_title;
     CheckBox checkbox_term;
 
     @Override
@@ -29,7 +29,6 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         dropdown=(ImageView)findViewById(R.id.dropdown);
         tv_service=(TextView)findViewById(R.id.tv_service);
         tv_terms_guidelines=(TextView)findViewById(R.id.tv_terms_guidelines);
-        et_btn_submit=(TextView)findViewById(R.id.et_btn_submit);
         tv_post_review=(TextView)findViewById(R.id.tv_post_review);
         tv_title=(TextView)findViewById(R.id.tv_title);
         checkbox_term=(CheckBox)findViewById(R.id.checkbox_term);

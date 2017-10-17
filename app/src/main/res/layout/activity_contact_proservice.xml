@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:hint="Select what service you need"
-                android:paddingLeft="19dp"
+                android:paddingLeft="10dp"
                 android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
             <ImageView
@@ -118,12 +118,13 @@
 
 
 
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
             android:layout_below="@+id/relative_dropdown"
             android:layout_above="@+id/checkbox_term"
+            android:inputType="textMultiLine"
+            android:gravity="top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/et_btn_submit"
             android:hint="Provide a brief description of your project and include
  details such as;budget,best time to contact you and how fast you need to get the project completed"
             android:textSize="14sp"
