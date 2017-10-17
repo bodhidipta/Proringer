@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -67,6 +68,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
     LinearLayout LLNetworkDisconnection;
     NestedScrollView nested_scroll_main;
 
+    CardView cardview_contact_pro;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         img_top = (ImageView) findViewById(R.id.img_top);
         img_profile = (ImageView) findViewById(R.id.img_profile);
         img_achievements = (ImageView) findViewById(R.id.img_achievements);
+
+        cardview_contact_pro= (CardView) findViewById(R.id.cardview_contact_pro);
 
         rbar = (RatingBar) findViewById(R.id.rbar);
 
@@ -116,6 +121,16 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+
+        cardview_contact_pro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(ProsProjectDetailsActivity.this,ContactProServiceActivity.class);
+                intent.putExtra("pros_company_name",pros_company_name);
+                startActivity(intent);
             }
         });
 

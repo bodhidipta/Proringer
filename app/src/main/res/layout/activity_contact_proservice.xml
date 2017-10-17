@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ececeb"
+    tools:context="com.android.llc.proringer.activities.ContactProServiceActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:hint="Buuble Granite Roofing Company"
+                android:gravity="center"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/img_cancle"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:padding="15dp"
+                android:src="@drawable/ic_cross_circle_gray" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:id="@+id/relative_dropdown"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/background_solid_orange_border"
+            android:layout_marginTop="10dp">
+            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                android:id="@+id/tv_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:hint="Select what service you need"
+                android:paddingLeft="19dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:id="@+id/dropdown"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_post_review"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="SUBMIT"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+        <View
+            android:layout_above="@+id/tv_post_review"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/SplitLine_hor1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#b6b6b3" />
+
+        <TextView
+            android:layout_above="@+id/SplitLine_hor1"
+            android:id="@+id/tv_terms_guidelines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="vghjgvbhjbhbhkbnhkjjnkhvhvghgvhvghgvhgvvfghhvvhggvhvgvghgvvhvghghvhvgh"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_term"
+            android:layout_above="@+id/tv_terms_guidelines"
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:buttonTint="#8f8f8d"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextDark"
+            android:text="Send this message upto 5 aditional top rank pro for more quotes"/>
+
+
+
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_below="@+id/relative_dropdown"
+            android:layout_above="@+id/checkbox_term"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/et_btn_submit"
+            android:hint="Provide a brief description of your project and include
+ details such as;budget,best time to contact you and how fast you need to get the project completed"
+            android:textSize="14sp"
+            android:textColor="@color/colorTextDark"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/background_white_with_border"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
