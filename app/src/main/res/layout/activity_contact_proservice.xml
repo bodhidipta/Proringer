@@ -123,6 +123,7 @@
             android:layout_above="@+id/checkbox_term"
             android:inputType="textMultiLine"
             android:gravity="top"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Provide a brief description of your project and include

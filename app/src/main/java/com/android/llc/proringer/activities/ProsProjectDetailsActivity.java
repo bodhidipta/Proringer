@@ -61,6 +61,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
     ProsDetailsLicenseAdapter prosDetailsLicenseAdapter;
     ProsDetailsImageAdapter prosDetailsImageAdapter;
 
+    JSONArray services;
+
     JSONObject infoArrayJsonObject = null;
     JSONObject infoJsonObject = null;
 
@@ -130,6 +132,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
                 Intent intent=new Intent(ProsProjectDetailsActivity.this,ContactProServiceActivity.class);
                 intent.putExtra("pros_company_name",pros_company_name);
+                intent.putExtra("services",services.toString());
                 startActivity(intent);
             }
         });
@@ -243,6 +246,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
                     ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
+                    services=infoArrayJsonObject.getJSONArray("services");
 
                     if( infoArrayJsonObject.getJSONArray("services").length()>14) {
                         ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.VISIBLE);
