@@ -38,7 +38,7 @@ public class CustomListAdapterDialog extends RecyclerView.Adapter<CustomListAdap
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         try {
-            holder.tv.setText(predictionsJsonArray.getJSONObject(position).getString("member_name"));
+            holder.tv.setText(predictionsJsonArray.getJSONObject(position).getString("service_name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.CustomListAdapterDialog;
@@ -49,6 +48,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         String title=getIntent().getExtras().getString("pros_company_name");
         services=getIntent().getExtras().getString("services");
 
+        Logger.printMessage("services",services);
 
         tv_title.setText(title);
         img_cancle.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +106,6 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
                     Logger.printMessage("value", "" + value);
 
                 }
-
             });
 
             rcv_.setAdapter(customListAdapterDialog);
