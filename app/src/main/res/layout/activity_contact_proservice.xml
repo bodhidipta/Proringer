@@ -90,7 +90,7 @@
             android:layout_height="1dp"
             android:background="#b6b6b3" />
 
-        <TextView
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_above="@+id/SplitLine_hor1"
             android:id="@+id/tv_terms_guidelines"
             android:layout_width="wrap_content"

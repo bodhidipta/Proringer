@@ -19,17 +19,22 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.CustomListAdapterDialog;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ContactProServiceActivity extends AppCompatActivity implements MyCustomAlertListener {
 
     ImageView img_cancle,dropdown;
-    TextView tv_service,tv_terms_guidelines,tv_post_review,tv_title;
     CheckBox checkbox_term;
     PopupWindow popupWindow;
     CustomListAdapterDialog customListAdapterDialog = null;
     String services;
+    ProSemiBoldTextView tv_service;
+    ProRegularTextView tv_terms_guidelines,tv_post_review,tv_title;
 
 
     @Override
@@ -38,10 +43,10 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         setContentView(R.layout.activity_contact_proservice);
         img_cancle=(ImageView)findViewById(R.id.img_cancle);
         dropdown=(ImageView)findViewById(R.id.dropdown);
-        tv_service=(TextView)findViewById(R.id.tv_service);
-        tv_terms_guidelines=(TextView)findViewById(R.id.tv_terms_guidelines);
-        tv_post_review=(TextView)findViewById(R.id.tv_post_review);
-        tv_title=(TextView)findViewById(R.id.tv_title);
+        tv_service=(ProSemiBoldTextView)findViewById(R.id.tv_service);
+        tv_terms_guidelines=(ProRegularTextView)findViewById(R.id.tv_terms_guidelines);
+        tv_post_review=(ProRegularTextView)findViewById(R.id.tv_post_review);
+        tv_title=(ProRegularTextView)findViewById(R.id.tv_title);
         checkbox_term=(CheckBox)findViewById(R.id.checkbox_term);
 
 
@@ -105,6 +110,11 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
                     popupWindow.dismiss();
                     Logger.printMessage("value", "" + value);
 
+                    try {
+                        tv_service.setText(value.getString("service_name"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
