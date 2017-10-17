@@ -106,8 +106,9 @@
         <CheckBox
             android:id="@+id/checkbox_term"
             android:layout_above="@+id/tv_terms_guidelines"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:textSize="12sp"
+            android:layout_marginBottom="10dp"
             android:buttonTint="#8f8f8d"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="10dp"
@@ -124,6 +125,7 @@
             android:inputType="textMultiLine"
             android:gravity="top"
             android:padding="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Provide a brief description of your project and include

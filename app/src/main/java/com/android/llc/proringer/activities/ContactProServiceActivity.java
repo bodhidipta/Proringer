@@ -61,14 +61,14 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
                 finish();
             }
         });
-        String termsTextOne = "By submitting Your request you agree to the Terms of Use,including consent to have ProRinger and our patterns contact you to discuss your project at the provided number/address.Your consent to making communication is  not required to make purchase.";
-        String termsTextClick = "Learn More ";
+        String termsTextOne = "By submitting Your request you agree to the Terms of Use,including your consent to have ProRinger and our patterns contact you to discuss your project at the provided number/address.";
+        //String termsTextClick = "Learn More ";
         Spannable word1 = new SpannableString(termsTextOne);
         word1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorTextDark)), 0, termsTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_terms_guidelines.setText(word1);
-        Spannable word2 = new SpannableString(termsTextClick);
-        word2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, termsTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv_terms_guidelines.append(word2);
+        //Spannable word2 = new SpannableString(termsTextClick);
+        //word2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, termsTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+       // tv_terms_guidelines.append(word2);
 
         findViewById(R.id.relative_dropdown).setOnClickListener(new View.OnClickListener() {
             @Override
