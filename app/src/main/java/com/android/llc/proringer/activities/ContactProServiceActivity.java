@@ -33,8 +33,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
     PopupWindow popupWindow;
     CustomListAdapterDialog customListAdapterDialog = null;
     String services;
-    ProSemiBoldTextView tv_service;
-    ProRegularTextView tv_terms_guidelines,tv_post_review,tv_title;
+    ProRegularTextView tv_service,tv_terms_guidelines,tv_post_review,tv_title;
 
 
     @Override
@@ -43,7 +42,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         setContentView(R.layout.activity_contact_proservice);
         img_cancle=(ImageView)findViewById(R.id.img_cancle);
         dropdown=(ImageView)findViewById(R.id.dropdown);
-        tv_service=(ProSemiBoldTextView)findViewById(R.id.tv_service);
+        tv_service=(ProRegularTextView)findViewById(R.id.tv_service);
         tv_terms_guidelines=(ProRegularTextView)findViewById(R.id.tv_terms_guidelines);
         tv_post_review=(ProRegularTextView)findViewById(R.id.tv_post_review);
         tv_title=(ProRegularTextView)findViewById(R.id.tv_title);

@@ -49,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/background_solid_orange_border"
             android:layout_marginTop="10dp">
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/tv_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
