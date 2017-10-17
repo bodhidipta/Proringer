@@ -82,7 +82,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="14sp" />
         <View
-            android:layout_above="@+id/tv_post_review"
+            android:layout_above="@+id/tv_contact_pro"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/SplitLine_hor1"

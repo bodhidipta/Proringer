@@ -62,6 +62,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
     ProsDetailsImageAdapter prosDetailsImageAdapter;
 
     JSONArray services;
+    String contact_info_status="";
 
     JSONObject infoArrayJsonObject = null;
     JSONObject infoJsonObject = null;
@@ -133,6 +134,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                 Intent intent=new Intent(ProsProjectDetailsActivity.this,ContactProServiceActivity.class);
                 intent.putExtra("pros_company_name",pros_company_name);
                 intent.putExtra("services",services.toString());
+                intent.putExtra("contact_info_status",contact_info_status);
                 startActivity(intent);
             }
         });
@@ -214,6 +216,9 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     infoArrayJsonObject = jsonObject.getJSONObject("info_array");
                     infoJsonObject = infoArrayJsonObject.getJSONObject("info");
 
+                    contact_info_status=infoJsonObject.getString("contact_info_status");
+                    services=infoArrayJsonObject.getJSONArray("services");
+
 
                     if (!infoJsonObject.getString("header_image").equals(""))
                         Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
@@ -246,7 +251,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
                     ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
-                    services=infoArrayJsonObject.getJSONArray("services");
 
                     if( infoArrayJsonObject.getJSONArray("services").length()>14) {
                         ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.VISIBLE);

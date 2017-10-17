@@ -30,7 +30,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
     CheckBox checkbox_term;
     PopupWindow popupWindow;
     CustomListAdapterDialog customListAdapterDialog = null;
-    String services;
+    String services,contact_info_status;
     ProRegularTextView tv_service,tv_terms_guidelines,tv_title;
 
 
@@ -48,6 +48,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
         String title=getIntent().getExtras().getString("pros_company_name");
         services=getIntent().getExtras().getString("services");
+        contact_info_status=getIntent().getExtras().getString("contact_info_status");
 
         Logger.printMessage("services",services);
 
@@ -66,6 +67,12 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         //Spannable word2 = new SpannableString(termsTextClick);
         //word2.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, termsTextClick.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
        // tv_terms_guidelines.append(word2);
+
+        if (contact_info_status.equalsIgnoreCase("N")){
+            findViewById(R.id.checkbox_term).setVisibility(View.GONE);
+        }else {
+            findViewById(R.id.checkbox_term).setVisibility(View.VISIBLE);
+        }
 
         findViewById(R.id.relative_dropdown).setOnClickListener(new View.OnClickListener() {
             @Override
