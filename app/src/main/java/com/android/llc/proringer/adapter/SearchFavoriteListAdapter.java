@@ -55,7 +55,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             holder.tv_pros_company_name.setText(jsonInfoArray.getJSONObject(position).getString("pros_company_name").trim());
             holder.tv_category_name.setText(jsonInfoArray.getJSONObject(position).getString("category_name").trim());
             holder.tv_address.setText(jsonInfoArray.getJSONObject(position).getString("city").trim()
-                    + "," + jsonInfoArray.getJSONObject(position).getString("state").trim());
+                    + ", " + jsonInfoArray.getJSONObject(position).getString("state").trim());
 
             holder.tv_total_review.setText("(" + jsonInfoArray.getJSONObject(position).getString("total_review").trim() + ")");
 
