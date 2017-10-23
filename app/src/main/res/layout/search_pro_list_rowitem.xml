@@ -43,7 +43,7 @@
                     android:layout_height="25dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/verified" />
+                    android:src="@mipmap/ic_verified" />
             </RelativeLayout>
 
             <LinearLayout
@@ -126,7 +126,7 @@
                             android:id="@+id/img_verify_tick"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
-                            android:src="@drawable/verified" />
+                            android:src="@mipmap/ic_verified" />
 
                         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                             android:id="@+id/tv_verify"
