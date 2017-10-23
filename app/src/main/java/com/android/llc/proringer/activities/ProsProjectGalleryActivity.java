@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.helper.TouchImageView;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.MethodsUtils;
 import com.bumptech.glide.Glide;
@@ -99,35 +101,15 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
     public void showImagePortFolioDialog(String url) {
 
         Logger.printMessage("url",url);
-
         final Dialog dialog = new Dialog(ProsProjectGalleryActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                    dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialogbox_portfolio);
-        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
-
-
-        dialog.findViewById(R.id.RLMain).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[1] - 30);
-        dialog.findViewById(R.id.RLMain).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0] / 2;
-        //        scrollView.getLayoutParams().height = (height-30)/2;
-
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        ImageView imgView = (ImageView) dialog.findViewById(R.id.imgView);
-        Glide.with(ProsProjectGalleryActivity.this).load(url)
-//                .override(600, 200) // resizes the image to these dimensions (in pixel)
-                .centerCrop().into(imgView);
+        dialog.findViewById(R.id.imageview_dialog).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[1]);
+        dialog.findViewById(R.id.imageview_dialog).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0] / 2;
 
-        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        TouchImageView im=(TouchImageView)dialog.findViewById(R.id.imageview_dialog);
+        Glide.with(ProsProjectGalleryActivity.this).load(url).into(im);
         dialog.show();
     }
 
