@@ -17,6 +17,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.MethodsUtils;
 
 import org.json.JSONArray;
@@ -63,6 +64,8 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
                 try {
                     JSONObject portfolioObj = new JSONObject(message);
                     JSONArray portfolioInfoArray = portfolioObj.getJSONArray("info_array");
+
+                    Logger.printMessage("portfolioInfoArray-->",""+portfolioInfoArray);
 
                     ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectGalleryActivity.this, portfolioInfoArray);
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
