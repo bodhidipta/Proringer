@@ -7,7 +7,7 @@
     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="45dp"
 
         android:gravity="center"
         android:padding="5dp"
