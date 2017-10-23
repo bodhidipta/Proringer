@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
+import com.android.llc.proringer.activities.ProsProjectGalleryActivity;
 import com.bumptech.glide.Glide;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by su on 8/3/17.
@@ -17,10 +20,12 @@ import org.json.JSONArray;
 public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsDetailsPortfolioImageAdapter.MyViewHolder> {
     Context context;
     JSONArray portfolioInfoArray;
+    ProsProjectGalleryActivity.onOptionSelected callback;
 
-    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray) {
+    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray,ProsProjectGalleryActivity.onOptionSelected callback) {
         this.context = context;
         this.portfolioInfoArray = portfolioInfoArray;
+        this.callback = callback;
     }
 
 
@@ -31,7 +36,7 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         try {
             if (!portfolioInfoArray.getJSONObject(position).getString("portfolio_img").equals(""))
                 Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).override(600, 200) // resizes the image to these dimensions (in pixel)
@@ -39,6 +44,17 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    callback.onItemPassed(position, portfolioInfoArray.getJSONObject(position).getString("portfolio_img"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override

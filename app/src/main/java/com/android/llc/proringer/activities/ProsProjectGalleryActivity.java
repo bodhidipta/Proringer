@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
@@ -19,6 +20,7 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.MethodsUtils;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +69,12 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
 
                     Logger.printMessage("portfolioInfoArray-->",""+portfolioInfoArray);
 
-                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectGalleryActivity.this, portfolioInfoArray);
+                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectGalleryActivity.this, portfolioInfoArray, new onOptionSelected() {
+                        @Override
+                        public void onItemPassed(int position, String value) {
+                            showImagePortFolioDialog(value);
+                        }
+                    });
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
 
                 } catch (JSONException e) {
@@ -86,71 +93,42 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         }, portfolio_id);
     }
 
-//    public void showImagePortFolioDialog(String portfolio_id) {
-//
-//        ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
-//            @Override
-//            public void onStart() {
-//                myLoader.showLoader();
-//            }
-//
-//            @Override
-//            public void onComplete(String message) {
-//                if (myLoader != null && myLoader.isMyLoaderShowing())
-//                    myLoader.dismissLoader();
-//                try {
-//                    JSONObject portfolioObj = new JSONObject(message);
-//                    JSONArray portfolioInfoArray = portfolioObj.getJSONArray("info_array");
-//
-//
-//                    final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
-//                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-////                    dialog.setCancelable(false);
-//                    dialog.setContentView(R.layout.custom_dialogbox_portfolio);
-//                    //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-//
-//                    dialog.setCanceledOnTouchOutside(false);
+    public interface onOptionSelected {
+        void onItemPassed(int position, String value);
+    }
+
+    public void showImagePortFolioDialog(String url) {
+
+        Logger.printMessage("url",url);
+
+        final Dialog dialog = new Dialog(ProsProjectGalleryActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                    dialog.setCancelable(false);
-//
-//
-//                    dialog.findViewById(R.id.RLMain).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
-//                    dialog.findViewById(R.id.RLMain).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[0] / 2;
-//                    //        scrollView.getLayoutParams().height = (height-30)/2;
-//
-//                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//
-//                    RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
-//                    rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
-//
-//                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectDetailsActivity.this, portfolioInfoArray);
-//                    rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
-//
-//                    dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//
-//
-//                    dialog.show();
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    if (myLoader != null && myLoader.isMyLoaderShowing())
-//                        myLoader.dismissLoader();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                if (myLoader != null && myLoader.isMyLoaderShowing())
-//                    myLoader.dismissLoader();
-//            }
-//        }, portfolio_id);
-//    }
+        dialog.setContentView(R.layout.custom_dialogbox_portfolio);
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+
+
+        dialog.findViewById(R.id.RLMain).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[1] - 30);
+        dialog.findViewById(R.id.RLMain).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0] / 2;
+        //        scrollView.getLayoutParams().height = (height-30)/2;
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        ImageView imgView = (ImageView) dialog.findViewById(R.id.imgView);
+        Glide.with(ProsProjectGalleryActivity.this).load(url).override(600, 200) // resizes the image to these dimensions (in pixel)
+                .centerCrop().into(imgView);
+
+        dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 }
