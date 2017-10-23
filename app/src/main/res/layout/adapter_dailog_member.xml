@@ -11,7 +11,7 @@
 
         android:gravity="center"
         android:padding="5dp"
-        android:textSize="19dp" />
+        android:textSize="14dp" />
 
     <View
         android:id="@+id/SplitLine_hor1"
