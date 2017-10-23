@@ -119,7 +119,8 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         ImageView imgView = (ImageView) dialog.findViewById(R.id.imgView);
-        Glide.with(ProsProjectGalleryActivity.this).load(url).override(600, 200) // resizes the image to these dimensions (in pixel)
+        Glide.with(ProsProjectGalleryActivity.this).load(url)
+//                .override(600, 200) // resizes the image to these dimensions (in pixel)
                 .centerCrop().into(imgView);
 
         dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
