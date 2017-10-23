@@ -195,6 +195,8 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            Intent backIntent = new Intent();
+            setResult(RESULT_CANCELED, backIntent );
             finish();
         }
         return super.onOptionsItemSelected(item);

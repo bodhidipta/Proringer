@@ -189,13 +189,15 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
             }
         });
 
+        setDataProListDetails();
+
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setDataProListDetails();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        setDataProListDetails();
+//    }
 
     public void setDataProListDetails() {
 
@@ -357,7 +359,9 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                     prosDetailsImageAdapter = new ProsDetailsImageAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("project_gallery"), new onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, String value) {
-                            showImagePortFolioDialog(value);
+                            Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsProjectGalleryActivity.class);
+                            intent.putExtra("portfolio_id", value);
+                            startActivity(intent);
                         }
                     });
                     rcv_project_gallery.setAdapter(prosDetailsImageAdapter);
@@ -393,76 +397,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                 pros_id
 //                "82"
         );
-    }
-
-
-    public void showImagePortFolioDialog(String portfolio_id) {
-
-        ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
-            @Override
-            public void onStart() {
-                myLoader.showLoader();
-            }
-
-            @Override
-            public void onComplete(String message) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
-                try {
-                    JSONObject portfolioObj = new JSONObject(message);
-                    JSONArray portfolioInfoArray = portfolioObj.getJSONArray("info_array");
-
-
-                    final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                    dialog.setCancelable(false);
-                    dialog.setContentView(R.layout.custom_dialogbox_portfolio);
-                    //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
-                    dialog.setCanceledOnTouchOutside(false);
-                    dialog.setCancelable(false);
-
-
-                    dialog.findViewById(R.id.RLMain).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1] - 30);
-                    dialog.findViewById(R.id.RLMain).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[0] / 2;
-                    //        scrollView.getLayoutParams().height = (height-30)/2;
-
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                    RecyclerView rcv_portfolio = (RecyclerView) dialog.findViewById(R.id.rcv_portfolio);
-                    rcv_portfolio.setLayoutManager(new LinearLayoutManager(ProsProjectDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
-
-                    ProsDetailsPortfolioImageAdapter prosDetailsPortfolioImageAdapter = new ProsDetailsPortfolioImageAdapter(ProsProjectDetailsActivity.this, portfolioInfoArray);
-                    rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
-
-                    dialog.findViewById(R.id.img_cancel_dialog).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                        }
-                    });
-
-
-                    dialog.show();
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    if (myLoader != null && myLoader.isMyLoaderShowing())
-                        myLoader.dismissLoader();
-                }
-
-            }
-
-            @Override
-            public void onError(String error) {
-                if (myLoader != null && myLoader.isMyLoaderShowing())
-                    myLoader.dismissLoader();
-            }
-        }, portfolio_id);
-
-
     }
 
     @Override
@@ -539,4 +473,14 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         dialog.show();
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            return;
+        }else {
+            setDataProListDetails();
+        }
+    }
 }

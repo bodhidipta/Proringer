@@ -1,5 +1,6 @@
 package com.android.llc.proringer.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -69,6 +70,8 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
         img_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent backIntent = new Intent();
+                setResult(RESULT_CANCELED, backIntent );
                 finish();
             }
         });
@@ -198,6 +201,9 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
                         myLoader.dismissLoader();
 
                     Toast.makeText(ContactProServiceActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                    Intent backIntent = new Intent();
+                    setResult(RESULT_OK, backIntent );
                     finish();
 
                 }

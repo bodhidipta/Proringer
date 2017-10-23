@@ -105,7 +105,9 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(GetStartedActivity.RESULT_CANCELED);
+        Intent backIntent = new Intent();
+        setResult(RESULT_CANCELED, backIntent );
+//        setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
     }
 
