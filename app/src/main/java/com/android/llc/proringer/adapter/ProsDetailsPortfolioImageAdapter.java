@@ -2,13 +2,11 @@ package com.android.llc.proringer.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 
@@ -19,22 +17,10 @@ import org.json.JSONArray;
 public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsDetailsPortfolioImageAdapter.MyViewHolder> {
     Context context;
     JSONArray portfolioInfoArray;
-    int height;
-    int width;
 
     public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray) {
         this.context = context;
         this.portfolioInfoArray = portfolioInfoArray;
-
-
-//        DisplayMetrics displayMetrics = new DisplayMetrics();
-//        ((ProsProjectDetailsActivity) context).getWindowManager()
-//                .getDefaultDisplay()
-//                .getMetrics(displayMetrics);
-//
-//        height = displayMetrics.heightPixels;
-//        width = displayMetrics.widthPixels;
-
     }
 
 
@@ -46,11 +32,10 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        //holder.img.getLayoutParams().width = (width)/3;
-//        holder.img.getLayoutParams().height = (width) /3;
         try {
             if (!portfolioInfoArray.getJSONObject(position).getString("portfolio_img").equals(""))
-                Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).centerCrop().into(holder.img);
+                Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).override(600, 200) // resizes the image to these dimensions (in pixel)
+                        .centerCrop().into(holder.img);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
