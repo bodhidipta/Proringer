@@ -3,12 +3,14 @@ package com.android.llc.proringer.activities;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -39,9 +41,20 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pros_project_gallery);
         rcv_portfolio = (RecyclerView)findViewById(R.id.rcv_portfolio);
-        rcv_portfolio.setLayoutManager(new GridLayoutManager(ProsProjectGalleryActivity.this,3));
+//        rcv_portfolio.setLayoutManager(new GridLayoutManager(ProsProjectGalleryActivity.this,3));
+
+
+        Display display = ProsProjectGalleryActivity.this.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int  x = size.x;
+        x=(int)x/3;
+
+        GridLayoutManager linearLayoutManager = new GridLayoutManager(ProsProjectGalleryActivity.this,3);
+        rcv_portfolio.setLayoutManager(linearLayoutManager);
+
         myLoader = new MyLoader(this);
-        loadImagePortFolio(getIntent().getStringExtra("portfolio_id"));
+        loadImagePortFolio(getIntent().getStringExtra("portfolio_id"),x);
         findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +65,7 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         });
     }
 
-    public void loadImagePortFolio(String portfolio_id) {
+    public void loadImagePortFolio(String portfolio_id, final int x) {
 
         ProServiceApiHelper.getInstance(ProsProjectGalleryActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
@@ -75,7 +88,7 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
                         public void onItemPassed(int position, String value) {
                             showImagePortFolioDialog(value);
                         }
-                    });
+                    },x);
                     rcv_portfolio.setAdapter(prosDetailsPortfolioImageAdapter);
 
                 } catch (JSONException e) {

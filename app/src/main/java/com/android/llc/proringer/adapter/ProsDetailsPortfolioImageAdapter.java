@@ -1,6 +1,7 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +22,22 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
     Context context;
     JSONArray portfolioInfoArray;
     ProsProjectGalleryActivity.onOptionSelected callback;
+    int x;
 
-    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray,ProsProjectGalleryActivity.onOptionSelected callback) {
+    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray,ProsProjectGalleryActivity.onOptionSelected callback,int x) {
         this.context = context;
         this.portfolioInfoArray = portfolioInfoArray;
         this.callback = callback;
+        this.x=x;
     }
 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_pro_details_images, parent, false);
+        GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) itemView.getLayoutParams();
+        params.height = x;
+        itemView.setLayoutParams(params);
         return new ProsDetailsPortfolioImageAdapter.MyViewHolder(itemView);
     }
 
