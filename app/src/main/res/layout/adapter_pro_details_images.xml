@@ -3,7 +3,7 @@
     android:id="@+id/img"
     android:layout_width="wrap_content"
     android:layout_height="100dp"
-    android:scaleType="fitXY"
+    android:scaleType="centerCrop"
     android:layout_margin="2dp"
     android:adjustViewBounds="true"/>
 
