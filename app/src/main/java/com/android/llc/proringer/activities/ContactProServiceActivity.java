@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.CustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -112,7 +113,11 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
     @Override
     public void callbackForAlert(String result, int i) {
-
+        if(result.equalsIgnoreCase("ok") && i==3){
+            Intent backIntent = new Intent();
+            setResult(RESULT_OK, backIntent );
+            finish();
+        }
     }
 
     private void showDialogServies(View v, JSONArray PredictionsJsonArray) {
@@ -202,9 +207,8 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
                     Toast.makeText(ContactProServiceActivity.this,message,Toast.LENGTH_SHORT).show();
 
-                    Intent backIntent = new Intent();
-                    setResult(RESULT_OK, backIntent );
-                    finish();
+                    CustomAlert customAlert = new CustomAlert(ContactProServiceActivity.this, "",message, ContactProServiceActivity.this);
+                    customAlert.createNormalAlert("Ok",3);
 
                 }
 
