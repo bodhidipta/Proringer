@@ -179,7 +179,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 
                     tv_address.setText(jsonInfoArray.getJSONObject(0).getString("city")
-                            + "," + jsonInfoArray.getJSONObject(0).getString("state_code")
+                            + ", " + jsonInfoArray.getJSONObject(0).getString("state_code")
                             + " " + jsonInfoArray.getJSONObject(0).getString("zipcode"));
 
                     tv_active_projects.setText(jsonInfoArray.getJSONObject(0).getString("total_active_project"));
