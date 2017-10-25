@@ -45,7 +45,7 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         try {
             if (!portfolioInfoArray.getJSONObject(position).getString("portfolio_img").equals(""))
-                Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).override(600, 200) // resizes the image to these dimensions (in pixel)
+                Glide.with(context).load(portfolioInfoArray.getJSONObject(position).getString("portfolio_img")).override(640, 480) // resizes the image to these dimensions (in pixel)
                         .centerCrop().into(holder.img);
         } catch (Exception ex) {
             ex.printStackTrace();
