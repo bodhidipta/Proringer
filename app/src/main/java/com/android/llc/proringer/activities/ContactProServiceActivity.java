@@ -87,8 +87,10 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
         if (contact_info_status.equalsIgnoreCase("N")){
             findViewById(R.id.checkbox_term).setVisibility(View.GONE);
+            findViewById(R.id.SplitLine_hor1).setVisibility(View.GONE);
         }else {
             findViewById(R.id.checkbox_term).setVisibility(View.VISIBLE);
+            findViewById(R.id.SplitLine_hor1).setVisibility(View.VISIBLE);
         }
 
         findViewById(R.id.relative_dropdown).setOnClickListener(new View.OnClickListener() {
