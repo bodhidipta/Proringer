@@ -56,17 +56,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp">
 
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_pros_company_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:maxLines="1"
-                        android:paddingRight="30dp"
-                        android:text="Jims Plumbing Service"
-                        android:textColor="#231f20"
-                        android:textSize="14sp" />
-
                     <ImageView
                         android:id="@+id/img_favorite"
                         android:layout_width="30dp"
@@ -75,6 +64,19 @@
                         android:layout_centerVertical="true"
                         android:padding="5dp"
                         android:src="@drawable/ic_favorite" />
+
+                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                        android:id="@+id/tv_pros_company_name"
+                        android:layout_toLeftOf="@+id/img_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="Jims Plumbing Service"
+                        android:textColor="#231f20"
+                        android:textSize="14sp" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
