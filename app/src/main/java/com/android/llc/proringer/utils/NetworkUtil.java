@@ -3,6 +3,7 @@ package com.android.llc.proringer.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
+import android.net.NetworkInfo;
 
 /**
  * Created by bodhidipta on 19/06/17.
@@ -34,12 +35,9 @@ public class NetworkUtil {
     }
 
     public boolean isNetworkAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        for (Network network : cm.getAllNetworks()) {
-            if (cm.getNetworkInfo(network).isAvailable() && cm.getNetworkInfo(network).isConnected()) {
-                return true;
-            }
-        }
-        return false;
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager)context. getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
