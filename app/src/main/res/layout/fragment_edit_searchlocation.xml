@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBGblueShade"
+    android:clickable="true"
+    android:orientation="vertical">
+    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        android:id="@+id/selected_text"
+        android:layout_below="@+id/linear_progrebarr_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Add a phto(optional)"
+        android:textColor="@color/colorTextDark"
+        android:textSize="14sp"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/container_location"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
+                android:id="@+id/zip_code_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_white_with_border"
+                android:gravity="center"
+                android:inputType="text"
+                android:maxLength="6"
+                android:text="10001"
+                android:padding="4dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <ProgressBar
+                android:id="@+id/loading_progress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/error_progress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_error_outline"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/continue_location_section"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="CONTINUE"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/location_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/continue_location_section"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="@dimen/button_height" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,10 +1,12 @@
 package com.android.llc.proringer.fragments.main_content;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.AddEditProsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.pojo.Appsdata;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -31,7 +35,7 @@ public class MyProjectDetailsFragment extends Fragment{
     ProRegularTextView tv_posted_in, tv_project, tv_service, tv_type, tv_property, tv_status, tv_start, img_description;
     ImageView img_project;
     LinearLayout LL_Active;
-    ProSemiBoldTextView tv_accepted_review;
+    ProSemiBoldTextView tv_accepted_review,tv_edit;
 
     @Nullable
     @Override
@@ -53,19 +57,43 @@ public class MyProjectDetailsFragment extends Fragment{
         tv_start = (ProRegularTextView) view.findViewById(R.id.tv_start);
         img_description = (ProRegularTextView) view.findViewById(R.id.img_description);
         img_project = (ImageView) view.findViewById(R.id.img_project);
-
         LL_Active = (LinearLayout) view.findViewById(R.id.LL_Active);
         tv_accepted_review = (ProSemiBoldTextView) view.findViewById(R.id.tv_accepted_review);
-
-
+        tv_edit=(ProSemiBoldTextView)view.findViewById(R.id.tv_edit);
         tv_posted_in.setText(ProApplication.getInstance().getDataSelected().getDate_time());
+
+        Appsdata.projectid=ProApplication.getInstance().getDataSelected().getId();
+        String id=ProApplication.getInstance().getDataSelected().getId();
+        Log.d("id",id);
         tv_project.setText(ProApplication.getInstance().getDataSelected().getProject_category_name());
+        final String project=ProApplication.getInstance().getDataSelected().getProject_category_name();
         tv_service.setText(ProApplication.getInstance().getDataSelected().getProject_category_service_name());
         tv_type.setText(ProApplication.getInstance().getDataSelected().getProject_service_looktype());
         tv_property.setText(ProApplication.getInstance().getDataSelected().getProperty_type_name());
         tv_status.setText(ProApplication.getInstance().getDataSelected().getProject_stage());
         tv_start.setText(ProApplication.getInstance().getDataSelected().getProject_timeframe_name());
         img_description.setText(ProApplication.getInstance().getDataSelected().getProject_name());
+        String city=ProApplication.getInstance().getDataSelected().getCity();
+        String projectzip=ProApplication.getInstance().getDataSelected().getZip();
+        String county=ProApplication.getInstance().getDataSelected().getCountry_code();
+        String state=ProApplication.getInstance().getDataSelected().getState_code();
+        String latlong=ProApplication.getInstance().getDataSelected().getLatitude();
+        String longtitude=ProApplication.getInstance().getDataSelected().getLatitude();
+        Log.d("city",city);
+        Log.d("Zip",projectzip);
+        Log.d("count",county);
+        Log.d("State",state);
+        Log.d("latlong",latlong);
+        Log.d("longtitued",longtitude);
+        Appsdata.servic=ProApplication.getInstance().getDataSelected().getProject_category_service_name();
+        Appsdata.Project_name=(ProApplication.getInstance().getDataSelected().getProject_category_name());
+        Appsdata.city=city;
+        Appsdata.projectzip=projectzip;
+        Appsdata.county=county;
+        Appsdata.state=state;
+        Appsdata.latlong=latlong;
+        Appsdata.longtitude=longtitude;
+
 
         myLoader=new MyLoader(getActivity());
 
@@ -87,6 +115,15 @@ public class MyProjectDetailsFragment extends Fragment{
             LL_Active.setVisibility(View.GONE);
             tv_accepted_review.setVisibility(View.GONE);
         }
+        tv_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//
+                Intent i= new Intent(getActivity(), AddEditProsActivity.class);
+                i.putExtra("Project",project);
+                startActivity(i);
+            }
+        });
         view.findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

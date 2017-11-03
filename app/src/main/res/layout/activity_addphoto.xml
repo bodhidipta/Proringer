@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.android.llc.proringer.activities.AddEditProsActivity">
+
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapsing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentScrim="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin" />
+
+        <RelativeLayout
+            android:id="@+id/RLToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimary"
+            app:layout_collapseMode="pin">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:src="@drawable/ic_keyboard_arrow_left_black_24px" />
+
+            <ImageView
+                android:id="@+id/img_home"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:src="@drawable/ic_home" />
+
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/tv_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:hint="Buuble Granite Roofing Company"
+                android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.CollapsingToolbarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/linear_progrebarr_text"
+            android:orientation="vertical"
+            android:layout_marginTop="0dp">
+            <ProgressBar
+                android:id="@+id/progress_posting"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="10"
+                android:progress="6"
+                android:progressTint="@color/colorAccent" />
+
+            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                android:id="@+id/selected_service_category"
+                android:layout_width="match_parent"
+                android:layout_marginTop="3dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorHeader"
+                android:gravity="center"
+                android:text="Selected type"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"></FrameLayout>
+
+
+</LinearLayout>

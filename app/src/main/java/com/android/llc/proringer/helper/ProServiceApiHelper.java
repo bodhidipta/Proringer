@@ -7,6 +7,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.pojo.AddressData;
+import com.android.llc.proringer.pojo.Appsdata;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
@@ -106,6 +107,8 @@ public class ProServiceApiHelper {
     private String profileImageAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_profileimg";
     private String contactProAPI = "http://esolz.co.in/lab6/proringer_latest/contact_pro";
 
+
+    private  String editprojectAPI="http://esolz.co.in/lab6/proringer_latest/app_project_edit";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -3330,6 +3333,123 @@ public class ProServiceApiHelper {
     }
 
 
+
+    /**
+     * Post Project
+     *
+     * @param callback
+     * @param params
+     */
+    public void editproject(final getApiProcessCallback callback, String... params)
+    {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+
+
+            new AsyncTask<String, Void, String>() {
+                File upload_temp_PIC;
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+
+                @Override
+                protected String doInBackground(String... params) {
+                    OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+                    //Logger.printMessage("@user_id", "user_id:" + ProApplication.getInstance().getUserId());
+                    try {
+                        if (!params[8].equals("")) {
+                            try {
+                                Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[8]);
+                                Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
+                                upload_temp_PIC = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
+                                upload_temp_PIC.createNewFile();
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                                byte[] bitmapdata = bos.toByteArray();
+
+                                FileOutputStream fos = new FileOutputStream(upload_temp_PIC);
+                                fos.write(bitmapdata);
+                                fos.flush();
+                                fos.close();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                return e.getMessage();
+                            }
+
+                        }
+                        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+                        MultipartBody.Builder requestBody = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("project_id",params[0])
+                                .addFormDataPart("user_id", Appsdata.Uid)
+                                .addFormDataPart("project_zipcode", params[1])
+                                .addFormDataPart("city",params[2])
+                                .addFormDataPart("state",params[3])
+                                .addFormDataPart("country", params[4])
+                                .addFormDataPart("latitude", params[5])
+                                .addFormDataPart("longitude", params[6])
+                                .addFormDataPart("project_details", params[7]);
+
+
+                        if (upload_temp_PIC != null) {
+                            Logger.printMessage("*****", "" + upload_temp_PIC.getAbsolutePath());
+                            requestBody.addFormDataPart("project_image", upload_temp_PIC.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp_PIC));
+                        } else {
+                            requestBody.addFormDataPart("project_image", "");
+
+                        }
+
+                        Request request = new Request.Builder()
+                                .post(requestBody.build())
+                                .url(editprojectAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_edit_response", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+
+
+
+                }
+
+
+
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }. executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        }
+        else {
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+        }
+    }
 
 
     /**

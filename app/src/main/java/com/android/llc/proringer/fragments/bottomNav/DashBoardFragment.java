@@ -26,6 +26,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.pojo.Appsdata;
 import com.android.llc.proringer.utils.ImageTakerActivityCamera;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.PermissionController;
@@ -175,6 +176,10 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 
                     if (!jsonInfoArray.getJSONObject(0).getString("profile_img").equals(""))
                         Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
+
+
+                    String uid= jsonInfoArray.getJSONObject(0).getString("homeowner_id");
+                    Appsdata.Uid=uid;
 
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 

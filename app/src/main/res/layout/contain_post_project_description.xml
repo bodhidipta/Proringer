@@ -9,14 +9,26 @@
     >
 
     <LinearLayout
-        android:padding="10dp"
+        android:padding="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/selected_text"
+            android:layout_below="@+id/linear_progrebarr_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Add a phto(optional)"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp"
+            android:visibility="visible" />
 
         <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
             android:id="@+id/project_description_text"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:background="@drawable/background_white_with_border"
             android:gravity="top"
