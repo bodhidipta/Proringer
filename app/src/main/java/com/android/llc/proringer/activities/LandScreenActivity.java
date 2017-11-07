@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.bottomNav.DashBoardFragment;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
@@ -37,10 +38,16 @@ import com.android.llc.proringer.fragments.main_content.MyProjectRateProFragment
 import com.android.llc.proringer.fragments.main_content.ProjectMessagingFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.crashlytics.android.Crashlytics;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -58,6 +65,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     private FragmentManager fragmentManager = null;
 
     private InputMethodManager keyboard;
+
+    MyLoader myLoader = null;
 
 
     @Override
@@ -81,6 +90,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         getSupportActionBar().setTitle("");
 
         keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+
+        myLoader = new MyLoader(this);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -187,10 +198,32 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                         break;
                     case NavigationHandler.LOGOUT:
                         closeDrawer();
-                        ProApplication.getInstance().logOut();
-                        startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
-                        finish();
-                        break;
+
+                        ProServiceApiHelper.getInstance(LandScreenActivity.this).logOut(new ProServiceApiHelper.getApiProcessCallback() {
+                            @Override
+                            public void onStart() {
+                                myLoader.showLoader();
+                            }
+
+                            @Override
+                            public void onComplete(String message) {
+                                if (myLoader != null && myLoader.isMyLoaderShowing())
+                                    myLoader.dismissLoader();
+
+                                ProApplication.getInstance().logOut();
+                                startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
+                                finish();
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                                if (myLoader != null && myLoader.isMyLoaderShowing())
+                                    myLoader.dismissLoader();
+                            }
+                        });
+
+                    break;
 
                     case NavigationHandler.Email_Support:
                         closeDrawer();

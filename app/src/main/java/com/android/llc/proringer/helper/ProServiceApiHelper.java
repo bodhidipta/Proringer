@@ -110,6 +110,7 @@ public class ProServiceApiHelper {
 
     private  String editprojectAPI="http://esolz.co.in/lab6/proringer_latest/app_project_edit";
     private  String loginFBAPI="http://esolz.co.in/lab6/proringer_latest/app_facebook_login";
+    private  String logOutAPI="http://esolz.co.in/lab6/HappywanNyan/app_logout";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -3543,6 +3544,73 @@ public class ProServiceApiHelper {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
+
+
+
+    /**
+     * logout a project or search a pro
+     *
+     * @param callback
+     * @param params
+     */
+    public void logOut(final getApiProcessCallback callback, String... params) {
+
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        logOutAPI=logOutAPI + "?" + "user_id=" + ProApplication.getInstance().getUserId() +"&anorid_status=1";
+                        Logger.printMessage("logOut", "" + logOutAPI);
+
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(logOutAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+                        JSONObject mainObject = new JSONObject(responseString);
+
+                        if (mainObject.getBoolean("response")) {
+                            return  responseString;
+                        } else {
+                            exception = mainObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return null;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(String result) {
+                    if (!exception.equals("")) {
+                        callback.onError(exception);
+                    } else if (exception.equals("")) {
+                        callback.onComplete(result);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+        }
+    }
+
+
+
 
 
     /**
