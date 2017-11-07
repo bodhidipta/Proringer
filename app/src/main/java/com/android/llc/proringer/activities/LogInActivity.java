@@ -13,6 +13,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 
@@ -57,6 +58,13 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LogInActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
+        findViewById(R.id.RLFacebook).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(LogInActivity.this, FacebookActivity.class), FacebookActivity.FacebookResponse);
             }
         });
         sign_up = (ProSemiBoldTextView) findViewById(R.id.sign_up);
@@ -135,4 +143,21 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
             log_in.performClick();
         }
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == FacebookActivity.FacebookResponse && resultCode == RESULT_OK) {
+//            startActivity(new Intent(LoginChooserActivity.this, BaseActivity.class));
+//            finish();
+
+            Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+
+    }
+
 }

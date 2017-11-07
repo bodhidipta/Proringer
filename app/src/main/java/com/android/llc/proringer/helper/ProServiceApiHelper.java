@@ -109,6 +109,7 @@ public class ProServiceApiHelper {
 
 
     private  String editprojectAPI="http://esolz.co.in/lab6/proringer_latest/app_project_edit";
+    private  String loginFBAPI="http://esolz.co.in/lab6/proringer_latest/app_facebook_login";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -445,6 +446,98 @@ public class ProServiceApiHelper {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
+
+
+
+
+
+    /**
+     * For Facebook login of user
+     *
+     * @param callback
+     * @param params
+     */
+
+    public void getUserLoggedInFacebook(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+
+                        RequestBody body = new FormBody.Builder()
+                                .add("f_name", params[0])
+                                .add("l_name", params[1])
+                                .add("email", params[2])
+                                .add("fb_id", params[2])
+                                .build();
+
+                        Logger.printMessage("f_name", ":-" + params[0]);
+                        Logger.printMessage("l_name", ":-" + params[1]);
+                        Logger.printMessage("email", ":-" + params[2]);
+                        Logger.printMessage("fb_id", ":-" + params[3]);
+                        Logger.printMessage("loginFBAPI", loginFBAPI);
+
+
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Request request = new Request.Builder()
+                                .url(loginFBAPI)
+                                .post(body)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String response_string = response.body().string();
+
+                        Logger.printMessage("loginFBAPI", loginFBAPI + "\n"
+                                + params[0] + "\n"
+                                + params[1] + "\n"
+                                + params[2] + "\n"
+                                + params[3] + "\n"
+                                + response_string);
+
+                        JSONObject mainResponseObj = new JSONObject(response_string);
+                        if (mainResponseObj.getBoolean("response")) {
+                            exception = "";
+                            JSONObject jsonInfo = mainResponseObj.getJSONObject("info_array");
+                            ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"), jsonInfo.getString("zipcode"));
+                            return mainResponseObj.getString("message");
+                        } else {
+                            exception = "true";
+                            return mainResponseObj.getString("message");
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else {
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+        }
+    }
+
 
 
     /**

@@ -84,6 +84,7 @@
             android:background="@color/colorHeader" />
 
         <RelativeLayout
+            android:id="@+id/RLFacebook"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:background="#3c5a99">

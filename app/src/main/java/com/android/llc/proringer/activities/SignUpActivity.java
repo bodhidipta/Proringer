@@ -70,7 +70,6 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
 
         keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         sign_up_with_facebook = (RelativeLayout) findViewById(R.id.sign_up_with_facebook);
-
         first_name = (ProLightEditText) findViewById(R.id.first_name);
         last_name = (ProLightEditText) findViewById(R.id.last_name);
         email = (ProLightEditText) findViewById(R.id.email);
@@ -89,6 +88,14 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
         mail_resent.setMovementMethod(LinkMovementMethod.getInstance());
 
         myLoader=new MyLoader(SignUpActivity.this);
+
+        sign_up_with_facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(SignUpActivity.this, FacebookActivity.class), FacebookActivity.FacebookResponse);
+            }
+        });
+
 
         findViewById(R.id.terms_of_use).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -337,6 +344,20 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
         }
         else if(result.equalsIgnoreCase("retry") && i==1){
             validateRegistration();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == FacebookActivity.FacebookResponse && resultCode == RESULT_OK) {
+//            startActivity(new Intent(LoginChooserActivity.this, BaseActivity.class));
+//            finish();
+
+            Intent intent = new Intent(SignUpActivity.this, LandScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         }
     }
 }
