@@ -115,12 +115,13 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
     public void showImagePortFolioDialog(String url) {
 
         Logger.printMessage("url",url);
-        final Dialog dialog = new Dialog(ProsProjectGalleryActivity.this);
+        final Dialog dialog = new Dialog(ProsProjectGalleryActivity.this,android.R.style.Theme_Light);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialogbox_portfolio);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        dialog.findViewById(R.id.imageview_dialog).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[1]);
-        dialog.findViewById(R.id.imageview_dialog).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0];
+        dialog.findViewById(R.id.RelativeMainLL).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[1]);
+        dialog.findViewById(R.id.RelativeMainLL).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0];
 
 
         dialog.findViewById(R.id.img_close).setOnClickListener(new View.OnClickListener() {

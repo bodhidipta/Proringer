@@ -1,17 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeMainLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/img_close"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="5dp"
         android:layout_alignParentRight="true"
-        android:padding="10dp"
         android:src="@drawable/ic_cross_circle" />
 
-    <com.android.llc.proringer.helper.TouchImageViewFinal xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.android.llc.proringer.helper.TouchImageViewFinal
         android:id="@+id/imageview_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
