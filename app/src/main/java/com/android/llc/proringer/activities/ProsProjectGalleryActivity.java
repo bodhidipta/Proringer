@@ -21,6 +21,7 @@ import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.helper.TouchImageView;
+import com.android.llc.proringer.helper.TouchImageViewFinal;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.MethodsUtils;
 import com.bumptech.glide.Glide;
@@ -119,9 +120,18 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         dialog.findViewById(R.id.imageview_dialog).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[1]);
-        dialog.findViewById(R.id.imageview_dialog).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0] / 2;
+        dialog.findViewById(R.id.imageview_dialog).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectGalleryActivity.this)[0];
 
-        TouchImageView im=(TouchImageView)dialog.findViewById(R.id.imageview_dialog);
+
+        dialog.findViewById(R.id.img_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        TouchImageViewFinal im=(TouchImageViewFinal)dialog.findViewById(R.id.imageview_dialog);
         Glide.with(ProsProjectGalleryActivity.this).load(url).into(im);
         dialog.show();
     }

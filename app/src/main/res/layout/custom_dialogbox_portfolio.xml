@@ -1,10 +1,26 @@
-<com.android.llc.proringer.helper.TouchImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scaleType="fitXY"
-    android:adjustViewBounds="true"
-    android:id="@+id/imageview_dialog"
-    android:background="#00000000">
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_cross_circle" />
+
+    <com.android.llc.proringer.helper.TouchImageViewFinal xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/imageview_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/img_close"
+        android:adjustViewBounds="true"
+        android:background="#00000000"
+        android:scaleType="fitXY"></com.android.llc.proringer.helper.TouchImageViewFinal>
+
+</RelativeLayout>
 
 
-</com.android.llc.proringer.helper.TouchImageView>
+
