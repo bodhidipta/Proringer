@@ -5,17 +5,21 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.android.llc.proringer.ImagePinching.graphics.ImageViewTouch;
+import com.android.llc.proringer.ImagePinching.graphics.ImageViewTouchBase;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.helper.MyLoader;
@@ -29,6 +33,8 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 
 /**
  * Created by su on 10/23/17.
@@ -132,8 +138,45 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         });
 
 
-        TouchImageViewFinal im=(TouchImageViewFinal)dialog.findViewById(R.id.imageview_dialog);
-        Glide.with(ProsProjectGalleryActivity.this).load(url).into(im);
+        ImageViewTouch mImage=(ImageViewTouch)dialog.findViewById(R.id.imageview_dialog);
+
+        // set the default image display type
+        mImage.setDisplayType(ImageViewTouchBase.DisplayType.FIT_IF_BIGGER);
+        Glide.with(ProsProjectGalleryActivity.this).load(url).into(mImage);
+
+
+        mImage.setSingleTapListener(
+                new ImageViewTouch.OnImageViewTouchSingleTapListener() {
+
+                    @Override
+                    public void onSingleTapConfirmed() {
+                        Logger.printMessage("onSingleTapConfirmed", "onSingleTapConfirmed");
+                    }
+                }
+        );
+
+
+        mImage.setDoubleTapListener(
+                new ImageViewTouch.OnImageViewTouchDoubleTapListener() {
+
+                    @Override
+                    public void onDoubleTap() {
+                        Logger.printMessage("onDoubleTap", "onDoubleTap");
+                    }
+                }
+        );
+
+        mImage.setOnDrawableChangedListener(
+                new ImageViewTouchBase.OnDrawableChangeListener() {
+
+                    @Override
+                    public void onDrawableChanged(Drawable drawable) {
+                        Logger.printMessage("onBitmapChanged", "onBitmapChanged: " + drawable);
+                    }
+                }
+        );
+
+
         dialog.show();
     }
 

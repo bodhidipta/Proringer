@@ -4,22 +4,19 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/img_close"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:padding="5dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_cross_circle" />
-
-    <com.android.llc.proringer.helper.TouchImageViewFinal
+    <com.android.llc.proringer.ImagePinching.graphics.ImageViewTouch
         android:id="@+id/imageview_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/img_close"
-        android:adjustViewBounds="true"
-        android:background="#00000000"
-        android:scaleType="fitXY"></com.android.llc.proringer.helper.TouchImageViewFinal>
+        />
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_cross_circle" />
 
 </RelativeLayout>
 
