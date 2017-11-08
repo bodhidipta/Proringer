@@ -71,12 +71,9 @@ public class EditImageSelectFragment extends Fragment {
         view.findViewById(R.id.continue_image_section).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                  ((AddEditProsActivity) getActivity()).mCurrentPhotoPath = mCurrentPhotoPath;
                   ((AddEditProsActivity) getActivity()).increaseStep();
                  ((AddEditProsActivity) getActivity()).changeFragmentNext(1);
-
-
             }
         });
 
@@ -174,7 +171,4 @@ public class EditImageSelectFragment extends Fragment {
                 .create()
                 .show();
     }
-
-
-
 }
