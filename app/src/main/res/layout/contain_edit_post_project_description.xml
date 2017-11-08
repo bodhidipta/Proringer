@@ -13,6 +13,18 @@
         android:orientation="vertical"
         android:padding="0dp">
 
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/selected_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/linear_progrebarr_text"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Add details about the project"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
         <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
             android:id="@+id/project_description_text"
             android:layout_width="match_parent"

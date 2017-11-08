@@ -20,21 +20,18 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 public class EditProsDetailsFragment extends Fragment {
     ProRegularEditText project_description_text;
-    ProRegularTextView selected_text;
     ScrollView container_project_description;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.contain_post_project_description, container, false);
+        return inflater.inflate(R.layout.contain_edit_post_project_description, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         project_description_text = (ProRegularEditText) view.findViewById(R.id.project_description_text);
-        selected_text = (ProRegularTextView) view.findViewById(R.id.selected_text);
-        selected_text.setText("Add details about the project");
         container_project_description = (ScrollView) view.findViewById(R.id.container_project_description);
 
         project_description_text.setOnTouchListener(new View.OnTouchListener() {
