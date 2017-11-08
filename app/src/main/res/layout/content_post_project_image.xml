@@ -35,10 +35,11 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:layout_below="@+id/add_photo"
             android:id="@+id/image_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/continue_image_section"
-            android:layout_marginTop="@dimen/button_height" />
+            />
     </RelativeLayout>
 </LinearLayout>
