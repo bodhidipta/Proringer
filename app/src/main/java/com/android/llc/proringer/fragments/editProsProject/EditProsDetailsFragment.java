@@ -12,7 +12,6 @@ import android.widget.ScrollView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.AddEditProsActivity;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
-import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
  * Created by su on 2/11/17.
