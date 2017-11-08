@@ -135,7 +135,7 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
         ImageViewTouch mImage = (ImageViewTouch) dialog.findViewById(R.id.imageview_dialog);
 
         // set the default image display type
-        mImage.setDisplayType(ImageViewTouchBase.DisplayType.FIT_IF_BIGGER);
+        mImage.setDisplayType(ImageViewTouchBase.DisplayType.FIT_WIDTH);
         Glide.with(ProsProjectGalleryActivity.this).load(url).into(mImage);
 
 

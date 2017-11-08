@@ -90,31 +90,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         img_back. setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("size list",""+fragmentPushList.size());
-                if(fragmentPushList.size()==2)
-               {
-                   FragmentTransaction transaction3 = fragmentManager.beginTransaction();
-                   transaction3.replace(R.id.fragment_container, new EditImageSelectFragment(), "" + EditImageSelectFragment.class.getCanonicalName());
-                   transaction3.addToBackStack("" + EditImageSelectFragment.class.getCanonicalName());
-                   transaction3.commit();
-                   fragmentPushList.remove(fragmentPushList.size()-1);
-                   progress_posting.setProgress(6);
-
-               }
-               else if(fragmentPushList.size()==3)
-               {
-                   FragmentTransaction transaction4 = fragmentManager.beginTransaction();
-                   transaction4.replace(R.id.fragment_container, new EditProsDetailsFragment(), "" + EditProsDetailsFragment.class.getCanonicalName());
-                   transaction4.addToBackStack("" + EditProsDetailsFragment.class.getCanonicalName());
-                   transaction4.commit();
-                   fragmentPushList.remove(fragmentPushList.size()-1);
-                   progress_posting.setProgress(8);
-
-               }
-               else if(fragmentPushList.size()==1)
-               {
-                   finish();
-               }
+                onBackPressed();
             }
         });
         img_home.setOnClickListener(new View.OnClickListener() {
@@ -291,6 +267,36 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         }
         else if (result.equalsIgnoreCase("retry")&&i==2){
             changeFragmentNext(1);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d("size list",""+fragmentPushList.size());
+        if(fragmentPushList.size()==2)
+        {
+            FragmentTransaction transaction3 = fragmentManager.beginTransaction();
+            transaction3.replace(R.id.fragment_container, new EditImageSelectFragment(), "" + EditImageSelectFragment.class.getCanonicalName());
+            transaction3.addToBackStack("" + EditImageSelectFragment.class.getCanonicalName());
+            transaction3.commit();
+            fragmentPushList.remove(fragmentPushList.size()-1);
+            progress_posting.setProgress(6);
+
+        }
+        else if(fragmentPushList.size()==3)
+        {
+            FragmentTransaction transaction4 = fragmentManager.beginTransaction();
+            transaction4.replace(R.id.fragment_container, new EditProsDetailsFragment(), "" + EditProsDetailsFragment.class.getCanonicalName());
+            transaction4.addToBackStack("" + EditProsDetailsFragment.class.getCanonicalName());
+            transaction4.commit();
+            fragmentPushList.remove(fragmentPushList.size()-1);
+            progress_posting.setProgress(8);
+
+        }
+        else if(fragmentPushList.size()==1)
+        {
+            finish();
         }
     }
 }

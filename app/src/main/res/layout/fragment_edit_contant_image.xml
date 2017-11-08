@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="Add a phto(optional)"
+        android:text="Add a photo (optional)"
         android:textColor="@color/colorTextDark"
         android:textSize="14sp"
         android:visibility="visible" />
@@ -48,6 +48,9 @@
         <ImageView
             android:layout_below="@+id/add_photo"
             android:id="@+id/image_pager"
+            android:scaleType="fitXY"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/continue_image_section"
