@@ -135,7 +135,7 @@ public class EditSearchLocationFragment extends Fragment{
         continue_location_section.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AddEditProsActivity) getActivity()).completeeditproject();
+                ((AddEditProsActivity) getActivity()).completeEditProject();
             }
         });
 

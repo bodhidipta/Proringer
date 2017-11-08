@@ -96,8 +96,6 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         img_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(AddEditProsActivity.this,LandScreenActivity.class);
-                startActivity(i);
                 finish();
             }
         });
@@ -175,7 +173,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
-    public boolean completeeditproject() {
+    public boolean completeEditProject() {
         Log.d("project_id", project_id);
         Log.d("user_id", Appsdata.Uid);
         Log.d("project_zipcode", project_zipcode);
@@ -201,10 +199,9 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
-                Toast.makeText(AddEditProsActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+                CustomAlert customAlert = new CustomAlert(AddEditProsActivity.this, "", "" + message, AddEditProsActivity.this);
+                customAlert.createNormalAlert("ok",1);
 
-                Intent i=new Intent( AddEditProsActivity.this,LandScreenActivity.class);
-                startActivity(i);
                 iseditPostProject=true;
             }
 
@@ -263,10 +260,17 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
     @Override
     public void callbackForAlert(String result, int i) {
         if (result.equalsIgnoreCase("retry")&&i==1){
-            completeeditproject();
+            completeEditProject();
         }
         else if (result.equalsIgnoreCase("retry")&&i==2){
             changeFragmentNext(1);
+        }
+
+        else if(result.equalsIgnoreCase("ok")&&i==1){
+            Intent intent=new Intent( AddEditProsActivity.this,LandScreenActivity.class);
+            intent.putExtra("go_to","my_project");
+            startActivity(intent);
+            finish();
         }
     }
 

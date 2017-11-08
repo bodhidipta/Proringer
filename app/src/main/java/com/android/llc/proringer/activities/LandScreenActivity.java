@@ -302,12 +302,29 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         });
 
 
+        Bundle extras = getIntent().getExtras();
+        if(extras==null)
+        {
 
-        /**
-         * place dashboard fragment when visit first time
-         * also highlight bottom navigation selection
-         */
-        redirectToDashBoard();
+        }
+        else {
+            if(extras.getString("go_to").equalsIgnoreCase("my_project")) {
+                /**
+                 * place dashboard fragment when user edit my project
+                 * also highlight bottom navigation selection
+                 */
+                redirectMyProject();
+            }
+            else {
+                /**
+                 * place dashboard fragment when visit first time
+                 * also highlight bottom navigation selection
+                 */
+                redirectToDashBoard();
+            }
+        }
+
+
 
     }
 
@@ -643,6 +660,15 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     public void redirectToDashBoard() {
         bottomNavInstance.highLightSelected(BottomNav.DASHBOARD);
         transactDashBoard();
+    }
+
+    /**
+     *Redirect to MyProjectList fragment transaction
+     */
+
+    public void redirectMyProject(){
+        bottomNavInstance.highLightSelected(BottomNav.MY_PROJECTS);
+        transactMyProjects();
     }
 
     /**
