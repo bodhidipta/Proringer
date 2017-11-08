@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="0dp">
+        >
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/selected_text"
@@ -30,6 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/background_white_with_border"
             android:gravity="top"
             android:hint="Including as much information as you can about your project help us pair the right pros with your project."
@@ -43,6 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="CONTINUE"
