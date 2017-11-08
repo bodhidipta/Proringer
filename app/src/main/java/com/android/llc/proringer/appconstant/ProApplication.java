@@ -35,6 +35,8 @@ public class ProApplication extends Application {
     private SharedPreferences notificationPreference = null;
     private ProjectPostedData dataSelected = null;
 
+    public String go_to="";
+
     public static ProApplication getInstance() {
         return instance;
     }

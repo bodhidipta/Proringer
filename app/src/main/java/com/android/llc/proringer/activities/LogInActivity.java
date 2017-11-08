@@ -96,7 +96,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
 
                                     Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.putExtra("go_to","dashboard");
+                                    ProApplication.getInstance().go_to="dashboard";
                                     startActivity(intent);
                                     finish();
                                 }
@@ -155,7 +155,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
 
             Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("go_to","dashboard");
+            ProApplication.getInstance().go_to="dashboard";
             startActivity(intent);
             finish();
         }

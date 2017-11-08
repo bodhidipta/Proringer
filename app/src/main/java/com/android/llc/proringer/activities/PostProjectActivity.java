@@ -136,6 +136,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             public void onClick(View v) {
                 if (!ProApplication.getInstance().getUserId().equals("")) {
                     Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
+                    ProApplication.getInstance().go_to="dashboard";
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();

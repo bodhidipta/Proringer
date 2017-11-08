@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.AddEditProsActivity;
@@ -19,6 +21,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 public class EditProsDetailsFragment extends Fragment {
     ProRegularEditText project_description_text;
     ProRegularTextView selected_text;
+    ScrollView container_project_description;
 
     @Nullable
     @Override
@@ -30,8 +33,18 @@ public class EditProsDetailsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         project_description_text = (ProRegularEditText) view.findViewById(R.id.project_description_text);
-        selected_text=(ProRegularTextView)view.findViewById(R.id.selected_text);
+        selected_text = (ProRegularTextView) view.findViewById(R.id.selected_text);
         selected_text.setText("Add details about the project");
+        container_project_description = (ScrollView) view.findViewById(R.id.container_project_description);
+
+        project_description_text.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                container_project_description.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
 
         view.findViewById(R.id.continue_project_describing).setOnClickListener(new View.OnClickListener() {
             @Override

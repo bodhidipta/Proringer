@@ -66,7 +66,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Intent intent=new Intent(SplashScreenActivity.this, LandScreenActivity.class);
-                    intent.putExtra("go_to","dashboard");
+                    ProApplication.getInstance().go_to="dashboard";
                     startActivity(intent);
                     finish();
                 }

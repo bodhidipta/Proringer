@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.editPros.EditImageSelectFragment;
 import com.android.llc.proringer.fragments.editPros.EditProsDetailsFragment;
 import com.android.llc.proringer.fragments.editPros.EditSearchLocationFragment;
@@ -223,7 +224,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
             changeFragmentNext(1);
         } else if (result.equalsIgnoreCase("ok") && i == 1) {
             Intent intent = new Intent(AddEditProsActivity.this, LandScreenActivity.class);
-            intent.putExtra("go_to", "my_project");
+            ProApplication.getInstance().go_to="myProject";
             startActivity(intent);
             finish();
         }

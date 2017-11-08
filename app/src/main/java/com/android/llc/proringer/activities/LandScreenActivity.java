@@ -302,30 +302,20 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         });
 
 
-        Bundle extras = getIntent().getExtras();
-        if(extras==null)
+        if(ProApplication.getInstance().go_to.equalsIgnoreCase("dashboard"))
         {
-
+            /**
+             * place dashboard fragment when visit first time
+             * also highlight bottom navigation selection
+             */
+            redirectToDashBoard();
+        }else if(ProApplication.getInstance().go_to.equalsIgnoreCase("myProject")){
+            /**
+             * place dashboard fragment when user edit my project
+             * also highlight bottom navigation selection
+             */
+            redirectMyProject();
         }
-        else {
-            if(extras.getString("go_to").equalsIgnoreCase("my_project")) {
-                /**
-                 * place dashboard fragment when user edit my project
-                 * also highlight bottom navigation selection
-                 */
-                redirectMyProject();
-            }
-            else {
-                /**
-                 * place dashboard fragment when visit first time
-                 * also highlight bottom navigation selection
-                 */
-                redirectToDashBoard();
-            }
-        }
-
-
-
     }
 
     @Override
