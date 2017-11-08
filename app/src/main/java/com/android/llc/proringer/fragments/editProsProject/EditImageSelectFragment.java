@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.editPros;
+package com.android.llc.proringer.fragments.editProsProject;
 
 import android.content.DialogInterface;
 import android.content.Intent;

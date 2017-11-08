@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.editPros;
+package com.android.llc.proringer.fragments.editProsProject;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

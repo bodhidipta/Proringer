@@ -73,7 +73,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             step3option = "What type of property will this be for?",
             step4option = "What is the current status for this project?",
             step5option = "When would you like to start?",
-            step6option = "Add a photo(Optional)",
+            step6option = "Add a photo (Optional)",
             step7option = "Add details about the project",
             step8option = "Where is the project located",
             step9option = "Lets get acquainted",

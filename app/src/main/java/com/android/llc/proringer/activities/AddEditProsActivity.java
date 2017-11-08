@@ -13,10 +13,9 @@ import android.widget.ProgressBar;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.fragments.editPros.EditImageSelectFragment;
-import com.android.llc.proringer.fragments.editPros.EditProsDetailsFragment;
-import com.android.llc.proringer.fragments.editPros.EditSearchLocationFragment;
-import com.android.llc.proringer.fragments.postProject.PostProjectSelectImageFragment;
+import com.android.llc.proringer.fragments.editProsProject.EditImageSelectFragment;
+import com.android.llc.proringer.fragments.editProsProject.EditProsDetailsFragment;
+import com.android.llc.proringer.fragments.editProsProject.EditSearchLocationFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
