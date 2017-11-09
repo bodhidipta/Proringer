@@ -94,7 +94,7 @@
             android:id="@+id/pros_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="5dp"/>
     </LinearLayout>
 
     <LinearLayout
