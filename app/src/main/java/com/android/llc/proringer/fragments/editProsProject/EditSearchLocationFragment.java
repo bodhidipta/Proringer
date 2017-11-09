@@ -107,6 +107,10 @@ public class EditSearchLocationFragment extends Fragment{
                     zip_code_text.setText("");
                     ((AddEditProsActivity) getActivity()).selectedAddressData = null;
                     addressDataList.clear();
+                    if (zip_search_adapter!=null){
+                        Logger.printMessage("zip_search_adapter-->","not null");
+                        zip_search_adapter.updateData(addressDataList);
+                    }
                 }
 //                else {
 //                    zip_code_text.setText(ProApplication.getInstance().getZipCode());
