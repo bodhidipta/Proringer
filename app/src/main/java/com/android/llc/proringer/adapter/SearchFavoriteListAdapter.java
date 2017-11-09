@@ -16,11 +16,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
 import com.android.llc.proringer.helper.ShowMyDialog;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
@@ -49,6 +52,13 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        if (position==jsonInfoArray.length()-1){
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext,10));
+            holder.LL_Main.setLayoutParams(params);
+        }
+
         holder.ratingBar.setMax(5);
         try {
             holder.ratingBar.setRating(Float.valueOf(jsonInfoArray.getJSONObject(position).getString("pro_avg_review_rating").trim()));
@@ -146,7 +156,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout linear_layout_border;
+        LinearLayout linear_layout_border,LL_Main;
         RatingBar ratingBar;
         CardView main_container;
         ProRegularTextView tv_pros_company_name;
@@ -176,6 +186,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
             img_favorite = (ImageView) itemView.findViewById(R.id.img_favorite);
 
             linear_layout_border = (LinearLayout) itemView.findViewById(R.id.linear_layout_border);
+            LL_Main = (LinearLayout) itemView.findViewById(R.id.LL_Main);
 
         }
     }
@@ -188,5 +199,11 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
     public void refreshData(JSONArray jsonInfoArray) {
         this.jsonInfoArray = jsonInfoArray;
         notifyDataSetChanged();
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+            return position;
     }
 }

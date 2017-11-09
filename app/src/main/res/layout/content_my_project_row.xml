@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/LL_Main"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/start_project"
@@ -20,7 +21,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_my_project_white" />
+            android:src="@drawable/ic_my_project_white"/>
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
             android:padding="10dp"
             android:text="START A NEW PROJECT"
             android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <android.support.v7.widget.CardView
@@ -53,11 +54,11 @@
                 android:id="@+id/project_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="10dp"
+                android:layout_toStartOf="@+id/right_chevron"
                 android:paddingBottom="5dp"
+                android:paddingRight="10dp"
                 android:textColor="@color/colorTextDark"
-                android:textSize="16sp"
-                android:layout_toStartOf="@+id/right_chevron" />
+                android:textSize="16sp"/>
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/create_date"
@@ -68,7 +69,7 @@
                 android:paddingTop="5dp"
                 android:text="Created on 12/07/2017"
                 android:textColor="@color/colorSelectedDark"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/messages"
@@ -85,7 +86,7 @@
                 android:paddingTop="5dp"
                 android:text="MESSAGES"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/job_status"
@@ -101,7 +102,7 @@
                 android:paddingTop="5dp"
                 android:text="ACTIVE"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <ImageView
                 android:id="@+id/right_chevron"
@@ -109,7 +110,7 @@
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_right_chevron_dark" />
+                android:background="@drawable/ic_right_chevron_dark"/>
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/review_pro"
@@ -126,7 +127,7 @@
                 android:text="REVIEW PRO"
                 android:textColor="#ffffff"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -142,7 +143,7 @@
                 android:paddingTop="10dp"
                 android:text="NO"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/pro_hired"
@@ -158,7 +159,7 @@
                 android:paddingTop="10dp"
                 android:text="YES"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/lebel_hireing_offr"
@@ -170,7 +171,7 @@
                 android:text="Did you hire a proringer pro"
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextDark"
-                android:textSize="8sp" />
+                android:textSize="8sp"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

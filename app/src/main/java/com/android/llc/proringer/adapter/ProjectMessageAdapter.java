@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.onItemClick;
 import com.android.llc.proringer.pojo.ProjectMessage;
+import com.android.llc.proringer.utils.MethodsUtils;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 
@@ -53,6 +54,12 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        if (position==projectMessageArrayList.size()-1){
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext,10));
+            holder.swipe_layout.setLayoutParams(params);
+        }
 
         if (projectMessageArrayList != null && 0 <= position && position < projectMessageArrayList.size()) {
             final String data = projectMessageArrayList.get(position).getTagName();

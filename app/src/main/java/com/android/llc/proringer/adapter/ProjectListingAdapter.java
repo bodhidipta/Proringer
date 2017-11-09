@@ -14,6 +14,7 @@ import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.fragments.bottomNav.MyProjectsFragment;
 import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 
@@ -47,6 +48,13 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        if (position==itemList.size()-1){
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext,10));
+            holder.LL_Main.setLayoutParams(params);
+        }
+
         holder.job_status.setVisibility(View.INVISIBLE);
         holder.messages.setVisibility(View.INVISIBLE);
         holder.pro_hired.setVisibility(View.INVISIBLE);
@@ -175,13 +183,14 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
         ProRegularTextView job_status, messages, pro_hired, no_pro_hired, lebel_hireing_offr, review_pro, create_date;
         ImageView right_chevron;
         ProSemiBoldTextView project_name;
-        LinearLayout start_project;
+        LinearLayout start_project,LL_Main;
         View totalView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             project_name = (ProSemiBoldTextView) itemView.findViewById(R.id.project_name);
             start_project = (LinearLayout) itemView.findViewById(R.id.start_project);
+            LL_Main = (LinearLayout) itemView.findViewById(R.id.LL_Main);
             job_status = (ProRegularTextView) itemView.findViewById(R.id.job_status);
             messages = (ProRegularTextView) itemView.findViewById(R.id.messages);
             pro_hired = (ProRegularTextView) itemView.findViewById(R.id.pro_hired);

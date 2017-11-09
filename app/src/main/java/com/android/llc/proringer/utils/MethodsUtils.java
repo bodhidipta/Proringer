@@ -17,4 +17,9 @@ public class MethodsUtils {
         return new int[]{displayMetrics.heightPixels,displayMetrics.widthPixels};
     }
 
+    public static int dpToPx(Context context,int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
 }
