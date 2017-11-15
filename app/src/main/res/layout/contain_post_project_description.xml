@@ -11,12 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="0dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        >
 
         <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
             android:id="@+id/project_description_text"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_white_with_border"
             android:gravity="top"
@@ -30,7 +33,7 @@
             android:id="@+id/continue_project_describing"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="CONTINUE"
