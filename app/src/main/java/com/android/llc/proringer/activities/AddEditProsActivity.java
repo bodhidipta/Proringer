@@ -223,6 +223,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
             changeFragmentNext(1);
         } else if (result.equalsIgnoreCase("ok") && i == 1) {
             Intent intent = new Intent(AddEditProsActivity.this, LandScreenActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             ProApplication.getInstance().go_to="myProject";
             startActivity(intent);
             finish();
