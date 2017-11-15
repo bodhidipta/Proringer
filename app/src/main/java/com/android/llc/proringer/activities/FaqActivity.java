@@ -91,7 +91,7 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 tv2.setTextColor(getResources().getColor(R.color.colorTextBlack, null));
                             } else {
-                                tv1.setTextColor(getResources().getColor(R.color.colorTextBlack));
+                                tv2.setTextColor(getResources().getColor(R.color.colorTextBlack));
                             }
 
                             linear_main_container.addView(tv1);
