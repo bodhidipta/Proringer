@@ -21,12 +21,9 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.security.MessageDigest;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FacebookActivity extends AppCompatActivity implements MyCustomAlertListener {

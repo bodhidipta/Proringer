@@ -40,11 +40,13 @@
     <RelativeLayout
         android:id="@+id/cont_bottom"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:background="@android:color/transparent">
 
+
         <LinearLayout
+            android:id="@+id/LL_Bottom"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
@@ -161,16 +163,24 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_above="@+id/LL_Bottom"
+            android:id="@+id/SplitLine_hor1"
+            android:layout_width="match_parent"
+            android:layout_height= "1dp"
+            android:background="@color/colorLightGray" />
+
         <RelativeLayout
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation=".1dp"
             android:layout_centerInParent="true"
             android:background="@drawable/circle_white">
 
             <ImageView
                 android:id="@+id/cerete_project"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:src="@drawable/project_button_icon" />
         </RelativeLayout>
