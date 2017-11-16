@@ -209,12 +209,15 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
         if (result.equalsIgnoreCase("Re-login") && i==1){
 
             ProApplication.getInstance().logOut();
+            ProApplication.getInstance().clearFBUserStatus();
             startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
             ((LandScreenActivity) getActivity()).finish();
         }
         else if(result.equalsIgnoreCase("Re-login") && i==2){
 
             ProApplication.getInstance().logOut();
+            ProApplication.getInstance().clearFBUserStatus();
+
             startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
             ((LandScreenActivity) getActivity()).finish();
         }

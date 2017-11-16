@@ -153,11 +153,19 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
 //            startActivity(new Intent(LoginChooserActivity.this, BaseActivity.class));
 //            finish();
 
-            Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            ProApplication.getInstance().go_to="dashboard";
-            startActivity(intent);
-            finish();
+            if (ProApplication.getInstance().getFBUserStatus()==1){
+                Intent intent = new Intent(LogInActivity.this, FirstTimeFaceBookLoginUserInformationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                ProApplication.getInstance().go_to="dashboard";
+                startActivity(intent);
+                finish();
+            }
         }
 
     }

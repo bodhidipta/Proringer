@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
@@ -354,10 +355,24 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
 //            startActivity(new Intent(LoginChooserActivity.this, BaseActivity.class));
 //            finish();
 
-            Intent intent = new Intent(SignUpActivity.this, LandScreenActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            if (ProApplication.getInstance().getFBUserStatus()==1){
+                Intent intent = new Intent(SignUpActivity.this, FirstTimeFaceBookLoginUserInformationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent intent = new Intent(SignUpActivity.this, LandScreenActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                ProApplication.getInstance().go_to="dashboard";
+                startActivity(intent);
+                finish();
+            }
+
+//            Intent intent = new Intent(SignUpActivity.this, LandScreenActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//            finish();
         }
     }
 }

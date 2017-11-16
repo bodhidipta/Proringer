@@ -137,6 +137,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 
+                            ProApplication.getInstance().setFBUserStatus(1);
                             Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this,LandScreenActivity.class);
                             startActivity(intent);
                             finish();

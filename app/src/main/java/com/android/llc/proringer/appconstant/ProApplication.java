@@ -32,6 +32,7 @@ import io.fabric.sdk.android.Fabric;
 public class ProApplication extends Application {
     private static ProApplication instance = null;
     private SharedPreferences userPreference = null;
+    private SharedPreferences userFbFirstTimeStatus = null;
     private SharedPreferences notificationPreference = null;
     private ProjectPostedData dataSelected = null;
 
@@ -48,7 +49,25 @@ public class ProApplication extends Application {
         instance = this;
         userPreference = getSharedPreferences("USER_PREFERENCE", MODE_PRIVATE);
         notificationPreference = getSharedPreferences("NOTIFICATION_PREFERENCE", MODE_PRIVATE);
+        userFbFirstTimeStatus=getSharedPreferences("USER_STATUS", MODE_PRIVATE);
     }
+
+
+
+
+    public void setFBUserStatus(int a){
+        userFbFirstTimeStatus.edit().clear().apply();
+        userFbFirstTimeStatus.edit().putInt("user_status",a).apply();
+    }
+    public void clearFBUserStatus() {
+        userPreference.edit().clear().apply();
+    }
+    public int getFBUserStatus(){
+        return userFbFirstTimeStatus.getInt("user_status",0);
+    }
+
+
+
 
     public void setUserPreference(String user_id,
                                   String user_type,

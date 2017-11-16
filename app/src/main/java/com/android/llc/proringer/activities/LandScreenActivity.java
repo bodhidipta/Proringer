@@ -207,6 +207,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                                     myLoader.dismissLoader();
 
                                 ProApplication.getInstance().logOut();
+                                ProApplication.getInstance().clearFBUserStatus();
+
                                 startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
                                 finish();
                             }

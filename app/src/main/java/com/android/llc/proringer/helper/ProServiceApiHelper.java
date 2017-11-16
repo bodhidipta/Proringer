@@ -478,13 +478,15 @@ public class ProServiceApiHelper {
                                 .add("f_name", params[0])
                                 .add("l_name", params[1])
                                 .add("email", params[2])
-                                .add("fb_id", params[2])
+                                .add("fb_id", params[3])
+                                .add("device_type","A")
                                 .build();
 
                         Logger.printMessage("f_name", ":-" + params[0]);
                         Logger.printMessage("l_name", ":-" + params[1]);
                         Logger.printMessage("email", ":-" + params[2]);
                         Logger.printMessage("fb_id", ":-" + params[3]);
+                        Logger.printMessage("device_type", ":- A");
                         Logger.printMessage("loginFBAPI", loginFBAPI);
 
 
@@ -503,13 +505,17 @@ public class ProServiceApiHelper {
                                 + params[1] + "\n"
                                 + params[2] + "\n"
                                 + params[3] + "\n"
+                                +"A"+ "\n"
                                 + response_string);
 
                         JSONObject mainResponseObj = new JSONObject(response_string);
                         if (mainResponseObj.getBoolean("response")) {
                             exception = "";
                             JSONObject jsonInfo = mainResponseObj.getJSONObject("info_array");
+
+                            ProApplication.getInstance().setFBUserStatus(mainResponseObj.getInt("user_status"));
                             ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"), jsonInfo.getString("zipcode"));
+
                             return mainResponseObj.getString("message");
                         } else {
                             exception = "true";
