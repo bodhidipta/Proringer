@@ -138,7 +138,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
     private void updateUserInformation() {
 
         if (!zip_code.getText().toString().trim().equals("")) {
-            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).updateUserInformation(
+            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).updateUserInformationFirstTime(
                     new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
@@ -150,11 +150,26 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 
-                            ProApplication.getInstance().setFBUserStatus(1);
-                            Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this,LandScreenActivity.class);
-                            startActivity(intent);
-                            finish();
+                            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
+                                @Override
+                                public void onStart() {
 
+                                }
+
+                                @Override
+                                public void onComplete(String message) {
+                                    ProApplication.getInstance().setFBUserStatus(0);
+                                    Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this,LandScreenActivity.class);
+                                    ProApplication.getInstance().go_to="dashboard";
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String error) {
+
+                                }
+                            });
                         }
 
                         @Override

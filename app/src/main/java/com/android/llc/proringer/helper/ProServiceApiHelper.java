@@ -3616,6 +3616,102 @@ public class ProServiceApiHelper {
         }
     }
 
+
+    public void updateUserInformationFirstTime(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("f_name", ":-" + params[0]);
+                        Logger.printMessage("l_name", ":-" + params[1]);
+                        Logger.printMessage("address", ":-" + params[2]);
+                        Logger.printMessage("city", ":-" + params[3]);
+                        Logger.printMessage("country", ":-" + params[4]);
+                        Logger.printMessage("state", ":-" + params[5]);
+                        Logger.printMessage("zipcode", ":-" + params[6]);
+                        Logger.printMessage("phone", ":-" + params[7]);
+                        Logger.printMessage("details", ":-" + params[8]);
+                        Logger.printMessage("latitude", ":-" + params[9]);
+                        Logger.printMessage("longitude", ":-" + params[10]);
+                        Logger.printMessage("updateUserInformationAPI", updateUserInformationAPI);
+
+
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", ProApplication.getInstance().getUserId())
+                                .add("f_name", params[0])
+                                .add("l_name", params[1])
+                                .add("address", params[2])
+                                .add("city", params[3])
+                                .add("country", params[4])
+                                .add("state", params[5])
+                                .add("zipcode", params[6])
+                                .add("phone", params[7])
+                                .add("details", params[8])
+                                .add("latitude", params[9])
+                                .add("longitude", params[10])
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .url(updateUserInformationAPI)
+                                .post(requestBody)
+                                .build();
+                        Response response = okHttpClient.newCall(request).execute();
+                        String responseString = response.body().string();
+                        Logger.printMessage("UpdateUserInfo", responseString);
+                        JSONObject respo = new JSONObject(responseString);
+                        if (respo.getBoolean("response")) {
+                            return respo.getString("message");
+                        } else {
+                            exception = respo.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(final String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        Logger.printMessage("successfullyUpdateMSQL", "YES");
+                        try {
+                            callback.onComplete(s);
+                        } catch (Exception io) {
+                            io.printStackTrace();
+                            callback.onError(io.getMessage());
+                        }
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+    }
+
+
+
+
+
+
+
     /**
      * Interface used to get call back for getServiceList and getCategoryList
      */
