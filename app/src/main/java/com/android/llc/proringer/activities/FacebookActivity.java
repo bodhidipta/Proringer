@@ -110,6 +110,9 @@ public class FacebookActivity extends AppCompatActivity implements MyCustomAlert
 
                         @Override
                         public void onComplete(String message) {
+
+                            Logger.printMessage("@message",message);
+
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 

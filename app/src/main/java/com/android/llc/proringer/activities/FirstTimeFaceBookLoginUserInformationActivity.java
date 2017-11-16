@@ -1,18 +1,14 @@
-package com.android.llc.proringer.fragments.drawerNav;
+package com.android.llc.proringer.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.activities.LocationFinder;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
@@ -28,59 +24,67 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by bodhidipta on 22/06/17.
- * <!-- * Copyright (c) 2017, The Proringer-->
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Created by su on 11/16/17.
  */
 
-public class UserInformationFragment extends Fragment implements MyCustomAlertListener{
+public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActivity implements MyCustomAlertListener {
     private ProLightEditText first_name, last_name, contact, zip_code, city, state;
     ProRegularTextView tv_search_by_location;
-//    ProLightEditText address;
+    //    ProLightEditText address;
     PopupWindow popupWindow;
     MyLoader myLoader = null;
     ImageView Erase;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_information, container, false);
-    }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        first_name = (ProLightEditText) view.findViewById(R.id.first_name);
-        last_name = (ProLightEditText) view.findViewById(R.id.last_name);
-        contact = (ProLightEditText) view.findViewById(R.id.contact);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.first_time_facebook_user_login_information);
 
-        myLoader=new MyLoader(getActivity());
+        first_name = (ProLightEditText)findViewById(R.id.first_name);
+        last_name = (ProLightEditText)findViewById(R.id.last_name);
+        contact = (ProLightEditText) findViewById(R.id.contact);
+
+        myLoader=new MyLoader(FirstTimeFaceBookLoginUserInformationActivity.this);
 //        address= (ProLightEditText) view.findViewById(R.id.address);
 
-        tv_search_by_location = (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
+        tv_search_by_location = (ProRegularTextView) findViewById(R.id.tv_search_by_location);
         tv_search_by_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getActivity(), LocationFinder.class);
-               startActivityForResult(i, 1);
+                Intent i = new Intent(FirstTimeFaceBookLoginUserInformationActivity.this, LocationFinder.class);
+                startActivityForResult(i, 1);
             }
         });
 
-      //  Erase= (ImageView) view.findViewById(R.id.Erase);
+
+        zip_code = (ProLightEditText)findViewById(R.id.zip_code);
+
+        city = (ProLightEditText)findViewById(R.id.city);
+        city.setEnabled(false);
+        city.setClickable(false);
+
+        state = (ProLightEditText)findViewById(R.id.state);
+        state.setEnabled(false);
+        state.setClickable(false);
+
+
+        plotUserInformation();
+
+        findViewById(R.id.save_ifo).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        validationCheckAndSubmit();
+                    }
+                }
+        );
+
+
+        //  Erase= (ImageView) view.findViewById(R.id.Erase);
 
 //        Erase.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -116,35 +120,12 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
 //                }
 //            }
 //        });
-
-
-        zip_code = (ProLightEditText) view.findViewById(R.id.zip_code);
-
-        city = (ProLightEditText) view.findViewById(R.id.city);
-        city.setEnabled(false);
-        city.setClickable(false);
-
-        state = (ProLightEditText) view.findViewById(R.id.state);
-        state.setEnabled(false);
-        state.setClickable(false);
-
-
-        plotUserInformation();
-
-        view.findViewById(R.id.save_ifo).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        updateUserInformation();
-                    }
-                }
-        );
     }
 
     private void updateUserInformation() {
 
         if (!zip_code.getText().toString().trim().equals("")) {
-            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformation(
+            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).updateUserInformation(
                     new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
@@ -155,6 +136,11 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                         public void onComplete(String message) {
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
+
+                            Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this,LandScreenActivity.class);
+                            startActivity(intent);
+                            finish();
+
                         }
 
                         @Override
@@ -162,7 +148,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 
-                            CustomAlert customAlert = new CustomAlert(getActivity(), "Error updating information", "" + error, UserInformationFragment.this);
+                            CustomAlert customAlert = new CustomAlert(FirstTimeFaceBookLoginUserInformationActivity.this, "Error updating information", "" + error, FirstTimeFaceBookLoginUserInformationActivity.this);
                             customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
                         }
                     },
@@ -180,13 +166,13 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                     "");
         } else {
 
-            CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code", UserInformationFragment.this);
+            CustomAlert customAlert = new CustomAlert(FirstTimeFaceBookLoginUserInformationActivity.this, "Updating Error", "Please Choose the correct address which will contains zip code", FirstTimeFaceBookLoginUserInformationActivity.this);
             customAlert.createNormalAlert("ok",1);
         }
     }
 
     private void plotUserInformation() {
-        DatabaseHandler.getInstance((LandScreenActivity) getActivity()).getUserInfo(
+        DatabaseHandler.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
@@ -213,6 +199,15 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                             zip_code.setText(innerObj.getString("zipcode") + "");
                             contact.setText(innerObj.getString("ph_no") + "");
 
+
+
+                            ////////////////go to dashboard/////////////////////
+                            Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this, LandScreenActivity.class);
+                            ProApplication.getInstance().go_to="dashboard";
+                            startActivity(intent);
+                            finish();
+                            /////////////////////////////////end////////////////
+
                         } catch (JSONException jse) {
                             jse.printStackTrace();
                         }
@@ -224,8 +219,75 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                          * No user data found on database or something went wrong
                          */
                         Logger.printMessage("@dashBoard", "on database data not exists:--" + s);
+
                     }
                 });
+    }
+
+
+
+    private void validationCheckAndSubmit(){
+
+        first_name.setError(null);//removes error
+        first_name.clearFocus();
+
+        last_name.setError(null);//removes error
+        last_name.clearFocus();
+
+        contact.setError(null);//removes error
+        contact.clearFocus();
+
+        tv_search_by_location.setError(null);//removes error
+        tv_search_by_location.clearFocus();
+
+        city.setError(null);//removes error
+        city.clearFocus();
+
+        state.setError(null);//removes error
+        state.clearFocus();
+
+        zip_code.setError(null);//removes error
+        zip_code.clearFocus();
+
+        if (first_name.getText().toString().equals("")){
+            first_name.requestFocus();
+            first_name.setError("Please Enter First Name");
+        }else {
+            if (last_name.getText().toString().equals("")){
+                last_name.requestFocus();
+                last_name.setError("Please Enter Last Name");
+            }else {
+                if (contact.getText().toString().equals("")){
+                    contact.requestFocus();
+                    contact.setError("Please Enter Phone Number");
+                }
+                else {
+                    if (tv_search_by_location.getText().toString().equals("")){
+                        tv_search_by_location.requestFocus();
+                        tv_search_by_location.setError("Please Enter Address");
+                    }else {
+                        if (city.getText().toString().equals("")){
+                            city.requestFocus();
+                            city.setError("Please Enter City");
+                        }else {
+                            if(state.getText().toString().equals("")){
+                                state.requestFocus();
+                                state.setError("Please Enter State");
+                            }else {
+                                if (zip_code.getText().toString().equals("")){
+                                    zip_code.requestFocus();
+                                    zip_code.setError("Please Enter Zip Code");
+                                }else {
+                                    updateUserInformation();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 
     @Override
@@ -264,7 +326,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
     }
 
     public void createGooglePlaceList(final View view, String place) {
-        ProServiceApiHelper.getInstance(getActivity()).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).getLocationListUsingGoogleAPI(place, new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
             }

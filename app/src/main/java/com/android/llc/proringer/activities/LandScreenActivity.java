@@ -1,11 +1,9 @@
 package com.android.llc.proringer.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +16,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.bottomNav.DashBoardFragment;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
