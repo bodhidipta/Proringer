@@ -513,6 +513,7 @@ public class ProServiceApiHelper {
                             exception = "";
                             JSONObject jsonInfo = mainResponseObj.getJSONObject("info_array");
 
+                            ProApplication.getInstance().setFbFirstTimeJson(response_string);
                             ProApplication.getInstance().setFBUserStatus(mainResponseObj.getInt("user_status"));
                             ProApplication.getInstance().setUserPreference(jsonInfo.getString("user_id"), jsonInfo.getString("user_type"), jsonInfo.getString("first_name"), jsonInfo.getString("last_name"), jsonInfo.getString("zipcode"));
 
@@ -534,7 +535,7 @@ public class ProServiceApiHelper {
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
-                        callback.onComplete(s);
+                        getUserInformation(callback);
                     } else {
                         callback.onError(s);
                     }
@@ -3614,10 +3615,6 @@ public class ProServiceApiHelper {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
-
-
-
-
 
     /**
      * Interface used to get call back for getServiceList and getCategoryList

@@ -71,8 +71,21 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
         state.setEnabled(false);
         state.setClickable(false);
 
+        String firstTimeFbDetails=ProApplication.getInstance().getFbFirstTimeJson();
 
-        plotUserInformation();
+        Logger.printMessage("@firstTimeFBLogin", firstTimeFbDetails);
+        try {
+            JSONObject mainObject = new JSONObject(firstTimeFbDetails);
+            JSONObject info_arr = mainObject.getJSONObject("info_array");
+            first_name.setText(info_arr.getString("first_name") + "");
+            last_name.setText(info_arr.getString("last_name") + "");
+//                            address.setText(innerObj.getString("address") + "");
+            zip_code.setText(info_arr.getString("zipcode") + "");
+
+
+        } catch (JSONException jse) {
+            jse.printStackTrace();
+        }
 
         findViewById(R.id.save_ifo).setOnClickListener(
                 new View.OnClickListener() {
@@ -166,66 +179,10 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                     "",
                     "");
         } else {
-
             CustomAlert customAlert = new CustomAlert(FirstTimeFaceBookLoginUserInformationActivity.this, "Updating Error", "Please Choose the correct address which will contains zip code", FirstTimeFaceBookLoginUserInformationActivity.this);
             customAlert.createNormalAlert("ok",1);
         }
     }
-
-    private void plotUserInformation() {
-        DatabaseHandler.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).getUserInfo(
-                ProApplication.getInstance().getUserId(),
-                new DatabaseHandler.onQueryCompleteListener() {
-                    @Override
-                    public void onSuccess(String... s) {
-
-                        Logger.printMessage("database", "Yes");
-                        Logger.printMessage("success", "s:--" + s);
-                        /**
-                         * User data already found in database
-                         */
-
-                        Logger.printMessage("@dashBoard", "on database data exists");
-                        try {
-                            JSONObject mainObject = new JSONObject(s[0]);
-                            JSONArray info_arr = mainObject.getJSONArray("info_array");
-                            JSONObject innerObj = info_arr.getJSONObject(0);
-                            first_name.setText(innerObj.getString("f_name") + "");
-                            last_name.setText(innerObj.getString("l_name") + "");
-//                            address.setText(innerObj.getString("address") + "");
-                            tv_search_by_location.setText(innerObj.getString("address") + "");
-
-                            city.setText(innerObj.getString("city") + "");
-                            state.setText(innerObj.getString("state") + "");
-                            zip_code.setText(innerObj.getString("zipcode") + "");
-                            contact.setText(innerObj.getString("ph_no") + "");
-
-
-
-                            ////////////////go to dashboard/////////////////////
-                            Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this, LandScreenActivity.class);
-                            ProApplication.getInstance().go_to="dashboard";
-                            startActivity(intent);
-                            finish();
-                            /////////////////////////////////end////////////////
-
-                        } catch (JSONException jse) {
-                            jse.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(String s) {
-                        /**
-                         * No user data found on database or something went wrong
-                         */
-                        Logger.printMessage("@dashBoard", "on database data not exists:--" + s);
-
-                    }
-                });
-    }
-
-
 
     private void validationCheckAndSubmit(){
 
@@ -352,121 +309,6 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
         });
     }
 
-//    private void showDialog(View v, JSONArray PredictionsJsonArray) {
-//
-//        if (popupWindow == null) {
-//            popupWindow = new PopupWindow(getActivity());
-//            // Closes the popup window when touch outside.
-//            popupWindow.setOutsideTouchable(true);
-//            popupWindow.setFocusable(false);
-//            // Removes default background.
-//            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//            View dailogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_show_place, null);
-//
-//            RecyclerView rcv_ = (RecyclerView) dailogView.findViewById(R.id.rcv_);
-//            rcv_.setLayoutManager(new LinearLayoutManager(getActivity()));
-//
-//            placeCustomListAdapterDialog = new PlaceCustomListAdapterDialog(getActivity(), PredictionsJsonArray, new onOptionSelected() {
-//                @Override
-//                public void onItemPassed(int position, JSONObject value) {
-//                    try {
-//                        checkToShowAfterSearach = true;
-////                        address.setText(value.getString("description"));
-//
-//                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-////                        imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
-//
-//                        ProServiceApiHelper.getInstance(getActivity()).getZipLocationStateAPI(new ProServiceApiHelper.getApiProcessCallback() {
-//                            @Override
-//                            public void onStart() {
-//
-//                            }
-//
-//                            @Override
-//                            public void onComplete(String message) {
-//                                try {
-//                                    JSONObject mainRes = new JSONObject(message);
-//
-//                                    if (mainRes.getString("status").equalsIgnoreCase("OK") &&
-//                                            mainRes.has("results") &&
-//                                            mainRes.getJSONArray("results").length() > 0) {
-//
-//                                        JSONArray results = mainRes.getJSONArray("results");
-//
-//                                        JSONObject innerIncer = results.getJSONObject(0);
-//
-//                                        /**
-//                                         * loop through address component
-//                                         * for country and state
-//                                         */
-//                                        if (innerIncer.has("address_components") &&
-//                                                innerIncer.getJSONArray("address_components").length() > 0) {
-//
-//                                            Logger.printMessage("address_components",""+innerIncer.getJSONArray("address_components"));
-//
-//                                            JSONArray address_components = innerIncer.getJSONArray("address_components");
-//
-//                                            for (int j = 0; j < address_components.length(); j++) {
-//
-//                                                if (address_components.getJSONObject(j).has("types") &&
-//                                                        address_components.getJSONObject(j).getJSONArray("types").length() > 0
-//                                                        ) {
-//
-//                                                    JSONArray types = address_components.getJSONObject(j).getJSONArray("types");
-//
-//                                                    for (int k = 0; k < types.length(); k++) {
-//                                                        if (types.getString(k).equals("administrative_area_level_2")) {
-//                                                            city.setText(address_components.getJSONObject(j).getString("short_name"));
-//                                                        }
-//                                                        if (types.getString(k).equals("administrative_area_level_1")) {
-//                                                            state.setText(address_components.getJSONObject(j).getString("short_name"));
-//                                                        }
-//                                                        if (types.getString(k).equals("postal_code")) {
-//                                                            zip_code.setText(address_components.getJSONObject(j).getString("short_name"));
-//                                                        }
-//                                                        else {
-//                                                            zip_code.setText("");
-//                                                        }
-//                                                    }
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                            @Override
-//                            public void onError(String error) {
-//
-//                            }
-//                        },address.getText().toString().trim()
-//                        );
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    popupWindow.dismiss();
-//                }
-//            });
-//
-//            rcv_.setAdapter(placeCustomListAdapterDialog);
-//            // some other visual settings
-//            popupWindow.setFocusable(false);
-//            popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-//            popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-//
-//            // set the list view as pop up window content
-//            popupWindow.setContentView(dailogView);
-//            popupWindow.showAsDropDown(v, -5, 0);
-//
-//
-//        } else {
-//            popupWindow.showAsDropDown(v, -5, 0);
-//            placeCustomListAdapterDialog.setRefresh(PredictionsJsonArray);
-//        }
-//    }
 
     public interface onOptionSelected {
         void onItemPassed(int position, JSONObject value);

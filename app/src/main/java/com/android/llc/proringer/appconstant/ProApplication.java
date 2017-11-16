@@ -33,6 +33,7 @@ public class ProApplication extends Application {
     private static ProApplication instance = null;
     private SharedPreferences userPreference = null;
     private SharedPreferences userFbFirstTimeStatus = null;
+    private SharedPreferences userFbFirstTimeJson = null;
     private SharedPreferences notificationPreference = null;
     private ProjectPostedData dataSelected = null;
 
@@ -50,20 +51,36 @@ public class ProApplication extends Application {
         userPreference = getSharedPreferences("USER_PREFERENCE", MODE_PRIVATE);
         notificationPreference = getSharedPreferences("NOTIFICATION_PREFERENCE", MODE_PRIVATE);
         userFbFirstTimeStatus=getSharedPreferences("USER_STATUS", MODE_PRIVATE);
+        userFbFirstTimeJson=getSharedPreferences("USER_STATUS_JSON", MODE_PRIVATE);
     }
+
 
 
 
 
     public void setFBUserStatus(int a){
-        userFbFirstTimeStatus.edit().clear().apply();
         userFbFirstTimeStatus.edit().putInt("user_status",a).apply();
     }
     public void clearFBUserStatus() {
-        userPreference.edit().clear().apply();
+        userFbFirstTimeStatus.edit().putInt("user_status",0).apply();
     }
     public int getFBUserStatus(){
         return userFbFirstTimeStatus.getInt("user_status",0);
+    }
+
+
+
+
+
+    public void setFbFirstTimeJson(String firstTimeJson){
+        userFbFirstTimeJson.edit().putString("firstTimeJson",firstTimeJson).apply();
+    }
+    public void clearUserFbFirstTimeJson() {
+        userFbFirstTimeJson.edit().clear().apply();
+
+    }
+    public String getFbFirstTimeJson(){
+        return userFbFirstTimeJson.getString("firstTimeJson","None");
     }
 
 

@@ -210,6 +210,8 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
 
             ProApplication.getInstance().logOut();
             ProApplication.getInstance().clearFBUserStatus();
+            ProApplication.getInstance().clearUserFbFirstTimeJson();
+
             startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
             ((LandScreenActivity) getActivity()).finish();
         }
@@ -217,6 +219,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
 
             ProApplication.getInstance().logOut();
             ProApplication.getInstance().clearFBUserStatus();
+            ProApplication.getInstance().clearUserFbFirstTimeJson();
 
             startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
             ((LandScreenActivity) getActivity()).finish();
