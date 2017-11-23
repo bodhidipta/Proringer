@@ -190,8 +190,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
         android:elevation="5dp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -224,8 +224,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/back_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
         android:elevation="5dp"
         android:visibility="gone"
         app:popupTheme="@style/AppTheme.PopupOverlay">

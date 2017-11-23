@@ -63,6 +63,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     private InputMethodManager keyboard;
 
     MyLoader myLoader = null;
+    NavigationHandler navigationHandler=null;
 
 
     @Override
@@ -140,7 +141,10 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         /**
          * Handles view click for drawer layout
          */
-        NavigationHandler.getInstance().init(mDrawer, new NavigationHandler.OnHandleInput() {
+
+        navigationHandler=NavigationHandler.getInstance();
+
+        navigationHandler.init(mDrawer, new NavigationHandler.OnHandleInput() {
             @Override
             public void onClickItem(String tag) {
                 switch (tag) {
@@ -720,6 +724,9 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             public void run() {
                 if (mDrawer != null)
                     mDrawer.closeDrawer(GravityCompat.START);
+
+                navigationHandler.closeAndResetSideMenuDesign();
+
             }
         });
     }

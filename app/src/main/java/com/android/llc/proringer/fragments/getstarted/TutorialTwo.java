@@ -47,6 +47,6 @@ public class TutorialTwo extends Fragment {
         description = (ProLightTextView) view.findViewById(R.id.description);
 
         header_text.setText("READ REAL REVIEWS");
-        description.setText("Reviews submitted from your neighbours,\nfriends and other local property owners.");
+        description.setText("Reviews submitted from your neighbors,\nfriends and other local property owners.");
     }
 }
