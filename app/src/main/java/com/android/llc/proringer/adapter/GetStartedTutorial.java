@@ -4,11 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
-
 import com.android.llc.proringer.fragments.getstarted.TutorialFive;
 import com.android.llc.proringer.fragments.getstarted.TutorialFour;
 import com.android.llc.proringer.fragments.getstarted.TutorialOne;
-import com.android.llc.proringer.fragments.getstarted.TutorialThree;
 import com.android.llc.proringer.fragments.getstarted.TutorialTwo;
 
 /**
@@ -65,11 +63,11 @@ public class GetStartedTutorial extends FragmentPagerAdapter {
                 return new TutorialOne();
             case 1:
                 return new TutorialTwo();
+//            case 2:
+//                return new TutorialThree();
             case 2:
-                return new TutorialThree();
-            case 3:
                 return new TutorialFour();
-            case 4:
+            case 3:
                 return new TutorialFive();
             default:
                 return new TutorialOne();
@@ -81,6 +79,6 @@ public class GetStartedTutorial extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 }
