@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.6"
+        android:alpha="0.3"
         android:src="@drawable/get_started_background" />
 
     <LinearLayout
@@ -90,11 +90,11 @@
                     android:layout_marginRight="5dp"
                     android:background="@drawable/circle_dark" />
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/pager_dot_three"-->
-                    <!--android:layout_width="10dp"-->
-                    <!--android:layout_height="10dp"-->
-                    <!--android:background="@drawable/circle_dark" />-->
+                <ImageView
+                    android:id="@+id/pager_dot_three"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/circle_dark" />
 
                 <ImageView
                     android:id="@+id/pager_dot_four"
