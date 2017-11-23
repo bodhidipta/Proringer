@@ -24,6 +24,7 @@
                 android:background="@drawable/background_white_with_border"
                 android:gravity="center"
                 android:inputType="text"
+                android:singleLine="true"
                 android:maxLength="6"
                 android:text="10001"
                 android:padding="4dp"

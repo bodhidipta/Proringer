@@ -7,11 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectLocationListAdapter;
@@ -42,7 +46,7 @@ public class SearchLocationFragment extends Fragment {
     private ImageView error_progress;
     private boolean outer_block_check = false;
     private MyLoader myLoader = null;
-    TextWatcher textWatcher = null;
+    //TextWatcher textWatcher = null;
 
     @Nullable
     @Override
@@ -65,26 +69,26 @@ public class SearchLocationFragment extends Fragment {
         ((PostProjectActivity) getActivity()).selectedAddressData = null;
         Logger.printMessage("onCreate", "onCreate");
 
-        textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.toString().length() > 4) {
-                    Logger.printMessage("GreaterThan4", "" + s.toString().length());
-                    searchLocationUsingZip(s.toString());
-                }
-            }
-        };
-        zip_code_text.addTextChangedListener(textWatcher);
+//        textWatcher = new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (s.toString().length() > 4) {
+//                    Logger.printMessage("GreaterThan4", "" + s.toString().length());
+//                    searchLocationUsingZip(s.toString());
+//                }
+//            }
+//        };
+//        zip_code_text.addTextChangedListener(textWatcher);
 
         if (!ProApplication.getInstance().getUserId().equals("")) {
             plotUserInformation();
@@ -95,6 +99,26 @@ public class SearchLocationFragment extends Fragment {
             Logger.printMessage("Lng", "" + ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCurrentLatLng()[1]);
             getCurrentLocationZip();
         }
+
+
+
+
+
+        zip_code_text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    Logger.printMessage("search_category", zip_code_text.getText().toString());
+                    searchLocationUsingZip(zip_code_text.getText().toString());
+                }
+                else if((event != null && (actionId == KeyEvent.KEYCODE_DEL))){
+
+                }
+                return false;
+            }
+        });
+
+
+
 
         zip_code_text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
@@ -136,7 +160,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
 
-    private void searchLocationUsingZipFirstTime(String key) {
+    private void searchLocationUsingZipFirstTime(final String key) {
         Logger.printMessage("key",""+key);
         ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
@@ -155,6 +179,7 @@ public class SearchLocationFragment extends Fragment {
                     Logger.printMessage("Exception",""+e.getMessage());
                     addressDataList.clear();
                 }
+                searchLocationUsingZip(key);
             }
 
             @Override
