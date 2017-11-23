@@ -200,31 +200,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                     case NavigationHandler.LOGOUT:
                         closeDrawer();
 
-                        ProServiceApiHelper.getInstance(LandScreenActivity.this).logOut(new ProServiceApiHelper.getApiProcessCallback() {
-                            @Override
-                            public void onStart() {
-                                myLoader.showLoader();
-                            }
-
-                            @Override
-                            public void onComplete(String message) {
-                                if (myLoader != null && myLoader.isMyLoaderShowing())
-                                    myLoader.dismissLoader();
-
-                                ProApplication.getInstance().logOut();
-                                ProApplication.getInstance().clearFBUserStatus();
-
-                                startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
-                                finish();
-                            }
-
-                            @Override
-                            public void onError(String error) {
-
-                                if (myLoader != null && myLoader.isMyLoaderShowing())
-                                    myLoader.dismissLoader();
-                            }
-                        });
+                        CustomAlert customAlert = new CustomAlert(LandScreenActivity.this, "", "Are you sure you want to log out?", LandScreenActivity.this);
+                        customAlert.getListenerRetryCancelFromNormalAlert("Ok","Cancel",10);
 
                     break;
 
@@ -787,6 +764,35 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     public void callbackForAlert(String result, int i) {
         if (result.equalsIgnoreCase("Yes") && i==1){
             finish();
+        }
+
+        if (result.equalsIgnoreCase("Ok") && i==10){
+
+            ProServiceApiHelper.getInstance(LandScreenActivity.this).logOut(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+                    myLoader.showLoader();
+                }
+
+                @Override
+                public void onComplete(String message) {
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
+
+                    ProApplication.getInstance().logOut();
+                    ProApplication.getInstance().clearFBUserStatus();
+
+                    startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
+                    finish();
+                }
+
+                @Override
+                public void onError(String error) {
+
+                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                        myLoader.dismissLoader();
+                }
+            });
         }
     }
 
