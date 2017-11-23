@@ -281,6 +281,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.nav_toggle_icon, null));
 
 
+
+
         /**
          * Toolbar icon of search local pro icon
          */
