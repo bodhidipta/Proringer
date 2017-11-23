@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
@@ -203,6 +204,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                         public void onComplete(String message) {
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
+                            Toast.makeText(getActivity(),"User information updated successfully",Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
