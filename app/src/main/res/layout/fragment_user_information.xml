@@ -66,6 +66,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text_selecter"
             android:inputType="phone"
+            android:maxLength="14"
             android:padding="10dp"
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />

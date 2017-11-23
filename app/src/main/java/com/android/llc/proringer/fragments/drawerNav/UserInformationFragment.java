@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.LocationFinder;
@@ -23,6 +27,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,15 +49,16 @@ import org.json.JSONObject;
  * limitations under the License.
  */
 
-public class UserInformationFragment extends Fragment implements MyCustomAlertListener{
+public class UserInformationFragment extends Fragment implements MyCustomAlertListener {
     private ProLightEditText first_name, last_name, contact, zip_code, city, state;
     ProRegularTextView tv_search_by_location;
-//    ProLightEditText address;
+    //    ProLightEditText address;
     PopupWindow popupWindow;
     MyLoader myLoader = null;
     ImageView Erase;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
+    int textLength = 0;
 
     @Nullable
     @Override
@@ -67,7 +73,47 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         contact = (ProLightEditText) view.findViewById(R.id.contact);
 
-        myLoader=new MyLoader(getActivity());
+        contact.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = contact.getText().toString();
+                textLength = contact.getText().length();
+
+                if (text.endsWith("-") || text.endsWith(" ") || text.endsWith(" "))
+                    return;
+
+                if (textLength == 1) {
+                    if (!text.contains("(")) {
+                        contact.setText(new StringBuilder(text).insert(text.length() - 1, "(").toString());
+                        contact.setSelection(contact.getText().length());
+                    }
+
+                } else if (textLength == 5) {
+
+                    if (!text.contains(")")) {
+                        contact.setText(new StringBuilder(text).insert(text.length() - 1, ")").toString());
+                        contact.setSelection(contact.getText().length());
+                    }
+
+                } else if (textLength == 6) {
+                    contact.setText(new StringBuilder(text).insert(text.length() - 1, " ").toString());
+                    contact.setSelection(contact.getText().length());
+
+                } else if (textLength == 10) {
+                    if (!text.contains("-")) {
+                        contact.setText(new StringBuilder(text).insert(text.length() - 1, "-").toString());
+                        contact.setSelection(contact.getText().length());
+                    }
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        myLoader = new MyLoader(getActivity());
 //        address= (ProLightEditText) view.findViewById(R.id.address);
 
         tv_search_by_location = (ProRegularTextView) view.findViewById(R.id.tv_search_by_location);
@@ -76,11 +122,11 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
             public void onClick(View view) {
 
                 Intent i = new Intent(getActivity(), LocationFinder.class);
-               startActivityForResult(i, 1);
+                startActivityForResult(i, 1);
             }
         });
 
-      //  Erase= (ImageView) view.findViewById(R.id.Erase);
+        //  Erase= (ImageView) view.findViewById(R.id.Erase);
 
 //        Erase.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -165,7 +211,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                                 myLoader.dismissLoader();
 
                             CustomAlert customAlert = new CustomAlert(getActivity(), "Error updating information", "" + error, UserInformationFragment.this);
-                            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                            customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                         }
                     },
                     first_name.getText().toString().trim(),
@@ -183,7 +229,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
         } else {
 
             CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code", UserInformationFragment.this);
-            customAlert.createNormalAlert("ok",1);
+            customAlert.createNormalAlert("ok", 1);
         }
     }
 
@@ -260,7 +306,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             updateUserInformation();
         }
     }

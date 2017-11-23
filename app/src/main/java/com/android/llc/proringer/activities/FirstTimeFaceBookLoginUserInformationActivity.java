@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -36,6 +38,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
     ImageView Erase;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
+    int textLength=0;
 
 
     @Override
@@ -46,6 +49,46 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
         first_name = (ProLightEditText)findViewById(R.id.first_name);
         last_name = (ProLightEditText)findViewById(R.id.last_name);
         contact = (ProLightEditText) findViewById(R.id.contact);
+
+        contact.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = contact.getText().toString();
+                textLength = contact.getText().length();
+
+                if (text.endsWith("-") || text.endsWith(" ") || text.endsWith(" "))
+                    return;
+
+                if (textLength == 1) {
+                    if (!text.contains("(")) {
+                        contact.setText(new StringBuilder(text).insert(text.length() - 1, "(").toString());
+                        contact.setSelection(contact.getText().length());
+                    }
+
+                } else if (textLength == 5) {
+
+                    if (!text.contains(")")) {
+                        contact.setText(new StringBuilder(text).insert(text.length() - 1, ")").toString());
+                        contact.setSelection(contact.getText().length());
+                    }
+
+                } else if (textLength == 6) {
+                    contact.setText(new StringBuilder(text).insert(text.length() - 1, " ").toString());
+                    contact.setSelection(contact.getText().length());
+
+                } else if (textLength == 10) {
+                    if (!text.contains("-")) {
+                        contact.setText(new StringBuilder(text).insert(text.length() - 1, "-").toString());
+                        contact.setSelection(contact.getText().length());
+                    }
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         myLoader=new MyLoader(FirstTimeFaceBookLoginUserInformationActivity.this);
 //        address= (ProLightEditText) view.findViewById(R.id.address);
