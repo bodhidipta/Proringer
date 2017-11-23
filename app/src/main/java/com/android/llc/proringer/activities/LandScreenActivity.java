@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -278,6 +279,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         });
 
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.nav_toggle_icon, null));
+
 
         /**
          * Toolbar icon of search local pro icon
@@ -794,5 +796,4 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         Crashlytics.setUserEmail("user@fabric.io");
         Crashlytics.setUserName("Test User");
     }
-
 }
