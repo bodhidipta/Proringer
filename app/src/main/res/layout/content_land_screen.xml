@@ -384,8 +384,10 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
+                android:layout_height="2px"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorLightGray" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
