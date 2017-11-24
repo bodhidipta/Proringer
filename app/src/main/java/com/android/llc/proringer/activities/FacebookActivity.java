@@ -153,6 +153,7 @@ public class FacebookActivity extends AppCompatActivity implements MyCustomAlert
             Intent intent = new Intent();
             setResult(RESULT_CANCELED, intent);
             finish();
+            LoginManager.getInstance().logOut();
         }
     }
 }

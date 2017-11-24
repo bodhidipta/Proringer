@@ -90,11 +90,11 @@
                     android:layout_marginRight="5dp"
                     android:background="@drawable/circle_dark" />
 
-                <ImageView
-                    android:id="@+id/pager_dot_three"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/circle_dark" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/pager_dot_three"-->
+                    <!--android:layout_width="10dp"-->
+                    <!--android:layout_height="10dp"-->
+                    <!--android:background="@drawable/circle_dark" />-->
 
                 <ImageView
                     android:id="@+id/pager_dot_four"
