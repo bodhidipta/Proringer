@@ -786,9 +786,13 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                     ProApplication.getInstance().clearFBUserStatus();
 
 
-                    //////////////Facebook cookies remove///////////////
-                    LoginManager.getInstance().logOut();
-                    FirebaseAuth.getInstance().signOut();
+                    /////////////////Facebook logout///////////session//
+                    if (AccessToken.getCurrentAccessToken() != null && com.facebook.Profile.getCurrentProfile() != null) {
+                        LoginManager.getInstance().logOut();
+                        FirebaseAuth.getInstance().signOut();
+                    }
+//                  /////////////end///////////////////////////////////
+
 
                     startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
                     finish();
