@@ -41,6 +41,9 @@ import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.crashlytics.android.Crashlytics;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -781,6 +784,11 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
 
                     ProApplication.getInstance().logOut();
                     ProApplication.getInstance().clearFBUserStatus();
+
+
+                    //////////////Facebook cookies remove///////////////
+                    LoginManager.getInstance().logOut();
+                    FirebaseAuth.getInstance().signOut();
 
                     startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
                     finish();
