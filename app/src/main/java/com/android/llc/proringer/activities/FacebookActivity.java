@@ -105,11 +105,13 @@ public class FacebookActivity extends AppCompatActivity implements MyCustomAlert
             @Override
             public void onCancel() {
                 Toast.makeText(getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
