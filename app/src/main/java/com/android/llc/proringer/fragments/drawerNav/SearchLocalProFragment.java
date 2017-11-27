@@ -103,6 +103,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             public void onClick(View view) {
                 edt_search.setText("");
                 category_search = "";
+                loadList();
             }
         });
 
@@ -159,17 +160,16 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 } else {
                     img_clear.setVisibility(View.GONE);
                 }
-                if (category_search.length() == 0) {
-                    closeKeypad();
-                    loadList();
-                }
+//                if (category_search.length() == 0) {
+//                    closeKeypad();
+//                    loadList();
+//                }
                 //loadCategoryList();
             }
         };
 
         edt_search.setText("");
         category_search = "";
-
         edt_search.addTextChangedListener(mySearchTextWatcher);
 
         if (((LandScreenActivity) getActivity()).local_pros_search_zip.trim().equals("")) {

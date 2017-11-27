@@ -107,6 +107,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
             public void onClick(View view) {
                 edt_search.setText("");
                 category_search = "";
+                loadList();
             }
         });
 
@@ -130,17 +131,18 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 } else {
                     img_clear.setVisibility(View.GONE);
                 }
-                if(category_search.length()==0){
-                    closeKeypad();
-                    loadList();
-                }
+//                if(category_search.length()==0){
+//                    closeKeypad();
+//                    loadList();
+//                }
                 //loadCategoryList();
             }
         };
-        edt_search.addTextChangedListener(mySearchTextWatcher);
+
 
         edt_search.setText("");
         category_search = "";
+        edt_search.addTextChangedListener(mySearchTextWatcher);
 
         edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
