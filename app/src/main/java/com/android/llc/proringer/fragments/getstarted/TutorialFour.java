@@ -46,6 +46,6 @@ public class TutorialFour extends Fragment {
         description = (ProLightTextView) view.findViewById(R.id.description);
 
         header_text.setText("SHARE YOUR EXPERIENCE");
-        description.setText("Review pros and help others make\ninformed decisions when choosing a pro.");
+        description.setText("Review pros and help others make informed\ndecisions when choosing a pro.");
     }
 }

@@ -46,6 +46,6 @@ public class TutorialOne extends Fragment {
         description = (ProLightTextView) view.findViewById(R.id.description);
 
         header_text.setText("POST YOUR PROJECTS");
-        description.setText("When they pros complete for your\nbusiness.You save money!");
+        description.setText("When they pros complete for your business.\nYou save money!");
     }
 }

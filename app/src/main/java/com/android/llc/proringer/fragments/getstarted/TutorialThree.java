@@ -46,6 +46,6 @@ public class TutorialThree extends Fragment {
         description = (ProLightTextView) view.findViewById(R.id.description);
 
         header_text.setText("SEARCH ACTIVE DEALS");
-        description.setText("Periodically pros offer exclusive deals\non ProRinger to earn your business.");
+        description.setText("Periodically pros offer exclusive deals on\nProRinger to earn your business.");
     }
 }
