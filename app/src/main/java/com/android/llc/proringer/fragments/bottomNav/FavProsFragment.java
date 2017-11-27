@@ -108,6 +108,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 edt_search.setText("");
                 category_search = "";
                 loadList();
+                closeKeypad();
             }
         });
 

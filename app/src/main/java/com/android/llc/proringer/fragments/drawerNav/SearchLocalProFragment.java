@@ -104,6 +104,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 edt_search.setText("");
                 category_search = "";
                 loadList();
+                closeKeypad();
             }
         });
 
