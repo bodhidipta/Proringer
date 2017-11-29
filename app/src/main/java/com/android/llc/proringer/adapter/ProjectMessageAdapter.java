@@ -81,11 +81,11 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             holder.bind(projectMessage, position);
         }
 
-        if (position % 3 == 0) {
-            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
-        } else {
+//        if (position % 3 == 0) {
+//            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
+//        } else {
             holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
-        }
+       // }
 
     }
 

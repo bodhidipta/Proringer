@@ -7,10 +7,12 @@
     app:mode="same_level">
 
     <LinearLayout
+        android:id="@+id/delete_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <LinearLayout
             android:id="@+id/LLMore"
@@ -54,87 +56,97 @@
                 android:text="Delete"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
+
         </LinearLayout>
 
     </LinearLayout>
 
+
     <RelativeLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/vertical_line_bg"
-        android:orientation="horizontal"
-        android:paddingRight="5dp"
-       >
+        android:layout_height="wrap_content"
+        android:background="@drawable/vertical_line_bg">
 
-        <ImageView
-            android:id="@+id/prof_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:layout_toRightOf="@+id/flag"
-            android:background="@color/colorGreen" />
 
         <RelativeLayout
-            android:id="@+id/RLName_date"
+            android:id="@+id/info_cont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/prof_img"
-            android:paddingTop="15dp"
-            >
-
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_alignParentRight="true"
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="Date"
-                android:textColor="@color/colorTextDark"
-                android:textSize="12sp" />
-
-            <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                android:layout_toLeftOf="@+id/tv_date"
-                android:id="@+id/tv_name"
-                android:layout_width="match_parent"
-                android:lines="1"
-                android:layout_height="wrap_content"
-                android:text="Project name"
-                android:textColor="@color/colorAccent"
-                android:textSize="14sp" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/RLDes_cont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/RLName_date"
-            android:layout_toRightOf="@+id/prof_img"
-            android:orientation="horizontal"
-            android:paddingRight="10dp">
+            android:layout_centerInParent="true">
 
             <ImageView
-                android:id="@+id/img_attached"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_attachment" />
+                android:id="@+id/prof_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop" />
 
-            <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                android:layout_toRightOf="@+id/img_attached"
-                android:id="@+id/tv_description"
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/RLName_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:lines="1"
-                android:text="Description of the message .......dfgdf aksdjlf "
-                android:textColor="@color/colorTextDark"
-                android:textSize="14sp" />
+                android:layout_toRightOf="@+id/prof_img">
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:text="Date"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_date"
+                    android:lines="1"
+                    android:text="Project name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RLDes_cont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RLName_date"
+                android:layout_toRightOf="@+id/prof_img"
+                android:orientation="horizontal"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/img_attached"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_attachment" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/img_attached"
+                    android:lines="1"
+                    android:maxLines="2"
+                    android:text="Description of the message .......dfgdf aksdjlf "
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorLightGray" />
 
     </RelativeLayout>
 
