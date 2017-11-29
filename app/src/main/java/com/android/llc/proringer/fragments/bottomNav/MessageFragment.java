@@ -86,7 +86,7 @@ public class MessageFragment extends Fragment {
                             projectMessage.setProj_name( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
                             projectMessage.setStatus( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
                             projectMessage.setProject_date( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
-                            projectMessage.setNo_of_pros_user( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("no_of_pro_user"));
+                            projectMessage.setNo_of_pros_user( jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("no_of_pro_user"));
                             projectMessageArrayList.add(projectMessage);
                         }
 
@@ -100,9 +100,9 @@ public class MessageFragment extends Fragment {
                             Logger.printMessage("projectMessageAdapter", "null");
                             projectMessageAdapter = new ProjectMessageAdapter((LandScreenActivity) getActivity(), projectMessageArrayList, new onOptionSelected() {
                                 @Override
-                                public void onItemPassed(int position, String value) {
+                                public void onItemPassed(int position, String project_id) {
                                     ((LandScreenActivity) getActivity()).toggleToolBar(true);
-                                    ((LandScreenActivity) getActivity()).transactProjectMessaging();
+                                    ((LandScreenActivity) getActivity()).transactProjectMessaging(project_id);
                                 }
                             });
 

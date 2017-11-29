@@ -15,8 +15,15 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.IndividualMessageActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectDetailedMessageAdapter;
-import com.android.llc.proringer.helper.onItemClick;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
+import com.android.llc.proringer.utils.Logger;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -42,10 +49,13 @@ public class ProjectMessagingFragment extends Fragment {
     RecyclerView message_list;
     ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
     ProjectDetailedMessageAdapter projectDetailedMessageAdapter;
+    String project_id = "";
+    MyLoader myLoader = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        project_id = getArguments().getString("project_id");
         return inflater.inflate(R.layout.project_detailed_messaging, container, false);
     }
 
@@ -53,26 +63,16 @@ public class ProjectMessagingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        myLoader = new MyLoader(getActivity());
         projectMessageDetailsArrayList = new ArrayList<>();
-
-        for (int i = 0; i < 15; i++) {
-            ProjectMessageDetails projectMessageDetails = new ProjectMessageDetails();
-            projectMessageDetails.setIsOpen(false);
-            projectMessageDetails.setTagName("view " + i);
-            projectMessageDetailsArrayList.add(projectMessageDetails);
-        }
 
         detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
 
         message_list = (RecyclerView) view.findViewById(R.id.message_list);
         message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
-        projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), projectMessageDetailsArrayList, new onItemClick() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));
-            }
-        });
-        message_list.setAdapter(projectDetailedMessageAdapter);
+
+        loadList();
+
     }
 
 //    @Override
@@ -96,4 +96,80 @@ public class ProjectMessagingFragment extends Fragment {
 //            projectDetailedMessageAdapter.restoreStates(savedInstanceState);
 //        }
 //    }
+
+    public void loadList() {
+
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+                myLoader.showLoader();
+            }
+
+            @Override
+            public void onComplete(String message) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+                try {
+                    JSONObject jsonObject = new JSONObject(message);
+                    JSONArray info_array = jsonObject.getJSONArray("info_array");
+
+                    if (info_array.getJSONObject(0).has("all_pro_user_list")) {
+
+                        for (int i = 0; i < info_array.getJSONObject(0).getJSONArray("all_pro_user_list").length(); i++) {
+
+                            ProjectMessageDetails projectMessageDetails = new ProjectMessageDetails();
+
+                            projectMessageDetails.setId(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("id"));
+                            projectMessageDetails.setProject_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id"));
+                            projectMessageDetails.setHomeowner_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("homeowner_id"));
+                            projectMessageDetails.setPro_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id"));
+                            projectMessageDetails.setPro_img(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_img"));
+                            projectMessageDetails.setPro_rating(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_rating"));
+                            projectMessageDetails.setPro_time_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_time_status"));
+                            projectMessageDetails.setPro_user_name(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_user_name"));
+                            projectMessageDetails.setPro_com_nm(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_com_nm"));
+                            projectMessageDetails.setNo_of_msg(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("no_of_msg"));
+                            projectMessageDetails.setMessage_info(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("message_info"));
+                            projectMessageDetails.setMessage_list(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getJSONArray("message_list"));
+
+                            projectMessageDetailsArrayList.add(projectMessageDetails);
+                        }
+                        Logger.printMessage("all_pro_user_list", "" + info_array.getJSONObject(0).getJSONArray("all_pro_user_list"));
+
+                        if (projectDetailedMessageAdapter == null) {
+                            Logger.printMessage("projectDetailedMessageAdapter", "not null");
+                            projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), projectMessageDetailsArrayList, new onOptionSelected() {
+                                @Override
+                                public void onItemPassed(int position, String value) {
+                                    startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));
+                                }
+                            });
+
+                            message_list.setAdapter(projectDetailedMessageAdapter);
+
+                        } else {
+                            Logger.printMessage("projectDetailedMessageAdapter", "not null");
+                            //projectMessageAdapter.refreshData(info_array);
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+            }
+        }, ProApplication.getInstance().getUserId(), project_id);
+
+    }
+
+    public interface onOptionSelected {
+        void onItemPassed(int position, String value);
+    }
+
+
 }

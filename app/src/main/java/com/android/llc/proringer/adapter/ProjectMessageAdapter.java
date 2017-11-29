@@ -129,7 +129,9 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             main_container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callback.onItemPassed(position, projectMessage.getProj_id());
+                    if (projectMessage.getNo_of_pros_user()!=0) {
+                        callback.onItemPassed(position, projectMessage.getProj_id());
+                    }
                 }
             });
 
@@ -159,7 +161,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             });
             project_name.setText(projectMessage.getProj_name());
 
-            if (projectMessage.getNo_of_pros_user().equalsIgnoreCase("0")){
+            if (projectMessage.getNo_of_pros_user()==0){
                 name_convo.setText("No Conversions");
             }
             else {

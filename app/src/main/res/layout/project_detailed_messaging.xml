@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:background="@drawable/background_white_with_border"
-            android:hint="search..."
+            android:hint="Search"
             android:paddingLeft="30dp"
             android:textColorHint="@color/colorTextDark"
             android:textSize="14sp" />

@@ -463,15 +463,21 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
      * Transact individual message from details message
      * flow is MessageFragment(main sectional fragment)->detailedMessage(fragment)
      */
-    public void transactProjectMessaging() {
+    public void transactProjectMessaging(String project_id) {
         toggleToolBar(true);
         if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + ProjectMessagingFragment.class.getCanonicalName()) != null) {
             Logger.printMessage("back_stack", "Removed *****" + ProjectMessagingFragment.class.getCanonicalName());
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + ProjectMessagingFragment.class.getCanonicalName())).commit();
             fragmentManager.popBackStack("" + ProjectMessagingFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+        Bundle bundle = new Bundle();
+        bundle.putString("project_id", project_id);
+
+        ProjectMessagingFragment projectMessagingFragment = new ProjectMessagingFragment();
+        projectMessagingFragment.setArguments(bundle);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new ProjectMessagingFragment(), "" + ProjectMessagingFragment.class.getCanonicalName());
+        transaction.replace(R.id.fragment_container,projectMessagingFragment, "" + ProjectMessagingFragment.class.getCanonicalName());
         transaction.addToBackStack("" + ProjectMessagingFragment.class.getCanonicalName());
         transaction.commit();
 

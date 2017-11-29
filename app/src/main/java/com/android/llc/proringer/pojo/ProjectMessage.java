@@ -5,7 +5,8 @@ package com.android.llc.proringer.pojo;
  */
 
 public class ProjectMessage {
-    String proj_id = "",proj_image="",proj_name="",status="",project_date="",no_of_pros_user="";
+    String proj_id = "",proj_image="",proj_name="",status="",project_date="";
+    int no_of_pros_user;
 
     public String getProj_id() {
         return proj_id;
@@ -47,11 +48,11 @@ public class ProjectMessage {
         this.project_date = project_date;
     }
 
-    public String getNo_of_pros_user() {
+    public int getNo_of_pros_user() {
         return no_of_pros_user;
     }
 
-    public void setNo_of_pros_user(String no_of_pros_user) {
+    public void setNo_of_pros_user(int no_of_pros_user) {
         this.no_of_pros_user = no_of_pros_user;
     }
 }

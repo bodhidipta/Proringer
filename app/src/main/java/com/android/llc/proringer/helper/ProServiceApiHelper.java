@@ -3785,9 +3785,6 @@ public class ProServiceApiHelper {
 
 
 
-
-
-
     /**
      * Interface used to get call back for getServiceList and getCategoryList
      */
