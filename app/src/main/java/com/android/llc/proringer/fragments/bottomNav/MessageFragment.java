@@ -8,13 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectMessageAdapter;
-import com.android.llc.proringer.helper.onItemClick;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectMessage;
-
+import com.android.llc.proringer.utils.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +40,8 @@ import java.util.ArrayList;
 
 public class MessageFragment extends Fragment {
     private RecyclerView project_message_list;
-    private ProjectMessageAdapter adapter;
+    private ProjectMessageAdapter projectMessageAdapter;
+    MyLoader myLoader = null;
     ArrayList<ProjectMessage> projectMessageArrayList;
 
     @Nullable
@@ -49,28 +54,79 @@ public class MessageFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         projectMessageArrayList = new ArrayList<>();
-
-
-        for (int i = 0; i < 15; i++) {
-            ProjectMessage projectMessage = new ProjectMessage();
-            projectMessage.setIsOpen(false);
-            projectMessage.setTagName("view " + i);
-            projectMessageArrayList.add(projectMessage);
-        }
+        myLoader = new MyLoader(getActivity());
 
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
         project_message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
+        loadList();
 
-
-        adapter = new ProjectMessageAdapter((LandScreenActivity) getActivity(), projectMessageArrayList, new onItemClick() {
-            @Override
-            public void onItemClick(int pos) {
-                ((LandScreenActivity) getActivity()).toggleToolBar(true);
-                ((LandScreenActivity) getActivity()).transactProjectMessaging();
-            }
-        });
-
-        project_message_list.setAdapter(adapter);
     }
+    public void loadList() {
 
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+                myLoader.showLoader();
+            }
+
+            @Override
+            public void onComplete(String message) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+                try {
+                    JSONObject jsonObject = new JSONObject(message);
+
+                    if (jsonObject.has("info_array")) {
+
+
+                        for (int i = 0; i < jsonObject.getJSONArray("info_array").length(); i++) {
+                            ProjectMessage projectMessage = new ProjectMessage();
+                            projectMessage.setProj_id( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_id"));
+                            projectMessage.setProj_image( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_image"));
+                            projectMessage.setProj_name( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
+                            projectMessage.setStatus( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
+                            projectMessage.setProject_date( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
+                            projectMessage.setNo_of_pros_user( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("no_of_pro_user"));
+                            projectMessageArrayList.add(projectMessage);
+                        }
+
+
+                        JSONArray info_array = jsonObject.getJSONArray("info_array");
+
+
+                        Logger.printMessage("info_array", "" + info_array);
+
+                        if (projectMessageAdapter == null) {
+                            Logger.printMessage("projectMessageAdapter", "null");
+                            projectMessageAdapter = new ProjectMessageAdapter((LandScreenActivity) getActivity(), projectMessageArrayList, new onOptionSelected() {
+                                @Override
+                                public void onItemPassed(int position, String value) {
+                                    ((LandScreenActivity) getActivity()).toggleToolBar(true);
+                                    ((LandScreenActivity) getActivity()).transactProjectMessaging();
+                                }
+                            });
+
+                            project_message_list.setAdapter(projectMessageAdapter);
+                        } else {
+                            Logger.printMessage("projectMessageAdapter", "not null");
+                            //projectMessageAdapter.refreshData(info_array);
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                if (myLoader != null && myLoader.isMyLoaderShowing())
+                    myLoader.dismissLoader();
+            }
+        }, ProApplication.getInstance().getUserId(),"");
+
+    }
+    public interface onOptionSelected {
+        void onItemPassed(int position, String value);
+    }
 }
