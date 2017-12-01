@@ -89,7 +89,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                 @Override
                 public void onClick(View v) {
                     delete_position=position;
-                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete?", ProjectMessageAdapter.this);
+                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete all this conversation?", ProjectMessageAdapter.this);
                     customAlert.getListenerRetryCancelFromNormalAlert("Ok","Cancel",1);
                 }
             });
