@@ -55,7 +55,7 @@ public class EditImageSelectFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         image_pager = (ImageView) view.findViewById(R.id.image_pager);
-        selected_text=(ProRegularTextView)view.findViewById(R.id.selected_text);
+        selected_text = (ProRegularTextView) view.findViewById(R.id.selected_text);
 
         //content_post_project_img=(LinearLayout)view.findViewById(R.id.content_post_project_img);
         view.findViewById(R.id.add_photo).setOnClickListener(new View.OnClickListener() {
@@ -71,13 +71,14 @@ public class EditImageSelectFragment extends Fragment {
         view.findViewById(R.id.continue_image_section).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 ((AddEditProsActivity) getActivity()).mCurrentPhotoPath = mCurrentPhotoPath;
-                  ((AddEditProsActivity) getActivity()).increaseStep();
-                 ((AddEditProsActivity) getActivity()).changeFragmentNext(1);
+                ((AddEditProsActivity) getActivity()).mCurrentPhotoPath = mCurrentPhotoPath;
+                ((AddEditProsActivity) getActivity()).increaseStep();
+                ((AddEditProsActivity) getActivity()).changeFragmentNext(1);
             }
         });
 
     }
+
     public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
         try {
             Logger.printMessage("resultCode", "requestCode " + requestCode + " &b resultcode :: " + resultCode);
@@ -131,6 +132,7 @@ public class EditImageSelectFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     public String getRealPathFromURI(Uri contentURI) {
         Cursor cursor = ((AddEditProsActivity) getActivity()).getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {

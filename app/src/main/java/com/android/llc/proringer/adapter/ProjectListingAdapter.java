@@ -49,9 +49,9 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        if (position==itemList.size()-1){
+        if (position == itemList.size() - 1) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext,10));
+            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext, 10));
             holder.LL_Main.setLayoutParams(params);
         }
 
@@ -183,7 +183,7 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
         ProRegularTextView job_status, messages, pro_hired, no_pro_hired, lebel_hireing_offr, review_pro, create_date;
         ImageView right_chevron;
         ProSemiBoldTextView project_name;
-        LinearLayout start_project,LL_Main;
+        LinearLayout start_project, LL_Main;
         View totalView;
 
         public ViewHolder(View itemView) {

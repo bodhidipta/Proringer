@@ -27,7 +27,7 @@ import java.util.Date;
  * Created by Bodhidipta on 16/9/15.
  */
 public class ImageCompressor {
-    private final String TAG = "BodhiImageCompression";
+    private final String TAG = "SurajImageCompression";
 
     static volatile ImageCompressor singleton = null;
     private static Context mContext;

@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.activities.ProsProjectGalleryActivity;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -24,11 +26,11 @@ public class ProsDetailsPortfolioImageAdapter extends RecyclerView.Adapter<ProsD
     ProsProjectGalleryActivity.onOptionSelected callback;
     int x;
 
-    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray,ProsProjectGalleryActivity.onOptionSelected callback,int x) {
+    public ProsDetailsPortfolioImageAdapter(Context context, JSONArray portfolioInfoArray, ProsProjectGalleryActivity.onOptionSelected callback, int x) {
         this.context = context;
         this.portfolioInfoArray = portfolioInfoArray;
         this.callback = callback;
-        this.x=x;
+        this.x = x;
     }
 
 

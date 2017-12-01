@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import java.util.LinkedList;
 
 /**
@@ -19,16 +21,18 @@ public class ProCategoryListAdapter extends RecyclerView.Adapter<ProCategoryList
     Context mContext;
     LinkedList<ProCategoryData> listdata;
     SearchLocalProFragment.onOptionSelectedCategory callback;
-    public ProCategoryListAdapter(Context mContext,LinkedList<ProCategoryData> listdata, SearchLocalProFragment.onOptionSelectedCategory callback){
-        this.mContext=mContext;
-        this.listdata=listdata;
-        this.callback=callback;
+
+    public ProCategoryListAdapter(Context mContext, LinkedList<ProCategoryData> listdata, SearchLocalProFragment.onOptionSelectedCategory callback) {
+        this.mContext = mContext;
+        this.listdata = listdata;
+        this.callback = callback;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_category_dailog, parent, false);
-        return new MyViewHolder(itemView);    }
+        return new MyViewHolder(itemView);
+    }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
@@ -38,7 +42,7 @@ public class ProCategoryListAdapter extends RecyclerView.Adapter<ProCategoryList
         holder.tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    callback.onItemPassed(position,listdata.get(position));
+                callback.onItemPassed(position, listdata.get(position));
             }
         });
     }
@@ -50,13 +54,15 @@ public class ProCategoryListAdapter extends RecyclerView.Adapter<ProCategoryList
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView tv;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv= (ProRegularTextView) itemView.findViewById(R.id.tv);
+            tv = (ProRegularTextView) itemView.findViewById(R.id.tv);
         }
     }
-    public void setRefresh(LinkedList<ProCategoryData> listdata){
-        this.listdata=listdata;
+
+    public void setRefresh(LinkedList<ProCategoryData> listdata) {
+        this.listdata = listdata;
         notifyDataSetChanged();
     }
 }

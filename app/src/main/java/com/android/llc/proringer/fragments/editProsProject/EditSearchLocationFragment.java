@@ -36,7 +36,7 @@ import java.util.List;
  * Created by su on 2/11/17.
  */
 
-public class EditSearchLocationFragment extends Fragment{
+public class EditSearchLocationFragment extends Fragment {
     private List<AddressData> addressDataList;
     private ProRegularEditText zip_code_text;
     private PostProjectLocationListAdapter zip_search_adapter = null;
@@ -46,21 +46,22 @@ public class EditSearchLocationFragment extends Fragment{
     private boolean outer_block_check = false;
     private MyLoader myLoader = null;
     TextWatcher textWatcher = null;
-    ProRegularTextView selected_text,continue_location_section;
+    ProRegularTextView selected_text, continue_location_section;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_edit_searchlocation, container, false);
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         zip_code_text = (ProRegularEditText) view.findViewById(R.id.zip_code_text);
         location_list = (RecyclerView) view.findViewById(R.id.location_list);
         loading_progress = (ProgressBar) view.findViewById(R.id.loading_progress);
-        selected_text=(ProRegularTextView)view.findViewById(R.id.selected_text);
-        continue_location_section=(ProRegularTextView)view.findViewById(R.id.continue_location_section);
+        selected_text = (ProRegularTextView) view.findViewById(R.id.selected_text);
+        continue_location_section = (ProRegularTextView) view.findViewById(R.id.continue_location_section);
         error_progress = (ImageView) view.findViewById(R.id.error_progress);
         location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
         selected_text.setText("Where is the project located");
@@ -107,8 +108,8 @@ public class EditSearchLocationFragment extends Fragment{
                     zip_code_text.setText("");
                     ((AddEditProsActivity) getActivity()).selectedAddressData = null;
                     addressDataList.clear();
-                    if (zip_search_adapter!=null){
-                        Logger.printMessage("zip_search_adapter-->","not null");
+                    if (zip_search_adapter != null) {
+                        Logger.printMessage("zip_search_adapter-->", "not null");
                         zip_search_adapter.updateData(addressDataList);
                     }
                 }
@@ -128,7 +129,7 @@ public class EditSearchLocationFragment extends Fragment{
 
                 if (addressDataList != null & addressDataList.size() > 0) {
                     ((AddEditProsActivity) getActivity()).closeKeypad();
-                   // ((AddEditProsActivity) getActivity()).increaseStep();
+                    // ((AddEditProsActivity) getActivity()).increaseStep();
                     ((AddEditProsActivity) getActivity()).changeFragmentNext(6);
                     addressDataList.clear();
                 } else {
@@ -147,7 +148,7 @@ public class EditSearchLocationFragment extends Fragment{
 
 
     private void searchLocationUsingZipFirstTime(String key) {
-        Logger.printMessage("key",""+key);
+        Logger.printMessage("key", "" + key);
         ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<AddressData> listdata) {
@@ -161,8 +162,8 @@ public class EditSearchLocationFragment extends Fragment{
                             ((AddEditProsActivity) getActivity()).selectedAddressData = addressDataList.get(0);
                         }
                     }
-                }catch (Exception e){
-                    Logger.printMessage("Exception",""+e.getMessage());
+                } catch (Exception e) {
+                    Logger.printMessage("Exception", "" + e.getMessage());
                     addressDataList.clear();
                 }
             }
@@ -210,8 +211,8 @@ public class EditSearchLocationFragment extends Fragment{
                             }
                         }
                     }
-                }catch (Exception e){
-                    Logger.printMessage("Exception",""+e.getMessage());
+                } catch (Exception e) {
+                    Logger.printMessage("Exception", "" + e.getMessage());
                 }
             }
 
@@ -276,13 +277,13 @@ public class EditSearchLocationFragment extends Fragment{
                                         Logger.printMessage("types", "" + jsonArrayType.get(0));
 
                                         if (jsonArrayType.get(0).equals("postal_code")) {
-                                            Logger.printMessage("postal_code_get",""+jsonArrayType.get(0));
+                                            Logger.printMessage("postal_code_get", "" + jsonArrayType.get(0));
                                             zip_code_text.setText(jsonArrayAddressComponents.getJSONObject(j).getString("long_name"));
                                             searchLocationUsingZipFirstTime(zip_code_text.getText().toString());
                                             outer_block_check = true;
                                             break;
-                                        }else {
-                                            Logger.printMessage("postal_code",""+jsonArrayType.get(0));
+                                        } else {
+                                            Logger.printMessage("postal_code", "" + jsonArrayType.get(0));
                                         }
                                     }
                                 }
@@ -291,7 +292,7 @@ public class EditSearchLocationFragment extends Fragment{
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Logger.printMessage("JSONException",""+e.getMessage());
+                    Logger.printMessage("JSONException", "" + e.getMessage());
                     if (myLoader != null && myLoader.isMyLoaderShowing())
                         myLoader.dismissLoader();
                 }

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
+
 import com.android.llc.proringer.fragments.getstarted.TutorialFive;
 import com.android.llc.proringer.fragments.getstarted.TutorialFour;
 import com.android.llc.proringer.fragments.getstarted.TutorialOne;

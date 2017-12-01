@@ -13,18 +13,18 @@ public class CustomAlert {
 
     MyCustomAlertListener ml;
     Context context;
-    String title,message;
+    String title, message;
 
 
     // constructor
-    public CustomAlert(Context context,String title,String message,MyCustomAlertListener ml){
-        this.context=context;
-        this.title=title;
-        this.message=message;
+    public CustomAlert(Context context, String title, String message, MyCustomAlertListener ml) {
+        this.context = context;
+        this.title = title;
+        this.message = message;
         this.ml = ml;
     }
 
-    public void createNormalAlert(final String positiveTitle,final int checkValue){
+    public void createNormalAlert(final String positiveTitle, final int checkValue) {
         new AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(title)
@@ -33,7 +33,7 @@ public class CustomAlert {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        ml.callbackForAlert(positiveTitle,checkValue);
+                        ml.callbackForAlert(positiveTitle, checkValue);
                     }
                 })
                 .create()
@@ -41,8 +41,7 @@ public class CustomAlert {
     }
 
 
-
-    public void getListenerRetryCancelFromNormalAlert(final String positiveTitle,final String negativeTitle,final int checkValue){
+    public void getListenerRetryCancelFromNormalAlert(final String positiveTitle, final String negativeTitle, final int checkValue) {
         new AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(title)
@@ -52,7 +51,7 @@ public class CustomAlert {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         /////////take listener event///////////////
-                        ml.callbackForAlert(positiveTitle,checkValue);
+                        ml.callbackForAlert(positiveTitle, checkValue);
                     }
                 })
                 .setNegativeButton(negativeTitle, new DialogInterface.OnClickListener() {
@@ -61,7 +60,7 @@ public class CustomAlert {
                         dialog.dismiss();
 
                         /////////take listener event///////////////
-                        ml.callbackForAlert(negativeTitle,checkValue);
+                        ml.callbackForAlert(negativeTitle, checkValue);
                     }
                 })
                 .create()

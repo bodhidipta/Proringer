@@ -27,6 +27,7 @@ import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -53,9 +54,9 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        if (position==jsonInfoArray.length()-1){
+        if (position == jsonInfoArray.length() - 1) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext,10));
+            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext, 10));
             holder.LL_Main.setLayoutParams(params);
         }
 
@@ -156,7 +157,7 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout linear_layout_border,LL_Main;
+        LinearLayout linear_layout_border, LL_Main;
         RatingBar ratingBar;
         CardView main_container;
         ProRegularTextView tv_pros_company_name;
@@ -204,6 +205,6 @@ public class SearchFavoriteListAdapter extends RecyclerView.Adapter<SearchFavori
 
     @Override
     public int getItemViewType(int position) {
-            return position;
+        return position;
     }
 }

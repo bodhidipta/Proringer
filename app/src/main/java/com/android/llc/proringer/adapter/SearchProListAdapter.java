@@ -67,9 +67,9 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        if (position==jsonInfoArray.length()-1){
+        if (position == jsonInfoArray.length() - 1) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext,10));
+            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext, 10));
             holder.LL_Main.setLayoutParams(params);
         }
 
@@ -179,7 +179,7 @@ public class SearchProListAdapter extends RecyclerView.Adapter<SearchProListAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout linear_layout_border,LL_Main;
+        LinearLayout linear_layout_border, LL_Main;
         RatingBar ratingBar;
         CardView main_container;
         ProRegularTextView tv_pros_company_name;

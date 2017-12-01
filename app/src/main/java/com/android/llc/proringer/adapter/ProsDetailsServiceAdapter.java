@@ -42,7 +42,7 @@ public class ProsDetailsServiceAdapter extends RecyclerView.Adapter<ProsDetailsS
 //                holder.tv_name.setText("More...");
 //                holder.tv_name.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
 //            } else {
-                holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("service_name"));
+            holder.tv_name.setText(serviceAreaJsonArray.getJSONObject(position).getString("service_name"));
             //}
         } catch (JSONException e) {
             e.printStackTrace();

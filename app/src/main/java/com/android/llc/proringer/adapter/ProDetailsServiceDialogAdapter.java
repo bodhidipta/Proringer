@@ -19,9 +19,10 @@ import org.json.JSONException;
 public class ProDetailsServiceDialogAdapter extends RecyclerView.Adapter<ProDetailsServiceDialogAdapter.MyViewHolder> {
     JSONArray serviceAreaJsonArray;
     Context context;
-    public ProDetailsServiceDialogAdapter(Context context, JSONArray serviceJsonArray){
-        this.context=context;
-        this.serviceAreaJsonArray=serviceJsonArray;
+
+    public ProDetailsServiceDialogAdapter(Context context, JSONArray serviceJsonArray) {
+        this.context = context;
+        this.serviceAreaJsonArray = serviceJsonArray;
     }
 
     @Override
@@ -46,9 +47,10 @@ public class ProDetailsServiceDialogAdapter extends RecyclerView.Adapter<ProDeta
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView tv_name;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_name= (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
         }
     }
 }

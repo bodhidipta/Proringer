@@ -10,14 +10,14 @@ import android.view.WindowManager;
 
 public class MethodsUtils {
 
-    public static int[]  getScreenHeightAndWidth(Context context){
+    public static int[] getScreenHeightAndWidth(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        return new int[]{displayMetrics.heightPixels,displayMetrics.widthPixels};
+        return new int[]{displayMetrics.heightPixels, displayMetrics.widthPixels};
     }
 
-    public static int dpToPx(Context context,int dp) {
+    public static int dpToPx(Context context, int dp) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }

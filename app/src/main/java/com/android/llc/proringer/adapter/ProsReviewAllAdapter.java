@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsReportAbuseActivity;
 import com.android.llc.proringer.activities.ProsReviewAllListActivity;
@@ -34,7 +35,7 @@ import org.json.JSONException;
  * Created by su on 8/4/17.
  */
 
-public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdapter.MyViewHolder> implements MyCustomAlertListener{
+public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdapter.MyViewHolder> implements MyCustomAlertListener {
     Context context;
     JSONArray jsonInfoArray;
 
@@ -62,9 +63,9 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
             holder.tv_name.setText(jsonInfoArray.getJSONObject(position).getString("homeowner_name"));
             holder.tv_review_date.setText(jsonInfoArray.getJSONObject(position).getString("date_time"));
 
-            if(jsonInfoArray.getJSONObject(position).getString("review_report_status").trim().equals("0")){
+            if (jsonInfoArray.getJSONObject(position).getString("review_report_status").trim().equals("0")) {
                 holder.tv_report.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 holder.tv_report.setVisibility(View.GONE);
             }
 
@@ -72,14 +73,14 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 @Override
                 public void onClick(View view) {
                     try {
-                        if(jsonInfoArray.getJSONObject(position).getString("review_report_status").trim().equals("0")) {
+                        if (jsonInfoArray.getJSONObject(position).getString("review_report_status").trim().equals("0")) {
                             Intent intent = new Intent(context, ProsReportAbuseActivity.class);
                             intent.putExtra("review_report_id", jsonInfoArray.getJSONObject(position).getString("id"));
                             context.startActivity(intent);
-                        }else {
+                        } else {
 
-                            CustomAlert customAlert = new CustomAlert(context, "Contact Us","Sorry! You have already added a report for this review", ProsReviewAllAdapter.this);
-                            customAlert.createNormalAlert("ok",1);
+                            CustomAlert customAlert = new CustomAlert(context, "Contact Us", "Sorry! You have already added a report for this review", ProsReviewAllAdapter.this);
+                            customAlert.createNormalAlert("ok", 1);
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -125,9 +126,6 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                                 // There is the OnCLick. put your intent to Register class here
                                 widget.invalidate();
                                 Logger.printMessage("SpanHello", "click");
-
-
-
 
 
                                 try {

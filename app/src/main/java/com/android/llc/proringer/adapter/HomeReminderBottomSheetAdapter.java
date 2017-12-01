@@ -43,7 +43,7 @@ public class HomeReminderBottomSheetAdapter extends RecyclerView.Adapter<HomeRem
         holder.LL_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position!=0){
+                if (position != 0) {
                     callback.onItemPassed(position, arrayList.get(position));
                     dialog.dismiss();
                 }

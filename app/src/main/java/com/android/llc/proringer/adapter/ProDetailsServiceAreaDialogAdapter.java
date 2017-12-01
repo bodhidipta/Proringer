@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -17,9 +19,10 @@ import org.json.JSONException;
 public class ProDetailsServiceAreaDialogAdapter extends RecyclerView.Adapter<ProDetailsServiceAreaDialogAdapter.MyViewHolder> {
     JSONArray serviceAreaJsonArray;
     Context context;
-    public ProDetailsServiceAreaDialogAdapter(Context context, JSONArray serviceJsonArray){
-        this.context=context;
-        this.serviceAreaJsonArray=serviceJsonArray;
+
+    public ProDetailsServiceAreaDialogAdapter(Context context, JSONArray serviceJsonArray) {
+        this.context = context;
+        this.serviceAreaJsonArray = serviceJsonArray;
     }
 
     @Override
@@ -39,14 +42,15 @@ public class ProDetailsServiceAreaDialogAdapter extends RecyclerView.Adapter<Pro
 
     @Override
     public int getItemCount() {
-            return serviceAreaJsonArray.length();
+        return serviceAreaJsonArray.length();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ProRegularTextView tv_name;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_name= (ProRegularTextView) itemView.findViewById(R.id.tv_name);
+            tv_name = (ProRegularTextView) itemView.findViewById(R.id.tv_name);
         }
     }
 }

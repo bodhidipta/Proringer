@@ -32,12 +32,12 @@ public class NavigationHandler {
     private OnHandleInput listener = null;
     private static NavigationHandler instance = null;
 
-    private LinearLayout find_local_pros_cont, account_cont, support_cont, about_cont,LLAccount,LLSupport,LLAbout;
+    private LinearLayout find_local_pros_cont, account_cont, support_cont, about_cont, LLAccount, LLSupport, LLAbout;
     private ImageView find_local_pros_img, account_img, support_img, about_img;
     private ProBoldTextView find_local_pros_text, account_text, support_text, about_text;
 
     private RelativeLayout userInformation, login_settings, notification, home_scheduler, invite_friend, log_out,
-            RLEmailSupport,RLFaq,RLProviderFeedback,RLTerms,RLPrivacyPolicy;
+            RLEmailSupport, RLFaq, RLProviderFeedback, RLTerms, RLPrivacyPolicy;
 
     public static final String FIND_LOCAL_PROS = "find_local_pros",
             ACCOUNT = "account",
@@ -92,9 +92,9 @@ public class NavigationHandler {
         RLTerms = (RelativeLayout) view.findViewById(R.id.RLTerms);
         RLPrivacyPolicy = (RelativeLayout) view.findViewById(R.id.RLPrivacyPolicy);
 
-        LLAccount= (LinearLayout) view.findViewById(R.id.LLAccount);
-        LLSupport= (LinearLayout) view.findViewById(R.id.LLSupport);
-        LLAbout= (LinearLayout) view.findViewById(R.id.LLAbout);
+        LLAccount = (LinearLayout) view.findViewById(R.id.LLAccount);
+        LLSupport = (LinearLayout) view.findViewById(R.id.LLSupport);
+        LLAbout = (LinearLayout) view.findViewById(R.id.LLAbout);
 
 
         find_local_pros_cont.setOnClickListener(new View.OnClickListener() {
@@ -436,7 +436,7 @@ public class NavigationHandler {
     }
 
 
-    public void closeAndResetSideMenuDesign(){
+    public void closeAndResetSideMenuDesign() {
 
         find_local_pros_cont.setBackgroundColor(Color.TRANSPARENT);
         find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro);

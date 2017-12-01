@@ -9,6 +9,7 @@ import android.graphics.drawable.LayerDrawable;
 import com.android.llc.proringer.pojo.NotificationData;
 import com.android.llc.proringer.pojo.ProjectPostedData;
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -37,7 +38,7 @@ public class ProApplication extends Application {
     private SharedPreferences notificationPreference = null;
     private ProjectPostedData dataSelected = null;
 
-    public String go_to="";
+    public String go_to = "";
 
     public static ProApplication getInstance() {
         return instance;
@@ -50,40 +51,36 @@ public class ProApplication extends Application {
         instance = this;
         userPreference = getSharedPreferences("USER_PREFERENCE", MODE_PRIVATE);
         notificationPreference = getSharedPreferences("NOTIFICATION_PREFERENCE", MODE_PRIVATE);
-        userFbFirstTimeStatus=getSharedPreferences("USER_STATUS", MODE_PRIVATE);
-        userFbFirstTimeJson=getSharedPreferences("USER_STATUS_JSON", MODE_PRIVATE);
+        userFbFirstTimeStatus = getSharedPreferences("USER_STATUS", MODE_PRIVATE);
+        userFbFirstTimeJson = getSharedPreferences("USER_STATUS_JSON", MODE_PRIVATE);
     }
 
 
-
-
-
-    public void setFBUserStatus(int a){
-        userFbFirstTimeStatus.edit().putInt("user_status",a).apply();
+    public void setFBUserStatus(int a) {
+        userFbFirstTimeStatus.edit().putInt("user_status", a).apply();
     }
+
     public void clearFBUserStatus() {
-        userFbFirstTimeStatus.edit().putInt("user_status",0).apply();
-    }
-    public int getFBUserStatus(){
-        return userFbFirstTimeStatus.getInt("user_status",0);
+        userFbFirstTimeStatus.edit().putInt("user_status", 0).apply();
     }
 
-
-
-
-
-    public void setFbFirstTimeJson(String firstTimeJson){
-        userFbFirstTimeJson.edit().putString("firstTimeJson",firstTimeJson).apply();
+    public int getFBUserStatus() {
+        return userFbFirstTimeStatus.getInt("user_status", 0);
     }
+
+
+    public void setFbFirstTimeJson(String firstTimeJson) {
+        userFbFirstTimeJson.edit().putString("firstTimeJson", firstTimeJson).apply();
+    }
+
     public void clearUserFbFirstTimeJson() {
         userFbFirstTimeJson.edit().clear().apply();
 
     }
-    public String getFbFirstTimeJson(){
-        return userFbFirstTimeJson.getString("firstTimeJson","None");
+
+    public String getFbFirstTimeJson() {
+        return userFbFirstTimeJson.getString("firstTimeJson", "None");
     }
-
-
 
 
     public void setUserPreference(String user_id,
