@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     app:dragEdge="right"
     app:mode="same_level">
 
@@ -65,22 +65,22 @@
     <RelativeLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/vertical_line_bg">
 
 
         <RelativeLayout
             android:id="@+id/info_cont"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true">
 
             <ImageView
                 android:id="@+id/prof_img"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="10dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="fitXY" />
 
             <RelativeLayout
                 android:layout_marginTop="10dp"
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/img_attached"
-                    android:lines="1"
+                    android:lines="2"
                     android:maxLines="2"
                     android:text="Description of the message .......dfgdf aksdjlf "
                     android:textColor="@color/colorTextDark"

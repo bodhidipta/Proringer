@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
     app:dragEdge="right"
     app:mode="same_level">
 
@@ -34,7 +34,7 @@
     <RelativeLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:background="@drawable/vertical_line_bg"
         >
@@ -42,21 +42,22 @@
         <RelativeLayout
             android:id="@+id/info_cont"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             >
 
             <ImageView
                 android:id="@+id/project_type_img"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"/>
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitXY"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/project_type_img"
 
@@ -77,28 +78,44 @@
                         android:paddingBottom="5dp"
                         android:paddingRight="15dp"
                         android:text="Today"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="10sp" />
+                        android:gravity="center"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="12sp" />
 
                     <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
                         android:id="@+id/project_name"
                         android:layout_toLeftOf="@+id/date"
+                        android:layout_marginRight="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Plumbing project"
+                        android:singleLine="true"
+                        android:text="Plumbing project jsadhbashhashahsdhaggdasgdgagghasgashgahsgggggghgashgghsa"
                         android:textColor="@color/colorTextDark"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
 
+
+                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                        android:id="@+id/name_convo_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/project_name"
+                        android:text="12"
+                        android:textColor="@color/colorTextBlack"
+                        android:singleLine="true"
+                        android:textSize="10sp" />
 
                     <com.android.llc.proringer.viewsmod.textview.ProLightTextView
                         android:id="@+id/name_convo"
+                        android:layout_toRightOf="@+id/name_convo_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/project_name"
                         android:text="Conversions"
-                        android:textSize="12sp" />
+                        android:singleLine="true"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="10sp" />
 
                     <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
                         android:id="@+id/status"
@@ -108,13 +125,14 @@
                         android:paddingTop="5dp"
                         android:text="Active"
                         android:textColor="@color/colorSky"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:id="@+id/img_more"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_alignParentRight="true"
-                        android:layout_below="@+id/date"
+                        android:layout_below="@+id/project_name"
                         android:src="@drawable/ic_right_chevron_dark" />
 
                 </RelativeLayout>

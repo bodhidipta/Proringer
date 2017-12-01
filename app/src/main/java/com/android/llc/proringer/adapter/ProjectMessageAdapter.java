@@ -12,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.LogInActivity;
 import com.android.llc.proringer.fragments.bottomNav.MessageFragment;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.pojo.ProjectMessage;
 import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
@@ -44,10 +47,11 @@ import java.util.ArrayList;
  * limitations under the License.
  */
 
-public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAdapter.ViewHolder> {
+public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAdapter.ViewHolder> implements MyCustomAlertListener {
     private Context mcontext;
     MessageFragment.onOptionSelected callback;
     ArrayList<ProjectMessage> projectMessageArrayList;
+    int delete_position=0;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
     public ProjectMessageAdapter(Context mcontext, ArrayList<ProjectMessage> projectMessageArrayList, MessageFragment.onOptionSelected callback) {
@@ -79,6 +83,17 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
             // Bind your data here
             holder.bind(projectMessage, position);
+
+
+            holder.delete_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    delete_position=position;
+                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete?", ProjectMessageAdapter.this);
+                    customAlert.getListenerRetryCancelFromNormalAlert("Ok","Cancel",1);
+                }
+            });
+
         }
 
 //        if (position % 3 == 0) {
@@ -98,12 +113,13 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         }
     }
 
+
     class ViewHolder extends RecyclerView.ViewHolder {
         View flag;
         SwipeRevealLayout swipe_layout;
         RelativeLayout main_container;
         LinearLayout delete_layout;
-        ProSemiBoldTextView project_name, status;
+        ProSemiBoldTextView project_name, status,name_convo_value;
         ProRegularTextView date;
         ProLightTextView name_convo;
         ImageView project_type_img;
@@ -120,6 +136,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             project_name = (ProSemiBoldTextView) itemView.findViewById(R.id.project_name);
             status = (ProSemiBoldTextView) itemView.findViewById(R.id.status);
             date = (ProRegularTextView) itemView.findViewById(R.id.date);
+            name_convo_value = (ProSemiBoldTextView) itemView.findViewById(R.id.name_convo_value);
             name_convo = (ProLightTextView) itemView.findViewById(R.id.name_convo);
         }
 
@@ -136,13 +153,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             });
 
 
-            delete_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    projectMessageArrayList.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                }
-            });
+
 
             Glide.with(mcontext).load(projectMessage.getProj_image()).fitCenter().placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(project_type_img) {
                 /**
@@ -162,10 +173,12 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             project_name.setText(projectMessage.getProj_name());
 
             if (projectMessage.getNo_of_pros_user()==0){
-                name_convo.setText("No Conversions");
+                name_convo_value.setText("");
+                name_convo.setText("");
             }
             else {
-                name_convo.setText(projectMessage.getNo_of_pros_user()+" "+"Conversions");
+                name_convo_value.setText(""+projectMessage.getNo_of_pros_user());
+                name_convo.setText(" Conversations");
             }
 
             if (projectMessage.getStatus().equalsIgnoreCase("Y")){
@@ -195,6 +208,16 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
      */
     public void restoreStates(Bundle inState) {
         binderHelper.restoreStates(inState);
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("Ok") && i == 1) {
+//            projectMessageArrayList.remove(getAdapterPosition());
+//            notifyItemRemoved(getAdapterPosition());
+            projectMessageArrayList.remove(delete_position);
+            notifyItemRemoved(delete_position);
+        }
     }
 
 }
