@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProsReviewAllAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -29,10 +30,10 @@ import org.json.JSONObject;
  */
 
 public class ProsReviewAllListActivity extends AppCompatActivity {
-    public String pros_id = "", pros_company_name = "",img="",total_avg_review="",total_review="";
+    public String pros_id = "", pros_company_name = "", img = "", total_avg_review = "", total_review = "";
     RecyclerView rcv_review_all;
     ProsReviewAllAdapter prosReviewAllAdapter;
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
     JSONArray jsonInfoReviewArray;
     ImageView img_profile;
 
@@ -48,9 +49,9 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
         jsonInfoReviewArray = new JSONArray();
 
-        myLoader=new MyLoader(ProsReviewAllListActivity.this);
+        myLoader = new MyLoader(ProsReviewAllListActivity.this);
 
-        img_profile= (ImageView) findViewById(R.id.img_profile);
+        img_profile = (ImageView) findViewById(R.id.img_profile);
 
 
         if (getIntent().getExtras() != null) {
@@ -70,8 +71,8 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         if (!img.trim().equals(""))
             Glide.with(ProsReviewAllListActivity.this).load(img).centerCrop().into(img_profile);
 
-        ((ProRegularTextView)findViewById(R.id.tv_rate_value)).setText(total_avg_review);
-        ((RatingBar)findViewById(R.id.rbar)).setRating(Float.parseFloat(total_avg_review));
+        ((ProRegularTextView) findViewById(R.id.tv_rate_value)).setText(total_avg_review);
+        ((RatingBar) findViewById(R.id.rbar)).setRating(Float.parseFloat(total_avg_review));
         ((ProRegularTextView) findViewById(R.id.tv_review_value)).setText(total_review);
 
 
@@ -83,7 +84,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(ProsReviewAllListActivity.this, ProsReviewActivity.class);
                         intent.putExtra("pros_id", pros_id);
-                        intent.putExtra("img",img);
+                        intent.putExtra("img", img);
                         startActivity(intent);
                     } else {
                         Toast.makeText(ProsReviewAllListActivity.this, "Details Page Loading problem", Toast.LENGTH_LONG).show();
@@ -106,7 +107,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent backIntent = new Intent();
-        setResult(RESULT_CANCELED, backIntent );
+        setResult(RESULT_CANCELED, backIntent);
 //        setResult(GetStartedActivity.RESULT_CANCELED);
         finish();
     }
@@ -126,7 +127,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReview(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                              @Override
                                                                                              public void onStart() {
-                                                                                                myLoader.showLoader();
+                                                                                                 myLoader.showLoader();
                                                                                              }
 
                                                                                              @Override

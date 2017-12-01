@@ -107,6 +107,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                     }
                 }
             }
+
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
@@ -204,7 +205,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                         public void onComplete(String message) {
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
-                            Toast.makeText(getActivity(),"User information updated successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "User information updated successfully", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

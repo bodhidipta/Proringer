@@ -17,23 +17,27 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class LocationFinder extends AppCompatActivity {
 
-    String selectedPlace = "",city = "", state = "", zip_code = "";
+    String selectedPlace = "", city = "", state = "", zip_code = "";
     EditText locationText;
     ImageView Erase;
     ListView listviewLocation;
     MyLoader myLoader = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,24 +46,24 @@ public class LocationFinder extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(""+getResources().getString(R.string.selectAddress));
+        getSupportActionBar().setTitle("" + getResources().getString(R.string.selectAddress));
         //----------------------
 
-        myLoader=new MyLoader(LocationFinder.this);
+        myLoader = new MyLoader(LocationFinder.this);
 
         listviewLocation = (ListView) findViewById(R.id.suggestion);
         listviewLocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedPlace = (String) parent.getItemAtPosition(position);
-                Logger.printMessage("selectedPlace",selectedPlace);
+                Logger.printMessage("selectedPlace", selectedPlace);
                 getZipCityState();
                 locationText.setText(selectedPlace);
                 listviewLocation.setVisibility(View.GONE);
             }
         });
         locationText = (EditText) findViewById(R.id.locationed);
-        Erase=(ImageView)findViewById(R.id.Erase);
+        Erase = (ImageView) findViewById(R.id.Erase);
         Erase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,10 +87,9 @@ public class LocationFinder extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(locationText.getText().length()>0)
-                {
+                if (locationText.getText().length() > 0) {
                     Erase.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     Erase.setVisibility(View.GONE);
                 }
             }
@@ -99,12 +102,12 @@ public class LocationFinder extends AppCompatActivity {
 
             @Override
             public void onComplete(ArrayList<String> listData) {
-                if(listData.size()>0) {
+                if (listData.size() > 0) {
                     ArrayAdapter adapter = new ArrayAdapter(LocationFinder.this, R.layout.location_list_adapter, android.R.id.text1, listData);
                     listviewLocation.setAdapter(adapter);
                     listviewLocation.setVisibility(View.VISIBLE);
 
-                }else {
+                } else {
                     listviewLocation.setVisibility(View.GONE);
                 }
                 ViewGroup.LayoutParams params = listviewLocation.getLayoutParams();
@@ -121,7 +124,7 @@ public class LocationFinder extends AppCompatActivity {
             public void onStartFetch() {
 
             }
-        }, URLEncoder.encode( url.toString().trim()));
+        }, URLEncoder.encode(url.toString().trim()));
     }
 
 

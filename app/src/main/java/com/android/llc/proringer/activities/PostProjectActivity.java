@@ -31,6 +31,7 @@ import com.android.llc.proringer.pojo.ProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -58,7 +59,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 
     boolean back = false;
 
-    public boolean isSubmitPostProject=false;
+    public boolean isSubmitPostProject = false;
 
 
     private ProgressBar progress_posting;
@@ -122,7 +123,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        myLoader=new MyLoader(PostProjectActivity.this);
+        myLoader = new MyLoader(PostProjectActivity.this);
 
         LLMain = (LinearLayout) findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) findViewById(R.id.LLNetworkDisconnection);
@@ -136,12 +137,11 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             public void onClick(View v) {
                 if (!ProApplication.getInstance().getUserId().equals("")) {
                     Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
-                    ProApplication.getInstance().go_to="dashboard";
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ProApplication.getInstance().go_to = "dashboard";
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-                }else
-                {
+                } else {
                     finish();
                 }
             }
@@ -191,11 +191,10 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             if (fragmentPushList.get(fragmentPushList.size() - 1).equals(CateGoryListFragment.class.getCanonicalName())) {
                 if (!ProApplication.getInstance().getUserId().equals("")) {
                     Intent intent = new Intent(PostProjectActivity.this, LandScreenActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-                }else
-                {
+                } else {
                     finish();
                 }
             } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherListFragment.class.getCanonicalName())) {
@@ -279,7 +278,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 //                        CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Post Project", "" + message, PostProjectActivity.this);
 //                        customAlert.createNormalAlert("ok",1);
 
-                        isSubmitPostProject=true;
+                        isSubmitPostProject = true;
                     }
 
                     @Override
@@ -287,10 +286,10 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
                         if (myLoader != null && myLoader.isMyLoaderShowing())
                             myLoader.dismissLoader();
 
-                        isSubmitPostProject=true;
+                        isSubmitPostProject = true;
 
                         CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Project post error", "" + error, PostProjectActivity.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                     }
                 },
                 selectedCategory.getId(),
@@ -520,10 +519,9 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry")&&i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             completePostProject();
-        }
-        else if (result.equalsIgnoreCase("retry")&&i==2){
+        } else if (result.equalsIgnoreCase("retry") && i == 2) {
             changeFragmentNext(1);
         }
 //        else if(result.equalsIgnoreCase("ok")&&i==1){

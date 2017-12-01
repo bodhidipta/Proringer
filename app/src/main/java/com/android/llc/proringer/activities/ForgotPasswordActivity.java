@@ -11,6 +11,7 @@ import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
@@ -99,7 +100,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
 
 
                             CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "forgot", "" + message, ForgotPasswordActivity.this);
-                            customAlert.createNormalAlert("ok",1);
+                            customAlert.createNormalAlert("ok", 1);
 
                         }
 
@@ -109,7 +110,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
                                 myLoader.dismissLoader();
 
                             CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "Request password error", "" + error, ForgotPasswordActivity.this);
-                            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                            customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
 
                         }
                     });
@@ -151,7 +152,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
                                                 closeKeypad();
 
                                                 CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "forgot", "" + message, ForgotPasswordActivity.this);
-                                                customAlert.createNormalAlert("ok",2);
+                                                customAlert.createNormalAlert("ok", 2);
 
                                             }
 
@@ -161,7 +162,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
                                                     myLoader.dismissLoader();
 
                                                 CustomAlert customAlert = new CustomAlert(ForgotPasswordActivity.this, "Reset password error", "" + error, ForgotPasswordActivity.this);
-                                                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
+                                                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 2);
                                             }
                                         }
                                 );
@@ -193,17 +194,14 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             findViewById(R.id.pre_submit_email).setVisibility(View.GONE);
             header_text.setText("RESET PASSWORD");
-        }
-        else if (result.equalsIgnoreCase("ok") && i==2){
+        } else if (result.equalsIgnoreCase("ok") && i == 2) {
             finish();
-        }
-        else if (result.equalsIgnoreCase("retry")&&i==1){
+        } else if (result.equalsIgnoreCase("retry") && i == 1) {
             findViewById(R.id.submit_email).performClick();
-        }
-        else if (result.equalsIgnoreCase("retry")&&i==2){
+        } else if (result.equalsIgnoreCase("retry") && i == 2) {
             findViewById(R.id.submit_email).performClick();
         }
     }

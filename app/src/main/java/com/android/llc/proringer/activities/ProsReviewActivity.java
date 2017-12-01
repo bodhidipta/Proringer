@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -33,12 +34,12 @@ import com.bumptech.glide.Glide;
  * Created by su on 8/1/17.
  */
 
-public class ProsReviewActivity extends AppCompatActivity implements MyCustomAlertListener{
+public class ProsReviewActivity extends AppCompatActivity implements MyCustomAlertListener {
     TextView tv_terms_guidelines;
     RatingBar ratBar_review;
     String pros_id = "", img = "", review_rate = "0";
     ProRegularEditText project_description_text;
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
     ImageView img_profile;
     ProRegularTextView tv_rate_name;
 
@@ -47,7 +48,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_pro);
 
-        tv_rate_name= (ProRegularTextView) findViewById(R.id.tv_rate_name);
+        tv_rate_name = (ProRegularTextView) findViewById(R.id.tv_rate_name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,7 +57,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
 
         project_description_text = (ProRegularEditText) findViewById(R.id.project_description_text);
         img_profile = (ImageView) findViewById(R.id.img_profile);
-        myLoader=new MyLoader(ProsReviewActivity.this);
+        myLoader = new MyLoader(ProsReviewActivity.this);
 
 
         if (getIntent().getExtras() != null) {
@@ -87,25 +88,21 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
                 // TODO Auto-generated method stub
                 //Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
                 review_rate = Float.toString(rating);
-                Logger.printMessage("review_rate",""+review_rate);
-                if(rating==0.0){
+                Logger.printMessage("review_rate", "" + review_rate);
+                if (rating == 0.0) {
                     tv_rate_name.setText("Choose review rate");
                 }
 
-                if(rating==1.0)
-                {
+                if (rating == 1.0) {
                     tv_rate_name.setText("Poor");
-                }
-                else if(rating==2.0){
+                } else if (rating == 2.0) {
                     tv_rate_name.setText("Fair");
-                }
-                else if(rating==3.0){
+                } else if (rating == 3.0) {
                     tv_rate_name.setText("Good");
-                }
-                else  if(rating==4.0){
+                } else if (rating == 4.0) {
                     tv_rate_name.setText("Excellent");
                 }
-                if(rating==5){
+                if (rating == 5) {
                     tv_rate_name.setText("Super Star");
                 }
             }
@@ -196,7 +193,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent backIntent = new Intent();
-            setResult(RESULT_CANCELED, backIntent );
+            setResult(RESULT_CANCELED, backIntent);
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -206,7 +203,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
         ProServiceApiHelper.getInstance(ProsReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-              myLoader.showLoader();
+                myLoader.showLoader();
             }
 
             @Override
@@ -215,7 +212,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
                     myLoader.dismissLoader();
 
                 CustomAlert customAlert = new CustomAlert(ProsReviewActivity.this, "Add Review", "" + message, ProsReviewActivity.this);
-                customAlert.createNormalAlert("ok",1);
+                customAlert.createNormalAlert("ok", 1);
 
             }
 
@@ -225,7 +222,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
                     myLoader.dismissLoader();
 
                 CustomAlert customAlert = new CustomAlert(ProsReviewActivity.this, "Add Review", "" + error, ProsReviewActivity.this);
-                customAlert.createNormalAlert("ok",2);
+                customAlert.createNormalAlert("ok", 2);
 
             }
         }, ProApplication.getInstance().getUserId(), pros_id, review_rate, project_description_text.getText().toString().trim());

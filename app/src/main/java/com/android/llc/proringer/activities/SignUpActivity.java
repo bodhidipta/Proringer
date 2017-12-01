@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -48,7 +49,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  * -->
  */
 
-public class SignUpActivity extends AppCompatActivity implements MyCustomAlertListener{
+public class SignUpActivity extends AppCompatActivity implements MyCustomAlertListener {
     private ProBoldTextView sign_in;
     private RelativeLayout sign_up_with_facebook;
     private ProLightEditText first_name, last_name, email, password, confirm_password, zip_code;
@@ -88,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
         contact.setMovementMethod(LinkMovementMethod.getInstance());
         mail_resent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        myLoader=new MyLoader(SignUpActivity.this);
+        myLoader = new MyLoader(SignUpActivity.this);
 
         sign_up_with_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -298,8 +299,8 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
                                                                                            e.printStackTrace();
                                                                                        }
 
-                                                                                       CustomAlert customAlert = new CustomAlert(SignUpActivity.this,"Registration ", "" + message, SignUpActivity.this);
-                                                                                       customAlert.createNormalAlert("ok",1);
+                                                                                       CustomAlert customAlert = new CustomAlert(SignUpActivity.this, "Registration ", "" + message, SignUpActivity.this);
+                                                                                       customAlert.createNormalAlert("ok", 1);
 
                                                                                    }
 
@@ -309,7 +310,7 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
                                                                                            myLoader.dismissLoader();
 
                                                                                        CustomAlert customAlert = new CustomAlert(SignUpActivity.this, "Registration error", "" + error, SignUpActivity.this);
-                                                                                       customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                                                                                       customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                                                                                    }
                                                                                },
                 first_name.getText().toString().trim(),
@@ -340,10 +341,9 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if(result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             container_confirm.setVisibility(View.VISIBLE);
-        }
-        else if(result.equalsIgnoreCase("retry") && i==1){
+        } else if (result.equalsIgnoreCase("retry") && i == 1) {
             validateRegistration();
         }
     }
@@ -355,16 +355,15 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
 //            startActivity(new Intent(LoginChooserActivity.this, BaseActivity.class));
 //            finish();
 
-            if (ProApplication.getInstance().getFBUserStatus()==1){
+            if (ProApplication.getInstance().getFBUserStatus() == 1) {
                 Intent intent = new Intent(SignUpActivity.this, FirstTimeFaceBookLoginUserInformationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-            }
-            else {
+            } else {
                 Intent intent = new Intent(SignUpActivity.this, LandScreenActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                ProApplication.getInstance().go_to="dashboard";
+                ProApplication.getInstance().go_to = "dashboard";
                 startActivity(intent);
                 finish();
             }

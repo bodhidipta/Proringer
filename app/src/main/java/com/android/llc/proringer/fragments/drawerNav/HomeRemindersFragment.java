@@ -138,7 +138,7 @@ public class HomeRemindersFragment extends Fragment {
 
         property_image = (ImageView) view.findViewById(R.id.property_image);
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         add_propert_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +170,7 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" +  (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
+                            Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
                             tv_year_build.setText(new SimpleDateFormat("yyyy").format(date));
 
 
@@ -243,7 +243,7 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" +  dPicker.getDayOfMonth() + "-" + dPicker.getYear());
+                            Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
                             tv_last_water_heater_flush.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
@@ -340,7 +340,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-               // dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                // dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -375,7 +375,7 @@ public class HomeRemindersFragment extends Fragment {
             public void onClick(View v) {
                 View dialoglayout = LayoutInflater.from((LandScreenActivity) getActivity()).inflate(R.layout.dialog_date_picker, null);
                 final DatePicker dPicker = (DatePicker) dialoglayout.findViewById(R.id.date_picker);
-               // dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+                // dPicker.setMaxDate(Calendar.getInstance().getTimeInMillis());
                 AlertDialog.Builder builder = new AlertDialog.Builder((LandScreenActivity) getActivity());
 
 
@@ -418,7 +418,7 @@ public class HomeRemindersFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         try {
-                            Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" +  dPicker.getDayOfMonth() + "-" + dPicker.getYear());
+                            Date date = new SimpleDateFormat("MM-dd-yyyy").parse("" + (dPicker.getMonth() + 1) + "-" + dPicker.getDayOfMonth() + "-" + dPicker.getYear());
                             tv_last_gutter_clean.setText(new SimpleDateFormat("MM-dd-yyyy").format(date));
 
                         } catch (Exception e) {
@@ -453,7 +453,7 @@ public class HomeRemindersFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                      myLoader.showLoader();
+                        myLoader.showLoader();
                     }
 
                     @Override
@@ -903,7 +903,7 @@ public class HomeRemindersFragment extends Fragment {
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                      myLoader.showLoader();
+                        myLoader.showLoader();
                     }
 
                     @Override

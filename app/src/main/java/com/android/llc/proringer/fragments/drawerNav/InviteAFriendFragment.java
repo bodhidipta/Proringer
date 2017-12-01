@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -34,10 +35,10 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * limitations under the License.
  */
 
-public class InviteAFriendFragment extends Fragment implements MyCustomAlertListener{
+public class InviteAFriendFragment extends Fragment implements MyCustomAlertListener {
     ProLightEditText first_name, last_name, email, confirm_email;
     ProRegularTextView invited_submit;
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
 
     @Nullable
     @Override
@@ -60,7 +61,7 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
             }
         });
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
     }
 
@@ -106,7 +107,7 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Invite Friend", "" + message, InviteAFriendFragment.this);
-                        customAlert.createNormalAlert("ok",1);
+                        customAlert.createNormalAlert("ok", 1);
                     }
 
                     @Override
@@ -115,7 +116,7 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Invite Friend Error", "" + error, InviteAFriendFragment.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
 
                     }
                 },
@@ -134,10 +135,9 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             resetForm();
-        }
-        else if(result.equalsIgnoreCase("retry") && i==1){
+        } else if (result.equalsIgnoreCase("retry") && i == 1) {
             validateInvite();
         }
     }

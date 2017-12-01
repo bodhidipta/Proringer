@@ -61,19 +61,18 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (ProApplication.getInstance().getFBUserStatus()==1){
+                if (ProApplication.getInstance().getFBUserStatus() == 1) {
                     Intent intent = new Intent(SplashScreenActivity.this, FirstTimeFaceBookLoginUserInformationActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
-                }
-                else {
+                } else {
                     if (ProApplication.getInstance().getUserId().equals("")) {
                         startActivity(new Intent(SplashScreenActivity.this, GetStartedActivity.class));
                         finish();
                     } else {
-                        Intent intent=new Intent(SplashScreenActivity.this, LandScreenActivity.class);
-                        ProApplication.getInstance().go_to="dashboard";
+                        Intent intent = new Intent(SplashScreenActivity.this, LandScreenActivity.class);
+                        ProApplication.getInstance().go_to = "dashboard";
                         startActivity(intent);
                         finish();
                     }

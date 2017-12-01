@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -18,11 +19,12 @@ import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
  * Created by su on 8/4/17.
  */
 
-public class ProsReportAbuseActivity extends AppCompatActivity implements MyCustomAlertListener{
+public class ProsReportAbuseActivity extends AppCompatActivity implements MyCustomAlertListener {
     String review_report_id = "";
     MyLoader myLoader = null;
 
     ProRegularEditText pro_review_description_text;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,9 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        pro_review_description_text=(ProRegularEditText)findViewById(R.id.pro_review_description_text);
+        pro_review_description_text = (ProRegularEditText) findViewById(R.id.pro_review_description_text);
 
-        myLoader=new MyLoader(ProsReportAbuseActivity.this);
+        myLoader = new MyLoader(ProsReportAbuseActivity.this);
 
         if (getIntent().getExtras() != null) {
             review_report_id = getIntent().getExtras().getString("review_report_id");
@@ -44,16 +46,16 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
             @Override
             public void onClick(View view) {
 
-                String text=pro_review_description_text.getText().toString().trim();
+                String text = pro_review_description_text.getText().toString().trim();
 
-                if ((text.length()>=30)) {
+                if ((text.length() >= 30)) {
 //                    ((ProRegularEditText) findViewById(R.id.pro_review_description_text)).setError("Please enter report abuse description");
                     submitReviewReport();
                 } else {
 
                     //Toast.makeText(ProsReportAbuseActivity.this, "Please enter 30 letter", Toast.LENGTH_SHORT).show();
-                    CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Report Abuse","Please tell us more Must be over 30 characters.", ProsReportAbuseActivity.this);
-                    customAlert.createNormalAlert("Ok",3);
+                    CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Report Abuse", "Please tell us more Must be over 30 characters.", ProsReportAbuseActivity.this);
+                    customAlert.createNormalAlert("Ok", 3);
 
 
                 }
@@ -87,8 +89,8 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
                                                                                                    if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                                        myLoader.dismissLoader();
 
-                                                                                                   CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse","" + message, ProsReportAbuseActivity.this);
-                                                                                                   customAlert.createNormalAlert("Ok",1);
+                                                                                                   CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse", "" + message, ProsReportAbuseActivity.this);
+                                                                                                   customAlert.createNormalAlert("Ok", 1);
                                                                                                }
 
                                                                                                @Override
@@ -96,8 +98,8 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
                                                                                                    if (myLoader != null && myLoader.isMyLoaderShowing())
                                                                                                        myLoader.dismissLoader();
 
-                                                                                                   CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse","" + error, ProsReportAbuseActivity.this);
-                                                                                                   customAlert.createNormalAlert("Ok",2);
+                                                                                                   CustomAlert customAlert = new CustomAlert(ProsReportAbuseActivity.this, "Pros Report Abuse", "" + error, ProsReportAbuseActivity.this);
+                                                                                                   customAlert.createNormalAlert("Ok", 2);
 
                                                                                                }
                                                                                            }, ProApplication.getInstance().getUserId()
@@ -108,7 +110,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
     @Override
     public void callbackForAlert(String result, int i) {
 
-        if(result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             finish();
         }
     }

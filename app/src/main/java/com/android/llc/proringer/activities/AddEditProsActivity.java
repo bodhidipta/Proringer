@@ -224,7 +224,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         } else if (result.equalsIgnoreCase("ok") && i == 1) {
             Intent intent = new Intent(AddEditProsActivity.this, LandScreenActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            ProApplication.getInstance().go_to="myProject";
+            ProApplication.getInstance().go_to = "myProject";
             startActivity(intent);
             finish();
         }
@@ -237,13 +237,13 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         progressStep--;
         Log.d("size list", "" + fragmentPushList.size());
         if (fragmentPushList.size() >= 1) {
-            if (fragmentPushList.size()==3) {
+            if (fragmentPushList.size() == 3) {
                 fragmentPushList.remove(fragmentPushList.size() - 1);
                 progress_posting.setProgress(progressStep);
-            } else if (fragmentPushList.size()==2) {
+            } else if (fragmentPushList.size() == 2) {
                 fragmentPushList.remove(fragmentPushList.size() - 1);
                 progress_posting.setProgress(progressStep);
-            } else if(fragmentPushList.size()==1){
+            } else if (fragmentPushList.size() == 1) {
                 fragmentPushList.remove(fragmentPushList.size() - 1);
                 progress_posting.setProgress(progressStep);
                 finish();

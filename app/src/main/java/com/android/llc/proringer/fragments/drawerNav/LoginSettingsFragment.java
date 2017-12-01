@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.GetStartedActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
@@ -39,7 +40,7 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
  * limitations under the License.
  */
 
-public class LoginSettingsFragment extends Fragment implements MyCustomAlertListener{
+public class LoginSettingsFragment extends Fragment implements MyCustomAlertListener {
     private ProRegularTextView current_email, update_email, change_password;
     private ProLightEditText new_email, confirm_new_email, current_password, new_password, confirm_new_password;
     private MyLoader myLoader = null;
@@ -66,7 +67,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
         new_password = (ProLightEditText) view.findViewById(R.id.new_password);
         confirm_new_password = (ProLightEditText) view.findViewById(R.id.confirm_new_password);
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         update_email.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +125,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
-                      myLoader.showLoader();
+                        myLoader.showLoader();
                     }
 
                     @Override
@@ -133,7 +134,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Change Email", "" + message, LoginSettingsFragment.this);
-                        customAlert.createNormalAlert("Re-login",1);
+                        customAlert.createNormalAlert("Re-login", 1);
                     }
 
                     @Override
@@ -142,7 +143,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Contact Us Error", "" + error, LoginSettingsFragment.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                     }
                 },
                 new_email.getText().toString().trim(),
@@ -185,7 +186,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Change Password", "" + message, LoginSettingsFragment.this);
-                        customAlert.createNormalAlert("Re-login",2);
+                        customAlert.createNormalAlert("Re-login", 2);
                     }
 
                     @Override
@@ -195,7 +196,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
 
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Change Password Error", "" + error, LoginSettingsFragment.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",2);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 2);
 
                     }
                 },
@@ -206,7 +207,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("Re-login") && i==1){
+        if (result.equalsIgnoreCase("Re-login") && i == 1) {
 
             ProApplication.getInstance().logOut();
             ProApplication.getInstance().clearFBUserStatus();
@@ -214,8 +215,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
 
             startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
             ((LandScreenActivity) getActivity()).finish();
-        }
-        else if(result.equalsIgnoreCase("Re-login") && i==2){
+        } else if (result.equalsIgnoreCase("Re-login") && i == 2) {
 
             ProApplication.getInstance().logOut();
             ProApplication.getInstance().clearFBUserStatus();
@@ -223,12 +223,9 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
 
             startActivity(new Intent((LandScreenActivity) getActivity(), GetStartedActivity.class));
             ((LandScreenActivity) getActivity()).finish();
-        }
-
-        else if(result.equalsIgnoreCase("retry") && i==1){
+        } else if (result.equalsIgnoreCase("retry") && i == 1) {
             update_email.performClick();
-        }
-        else if (result.equalsIgnoreCase("retry") && i==2){
+        } else if (result.equalsIgnoreCase("retry") && i == 2) {
             change_password.performClick();
         }
     }

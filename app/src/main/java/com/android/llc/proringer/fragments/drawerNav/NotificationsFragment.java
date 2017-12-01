@@ -1,4 +1,5 @@
 package com.android.llc.proringer.fragments.drawerNav;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -34,7 +36,7 @@ import com.android.llc.proringer.viewsmod.SwitchHelper;
  * limitations under the License.
  */
 
-public class NotificationsFragment extends Fragment implements MyCustomAlertListener{
+public class NotificationsFragment extends Fragment implements MyCustomAlertListener {
     private SwitchHelper email_newsletter, email_chat_msg, email_tips_artcl, email_prjct_rspnse, mobile_newsletter, mobile_chat_msg, mobile_tips_artcl, mobile_prjct_rspnse;
     MyLoader myLoader;
     ScrollView ScrollViewMAin;
@@ -72,7 +74,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
         mobile_tips_artcl.setState(ProApplication.getInstance().getUserNotification().isMobile_tips_article());
         mobile_prjct_rspnse.setState(ProApplication.getInstance().getUserNotification().isMobile_project_replies());
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         getNotificationState();
 
@@ -175,7 +177,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
                         }
 
                         CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, NotificationsFragment.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                     }
                 });
     }
@@ -212,7 +214,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             getNotificationState();
         }
     }

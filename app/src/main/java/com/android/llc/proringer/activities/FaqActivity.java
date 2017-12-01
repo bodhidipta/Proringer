@@ -25,9 +25,9 @@ import org.json.JSONObject;
  * Created by su on 7/19/17.
  */
 
-public class FaqActivity extends AppCompatActivity implements MyCustomAlertListener{
+public class FaqActivity extends AppCompatActivity implements MyCustomAlertListener {
     LinearLayout linear_main_container;
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
 
 
     @Override
@@ -43,9 +43,9 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
         ((ProRegularTextView) findViewById(R.id.tv_title)).setText("Faq");
 
 
-        myLoader=new MyLoader(FaqActivity.this);
+        myLoader = new MyLoader(FaqActivity.this);
 
-        linear_main_container = (LinearLayout)findViewById(R.id.linear_main_container);
+        linear_main_container = (LinearLayout) findViewById(R.id.linear_main_container);
 
         ProServiceApiHelper.getInstance(FaqActivity.this).getFaqInformation(new ProServiceApiHelper.faqCallback() {
             @Override
@@ -109,7 +109,7 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
                     myLoader.dismissLoader();
 
                 CustomAlert customAlert = new CustomAlert(FaqActivity.this, "Faq", "" + error, FaqActivity.this);
-                customAlert.createNormalAlert("ok",1);
+                customAlert.createNormalAlert("ok", 1);
 
                 if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);

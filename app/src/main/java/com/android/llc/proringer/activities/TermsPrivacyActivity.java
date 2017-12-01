@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
@@ -18,6 +19,7 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,8 +28,8 @@ import org.json.JSONObject;
  */
 
 public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomAlertListener {
-    MyLoader myLoader=null;
-    ProRegularTextView tv_title,tv_effective_date,tv_page_content;
+    MyLoader myLoader = null;
+    ProRegularTextView tv_title, tv_effective_date, tv_page_content;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        myLoader=new MyLoader(TermsPrivacyActivity.this);
+        myLoader = new MyLoader(TermsPrivacyActivity.this);
 
         tv_effective_date = (ProRegularTextView) findViewById(R.id.tv_effective_date);
         tv_page_content = (ProRegularTextView) findViewById(R.id.tv_page_content);
@@ -70,7 +72,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
         ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getTermsOfUseInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-               myLoader.showLoader();
+                myLoader.showLoader();
             }
 
             @Override
@@ -103,7 +105,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                     myLoader.dismissLoader();
 
                 CustomAlert customAlert = new CustomAlert(TermsPrivacyActivity.this, "Terms Of Use", "" + error, TermsPrivacyActivity.this);
-                customAlert.createNormalAlert("ok",1);
+                customAlert.createNormalAlert("ok", 1);
 
                 if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);
@@ -117,7 +119,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
         ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getPrivacyPolicyInformation(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
-               myLoader.showLoader();
+                myLoader.showLoader();
             }
 
             @Override
@@ -148,7 +150,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
                     myLoader.dismissLoader();
 
                 CustomAlert customAlert = new CustomAlert(TermsPrivacyActivity.this, "Privacy Policy", "" + error, TermsPrivacyActivity.this);
-                customAlert.createNormalAlert("ok",2);
+                customAlert.createNormalAlert("ok", 2);
 
                 if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
                     findViewById(R.id.ScrollViewMAin).setVisibility(View.GONE);

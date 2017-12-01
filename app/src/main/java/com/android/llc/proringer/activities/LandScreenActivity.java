@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.bottomNav.DashBoardFragment;
@@ -57,7 +58,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     private DrawerLayout mDrawer;
     public BottomNav bottomNavInstance = null;
 
-    public String local_pros_search_zip="";
+    public String local_pros_search_zip = "";
 
     private Toolbar toolbar = null;
     private Toolbar back_toolbar = null;
@@ -67,15 +68,15 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     private InputMethodManager keyboard;
 
     MyLoader myLoader = null;
-    NavigationHandler navigationHandler=null;
+    NavigationHandler navigationHandler = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        
-        Fabric.with(this,new Crashlytics());
+
+        Fabric.with(this, new Crashlytics());
 
         // TODO: Move this to where you establish a user session
         logUser();
@@ -146,7 +147,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
          * Handles view click for drawer layout
          */
 
-        navigationHandler=NavigationHandler.getInstance();
+        navigationHandler = NavigationHandler.getInstance();
 
         navigationHandler.init(mDrawer, new NavigationHandler.OnHandleInput() {
             @Override
@@ -204,9 +205,9 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                         closeDrawer();
 
                         CustomAlert customAlert = new CustomAlert(LandScreenActivity.this, "", "Are you sure you want to log out?", LandScreenActivity.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("Ok","Cancel",10);
+                        customAlert.getListenerRetryCancelFromNormalAlert("Ok", "Cancel", 10);
 
-                    break;
+                        break;
 
                     case NavigationHandler.Email_Support:
                         closeDrawer();
@@ -224,7 +225,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
 
                     case NavigationHandler.Faq:
                         closeDrawer();
-                        startActivity(new Intent(LandScreenActivity.this,FaqActivity.class));
+                        startActivity(new Intent(LandScreenActivity.this, FaqActivity.class));
                         break;
 
                     case NavigationHandler.Provider_Feedback:
@@ -261,8 +262,6 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.nav_toggle_icon, null));
 
 
-
-
         /**
          * Toolbar icon of search local pro icon
          */
@@ -288,14 +287,13 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         });
 
 
-        if(ProApplication.getInstance().go_to.equalsIgnoreCase("dashboard"))
-        {
+        if (ProApplication.getInstance().go_to.equalsIgnoreCase("dashboard")) {
             /**
              * place dashboard fragment when visit first time
              * also highlight bottom navigation selection
              */
             redirectToDashBoard();
-        }else if(ProApplication.getInstance().go_to.equalsIgnoreCase("myProject")){
+        } else if (ProApplication.getInstance().go_to.equalsIgnoreCase("myProject")) {
             /**
              * place dashboard fragment when user edit my project
              * also highlight bottom navigation selection
@@ -312,7 +310,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         } else {
 
             CustomAlert customAlert = new CustomAlert(LandScreenActivity.this, "", "Do you want to exit application?", LandScreenActivity.this);
-            customAlert.getListenerRetryCancelFromNormalAlert("Yes","Abort",1);
+            customAlert.getListenerRetryCancelFromNormalAlert("Yes", "Abort", 1);
 
         }
     }
@@ -477,7 +475,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         projectMessagingFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container,projectMessagingFragment, "" + ProjectMessagingFragment.class.getCanonicalName());
+        transaction.replace(R.id.fragment_container, projectMessagingFragment, "" + ProjectMessagingFragment.class.getCanonicalName());
         transaction.addToBackStack("" + ProjectMessagingFragment.class.getCanonicalName());
         transaction.commit();
 
@@ -492,7 +490,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
      * Fragment transaction for Search Local Pros
      */
     public void transactSearchLocalPros() {
-        local_pros_search_zip="";
+        local_pros_search_zip = "";
         toggleToolBar(false);
         toggleProMapSearch(true);
         bottomNavInstance.highLightSelected(BottomNav.CREATE_PROJECT);
@@ -645,10 +643,10 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     }
 
     /**
-     *Redirect to MyProjectList fragment transaction
+     * Redirect to MyProjectList fragment transaction
      */
 
-    public void redirectMyProject(){
+    public void redirectMyProject() {
         bottomNavInstance.highLightSelected(BottomNav.MY_PROJECTS);
         transactMyProjects();
     }
@@ -730,7 +728,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             findViewById(R.id.search_local_pro_header_map).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent searchIntent=new Intent(LandScreenActivity.this,SearchNearProActivity.class);
+                    Intent searchIntent = new Intent(LandScreenActivity.this, SearchNearProActivity.class);
                     startActivityForResult(searchIntent, 41);
 
                 }
@@ -754,15 +752,15 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
 
             Bundle extras = data.getBundleExtra("data");
             if (extras != null) {
-                local_pros_search_zip=extras.getString("searchZip");
+                local_pros_search_zip = extras.getString("searchZip");
                 Logger.printMessage("local_pros_search_zip", "--->" + local_pros_search_zip);
 
 
                 if (fragmentManager.getBackStackEntryCount() > 0 && fragmentManager.findFragmentByTag("" + SearchLocalProFragment.class.getCanonicalName()) != null) {
                     Logger.printMessage("back_stack", "Removed *****" + SearchLocalProFragment.class.getCanonicalName());
-                    SearchLocalProFragment fragment=(SearchLocalProFragment)fragmentManager.findFragmentByTag("" + SearchLocalProFragment.class.getCanonicalName());
+                    SearchLocalProFragment fragment = (SearchLocalProFragment) fragmentManager.findFragmentByTag("" + SearchLocalProFragment.class.getCanonicalName());
                     fragment.loadList();
-                    Logger.printMessage("LoadListFromActivity","YES");
+                    Logger.printMessage("LoadListFromActivity", "YES");
                 }
 
             }
@@ -771,11 +769,11 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("Yes") && i==1){
+        if (result.equalsIgnoreCase("Yes") && i == 1) {
             finish();
         }
 
-        if (result.equalsIgnoreCase("Ok") && i==10){
+        if (result.equalsIgnoreCase("Ok") && i == 10) {
 
             ProServiceApiHelper.getInstance(LandScreenActivity.this).logOut(new ProServiceApiHelper.getApiProcessCallback() {
                 @Override

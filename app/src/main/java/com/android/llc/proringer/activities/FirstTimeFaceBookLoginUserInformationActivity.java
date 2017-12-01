@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.PlaceCustomListAdapterDialog;
 import com.android.llc.proringer.appconstant.ProApplication;
@@ -21,6 +22,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +40,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
     ImageView Erase;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
-    int textLength=0;
+    int textLength = 0;
 
 
     @Override
@@ -46,8 +48,8 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_time_facebook_user_login_information);
 
-        first_name = (ProLightEditText)findViewById(R.id.first_name);
-        last_name = (ProLightEditText)findViewById(R.id.last_name);
+        first_name = (ProLightEditText) findViewById(R.id.first_name);
+        last_name = (ProLightEditText) findViewById(R.id.last_name);
         contact = (ProLightEditText) findViewById(R.id.contact);
 
         contact.addTextChangedListener(new TextWatcher() {
@@ -83,6 +85,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                     }
                 }
             }
+
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
@@ -90,7 +93,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
             }
         });
 
-        myLoader=new MyLoader(FirstTimeFaceBookLoginUserInformationActivity.this);
+        myLoader = new MyLoader(FirstTimeFaceBookLoginUserInformationActivity.this);
 //        address= (ProLightEditText) view.findViewById(R.id.address);
 
         tv_search_by_location = (ProRegularTextView) findViewById(R.id.tv_search_by_location);
@@ -104,17 +107,17 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
         });
 
 
-        zip_code = (ProLightEditText)findViewById(R.id.zip_code);
+        zip_code = (ProLightEditText) findViewById(R.id.zip_code);
 
-        city = (ProLightEditText)findViewById(R.id.city);
+        city = (ProLightEditText) findViewById(R.id.city);
         city.setEnabled(false);
         city.setClickable(false);
 
-        state = (ProLightEditText)findViewById(R.id.state);
+        state = (ProLightEditText) findViewById(R.id.state);
         state.setEnabled(false);
         state.setClickable(false);
 
-        String firstTimeFbDetails=ProApplication.getInstance().getFbFirstTimeJson();
+        String firstTimeFbDetails = ProApplication.getInstance().getFbFirstTimeJson();
 
         Logger.printMessage("@firstTimeFBLogin", firstTimeFbDetails);
         try {
@@ -202,8 +205,8 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                                 @Override
                                 public void onComplete(String message) {
                                     ProApplication.getInstance().setFBUserStatus(0);
-                                    Intent intent=new Intent(FirstTimeFaceBookLoginUserInformationActivity.this,LandScreenActivity.class);
-                                    ProApplication.getInstance().go_to="dashboard";
+                                    Intent intent = new Intent(FirstTimeFaceBookLoginUserInformationActivity.this, LandScreenActivity.class);
+                                    ProApplication.getInstance().go_to = "dashboard";
                                     startActivity(intent);
                                     finish();
                                 }
@@ -221,7 +224,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                                 myLoader.dismissLoader();
 
                             CustomAlert customAlert = new CustomAlert(FirstTimeFaceBookLoginUserInformationActivity.this, "Error updating information", "" + error, FirstTimeFaceBookLoginUserInformationActivity.this);
-                            customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                            customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                         }
                     },
                     first_name.getText().toString().trim(),
@@ -238,11 +241,11 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                     "");
         } else {
             CustomAlert customAlert = new CustomAlert(FirstTimeFaceBookLoginUserInformationActivity.this, "Updating Error", "Please Choose the correct address which will contains zip code", FirstTimeFaceBookLoginUserInformationActivity.this);
-            customAlert.createNormalAlert("ok",1);
+            customAlert.createNormalAlert("ok", 1);
         }
     }
 
-    private void validationCheckAndSubmit(){
+    private void validationCheckAndSubmit() {
 
         first_name.setError(null);//removes error
         first_name.clearFocus();
@@ -265,35 +268,34 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
         zip_code.setError(null);//removes error
         zip_code.clearFocus();
 
-        if (first_name.getText().toString().equals("")){
+        if (first_name.getText().toString().equals("")) {
             first_name.requestFocus();
             first_name.setError("Please Enter First Name");
-        }else {
-            if (last_name.getText().toString().equals("")){
+        } else {
+            if (last_name.getText().toString().equals("")) {
                 last_name.requestFocus();
                 last_name.setError("Please Enter Last Name");
-            }else {
-                if (contact.getText().toString().equals("")){
+            } else {
+                if (contact.getText().toString().equals("")) {
                     contact.requestFocus();
                     contact.setError("Please Enter Phone Number");
-                }
-                else {
-                    if (tv_search_by_location.getText().toString().equals("")){
+                } else {
+                    if (tv_search_by_location.getText().toString().equals("")) {
                         tv_search_by_location.requestFocus();
                         tv_search_by_location.setError("Please Enter Address");
-                    }else {
-                        if (city.getText().toString().equals("")){
+                    } else {
+                        if (city.getText().toString().equals("")) {
                             city.requestFocus();
                             city.setError("Please Enter City");
-                        }else {
-                            if(state.getText().toString().equals("")){
+                        } else {
+                            if (state.getText().toString().equals("")) {
                                 state.requestFocus();
                                 state.setError("Please Enter State");
-                            }else {
-                                if (zip_code.getText().toString().equals("")){
+                            } else {
+                                if (zip_code.getText().toString().equals("")) {
                                     zip_code.requestFocus();
                                     zip_code.setError("Please Enter Zip Code");
-                                }else {
+                                } else {
                                     updateUserInformation();
                                 }
                             }
@@ -336,7 +338,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             updateUserInformation();
         }
     }

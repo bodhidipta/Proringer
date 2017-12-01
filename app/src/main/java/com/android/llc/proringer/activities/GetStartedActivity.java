@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.GetStartedTutorial;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -55,14 +56,14 @@ import java.util.Date;
 public class GetStartedActivity extends AppCompatActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,MyCustomAlertListener {
+        GoogleApiClient.OnConnectionFailedListener, MyCustomAlertListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private ViewPager get_started_pager;
     private GetStartedTutorial adapter;
     private ImageView pager_dot_one, pager_dot_two,
-//            pager_dot_three,
-            pager_dot_four, pager_dot_five, slide_left, slide_right;
+    //            pager_dot_three,
+    pager_dot_four, pager_dot_five, slide_left, slide_right;
     private ProRegularTextView get_started, sign_in;
 
 
@@ -224,8 +225,8 @@ public class GetStartedActivity extends AppCompatActivity implements
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
 
-                CustomAlert customAlert = new CustomAlert(GetStartedActivity.this,getResources().getString(R.string.title_location_permission), getResources().getString(R.string.text_location_permission),GetStartedActivity.this);
-                customAlert.createNormalAlert("ok",1);
+                CustomAlert customAlert = new CustomAlert(GetStartedActivity.this, getResources().getString(R.string.title_location_permission), getResources().getString(R.string.text_location_permission), GetStartedActivity.this);
+                customAlert.createNormalAlert("ok", 1);
 
             } else {
                 // No explanation needed, we can request the permission.
@@ -421,7 +422,7 @@ public class GetStartedActivity extends AppCompatActivity implements
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             ActivityCompat.requestPermissions(GetStartedActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);

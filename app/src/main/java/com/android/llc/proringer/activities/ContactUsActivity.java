@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
@@ -19,7 +20,7 @@ import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
  * Created by su on 7/19/17.
  */
 
-public class ContactUsActivity extends AppCompatActivity implements MyCustomAlertListener{
+public class ContactUsActivity extends AppCompatActivity implements MyCustomAlertListener {
     ProLightEditText first_name, last_name, email, phonenumber;
     MyLoader myLoader;
     EditText contact_info;
@@ -34,7 +35,7 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        myLoader=new MyLoader(ContactUsActivity.this);
+        myLoader = new MyLoader(ContactUsActivity.this);
 
 
         first_name = (ProLightEditText) findViewById(R.id.first_name);
@@ -98,7 +99,7 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
                             myLoader.dismissLoader();
 
                         CustomAlert customAlert = new CustomAlert(ContactUsActivity.this, "Contact Us", "" + message, ContactUsActivity.this);
-                        customAlert.createNormalAlert("ok",1);
+                        customAlert.createNormalAlert("ok", 1);
                     }
 
                     @Override
@@ -108,7 +109,7 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
 
 
                         CustomAlert customAlert = new CustomAlert(ContactUsActivity.this, "Contact Us Error", "" + error, ContactUsActivity.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                     }
                 },
                 first_name.getText().toString().trim(),
@@ -137,10 +138,9 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
     @Override
     public void callbackForAlert(String result, int i) {
 
-        if(result.equalsIgnoreCase("ok")&&i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             resetForm();
-        }
-        else if (result.equalsIgnoreCase("retry")&&i==1){
+        } else if (result.equalsIgnoreCase("retry") && i == 1) {
             validateContactUs();
         }
     }

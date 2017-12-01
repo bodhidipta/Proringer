@@ -91,7 +91,7 @@ public class FacebookActivity extends AppCompatActivity implements MyCustomAlert
                                 Logger.printMessage("@@ FB DETAILS-->", "" + object.toString());
                                 Logger.printMessage("@@ FB DETAILS_GRAPH-->", "" + response.getJSONObject());
                                 // Application code
-                                handleFacebookAccessToken(loginResult.getAccessToken(),response.getJSONObject());
+                                handleFacebookAccessToken(loginResult.getAccessToken(), response.getJSONObject());
                             }
                         });
                 Bundle parameters = new Bundle();
@@ -141,7 +141,7 @@ public class FacebookActivity extends AppCompatActivity implements MyCustomAlert
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), R.string.firebase_error_login, Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     LoginWithWanNyaan(jsonObject);
                 }
             }

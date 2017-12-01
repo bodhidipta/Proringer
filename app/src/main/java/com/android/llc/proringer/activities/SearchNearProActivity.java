@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
@@ -34,9 +35,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -109,11 +112,11 @@ public class SearchNearProActivity extends AppCompatActivity implements
                 if (
 //                        (event.getAction() == KeyEvent.ACTION_DOWN)
 //                                ||
-                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     Logger.printMessage("zip", edt_zip.getText().toString());
-                    if (edt_zip.getText().toString().trim().length()>4) {
+                    if (edt_zip.getText().toString().trim().length() > 4) {
                         searchLocationUsingZip(edt_zip.getText().toString().trim());
-                    }else {
+                    } else {
                         edt_zip.setError("zip code length would be more than four");
                     }
                     return true;
@@ -133,9 +136,9 @@ public class SearchNearProActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 Logger.printMessage("zip", edt_zip.getText().toString());
-                if (edt_zip.getText().toString().length()>4) {
+                if (edt_zip.getText().toString().length() > 4) {
                     searchLocationUsingZip(edt_zip.getText().toString().trim());
-                }else {
+                } else {
                     edt_zip.setError("zip code length would be more than four");
                 }
             }
@@ -144,7 +147,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
         findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               closeKeypad();
+                closeKeypad();
             }
         });
     }
@@ -168,7 +171,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
         ProServiceApiHelper.getInstance(SearchNearProActivity.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
-               // myLoader.showLoader();
+                // myLoader.showLoader();
             }
 
             @Override
@@ -236,6 +239,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
             }
         });
     }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Logger.printMessage(TAG, "onConnected - isConnected ...............: " + mGoogleApiClient.isConnected());
@@ -424,8 +428,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
             ActivityCompat.requestPermissions(SearchNearProActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-        else if (result.equalsIgnoreCase("ok") && i==2){
+        } else if (result.equalsIgnoreCase("ok") && i == 2) {
 
         }
     }
@@ -462,7 +465,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
             public void onComplete(List<AddressData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
-                Logger.printMessage("listData",""+listdata.size());
+                Logger.printMessage("listData", "" + listdata.size());
                 closeKeypad();
 
                 Intent i = new Intent();
@@ -480,7 +483,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
                     myLoader.dismissLoader();
                 Logger.printMessage("error", "" + error);
                 closeKeypad();
-                CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this, "ERROR",error, SearchNearProActivity.this);
+                CustomAlert customAlert = new CustomAlert(SearchNearProActivity.this, "ERROR", error, SearchNearProActivity.this);
                 customAlert.createNormalAlert("ok", 2);
             }
 
@@ -497,7 +500,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
 
         Intent i = new Intent();
         Bundle BD = new Bundle();
-        BD.putString("searchZip","");
+        BD.putString("searchZip", "");
         i.putExtra("data", BD);
         setResult(Activity.RESULT_OK, i);
 

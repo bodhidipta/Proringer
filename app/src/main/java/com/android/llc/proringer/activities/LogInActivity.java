@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -35,7 +36,7 @@ import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
  * -->
  */
 
-public class LogInActivity extends AppCompatActivity implements MyCustomAlertListener{
+public class LogInActivity extends AppCompatActivity implements MyCustomAlertListener {
     private ProSemiBoldTextView sign_up;
     private ProSemiBoldTextView log_in;
     private ProLightEditText email, password;
@@ -51,7 +52,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        myLoader=new MyLoader(LogInActivity.this);
+        myLoader = new MyLoader(LogInActivity.this);
 
 
         findViewById(R.id.forget_password).setOnClickListener(new View.OnClickListener() {
@@ -96,7 +97,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
 
                                     Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    ProApplication.getInstance().go_to="dashboard";
+                                    ProApplication.getInstance().go_to = "dashboard";
                                     startActivity(intent);
                                     finish();
                                 }
@@ -107,7 +108,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
                                         myLoader.dismissLoader();
 
                                     CustomAlert customAlert = new CustomAlert(LogInActivity.this, "Sign in error", "" + error, LogInActivity.this);
-                                    customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                                    customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
                                 }
                             },
                             email.getText().toString().trim(),
@@ -140,7 +141,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry")&&i==1) {
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             log_in.performClick();
         }
     }
@@ -153,16 +154,15 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
 //            startActivity(new Intent(LoginChooserActivity.this, BaseActivity.class));
 //            finish();
 
-            if (ProApplication.getInstance().getFBUserStatus()==1){
+            if (ProApplication.getInstance().getFBUserStatus() == 1) {
                 Intent intent = new Intent(LogInActivity.this, FirstTimeFaceBookLoginUserInformationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-            }
-            else {
+            } else {
                 Intent intent = new Intent(LogInActivity.this, LandScreenActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                ProApplication.getInstance().go_to="dashboard";
+                ProApplication.getInstance().go_to = "dashboard";
                 startActivity(intent);
                 finish();
             }

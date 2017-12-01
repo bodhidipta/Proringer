@@ -54,7 +54,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         LinkedList<ChatPojo> chatList = new LinkedList<>();
 
-        img_background= (ImageView) findViewById(R.id.img_background);
+        img_background = (ImageView) findViewById(R.id.img_background);
 
         Glide.with(IndividualMessageActivity.this).load(R.drawable.chat_background).centerCrop().into(img_background);
 
