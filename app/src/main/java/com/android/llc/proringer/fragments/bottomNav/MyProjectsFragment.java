@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectListingAdapter;
@@ -39,8 +40,8 @@ import java.util.List;
  * -->
  */
 
-public class MyProjectsFragment extends Fragment implements MyCustomAlertListener{
-    MyLoader myLoader=null;
+public class MyProjectsFragment extends Fragment implements MyCustomAlertListener {
+    MyLoader myLoader = null;
     RecyclerView project_list;
     LinearLayout no_project_available, LLNetworkDisconnection;
 
@@ -59,7 +60,7 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
         project_list = (RecyclerView) view.findViewById(R.id.project_list);
         project_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         loadList();
     }
@@ -107,8 +108,8 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
                 }
 
 
-                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error,MyProjectsFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, MyProjectsFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
         });
 
@@ -117,7 +118,7 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
     @Override
     public void callbackForAlert(String result, int i) {
 
-        if (result.equalsIgnoreCase("retry")&&i==1) {
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             loadList();
         }
     }

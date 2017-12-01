@@ -69,7 +69,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 
         if (projectMessageDetailsArrayList != null && 0 <= position && position < projectMessageDetailsArrayList.size()) {
 
-            ProjectMessageDetails projectMessageDetails=projectMessageDetailsArrayList.get(position);
+            ProjectMessageDetails projectMessageDetails = projectMessageDetailsArrayList.get(position);
 
             // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
             // put an unique string id as value, can be any string which uniquely define the data
@@ -83,14 +83,14 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 //        if (position % 3 == 0) {
 //            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
 //        } else {
-            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
+        holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
         //}
         holder.img_attached.setVisibility(View.GONE);
 
         holder.main_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(projectMessageDetailsArrayList.get(position).getNo_of_msg()>0) {
+                if (projectMessageDetailsArrayList.get(position).getNo_of_msg() > 0) {
                     callback.onItemPassed(position, "");
                 }
             }
@@ -103,8 +103,8 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         SwipeRevealLayout swipe_layout;
         RelativeLayout main_container;
         LinearLayout LLDelete, LLMore;
-        ImageView img_attached,prof_img;
-        ProRegularTextView tv_description,tv_date;
+        ImageView img_attached, prof_img;
+        ProRegularTextView tv_description, tv_date;
         ProSemiBoldTextView tv_name;
 
         public ViewHolder(View itemView) {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.PostProjectCategoryGridAdapter;
@@ -82,7 +83,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         progress_posting = (ProgressBar) view.findViewById(R.id.progress_posting);
         selected_service_category = (ProRegularTextView) view.findViewById(R.id.selected_service_category);
@@ -227,7 +228,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
 
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, PostProjectFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
         });
     }
@@ -330,7 +331,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
                     myLoader.dismissLoader();
 
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Contact Us", "" + error, PostProjectFragment.this);
-                customAlert.createNormalAlert("ok",1);
+                customAlert.createNormalAlert("ok", 1);
             }
 
             @Override
@@ -463,7 +464,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i==1){
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             listPostProject();
         }
     }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.ProjectMessageAdapter;
@@ -16,9 +17,11 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectMessage;
 import com.android.llc.proringer.utils.Logger;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -61,6 +64,7 @@ public class MessageFragment extends Fragment {
         loadList();
 
     }
+
     public void loadList() {
 
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
@@ -81,12 +85,12 @@ public class MessageFragment extends Fragment {
 
                         for (int i = 0; i < jsonObject.getJSONArray("info_array").length(); i++) {
                             ProjectMessage projectMessage = new ProjectMessage();
-                            projectMessage.setProj_id( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_id"));
-                            projectMessage.setProj_image( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_image"));
-                            projectMessage.setProj_name( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
-                            projectMessage.setStatus( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
-                            projectMessage.setProject_date( jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
-                            projectMessage.setNo_of_pros_user( jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("no_of_pro_user"));
+                            projectMessage.setProj_id(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_id"));
+                            projectMessage.setProj_image(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_image"));
+                            projectMessage.setProj_name(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
+                            projectMessage.setStatus(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
+                            projectMessage.setProject_date(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
+                            projectMessage.setNo_of_pros_user(jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("no_of_pro_user"));
                             projectMessageArrayList.add(projectMessage);
                         }
 
@@ -123,9 +127,10 @@ public class MessageFragment extends Fragment {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
             }
-        }, ProApplication.getInstance().getUserId(),"");
+        }, ProApplication.getInstance().getUserId(), "");
 
     }
+
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }

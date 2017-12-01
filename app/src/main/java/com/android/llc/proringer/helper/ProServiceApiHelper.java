@@ -3,6 +3,7 @@ package com.android.llc.proringer.helper;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
@@ -33,6 +34,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -114,10 +116,10 @@ public class ProServiceApiHelper {
     private String contactProAPI = "http://esolz.co.in/lab6/proringer_latest/contact_pro";
 
 
-    private  String editprojectAPI="http://esolz.co.in/lab6/proringer_latest/app_project_edit";
-    private  String loginFBAPI="http://esolz.co.in/lab6/proringer_latest/app_facebook_login";
-    private  String logOutAPI="http://esolz.co.in/lab6/HappywanNyan/app_logout";
-    private  String messageListAPI="http://esolz.co.in/lab6/proringer_latest/app_project_message";
+    private String editprojectAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_edit";
+    private String loginFBAPI = "http://esolz.co.in/lab6/proringer_latest/app_facebook_login";
+    private String logOutAPI = "http://esolz.co.in/lab6/HappywanNyan/app_logout";
+    private String messageListAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_message";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -456,9 +458,6 @@ public class ProServiceApiHelper {
     }
 
 
-
-
-
     /**
      * For Facebook login of user
      *
@@ -486,7 +485,7 @@ public class ProServiceApiHelper {
                                 .add("l_name", params[1])
                                 .add("email", params[2])
                                 .add("fb_id", params[3])
-                                .add("device_type","A")
+                                .add("device_type", "A")
                                 .build();
 
                         Logger.printMessage("f_name", ":-" + params[0]);
@@ -512,7 +511,7 @@ public class ProServiceApiHelper {
                                 + params[1] + "\n"
                                 + params[2] + "\n"
                                 + params[3] + "\n"
-                                +"A"+ "\n"
+                                + "A" + "\n"
                                 + response_string);
 
                         JSONObject mainResponseObj = new JSONObject(response_string);
@@ -552,7 +551,6 @@ public class ProServiceApiHelper {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
-
 
 
     /**
@@ -1326,30 +1324,29 @@ public class ProServiceApiHelper {
 
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                return  e.getMessage();
+                                return e.getMessage();
                             }
                         }
 
-                        Logger.printMessage("user_id","-->"+ProApplication.getInstance().getUserId());
-                        Logger.printMessage("year_build","-->"+params[0]);
-                        Logger.printMessage("footage","-->"+params[1]);
-                        Logger.printMessage("garage","-->"+params[2]);
-                        Logger.printMessage("property_type","-->"+params[3]);
-                        Logger.printMessage("basement","-->"+params[4]);
-                        Logger.printMessage("size","-->"+params[5]);
-                        Logger.printMessage("roof_age","-->"+params[6]);
-                        Logger.printMessage("ac_age","-->"+params[7]);
-                        Logger.printMessage("furnance_age","-->"+params[8]);
-                        Logger.printMessage("filter_change","-->"+params[9]);
-                        Logger.printMessage("water_heater_age","-->"+params[10]);
-                        Logger.printMessage("window_age","-->"+params[11]);
-                        Logger.printMessage("water_heater_flush","-->"+params[12]);
-                        Logger.printMessage("chimney_sweep","-->"+params[13]);
-                        Logger.printMessage("last_radon_gas","-->"+params[14]);
-                        Logger.printMessage("smoke_detector","-->"+params[15]);
-                        Logger.printMessage("co_detector","-->"+params[16]);
-                        Logger.printMessage("gutter_clean","-->"+params[17]);
-
+                        Logger.printMessage("user_id", "-->" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("year_build", "-->" + params[0]);
+                        Logger.printMessage("footage", "-->" + params[1]);
+                        Logger.printMessage("garage", "-->" + params[2]);
+                        Logger.printMessage("property_type", "-->" + params[3]);
+                        Logger.printMessage("basement", "-->" + params[4]);
+                        Logger.printMessage("size", "-->" + params[5]);
+                        Logger.printMessage("roof_age", "-->" + params[6]);
+                        Logger.printMessage("ac_age", "-->" + params[7]);
+                        Logger.printMessage("furnance_age", "-->" + params[8]);
+                        Logger.printMessage("filter_change", "-->" + params[9]);
+                        Logger.printMessage("water_heater_age", "-->" + params[10]);
+                        Logger.printMessage("window_age", "-->" + params[11]);
+                        Logger.printMessage("water_heater_flush", "-->" + params[12]);
+                        Logger.printMessage("chimney_sweep", "-->" + params[13]);
+                        Logger.printMessage("last_radon_gas", "-->" + params[14]);
+                        Logger.printMessage("smoke_detector", "-->" + params[15]);
+                        Logger.printMessage("co_detector", "-->" + params[16]);
+                        Logger.printMessage("gutter_clean", "-->" + params[17]);
 
 
                         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
@@ -1375,7 +1372,7 @@ public class ProServiceApiHelper {
                                 .addFormDataPart("co_detector", "" + params[16])
                                 .addFormDataPart("gutter_clean", "" + params[17]);
                         if (upload_temp != null) {
-                            Logger.printMessage("photo_param","-->"+upload_temp.getAbsolutePath());
+                            Logger.printMessage("photo_param", "-->" + upload_temp.getAbsolutePath());
                             Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
                             requestBody.addFormDataPart("property_image", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
                         }
@@ -2138,7 +2135,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getUserFavoriteProsList(final getApiProcessCallback callback,String... params) {
+    public void getUserFavoriteProsList(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -2158,7 +2155,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("category_search", ":-" + params[1]);
                         Logger.printMessage("zip_search", ":-" + params[2]);
 
-                        String FavProListAPI = favoriteProsListAPI + params[0]+"&category_search="+params[1]+"&zip_search="+params[2];
+                        String FavProListAPI = favoriteProsListAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2];
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
@@ -2195,7 +2192,7 @@ public class ProServiceApiHelper {
                         callback.onError(s);
                     }
                 }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,params);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
         } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
@@ -2297,7 +2294,7 @@ public class ProServiceApiHelper {
                     OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
                     try {
-                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address="+ params[0]+"&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
+                        String searchLocalProject = "https://maps.googleapis.com/maps/api/geocode/json?address=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
                         Logger.printMessage("searchLocationAPI", "" + searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)
@@ -2410,7 +2407,8 @@ public class ProServiceApiHelper {
      */
     public void getZipCodeUsingGoogleApi(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
-            new AsyncTask<String, Void, String>() {;
+            new AsyncTask<String, Void, String>() {
+                ;
                 String exception = "";
 
                 @Override
@@ -2435,7 +2433,7 @@ public class ProServiceApiHelper {
                         Response response = client.newCall(request).execute();
                         String responseString = response.body().string();
                         JSONObject jsonObject = new JSONObject(responseString);
-                       // Logger.printMessage("jsonObject",""+jsonObject);
+                        // Logger.printMessage("jsonObject",""+jsonObject);
                         if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
                             return responseString;
                         } else {
@@ -2467,6 +2465,7 @@ public class ProServiceApiHelper {
 
     /**
      * get Location List code  using google api
+     *
      * @param param
      * @param callback
      */
@@ -2489,7 +2488,7 @@ public class ProServiceApiHelper {
 
                     try {
                         String searchLocalProject = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + params[0] + "&key=AIzaSyDoLuAdSE7M9SzeIht7-Bm-WrUjnDQBofg&language=en";
-                        Logger.printMessage("searchLocationAPI",""+searchLocalProject);
+                        Logger.printMessage("searchLocationAPI", "" + searchLocalProject);
                         Request request = new Request.Builder()
                                 .url(searchLocalProject)
                                 .build();
@@ -2527,7 +2526,6 @@ public class ProServiceApiHelper {
             callback.onError("No internet connection found. Please check your internet connection.");
         }
     }
-
 
 
     public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback, String... params) {
@@ -2582,7 +2580,7 @@ public class ProServiceApiHelper {
                                     for (int j = 0; j < terms.length(); j++) {
                                         if (terms.getJSONObject(j).getString("value").contains("United States") ||
                                                 terms.getJSONObject(j).getString("value").contains("Canada")) {
-                                            Logger.printMessage("description",""+innerIncer.getString("description"));
+                                            Logger.printMessage("description", "" + innerIncer.getString("description"));
                                             addressList.add(innerIncer.getString("description"));
                                             break;
                                         }
@@ -2602,7 +2600,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
-                    Logger.printMessage("location",s);
+                    Logger.printMessage("location", s);
                     if (exception.equals("")) {
                         if (addressList != null && addressList.size() > 0)
                             callback.onComplete(addressList);
@@ -3363,8 +3361,6 @@ public class ProServiceApiHelper {
     }
 
 
-
-
     /**
      * contact pro ..
      *
@@ -3440,15 +3436,13 @@ public class ProServiceApiHelper {
     }
 
 
-
     /**
      * Post Project
      *
      * @param callback
      * @param params
      */
-    public void editproject(final getApiProcessCallback callback, String... params)
-    {
+    public void editproject(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
 
 
@@ -3492,11 +3486,11 @@ public class ProServiceApiHelper {
                         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                         MultipartBody.Builder requestBody = new MultipartBody.Builder()
                                 .setType(MultipartBody.FORM)
-                                .addFormDataPart("project_id",params[0])
+                                .addFormDataPart("project_id", params[0])
                                 .addFormDataPart("user_id", Appsdata.Uid)
                                 .addFormDataPart("project_zipcode", params[1])
-                                .addFormDataPart("city",params[2])
-                                .addFormDataPart("state",params[3])
+                                .addFormDataPart("city", params[2])
+                                .addFormDataPart("state", params[3])
                                 .addFormDataPart("country", params[4])
                                 .addFormDataPart("latitude", params[5])
                                 .addFormDataPart("longitude", params[6])
@@ -3535,10 +3529,7 @@ public class ProServiceApiHelper {
                     }
 
 
-
                 }
-
-
 
 
                 @Override
@@ -3550,14 +3541,12 @@ public class ProServiceApiHelper {
                         callback.onError(s);
                     }
                 }
-            }. executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
-        }
-        else {
+        } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
-
 
 
     /**
@@ -3577,12 +3566,13 @@ public class ProServiceApiHelper {
                     super.onPreExecute();
                     callback.onStart();
                 }
+
                 @Override
                 protected String doInBackground(String... params) {
                     try {
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
-                        logOutAPI=logOutAPI + "?" + "user_id=" + ProApplication.getInstance().getUserId() +"&anorid_status=1";
+                        logOutAPI = logOutAPI + "?" + "user_id=" + ProApplication.getInstance().getUserId() + "&anorid_status=1";
                         Logger.printMessage("logOut", "" + logOutAPI);
 
                         Request request = new Request.Builder()
@@ -3595,7 +3585,7 @@ public class ProServiceApiHelper {
                         JSONObject mainObject = new JSONObject(responseString);
 
                         if (mainObject.getBoolean("response")) {
-                            return  responseString;
+                            return responseString;
                         } else {
                             exception = mainObject.getString("message");
                             return exception;
@@ -3713,14 +3703,12 @@ public class ProServiceApiHelper {
     }
 
 
-
-
     /**
      * get message  list
      *
      * @param callback
      */
-    public void getUserMessageList(final getApiProcessCallback callback,String... params) {
+    public void getUserMessageList(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -3737,9 +3725,9 @@ public class ProServiceApiHelper {
                     try {
 
                         Logger.printMessage("user_id", ":-" + params[0]);
-                        Logger.printMessage("project_id", ":-" +params[1]);
+                        Logger.printMessage("project_id", ":-" + params[1]);
 
-                        String MessageListAPI = messageListAPI+"?user_id="+params[0]+"&project_id="+params[1];
+                        String MessageListAPI = messageListAPI + "?user_id=" + params[0] + "&project_id=" + params[1];
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
@@ -3776,13 +3764,11 @@ public class ProServiceApiHelper {
                         callback.onError(s);
                     }
                 }
-            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,params);
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
         } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
-
-
 
 
     /**

@@ -51,7 +51,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     private Context mcontext;
     MessageFragment.onOptionSelected callback;
     ArrayList<ProjectMessage> projectMessageArrayList;
-    int delete_position=0;
+    int delete_position = 0;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
     public ProjectMessageAdapter(Context mcontext, ArrayList<ProjectMessage> projectMessageArrayList, MessageFragment.onOptionSelected callback) {
@@ -88,9 +88,9 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             holder.delete_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    delete_position=position;
+                    delete_position = position;
                     CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete all this conversation?", ProjectMessageAdapter.this);
-                    customAlert.getListenerRetryCancelFromNormalAlert("Ok","Cancel",1);
+                    customAlert.getListenerRetryCancelFromNormalAlert("Ok", "Cancel", 1);
                 }
             });
 
@@ -99,8 +99,8 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 //        if (position % 3 == 0) {
 //            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
 //        } else {
-            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
-       // }
+        holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
+        // }
 
     }
 
@@ -119,7 +119,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         SwipeRevealLayout swipe_layout;
         RelativeLayout main_container;
         LinearLayout delete_layout;
-        ProSemiBoldTextView project_name, status,name_convo_value;
+        ProSemiBoldTextView project_name, status, name_convo_value;
         ProRegularTextView date;
         ProLightTextView name_convo;
         ImageView project_type_img;
@@ -146,13 +146,11 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             main_container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (projectMessage.getNo_of_pros_user()!=0) {
+                    if (projectMessage.getNo_of_pros_user() != 0) {
                         callback.onItemPassed(position, projectMessage.getProj_id());
                     }
                 }
             });
-
-
 
 
             Glide.with(mcontext).load(projectMessage.getProj_image()).fitCenter().placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(project_type_img) {
@@ -172,19 +170,18 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             });
             project_name.setText(projectMessage.getProj_name());
 
-            if (projectMessage.getNo_of_pros_user()==0){
+            if (projectMessage.getNo_of_pros_user() == 0) {
                 name_convo_value.setText("");
                 name_convo.setText("");
-            }
-            else {
-                name_convo_value.setText(""+projectMessage.getNo_of_pros_user());
+            } else {
+                name_convo_value.setText("" + projectMessage.getNo_of_pros_user());
                 name_convo.setText(" Conversations");
             }
 
-            if (projectMessage.getStatus().equalsIgnoreCase("Y")){
+            if (projectMessage.getStatus().equalsIgnoreCase("Y")) {
                 status.setVisibility(View.VISIBLE);
                 status.setText("Active");
-            }else {
+            } else {
                 status.setVisibility(View.GONE);
             }
 

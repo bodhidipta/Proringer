@@ -81,12 +81,12 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
         LLMain = (LinearLayout) view.findViewById(R.id.LLMain);
         LLNetworkDisconnection = (LinearLayout) view.findViewById(R.id.LLNetworkDisconnection);
 
-        keyboard= (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        img_clear=(ImageView)view.findViewById(R.id.img_clear);
+        img_clear = (ImageView) view.findViewById(R.id.img_clear);
         img_clear.setVisibility(View.GONE);
 
-        edt_search=(ProRegularEditText)view.findViewById(R.id.edt_search);
+        edt_search = (ProRegularEditText) view.findViewById(R.id.edt_search);
 
         view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
 
@@ -151,9 +151,8 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                     Logger.printMessage("search_category", edt_search.getText().toString());
                     closeKeypad();
                     loadListSearch();
-                }
-                else if((event != null && (actionId == KeyEvent.KEYCODE_DEL))){
-                    if (edt_search.getText().toString().equals("")){
+                } else if ((event != null && (actionId == KeyEvent.KEYCODE_DEL))) {
+                    if (edt_search.getText().toString().equals("")) {
                         Logger.printMessage("search_category", edt_search.getText().toString());
                         closeKeypad();
                         loadList();
@@ -163,7 +162,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
             }
         });
 
-        if (((LandScreenActivity)getActivity()).local_pros_search_zip.trim().equals("")) {
+        if (((LandScreenActivity) getActivity()).local_pros_search_zip.trim().equals("")) {
             plotUserInformation();
         } else {
             loadList();
@@ -235,7 +234,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
                 customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
-        }, ProApplication.getInstance().getUserId(), category_search,((LandScreenActivity)getActivity()).local_pros_search_zip);
+        }, ProApplication.getInstance().getUserId(), category_search, ((LandScreenActivity) getActivity()).local_pros_search_zip);
     }
 
     public void loadListSearch() {
@@ -304,7 +303,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
                 customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
-        }, ProApplication.getInstance().getUserId(), category_search,((LandScreenActivity)getActivity()).local_pros_search_zip);
+        }, ProApplication.getInstance().getUserId(), category_search, ((LandScreenActivity) getActivity()).local_pros_search_zip);
     }
 
     @Override
@@ -412,10 +411,10 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                             Logger.printMessage("zipCode", "zipCode:-" + innerObj.getString("zipcode"));
 
                             if (innerObj.getString("zipcode").trim().equals("")) {
-                                ((LandScreenActivity)getActivity()).local_pros_search_zip="";
+                                ((LandScreenActivity) getActivity()).local_pros_search_zip = "";
                                 loadList();
                             } else {
-                                ((LandScreenActivity)getActivity()).local_pros_search_zip=innerObj.getString("zipcode");
+                                ((LandScreenActivity) getActivity()).local_pros_search_zip = innerObj.getString("zipcode");
                                 loadList();
                             }
                         } catch (JSONException jse) {

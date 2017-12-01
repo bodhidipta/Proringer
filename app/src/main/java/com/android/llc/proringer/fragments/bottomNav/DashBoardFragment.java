@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
@@ -74,7 +75,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
     ImageView profile_pic;
     ProRegularTextView tv_name, tv_active_projects, tv_favorite_pros;
     ProLightTextView tv_address;
-    MyLoader myLoader=null;
+    MyLoader myLoader = null;
 
     LinearLayout LLNetworkDisconnection;
     NestedScrollView nested_scroll_main;
@@ -98,7 +99,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
         tv_favorite_pros = (ProRegularTextView) view.findViewById(R.id.tv_favorite_pros);
         tv_address = (ProLightTextView) view.findViewById(R.id.tv_address);
 
-        myLoader=new MyLoader(getActivity());
+        myLoader = new MyLoader(getActivity());
 
         view.findViewById(R.id.post_project).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,8 +179,8 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                         Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
 
 
-                    String uid= jsonInfoArray.getJSONObject(0).getString("homeowner_id");
-                    Appsdata.Uid=uid;
+                    String uid = jsonInfoArray.getJSONObject(0).getString("homeowner_id");
+                    Appsdata.Uid = uid;
 
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 
@@ -209,8 +210,8 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                 }
 
 
-                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error,DashBoardFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry","abort",1);
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, DashBoardFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
         });
     }
@@ -256,8 +257,8 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 //                                    super.onResourceReady(resource, animation);
 //                                }
 //                            });
-                           // dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
-                          //  dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
+                            // dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
+                            //  dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
                         }
                     }
                 }, 800);
@@ -287,8 +288,8 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 //                            super.onResourceReady(resource, animation);
 //                        }
 //                    });
-                   // dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
-                   // dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
+                    // dialog.findViewById(R.id.img_select).setVisibility(View.GONE);
+                    // dialog.findViewById(R.id.img_cancel).setVisibility(View.VISIBLE);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -399,7 +400,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 //        });
 //    }
 
-    public void loadProfileImage(){
+    public void loadProfileImage() {
         if (mCurrentPhotoPath.trim().equals("")) {
             Toast.makeText(getActivity(), "Please choose Image", Toast.LENGTH_SHORT).show();
         } else {
@@ -417,7 +418,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                     //dialog.dismiss();
 
                     CustomAlert customAlert = new CustomAlert(getActivity(), "" + "Upload Image", "" + message, DashBoardFragment.this);
-                    customAlert.createNormalAlert("ok",1);
+                    customAlert.createNormalAlert("ok", 1);
                 }
 
                 @Override
@@ -426,7 +427,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                         myLoader.dismissLoader();
 
                     CustomAlert customAlert = new CustomAlert(getActivity(), "Contact Us", "" + error, DashBoardFragment.this);
-                    customAlert.createNormalAlert("ok",2);
+                    customAlert.createNormalAlert("ok", 2);
 
                 }
             }, ProApplication.getInstance().getUserId(), mCurrentPhotoPath);
@@ -435,10 +436,10 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i==1) {
+        if (result.equalsIgnoreCase("retry") && i == 1) {
             plotUserInformation();
         }
-        if (result.equalsIgnoreCase("ok") && i==1){
+        if (result.equalsIgnoreCase("ok") && i == 1) {
             plotUserInformation();
         }
     }
