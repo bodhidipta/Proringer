@@ -308,10 +308,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-
             CustomAlert customAlert = new CustomAlert(LandScreenActivity.this, "", "Do you want to exit application?", LandScreenActivity.this);
             customAlert.getListenerRetryCancelFromNormalAlert("Yes", "Abort", 1);
-
         }
     }
 

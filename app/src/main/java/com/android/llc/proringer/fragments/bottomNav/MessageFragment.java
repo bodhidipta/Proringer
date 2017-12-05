@@ -134,4 +134,10 @@ public class MessageFragment extends Fragment {
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+    }
 }

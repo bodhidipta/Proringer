@@ -56,86 +56,77 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY" />
 
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/project_type_img"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/project_type_img">
 
-                <RelativeLayout
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="15dp"
+                    android:text="Today"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:id="@+id/project_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/date"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:text="Plumbing project jsadhbashhashahsdhaggdasgdgagghasgashgahsgggggghgashgghsa"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp" />
 
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="15dp"
-                        android:text="Today"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="12sp" />
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:id="@+id/name_convo_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/project_name"
+                    android:singleLine="true"
+                    android:text="12"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="10sp" />
 
-                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                        android:id="@+id/project_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_toLeftOf="@+id/date"
-                        android:paddingBottom="5dp"
-                        android:singleLine="true"
-                        android:text="Plumbing project jsadhbashhashahsdhaggdasgdgagghasgashgahsgggggghgashgghsa"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="14sp" />
+                <com.android.llc.proringer.viewsmod.textview.ProLightTextView
+                    android:id="@+id/name_convo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/project_name"
+                    android:layout_toRightOf="@+id/name_convo_value"
+                    android:singleLine="true"
+                    android:text="Conversions"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="10sp" />
 
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name_convo"
+                    android:paddingTop="5dp"
+                    android:text="Active"
+                    android:textColor="@color/colorSky"
+                    android:textSize="10sp" />
 
-                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                        android:id="@+id/name_convo_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/project_name"
-                        android:singleLine="true"
-                        android:text="12"
-                        android:textColor="@color/colorTextBlack"
-                        android:textSize="10sp" />
+                <ImageView
+                    android:id="@+id/img_more"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/project_name"
+                    android:src="@drawable/ic_right_chevron_dark" />
 
-                    <com.android.llc.proringer.viewsmod.textview.ProLightTextView
-                        android:id="@+id/name_convo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/project_name"
-                        android:layout_toRightOf="@+id/name_convo_value"
-                        android:singleLine="true"
-                        android:text="Conversions"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="10sp" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                        android:id="@+id/status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/name_convo"
-                        android:paddingTop="5dp"
-                        android:text="Active"
-                        android:textColor="@color/colorSky"
-                        android:textSize="10sp" />
-
-                    <ImageView
-                        android:id="@+id/img_more"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/project_name"
-                        android:src="@drawable/ic_right_chevron_dark" />
-
-                </RelativeLayout>
-            </LinearLayout>
-
+            </RelativeLayout>
 
         </RelativeLayout>
 

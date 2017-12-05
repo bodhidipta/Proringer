@@ -73,8 +73,7 @@
             android:id="@+id/info_cont"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-           >
+            android:layout_centerInParent="true">
 
 
             <ImageView
@@ -88,69 +87,65 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY" />
 
+
             <RelativeLayout
-                android:layout_toRightOf="@+id/prof_img"
+                android:layout_marginTop="10dp"
+                android:id="@+id/RLName_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/prof_img"
                 android:paddingRight="10dp">
 
-                <RelativeLayout
-                    android:id="@+id/RLName_date"
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:text="Date"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
+                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                   >
+                    android:layout_toLeftOf="@+id/tv_date"
+                    android:lines="1"
+                    android:text="Project name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
 
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:gravity="right"
-                        android:text="Date"
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="12sp" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/tv_date"
-                        android:lines="1"
-                        android:text="Project name"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="14sp" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/RLDes_cont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/RLName_date"
-                    >
-
-                    <ImageView
-                        android:id="@+id/img_attached"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_attachment" />
-
-                    <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
-                        android:id="@+id/tv_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/img_attached"
-                        android:lines="2"
-                        android:maxLines="2"
-                        android:text="Description of the message .......dfgdf aksdjlf "
-                        android:textColor="@color/colorTextDark"
-                        android:textSize="14sp" />
-
-                </RelativeLayout>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RLDes_cont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RLName_date"
+                android:layout_toRightOf="@+id/prof_img"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/img_attached"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_attachment" />
+
+                <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/img_attached"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="Description of the message .......dfgdf aksdjlf "
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
