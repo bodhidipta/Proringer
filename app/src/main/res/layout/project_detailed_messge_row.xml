@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp">
+        >
 
         <LinearLayout
             android:id="@+id/LLMore"
@@ -60,7 +60,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/main_container"

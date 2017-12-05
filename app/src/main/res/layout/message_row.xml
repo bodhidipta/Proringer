@@ -14,7 +14,7 @@
         android:background="#ff002a"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="5dp">
+        >
 
         <ImageView
             android:layout_width="25dp"
