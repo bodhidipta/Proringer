@@ -216,23 +216,23 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         if (result.equalsIgnoreCase("Ok") && i == 1) {
 //            projectMessageArrayList.remove(getAdapterPosition());
 //            notifyItemRemoved(getAdapterPosition());
-            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onComplete(String message) {
-                    projectMessageArrayList.remove(delete_position);
-                    notifyItemRemoved(delete_position);
-                }
-
-                @Override
-                public void onError(String error) {
-
-                }
-            }, ProApplication.getInstance().getUserId(), "");
+//            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+//                @Override
+//                public void onStart() {
+//
+//                }
+//
+//                @Override
+//                public void onComplete(String message) {
+//                    projectMessageArrayList.remove(delete_position);
+//                    notifyItemRemoved(delete_position);
+//                }
+//
+//                @Override
+//                public void onError(String error) {
+//
+//                }
+//            }, ProApplication.getInstance().getUserId(), "");
 
         }
     }
