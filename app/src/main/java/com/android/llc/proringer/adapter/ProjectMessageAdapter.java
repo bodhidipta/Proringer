@@ -62,6 +62,8 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         this.projectMessageArrayList = projectMessageArrayList;
     }
 
+
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.message_row, parent, false));
