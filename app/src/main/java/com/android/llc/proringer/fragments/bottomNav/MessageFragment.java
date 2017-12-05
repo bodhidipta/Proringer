@@ -15,7 +15,7 @@ import com.android.llc.proringer.adapter.ProjectMessageAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.helper.SpaceItemDecoration;
+import com.android.llc.proringer.helper.SimpleDividerItemDecoration;
 import com.android.llc.proringer.pojo.ProjectMessage;
 import com.android.llc.proringer.utils.Logger;
 
@@ -62,8 +62,7 @@ public class MessageFragment extends Fragment {
 
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
         project_message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
-        project_message_list.addItemDecoration(new SpaceItemDecoration(getActivity(), R.dimen.list_space,
-                        true, true));
+        project_message_list.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         loadList();
 
     }
