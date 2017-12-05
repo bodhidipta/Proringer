@@ -155,7 +155,9 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             });
 
 
-            Glide.with(mcontext).load(projectMessage.getProj_image()).placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(project_type_img) {
+            Glide.with(mcontext).load(projectMessage.getProj_image())
+                    .placeholder(R.drawable.plumber)
+                    .into(new GlideDrawableImageViewTarget(project_type_img) {
                 /**
                  * {@inheritDoc}
                  * If no {@link GlideAnimation} is given or if the animation does not set the
