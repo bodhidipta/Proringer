@@ -75,19 +75,31 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true">
 
-            <ImageView
-                android:id="@+id/prof_img"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            <LinearLayout
                 android:layout_margin="10dp"
-                android:scaleType="fitXY" />
+                android:orientation="horizontal"
+                android:id="@+id/LL_Image"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/prof_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"/>
+
+            </LinearLayout>
+
+
 
             <RelativeLayout
                 android:layout_marginTop="10dp"
                 android:id="@+id/RLName_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/prof_img">
+                android:layout_toRightOf="@+id/LL_Image">
 
                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                     android:id="@+id/tv_date"
@@ -117,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/RLName_date"
-                android:layout_toRightOf="@+id/prof_img"
+                android:layout_toRightOf="@+id/LL_Image"
                 android:orientation="horizontal"
                 android:paddingRight="10dp">
 

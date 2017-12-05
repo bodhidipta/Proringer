@@ -136,7 +136,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             tv_date.setText(projectMessageDetails.getPro_time_status());
             tv_description.setText(projectMessageDetails.getMessage_info());
 
-            Glide.with(mcontext).load(projectMessageDetails.getPro_img()).fitCenter().placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(prof_img) {
+            Glide.with(mcontext).load(projectMessageDetails.getPro_img()).placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(prof_img) {
                 /**
                  * {@inheritDoc}
                  * If no {@link GlideAnimation} is given or if the animation does not set the

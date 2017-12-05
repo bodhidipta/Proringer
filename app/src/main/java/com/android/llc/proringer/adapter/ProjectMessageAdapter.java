@@ -12,10 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.LogInActivity;
+import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.bottomNav.MessageFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectMessage;
 import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
@@ -89,7 +91,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                 @Override
                 public void onClick(View v) {
                     delete_position = position;
-                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete all this conversation?", ProjectMessageAdapter.this);
+                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete all conversations within this project posting?", ProjectMessageAdapter.this);
                     customAlert.getListenerRetryCancelFromNormalAlert("Ok", "Cancel", 1);
                 }
             });
@@ -153,7 +155,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             });
 
 
-            Glide.with(mcontext).load(projectMessage.getProj_image()).fitCenter().placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(project_type_img) {
+            Glide.with(mcontext).load(projectMessage.getProj_image()).placeholder(R.drawable.plumber).into(new GlideDrawableImageViewTarget(project_type_img) {
                 /**
                  * {@inheritDoc}
                  * If no {@link GlideAnimation} is given or if the animation does not set the
@@ -212,8 +214,24 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         if (result.equalsIgnoreCase("Ok") && i == 1) {
 //            projectMessageArrayList.remove(getAdapterPosition());
 //            notifyItemRemoved(getAdapterPosition());
-            projectMessageArrayList.remove(delete_position);
-            notifyItemRemoved(delete_position);
+            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onComplete(String message) {
+                    projectMessageArrayList.remove(delete_position);
+                    notifyItemRemoved(delete_position);
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            }, ProApplication.getInstance().getUserId(), "");
+
         }
     }
 

@@ -121,6 +121,9 @@ public class ProServiceApiHelper {
     private String logOutAPI = "http://esolz.co.in/lab6/HappywanNyan/app_logout";
     private String messageListAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_message";
 
+
+    private String messageDeleteAPI = "";
+
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
             instance = new ProServiceApiHelper();
@@ -3736,6 +3739,74 @@ public class ProServiceApiHelper {
                         Request request = new Request.Builder()
                                 .get()
                                 .url(MessageListAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return responseString;
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+        } else {
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+        }
+    }
+
+
+    /**
+     * delete message  list
+     *
+     * @param callback
+     */
+    public void deleteMessageList(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("project_id", ":-" + params[1]);
+
+                        String MessageDeleteAPI = messageDeleteAPI + "?user_id=" + params[0] + "&project_id=" + params[1];
+
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+
+                        Logger.printMessage("messageDeleteAPI", MessageDeleteAPI);
+                        Request request = new Request.Builder()
+                                .get()
+                                .url(MessageDeleteAPI)
                                 .build();
 
                         Response response = client.newCall(request).execute();
