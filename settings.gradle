@@ -1,1 +1,1 @@
-include ':app', ':koushiklibrary-release'
+include ':app'

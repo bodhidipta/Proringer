@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Proringer.iml" filepath="$PROJECT_DIR$/Proringer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/koushiklibrary-release/koushiklibrary-release.iml" filepath="$PROJECT_DIR$/koushiklibrary-release/koushiklibrary-release.iml" />
     </modules>
   </component>
 </project>
