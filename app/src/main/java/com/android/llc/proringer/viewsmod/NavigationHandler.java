@@ -210,13 +210,13 @@ public class NavigationHandler {
 
                 listener.onClickItem(FIND_LOCAL_PROS);
 
-                find_local_pros_cont.setBackgroundColor(Color.parseColor("#656565"));
-                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro_white);
-                find_local_pros_text.setTextColor(Color.WHITE);
-
                 LLSupport.setVisibility(View.GONE);
                 LLAbout.setVisibility(View.GONE);
                 LLAccount.setVisibility(View.GONE);
+
+                find_local_pros_cont.setBackgroundColor(Color.parseColor("#656565"));
+                find_local_pros_img.setBackgroundResource(R.drawable.ic_search_pro_white);
+                find_local_pros_text.setTextColor(Color.WHITE);
 
                 account_cont.setBackgroundColor(Color.TRANSPARENT);
                 account_img.setBackgroundResource(R.drawable.ic_settings);
