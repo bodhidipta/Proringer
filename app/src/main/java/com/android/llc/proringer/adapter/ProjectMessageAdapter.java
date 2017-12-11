@@ -72,11 +72,11 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        if (position == projectMessageArrayList.size() - 1) {
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext, 10));
-            holder.swipe_layout.setLayoutParams(params);
-        }
+//        if (position == projectMessageArrayList.size() - 1) {
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//            params.setMargins(0, 0, 0, new MethodsUtils().dpToPx(mcontext, 10));
+//            holder.swipe_layout.setLayoutParams(params);
+//        }
 
         if (projectMessageArrayList != null && 0 <= position && position < projectMessageArrayList.size()) {
             ProjectMessage projectMessage = projectMessageArrayList.get(position);
