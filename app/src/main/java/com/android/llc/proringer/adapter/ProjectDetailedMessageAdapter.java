@@ -84,7 +84,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         }
 
 
-        if (projectMessageDetailsArrayList.get(position).getRead_status()==0) {
+        if (projectMessageDetailsArrayList.get(position).getRead_status()==1) {
             holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
         } else {
         holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
