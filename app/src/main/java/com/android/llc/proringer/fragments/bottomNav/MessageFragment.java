@@ -92,7 +92,8 @@ public class MessageFragment extends Fragment {
                             projectMessage.setProj_name(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
                             projectMessage.setStatus(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
                             projectMessage.setProject_date(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
-                            projectMessage.setNo_of_pros_user(jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("no_of_pro_user"));
+                            projectMessage.setNo_of_pros_user(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("no_of_pro_user"));
+                            projectMessage.setRead_status(jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("read_status"));
                             projectMessageArrayList.add(projectMessage);
                         }
 

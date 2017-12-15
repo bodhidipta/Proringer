@@ -132,6 +132,7 @@ public class ProjectMessagingFragment extends Fragment {
                             projectMessageDetails.setPro_com_nm(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_com_nm"));
                             projectMessageDetails.setNo_of_msg(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("no_of_msg"));
                             projectMessageDetails.setMessage_info(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("message_info"));
+                            projectMessageDetails.setRead_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("read_status"));
                             projectMessageDetails.setMessage_list(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getJSONArray("message_list"));
 
                             projectMessageDetailsArrayList.add(projectMessageDetails);

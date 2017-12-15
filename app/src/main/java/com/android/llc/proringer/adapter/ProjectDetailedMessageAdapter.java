@@ -80,11 +80,12 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         }
 
 
-//        if (position % 3 == 0) {
-//            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
-//        } else {
+        if (projectMessageDetailsArrayList.get(position).getRead_status()==0) {
+            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
+        } else {
         holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
-        //}
+        }
+
         holder.img_attached.setVisibility(View.GONE);
 
         holder.main_container.setOnClickListener(new View.OnClickListener() {

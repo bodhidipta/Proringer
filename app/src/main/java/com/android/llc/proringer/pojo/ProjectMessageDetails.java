@@ -8,11 +8,19 @@ import org.json.JSONArray;
 
 public class ProjectMessageDetails {
     String id,project_id,homeowner_id,pro_id,pro_img,pro_rating,pro_time_status,pro_user_name,pro_com_nm,message_info;
-    int no_of_msg;
+    int no_of_msg,read_status;
     JSONArray message_list;
 
     public String getId() {
         return id;
+    }
+
+    public int getRead_status() {
+        return read_status;
+    }
+
+    public void setRead_status(int read_status) {
+        this.read_status = read_status;
     }
 
     public void setId(String id) {

@@ -1,6 +1,7 @@
 package com.android.llc.proringer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -63,7 +64,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     }
 
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.message_row, parent, false));
@@ -100,11 +100,11 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
 
         }
 
-//        if (position % 3 == 0) {
-//            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
-//        } else {
-        holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
-        // }
+        if (projectMessageArrayList.get(position).getRead_status() == 1) {
+            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
+        } else {
+            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
+        }
 
     }
 
@@ -150,7 +150,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             main_container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (projectMessage.getNo_of_pros_user() != 0) {
+                    if (Integer.parseInt(projectMessage.getNo_of_pros_user()) != 0) {
                         callback.onItemPassed(position, projectMessage.getProj_id());
                     }
                 }
@@ -160,23 +160,23 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             Glide.with(mcontext).load(projectMessage.getProj_image())
                     .placeholder(R.drawable.plumber)
                     .into(new GlideDrawableImageViewTarget(project_type_img) {
-                /**
-                 * {@inheritDoc}
-                 * If no {@link GlideAnimation} is given or if the animation does not set the
-                 * {@link Drawable} on the view, the drawable is set using
-                 * {@link ImageView#setImageDrawable(Drawable)}.
-                 *
-                 * @param resource  {@inheritDoc}
-                 * @param animation {@inheritDoc}
-                 */
-                @Override
-                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                    super.onResourceReady(resource, animation);
-                }
-            });
+                        /**
+                         * {@inheritDoc}
+                         * If no {@link GlideAnimation} is given or if the animation does not set the
+                         * {@link Drawable} on the view, the drawable is set using
+                         * {@link ImageView#setImageDrawable(Drawable)}.
+                         *
+                         * @param resource  {@inheritDoc}
+                         * @param animation {@inheritDoc}
+                         */
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                            super.onResourceReady(resource, animation);
+                        }
+                    });
             project_name.setText(projectMessage.getProj_name());
 
-            if (projectMessage.getNo_of_pros_user() == 0) {
+            if (Integer.parseInt(projectMessage.getNo_of_pros_user()) == 0) {
                 name_convo_value.setText("");
                 name_convo.setText("");
             } else {
@@ -184,7 +184,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                 name_convo.setText(" Conversations");
             }
 
-            if (projectMessage.getStatus().equalsIgnoreCase("Y")) {
+            if (projectMessage.getStatus().equalsIgnoreCase("A")) {
                 status.setVisibility(View.VISIBLE);
                 status.setText("Active");
             } else {
