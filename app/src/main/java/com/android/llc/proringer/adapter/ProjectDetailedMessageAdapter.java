@@ -12,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.FacebookActivity;
 import com.android.llc.proringer.fragments.main_content.ProjectMessagingFragment;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -42,11 +45,12 @@ import java.util.ArrayList;
  * limitations under the License.
  */
 
-public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> {
+public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> implements MyCustomAlertListener{
     Context mcontext = null;
     ProjectMessagingFragment.onOptionSelected callback;
     ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
+    int deletePos=0;
 
     public ProjectDetailedMessageAdapter(Context mcontext, ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, ProjectMessagingFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
@@ -98,6 +102,16 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         });
     }
 
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("ok")){
+            if (i==0){
+                projectMessageDetailsArrayList.remove(deletePos);
+                notifyItemRemoved(deletePos);
+            }
+        }
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         View flag;
@@ -128,8 +142,9 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             LLDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    projectMessageDetailsArrayList.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
+                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete this conversation?",ProjectDetailedMessageAdapter.this );
+                    customAlert.createNormalAlert("ok", 1);
+                    deletePos=getAdapterPosition();
                 }
             });
 
