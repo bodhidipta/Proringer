@@ -307,7 +307,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:elevation="3dp"
                 android:orientation="horizontal"
@@ -333,8 +333,8 @@
 
                     <ImageView
                         android:id="@+id/img_project"
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
