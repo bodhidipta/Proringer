@@ -10,13 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.FacebookActivity;
+import com.android.llc.proringer.activities.LandScreenActivity;
+import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.main_content.ProjectMessagingFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectMessageDetails;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
@@ -25,6 +31,9 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -45,17 +54,19 @@ import java.util.ArrayList;
  * limitations under the License.
  */
 
-public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> implements MyCustomAlertListener{
+public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> implements MyCustomAlertListener {
     Context mcontext = null;
     ProjectMessagingFragment.onOptionSelected callback;
     ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
-    int deletePos=0;
+    int delete_position = 0;
+    MyLoader myLoader;
 
     public ProjectDetailedMessageAdapter(Context mcontext, ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, ProjectMessagingFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.projectMessageDetailsArrayList = projectMessageDetailsArrayList;
         this.callback = callback;
+        myLoader = new MyLoader(mcontext);
     }
 
     @Override
@@ -84,10 +95,10 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         }
 
 
-        if (projectMessageDetailsArrayList.get(position).getRead_status()==1) {
+        if (projectMessageDetailsArrayList.get(position).getRead_status() == 1) {
             holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
         } else {
-        holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
+            holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
         }
 
         holder.img_attached.setVisibility(View.GONE);
@@ -104,11 +115,38 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("ok")){
-            if (i==0){
-                projectMessageDetailsArrayList.remove(deletePos);
-                notifyItemRemoved(deletePos);
-            }
+
+        Logger.printMessage("result-->", result);
+        Logger.printMessage("i-->", String.valueOf(i));
+        if (result.equalsIgnoreCase("Ok") && i == 1) {
+
+            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+                    myLoader.showLoader();
+                }
+
+                @Override
+                public void onComplete(String message) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(message);
+                        Toast.makeText(mcontext, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
+                        projectMessageDetailsArrayList.remove(delete_position);
+                        notifyItemRemoved(delete_position);
+                        myLoader.dismissLoader();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    myLoader.dismissLoader();
+                }
+            }, ProApplication.getInstance().getUserId(), projectMessageDetailsArrayList.get(delete_position).getProject_id(), projectMessageDetailsArrayList.get(delete_position).getPro_id());
+
         }
     }
 
@@ -142,9 +180,9 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             LLDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete this conversation?",ProjectDetailedMessageAdapter.this );
+                    CustomAlert customAlert = new CustomAlert(mcontext, "Delete", "Are you sure you want to delete this conversation?", ProjectDetailedMessageAdapter.this);
                     customAlert.createNormalAlert("ok", 1);
-                    deletePos=getAdapterPosition();
+                    delete_position = getAdapterPosition();
                 }
             });
 
@@ -155,20 +193,20 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             Glide.with(mcontext).load(projectMessageDetails.getPro_img())
                     .placeholder(R.drawable.plumber)
                     .into(new GlideDrawableImageViewTarget(prof_img) {
-                /**
-                 * {@inheritDoc}
-                 * If no {@link GlideAnimation} is given or if the animation does not set the
-                 * {@link Drawable} on the view, the drawable is set using
-                 * {@link ImageView#setImageDrawable(Drawable)}.
-                 *
-                 * @param resource  {@inheritDoc}
-                 * @param animation {@inheritDoc}
-                 */
-                @Override
-                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                    super.onResourceReady(resource, animation);
-                }
-            });
+                        /**
+                         * {@inheritDoc}
+                         * If no {@link GlideAnimation} is given or if the animation does not set the
+                         * {@link Drawable} on the view, the drawable is set using
+                         * {@link ImageView#setImageDrawable(Drawable)}.
+                         *
+                         * @param resource  {@inheritDoc}
+                         * @param animation {@inheritDoc}
+                         */
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                            super.onResourceReady(resource, animation);
+                        }
+                    });
 
             //textView.setText(data);
         }

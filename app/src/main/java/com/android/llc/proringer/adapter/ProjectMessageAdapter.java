@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
@@ -18,6 +19,7 @@ import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.fragments.bottomNav.MessageFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
+import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.ProjectMessage;
 import com.android.llc.proringer.utils.MethodsUtils;
@@ -30,6 +32,10 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -55,12 +61,14 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     MessageFragment.onOptionSelected callback;
     ArrayList<ProjectMessage> projectMessageArrayList;
     int delete_position = 0;
+    MyLoader myLoader;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
     public ProjectMessageAdapter(Context mcontext, ArrayList<ProjectMessage> projectMessageArrayList, MessageFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.callback = callback;
         this.projectMessageArrayList = projectMessageArrayList;
+        myLoader = new MyLoader(mcontext);
     }
 
 
@@ -179,6 +187,9 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             if (Integer.parseInt(projectMessage.getNo_of_pros_user()) == 0) {
                 name_convo_value.setText("");
                 name_convo.setText("");
+            } else if (Integer.parseInt(projectMessage.getNo_of_pros_user()) == 1) {
+                name_convo_value.setText("" + projectMessage.getNo_of_pros_user());
+                name_convo.setText(" Conversation");
             } else {
                 name_convo_value.setText("" + projectMessage.getNo_of_pros_user());
                 name_convo.setText(" Conversations");
@@ -218,24 +229,33 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         if (result.equalsIgnoreCase("Ok") && i == 1) {
 //            projectMessageArrayList.remove(getAdapterPosition());
 //            notifyItemRemoved(getAdapterPosition());
-//            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
-//                @Override
-//                public void onStart() {
-//
-//                }
-//
-//                @Override
-//                public void onComplete(String message) {
-//                    projectMessageArrayList.remove(delete_position);
-//                    notifyItemRemoved(delete_position);
-//                }
-//
-//                @Override
-//                public void onError(String error) {
-//
-//                }
-//            }, ProApplication.getInstance().getUserId(), "");
+            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+                    myLoader.showLoader();
+                }
 
+                @Override
+                public void onComplete(String message) {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(message);
+                        Toast.makeText(mcontext, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
+                        projectMessageArrayList.remove(delete_position);
+                        notifyItemRemoved(delete_position);
+                        myLoader.dismissLoader();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    myLoader.dismissLoader();
+                }
+            }, ProApplication.getInstance().getUserId(), projectMessageArrayList.get(delete_position).getProj_id(), "");
         }
     }
 

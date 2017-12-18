@@ -70,7 +70,7 @@
 
         <ImageView
             android:id="@+id/prof_img"
-            android:layout_width="90dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"

@@ -122,7 +122,7 @@ public class ProServiceApiHelper {
     private String messageListAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_message";
 
 
-    private String messageDeleteAPI = "";
+    private String messageDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_message_deleted";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -3797,8 +3797,9 @@ public class ProServiceApiHelper {
 
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("project_id", ":-" + params[1]);
+                        Logger.printMessage("pro_user_id", ":-" + params[2]);
 
-                        String MessageDeleteAPI = messageDeleteAPI + "?user_id=" + params[0] + "&project_id=" + params[1];
+                        String MessageDeleteAPI = messageDeleteAPI + "?user_id=" + params[0] + "&project_id=" + params[1]+"&pro_user_id="+params[2];
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
