@@ -39,4 +39,11 @@
     <string name="selectAddress">Select Address</string>
     <string name="firebase_error_login">FireBase Error Login</string>
 
+
+    <string name="crop_image_activity_title"></string>
+    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+    <string name="crop_image_menu_rotate_right">Rotate</string>
+    <string name="crop_image_menu_crop">Crop</string>
+    <string name="pick_image_intent_chooser_title">Select source</string>
+
 </resources>

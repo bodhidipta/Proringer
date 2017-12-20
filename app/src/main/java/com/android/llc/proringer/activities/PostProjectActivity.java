@@ -375,7 +375,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
             case 3:
 
                 FragmentTransaction transaction3 = fragmentManager.beginTransaction();
-                transaction3.replace(R.id.container_fragment, new PostProjectSelectImageFragment(), "" + PostProjectSelectImageFragment.class.getCanonicalName());
+                transaction3.replace(R.id.container_fragment, PostProjectSelectImageFragment.newInstance(PostProjectActivity.this), "" + PostProjectSelectImageFragment.class.getCanonicalName());
                 transaction3.addToBackStack("" + PostProjectSelectImageFragment.class.getCanonicalName());
                 transaction3.commit();
                 Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());
