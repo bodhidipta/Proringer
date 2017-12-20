@@ -100,7 +100,14 @@ public class CropImageActivity extends Activity implements CropImageView.OnSetIm
             }
         });
 
-        //setResultCancel();
+        findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResultCancel();
+            }
+        });
+
+
     }
 
     @Override

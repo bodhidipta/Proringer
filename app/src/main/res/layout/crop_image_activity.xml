@@ -5,18 +5,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorAccent">
+
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:padding="10dp"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:src="@drawable/ic_cross_circle_gray"
+            android:background="@color/colorPrimary"/>
 
         <TextView
+
+            android:layout_centerInParent="true"
             android:id="@+id/tv_crop"
             android:text="Crop"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.android.llc.proringer.cropImagePackage.CropImageView
         android:id="@+id/cropImageView"

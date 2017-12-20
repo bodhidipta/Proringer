@@ -327,7 +327,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             fragmentManager.popBackStack("" + DashBoardFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, new DashBoardFragment(), "" + DashBoardFragment.class.getCanonicalName());
+        transaction.replace(R.id.fragment_container, DashBoardFragment.newInstance(LandScreenActivity.this), "" + DashBoardFragment.class.getCanonicalName());
         transaction.addToBackStack("" + DashBoardFragment.class.getCanonicalName());
         transaction.commit();
         Logger.printMessage("Tag_frg", "" + getSupportFragmentManager().getBackStackEntryCount());

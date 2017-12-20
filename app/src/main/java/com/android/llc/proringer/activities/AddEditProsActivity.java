@@ -89,7 +89,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_container, new EditImageSelectFragment(), "" + EditImageSelectFragment.class.getCanonicalName());
+        transaction.add(R.id.fragment_container, EditImageSelectFragment.newInstance(AddEditProsActivity.this), "" + EditImageSelectFragment.class.getCanonicalName());
         transaction.addToBackStack("" + EditImageSelectFragment.class.getCanonicalName());
         transaction.commit();
         Logger.printMessage("Tag_frg", "" + fragmentManager.getBackStackEntryCount());
