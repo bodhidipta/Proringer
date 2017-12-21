@@ -242,8 +242,8 @@ public class LocationFinder extends AppCompatActivity {
                                             Logger.printMessage("zip_code", "-->" + zip_code);
                                         }
                                     }
-                                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                                    imm.hideSoftInputFromWindow(locationText.getWindowToken(), 0);
+//                                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+//                                    imm.hideSoftInputFromWindow(locationText.getWindowToken(), 0);
                                 }
                             }
                         }
