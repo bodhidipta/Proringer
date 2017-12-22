@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -31,9 +30,9 @@ import com.android.llc.proringer.fragments.drawerNav.LoginSettingsFragment;
 import com.android.llc.proringer.fragments.drawerNav.NotificationsFragment;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.fragments.drawerNav.UserInformationFragment;
-import com.android.llc.proringer.fragments.main_content.MyProjectDetailsFragment;
-import com.android.llc.proringer.fragments.main_content.MyProjectRateProFragment;
-import com.android.llc.proringer.fragments.main_content.ProjectMessagingFragment;
+import com.android.llc.proringer.fragments.mainContent.MyProjectDetailsFragment;
+import com.android.llc.proringer.fragments.mainContent.MyProjectRateProFragment;
+import com.android.llc.proringer.fragments.mainContent.ProjectMessagingFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
@@ -45,10 +44,6 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import io.fabric.sdk.android.Fabric;
 

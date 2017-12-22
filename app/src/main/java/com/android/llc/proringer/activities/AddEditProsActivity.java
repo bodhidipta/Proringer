@@ -34,7 +34,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
     ProRegularTextView tv_toolbar;
     ImageView img_back, img_home;
     public String mCurrentPhotoPath = "";
-    public String project_description_text = "";
+    public String project_description = "";
     ArrayList<String> fragmentPushList;
     private InputMethodManager keyboard;
     public ProRegularTextView selected_service_category, selected_text;
@@ -43,8 +43,6 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
     private int progressStep = 6;
     public boolean iseditPostProject = false;
     private MyLoader myLoader = null;
-    String Projectid = Appsdata.projectid;
-    String project_id, project_zipcode, city, state, country, latitude, longitude;
 
 
     @Override
@@ -60,16 +58,12 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         progress_posting = (ProgressBar) findViewById(R.id.progress_posting);
         selected_service_category = (ProRegularTextView) findViewById(R.id.selected_service_category);
         selected_text = (ProRegularTextView) findViewById(R.id.selected_text);
-        selected_service_category.setText(Appsdata.servic);
+
         myLoader = new MyLoader(AddEditProsActivity.this);
 
-        project_id = Appsdata.projectid;
-        project_zipcode = Appsdata.projectzip;
-        city = Appsdata.city;
-        state = Appsdata.state;
-        country = Appsdata.county;
-        latitude = Appsdata.latlong;
-        longitude = Appsdata.longtitude;
+        selected_service_category.setText(Appsdata.service);
+
+
         String projectname = getIntent().getExtras().getString("Project");
         tv_toolbar.setText(projectname);
         Log.d("project", projectname);
@@ -136,17 +130,20 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
     }
 
     public boolean completeEditProject() {
-        Log.d("project_id", project_id);
-        Log.d("user_id", Appsdata.Uid);
-        Log.d("project_zipcode", project_zipcode);
-        Log.d("city", Appsdata.city);
-        Log.d("state", Appsdata.state);
-        Log.d("country", country);
-        Log.d("latitude", latitude);
-        Log.d("longitude", longitude);
-        Log.d("Description", project_description_text);
-        String projectdescription = project_description_text;
+
+        Log.d("project_id","-->"+ Appsdata.projectid );
+        Log.d("user_id","-->"+ProApplication.getInstance().getUserId());
+        Log.d("project_zipcode", "-->" +selectedAddressData.getZip_code());
+        Log.d("city","-->"+selectedAddressData.getCity());
+        Log.d("state","-->"+ selectedAddressData.getState_code());
+        Log.d("country","-->"+selectedAddressData.getCountry_code());
+        Log.d("latitude","-->"+ selectedAddressData.getLatitude());
+        Log.d("longitude","-->"+ selectedAddressData.getLongitude());
+        Log.d("Description","-->"+ project_description);
+
         Logger.printMessage("@registrationPostPro", "mCurrentPhotoPath :" + mCurrentPhotoPath);
+
+
         ProServiceApiHelper.getInstance(AddEditProsActivity.this).editproject(
                 new ProServiceApiHelper.getApiProcessCallback() {
 
@@ -180,14 +177,15 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
                     }
 
 
-                }, project_id,
-                project_zipcode,
-                Appsdata.city,
-                Appsdata.state,
-                country,
-                latitude,
-                longitude,
-                projectdescription,
+                }, ProApplication.getInstance().getUserId()
+                ,Appsdata.projectid ,
+                ""+selectedAddressData.getZip_code(),
+                ""+selectedAddressData.getCity(),
+                ""+selectedAddressData.getState_code(),
+                selectedAddressData.getCountry_code(),
+                selectedAddressData.getLatitude(),
+                selectedAddressData.getLongitude(),
+                project_description,
                 mCurrentPhotoPath
         );
         return iseditPostProject;

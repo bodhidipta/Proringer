@@ -13,10 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.FacebookActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.fragments.main_content.ProjectMessagingFragment;
+import com.android.llc.proringer.fragments.mainContent.ProjectMessagingFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;

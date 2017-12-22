@@ -1561,8 +1561,8 @@ public class ProServiceApiHelper {
                                 .addFormDataPart("timeframe_id", params[5])
                                 .addFormDataPart("project_details", params[7])
                                 .addFormDataPart("project_zipcode", params[8])
-                                .addFormDataPart("city", "")
-                                .addFormDataPart("state", "")
+                                .addFormDataPart("city", params[9])
+                                .addFormDataPart("state", params[10])
                                 .addFormDataPart("country", params[11])
                                 .addFormDataPart("latitude", params[12])
                                 .addFormDataPart("longitude", params[13])
@@ -3467,7 +3467,7 @@ public class ProServiceApiHelper {
                     try {
                         if (!params[8].equals("")) {
                             try {
-                                Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[8]);
+                                Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[9]);
                                 Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
                                 upload_temp_PIC = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
                                 upload_temp_PIC.createNewFile();
@@ -3489,16 +3489,15 @@ public class ProServiceApiHelper {
                         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                         MultipartBody.Builder requestBody = new MultipartBody.Builder()
                                 .setType(MultipartBody.FORM)
-                                .addFormDataPart("project_id", params[0])
-                                .addFormDataPart("user_id", Appsdata.Uid)
-                                .addFormDataPart("project_zipcode", params[1])
-                                .addFormDataPart("city", params[2])
-                                .addFormDataPart("state", params[3])
-                                .addFormDataPart("country", params[4])
-                                .addFormDataPart("latitude", params[5])
-                                .addFormDataPart("longitude", params[6])
-                                .addFormDataPart("project_details", params[7]);
-
+                                .addFormDataPart("user_id", params[0])
+                                .addFormDataPart("project_id", params[1])
+                                .addFormDataPart("project_zipcode", params[2])
+                                .addFormDataPart("city", params[3])
+                                .addFormDataPart("state", params[4])
+                                .addFormDataPart("country", params[5])
+                                .addFormDataPart("latitude", params[6])
+                                .addFormDataPart("longitude", params[7])
+                                .addFormDataPart("project_details", params[8]);
 
                         if (upload_temp_PIC != null) {
                             Logger.printMessage("*****", "" + upload_temp_PIC.getAbsolutePath());

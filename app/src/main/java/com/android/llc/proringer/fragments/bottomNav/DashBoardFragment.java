@@ -196,9 +196,6 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                                 .into(profile_pic);
 
 
-                    String uid = jsonInfoArray.getJSONObject(0).getString("homeowner_id");
-                    Appsdata.Uid = uid;
-
                     tv_name.setText(jsonInfoArray.getJSONObject(0).getString("user_name"));
 
                     tv_address.setText(jsonInfoArray.getJSONObject(0).getString("city")

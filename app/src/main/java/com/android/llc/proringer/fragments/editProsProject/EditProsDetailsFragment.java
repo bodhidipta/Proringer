@@ -54,7 +54,7 @@ public class EditProsDetailsFragment extends Fragment {
                 } else {
                     ((AddEditProsActivity) getActivity()).closeKeypad();
                     ((AddEditProsActivity) getActivity()).increaseStep();
-                    ((AddEditProsActivity) getActivity()).project_description_text = project_description_text.getText().toString().trim();
+                    ((AddEditProsActivity) getActivity()).project_description = project_description_text.getText().toString().trim();
                     ((AddEditProsActivity) getActivity()).changeFragmentNext(2);
                 }
             }

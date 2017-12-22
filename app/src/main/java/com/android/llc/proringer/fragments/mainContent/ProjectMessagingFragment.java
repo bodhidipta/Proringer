@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.main_content;
+package com.android.llc.proringer.fragments.mainContent;
 
 import android.content.Intent;
 import android.os.Bundle;

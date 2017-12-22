@@ -1,4 +1,4 @@
-package com.android.llc.proringer.fragments.main_content;
+package com.android.llc.proringer.fragments.mainContent;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,9 +63,8 @@ public class MyProjectDetailsFragment extends Fragment {
         tv_edit = (ProSemiBoldTextView) view.findViewById(R.id.tv_edit);
         tv_posted_in.setText(ProApplication.getInstance().getDataSelected().getDate_time());
 
-        Appsdata.projectid = ProApplication.getInstance().getDataSelected().getId();
-        String id = ProApplication.getInstance().getDataSelected().getId();
-        Log.d("id", id);
+
+
         tv_project.setText(ProApplication.getInstance().getDataSelected().getProject_category_name());
         final String project = ProApplication.getInstance().getDataSelected().getProject_category_name();
         tv_service.setText(ProApplication.getInstance().getDataSelected().getProject_category_service_name());
@@ -74,26 +73,25 @@ public class MyProjectDetailsFragment extends Fragment {
         tv_status.setText(ProApplication.getInstance().getDataSelected().getProject_stage());
         tv_start.setText(ProApplication.getInstance().getDataSelected().getProject_timeframe_name());
         img_description.setText(ProApplication.getInstance().getDataSelected().getProject_name());
-        String city = ProApplication.getInstance().getDataSelected().getCity();
-        String projectzip = ProApplication.getInstance().getDataSelected().getZip();
-        String county = ProApplication.getInstance().getDataSelected().getCountry_code();
-        String state = ProApplication.getInstance().getDataSelected().getState_code();
-        String latlong = ProApplication.getInstance().getDataSelected().getLatitude();
-        String longtitude = ProApplication.getInstance().getDataSelected().getLatitude();
-        Log.d("city", city);
-        Log.d("Zip", projectzip);
-        Log.d("count", county);
-        Log.d("State", state);
-        Log.d("latlong", latlong);
-        Log.d("longtitued", longtitude);
-        Appsdata.servic = ProApplication.getInstance().getDataSelected().getProject_category_service_name();
+
+
+        Appsdata.projectid = ProApplication.getInstance().getDataSelected().getId();
+        Appsdata.service = ProApplication.getInstance().getDataSelected().getProject_category_service_name();
         Appsdata.Project_name = (ProApplication.getInstance().getDataSelected().getProject_category_name());
-        Appsdata.city = city;
-        Appsdata.projectzip = projectzip;
-        Appsdata.county = county;
-        Appsdata.state = state;
-        Appsdata.latlong = latlong;
-        Appsdata.longtitude = longtitude;
+        Appsdata.projectzip = ProApplication.getInstance().getDataSelected().getZip();
+
+        Log.d("projectid", Appsdata.projectid);
+        Log.d("service_name",Appsdata.service);
+        Log.d("Project_name", Appsdata.Project_name);
+        Log.d("city", ProApplication.getInstance().getDataSelected().getCity());
+        Log.d("Zip", Appsdata.projectzip);
+        Log.d("count", ProApplication.getInstance().getDataSelected().getCountry_code());
+        Log.d("State", ProApplication.getInstance().getDataSelected().getState_code());
+        Log.d("latlong", ProApplication.getInstance().getDataSelected().getLatitude());
+        Log.d("longitude", ProApplication.getInstance().getDataSelected().getLatitude());
+
+
+
 
 
         myLoader = new MyLoader(getActivity());
