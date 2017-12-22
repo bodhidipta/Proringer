@@ -27,6 +27,7 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
@@ -55,6 +56,8 @@ public class CropImageActivity extends Activity implements CropImageView.OnSetIm
      */
     private CropImageOptions mOptions;
 
+    private TextView tv_crop;
+
     @Override
     @SuppressLint("NewApi")
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class CropImageActivity extends Activity implements CropImageView.OnSetIm
         setContentView(R.layout.crop_image_activity);
 
         mCropImageView = (CropImageView) findViewById(R.id.cropImageView);
+        tv_crop = (TextView) findViewById(R.id.tv_crop);
 
         Intent intent = getIntent();
         mCropImageUri = intent.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_SOURCE);
@@ -93,7 +97,7 @@ public class CropImageActivity extends Activity implements CropImageView.OnSetIm
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        findViewById(R.id.tv_crop).setOnClickListener(new View.OnClickListener() {
+        tv_crop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cropImage();
@@ -151,6 +155,7 @@ public class CropImageActivity extends Activity implements CropImageView.OnSetIm
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
                 } else {
                     // no permissions required or already grunted, can start crop image activity
+                    tv_crop.setVisibility(View.VISIBLE);
                     mCropImageView.setImageUriAsync(mCropImageUri);
                 }
             }

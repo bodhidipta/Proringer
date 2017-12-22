@@ -99,7 +99,9 @@ public class MyProjectDetailsFragment extends Fragment {
         myLoader = new MyLoader(getActivity());
 
         if (!ProApplication.getInstance().getDataSelected().getProject_image().equals(""))
-            Glide.with((LandScreenActivity) getActivity()).load(ProApplication.getInstance().getDataSelected().getProject_image()).centerCrop().into(img_project);
+            Glide.with((LandScreenActivity) getActivity()).load(ProApplication.getInstance().getDataSelected().getProject_image())
+//                    .centerCrop()
+                    .into(img_project);
 
         Logger.printMessage("project_status", "" + ProApplication.getInstance().getDataSelected().getProject_status());
 

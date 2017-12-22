@@ -189,7 +189,7 @@ public class EditImageSelectFragment extends Fragment {
     private void startCropImageActivity(Uri imageUri) {
         Intent intent = CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .setMultiTouchEnabled(true)
+                .setMultiTouchEnabled(false)
                 .setAspectRatio(4,3)
                 .getIntent(addEditProsActivityMy);
         startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);

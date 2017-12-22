@@ -339,7 +339,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
     private void startCropImageActivity(Uri imageUri) {
         Intent intent = CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .setMultiTouchEnabled(true)
+                .setMultiTouchEnabled(false)
                 .setAspectRatio(1,1)
                 .getIntent(landScreenActivityMy);
         startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
