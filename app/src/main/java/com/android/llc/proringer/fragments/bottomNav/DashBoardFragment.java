@@ -191,7 +191,9 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
                     JSONArray jsonInfoArray = jsonObject.getJSONArray("info_array");
 
                     if (!jsonInfoArray.getJSONObject(0).getString("profile_img").equals(""))
-                        Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img")).centerCrop().into(profile_pic);
+                        Glide.with(getActivity()).load(jsonInfoArray.getJSONObject(0).getString("profile_img"))
+//                                .centerCrop()
+                                .into(profile_pic);
 
 
                     String uid = jsonInfoArray.getJSONObject(0).getString("homeowner_id");
