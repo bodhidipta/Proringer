@@ -86,7 +86,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
                                 Logger.printMessage("Parent_id###", "" + listdataMain.get(p).getParent_id());
 
                                 ((PostProjectActivity) getActivity()).selectedCategory = listdataMain.get(p);
-                                ((PostProjectActivity) getActivity()).setHeaderCategory();
+                                ((PostProjectActivity) getActivity()).setHeaderTextCategory();
                                 ((PostProjectActivity) getActivity()).increaseStep();
                                 /**
                                  * fragment calling
@@ -261,7 +261,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
                     @Override
                     public void onSelectItemClick(int position, ProCategoryData data) {
                         ((PostProjectActivity) getActivity()).selectedCategory = data;
-                        ((PostProjectActivity) getActivity()).setHeaderCategory();
+                        ((PostProjectActivity) getActivity()).setHeaderTextCategory();
                         ((PostProjectActivity) getActivity()).increaseStep();
 
                         Log.i("fridge","fridge");

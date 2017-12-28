@@ -3311,6 +3311,7 @@ public class ProServiceApiHelper {
                             }
                         }
                         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+
                         MultipartBody.Builder requestBody = new MultipartBody.Builder()
                                 .setType(MultipartBody.FORM)
                                 .addFormDataPart("user_id", params[0]);

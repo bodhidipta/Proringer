@@ -198,7 +198,6 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
                     finish();
                 }
             } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(ServiceAndOtherListFragment.class.getCanonicalName())) {
-
                 performServiceListingBack();
             } else if (fragmentPushList.get(fragmentPushList.size() - 1).equals(PostProjectSelectImageFragment.class.getCanonicalName())) {
                 fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + PostProjectSelectImageFragment.class.getCanonicalName())).commit();
@@ -335,10 +334,15 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         return isSubmitPostProject;
     }
 
-    public void setHeaderCategory() {
+    public void setHeaderTextCategory() {
         header_icon.setVisibility(View.GONE);
         header_text.setVisibility(View.VISIBLE);
         header_text.setText(selectedCategory.getCategory_name());
+    }
+
+    public void setHeaderIcon() {
+        header_icon.setVisibility(View.VISIBLE);
+        header_text.setVisibility(View.GONE);
     }
 
     public void changeFragmentNext(int next) {
@@ -505,15 +509,15 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
     private void performServiceListingBack() {
         Logger.printMessage("@back_service", "Got fragmnet on top :" + getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
         if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(ServiceAndOtherListFragment.class.getCanonicalName())
-                &&
-                ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).step > 0) {
+                && ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).step > 0) {
+
             ((ServiceAndOtherListFragment) getSupportFragmentManager().findFragmentByTag(ServiceAndOtherListFragment.class.getCanonicalName())).performBack();
         } else {
             isForth = true;
             fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("" + ServiceAndOtherListFragment.class.getCanonicalName())).commit();
             fragmentManager.popBackStack("" + ServiceAndOtherListFragment.class.getCanonicalName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentPushList.remove(fragmentPushList.size() - 1);
-
+            setHeaderIcon();
         }
     }
 
