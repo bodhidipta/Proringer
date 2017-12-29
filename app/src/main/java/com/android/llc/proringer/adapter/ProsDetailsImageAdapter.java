@@ -49,7 +49,7 @@ public class ProsDetailsImageAdapter extends RecyclerView.Adapter<ProsDetailsIma
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.img.getLayoutParams().width = (width - 30) / 5;
-        holder.img.getLayoutParams().height = (width - 30) / 5;
+        holder.img.getLayoutParams().height = (int)3*(width - 30) / (5*4);
         try {
             if (!imageJsonArray.getJSONObject(position).getString("portfolio_image").equals(""))
                 Glide.with(context).load(imageJsonArray.getJSONObject(position).getString("portfolio_image")).centerCrop().into(holder.img);
