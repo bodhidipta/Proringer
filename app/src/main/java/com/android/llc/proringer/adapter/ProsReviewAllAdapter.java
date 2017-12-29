@@ -87,6 +87,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                     }
                 }
             });
+
             holder.tv_review_comment.setText(jsonInfoArray.getJSONObject(position).getString("rater_description").trim());
 
             holder.tv_review_comment.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -109,17 +110,14 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        String contactTextClick = "Read Full Review";
-
 
                         Spannable word1 = new SpannableString(contactTextOne);
-
                         word1.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorTextDark)), 0, contactTextOne.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
                         holder.tv_review_comment.setText(word1);
 
-                        Spannable word2 = new SpannableString(contactTextClick);
 
+                        String contactTextClick = "Read Full Review";
+                        Spannable word2 = new SpannableString(contactTextClick);
                         ClickableSpan myClickableSpan = new ClickableSpan() {
                             @Override
                             public void onClick(View widget) {
