@@ -768,40 +768,20 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
 
         if (result.equalsIgnoreCase("Ok") && i == 10) {
 
-            ProServiceApiHelper.getInstance(LandScreenActivity.this).logOut(new ProServiceApiHelper.getApiProcessCallback() {
-                @Override
-                public void onStart() {
-                    myLoader.showLoader();
-                }
-
-                @Override
-                public void onComplete(String message) {
-                    if (myLoader != null && myLoader.isMyLoaderShowing())
-                        myLoader.dismissLoader();
-
-                    ProApplication.getInstance().logOut();
-                    ProApplication.getInstance().clearFBUserStatus();
+            ProApplication.getInstance().logOut();
+            ProApplication.getInstance().clearFBUserStatus();
 
 
-                    /////////////////Facebook logout///////////session//
-                    if (AccessToken.getCurrentAccessToken() != null && com.facebook.Profile.getCurrentProfile() != null) {
-                        LoginManager.getInstance().logOut();
-                        FirebaseAuth.getInstance().signOut();
-                    }
+            /////////////////Facebook logout///////////session//
+            if (AccessToken.getCurrentAccessToken() != null && com.facebook.Profile.getCurrentProfile() != null) {
+                LoginManager.getInstance().logOut();
+                FirebaseAuth.getInstance().signOut();
+            }
 //                  /////////////end///////////////////////////////////
 
 
-                    startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
-                    finish();
-                }
-
-                @Override
-                public void onError(String error) {
-
-                    if (myLoader != null && myLoader.isMyLoaderShowing())
-                        myLoader.dismissLoader();
-                }
-            });
+            startActivity(new Intent(LandScreenActivity.this, GetStartedActivity.class));
+            finish();
         }
     }
 

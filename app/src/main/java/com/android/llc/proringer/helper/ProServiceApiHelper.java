@@ -69,60 +69,61 @@ public class ProServiceApiHelper {
     private String currentLat = "";
     private String currentLng = "";
 
-    private final String categoryAPI = "http://esolz.co.in/lab6/proringer_latest/app_categorylist";
-    private String serviceAPI = "http://esolz.co.in/lab6/proringer_latest/app_catrgoryservice_list";
-    private String registrationAPI = "http://esolz.co.in/lab6/proringer_latest/app_signup";
-    private String loginAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_login";
-    private String forgetPasswordAPI = "http://esolz.co.in/lab6/proringer_latest/app_forgot_password";
-    private String resetPasswordAPI = "http://esolz.co.in/lab6/proringer_latest/app_resetpassword";
-    private String getUserInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_userinformation_list";
-    private String updateUserInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_userinfo_edit";
-    private String changeUserEmailAPI = "http://esolz.co.in/lab6/proringer_latest/app_change_email";
-    private String changeUserPasswordAPI = "http://esolz.co.in/lab6/proringer_latest/app_change_password";
-    private String getNotificationDetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_notification_list";
-    private String updateNotificationDetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_notification_save";
-    private String homeSchedulerOptionListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_option";
-    private String homeSchedulerValuesListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_list?user_id=";
-    private String updateHomeSchedularOptionAPI = "http://esolz.co.in/lab6/proringer_latest/app_homescheduler_save";
-    private String inviteFriendsAPI = "http://esolz.co.in/lab6/proringer_latest/app_invite_friend";
-    private String postProjectAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_post";
-    private String myProjectListAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_myproject?user_id=";
+    private String BaseUrl="http://esolz.co.in/lab6/proringer_latest/";
 
-    private String contactUsAPI = "http://esolz.co.in/lab6/proringer_latest/app_contact_us";
-    private String myProjectDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_delete";
-    private String myProjectDetailsAPI = "http://esolz.co.in/lab6/proringer_latest/app_myproject_details?user_id=";
-    private String favoriteProsListAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros?user_id=";
+    private String categoryAPI = BaseUrl+"app_categorylist";
+    private String serviceAPI = BaseUrl+"app_catrgoryservice_list";
+    private String registrationAPI = BaseUrl+"app_signup";
+    private String loginAPI = BaseUrl+"app_homeowner_login";
+    private String forgetPasswordAPI = BaseUrl+"app_forgot_password";
+    private String resetPasswordAPI = BaseUrl+"app_resetpassword";
+    private String getUserInformationAPI = BaseUrl+"app_userinformation_list";
+    private String updateUserInformationAPI = BaseUrl+"app_userinfo_edit";
+    private String changeUserEmailAPI = BaseUrl+"app_change_email";
+    private String changeUserPasswordAPI = BaseUrl+"app_change_password";
+    private String getNotificationDetailsAPI = BaseUrl+"app_notification_list";
+    private String updateNotificationDetailsAPI = BaseUrl+"app_notification_save";
+    private String homeSchedulerOptionListAPI = BaseUrl+"app_homescheduler_option";
+    private String homeSchedulerValuesListAPI = BaseUrl+"app_homescheduler_list?user_id=";
+    private String updateHomeSchedularOptionAPI = BaseUrl+"app_homescheduler_save";
+    private String inviteFriendsAPI = BaseUrl+"app_invite_friend";
+    private String postProjectAPI = BaseUrl+"app_project_post";
+    private String myProjectListAPI = BaseUrl+"app_homeowner_myproject?user_id=";
 
-    private String favoriteProsDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pros_delete";
+    private String contactUsAPI = BaseUrl+"app_contact_us";
+    private String myProjectDeleteAPI = BaseUrl+"app_myproject_delete";
+    private String myProjectDetailsAPI = BaseUrl+"app_myproject_details?user_id=";
+    private String favoriteProsListAPI = BaseUrl+"app_favourite_pros?user_id=";
 
-    private String faqInformationAPI = "http://esolz.co.in/lab6/proringer_latest/app_faq";
-    private String termsOfUseAPI = "http://esolz.co.in/lab6/proringer_latest/app_term";
-    private String privacyPolicyAPI = "http://esolz.co.in/lab6/proringer_latest/app_privacy_policy";
+    private String favoriteProsDeleteAPI = BaseUrl+"app_favourite_pros_delete";
 
-    private String prosListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_serch_result_project?user_id=";
+    private String faqInformationAPI = BaseUrl+"app_faq";
+    private String termsOfUseAPI = BaseUrl+"app_term";
+    private String privacyPolicyAPI = BaseUrl+"app_privacy_policy";
 
-    private String favouriteProAdddeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_favourite_pro_adddelete";
-    private String homeownerDashboardAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_dashboard";
-    private String prosIndividualListingAPI = "http://esolz.co.in/lab6/proringer_latest/app_pro_individual_listing";
+    private String prosListingAPI = BaseUrl+"app_serch_result_project?user_id=";
 
-    private String prosAddReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_addreview";
-    private String prosIndividualPortfolioImageAPI = "http://esolz.co.in/lab6/proringer_latest/app_individual_portfolio_image";
+    private String favouriteProAdddeleteAPI = BaseUrl+"app_favourite_pro_adddelete";
+    private String homeownerDashboardAPI = BaseUrl+"app_homeowner_dashboard";
+    private String prosIndividualListingAPI = BaseUrl+"app_pro_individual_listing";
 
-
-    private String prosAllReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_allreview";
-    private String prosReportReviewAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_reportreview";
-
-    private String profileImageAPI = "http://esolz.co.in/lab6/proringer_latest/app_homeowner_profileimg";
-    private String contactProAPI = "http://esolz.co.in/lab6/proringer_latest/contact_pro";
+    private String prosAddReviewAPI = BaseUrl+"app_homeowner_addreview";
+    private String prosIndividualPortfolioImageAPI = BaseUrl+"app_individual_portfolio_image";
 
 
-    private String editprojectAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_edit";
-    private String loginFBAPI = "http://esolz.co.in/lab6/proringer_latest/app_facebook_login";
-    private String logOutAPI = "http://esolz.co.in/lab6/HappywanNyan/app_logout";
-    private String messageListAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_message";
+    private String prosAllReviewAPI = BaseUrl+"app_homeowner_allreview";
+    private String prosReportReviewAPI = BaseUrl+"app_homeowner_reportreview";
+
+    private String profileImageAPI = BaseUrl+"app_homeowner_profileimg";
+    private String contactProAPI = BaseUrl+"contact_pro";
 
 
-    private String messageDeleteAPI = "http://esolz.co.in/lab6/proringer_latest/app_project_message_deleted";
+    private String editprojectAPI = BaseUrl+"app_project_edit";
+    private String loginFBAPI = BaseUrl+"app_facebook_login";
+    private String messageListAPI = BaseUrl+"app_project_message";
+
+
+    private String messageDeleteAPI = BaseUrl+"app_project_message_deleted";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -3546,70 +3547,6 @@ public class ProServiceApiHelper {
                 }
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
-        } else {
-            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
-        }
-    }
-
-
-    /**
-     * logout a project or search a pro
-     *
-     * @param callback
-     * @param params
-     */
-    public void logOut(final getApiProcessCallback callback, String... params) {
-
-        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
-            new AsyncTask<String, Void, String>() {
-                String exception = "";
-
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    callback.onStart();
-                }
-
-                @Override
-                protected String doInBackground(String... params) {
-                    try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
-
-                        logOutAPI = logOutAPI + "?" + "user_id=" + ProApplication.getInstance().getUserId() + "&anorid_status=1";
-                        Logger.printMessage("logOut", "" + logOutAPI);
-
-                        Request request = new Request.Builder()
-                                .get()
-                                .url(logOutAPI)
-                                .build();
-
-                        Response response = client.newCall(request).execute();
-                        String responseString = response.body().string();
-                        JSONObject mainObject = new JSONObject(responseString);
-
-                        if (mainObject.getBoolean("response")) {
-                            return responseString;
-                        } else {
-                            exception = mainObject.getString("message");
-                            return exception;
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        exception = e.getMessage();
-                        return null;
-                    }
-                }
-
-                @Override
-                protected void onPostExecute(String result) {
-                    if (!exception.equals("")) {
-                        callback.onError(exception);
-                    } else if (exception.equals("")) {
-                        callback.onComplete(result);
-                    }
-                }
-            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
