@@ -57,7 +57,6 @@ import okhttp3.Response;
 public class ProServiceApiHelper {
     private static ProServiceApiHelper instance = null;
     private static Context mcontext;
-    private onProCategoryListener listener;
 
     private String currentLat = "";
     private String currentLng = "";
