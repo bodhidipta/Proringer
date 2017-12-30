@@ -7,26 +7,19 @@ import android.os.AsyncTask;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
-import com.android.llc.proringer.pojo.AddressData;
-import com.android.llc.proringer.pojo.Appsdata;
-import com.android.llc.proringer.pojo.ProCategoryData;
-import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.android.llc.proringer.pojo.SetGetAddressData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProjectPostedData;
 import com.android.llc.proringer.utils.ImageCompressor;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.NetworkUtil;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -158,13 +151,13 @@ public class ProServiceApiHelper {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, LinkedList>() {
                 String exception = "";
-                LinkedList<ProCategoryData> categoryList = null;
+                LinkedList<SetGetProCategoryData> categoryList = null;
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
                     callback.onStartFetch();
-                    categoryList = new LinkedList<ProCategoryData>();
+                    categoryList = new LinkedList<SetGetProCategoryData>();
                 }
 
                 @Override
@@ -186,7 +179,7 @@ public class ProServiceApiHelper {
                         if (mainObject.getBoolean("response")) {
                             JSONArray lsitingArray = mainObject.getJSONArray("info_array");
                             for (int i = 0; i < lsitingArray.length(); i++) {
-                                ProCategoryData data = new ProCategoryData(
+                                SetGetProCategoryData data = new SetGetProCategoryData(
                                         lsitingArray.getJSONObject(i).getString("id"),
                                         lsitingArray.getJSONObject(i).getString("parent_id"),
                                         lsitingArray.getJSONObject(i).getString("category_name"),
@@ -235,7 +228,7 @@ public class ProServiceApiHelper {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, LinkedList>() {
                 String exception = "";
-                LinkedList<ProCategoryData> categoryList = null;
+                LinkedList<SetGetProCategoryData> categoryList = null;
                 String apiSer = "";
 
                 @Override
@@ -265,7 +258,7 @@ public class ProServiceApiHelper {
                         if (mainObject.getBoolean("response")) {
                             JSONArray lsitingArray = mainObject.getJSONArray("info_array");
                             for (int i = 0; i < lsitingArray.length(); i++) {
-                                ProCategoryData data = new ProCategoryData(
+                                SetGetProCategoryData data = new SetGetProCategoryData(
                                         lsitingArray.getJSONObject(i).getString("id"),
                                         "",
                                         lsitingArray.getJSONObject(i).getString("category_name"),
@@ -1697,12 +1690,12 @@ public class ProServiceApiHelper {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
-                LinkedList<ProjectPostedData> linkedList = null;
+                LinkedList<SetGetProjectPostedData> linkedList = null;
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    linkedList = new LinkedList<ProjectPostedData>();
+                    linkedList = new LinkedList<SetGetProjectPostedData>();
                     callback.onStart();
                 }
 
@@ -1728,7 +1721,7 @@ public class ProServiceApiHelper {
                                 JSONArray info_array = jsonObject.getJSONArray("info_array");
                                 if (info_array.length() > 0) {
                                     for (int i = 0; i < info_array.length(); i++) {
-                                        ProjectPostedData data = new ProjectPostedData(
+                                        SetGetProjectPostedData data = new SetGetProjectPostedData(
                                                 info_array.getJSONObject(i).getString("id"),
                                                 info_array.getJSONObject(i).getString("project_name"),
                                                 info_array.getJSONObject(i).getJSONObject("property_type").getString("property_type_id"),
@@ -2285,7 +2278,7 @@ public class ProServiceApiHelper {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
-                List<AddressData> addressList;
+                List<SetGetAddressData> addressList;
 
                 @Override
                 protected void onPreExecute() {
@@ -2313,7 +2306,7 @@ public class ProServiceApiHelper {
                                 mainRes.has("results") &&
                                 mainRes.getJSONArray("results").length() > 0) {
 
-                            addressList = new ArrayList<AddressData>();
+                            addressList = new ArrayList<SetGetAddressData>();
                             JSONArray results = mainRes.getJSONArray("results");
 
                             for (int i = 0; i < results.length(); i++) {
@@ -2358,7 +2351,7 @@ public class ProServiceApiHelper {
                                             }
                                         }
                                         if (country.equals("CA") || country.equals("US")) {
-                                            AddressData data = new AddressData(
+                                            SetGetAddressData data = new SetGetAddressData(
                                                     outerJsonObj.getString("formatted_address"),
                                                     state_code,
                                                     country,
@@ -3784,7 +3777,7 @@ public class ProServiceApiHelper {
      * Interface used to get call back for getServiceList and getCategoryList
      */
     public interface onProCategoryListener {
-        void onComplete(LinkedList<ProCategoryData> listdata);
+        void onComplete(LinkedList<SetGetProCategoryData> listdata);
 
         void onError(String error);
 
@@ -3806,7 +3799,7 @@ public class ProServiceApiHelper {
      * Interface used to get call back for search locationList
      */
     public interface onSearchZipCallback {
-        void onComplete(List<AddressData> listdata);
+        void onComplete(List<SetGetAddressData> listdata);
 
         void onError(String error);
 

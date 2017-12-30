@@ -22,7 +22,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -54,7 +54,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
     MyLoader myLoader = null;
     private PostProjectServiceAndOtherListAdapter adapter = null;
     private PostProjectCategoryGridAdapter gridAdapter = null;
-    private LinkedList<ProCategoryData> serviceListing = null;
+    private LinkedList<SetGetProCategoryData> serviceListing = null;
     private int step = 0;
     private String selectedId = "", step1Option = "",
             step2option = "What type of work best describe this project?",
@@ -200,13 +200,13 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
             }
 
             @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
+            public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
                 progress_posting.setProgress(step);
                 gridAdapter = new PostProjectCategoryGridAdapter((LandScreenActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
+                    public void onSelectItemClick(int position, SetGetProCategoryData data) {
                         if (step == 0) {
                             step1Option = data.getCategory_name();
                             selectedId = data.getId();
@@ -236,7 +236,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
     private void selectService(String id) {
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
+            public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
                 serviceListing = listdata;
@@ -248,14 +248,14 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
 
                 adapter = new PostProjectServiceAndOtherListAdapter((LandScreenActivity) getActivity(), listdata, PostProjectServiceAndOtherListAdapter.TYPE_LIST, new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
+                    public void onSelectItemClick(int position, SetGetProCategoryData data) {
                         if (step == 1) {
                             step++;
                             progress_posting.setProgress(step);
-                            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Repair", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Installation", "");
-                            ProCategoryData data3 = new ProCategoryData("", "", "Others", "");
+                            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Repair", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Installation", "");
+                            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "Others", "");
                             dataList.add(data1);
                             dataList.add(data2);
                             dataList.add(data3);
@@ -271,12 +271,12 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
                             step++;
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step3option);
-                            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Single Family Home", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Condominium", "");
-                            ProCategoryData data3 = new ProCategoryData("", "", "Townhome", "");
-                            ProCategoryData data4 = new ProCategoryData("", "", "Multi-Family", "");
-                            ProCategoryData data5 = new ProCategoryData("", "", "Commercial", "");
+                            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Single Family Home", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Condominium", "");
+                            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "Townhome", "");
+                            SetGetProCategoryData data4 = new SetGetProCategoryData("", "", "Multi-Family", "");
+                            SetGetProCategoryData data5 = new SetGetProCategoryData("", "", "Commercial", "");
                             dataList.add(data1);
                             dataList.add(data2);
                             dataList.add(data3);
@@ -289,9 +289,9 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step4option);
 
-                            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Ready to hire", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Planning and Budgeting", "");
+                            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Ready to hire", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Planning and Budgeting", "");
                             dataList.add(data1);
                             dataList.add(data2);
                             adapter.updateList(dataList);
@@ -299,12 +299,12 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
                             step++;
                             progress_posting.setProgress(step);
                             selected_service_property.setText("" + step5option);
-                            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Timing Is Flexible", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Within 1 Week", "");
-                            ProCategoryData data3 = new ProCategoryData("", "", "1-2 Week", "");
-                            ProCategoryData data4 = new ProCategoryData("", "", "More Than 2 Weeks", "");
-                            ProCategoryData data5 = new ProCategoryData("", "", "Emergency", "");
+                            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Timing Is Flexible", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Within 1 Week", "");
+                            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "1-2 Week", "");
+                            SetGetProCategoryData data4 = new SetGetProCategoryData("", "", "More Than 2 Weeks", "");
+                            SetGetProCategoryData data5 = new SetGetProCategoryData("", "", "Emergency", "");
                             dataList.add(data1);
                             dataList.add(data2);
                             dataList.add(data3);
@@ -369,10 +369,10 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
         } else if (step == 3) {
             step--;
             progress_posting.setProgress(step);
-            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-            ProCategoryData data1 = new ProCategoryData("", "", "Repair", "");
-            ProCategoryData data2 = new ProCategoryData("", "", "Installation", "");
-            ProCategoryData data3 = new ProCategoryData("", "", "Others", "");
+            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Repair", "");
+            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Installation", "");
+            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "Others", "");
             dataList.add(data1);
             dataList.add(data2);
             dataList.add(data3);
@@ -386,12 +386,12 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
             step--;
             progress_posting.setProgress(step);
             selected_service_property.setText("" + step3option);
-            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-            ProCategoryData data1 = new ProCategoryData("", "", "Single Family Home", "");
-            ProCategoryData data2 = new ProCategoryData("", "", "Condominium", "");
-            ProCategoryData data3 = new ProCategoryData("", "", "Townhome", "");
-            ProCategoryData data4 = new ProCategoryData("", "", "Multi-Family", "");
-            ProCategoryData data5 = new ProCategoryData("", "", "Commercial", "");
+            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Single Family Home", "");
+            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Condominium", "");
+            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "Townhome", "");
+            SetGetProCategoryData data4 = new SetGetProCategoryData("", "", "Multi-Family", "");
+            SetGetProCategoryData data5 = new SetGetProCategoryData("", "", "Commercial", "");
             dataList.add(data1);
             dataList.add(data2);
             dataList.add(data3);
@@ -404,9 +404,9 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
             progress_posting.setProgress(step);
             selected_service_property.setText("" + step4option);
 
-            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-            ProCategoryData data1 = new ProCategoryData("", "", "Ready to hire", "");
-            ProCategoryData data2 = new ProCategoryData("", "", "Planning and Budgeting", "");
+            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Ready to hire", "");
+            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Planning and Budgeting", "");
             dataList.add(data1);
             dataList.add(data2);
             adapter.updateList(dataList);
@@ -414,12 +414,12 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
             step--;
             progress_posting.setProgress(step);
             selected_service_property.setText("" + step5option);
-            LinkedList<ProCategoryData> dataList = new LinkedList<>();
-            ProCategoryData data1 = new ProCategoryData("", "", "Timing Is Flexible", "");
-            ProCategoryData data2 = new ProCategoryData("", "", "Within 1 Week", "");
-            ProCategoryData data3 = new ProCategoryData("", "", "1-2 Week", "");
-            ProCategoryData data4 = new ProCategoryData("", "", "More Than 2 Weeks", "");
-            ProCategoryData data5 = new ProCategoryData("", "", "Emergency", "");
+            LinkedList<SetGetProCategoryData> dataList = new LinkedList<>();
+            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Timing Is Flexible", "");
+            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Within 1 Week", "");
+            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "1-2 Week", "");
+            SetGetProCategoryData data4 = new SetGetProCategoryData("", "", "More Than 2 Weeks", "");
+            SetGetProCategoryData data5 = new SetGetProCategoryData("", "", "Emergency", "");
             dataList.add(data1);
             dataList.add(data2);
             dataList.add(data3);

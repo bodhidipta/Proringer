@@ -16,7 +16,7 @@ import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.helper.SimpleDividerItemDecoration;
-import com.android.llc.proringer.pojo.ProjectMessage;
+import com.android.llc.proringer.pojo.SetGetProjectMessage;
 import com.android.llc.proringer.utils.Logger;
 
 import org.json.JSONArray;
@@ -46,7 +46,7 @@ public class MessageFragment extends Fragment {
     private RecyclerView project_message_list;
     private ProjectMessageAdapter projectMessageAdapter;
     MyLoader myLoader = null;
-    ArrayList<ProjectMessage> projectMessageArrayList;
+    ArrayList<SetGetProjectMessage> setGetProjectMessageArrayList;
 
     @Nullable
     @Override
@@ -57,7 +57,7 @@ public class MessageFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        projectMessageArrayList = new ArrayList<>();
+        setGetProjectMessageArrayList = new ArrayList<>();
         myLoader = new MyLoader(getActivity());
 
         project_message_list = (RecyclerView) view.findViewById(R.id.message_list);
@@ -86,15 +86,15 @@ public class MessageFragment extends Fragment {
 
 
                         for (int i = 0; i < jsonObject.getJSONArray("info_array").length(); i++) {
-                            ProjectMessage projectMessage = new ProjectMessage();
-                            projectMessage.setProj_id(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_id"));
-                            projectMessage.setProj_image(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_image"));
-                            projectMessage.setProj_name(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
-                            projectMessage.setStatus(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
-                            projectMessage.setProject_date(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
-                            projectMessage.setNo_of_pros_user(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("no_of_pro_user"));
-                            projectMessage.setRead_status(jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("read_status"));
-                            projectMessageArrayList.add(projectMessage);
+                            SetGetProjectMessage setGetProjectMessage = new SetGetProjectMessage();
+                            setGetProjectMessage.setProj_id(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_id"));
+                            setGetProjectMessage.setProj_image(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_image"));
+                            setGetProjectMessage.setProj_name(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("proj_name"));
+                            setGetProjectMessage.setStatus(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("status"));
+                            setGetProjectMessage.setProject_date(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("project_date"));
+                            setGetProjectMessage.setNo_of_pros_user(jsonObject.getJSONArray("info_array").getJSONObject(i).getString("no_of_pro_user"));
+                            setGetProjectMessage.setRead_status(jsonObject.getJSONArray("info_array").getJSONObject(i).getInt("read_status"));
+                            setGetProjectMessageArrayList.add(setGetProjectMessage);
                         }
 
 
@@ -105,7 +105,7 @@ public class MessageFragment extends Fragment {
 
                         if (projectMessageAdapter == null) {
                             Logger.printMessage("projectMessageAdapter", "null");
-                            projectMessageAdapter = new ProjectMessageAdapter((LandScreenActivity) getActivity(), projectMessageArrayList, new onOptionSelected() {
+                            projectMessageAdapter = new ProjectMessageAdapter((LandScreenActivity) getActivity(), setGetProjectMessageArrayList, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(int position, String project_id) {
                                     ((LandScreenActivity) getActivity()).toggleToolBar(true);

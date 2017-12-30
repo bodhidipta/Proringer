@@ -4,7 +4,7 @@ package com.android.llc.proringer.pojo;
  * Created by manishsethia on 11/07/17.
  */
 
-public class AddressData {
+public class SetGetAddressData {
     private String formatted_address = "";
     private String state_code = "";
     private String country_code = "";
@@ -13,7 +13,7 @@ public class AddressData {
     private String latitude = "";
     private String longitude = "";
 
-    public AddressData(String formatted_address, String state_code, String country_code, String zip_code) {
+    public SetGetAddressData(String formatted_address, String state_code, String country_code, String zip_code) {
         this.formatted_address = formatted_address;
         this.state_code = state_code;
         this.country_code = country_code;

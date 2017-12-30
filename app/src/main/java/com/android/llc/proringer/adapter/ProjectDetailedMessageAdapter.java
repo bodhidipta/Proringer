@@ -20,7 +20,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.ProjectMessageDetails;
+import com.android.llc.proringer.pojo.SetGetProjectMessageDetailsData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -56,21 +56,21 @@ import java.util.ArrayList;
 public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectDetailedMessageAdapter.ViewHolder> implements MyCustomAlertListener {
     Context mcontext = null;
     ProjectMessagingFragment.onOptionSelected callback;
-    ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
+    ArrayList<SetGetProjectMessageDetailsData> setGetProjectMessageDetailsDataArrayList;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
     int delete_position = 0;
     MyLoader myLoader;
 
-    public ProjectDetailedMessageAdapter(Context mcontext, ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList, ProjectMessagingFragment.onOptionSelected callback) {
+    public ProjectDetailedMessageAdapter(Context mcontext, ArrayList<SetGetProjectMessageDetailsData> setGetProjectMessageDetailsDataArrayList, ProjectMessagingFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
-        this.projectMessageDetailsArrayList = projectMessageDetailsArrayList;
+        this.setGetProjectMessageDetailsDataArrayList = setGetProjectMessageDetailsDataArrayList;
         this.callback = callback;
         myLoader = new MyLoader(mcontext);
     }
 
     @Override
     public int getItemCount() {
-        return projectMessageDetailsArrayList.size();
+        return setGetProjectMessageDetailsDataArrayList.size();
     }
 
     @Override
@@ -81,20 +81,20 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
     @Override
     public void onBindViewHolder(ProjectDetailedMessageAdapter.ViewHolder holder, final int position) {
 
-        if (projectMessageDetailsArrayList != null && 0 <= position && position < projectMessageDetailsArrayList.size()) {
+        if (setGetProjectMessageDetailsDataArrayList != null && 0 <= position && position < setGetProjectMessageDetailsDataArrayList.size()) {
 
-            ProjectMessageDetails projectMessageDetails = projectMessageDetailsArrayList.get(position);
+            SetGetProjectMessageDetailsData setGetProjectMessageDetailsData = setGetProjectMessageDetailsDataArrayList.get(position);
 
             // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
             // put an unique string id as value, can be any string which uniquely define the data
-            binderHelper.bind(holder.swipe_layout, projectMessageDetails.getId());
+            binderHelper.bind(holder.swipe_layout, setGetProjectMessageDetailsData.getId());
 
             // Bind your data here
-            holder.bind(projectMessageDetails);
+            holder.bind(setGetProjectMessageDetailsData);
         }
 
 
-        if (projectMessageDetailsArrayList.get(position).getRead_status() == 1) {
+        if (setGetProjectMessageDetailsDataArrayList.get(position).getRead_status() == 1) {
             holder.main_container.setBackground(mcontext.getResources().getDrawable(R.drawable.vertical_line_bg));
         } else {
             holder.main_container.setBackground(mcontext.getResources().getDrawable(R.color.colorBGblueShade));
@@ -105,7 +105,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         holder.main_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (projectMessageDetailsArrayList.get(position).getNo_of_msg() > 0) {
+                if (setGetProjectMessageDetailsDataArrayList.get(position).getNo_of_msg() > 0) {
                     callback.onItemPassed(position, "");
                 }
             }
@@ -131,7 +131,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
                         JSONObject jsonObject = new JSONObject(message);
                         Toast.makeText(mcontext, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        projectMessageDetailsArrayList.remove(delete_position);
+                        setGetProjectMessageDetailsDataArrayList.remove(delete_position);
                         notifyItemRemoved(delete_position);
                         myLoader.dismissLoader();
 
@@ -144,7 +144,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
                 public void onError(String error) {
                     myLoader.dismissLoader();
                 }
-            }, ProApplication.getInstance().getUserId(), projectMessageDetailsArrayList.get(delete_position).getProject_id(), projectMessageDetailsArrayList.get(delete_position).getPro_id());
+            }, ProApplication.getInstance().getUserId(), setGetProjectMessageDetailsDataArrayList.get(delete_position).getProject_id(), setGetProjectMessageDetailsDataArrayList.get(delete_position).getPro_id());
 
         }
     }
@@ -173,7 +173,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             tv_name = (ProSemiBoldTextView) itemView.findViewById(R.id.tv_name);
         }
 
-        public void bind(ProjectMessageDetails projectMessageDetails) {
+        public void bind(SetGetProjectMessageDetailsData setGetProjectMessageDetailsData) {
 
 
             LLDelete.setOnClickListener(new View.OnClickListener() {
@@ -185,11 +185,11 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
                 }
             });
 
-            tv_name.setText(projectMessageDetails.getPro_com_nm());
-            tv_date.setText(projectMessageDetails.getPro_time_status());
-            tv_description.setText(projectMessageDetails.getMessage_info());
+            tv_name.setText(setGetProjectMessageDetailsData.getPro_com_nm());
+            tv_date.setText(setGetProjectMessageDetailsData.getPro_time_status());
+            tv_description.setText(setGetProjectMessageDetailsData.getMessage_info());
 
-            Glide.with(mcontext).load(projectMessageDetails.getPro_img())
+            Glide.with(mcontext).load(setGetProjectMessageDetailsData.getPro_img())
                     .placeholder(R.drawable.plumber)
                     .into(new GlideDrawableImageViewTarget(prof_img) {
                         /**

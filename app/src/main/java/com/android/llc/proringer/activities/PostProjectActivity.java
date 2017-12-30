@@ -26,10 +26,9 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.AddressData;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetAddressData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
-import com.android.llc.proringer.utils.NetworkUtil;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import java.util.ArrayList;
@@ -83,7 +82,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
     private ProRegularTextView header_text = null;
     public String mCurrentPhotoPath = "";
     public String project_description_text = "";
-    public AddressData selectedAddressData = null;
+    public SetGetAddressData selectedSetGetAddressData = null;
     private InputMethodManager keyboard;
 
     public String first_name = "", last_name = "", email = "", password = "", confirm_password = "";
@@ -92,14 +91,14 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
      * NEW FLOW VARS
      */
 
-    public LinkedList<ProCategoryData> serviceListing = null;
-    public LinkedList<ProCategoryData> service_look_typeList = null;
-    public LinkedList<ProCategoryData> property_typeList = null;
-    public LinkedList<ProCategoryData> project_stageList = null;
-    public LinkedList<ProCategoryData> selectedServiceList = null;
+    public LinkedList<SetGetProCategoryData> serviceListing = null;
+    public LinkedList<SetGetProCategoryData> service_look_typeList = null;
+    public LinkedList<SetGetProCategoryData> property_typeList = null;
+    public LinkedList<SetGetProCategoryData> project_stageList = null;
+    public LinkedList<SetGetProCategoryData> selectedServiceList = null;
 
-    public ProCategoryData selectedCategory;
-    public ProCategoryData selectedService;
+    public SetGetProCategoryData selectedCategory;
+    public SetGetProCategoryData selectedService;
     public String service_look_type;
     public String property_type;
     public String project_stage;
@@ -242,12 +241,12 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         Logger.printMessage("@registrationPostPro", "timeframe_id :" + timeframe_id);
         Logger.printMessage("@registrationPostPro", "mCurrentPhotoPath :" + mCurrentPhotoPath);
         Logger.printMessage("@registrationPostPro", "project_description_text :" + project_description_text);
-        Logger.printMessage("@registrationPostPro", "selectedAddressData.getZip_code() :" + selectedAddressData.getZip_code());
-        Logger.printMessage("@registrationPostPro", "selectedAddressData.getCity() :" + selectedAddressData.getCity());
-        Logger.printMessage("@registrationPostPro", "selectedAddressData.getState_code() :" + selectedAddressData.getState_code());
-        Logger.printMessage("@registrationPostPro", "selectedAddressData.getCountry_code() :" + selectedAddressData.getCountry_code());
-        Logger.printMessage("@registrationPostPro", "selectedAddressData.getLatitude() :" + selectedAddressData.getLatitude());
-        Logger.printMessage("@registrationPostPro", " selectedAddressData.getLongitude() :" + selectedAddressData.getLongitude());
+        Logger.printMessage("@registrationPostPro", "selectedSetGetAddressData.getZip_code() :" + selectedSetGetAddressData.getZip_code());
+        Logger.printMessage("@registrationPostPro", "selectedSetGetAddressData.getCity() :" + selectedSetGetAddressData.getCity());
+        Logger.printMessage("@registrationPostPro", "selectedSetGetAddressData.getState_code() :" + selectedSetGetAddressData.getState_code());
+        Logger.printMessage("@registrationPostPro", "selectedSetGetAddressData.getCountry_code() :" + selectedSetGetAddressData.getCountry_code());
+        Logger.printMessage("@registrationPostPro", "selectedSetGetAddressData.getLatitude() :" + selectedSetGetAddressData.getLatitude());
+        Logger.printMessage("@registrationPostPro", " selectedSetGetAddressData.getLongitude() :" + selectedSetGetAddressData.getLongitude());
         Logger.printMessage("@registrationPostPro", " first_name :" + first_name);
         Logger.printMessage("@registrationPostPro", "last_name:" + last_name);
         Logger.printMessage("@registrationPostPro", "email:" + email);
@@ -299,12 +298,12 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
                 timeframe_id,
                 mCurrentPhotoPath,
                 project_description_text,
-                selectedAddressData.getZip_code(),
-                selectedAddressData.getCity(),
-                selectedAddressData.getState_code(),
-                selectedAddressData.getCountry_code(),
-                selectedAddressData.getLatitude() + "",
-                selectedAddressData.getLongitude() + "",
+                selectedSetGetAddressData.getZip_code(),
+                selectedSetGetAddressData.getCity(),
+                selectedSetGetAddressData.getState_code(),
+                selectedSetGetAddressData.getCountry_code(),
+                selectedSetGetAddressData.getLatitude() + "",
+                selectedSetGetAddressData.getLongitude() + "",
                 first_name,
                 last_name,
                 email,

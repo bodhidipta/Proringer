@@ -13,7 +13,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.fragments.bottomNav.MyProjectsFragment;
-import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.android.llc.proringer.pojo.SetGetProjectPostedData;
 import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -26,11 +26,11 @@ import java.util.List;
 
 public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAdapter.ViewHolder> {
     private Context mcontext = null;
-    private List<ProjectPostedData> itemList;
+    private List<SetGetProjectPostedData> itemList;
     MyProjectsFragment.onOptionSelected callback;
 
 
-    public ProjectListingAdapter(Context mcontext, List<ProjectPostedData> itemList, MyProjectsFragment.onOptionSelected callback) {
+    public ProjectListingAdapter(Context mcontext, List<SetGetProjectPostedData> itemList, MyProjectsFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.callback = callback;

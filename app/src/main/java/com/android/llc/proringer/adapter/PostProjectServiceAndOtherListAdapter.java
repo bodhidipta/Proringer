@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import java.util.LinkedList;
@@ -31,13 +31,13 @@ import java.util.LinkedList;
 
 public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<PostProjectServiceAndOtherListAdapter.ViewHolder> {
     private Context mcontext;
-    private LinkedList<ProCategoryData> itemList;
+    private LinkedList<SetGetProCategoryData> itemList;
     private onClickItem listener;
     public static final int TYPE_GRID = 0;
     public static final int TYPE_LIST = 1;
     private int suppliedType = 0;
 
-    public PostProjectServiceAndOtherListAdapter(Context mcontext, LinkedList<ProCategoryData> itemList, int type, onClickItem listener) {
+    public PostProjectServiceAndOtherListAdapter(Context mcontext, LinkedList<SetGetProCategoryData> itemList, int type, onClickItem listener) {
         this.mcontext = mcontext;
         this.itemList = itemList;
         this.listener = listener;
@@ -74,7 +74,7 @@ public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<
     }
 
 
-    public void updateList(LinkedList<ProCategoryData> list) {
+    public void updateList(LinkedList<SetGetProCategoryData> list) {
         itemList = list;
         notifyDataSetChanged();
     }
@@ -85,6 +85,6 @@ public class PostProjectServiceAndOtherListAdapter extends RecyclerView.Adapter<
     }
 
     public interface onClickItem {
-        void onSelectItemClick(int position, ProCategoryData data);
+        void onSelectItemClick(int position, SetGetProCategoryData data);
     }
 }

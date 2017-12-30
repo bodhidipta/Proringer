@@ -1,17 +1,11 @@
 package com.android.llc.proringer.fragments.bottomNav;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,36 +15,24 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.activities.ContactUsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
-import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
-import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.cropImagePackage.CropImage;
 import com.android.llc.proringer.cropImagePackage.CropImageView;
-import com.android.llc.proringer.fragments.postProject.PostProjectSelectImageFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.Appsdata;
-import com.android.llc.proringer.utils.ImageTakerActivityCamera;
-import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.PermissionController;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
 import com.android.llc.proringer.viewsmod.textview.ProLightTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 

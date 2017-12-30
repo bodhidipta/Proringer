@@ -17,7 +17,7 @@ package com.android.llc.proringer.pojo;
  * limitations under the License.
  */
 
-public class NotificationData {
+public class SetGetNotificationData {
     private String email_newsletter = "FALSE";
     private String email_chat_msg = "FALSE";
     private String email_tips_article = "FALSE";
@@ -27,10 +27,10 @@ public class NotificationData {
     private String mobile_tips_article = "FALSE";
     private String mobile_project_replies = "FALSE";
 
-    public NotificationData() {
+    public SetGetNotificationData() {
     }
 
-    public NotificationData(String email_newsletter, String email_chat_msg, String email_tips_article, String email_project_replies, String mobile_newsletter, String mobile_chat_msg, String mobile_tips_article, String mobile_project_replies) {
+    public SetGetNotificationData(String email_newsletter, String email_chat_msg, String email_tips_article, String email_project_replies, String mobile_newsletter, String mobile_chat_msg, String mobile_tips_article, String mobile_project_replies) {
         this.email_newsletter = email_newsletter;
         this.email_chat_msg = email_chat_msg;
         this.email_tips_article = email_tips_article;

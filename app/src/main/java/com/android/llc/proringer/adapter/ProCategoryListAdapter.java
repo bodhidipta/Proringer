@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import java.util.LinkedList;
@@ -19,10 +19,10 @@ import java.util.LinkedList;
 
 public class ProCategoryListAdapter extends RecyclerView.Adapter<ProCategoryListAdapter.MyViewHolder> {
     Context mContext;
-    LinkedList<ProCategoryData> listdata;
+    LinkedList<SetGetProCategoryData> listdata;
     SearchLocalProFragment.onOptionSelectedCategory callback;
 
-    public ProCategoryListAdapter(Context mContext, LinkedList<ProCategoryData> listdata, SearchLocalProFragment.onOptionSelectedCategory callback) {
+    public ProCategoryListAdapter(Context mContext, LinkedList<SetGetProCategoryData> listdata, SearchLocalProFragment.onOptionSelectedCategory callback) {
         this.mContext = mContext;
         this.listdata = listdata;
         this.callback = callback;
@@ -61,7 +61,7 @@ public class ProCategoryListAdapter extends RecyclerView.Adapter<ProCategoryList
         }
     }
 
-    public void setRefresh(LinkedList<ProCategoryData> listdata) {
+    public void setRefresh(LinkedList<SetGetProCategoryData> listdata) {
         this.listdata = listdata;
         notifyDataSetChanged();
     }

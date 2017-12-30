@@ -6,7 +6,7 @@ import org.json.JSONArray;
  * Created by su on 8/8/17.
  */
 
-public class ProjectMessageDetails {
+public class SetGetProjectMessageDetailsData {
     String id,project_id,homeowner_id,pro_id,pro_img,pro_rating,pro_time_status,pro_user_name,pro_com_nm,message_info;
     int no_of_msg,read_status;
     JSONArray message_list;

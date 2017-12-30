@@ -4,7 +4,7 @@ package com.android.llc.proringer.pojo;
  * Created by manishsethia on 12/07/17.
  */
 
-public class ProjectPostedData {
+public class SetGetProjectPostedData {
     private String id = "";
     private String project_name = "";
     private String property_type_id = "";
@@ -33,7 +33,7 @@ public class ProjectPostedData {
     private String longitude = "";
     private String new_user_status = "";
 
-    public ProjectPostedData(String id, String project_name, String property_type_id, String property_type_name, String city, String zip, String project_category_id, String project_category_name, String project_category_service_id, String project_category_service_name, String country_id, String country_code, String state_id, String state_code, String project_image, String date_time, String last_edit, String project_timeframe_id, String project_timeframe_name, String project_service_looktype, String project_stage, String project_status, String project_response, String project_award, String latitude, String longitude, String new_user_status) {
+    public SetGetProjectPostedData(String id, String project_name, String property_type_id, String property_type_name, String city, String zip, String project_category_id, String project_category_name, String project_category_service_id, String project_category_service_name, String country_id, String country_code, String state_id, String state_code, String project_image, String date_time, String last_edit, String project_timeframe_id, String project_timeframe_name, String project_service_looktype, String project_stage, String project_status, String project_response, String project_award, String latitude, String longitude, String new_user_status) {
         this.id = id;
         this.project_name = project_name;
         this.property_type_id = property_type_id;

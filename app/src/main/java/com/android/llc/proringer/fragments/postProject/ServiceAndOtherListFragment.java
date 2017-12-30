@@ -16,7 +16,7 @@ import com.android.llc.proringer.activities.PostProjectActivity;
 import com.android.llc.proringer.adapter.PostProjectServiceAndOtherListAdapter;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 
 import java.util.LinkedList;
@@ -59,7 +59,7 @@ public class ServiceAndOtherListFragment extends Fragment {
     public void selectService(String id) {
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
+            public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
@@ -94,12 +94,12 @@ public class ServiceAndOtherListFragment extends Fragment {
         }, id);
     }
 
-    private void initAdapter(LinkedList<ProCategoryData> itemData) {
+    private void initAdapter(LinkedList<SetGetProCategoryData> itemData) {
         adapter = new PostProjectServiceAndOtherListAdapter((PostProjectActivity) getActivity(),
                 itemData, PostProjectServiceAndOtherListAdapter.TYPE_LIST,
                 new PostProjectServiceAndOtherListAdapter.onClickItem() {
                     @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
+                    public void onSelectItemClick(int position, SetGetProCategoryData data) {
                         ((PostProjectActivity) getActivity()).isForth = true;
                         if (step == 0) {
                             step++;
@@ -109,9 +109,9 @@ public class ServiceAndOtherListFragment extends Fragment {
                             ((PostProjectActivity) getActivity()).increaseStep();
 
                             ((PostProjectActivity) getActivity()).selectedServiceList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Repair", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Installation", "");
-                            ProCategoryData data3 = new ProCategoryData("", "", "Others", "");
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Repair", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Installation", "");
+                            SetGetProCategoryData data3 = new SetGetProCategoryData("", "", "Others", "");
                             ((PostProjectActivity) getActivity()).selectedServiceList.add(data1);
                             ((PostProjectActivity) getActivity()).selectedServiceList.add(data2);
                             ((PostProjectActivity) getActivity()).selectedServiceList.add(data3);
@@ -124,11 +124,11 @@ public class ServiceAndOtherListFragment extends Fragment {
                             ((PostProjectActivity) getActivity()).increaseStep();
 
                             ((PostProjectActivity) getActivity()).service_look_typeList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("4", "", "Single Family Home", "");
-                            ProCategoryData data2 = new ProCategoryData("5", "", "Condominium", "");
-                            ProCategoryData data3 = new ProCategoryData("6", "", "Townhome", "");
-                            ProCategoryData data4 = new ProCategoryData("7", "", "Multi-Family", "");
-                            ProCategoryData data5 = new ProCategoryData("1", "", "Commercial", "");
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("4", "", "Single Family Home", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("5", "", "Condominium", "");
+                            SetGetProCategoryData data3 = new SetGetProCategoryData("6", "", "Townhome", "");
+                            SetGetProCategoryData data4 = new SetGetProCategoryData("7", "", "Multi-Family", "");
+                            SetGetProCategoryData data5 = new SetGetProCategoryData("1", "", "Commercial", "");
                             ((PostProjectActivity) getActivity()).service_look_typeList.add(data1);
                             ((PostProjectActivity) getActivity()).service_look_typeList.add(data2);
                             ((PostProjectActivity) getActivity()).service_look_typeList.add(data3);
@@ -143,8 +143,8 @@ public class ServiceAndOtherListFragment extends Fragment {
                             ((PostProjectActivity) getActivity()).increaseStep();
 
                             ((PostProjectActivity) getActivity()).property_typeList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("", "", "Ready to hire", "");
-                            ProCategoryData data2 = new ProCategoryData("", "", "Planning and Budgeting", "");
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("", "", "Ready to hire", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("", "", "Planning and Budgeting", "");
                             ((PostProjectActivity) getActivity()).property_typeList.add(data1);
                             ((PostProjectActivity) getActivity()).property_typeList.add(data2);
                             adapter.updateList(((PostProjectActivity) getActivity()).property_typeList);
@@ -155,11 +155,11 @@ public class ServiceAndOtherListFragment extends Fragment {
                             ((PostProjectActivity) getActivity()).increaseStep();
 
                             ((PostProjectActivity) getActivity()).project_stageList = new LinkedList<>();
-                            ProCategoryData data1 = new ProCategoryData("1", "", "Timing Is Flexible", "");
-                            ProCategoryData data2 = new ProCategoryData("2", "", "Within 1 Week", "");
-                            ProCategoryData data3 = new ProCategoryData("3", "", "1-2 Week", "");
-                            ProCategoryData data4 = new ProCategoryData("4", "", "More Than 2 Weeks", "");
-                            ProCategoryData data5 = new ProCategoryData("5", "", "Emergency", "");
+                            SetGetProCategoryData data1 = new SetGetProCategoryData("1", "", "Timing Is Flexible", "");
+                            SetGetProCategoryData data2 = new SetGetProCategoryData("2", "", "Within 1 Week", "");
+                            SetGetProCategoryData data3 = new SetGetProCategoryData("3", "", "1-2 Week", "");
+                            SetGetProCategoryData data4 = new SetGetProCategoryData("4", "", "More Than 2 Weeks", "");
+                            SetGetProCategoryData data5 = new SetGetProCategoryData("5", "", "Emergency", "");
                             ((PostProjectActivity) getActivity()).project_stageList.add(data1);
                             ((PostProjectActivity) getActivity()).project_stageList.add(data2);
                             ((PostProjectActivity) getActivity()).project_stageList.add(data3);

@@ -20,7 +20,7 @@ import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.AddressData;
+import com.android.llc.proringer.pojo.SetGetAddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -37,7 +37,7 @@ import java.util.List;
  */
 
 public class EditSearchLocationFragment extends Fragment {
-    private List<AddressData> addressDataList;
+    private List<SetGetAddressData> setGetAddressDataList;
     private ProRegularEditText zip_code_text;
     private PostProjectLocationListAdapter zip_search_adapter = null;
     private RecyclerView location_list;
@@ -65,10 +65,10 @@ public class EditSearchLocationFragment extends Fragment {
         error_progress = (ImageView) view.findViewById(R.id.error_progress);
         location_list.setLayoutManager(new LinearLayoutManager(getActivity()));
         selected_text.setText("Where is the project located");
-        addressDataList = new ArrayList<>();
+        setGetAddressDataList = new ArrayList<>();
         myLoader = new MyLoader(getActivity());
         zip_search_adapter = null;
-        ((AddEditProsActivity) getActivity()).selectedAddressData = null;
+        ((AddEditProsActivity) getActivity()).selectedSetGetAddressData = null;
         Logger.printMessage("onCreate", "onCreate");
 
         textWatcher = new TextWatcher() {
@@ -106,11 +106,11 @@ public class EditSearchLocationFragment extends Fragment {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     zip_code_text.setText("");
-                    ((AddEditProsActivity) getActivity()).selectedAddressData = null;
-                    addressDataList.clear();
+                    ((AddEditProsActivity) getActivity()).selectedSetGetAddressData = null;
+                    setGetAddressDataList.clear();
                     if (zip_search_adapter != null) {
                         Logger.printMessage("zip_search_adapter-->", "not null");
-                        zip_search_adapter.updateData(addressDataList);
+                        zip_search_adapter.updateData(setGetAddressDataList);
                     }
                 }
 //                else {
@@ -127,11 +127,11 @@ public class EditSearchLocationFragment extends Fragment {
                  * fragment calling
                  */
 
-                if (addressDataList != null & addressDataList.size() > 0) {
+                if (setGetAddressDataList != null & setGetAddressDataList.size() > 0) {
                     ((AddEditProsActivity) getActivity()).closeKeypad();
                     // ((AddEditProsActivity) getActivity()).increaseStep();
                     ((AddEditProsActivity) getActivity()).changeFragmentNext(6);
-                    addressDataList.clear();
+                    setGetAddressDataList.clear();
                 } else {
                     zip_code_text.setError("Please enter a valid zip code to continue.");
                 }
@@ -151,32 +151,32 @@ public class EditSearchLocationFragment extends Fragment {
         Logger.printMessage("key", "" + key);
         ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
-            public void onComplete(List<AddressData> listdata) {
+            public void onComplete(List<SetGetAddressData> listdata) {
                 try {
-                    addressDataList = listdata;
-                    Logger.printMessage("addressDataList", "" + addressDataList.size());
+                    setGetAddressDataList = listdata;
+                    Logger.printMessage("setGetAddressDataList", "" + setGetAddressDataList.size());
 
-                    if (addressDataList != null && addressDataList.size() > 0) {
-                        if (addressDataList.get(0).getCountry_code().equals("US") ||
-                                addressDataList.get(0).getCountry_code().equals("CA")) {
-                            ((AddEditProsActivity) getActivity()).selectedAddressData = addressDataList.get(0);
+                    if (setGetAddressDataList != null && setGetAddressDataList.size() > 0) {
+                        if (setGetAddressDataList.get(0).getCountry_code().equals("US") ||
+                                setGetAddressDataList.get(0).getCountry_code().equals("CA")) {
+                            ((AddEditProsActivity) getActivity()).selectedSetGetAddressData = setGetAddressDataList.get(0);
                         }
                     }
                 } catch (Exception e) {
                     Logger.printMessage("Exception", "" + e.getMessage());
-                    addressDataList.clear();
+                    setGetAddressDataList.clear();
                 }
             }
 
             @Override
             public void onError(String error) {
                 Logger.printMessage("error", "" + error);
-                addressDataList.clear();
+                setGetAddressDataList.clear();
             }
 
             @Override
             public void onStartFetch() {
-                addressDataList.clear();
+                setGetAddressDataList.clear();
             }
         }, key);
     }
@@ -184,25 +184,25 @@ public class EditSearchLocationFragment extends Fragment {
     private void searchLocationUsingZip(String key) {
         ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
-            public void onComplete(List<AddressData> listdata) {
+            public void onComplete(List<SetGetAddressData> listdata) {
 
                 try {
-                    addressDataList = listdata;
-                    Logger.printMessage("addressDataList", "" + addressDataList.size());
+                    setGetAddressDataList = listdata;
+                    Logger.printMessage("setGetAddressDataList", "" + setGetAddressDataList.size());
 
                     loading_progress.setVisibility(View.GONE);
                     error_progress.setVisibility(View.GONE);
 
-                    if (addressDataList != null && addressDataList.size() > 0) {
-                        if (addressDataList.get(0).getCountry_code().equals("US") ||
-                                addressDataList.get(0).getCountry_code().equals("CA")) {
-                            ((AddEditProsActivity) getActivity()).selectedAddressData = addressDataList.get(0);
+                    if (setGetAddressDataList != null && setGetAddressDataList.size() > 0) {
+                        if (setGetAddressDataList.get(0).getCountry_code().equals("US") ||
+                                setGetAddressDataList.get(0).getCountry_code().equals("CA")) {
+                            ((AddEditProsActivity) getActivity()).selectedSetGetAddressData = setGetAddressDataList.get(0);
 
                             if (zip_search_adapter == null) {
-                                zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), addressDataList, new PostProjectLocationListAdapter.onItemelcted() {
+                                zip_search_adapter = new PostProjectLocationListAdapter(getActivity(), setGetAddressDataList, new PostProjectLocationListAdapter.onItemelcted() {
                                     @Override
-                                    public void onSelect(int pos, AddressData data) {
-                                        //((AddEditProsActivity) getActivity()).selectedAddressData = data;
+                                    public void onSelect(int pos, SetGetAddressData data) {
+                                        //((AddEditProsActivity) getActivity()).selectedSetGetAddressData = data;
                                     }
                                 });
                                 location_list.setAdapter(zip_search_adapter);
@@ -219,14 +219,14 @@ public class EditSearchLocationFragment extends Fragment {
             @Override
             public void onError(String error) {
                 Logger.printMessage("error", "" + error);
-                addressDataList.clear();
+                setGetAddressDataList.clear();
                 loading_progress.setVisibility(View.GONE);
                 error_progress.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onStartFetch() {
-                addressDataList.clear();
+                setGetAddressDataList.clear();
                 loading_progress.setVisibility(View.VISIBLE);
                 error_progress.setVisibility(View.GONE);
             }

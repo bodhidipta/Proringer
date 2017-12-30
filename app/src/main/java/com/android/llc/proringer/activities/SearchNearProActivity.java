@@ -23,7 +23,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.AddressData;
+import com.android.llc.proringer.pojo.SetGetAddressData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
@@ -462,7 +462,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
     private void searchLocationUsingZip(String key) {
         ProServiceApiHelper.getInstance(SearchNearProActivity.this).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
-            public void onComplete(List<AddressData> listdata) {
+            public void onComplete(List<SetGetAddressData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
                 Logger.printMessage("listData", "" + listdata.size());

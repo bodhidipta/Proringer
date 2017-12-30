@@ -20,8 +20,8 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.AddressData;
-import com.android.llc.proringer.pojo.Appsdata;
+import com.android.llc.proringer.pojo.SetGetAddressData;
+import com.android.llc.proringer.pojo.SetGetAppsdata;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -38,7 +38,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
     ArrayList<String> fragmentPushList;
     private InputMethodManager keyboard;
     public ProRegularTextView selected_service_category, selected_text;
-    public AddressData selectedAddressData = null;
+    public SetGetAddressData selectedSetGetAddressData = null;
     ProgressBar progress_posting;
     private int progressStep = 6;
     public boolean iseditPostProject = false;
@@ -52,7 +52,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         fragmentManager = getSupportFragmentManager();
         tv_toolbar = (ProRegularTextView) findViewById(R.id.tv_toolbar);
         fragmentPushList = new ArrayList<>();
-        Log.d("address", String.valueOf(selectedAddressData));
+        Log.d("address", String.valueOf(selectedSetGetAddressData));
         img_back = (ImageView) findViewById(R.id.img_back);
         img_home = (ImageView) findViewById(R.id.img_home);
         progress_posting = (ProgressBar) findViewById(R.id.progress_posting);
@@ -61,7 +61,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
         myLoader = new MyLoader(AddEditProsActivity.this);
 
-        selected_service_category.setText(Appsdata.service);
+        selected_service_category.setText(SetGetAppsdata.service);
 
 
         String projectname = getIntent().getExtras().getString("Project");
@@ -131,14 +131,14 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
     public boolean completeEditProject() {
 
-        Log.d("project_id","-->"+ Appsdata.projectid );
+        Log.d("project_id","-->"+ SetGetAppsdata.projectid );
         Log.d("user_id","-->"+ProApplication.getInstance().getUserId());
-        Log.d("project_zipcode", "-->" +selectedAddressData.getZip_code());
-        Log.d("city","-->"+selectedAddressData.getCity());
-        Log.d("state","-->"+ selectedAddressData.getState_code());
-        Log.d("country","-->"+selectedAddressData.getCountry_code());
-        Log.d("latitude","-->"+ selectedAddressData.getLatitude());
-        Log.d("longitude","-->"+ selectedAddressData.getLongitude());
+        Log.d("project_zipcode", "-->" + selectedSetGetAddressData.getZip_code());
+        Log.d("city","-->"+ selectedSetGetAddressData.getCity());
+        Log.d("state","-->"+ selectedSetGetAddressData.getState_code());
+        Log.d("country","-->"+ selectedSetGetAddressData.getCountry_code());
+        Log.d("latitude","-->"+ selectedSetGetAddressData.getLatitude());
+        Log.d("longitude","-->"+ selectedSetGetAddressData.getLongitude());
         Log.d("Description","-->"+ project_description);
 
         Logger.printMessage("@registrationPostPro", "mCurrentPhotoPath :" + mCurrentPhotoPath);
@@ -178,13 +178,13 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
 
                 }, ProApplication.getInstance().getUserId()
-                ,Appsdata.projectid ,
-                ""+selectedAddressData.getZip_code(),
-                ""+selectedAddressData.getCity(),
-                ""+selectedAddressData.getState_code(),
-                selectedAddressData.getCountry_code(),
-                selectedAddressData.getLatitude(),
-                selectedAddressData.getLongitude(),
+                , SetGetAppsdata.projectid ,
+                ""+ selectedSetGetAddressData.getZip_code(),
+                ""+ selectedSetGetAddressData.getCity(),
+                ""+ selectedSetGetAddressData.getState_code(),
+                selectedSetGetAddressData.getCountry_code(),
+                selectedSetGetAddressData.getLatitude(),
+                selectedSetGetAddressData.getLongitude(),
                 project_description,
                 mCurrentPhotoPath
         );

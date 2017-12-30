@@ -17,7 +17,7 @@ package com.android.llc.proringer.pojo;
  * limitations under the License.
  */
 
-public class ProCategoryData {
+public class SetGetProCategoryData {
 
     private String id = "";
     private String parent_id = "";
@@ -25,7 +25,7 @@ public class ProCategoryData {
     private String category_image = "";
 
 
-    public ProCategoryData(String id, String parent_id, String category_name, String category_image) {
+    public SetGetProCategoryData(String id, String parent_id, String category_name, String category_image) {
         this.id = id;
         this.parent_id = parent_id;
         this.category_name = category_name;

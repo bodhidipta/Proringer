@@ -18,7 +18,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.android.llc.proringer.pojo.SetGetProjectPostedData;
 
 import java.util.List;
 
@@ -85,7 +85,7 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
                     project_list.setAdapter(new ProjectListingAdapter((LandScreenActivity) getActivity(), projectList, new onOptionSelected() {
                         @Override
                         public void onItemPassed(int position, String value) {
-                            ProApplication.getInstance().setDataSelected((ProjectPostedData) projectList.get(position));
+                            ProApplication.getInstance().setDataSelected((SetGetProjectPostedData) projectList.get(position));
                             if (ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("A")
                                     || ProApplication.getInstance().getDataSelected().getProject_status().equalsIgnoreCase("Y")) {
                                 ((LandScreenActivity) getActivity()).transactMyProjectsDetails();

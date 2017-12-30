@@ -4,7 +4,7 @@ package com.android.llc.proringer.pojo;
  * Created by su on 7/29/17.
  */
 
-public class ProjectMessage {
+public class SetGetProjectMessage {
     String proj_id = "",proj_image="",proj_name="",status="",project_date="",no_of_pros_user="";
     int read_status;
 

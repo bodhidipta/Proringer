@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.IndevidualChatAdapter;
-import com.android.llc.proringer.pojo.ChatPojo;
+import com.android.llc.proringer.pojo.SetGetChatPojoData;
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
@@ -52,7 +52,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
 
         chat_list = (RecyclerView) findViewById(R.id.chat_list);
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
-        LinkedList<ChatPojo> chatList = new LinkedList<>();
+        LinkedList<SetGetChatPojoData> chatList = new LinkedList<>();
 
         img_background = (ImageView) findViewById(R.id.img_background);
 
@@ -63,7 +63,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
         calendar.setTime(new Date());
         calendar.add(java.util.Calendar.DAY_OF_MONTH, -3);
 
-        ChatPojo pojo1 = new ChatPojo(
+        SetGetChatPojoData pojo1 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 true,
                 "Hello- world ",
@@ -71,7 +71,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 true,
                 "");
         chatList.add(pojo1);
-        ChatPojo pojo2 = new ChatPojo(
+        SetGetChatPojoData pojo2 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 false,
                 "HI there - world ",
@@ -80,7 +80,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 "");
         chatList.add(pojo2);
         calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        ChatPojo pojo3 = new ChatPojo(
+        SetGetChatPojoData pojo3 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 true,
                 "Blahh... blahhh ... blahhhhhhhhh..... ",
@@ -88,7 +88,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 true,
                 "");
         chatList.add(pojo3);
-        ChatPojo pojo4 = new ChatPojo(
+        SetGetChatPojoData pojo4 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 false,
                 "",
@@ -97,7 +97,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 "http://visuallightbox.com/images/demo/macro1/data/images1/1.jpg");
         chatList.add(pojo4);
         calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        ChatPojo pojo5 = new ChatPojo(
+        SetGetChatPojoData pojo5 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 true,
                 "This is latest",
@@ -105,7 +105,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 true,
                 "");
         chatList.add(pojo5);
-        ChatPojo pojo6 = new ChatPojo(
+        SetGetChatPojoData pojo6 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 false,
                 "Indeed",
@@ -114,7 +114,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 "");
         chatList.add(pojo6);
         calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        ChatPojo pojo7 = new ChatPojo(
+        SetGetChatPojoData pojo7 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 true,
                 "This is latest",
@@ -122,7 +122,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 true,
                 "");
         chatList.add(pojo7);
-        ChatPojo pojo8 = new ChatPojo(
+        SetGetChatPojoData pojo8 = new SetGetChatPojoData(
                 new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
                 false,
                 "Indeed",

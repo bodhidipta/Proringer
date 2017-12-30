@@ -36,7 +36,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 
@@ -199,7 +199,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     }
 
     public interface onOptionSelectedCategory {
-        void onItemPassed(int position, ProCategoryData proCategoryData);
+        void onItemPassed(int position, SetGetProCategoryData setGetProCategoryData);
     }
 
     public void loadList() {
@@ -414,7 +414,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                 });
     }
 
-    private void showDialog(View v, LinkedList<ProCategoryData> listdata) {
+    private void showDialog(View v, LinkedList<SetGetProCategoryData> listdata) {
 
         if (popupWindow == null) {
             popupWindow = new PopupWindow(getActivity());
@@ -432,8 +432,8 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
             proCategoryListAdapter = new ProCategoryListAdapter(getActivity(), listdata, new onOptionSelectedCategory() {
 
                 @Override
-                public void onItemPassed(int position, ProCategoryData proCategoryData) {
-                    Logger.printMessage("position-->" + position, "value-->" + proCategoryData.getCategory_name());
+                public void onItemPassed(int position, SetGetProCategoryData setGetProCategoryData) {
+                    Logger.printMessage("position-->" + position, "value-->" + setGetProCategoryData.getCategory_name());
 
                     popupWindow.dismiss();
                 }

@@ -6,8 +6,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 
-import com.android.llc.proringer.pojo.NotificationData;
-import com.android.llc.proringer.pojo.ProjectPostedData;
+import com.android.llc.proringer.pojo.SetGetNotificationData;
+import com.android.llc.proringer.pojo.SetGetProjectPostedData;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
@@ -36,7 +36,7 @@ public class ProApplication extends Application {
     private SharedPreferences userFbFirstTimeStatus = null;
     private SharedPreferences userFbFirstTimeJson = null;
     private SharedPreferences notificationPreference = null;
-    private ProjectPostedData dataSelected = null;
+    private SetGetProjectPostedData dataSelected = null;
 
     public String go_to = "";
 
@@ -111,8 +111,8 @@ public class ProApplication extends Application {
 
     }
 
-    public NotificationData getUserNotification() {
-        return new NotificationData(
+    public SetGetNotificationData getUserNotification() {
+        return new SetGetNotificationData(
                 notificationPreference.getString("email_newsletter", "FALSE"),
                 notificationPreference.getString("email_chat_msg", "FALSE"),
                 notificationPreference.getString("email_tips_article", "FALSE"),
@@ -152,11 +152,11 @@ public class ProApplication extends Application {
         userPreference.edit().clear().apply();
     }
 
-    public ProjectPostedData getDataSelected() {
+    public SetGetProjectPostedData getDataSelected() {
         return dataSelected;
     }
 
-    public void setDataSelected(ProjectPostedData dataSelected) {
+    public void setDataSelected(SetGetProjectPostedData dataSelected) {
         this.dataSelected = dataSelected;
     }
 

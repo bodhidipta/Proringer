@@ -18,7 +18,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.ProCategoryData;
+import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -36,7 +36,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
     PostProjectCategoryGridAdapter gridAdapter;
     PostProjectCategoryListAdapter listAdapter;
     LinkedList<String> proCategoryDatasSortedList;
-    LinkedList<ProCategoryData> listdataMain;
+    LinkedList<SetGetProCategoryData> listdataMain;
     ProRegularTextView item_header;
 
 
@@ -183,7 +183,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
 //                    category_listing.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 //                    gridAdapter = new PostProjectCategoryGridAdapter(getActivity(), listdataMain, new PostProjectCategoryGridAdapter.onClickItem() {
 //                        @Override
-//                        public void onSelectItemClick(int position, ProCategoryData data) {
+//                        public void onSelectItemClick(int position, SetGetProCategoryData data) {
 //                            ((PostProjectActivity) getActivity()).selectedCategory = data;
 //                            ((PostProjectActivity) getActivity()).setHeaderCategory();
 //                            ((PostProjectActivity) getActivity()).increaseStep();
@@ -208,7 +208,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
     public void loadCatList(){
         ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
             @Override
-            public void onComplete(LinkedList<ProCategoryData> listdata) {
+            public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
 
@@ -259,7 +259,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
 
                 gridAdapter = new PostProjectCategoryGridAdapter((PostProjectActivity) getActivity(), listdata, new PostProjectCategoryGridAdapter.onClickItem() {
                     @Override
-                    public void onSelectItemClick(int position, ProCategoryData data) {
+                    public void onSelectItemClick(int position, SetGetProCategoryData data) {
                         ((PostProjectActivity) getActivity()).selectedCategory = data;
                         ((PostProjectActivity) getActivity()).setHeaderTextCategory();
                         ((PostProjectActivity) getActivity()).increaseStep();

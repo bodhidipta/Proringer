@@ -152,7 +152,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment impleme
  * IF no user is login then visible registration process or visible last part
  */
             view.findViewById(R.id.container_registration).setVisibility(View.VISIBLE);
-            //zip_code.setText(((PostProjectActivity) getActivity()).selectedAddressData.getZip_code());
+            //zip_code.setText(((PostProjectActivity) getActivity()).selectedSetGetAddressData.getZip_code());
 
         } else {
             if (((PostProjectActivity) getActivity()).completePostProject()) {

@@ -21,7 +21,7 @@ import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.Appsdata;
+import com.android.llc.proringer.pojo.SetGetAppsdata;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -75,16 +75,16 @@ public class MyProjectDetailsFragment extends Fragment {
         img_description.setText(ProApplication.getInstance().getDataSelected().getProject_name());
 
 
-        Appsdata.projectid = ProApplication.getInstance().getDataSelected().getId();
-        Appsdata.service = ProApplication.getInstance().getDataSelected().getProject_category_service_name();
-        Appsdata.Project_name = (ProApplication.getInstance().getDataSelected().getProject_category_name());
-        Appsdata.projectzip = ProApplication.getInstance().getDataSelected().getZip();
+        SetGetAppsdata.projectid = ProApplication.getInstance().getDataSelected().getId();
+        SetGetAppsdata.service = ProApplication.getInstance().getDataSelected().getProject_category_service_name();
+        SetGetAppsdata.Project_name = (ProApplication.getInstance().getDataSelected().getProject_category_name());
+        SetGetAppsdata.projectzip = ProApplication.getInstance().getDataSelected().getZip();
 
-        Log.d("projectid", Appsdata.projectid);
-        Log.d("service_name",Appsdata.service);
-        Log.d("Project_name", Appsdata.Project_name);
+        Log.d("projectid", SetGetAppsdata.projectid);
+        Log.d("service_name", SetGetAppsdata.service);
+        Log.d("Project_name", SetGetAppsdata.Project_name);
         Log.d("city", ProApplication.getInstance().getDataSelected().getCity());
-        Log.d("Zip", Appsdata.projectzip);
+        Log.d("Zip", SetGetAppsdata.projectzip);
         Log.d("count", ProApplication.getInstance().getDataSelected().getCountry_code());
         Log.d("State", ProApplication.getInstance().getDataSelected().getState_code());
         Log.d("latlong", ProApplication.getInstance().getDataSelected().getLatitude());

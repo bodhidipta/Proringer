@@ -19,7 +19,7 @@ import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.helper.SimpleDividerItemDecoration;
-import com.android.llc.proringer.pojo.ProjectMessageDetails;
+import com.android.llc.proringer.pojo.SetGetProjectMessageDetailsData;
 import com.android.llc.proringer.utils.Logger;
 
 import org.json.JSONArray;
@@ -48,7 +48,7 @@ import java.util.ArrayList;
 public class ProjectMessagingFragment extends Fragment {
     RelativeLayout detailed_project_search;
     RecyclerView message_list;
-    ArrayList<ProjectMessageDetails> projectMessageDetailsArrayList;
+    ArrayList<SetGetProjectMessageDetailsData> setGetProjectMessageDetailsDataArrayList;
     ProjectDetailedMessageAdapter projectDetailedMessageAdapter;
     String project_id = "";
     MyLoader myLoader = null;
@@ -65,7 +65,7 @@ public class ProjectMessagingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         myLoader = new MyLoader(getActivity());
-        projectMessageDetailsArrayList = new ArrayList<>();
+        setGetProjectMessageDetailsDataArrayList = new ArrayList<>();
 
         detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
 
@@ -119,29 +119,29 @@ public class ProjectMessagingFragment extends Fragment {
 
                         for (int i = 0; i < info_array.getJSONObject(0).getJSONArray("all_pro_user_list").length(); i++) {
 
-                            ProjectMessageDetails projectMessageDetails = new ProjectMessageDetails();
+                            SetGetProjectMessageDetailsData setGetProjectMessageDetailsData = new SetGetProjectMessageDetailsData();
 
-                            projectMessageDetails.setId(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("id"));
-                            projectMessageDetails.setProject_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id"));
-                            projectMessageDetails.setHomeowner_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("homeowner_id"));
-                            projectMessageDetails.setPro_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id"));
-                            projectMessageDetails.setPro_img(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_img"));
-                            projectMessageDetails.setPro_rating(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_rating"));
-                            projectMessageDetails.setPro_time_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_time_status"));
-                            projectMessageDetails.setPro_user_name(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_user_name"));
-                            projectMessageDetails.setPro_com_nm(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_com_nm"));
-                            projectMessageDetails.setNo_of_msg(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("no_of_msg"));
-                            projectMessageDetails.setMessage_info(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("message_info"));
-                            projectMessageDetails.setRead_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("read_status"));
-                            projectMessageDetails.setMessage_list(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getJSONArray("message_list"));
+                            setGetProjectMessageDetailsData.setId(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("id"));
+                            setGetProjectMessageDetailsData.setProject_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id"));
+                            setGetProjectMessageDetailsData.setHomeowner_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("homeowner_id"));
+                            setGetProjectMessageDetailsData.setPro_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id"));
+                            setGetProjectMessageDetailsData.setPro_img(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_img"));
+                            setGetProjectMessageDetailsData.setPro_rating(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_rating"));
+                            setGetProjectMessageDetailsData.setPro_time_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_time_status"));
+                            setGetProjectMessageDetailsData.setPro_user_name(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_user_name"));
+                            setGetProjectMessageDetailsData.setPro_com_nm(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_com_nm"));
+                            setGetProjectMessageDetailsData.setNo_of_msg(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("no_of_msg"));
+                            setGetProjectMessageDetailsData.setMessage_info(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("message_info"));
+                            setGetProjectMessageDetailsData.setRead_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("read_status"));
+                            setGetProjectMessageDetailsData.setMessage_list(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getJSONArray("message_list"));
 
-                            projectMessageDetailsArrayList.add(projectMessageDetails);
+                            setGetProjectMessageDetailsDataArrayList.add(setGetProjectMessageDetailsData);
                         }
                         Logger.printMessage("all_pro_user_list", "" + info_array.getJSONObject(0).getJSONArray("all_pro_user_list"));
 
                         if (projectDetailedMessageAdapter == null) {
                             Logger.printMessage("projectDetailedMessageAdapter", "not null");
-                            projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), projectMessageDetailsArrayList, new onOptionSelected() {
+                            projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), setGetProjectMessageDetailsDataArrayList, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(int position, String value) {
                                     startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));

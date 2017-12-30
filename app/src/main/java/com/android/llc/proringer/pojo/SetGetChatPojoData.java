@@ -17,7 +17,7 @@ package com.android.llc.proringer.pojo;
  * limitations under the License.
  */
 
-public class ChatPojo {
+public class SetGetChatPojoData {
     private String date = "";
     private boolean isDateVisible = false;
     private String message = "";
@@ -25,7 +25,7 @@ public class ChatPojo {
     private boolean ismessage = true;
     private String imageLink = "";
 
-    public ChatPojo(String date, boolean isDateVisible, String message, boolean sender, boolean ismessage, String imageLink) {
+    public SetGetChatPojoData(String date, boolean isDateVisible, String message, boolean sender, boolean ismessage, String imageLink) {
         this.date = date;
         this.isDateVisible = isDateVisible;
         this.message = message;
