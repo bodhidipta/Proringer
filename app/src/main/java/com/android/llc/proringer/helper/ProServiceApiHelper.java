@@ -114,7 +114,6 @@ public class ProServiceApiHelper {
     private String loginFBAPI = BaseUrl+"app_facebook_login";
     private String messageListAPI = BaseUrl+"app_project_message";
 
-
     private String messageDeleteAPI = BaseUrl+"app_project_message_deleted";
 
     public static ProServiceApiHelper getInstance(Context context) {

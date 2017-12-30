@@ -1,7 +1,6 @@
 package com.android.llc.proringer.activities;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -16,7 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.android.llc.proringer.R;
-import com.android.llc.proringer.adapter.GetStartedTutorial;
+import com.android.llc.proringer.adapter.GetStartedTutorialPagerAdapter;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
@@ -60,7 +59,7 @@ public class GetStartedActivity extends AppCompatActivity implements
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private ViewPager get_started_pager;
-    private GetStartedTutorial adapter;
+    private GetStartedTutorialPagerAdapter adapter;
     private ImageView pager_dot_one, pager_dot_two,
     //            pager_dot_three,
     pager_dot_four, pager_dot_five, slide_left, slide_right;
@@ -150,7 +149,7 @@ public class GetStartedActivity extends AppCompatActivity implements
             }
         });
 
-        adapter = new GetStartedTutorial(getSupportFragmentManager());
+        adapter = new GetStartedTutorialPagerAdapter(getSupportFragmentManager());
         get_started_pager.setAdapter(adapter);
 
         get_started_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
