@@ -61,10 +61,9 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             case 1:
                 ViewHolderReceiver viewHolderReceiver = (ViewHolderReceiver) holder;
 
-                if (dataList.get(position).isDateVisible()) {
+                if (!dataList.get(position).getDate().equals("")) {
                     viewHolderReceiver.date_header.setVisibility(View.VISIBLE);
-
-                    if (dataList.get(position).getDate().equals(new SimpleDateFormat("dd-MM-yyyy").format(new Date()))) {
+                    if (dataList.get(position).getDate().equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))) {
                         viewHolderReceiver.date_header.setText("Today");
                     } else {
                         viewHolderReceiver.date_header.setText(dataList.get(position).getDate());
@@ -73,24 +72,25 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     viewHolderReceiver.date_header.setVisibility(View.GONE);
                 }
 
-                if (dataList.get(position).ismessage()) {
+                if (!dataList.get(position).getMessage_info().trim().equals("")) {
                     viewHolderReceiver.receiver_message.setVisibility(View.VISIBLE);
+                    viewHolderReceiver.receiver_message.setText(dataList.get(position).getMessage_info().trim());
                     viewHolderReceiver.receiver_image_cont.setVisibility(View.GONE);
                 } else {
                     viewHolderReceiver.receiver_image_cont.setVisibility(View.VISIBLE);
                     viewHolderReceiver.receiver_message.setVisibility(View.GONE);
                 }
-                Glide.with(mcontext).load(dataList.get(position).getImageLink()).centerCrop().into(viewHolderReceiver.receiver_image);
+//                Glide.with(mcontext).load(dataList.get(position).getMsg_attachment()).centerCrop().into(viewHolderReceiver.receiver_image);
                 break;
 
             case 2:
                 ViewHolderSender viewHolderSender = (ViewHolderSender) holder;
 
 
-                if (dataList.get(position).isDateVisible()) {
+                if (!dataList.get(position).getDate().equals("")) {
                     viewHolderSender.date_header.setVisibility(View.VISIBLE);
 
-                    if (dataList.get(position).getDate().equals(new SimpleDateFormat("dd-MM-yyyy").format(new Date()))) {
+                    if (dataList.get(position).getDate().equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))) {
                         viewHolderSender.date_header.setText("Today");
                     } else {
                         viewHolderSender.date_header.setText(dataList.get(position).getDate());
@@ -100,14 +100,14 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 }
 
 
-                if (dataList.get(position).ismessage()) {
+                if (!dataList.get(position).getMessage_info().trim().equals("")) {
                     viewHolderSender.sender_message.setVisibility(View.VISIBLE);
+                    viewHolderSender.sender_message.setText(dataList.get(position).getMessage_info().trim());
                     viewHolderSender.sender_image_cont.setVisibility(View.GONE);
                 } else {
                     viewHolderSender.sender_image_cont.setVisibility(View.VISIBLE);
                     viewHolderSender.sender_message.setVisibility(View.GONE);
-                    Glide.with(mcontext).load(dataList.get(position).getImageLink()).fitCenter()
-                            .into(viewHolderSender.sender_image);
+//                    Glide.with(mcontext).load(dataList.get(position).getMsg_attachment()).fitCenter().into(viewHolderSender.sender_image);
                 }
                 break;
         }
@@ -152,7 +152,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (dataList.get(position).isSender()) {
+        if (dataList.get(position).getUser().equalsIgnoreCase("S")) {
             return 2;
         } else {
             return 1;

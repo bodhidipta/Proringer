@@ -144,7 +144,10 @@ public class ProjectMessagingFragment extends Fragment {
                             projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), setGetProjectMessageDetailsDataArrayList, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(int position, String value) {
-                                    startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));
+                                    Logger.printMessage("message_list"+"["+position+"]","-->"+setGetProjectMessageDetailsDataArrayList.get(position).getMessage_list().toString());
+                                    Intent intent = new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class);
+                                    intent.putExtra("message_list",setGetProjectMessageDetailsDataArrayList.get(position).getMessage_list().toString());
+                                    startActivity(intent);
                                 }
                             });
 

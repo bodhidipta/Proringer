@@ -12,11 +12,13 @@ import android.widget.ImageView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.IndevidualChatAdapter;
 import com.android.llc.proringer.pojo.SetGetChatPojoData;
+import com.android.llc.proringer.utils.Logger;
 import com.bumptech.glide.Glide;
 
-import java.text.SimpleDateFormat;
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -39,6 +41,8 @@ import java.util.LinkedList;
 public class IndividualMessageActivity extends AppCompatActivity {
     RecyclerView chat_list;
     ImageView img_background;
+    IndevidualChatAdapter indevidualChatAdapter=null;
+    JSONArray jsonArray;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +52,13 @@ public class IndividualMessageActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        try {
+            jsonArray=new JSONArray(getIntent().getStringExtra("message_list"));
+            Logger.printMessage("message_list","-->"+jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         chat_list = (RecyclerView) findViewById(R.id.chat_list);
@@ -59,80 +70,42 @@ public class IndividualMessageActivity extends AppCompatActivity {
         Glide.with(IndividualMessageActivity.this).load(R.drawable.chat_background).centerCrop().into(img_background);
 
 
-        java.util.Calendar calendar = java.util.Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, -3);
 
-        SetGetChatPojoData pojo1 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                true,
-                "Hello- world ",
-                true,
-                true,
-                "");
-        chatList.add(pojo1);
-        SetGetChatPojoData pojo2 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                false,
-                "HI there - world ",
-                false,
-                true,
-                "");
-        chatList.add(pojo2);
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        SetGetChatPojoData pojo3 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                true,
-                "Blahh... blahhh ... blahhhhhhhhh..... ",
-                false,
-                true,
-                "");
-        chatList.add(pojo3);
-        SetGetChatPojoData pojo4 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                false,
-                "",
-                false,
-                false,
-                "http://visuallightbox.com/images/demo/macro1/data/images1/1.jpg");
-        chatList.add(pojo4);
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        SetGetChatPojoData pojo5 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                true,
-                "This is latest",
-                true,
-                true,
-                "");
-        chatList.add(pojo5);
-        SetGetChatPojoData pojo6 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                false,
-                "Indeed",
-                false,
-                true,
-                "");
-        chatList.add(pojo6);
-        calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        SetGetChatPojoData pojo7 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                true,
-                "This is latest",
-                true,
-                true,
-                "");
-        chatList.add(pojo7);
-        SetGetChatPojoData pojo8 = new SetGetChatPojoData(
-                new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()),
-                false,
-                "Indeed",
-                false,
-                true,
-                "");
-        chatList.add(pojo8);
+        try {
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                for (int j = 0; j < jsonArray.getJSONObject(i).getJSONArray("info").length();j++){
+
+                    SetGetChatPojoData setGetChatPojoData=new SetGetChatPojoData();
+                    if (j==0){
+                        setGetChatPojoData.setDate(jsonArray.getJSONObject(i).getString("date"));
+                    }else {
+                        setGetChatPojoData.setDate("");
+                    }
+                    setGetChatPojoData.setUser(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
+                    setGetChatPojoData.setSender_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
+                    setGetChatPojoData.setReceiver_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
+                    setGetChatPojoData.setMessage_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
+                    setGetChatPojoData.setProject_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
+                    setGetChatPojoData.setMessage_info(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
+                    setGetChatPojoData.setOther_file_type(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
+                    setGetChatPojoData.setMsg_attachment(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
+                    setGetChatPojoData.setTime_status(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
+                    setGetChatPojoData.setTime_show(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
+                    setGetChatPojoData.setCom_name(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
+                    setGetChatPojoData.setUsersimage(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
+
+                    chatList.add(setGetChatPojoData);
+                }
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
 
         Collections.reverse(chatList);
-        chat_list.setAdapter(new IndevidualChatAdapter(this, chatList));
+        indevidualChatAdapter=new IndevidualChatAdapter(this, chatList);
+        chat_list.setAdapter(indevidualChatAdapter);
     }
 
     @Override
