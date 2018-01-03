@@ -65,7 +65,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         this.mcontext = mcontext;
         this.callback = callback;
         this.setGetProjectMessageArrayList = setGetProjectMessageArrayList;
-        myLoader = new MyLoader(mcontext);
+        myLoader = new MyLoader(this.mcontext);
     }
 
 
