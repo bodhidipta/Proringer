@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.pojo.SetGetChatPojoData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
