@@ -13,6 +13,7 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.IndevidualChatAdapter;
 import com.android.llc.proringer.pojo.SetGetChatPojoData;
 import com.android.llc.proringer.utils.Logger;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
@@ -54,6 +55,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
+            ((ProRegularTextView)findViewById(R.id.tv_pro_user_name)).setText(getIntent().getStringExtra("pro_com_nm"));
             jsonArray=new JSONArray(getIntent().getStringExtra("message_list"));
             Logger.printMessage("message_list","-->"+jsonArray);
         } catch (JSONException e) {

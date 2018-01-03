@@ -147,6 +147,7 @@ public class ProjectMessagingFragment extends Fragment {
                                     Logger.printMessage("message_list"+"["+position+"]","-->"+setGetProjectMessageDetailsDataArrayList.get(position).getMessage_list().toString());
                                     Intent intent = new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class);
                                     intent.putExtra("message_list",setGetProjectMessageDetailsDataArrayList.get(position).getMessage_list().toString());
+                                    intent.putExtra("pro_com_nm",setGetProjectMessageDetailsDataArrayList.get(position).getPro_com_nm());
                                     startActivity(intent);
                                 }
                             });
