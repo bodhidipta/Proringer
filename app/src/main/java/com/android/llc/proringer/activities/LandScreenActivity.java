@@ -723,7 +723,6 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
                 public void onClick(View view) {
                     Intent searchIntent = new Intent(LandScreenActivity.this, SearchNearProActivity.class);
                     startActivityForResult(searchIntent, 41);
-
                 }
             });
             findViewById(R.id.search_local_pro_header).setVisibility(View.GONE);
