@@ -17,9 +17,13 @@ import com.android.llc.proringer.utils.NetworkUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -2697,7 +2701,7 @@ public class ProServiceApiHelper {
                 @Override
                 protected String doInBackground(String... params) {
                     try {
-                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+//                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
 
                         Logger.printMessage("user_id", ":-" + params[0]);
@@ -2705,13 +2709,38 @@ public class ProServiceApiHelper {
                         Logger.printMessage("zip_search", ":-" + params[2]);
                         Logger.printMessage("prosListingAPI", prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2]);
 
-                        Request request = new Request.Builder()
-                                .get()
-                                .url(prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2])
-                                .build();
+//                        Request request = new Request.Builder()
+//                                .get()
+//                                .url(prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2])
+//                                .build();
 
-                        Response response = client.newCall(request).execute();
-                        String responseString = response.body().string();
+//                        Response response = client.newCall(request).execute();
+
+                        URL mUrl = new URL(prosListingAPI + params[0] + "&category_search=" + params[1] + "&zip_search=" + params[2]);
+                        HttpURLConnection httpConnection = (HttpURLConnection) mUrl.openConnection();
+                        httpConnection.setRequestMethod("GET");
+                        httpConnection.setRequestProperty("Content-length", "0");
+                        httpConnection.setUseCaches(true);
+                        httpConnection.setAllowUserInteraction(true);
+                        httpConnection.setConnectTimeout(160000);
+                        httpConnection.setReadTimeout(160000);
+
+                        httpConnection.connect();
+
+                        int responseCode = httpConnection.getResponseCode();
+                        StringBuilder sb = new StringBuilder();
+                        if (responseCode == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                sb.append(line + "\n");
+                            }
+                            br.close();
+                        }
+
+
+                        String responseString =sb.toString();
 
                         Logger.printMessage("prosListingAPI", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
