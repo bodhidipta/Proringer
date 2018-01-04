@@ -65,60 +65,62 @@ public class ProServiceApiHelper {
     private String currentLat = "";
     private String currentLng = "";
 
-    private String BaseUrl="http://esolz.co.in/lab6/proringer_latest/";
+    private String BaseUrl = "http://esolz.co.in/lab6/proringer_latest/";
 
-    private String categoryAPI = BaseUrl+"app_categorylist";
-    private String serviceAPI = BaseUrl+"app_catrgoryservice_list";
-    private String registrationAPI = BaseUrl+"app_signup";
-    private String loginAPI = BaseUrl+"app_homeowner_login";
-    private String forgetPasswordAPI = BaseUrl+"app_forgot_password";
-    private String resetPasswordAPI = BaseUrl+"app_resetpassword";
-    private String getUserInformationAPI = BaseUrl+"app_userinformation_list";
-    private String updateUserInformationAPI = BaseUrl+"app_userinfo_edit";
-    private String changeUserEmailAPI = BaseUrl+"app_change_email";
-    private String changeUserPasswordAPI = BaseUrl+"app_change_password";
-    private String getNotificationDetailsAPI = BaseUrl+"app_notification_list";
-    private String updateNotificationDetailsAPI = BaseUrl+"app_notification_save";
-    private String homeSchedulerOptionListAPI = BaseUrl+"app_homescheduler_option";
-    private String homeSchedulerValuesListAPI = BaseUrl+"app_homescheduler_list?user_id=";
-    private String updateHomeSchedularOptionAPI = BaseUrl+"app_homescheduler_save";
-    private String inviteFriendsAPI = BaseUrl+"app_invite_friend";
-    private String postProjectAPI = BaseUrl+"app_project_post";
-    private String myProjectListAPI = BaseUrl+"app_homeowner_myproject?user_id=";
+    private String categoryAPI = BaseUrl + "app_categorylist";
+    private String serviceAPI = BaseUrl + "app_catrgoryservice_list";
+    private String registrationAPI = BaseUrl + "app_signup";
+    private String loginAPI = BaseUrl + "app_homeowner_login";
+    private String forgetPasswordAPI = BaseUrl + "app_forgot_password";
+    private String resetPasswordAPI = BaseUrl + "app_resetpassword";
+    private String getUserInformationAPI = BaseUrl + "app_userinformation_list";
+    private String updateUserInformationAPI = BaseUrl + "app_userinfo_edit";
+    private String changeUserEmailAPI = BaseUrl + "app_change_email";
+    private String changeUserPasswordAPI = BaseUrl + "app_change_password";
+    private String getNotificationDetailsAPI = BaseUrl + "app_notification_list";
+    private String updateNotificationDetailsAPI = BaseUrl + "app_notification_save";
+    private String homeSchedulerOptionListAPI = BaseUrl + "app_homescheduler_option";
+    private String homeSchedulerValuesListAPI = BaseUrl + "app_homescheduler_list?user_id=";
+    private String updateHomeSchedularOptionAPI = BaseUrl + "app_homescheduler_save";
+    private String inviteFriendsAPI = BaseUrl + "app_invite_friend";
+    private String postProjectAPI = BaseUrl + "app_project_post";
+    private String myProjectListAPI = BaseUrl + "app_homeowner_myproject?user_id=";
 
-    private String contactUsAPI = BaseUrl+"app_contact_us";
-    private String myProjectDeleteAPI = BaseUrl+"app_myproject_delete";
-    private String myProjectDetailsAPI = BaseUrl+"app_myproject_details?user_id=";
-    private String favoriteProsListAPI = BaseUrl+"app_favourite_pros?user_id=";
+    private String contactUsAPI = BaseUrl + "app_contact_us";
+    private String myProjectDeleteAPI = BaseUrl + "app_myproject_delete";
+    private String myProjectDetailsAPI = BaseUrl + "app_myproject_details?user_id=";
+    private String favoriteProsListAPI = BaseUrl + "app_favourite_pros?user_id=";
 
-    private String favoriteProsDeleteAPI = BaseUrl+"app_favourite_pros_delete";
+    private String favoriteProsDeleteAPI = BaseUrl + "app_favourite_pros_delete";
 
-    private String faqInformationAPI = BaseUrl+"app_faq";
-    private String termsOfUseAPI = BaseUrl+"app_term";
-    private String privacyPolicyAPI = BaseUrl+"app_privacy_policy";
+    private String faqInformationAPI = BaseUrl + "app_faq";
+    private String termsOfUseAPI = BaseUrl + "app_term";
+    private String privacyPolicyAPI = BaseUrl + "app_privacy_policy";
 
-    private String prosListingAPI = BaseUrl+"app_serch_result_project?user_id=";
+    private String prosListingAPI = BaseUrl + "app_serch_result_project?user_id=";
 
-    private String favouriteProAdddeleteAPI = BaseUrl+"app_favourite_pro_adddelete";
-    private String homeownerDashboardAPI = BaseUrl+"app_homeowner_dashboard";
-    private String prosIndividualListingAPI = BaseUrl+"app_pro_individual_listing";
+    private String favouriteProAdddeleteAPI = BaseUrl + "app_favourite_pro_adddelete";
+    private String homeownerDashboardAPI = BaseUrl + "app_homeowner_dashboard";
+    private String prosIndividualListingAPI = BaseUrl + "app_pro_individual_listing";
 
-    private String prosAddReviewAPI = BaseUrl+"app_homeowner_addreview";
-    private String prosIndividualPortfolioImageAPI = BaseUrl+"app_individual_portfolio_image";
-
-
-    private String prosAllReviewAPI = BaseUrl+"app_homeowner_allreview";
-    private String prosReportReviewAPI = BaseUrl+"app_homeowner_reportreview";
-
-    private String profileImageAPI = BaseUrl+"app_homeowner_profileimg";
-    private String contactProAPI = BaseUrl+"contact_pro";
+    private String prosAddReviewAPI = BaseUrl + "app_homeowner_addreview";
+    private String prosIndividualPortfolioImageAPI = BaseUrl + "app_individual_portfolio_image";
 
 
-    private String editprojectAPI = BaseUrl+"app_project_edit";
-    private String loginFBAPI = BaseUrl+"app_facebook_login";
-    private String messageListAPI = BaseUrl+"app_project_message";
+    private String prosAllReviewAPI = BaseUrl + "app_homeowner_allreview";
+    private String prosReportReviewAPI = BaseUrl + "app_homeowner_reportreview";
 
-    private String messageDeleteAPI = BaseUrl+"app_project_message_deleted";
+    private String profileImageAPI = BaseUrl + "app_homeowner_profileimg";
+    private String contactProAPI = BaseUrl + "contact_pro";
+
+
+    private String editprojectAPI = BaseUrl + "app_project_edit";
+    private String loginFBAPI = BaseUrl + "app_facebook_login";
+    private String messageListAPI = BaseUrl + "app_project_message";
+
+    private String messageDeleteAPI = BaseUrl + "app_project_message_deleted";
+
+    private String messagesendAPI= BaseUrl+"app_project_msg_send";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
@@ -2740,7 +2742,7 @@ public class ProServiceApiHelper {
                         }
 
 
-                        String responseString =sb.toString();
+                        String responseString = sb.toString();
 
                         Logger.printMessage("prosListingAPI", "" + responseString);
                         JSONObject jsonObject = new JSONObject(responseString);
@@ -3756,7 +3758,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("project_id", ":-" + params[1]);
                         Logger.printMessage("pro_user_id", ":-" + params[2]);
 
-                        String MessageDeleteAPI = messageDeleteAPI + "?user_id=" + params[0] + "&project_id=" + params[1]+"&pro_user_id="+params[2];
+                        String MessageDeleteAPI = messageDeleteAPI + "?user_id=" + params[0] + "&project_id=" + params[1] + "&pro_user_id=" + params[2];
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
@@ -3797,6 +3799,91 @@ public class ProServiceApiHelper {
         } else {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
+    }
+
+
+    /**
+     * send message
+     *
+     * @param callback
+     */
+    public void sendmessage(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+
+
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        Logger.printMessage("user_id", ":-" + ProApplication.getInstance().getUserId());
+                        Logger.printMessage("project_id", ":-" + params[0]);
+                        Logger.printMessage("pro_id", ":-" + params[1]);
+                        Logger.printMessage("message", ":-" + params[2]);
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", ProApplication.getInstance().getUserId())
+                                .add("project_id", params[0])
+                                .add("pro_id", params[1])
+                                .add("message", params[2])
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .url(messagesendAPI)
+                                .post(requestBody)
+                                .build();
+                        Response response = okHttpClient.newCall(request).execute();
+                        String responseString = response.body().string();
+                        Logger.printMessage("responseInfo", responseString);
+                        JSONObject respo = new JSONObject(responseString);
+                        Logger.printMessage("responesrjjh", String.valueOf(respo.getBoolean("response")));
+                        if (respo.getBoolean("response")) {
+                            Logger.printMessage("mejdfgjdgfhjdg", respo.getString("message"));
+                            return respo.getString("message");
+                        } else {
+                            exception = respo.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        Logger.printMessage("successfullyUpdateMSQL", "YES");
+                        try {
+                            callback.onComplete(s);
+                        } catch (Exception io) {
+                            io.printStackTrace();
+                            callback.onError(io.getMessage());
+                        }
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+
+
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+        }
+
     }
 
 

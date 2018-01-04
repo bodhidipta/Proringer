@@ -1,23 +1,35 @@
 package com.android.llc.proringer.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.IndevidualChatAdapter;
+import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.cropImagePackage.CropImage;
+import com.android.llc.proringer.cropImagePackage.CropImageView;
+import com.android.llc.proringer.helper.MyLoader;
+import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.SetGetChatPojoData;
 import com.android.llc.proringer.utils.Logger;
-import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.android.llc.proringer.utils.PermissionController;
+import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -42,9 +54,17 @@ import java.util.LinkedList;
 public class IndividualMessageActivity extends AppCompatActivity {
     RecyclerView chat_list;
     ImageView img_background;
-    IndevidualChatAdapter indevidualChatAdapter=null;
-    JSONArray jsonArray;
-
+    MyLoader myLoader = null;
+    JSONObject jsonObject;
+    int sum;
+    LinkedList<SetGetChatPojoData> chatList;
+    IndevidualChatAdapter indevidualChatAdapter;
+    ImageView imv_camaragallery,im_send;
+    ProLightEditText tv_text;
+    private String mCurrentPhotoPath = "";
+    String projectid,pro_id,myprojectid;
+    boolean flag=true;
+    int position;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,60 +74,148 @@ public class IndividualMessageActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        try {
-            ((ProRegularTextView)findViewById(R.id.tv_pro_user_name)).setText(getIntent().getStringExtra("pro_com_nm"));
-            jsonArray=new JSONArray(getIntent().getStringExtra("message_list"));
-            Logger.printMessage("message_list","-->"+jsonArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
         chat_list = (RecyclerView) findViewById(R.id.chat_list);
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
-        LinkedList<SetGetChatPojoData> chatList = new LinkedList<>();
-
+        projectid= getIntent().getExtras().getString("projectid");
+        pro_id=getIntent().getExtras().getString("proid");
+        myprojectid=getIntent().getExtras().getString("projid");
+        position= Integer.parseInt(getIntent().getExtras().getString("position"));
+        Logger.printMessage("projectid",projectid);
+        Logger.printMessage("proid",pro_id);
+        Logger.printMessage("projid",myprojectid);
+        Logger.printMessage("position1", String.valueOf(position));
         img_background = (ImageView) findViewById(R.id.img_background);
-
+        imv_camaragallery=(ImageView)findViewById(R.id.imv_camaragallery);
+        im_send=(ImageView)findViewById(R.id.im_send);
+        imv_camaragallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IndividualMessageActivity.this, PermissionController.class);
+                intent.setAction(PermissionController.ACTION_READ_STORAGE_PERMISSION);
+                startActivityForResult(intent, 200);
+            }
+        });
+        tv_text=(ProLightEditText)findViewById(R.id.tv_text);
         Glide.with(IndividualMessageActivity.this).load(R.drawable.chat_background).centerCrop().into(img_background);
 
+        myLoader = new MyLoader(IndividualMessageActivity.this);
+
+        chatList = new LinkedList<>();
 
 
-        try {
 
-            for (int i = 0; i < jsonArray.length(); i++) {
+        if(indevidualChatAdapter==null)
+        {
+            flag=false;
+            try {
+                jsonObject =new JSONObject( getIntent().getExtras().getString("infoarry"));
+                Logger.printMessage("jsonObject","-->"+jsonObject);
+                JSONArray message_list=jsonObject.getJSONArray("message_list");
 
-                for (int j = 0; j < jsonArray.getJSONObject(i).getJSONArray("info").length();j++){
+                for (int i=0;i<message_list.length();i++){
 
-                    SetGetChatPojoData setGetChatPojoData=new SetGetChatPojoData();
-                    if (j==0){
-                        setGetChatPojoData.setDate(jsonArray.getJSONObject(i).getString("date"));
-                    }else {
-                        setGetChatPojoData.setDate("");
+                    for (int j=0;j<message_list.getJSONObject(i).getJSONArray("info").length();j++){
+
+                        SetGetChatPojoData chatPojo=new SetGetChatPojoData();
+                        if (j==0) {
+                            chatPojo.setDate(message_list.getJSONObject(i).getString("date"));
+                        }else {
+                            chatPojo.setDate("");
+                        }
+                        chatPojo.setUser(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
+                        chatPojo.setSender_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
+                        chatPojo.setReceiver_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
+                        chatPojo.setMessage_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
+                        chatPojo.setProject_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
+                        chatPojo.setMessage_info(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
+                        chatPojo.setOther_file_type(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
+                        chatPojo.setMsg_attachment(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
+                        chatPojo.setTime_status(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
+                        chatPojo.setTime_show(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
+                        chatPojo.setCom_name(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
+                        chatPojo.setUsersimage(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
+
+                        chatList.add(chatPojo);
+
                     }
-                    setGetChatPojoData.setUser(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
-                    setGetChatPojoData.setSender_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
-                    setGetChatPojoData.setReceiver_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
-                    setGetChatPojoData.setMessage_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
-                    setGetChatPojoData.setProject_id(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
-                    setGetChatPojoData.setMessage_info(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
-                    setGetChatPojoData.setOther_file_type(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
-                    setGetChatPojoData.setMsg_attachment(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
-                    setGetChatPojoData.setTime_status(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
-                    setGetChatPojoData.setTime_show(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
-                    setGetChatPojoData.setCom_name(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
-                    setGetChatPojoData.setUsersimage(jsonArray.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
 
-                    chatList.add(setGetChatPojoData);
                 }
+
+                Collections.reverse(chatList);
+                indevidualChatAdapter=new IndevidualChatAdapter(IndividualMessageActivity.this,chatList);
+
+                chat_list.setAdapter(indevidualChatAdapter);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }catch (Exception ex){
-            ex.printStackTrace();
+        }
+        else if (flag==false)
+        {
+            Updatemessage();
         }
 
-        Collections.reverse(chatList);
-        indevidualChatAdapter=new IndevidualChatAdapter(this, chatList);
-        chat_list.setAdapter(indevidualChatAdapter);
+
+        im_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message();
+            }
+        });
+    }
+
+    /*  @Override
+      public void onError(String error) {
+
+          Log.d("onError","onError");
+      }*/
+    //}, ProApplication.getInstance().getUserId(), project_id);
+    public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
+//
+
+        // handle result of CropImageActivity
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+
+                mCurrentPhotoPath = result.getUri().toString();
+
+//                      Glide.with(IndividualMessageActivity).load(result.getUri()).fitCenter().into(new GlideDrawableImageViewTarget(image_pager) {
+//                          /**
+//                           * {@inheritDoc}
+//                           * If no {@link GlideAnimation} is given or if the animation does not set the
+//                           * {@link Drawable} on the view, the drawable is set using
+//                           * {@link ImageView#setImageDrawable(Drawable)}.
+//                           *
+//                           * @param resource  {@inheritDoc}
+//                           * @param animation {@inheritDoc}
+//                           */
+//                          @Override
+//                          public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+//                              super.onResourceReady(resource, animation);
+//                          }
+//                      });
+
+                Log.i("path-->", mCurrentPhotoPath);
+                tv_text.setText(mCurrentPhotoPath);
+
+                Toast.makeText(IndividualMessageActivity.this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Toast.makeText(IndividualMessageActivity.this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == 200 && resultCode == RESULT_OK) {
+//               // showImagePickerOption();
+            startCropImageActivity(null);
+        }
+    }
+    private void startCropImageActivity(Uri imageUri) {
+        Intent intent = CropImage.activity(imageUri)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setMultiTouchEnabled(false)
+                .setAspectRatio(4,3)
+                .getIntent(IndividualMessageActivity.this);
+        startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
     }
 
     @Override
@@ -122,4 +230,104 @@ public class IndividualMessageActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
+    public void passdata(int position) {
+        sum=position;
+    }
+    public void message()
+    {
+        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).sendmessage(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+
+                Logger.printMessage("sdhdhjdfgh","jksdhhskhd");
+
+
+            }
+
+            @Override
+            public void onComplete(String message) {
+                Logger.printMessage("sdhdhjdfgh",message);
+                Updatemessage();
+                Toast.makeText(IndividualMessageActivity.this, message, Toast.LENGTH_SHORT).show();
+                tv_text.setText("");
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        },projectid,pro_id,tv_text.getText().toString().trim());
+    }
+
+    public void Updatemessage() {
+        chatList.clear();
+        Log.d("againcall", "jhsdjhshdkh");
+        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+                Logger.printMessage("jhdjhdj","jhsjahsh");
+
+            }
+
+            @Override
+            public void onComplete(String message) {
+                Logger.printMessage("messagesdysy",message);
+
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(message);
+                    final JSONArray info_array = jsonObject.getJSONArray("info_array");
+
+                    if (info_array.getJSONObject(0).has("all_pro_user_list")) {
+                        String ob=info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(position).toString();
+                        Logger.printMessage("ob",ob);
+                        JSONObject jsonObject1=new JSONObject(ob);
+
+                        JSONArray message_list=jsonObject1.getJSONArray("message_list");
+                        for (int i=0;i<message_list.length();i++){
+
+                            for (int j=0;j<message_list.getJSONObject(i).getJSONArray("info").length();j++){
+
+                                SetGetChatPojoData chatPojo=new SetGetChatPojoData();
+                                if (j==0) {
+                                    chatPojo.setDate(message_list.getJSONObject(i).getString("date"));
+                                }else {
+                                    chatPojo.setDate("");
+                                }
+                                chatPojo.setUser(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
+                                chatPojo.setSender_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
+                                chatPojo.setReceiver_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
+                                chatPojo.setMessage_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
+                                chatPojo.setProject_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
+                                chatPojo.setMessage_info(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
+                                chatPojo.setOther_file_type(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
+                                chatPojo.setMsg_attachment(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
+                                chatPojo.setTime_status(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
+                                chatPojo.setTime_show(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
+                                chatPojo.setCom_name(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
+                                chatPojo.setUsersimage(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
+
+                                chatList.add(chatPojo);
+
+                            }
+
+                        }
+                        Collections.reverse(chatList);
+                        indevidualChatAdapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String error) {
+                Logger.printMessage("jhdjhdj","jhsjahsh");
+            }
+        },ProApplication.getInstance().getUserId(),myprojectid);
+    }
+
 }
+

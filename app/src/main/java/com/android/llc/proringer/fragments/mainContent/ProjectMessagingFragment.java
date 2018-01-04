@@ -48,15 +48,18 @@ import java.util.ArrayList;
 public class ProjectMessagingFragment extends Fragment {
     RelativeLayout detailed_project_search;
     RecyclerView message_list;
-    ArrayList<SetGetProjectMessageDetailsData> setGetProjectMessageDetailsDataArrayList;
+    ArrayList<SetGetProjectMessageDetailsData> projectMessageDetailsArrayList;
     ProjectDetailedMessageAdapter projectDetailedMessageAdapter;
     String project_id = "";
+    String mypojectid="";
     MyLoader myLoader = null;
+    String projectid,pro_id;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         project_id = getArguments().getString("project_id");
+        mypojectid=project_id;
         return inflater.inflate(R.layout.project_detailed_messaging, container, false);
     }
 
@@ -65,7 +68,7 @@ public class ProjectMessagingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         myLoader = new MyLoader(getActivity());
-        setGetProjectMessageDetailsDataArrayList = new ArrayList<>();
+        projectMessageDetailsArrayList = new ArrayList<>();
 
         detailed_project_search = (RelativeLayout) view.findViewById(R.id.detailed_project_search);
 
@@ -113,7 +116,7 @@ public class ProjectMessagingFragment extends Fragment {
                     myLoader.dismissLoader();
                 try {
                     JSONObject jsonObject = new JSONObject(message);
-                    JSONArray info_array = jsonObject.getJSONArray("info_array");
+                    final JSONArray info_array = jsonObject.getJSONArray("info_array");
 
                     if (info_array.getJSONObject(0).has("all_pro_user_list")) {
 
@@ -123,8 +126,10 @@ public class ProjectMessagingFragment extends Fragment {
 
                             setGetProjectMessageDetailsData.setId(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("id"));
                             setGetProjectMessageDetailsData.setProject_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id"));
+                            projectid=info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id");
                             setGetProjectMessageDetailsData.setHomeowner_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("homeowner_id"));
                             setGetProjectMessageDetailsData.setPro_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id"));
+                            pro_id=info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id");
                             setGetProjectMessageDetailsData.setPro_img(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_img"));
                             setGetProjectMessageDetailsData.setPro_rating(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_rating"));
                             setGetProjectMessageDetailsData.setPro_time_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_time_status"));
@@ -135,23 +140,31 @@ public class ProjectMessagingFragment extends Fragment {
                             setGetProjectMessageDetailsData.setRead_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getInt("read_status"));
                             setGetProjectMessageDetailsData.setMessage_list(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getJSONArray("message_list"));
 
-                            setGetProjectMessageDetailsDataArrayList.add(setGetProjectMessageDetailsData);
+                            projectMessageDetailsArrayList.add(setGetProjectMessageDetailsData);
                         }
                         Logger.printMessage("all_pro_user_list", "" + info_array.getJSONObject(0).getJSONArray("all_pro_user_list"));
 
                         if (projectDetailedMessageAdapter == null) {
                             Logger.printMessage("projectDetailedMessageAdapter", "not null");
-                            projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), setGetProjectMessageDetailsDataArrayList, new onOptionSelected() {
+                            projectDetailedMessageAdapter = new ProjectDetailedMessageAdapter((LandScreenActivity) getActivity(), projectMessageDetailsArrayList, new onOptionSelected() {
                                 @Override
                                 public void onItemPassed(int position, String value) {
-                                    Logger.printMessage("message_list"+"["+position+"]","-->"+setGetProjectMessageDetailsDataArrayList.get(position).getMessage_list().toString());
-                                    Intent intent = new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class);
-                                    intent.putExtra("message_list",setGetProjectMessageDetailsDataArrayList.get(position).getMessage_list().toString());
-                                    intent.putExtra("pro_com_nm",setGetProjectMessageDetailsDataArrayList.get(position).getPro_com_nm());
-                                    startActivity(intent);
+                                    //startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));
+                                    Intent intent= new Intent(getActivity(),IndividualMessageActivity.class);
+                                    try {
+                                        intent.putExtra("infoarry", info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(position).toString());
+                                        intent.putExtra("projectid",projectid);
+                                        intent.putExtra("proid",pro_id);
+                                        String post= String.valueOf(position);
+                                        Logger.printMessage("position-->",post);
+                                        intent.putExtra("position",post);
+                                        intent.putExtra("projid",mypojectid);
+                                        startActivity(intent);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
-
                             message_list.setAdapter(projectDetailedMessageAdapter);
 
                         } else {
@@ -177,6 +190,4 @@ public class ProjectMessagingFragment extends Fragment {
     public interface onOptionSelected {
         void onItemPassed(int position, String value);
     }
-
-
 }
