@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,46 +192,92 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
 
     private void updateUserInformation() {
 
-        if (!zip_code.getText().toString().trim().equals("")) {
-            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformation(
-                    new ProServiceApiHelper.getApiProcessCallback() {
-                        @Override
-                        public void onStart() {
-                            myLoader.showLoader();
-                        }
+        if (first_name.getText().toString().trim().equals(""))
+        {
+            first_name.setError("Enter First Name");
+            first_name.setFocusable(true);
+        }
+        else {
+            first_name.setError(null);//removes error
+            first_name.clearFocus();
+            if (last_name.getText().toString().trim().equals(""))
+            {
+                last_name.setError("Enter Last Name");
+                last_name.setFocusable(true);
+            }
+            else {
+                last_name.setError(null);//removes error
+                last_name.clearFocus();
+                if (contact.getText().toString().trim().equals(""))
+                {
+                    contact.setError("Enter Phone Number");
+                    contact.setFocusable(true);
+                }
+                else {
 
-                        @Override
-                        public void onComplete(String message) {
-                            if (myLoader != null && myLoader.isMyLoaderShowing())
-                                myLoader.dismissLoader();
-                            Toast.makeText(getActivity(), "User information updated successfully", Toast.LENGTH_SHORT).show();
-                        }
+                    contact.setError(null);//removes error
+                    contact.clearFocus();
 
-                        @Override
-                        public void onError(String error) {
-                            if (myLoader != null && myLoader.isMyLoaderShowing())
-                                myLoader.dismissLoader();
+                    if (contact.getText().toString().trim().length()<14)
+                    {
+                        contact.setError("Enter Correct Phone Number");
+                        contact.setFocusable(true);
+                    }
+                    else {
 
-                            CustomAlert customAlert = new CustomAlert(getActivity(), "Error updating information", "" + error, UserInformationFragment.this);
-                            customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+                        contact.setError(null);//removes error
+                        contact.clearFocus();
+
+                        if (tv_search_by_location.getText().toString().trim().equals(""))
+                        {
+                            tv_search_by_location.setError("Choose Address");
+                            tv_search_by_location.setFocusable(true);
                         }
-                    },
-                    first_name.getText().toString().trim(),
-                    last_name.getText().toString().trim(),
-                    tv_search_by_location.getText().toString().trim(),
+                        else {
+                            if (zip_code.getText().toString().trim().equals("")||city.getText().toString().trim().equals("")||state.getText().toString().trim().equals("")) {
+                                CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code , city, state", UserInformationFragment.this);
+                                customAlert.createNormalAlert("ok", 1);
+                            } else {
+                                ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformation(
+                                        new ProServiceApiHelper.getApiProcessCallback() {
+                                            @Override
+                                            public void onStart() {
+                                                myLoader.showLoader();
+                                            }
+
+                                            @Override
+                                            public void onComplete(String message) {
+                                                if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                    myLoader.dismissLoader();
+                                                Toast.makeText(getActivity(), "User information updated successfully", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            @Override
+                                            public void onError(String error) {
+                                                if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                    myLoader.dismissLoader();
+
+                                                CustomAlert customAlert = new CustomAlert(getActivity(), "Error updating information", "" + error, UserInformationFragment.this);
+                                                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+                                            }
+                                        },
+                                        first_name.getText().toString().trim(),
+                                        last_name.getText().toString().trim(),
+                                        tv_search_by_location.getText().toString().trim(),
 //                    address.getText().toString().trim(),
-                    city.getText().toString().trim(),
-                    "USA",
-                    state.getText().toString().trim(),
-                    zip_code.getText().toString().trim(),
-                    contact.getText().toString().trim(),
-                    "",
-                    "",
-                    "");
-        } else {
-
-            CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code", UserInformationFragment.this);
-            customAlert.createNormalAlert("ok", 1);
+                                        city.getText().toString().trim(),
+                                        "USA",
+                                        state.getText().toString().trim(),
+                                        zip_code.getText().toString().trim(),
+                                        contact.getText().toString().trim(),
+                                        "",
+                                        "",
+                                        "");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
