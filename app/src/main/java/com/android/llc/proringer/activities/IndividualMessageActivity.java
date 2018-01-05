@@ -137,9 +137,6 @@ public class IndividualMessageActivity extends AppCompatActivity {
             }
 
 
-
-
-
             Collections.reverse(chatList);
             indevidualChatAdapter = new IndevidualChatAdapter(IndividualMessageActivity.this, chatList);
 
@@ -153,10 +150,10 @@ public class IndividualMessageActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!tv_text.getText().toString().trim().equals("")) {
-                    mCurrentPhotoPath="";
+                    mCurrentPhotoPath = "";
                     sendMessage();
-                }else {
-                    Toast.makeText(IndividualMessageActivity.this,"Enter Message",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(IndividualMessageActivity.this, "Enter Message", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -249,7 +246,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             public void onError(String error) {
 
             }
-        }, project_id, pro_id, tv_text.getText().toString().trim(),mCurrentPhotoPath);
+        }, project_id, pro_id, tv_text.getText().toString().trim(), mCurrentPhotoPath);
     }
 
     public void updateMessage() {

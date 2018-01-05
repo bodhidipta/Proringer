@@ -120,7 +120,7 @@ public class ProServiceApiHelper {
 
     private String messageDeleteAPI = BaseUrl + "app_project_message_deleted";
 
-    private String messagesendAPI= BaseUrl+"app_project_msg_send";
+    private String messagesendAPI = BaseUrl + "app_project_msg_send";
 
     public static ProServiceApiHelper getInstance(Context context) {
         if (instance == null)
