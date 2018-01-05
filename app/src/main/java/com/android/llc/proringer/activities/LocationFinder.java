@@ -98,7 +98,7 @@ public class LocationFinder extends AppCompatActivity {
 
     private void fetch_LocationSuggestion(final CharSequence url) {
 
-        ProServiceApiHelper.getInstance(LocationFinder.this).getSearchCountriesByPlacesFilter(new ProServiceApiHelper.onSearchPlacesNameCallback() {
+        ProServiceApiHelper.getInstance(LocationFinder.this).getSearchCountriesByPlacesFilterAPI(new ProServiceApiHelper.onSearchPlacesNameCallback() {
 
             @Override
             public void onComplete(ArrayList<String> listData) {

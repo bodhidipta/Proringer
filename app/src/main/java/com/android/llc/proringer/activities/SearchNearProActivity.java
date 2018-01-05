@@ -168,7 +168,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
     }
 
     public void getCurrentLocationZip() {
-        ProServiceApiHelper.getInstance(SearchNearProActivity.this).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(SearchNearProActivity.this).getZipCodeUsingGoogleAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 // myLoader.showLoader();
@@ -460,7 +460,7 @@ public class SearchNearProActivity extends AppCompatActivity implements
     }
 
     private void searchLocationUsingZip(String key) {
-        ProServiceApiHelper.getInstance(SearchNearProActivity.this).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance(SearchNearProActivity.this).getSearchAreaAPI(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<SetGetAddressData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())

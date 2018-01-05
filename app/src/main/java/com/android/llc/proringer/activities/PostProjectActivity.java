@@ -251,7 +251,7 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         Logger.printMessage("@registrationPostPro", "last_name:" + last_name);
         Logger.printMessage("@registrationPostPro", "email:" + email);
         Logger.printMessage("@registrationPostPro", "confirm_password:" + confirm_password);
-        ProServiceApiHelper.getInstance(PostProjectActivity.this).postProject(
+        ProServiceApiHelper.getInstance(PostProjectActivity.this).postProjectAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

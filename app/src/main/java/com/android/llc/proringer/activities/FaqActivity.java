@@ -47,7 +47,7 @@ public class FaqActivity extends AppCompatActivity implements MyCustomAlertListe
 
         linear_main_container = (LinearLayout) findViewById(R.id.linear_main_container);
 
-        ProServiceApiHelper.getInstance(FaqActivity.this).getFaqInformation(new ProServiceApiHelper.faqCallback() {
+        ProServiceApiHelper.getInstance(FaqActivity.this).getFaqInformationAPI(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

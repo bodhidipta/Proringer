@@ -300,7 +300,7 @@ public class PostProjectRegistrationAndFinalizeFragment extends Fragment impleme
                 } else if (((EditText)dialog.findViewById(R.id.edt_password)).getText().toString().trim().equals("")) {
                     ((EditText)dialog.findViewById(R.id.edt_password)).setError("Please enter password.");
                 } else {
-                    ProServiceApiHelper.getInstance(getActivity()).getUserLoggedIn(
+                    ProServiceApiHelper.getInstance(getActivity()).getUserLoggedInAPI(
                             new ProServiceApiHelper.getApiProcessCallback() {
                                 @Override
                                 public void onStart() {

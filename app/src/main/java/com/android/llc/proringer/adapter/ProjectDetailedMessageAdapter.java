@@ -119,7 +119,7 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
         Logger.printMessage("i-->", String.valueOf(i));
         if (result.equalsIgnoreCase("Ok") && i == 1) {
 
-            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageListAPI(new ProServiceApiHelper.getApiProcessCallback() {
                 @Override
                 public void onStart() {
                     myLoader.showLoader();

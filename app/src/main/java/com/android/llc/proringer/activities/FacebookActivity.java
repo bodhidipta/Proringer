@@ -180,7 +180,7 @@ public class FacebookActivity extends AppCompatActivity implements MyCustomAlert
     private void LoginWithWanNyaan(JSONObject jsonObject) {
         try {
 
-            ProServiceApiHelper.getInstance(FacebookActivity.this).getUserLoggedInFacebook(
+            ProServiceApiHelper.getInstance(FacebookActivity.this).getUserLoggedInFacebookAPI(
                     new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {

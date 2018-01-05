@@ -81,7 +81,7 @@ public class LogInActivity extends AppCompatActivity implements MyCustomAlertLis
                 } else if (password.getText().toString().trim().equals("")) {
                     password.setError("Please enter password.");
                 } else {
-                    ProServiceApiHelper.getInstance(LogInActivity.this).getUserLoggedIn(
+                    ProServiceApiHelper.getInstance(LogInActivity.this).getUserLoggedInAPI(
                             new ProServiceApiHelper.getApiProcessCallback() {
                                 @Override
                                 public void onStart() {

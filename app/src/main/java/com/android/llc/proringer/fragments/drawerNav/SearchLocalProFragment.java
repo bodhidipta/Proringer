@@ -294,7 +294,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                         dialog.dismiss();
                         ///////////delete from favorite list
                         try {
-                            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+                            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDeleteAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                                           @Override
                                                                                                                           public void onStart() {
                                                                                                                               myLoader.showLoader();
@@ -339,7 +339,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
     public void addFavPro(final String pros_id) {
         try {
-            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDelete(new ProServiceApiHelper.getApiProcessCallback() {
+            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).favouriteProAddDeleteAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                           @Override
                                                                                                           public void onStart() {
                                                                                                               myLoader.showLoader();

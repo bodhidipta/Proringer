@@ -85,7 +85,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
             @Override
             public void onClick(View v) {
                 if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
-                    ProServiceApiHelper.getInstance(ForgotPasswordActivity.this).forgetPassword(email.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
+                    ProServiceApiHelper.getInstance(ForgotPasswordActivity.this).forgetPasswordAPI(email.getText().toString().trim(), new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
                             myLoader.showLoader();
@@ -135,7 +135,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements MyCusto
                             password.setError("Please enter confirm password.");
                         } else {
                             if (password.getText().toString().trim().equals(confirm_password.getText().toString().trim())) {
-                                ProServiceApiHelper.getInstance(ForgotPasswordActivity.this).resetPassword(
+                                ProServiceApiHelper.getInstance(ForgotPasswordActivity.this).resetPasswordAPI(
                                         request_code.getText().toString().trim(),
                                         confirm_password.getText().toString().trim(),
                                         new ProServiceApiHelper.getApiProcessCallback() {

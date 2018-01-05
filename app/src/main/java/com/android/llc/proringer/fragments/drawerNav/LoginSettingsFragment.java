@@ -121,7 +121,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
      * Update current email address ,upon succeeding log out current user to re login
      */
     private void updateCurrentEmail() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserEmail(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserEmailAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
@@ -173,7 +173,7 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
      * Update password , on success log out current profile to re login
      */
     private void updatePassword() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserPassword(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserPasswordAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

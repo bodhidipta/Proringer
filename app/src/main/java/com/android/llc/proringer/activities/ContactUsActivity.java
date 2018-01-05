@@ -86,7 +86,7 @@ public class ContactUsActivity extends AppCompatActivity implements MyCustomAler
     }
 
     private void getSubmitParams() {
-        ProServiceApiHelper.getInstance(ContactUsActivity.this).contactUs(
+        ProServiceApiHelper.getInstance(ContactUsActivity.this).contactUsAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

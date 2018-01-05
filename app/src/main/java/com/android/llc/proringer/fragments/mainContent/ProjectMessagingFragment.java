@@ -108,7 +108,7 @@ public class ProjectMessagingFragment extends Fragment {
 
         projectMessageDetailsArrayList.clear();
 
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserMessageListAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

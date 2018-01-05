@@ -78,7 +78,7 @@ public class ProsReportAbuseActivity extends AppCompatActivity implements MyCust
 
     public void submitReviewReport() {
 
-        ProServiceApiHelper.getInstance(ProsReportAbuseActivity.this).addReviewReportAbuse(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsReportAbuseActivity.this).addReviewReportAbuseAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                @Override
                                                                                                public void onStart() {
                                                                                                    myLoader.showLoader();

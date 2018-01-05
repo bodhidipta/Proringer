@@ -79,7 +79,7 @@ public class ContactUsFragment extends Fragment {
     }
 
     private void getSubmitParams() {
-        ProServiceApiHelper.getInstance(getActivity()).contactUs(
+        ProServiceApiHelper.getInstance(getActivity()).contactUsAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

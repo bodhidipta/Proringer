@@ -150,7 +150,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getCategoryList(final onProCategoryListener callback, String... params) {
+    public void getCategoryListAPI(final onProCategoryListener callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, LinkedList>() {
@@ -227,7 +227,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getServiceList(final onProCategoryListener callback, final String... params) {
+    public void getServiceListAPI(final onProCategoryListener callback, final String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, LinkedList>() {
@@ -306,7 +306,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void getUserRegistered(final getApiProcessCallback callback, String... params) {
+    public void getUserRegisteredAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -385,7 +385,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void getUserLoggedIn(final getApiProcessCallback callback, String... params) {
+    public void getUserLoggedInAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -466,7 +466,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void getUserLoggedInFacebook(final getApiProcessCallback callback, String... params) {
+    public void getUserLoggedInFacebookAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -542,7 +542,7 @@ public class ProServiceApiHelper {
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
-                        getUserInformation(callback);
+                        getUserInformationAPI(callback);
                     } else {
                         callback.onError(s);
                     }
@@ -560,7 +560,7 @@ public class ProServiceApiHelper {
      * @param email
      * @param callback
      */
-    public void forgetPassword(final String email, final getApiProcessCallback callback) {
+    public void forgetPasswordAPI(final String email, final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -624,7 +624,7 @@ public class ProServiceApiHelper {
      * @param password
      * @param callback
      */
-    public void resetPassword(final String request_code, String password, final getApiProcessCallback callback) {
+    public void resetPasswordAPI(final String request_code, String password, final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -687,7 +687,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getUserInformation(final getApiProcessCallback callback) {
+    public void getUserInformationAPI(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -765,7 +765,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void updateUserInformation(final getApiProcessCallback callback, String... params) {
+    public void updateUserInformationAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -841,7 +841,7 @@ public class ProServiceApiHelper {
                         Logger.printMessage("successfullyUpdateMSQL", "YES");
                         try {
                             callback.onComplete(s);
-                            getUserInformation(callback);
+                            getUserInformationAPI(callback);
                         } catch (Exception io) {
                             io.printStackTrace();
                             callback.onError(io.getMessage());
@@ -861,7 +861,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void updateUserEmail(final getApiProcessCallback callback, String... params) {
+    public void updateUserEmailAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -932,7 +932,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void updateUserPassword(final getApiProcessCallback callback, String... params) {
+    public void updateUserPasswordAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1004,7 +1004,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getUserNotification(final getApiProcessCallback callback) {
+    public void getUserNotificationAPI(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1082,7 +1082,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void updateUserNotification(final getApiProcessCallback callback, String... params) {
+    public void updateUserNotificationAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1165,7 +1165,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getHomeSchedularOptionList(final getApiProcessCallback callback) {
+    public void getHomeSchedularOptionListAPI(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1228,7 +1228,7 @@ public class ProServiceApiHelper {
      * @param callback
      */
 
-    public void getHomeSchedularValuesList(final getApiProcessCallback callback) {
+    public void getHomeSchedularValuesListAPI(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1292,7 +1292,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void updateHomeSchedularOptions(final getApiProcessCallback callback, String... params) {
+    public void updateHomeSchedularOptionsAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1427,7 +1427,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void inviteFriends(final getApiProcessCallback callback, String... params) {
+    public void inviteFriendsAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1507,7 +1507,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void postProject(final getApiProcessCallback callback, String... params) {
+    public void postProjectAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1625,7 +1625,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getMyProjectDetails(final getApiProcessCallback callback, String... params) {
+    public void getMyProjectDetailsAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -1690,7 +1690,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getMyProjectList(final projectListCallback callback) {
+    public void getMyProjectListAPI(final projectListCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1793,7 +1793,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getFaqInformation(final faqCallback callback) {
+    public void getFaqInformationAPI(final faqCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1856,7 +1856,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getTermsOfUseInformation(final faqCallback callback) {
+    public void getTermsOfUseInformationAPI(final faqCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1919,7 +1919,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getPrivacyPolicyInformation(final faqCallback callback) {
+    public void getPrivacyPolicyInformationAPI(final faqCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -1983,7 +1983,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void contactUs(final getApiProcessCallback callback, String... params) {
+    public void contactUsAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2065,7 +2065,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void deleteMyProject(final getApiProcessCallback callback, String... params) {
+    public void deleteMyProjectAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2136,7 +2136,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getUserFavoriteProsList(final getApiProcessCallback callback, String... params) {
+    public void getUserFavoriteProsListAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -2206,7 +2206,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void deleteFavoritePro(final getApiProcessCallback callback, String... params) {
+    public void deleteFavoriteProAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2278,7 +2278,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void getSearchArea(final onSearchZipCallback callback, String... params) {
+    public void getSearchAreaAPI(final onSearchZipCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2406,7 +2406,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getZipCodeUsingGoogleApi(final getApiProcessCallback callback) {
+    public void getZipCodeUsingGoogleAPI(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 ;
@@ -2529,7 +2529,7 @@ public class ProServiceApiHelper {
     }
 
 
-    public void getSearchCountriesByPlacesFilter(final onSearchPlacesNameCallback callback, String... params) {
+    public void getSearchCountriesByPlacesFilterAPI(final onSearchPlacesNameCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2782,7 +2782,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void favouriteProAddDelete(final getApiProcessCallback callback, String... params) {
+    public void favouriteProAddDeleteAPI(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2855,7 +2855,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getDashBoardDetails(final getApiProcessCallback callback) {
+    public void getDashBoardDetailsAPI(final getApiProcessCallback callback) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -2917,7 +2917,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getProsIndividualListing(final getApiProcessCallback callback, String... params) {
+    public void getProsIndividualListingAPI(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -2994,7 +2994,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void prosAddReview(final getApiProcessCallback callback, String... params) {
+    public void prosAddReviewAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -3071,7 +3071,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getProsAllReview(final getApiProcessCallback callback, String... params) {
+    public void getProsAllReviewAPI(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -3145,7 +3145,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void getProIndividualPortfolioImage(final getApiProcessCallback callback, String... params) {
+    public void getProIndividualPortfolioImageAPI(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -3217,7 +3217,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void addReviewReportAbuse(final getApiProcessCallback callback, String... params) {
+    public void addReviewReportAbuseAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -3296,7 +3296,7 @@ public class ProServiceApiHelper {
      * @param params
      */
 
-    public void upLoadProfileImage(final getApiProcessCallback callback, String... params) {
+    public void upLoadProfileImageAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -3394,7 +3394,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void contactPro(final getApiProcessCallback callback, String... params) {
+    public void contactProAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -3469,7 +3469,7 @@ public class ProServiceApiHelper {
      * @param callback
      * @param params
      */
-    public void editproject(final getApiProcessCallback callback, String... params) {
+    public void seteditProjectAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
 
 
@@ -3575,7 +3575,7 @@ public class ProServiceApiHelper {
     }
 
 
-    public void updateUserInformationFirstTime(final getApiProcessCallback callback, String... params) {
+    public void updateUserInformationFirstTimeAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
                 String exception = "";
@@ -3670,7 +3670,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void getUserMessageList(final getApiProcessCallback callback, String... params) {
+    public void getUserMessageListAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -3738,7 +3738,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void deleteMessageList(final getApiProcessCallback callback, String... params) {
+    public void deleteMessageListAPI(final getApiProcessCallback callback, String... params) {
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
 
@@ -3807,7 +3807,7 @@ public class ProServiceApiHelper {
      *
      * @param callback
      */
-    public void sendmessage(final getApiProcessCallback callback, String... params) {
+    public void sendMessageAPI(final getApiProcessCallback callback, String... params) {
 
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
@@ -3917,6 +3917,7 @@ public class ProServiceApiHelper {
         }
 
     }
+
 
 
     /**

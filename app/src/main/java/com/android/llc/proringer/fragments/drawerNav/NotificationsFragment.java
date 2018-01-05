@@ -142,7 +142,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
         ScrollViewMAin.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserNotification(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserNotificationAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
@@ -183,7 +183,7 @@ public class NotificationsFragment extends Fragment implements MyCustomAlertList
     }
 
     private void setChangeNotification() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserNotification(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserNotificationAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

@@ -238,7 +238,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                                 CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code , city, state", UserInformationFragment.this);
                                 customAlert.createNormalAlert("ok", 1);
                             } else {
-                                ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformation(
+                                ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformationAPI(
                                         new ProServiceApiHelper.getApiProcessCallback() {
                                             @Override
                                             public void onStart() {

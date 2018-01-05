@@ -196,7 +196,7 @@ public class ContactProServiceActivity extends AppCompatActivity implements MyCu
 
     private void submit() {
         try {
-            ProServiceApiHelper.getInstance(ContactProServiceActivity.this).contactPro(new ProServiceApiHelper.getApiProcessCallback() {
+            ProServiceApiHelper.getInstance(ContactProServiceActivity.this).contactProAPI(new ProServiceApiHelper.getApiProcessCallback() {
 
                 @Override
                 public void onStart() {

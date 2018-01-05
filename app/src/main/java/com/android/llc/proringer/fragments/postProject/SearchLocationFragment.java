@@ -160,7 +160,7 @@ public class SearchLocationFragment extends Fragment {
 
     private void searchLocationUsingZipFirstTime(final String key) {
         Logger.printMessage("key",""+key);
-        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getSearchAreaAPI(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<SetGetAddressData> listdata) {
                 try {
@@ -194,7 +194,7 @@ public class SearchLocationFragment extends Fragment {
     }
 
     private void searchLocationUsingZip(String key) {
-        ProServiceApiHelper.getInstance(getActivity()).getSearchArea(new ProServiceApiHelper.onSearchZipCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getSearchAreaAPI(new ProServiceApiHelper.onSearchZipCallback() {
             @Override
             public void onComplete(List<SetGetAddressData> listdata) {
 
@@ -247,7 +247,7 @@ public class SearchLocationFragment extends Fragment {
 
     ////////////////////If the user offline then this function called first for current zip/////////////////////
     public void getCurrentLocationZip() {
-        ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleApi(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getZipCodeUsingGoogleAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

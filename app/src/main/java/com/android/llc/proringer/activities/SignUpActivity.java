@@ -276,7 +276,7 @@ public class SignUpActivity extends AppCompatActivity implements MyCustomAlertLi
     }
 
     private void callRegisteration() {
-        ProServiceApiHelper.getInstance(SignUpActivity.this).getUserRegistered(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(SignUpActivity.this).getUserRegisteredAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                    @Override
                                                                                    public void onStart() {
                                                                                        myLoader.showLoader();

@@ -68,7 +68,7 @@ public class ProsProjectGalleryActivity extends AppCompatActivity {
 
     public void loadImagePortFolio(String portfolio_id, final int x) {
 
-        ProServiceApiHelper.getInstance(ProsProjectGalleryActivity.this).getProIndividualPortfolioImage(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsProjectGalleryActivity.this).getProIndividualPortfolioImageAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

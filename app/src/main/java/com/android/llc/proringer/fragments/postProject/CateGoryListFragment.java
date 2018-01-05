@@ -206,7 +206,7 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
 
 
     public void loadCatList(){
-        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getCategoryListAPI(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())

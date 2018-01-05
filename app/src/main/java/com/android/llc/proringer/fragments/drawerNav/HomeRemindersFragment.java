@@ -449,7 +449,7 @@ public class HomeRemindersFragment extends Fragment {
         nested_scroll_main.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getHomeSchedularOptionList(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getHomeSchedularOptionListAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
@@ -797,7 +797,7 @@ public class HomeRemindersFragment extends Fragment {
     }
 
     private void setOptions() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getHomeSchedularValuesList(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getHomeSchedularValuesListAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {
@@ -899,7 +899,7 @@ public class HomeRemindersFragment extends Fragment {
     }
 
     private void updateOptions() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateHomeSchedularOptions(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateHomeSchedularOptionsAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

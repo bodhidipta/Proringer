@@ -205,7 +205,7 @@ public class MyProjectDetailsFragment extends Fragment {
     }
 
     public void delete() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteMyProject(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteMyProjectAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                 @Override
                                                                                                 public void onStart() {
                                                                                                     myLoader.showLoader();

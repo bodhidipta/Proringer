@@ -94,7 +94,7 @@ public class InviteAFriendFragment extends Fragment implements MyCustomAlertList
     }
 
     private void getSubmitParams() {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).inviteFriends(
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).inviteFriendsAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
                     @Override
                     public void onStart() {

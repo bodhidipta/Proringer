@@ -174,7 +174,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
         LLMain.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserFavoriteProsList(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserFavoriteProsListAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();
@@ -337,7 +337,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                         dialog.dismiss();
                         ///////////delete from favorite list
                         try {
-                            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteFavoritePro(new ProServiceApiHelper.getApiProcessCallback() {
+                            ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteFavoriteProAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                                                       @Override
                                                                                                                       public void onStart() {
                                                                                                                           myLoader.showLoader();

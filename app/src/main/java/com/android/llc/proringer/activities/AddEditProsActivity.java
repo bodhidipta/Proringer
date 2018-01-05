@@ -144,7 +144,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         Logger.printMessage("@registrationPostPro", "mCurrentPhotoPath :" + mCurrentPhotoPath);
 
 
-        ProServiceApiHelper.getInstance(AddEditProsActivity.this).editproject(
+        ProServiceApiHelper.getInstance(AddEditProsActivity.this).seteditProjectAPI(
                 new ProServiceApiHelper.getApiProcessCallback() {
 
 

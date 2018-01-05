@@ -184,7 +184,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
     private void updateUserInformation() {
 
         if (!zip_code.getText().toString().trim().equals("")) {
-            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).updateUserInformationFirstTime(
+            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).updateUserInformationFirstTimeAPI(
                     new ProServiceApiHelper.getApiProcessCallback() {
                         @Override
                         public void onStart() {
@@ -196,7 +196,7 @@ public class FirstTimeFaceBookLoginUserInformationActivity extends AppCompatActi
                             if (myLoader != null && myLoader.isMyLoaderShowing())
                                 myLoader.dismissLoader();
 
-                            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
+                            ProServiceApiHelper.getInstance(FirstTimeFaceBookLoginUserInformationActivity.this).getUserInformationAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                 @Override
                                 public void onStart() {
 

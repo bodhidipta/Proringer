@@ -200,7 +200,7 @@ public class ProsReviewActivity extends AppCompatActivity implements MyCustomAle
     }
 
     public void postReview() {
-        ProServiceApiHelper.getInstance(ProsReviewActivity.this).prosAddReview(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsReviewActivity.this).prosAddReviewAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

@@ -160,7 +160,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
         nested_scroll_main.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance(getActivity()).getDashBoardDetails(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getDashBoardDetailsAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();
@@ -214,7 +214,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 
     private void getUpdateUserData() {
 
-        ProServiceApiHelper.getInstance(getActivity()).getUserInformation(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(getActivity()).getUserInformationAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();
@@ -426,7 +426,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
         if (mCurrentPhotoPath.trim().equals("")) {
             Toast.makeText(getActivity(), "Please choose Image", Toast.LENGTH_SHORT).show();
         } else {
-            ProServiceApiHelper.getInstance(getActivity()).upLoadProfileImage(new ProServiceApiHelper.getApiProcessCallback() {
+            ProServiceApiHelper.getInstance(getActivity()).upLoadProfileImageAPI(new ProServiceApiHelper.getApiProcessCallback() {
                 @Override
                 public void onStart() {
                     myLoader.isMyLoaderShowing();

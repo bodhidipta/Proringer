@@ -206,7 +206,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
         LLNetworkDisconnection.setVisibility(View.GONE);
 
 
-        ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProsIndividualListing(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProsIndividualListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
 
                                                                                                       @Override
                                                                                                       public void onStart() {

@@ -226,7 +226,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
         if (result.equalsIgnoreCase("Ok") && i == 1) {
 //            setGetProjectMessageArrayList.remove(getAdapterPosition());
 //            notifyItemRemoved(getAdapterPosition());
-            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+            ProServiceApiHelper.getInstance((LandScreenActivity) mcontext).deleteMessageListAPI(new ProServiceApiHelper.getApiProcessCallback() {
                 @Override
                 public void onStart() {
                     myLoader.showLoader();

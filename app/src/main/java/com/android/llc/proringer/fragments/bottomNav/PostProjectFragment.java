@@ -193,7 +193,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
         LLMain.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getCategoryListAPI(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onStartFetch() {
                 myLoader.showLoader();
@@ -234,7 +234,7 @@ public class PostProjectFragment extends Fragment implements MyCustomAlertListen
     }
 
     private void selectService(String id) {
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getServiceListAPI(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())

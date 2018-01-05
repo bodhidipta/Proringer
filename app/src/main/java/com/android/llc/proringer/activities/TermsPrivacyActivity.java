@@ -69,7 +69,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
 
     public void loadDataTermsOfUse() {
 
-        ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getTermsOfUseInformation(new ProServiceApiHelper.faqCallback() {
+        ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getTermsOfUseInformationAPI(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();
@@ -116,7 +116,7 @@ public class TermsPrivacyActivity extends AppCompatActivity implements MyCustomA
     }
 
     public void loadPrivacyPolicy() {
-        ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getPrivacyPolicyInformation(new ProServiceApiHelper.faqCallback() {
+        ProServiceApiHelper.getInstance(TermsPrivacyActivity.this).getPrivacyPolicyInformationAPI(new ProServiceApiHelper.faqCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

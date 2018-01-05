@@ -228,7 +228,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
     }
 
     public void sendMessage() {
-        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).sendmessage(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).sendMessageAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 Logger.printMessage("start", "start");
@@ -252,7 +252,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
     public void updateMessage() {
         chatList.clear();
         Log.d("againcall", "yes");
-        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).getUserMessageListAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
                 Logger.printMessage("start", "start");

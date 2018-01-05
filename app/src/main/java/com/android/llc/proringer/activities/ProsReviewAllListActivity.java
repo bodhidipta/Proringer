@@ -124,7 +124,7 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
         findViewById(R.id.RLMain).setVisibility(View.VISIBLE);
         findViewById(R.id.LLNetworkDisconnection).setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReview(new ProServiceApiHelper.getApiProcessCallback() {
+        ProServiceApiHelper.getInstance(ProsReviewAllListActivity.this).getProsAllReviewAPI(new ProServiceApiHelper.getApiProcessCallback() {
                                                                                              @Override
                                                                                              public void onStart() {
                                                                                                  myLoader.showLoader();

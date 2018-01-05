@@ -69,7 +69,7 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
         project_list.setVisibility(View.VISIBLE);
         LLNetworkDisconnection.setVisibility(View.GONE);
 
-        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getMyProjectList(new ProServiceApiHelper.projectListCallback() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getMyProjectListAPI(new ProServiceApiHelper.projectListCallback() {
             @Override
             public void onStart() {
                 myLoader.showLoader();

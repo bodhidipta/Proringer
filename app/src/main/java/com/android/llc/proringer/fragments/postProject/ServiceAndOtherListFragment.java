@@ -57,7 +57,7 @@ public class ServiceAndOtherListFragment extends Fragment {
 
 
     public void selectService(String id) {
-        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getServiceList(new ProServiceApiHelper.onProCategoryListener() {
+        ProServiceApiHelper.getInstance((PostProjectActivity) getActivity()).getServiceListAPI(new ProServiceApiHelper.onProCategoryListener() {
             @Override
             public void onComplete(LinkedList<SetGetProCategoryData> listdata) {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
