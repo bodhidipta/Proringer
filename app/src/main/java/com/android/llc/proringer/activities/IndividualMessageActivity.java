@@ -136,6 +136,10 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 }
             }
 
+
+
+
+
             Collections.reverse(chatList);
             indevidualChatAdapter = new IndevidualChatAdapter(IndividualMessageActivity.this, chatList);
 
@@ -149,7 +153,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!tv_text.getText().toString().trim().equals("")) {
-                    message();
+                    sendMessage();
                 }else {
                     Toast.makeText(IndividualMessageActivity.this,"Enter Message",Toast.LENGTH_SHORT).show();
                 }
@@ -224,7 +228,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
         finish();
     }
 
-    public void message() {
+    public void sendMessage() {
         ProServiceApiHelper.getInstance(IndividualMessageActivity.this).sendmessage(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -234,7 +238,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             @Override
             public void onComplete(String message) {
                 Logger.printMessage("complete", message);
-                Updatemessage();
+                updateMessage();
                 Toast.makeText(IndividualMessageActivity.this, message, Toast.LENGTH_SHORT).show();
                 tv_text.setText("");
             }
@@ -246,7 +250,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
         }, project_id, pro_id, tv_text.getText().toString().trim());
     }
 
-    public void Updatemessage() {
+    public void updateMessage() {
         chatList.clear();
         Log.d("againcall", "yes");
         ProServiceApiHelper.getInstance(IndividualMessageActivity.this).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {

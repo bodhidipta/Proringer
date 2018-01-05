@@ -48,6 +48,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/receiver_image_download"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_centerInParent="true"

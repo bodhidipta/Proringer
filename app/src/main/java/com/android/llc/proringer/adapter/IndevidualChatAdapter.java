@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.pojo.SetGetChatPojoData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
+import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,7 +92,16 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 }else {
                     viewHolderReceiver.receiver_message.setVisibility(View.GONE);
                     viewHolderReceiver.receiver_image_cont.setVisibility(View.VISIBLE);
+                    Glide.with(mcontext).load(dataList.get(position).getMsg_attachment()).centerCrop().into(viewHolderReceiver.receiver_image);
+
                 }
+
+                viewHolderReceiver.receiver_image_download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
 
                /* if (dataList.get(position).isDateVisible()) {
                     viewHolderReceiver.date_header.setVisibility(View.VISIBLE);
@@ -147,7 +157,15 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 }else {
                     viewHolderSender.sender_image_cont.setVisibility(View.VISIBLE);
                     viewHolderSender.sender_message.setVisibility(View.GONE);
+                    Glide.with(mcontext).load(dataList.get(position).getMsg_attachment()).fitCenter().into(viewHolderSender.sender_image);
                 }
+
+                viewHolderSender.sender_image_download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
 
 
               /*  if (dataList.get(position).isDateVisible()) {
@@ -184,6 +202,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     class ViewHolderReceiver extends RecyclerView.ViewHolder {
         ProRegularTextView date_header, receiver_message, receiver_image_date;
         RelativeLayout receiver_image_cont;
+        ImageView receiver_image,receiver_image_download;
 
         public ViewHolderReceiver(View itemView) {
             super(itemView);
@@ -191,12 +210,14 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             receiver_message = (ProRegularTextView) itemView.findViewById(R.id.receiver_message);
             receiver_image_date = (ProRegularTextView) itemView.findViewById(R.id.receiver_image_date);
             receiver_image_cont = (RelativeLayout) itemView.findViewById(R.id.receiver_image_cont);
+            receiver_image = (ImageView) itemView.findViewById(R.id.receiver_image);
+            receiver_image_download = (ImageView) itemView.findViewById(R.id.receiver_image_download);
         }
     }
 
     class ViewHolderSender extends RecyclerView.ViewHolder {
         ProRegularTextView date_header, sender_message, sender_image_date;
-        ImageView sender_image;
+        ImageView sender_image,sender_image_download;
         RelativeLayout sender_image_cont;
 
         public ViewHolderSender(View itemView) {
@@ -205,6 +226,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             sender_message = (ProRegularTextView) itemView.findViewById(R.id.sender_message);
             sender_image_date = (ProRegularTextView) itemView.findViewById(R.id.sender_image_date);
             sender_image = (ImageView) itemView.findViewById(R.id.sender_image);
+            sender_image_download = (ImageView) itemView.findViewById(R.id.sender_image_download);
             sender_image_cont = (RelativeLayout) itemView.findViewById(R.id.sender_image_cont);
 
         }

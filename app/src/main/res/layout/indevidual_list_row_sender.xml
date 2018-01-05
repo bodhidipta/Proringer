@@ -50,6 +50,16 @@
                 android:layout_height="match_parent" />
 
 
+            <ImageView
+                android:id="@+id/sender_image_download"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:alpha="0.9"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_download" />
+
+
             <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                 android:id="@+id/sender_image_date"
                 android:layout_width="wrap_content"
