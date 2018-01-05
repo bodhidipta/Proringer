@@ -85,41 +85,28 @@ public class ProServiceApiHelper {
     private String inviteFriendsAPI = BaseUrl + "app_invite_friend";
     private String postProjectAPI = BaseUrl + "app_project_post";
     private String myProjectListAPI = BaseUrl + "app_homeowner_myproject?user_id=";
-
     private String contactUsAPI = BaseUrl + "app_contact_us";
     private String myProjectDeleteAPI = BaseUrl + "app_myproject_delete";
     private String myProjectDetailsAPI = BaseUrl + "app_myproject_details?user_id=";
     private String favoriteProsListAPI = BaseUrl + "app_favourite_pros?user_id=";
-
     private String favoriteProsDeleteAPI = BaseUrl + "app_favourite_pros_delete";
-
     private String faqInformationAPI = BaseUrl + "app_faq";
     private String termsOfUseAPI = BaseUrl + "app_term";
     private String privacyPolicyAPI = BaseUrl + "app_privacy_policy";
-
     private String prosListingAPI = BaseUrl + "app_serch_result_project?user_id=";
-
     private String favouriteProAdddeleteAPI = BaseUrl + "app_favourite_pro_adddelete";
     private String homeownerDashboardAPI = BaseUrl + "app_homeowner_dashboard";
     private String prosIndividualListingAPI = BaseUrl + "app_pro_individual_listing";
-
     private String prosAddReviewAPI = BaseUrl + "app_homeowner_addreview";
     private String prosIndividualPortfolioImageAPI = BaseUrl + "app_individual_portfolio_image";
-
-
     private String prosAllReviewAPI = BaseUrl + "app_homeowner_allreview";
     private String prosReportReviewAPI = BaseUrl + "app_homeowner_reportreview";
-
     private String profileImageAPI = BaseUrl + "app_homeowner_profileimg";
     private String contactProAPI = BaseUrl + "contact_pro";
-
-
     private String editprojectAPI = BaseUrl + "app_project_edit";
     private String loginFBAPI = BaseUrl + "app_facebook_login";
     private String messageListAPI = BaseUrl + "app_project_message";
-
     private String messageDeleteAPI = BaseUrl + "app_project_message_deleted";
-
     private String messagesendAPI = BaseUrl + "app_project_msg_send";
 
     public static ProServiceApiHelper getInstance(Context context) {
