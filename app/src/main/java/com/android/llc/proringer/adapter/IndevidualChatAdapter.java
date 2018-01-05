@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.helper.DownloaderAndShowFile;
 import com.android.llc.proringer.pojo.SetGetChatPojoData;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.bumptech.glide.Glide;
@@ -55,7 +56,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
 
 
@@ -99,7 +100,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 viewHolderReceiver.receiver_image_download.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        DownloaderAndShowFile.downloadAndOpenPDFOrImage(mcontext,dataList.get(position).getMsg_attachment());
                     }
                 });
 
@@ -163,7 +164,7 @@ public class IndevidualChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 viewHolderSender.sender_image_download.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        DownloaderAndShowFile.downloadAndOpenPDFOrImage(mcontext,dataList.get(position).getMsg_attachment());
                     }
                 });
 

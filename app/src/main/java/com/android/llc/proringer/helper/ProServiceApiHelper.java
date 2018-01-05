@@ -3838,7 +3838,7 @@ public class ProServiceApiHelper {
                                 upload_temp = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
                                 upload_temp.createNewFile();
                                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                                bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                                bmp.compress(Bitmap.CompressFormat.PNG, 100, bos);
                                 byte[] bitmapdata = bos.toByteArray();
 
                                 FileOutputStream fos = new FileOutputStream(upload_temp);
