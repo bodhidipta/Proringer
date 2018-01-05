@@ -50,16 +50,14 @@ public class ProjectMessagingFragment extends Fragment {
     RecyclerView message_list;
     ArrayList<SetGetProjectMessageDetailsData> projectMessageDetailsArrayList;
     ProjectDetailedMessageAdapter projectDetailedMessageAdapter;
-    String project_id = "";
     String mypojectid="";
     MyLoader myLoader = null;
-    String projectid,pro_id;
+    JSONArray info_array;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        project_id = getArguments().getString("project_id");
-        mypojectid=project_id;
+        mypojectid = getArguments().getString("project_id");
         return inflater.inflate(R.layout.project_detailed_messaging, container, false);
     }
 
@@ -76,11 +74,15 @@ public class ProjectMessagingFragment extends Fragment {
         message_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
         message_list.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
-        loadList();
-
     }
 
-//    @Override
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadList();
+    }
+
+    //    @Override
 //    protected void onSaveInstanceState(Bundle outState) {
 //        super.onSaveInstanceState(outState);
 //
@@ -104,6 +106,8 @@ public class ProjectMessagingFragment extends Fragment {
 
     public void loadList() {
 
+        projectMessageDetailsArrayList.clear();
+
         ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).getUserMessageList(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {
@@ -115,8 +119,8 @@ public class ProjectMessagingFragment extends Fragment {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
                 try {
-                    JSONObject jsonObject = new JSONObject(message);
-                    final JSONArray info_array = jsonObject.getJSONArray("info_array");
+
+                    info_array= new JSONObject(message).getJSONArray("info_array");
 
                     if (info_array.getJSONObject(0).has("all_pro_user_list")) {
 
@@ -126,10 +130,8 @@ public class ProjectMessagingFragment extends Fragment {
 
                             setGetProjectMessageDetailsData.setId(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("id"));
                             setGetProjectMessageDetailsData.setProject_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id"));
-                            projectid=info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("project_id");
                             setGetProjectMessageDetailsData.setHomeowner_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("homeowner_id"));
                             setGetProjectMessageDetailsData.setPro_id(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id"));
-                            pro_id=info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_id");
                             setGetProjectMessageDetailsData.setPro_img(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_img"));
                             setGetProjectMessageDetailsData.setPro_rating(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_rating"));
                             setGetProjectMessageDetailsData.setPro_time_status(info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(i).getString("pro_time_status"));
@@ -153,12 +155,6 @@ public class ProjectMessagingFragment extends Fragment {
                                     Intent intent= new Intent(getActivity(),IndividualMessageActivity.class);
                                     try {
                                         intent.putExtra("infoarry", info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(position).toString());
-                                        intent.putExtra("projectid",projectid);
-                                        intent.putExtra("proid",pro_id);
-                                        String post= String.valueOf(position);
-                                        Logger.printMessage("position-->",post);
-                                        intent.putExtra("position",post);
-                                        intent.putExtra("projid",mypojectid);
                                         startActivity(intent);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -169,8 +165,7 @@ public class ProjectMessagingFragment extends Fragment {
 
                         } else {
                             Logger.printMessage("projectDetailedMessageAdapter", "not null");
-                            //projectMessageAdapter.refreshData(info_array);
-
+                            projectDetailedMessageAdapter.notifyDataSetChanged();
                         }
                     }
                 } catch (JSONException e) {
@@ -183,7 +178,7 @@ public class ProjectMessagingFragment extends Fragment {
                 if (myLoader != null && myLoader.isMyLoaderShowing())
                     myLoader.dismissLoader();
             }
-        }, ProApplication.getInstance().getUserId(), project_id);
+        }, ProApplication.getInstance().getUserId(), mypojectid);
 
     }
 
