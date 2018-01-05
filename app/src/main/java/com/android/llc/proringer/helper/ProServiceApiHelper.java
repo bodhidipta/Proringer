@@ -3808,10 +3808,10 @@ public class ProServiceApiHelper {
      * @param callback
      */
     public void sendmessage(final getApiProcessCallback callback, String... params) {
+
         if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
             new AsyncTask<String, Void, String>() {
-
-
+                File upload_temp;
                 String exception = "";
 
                 @Override
@@ -3829,24 +3829,58 @@ public class ProServiceApiHelper {
                         Logger.printMessage("project_id", ":-" + params[0]);
                         Logger.printMessage("pro_id", ":-" + params[1]);
                         Logger.printMessage("message", ":-" + params[2]);
-                        RequestBody requestBody = new FormBody.Builder()
-                                .add("user_id", ProApplication.getInstance().getUserId())
-                                .add("project_id", params[0])
-                                .add("pro_id", params[1])
-                                .add("message", params[2])
-                                .build();
+                        Logger.printMessage("file", ":-" + params[3]);
+
+                        if (!params[3].equals("")) {
+                            try {
+                                Bitmap bmp = ImageCompressor.with(mcontext).compressBitmap(params[3]);
+                                Logger.printMessage("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
+                                upload_temp = new File(mcontext.getCacheDir(), "" + System.currentTimeMillis() + ".png");
+                                upload_temp.createNewFile();
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                                byte[] bitmapdata = bos.toByteArray();
+
+                                FileOutputStream fos = new FileOutputStream(upload_temp);
+                                fos.write(bitmapdata);
+                                fos.flush();
+                                fos.close();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                return e.getMessage();
+                            }
+                        }
+                        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+
+                        MultipartBody.Builder requestBody = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("user_id", ProApplication.getInstance().getUserId())
+                                .addFormDataPart("project_id", params[0])
+                                .addFormDataPart("pro_id", params[1])
+                                .addFormDataPart("message", params[2]);
+                        if (upload_temp != null) {
+                            Logger.printMessage("*****", "" + upload_temp.getAbsolutePath());
+                            requestBody.addFormDataPart("attach_file", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
+                        } else {
+                            requestBody.addFormDataPart("attach_file", "");
+                        }
+
 
                         Request request = new Request.Builder()
                                 .url(messagesendAPI)
-                                .post(requestBody)
+                                .post(requestBody.build())
                                 .build();
+
                         Response response = okHttpClient.newCall(request).execute();
+
                         String responseString = response.body().string();
                         Logger.printMessage("responseInfo", responseString);
                         JSONObject respo = new JSONObject(responseString);
-                        Logger.printMessage("responesrjjh", String.valueOf(respo.getBoolean("response")));
+                        Logger.printMessage("response-->", String.valueOf(respo.getBoolean("response")));
+
                         if (respo.getBoolean("response")) {
-                            Logger.printMessage("mejdfgjdgfhjdg", respo.getString("message"));
+                            Logger.printMessage("message-->", respo.getString("message"));
                             return respo.getString("message");
                         } else {
                             exception = respo.getString("message");
@@ -3865,7 +3899,7 @@ public class ProServiceApiHelper {
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     if (exception.equals("")) {
-                        Logger.printMessage("successfullyUpdateMSQL", "YES");
+                        Logger.printMessage("successfullyUpdate", "YES");
                         try {
                             callback.onComplete(s);
                         } catch (Exception io) {
@@ -3876,8 +3910,6 @@ public class ProServiceApiHelper {
                         callback.onError(s);
                     }
                 }
-
-
             }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 
         } else {

@@ -58,7 +58,7 @@
             <ImageView
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:id="@+id/imv_camaragallery"
+                android:id="@+id/img_camaragallery"
                 android:layout_alignParentRight="true"
                 android:padding="10dp"
                 android:src="@drawable/ic_camera" />

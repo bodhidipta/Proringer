@@ -58,7 +58,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
     JSONObject jsonObject;
     LinkedList<SetGetChatPojoData> chatList;
     IndevidualChatAdapter indevidualChatAdapter;
-    ImageView imv_camaragallery, im_send;
+    ImageView img_camaragallery, im_send;
     ProLightEditText tv_text;
     private String mCurrentPhotoPath = "";
     String project_id, id, pro_id;
@@ -76,10 +76,10 @@ public class IndividualMessageActivity extends AppCompatActivity {
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
 
         img_background = (ImageView) findViewById(R.id.img_background);
-        imv_camaragallery = (ImageView) findViewById(R.id.imv_camaragallery);
+        img_camaragallery = (ImageView) findViewById(R.id.img_camaragallery);
         im_send = (ImageView) findViewById(R.id.im_send);
 
-        imv_camaragallery.setOnClickListener(new View.OnClickListener() {
+        img_camaragallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndividualMessageActivity.this, PermissionController.class);
@@ -153,12 +153,14 @@ public class IndividualMessageActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!tv_text.getText().toString().trim().equals("")) {
+                    mCurrentPhotoPath="";
                     sendMessage();
                 }else {
                     Toast.makeText(IndividualMessageActivity.this,"Enter Message",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
     /*  @Override
@@ -194,7 +196,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
 //                      });
 
                 Log.i("path-->", mCurrentPhotoPath);
-                tv_text.setText(mCurrentPhotoPath);
+                sendMessage();
 
                 Toast.makeText(IndividualMessageActivity.this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -247,7 +249,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             public void onError(String error) {
 
             }
-        }, project_id, pro_id, tv_text.getText().toString().trim());
+        }, project_id, pro_id, tv_text.getText().toString().trim(),mCurrentPhotoPath);
     }
 
     public void updateMessage() {
