@@ -46,10 +46,11 @@
             android:layout_height="?android:attr/actionBarSize"
             android:layout_alignParentBottom="true"
             android:background="@color/colorAccent"
-            android:weightSum="3">
+            >
 
             <ImageView
-                android:layout_width="56dp"
+                android:visibility="visible"
+                android:layout_width="46dp"
                 android:layout_height="56dp"
                 android:id="@+id/im_send"
                 android:padding="10dp"
@@ -65,15 +66,15 @@
 
             <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:id="@+id/tv_text"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/edt_sent_message"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="56dp"
+                android:layout_toRightOf="@+id/im_send"
                 android:layout_marginRight="56dp"
                 android:background="@drawable/background_white_with_border"
                 android:gravity="center_vertical"
                 android:hint="Type here"
-
                 android:inputType="textAutoCorrect"
                 android:paddingLeft="5dp"
                 android:textSize="14sp" />

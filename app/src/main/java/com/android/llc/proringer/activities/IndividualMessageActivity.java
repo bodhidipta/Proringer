@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,9 +61,10 @@ public class IndividualMessageActivity extends AppCompatActivity {
     LinkedList<SetGetChatPojoData> chatList;
     IndevidualChatAdapter indevidualChatAdapter;
     ImageView img_camaragallery, im_send;
-    ProLightEditText tv_text;
+    ProLightEditText edt_sent_message;
     private String mCurrentPhotoPath = "";
     String project_id, id, pro_id;
+    TextWatcher mySearchTextWatcher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,7 +91,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             }
         });
 
-        tv_text = (ProLightEditText) findViewById(R.id.tv_text);
+        edt_sent_message = (ProLightEditText) findViewById(R.id.edt_sent_message);
         Glide.with(IndividualMessageActivity.this).load(R.drawable.chat_background).centerCrop().into(img_background);
 
         myLoader = new MyLoader(IndividualMessageActivity.this);
@@ -149,7 +152,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!tv_text.getText().toString().trim().equals("")) {
+                if (!edt_sent_message.getText().toString().trim().equals("")) {
                     mCurrentPhotoPath = "";
                     sendMessage();
                 } else {
@@ -157,6 +160,30 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        mySearchTextWatcher = new TextWatcher() {
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                // your logic here
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (s.toString().trim().length() > 0) {
+//                    im_send.setVisibility(View.VISIBLE);
+//                } else {
+//                    im_send.setVisibility(View.GONE);
+//                }
+//            }
+//        };
+
+//        edt_sent_message.addTextChangedListener(mySearchTextWatcher);
+
 
     }
 
@@ -239,14 +266,14 @@ public class IndividualMessageActivity extends AppCompatActivity {
                 Logger.printMessage("complete", message);
                 updateMessage();
                 Toast.makeText(IndividualMessageActivity.this, message, Toast.LENGTH_SHORT).show();
-                tv_text.setText("");
+                edt_sent_message.setText("");
             }
 
             @Override
             public void onError(String error) {
 
             }
-        }, project_id, pro_id, tv_text.getText().toString().trim(), mCurrentPhotoPath);
+        }, project_id, pro_id, edt_sent_message.getText().toString().trim(), mCurrentPhotoPath);
     }
 
     public void updateMessage() {
