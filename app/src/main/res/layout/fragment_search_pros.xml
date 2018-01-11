@@ -54,7 +54,8 @@
                 android:paddingLeft="30dp"
                 android:hint="Search Pros"
                 android:imeOptions="actionDone"
-                android:maxLines="1"
+                android:lines="1"
+                android:inputType="text"
                 android:singleLine="true"
                 android:textColorHint="@color/colorTextDark"
                 android:textSize="14sp" />
