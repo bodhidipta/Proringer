@@ -10,22 +10,23 @@
         android:layout_height="?actionBarSize"
         android:orientation="vertical">
 
-        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+        <com.android.llc.proringer.viewsmod.textview.HighSemiBoldTextView
             android:id="@+id/tv_tittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:paddingLeft="5dp"
-            android:paddingRight="?actionBarSize"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:text="gdfgfgfgdfgfgfg"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <ImageView
+            android:layout_centerInParent="true"
             android:id="@+id/img_cancel_dialog"
-            android:layout_width="?actionBarSize"
-            android:layout_height="match_parent"
+            android:layout_width="30dp"
+            android:padding="5dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:padding="15dp"
             android:src="@drawable/ic_cross_dialog" />
 
     </RelativeLayout>
@@ -45,17 +46,19 @@
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/tv_show_describetion"
             android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             />
 
         <!--<com.android.llc.proringer.helper.JustifyTextView-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:id="@+id/tv_show_describetion"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-            <!--android:lineSpacingMultiplier="1.1"-->
-            <!--/>-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:id="@+id/tv_show_describetion"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:lineSpacingMultiplier="1.1"-->
+        <!--/>-->
 
     </ScrollView>
 

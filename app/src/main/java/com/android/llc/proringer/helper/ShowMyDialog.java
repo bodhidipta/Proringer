@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.MethodsUtils;
+import com.android.llc.proringer.viewsmod.textview.HighSemiBoldTextView;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 /**
@@ -37,7 +38,7 @@ public class ShowMyDialog {
 
         LinearLayout LLMain = (LinearLayout) dialog.findViewById(R.id.LLMain);
 
-        ProRegularTextView tv_tittle = (ProRegularTextView) dialog.findViewById(R.id.tv_tittle);
+        HighSemiBoldTextView tv_tittle = (HighSemiBoldTextView) dialog.findViewById(R.id.tv_tittle);
         ProRegularTextView tv_show_describetion = (ProRegularTextView) dialog.findViewById(R.id.tv_show_describetion);
 
 
