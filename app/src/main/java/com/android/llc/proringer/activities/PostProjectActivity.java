@@ -31,6 +31,8 @@ import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -251,64 +253,68 @@ public class PostProjectActivity extends AppCompatActivity implements MyCustomAl
         Logger.printMessage("@registrationPostPro", "last_name:" + last_name);
         Logger.printMessage("@registrationPostPro", "email:" + email);
         Logger.printMessage("@registrationPostPro", "confirm_password:" + confirm_password);
-        ProServiceApiHelper.getInstance(PostProjectActivity.this).postProjectAPI(
-                new ProServiceApiHelper.getApiProcessCallback() {
-                    @Override
-                    public void onStart() {
-                        myLoader.showLoader();
-                    }
-
-                    @Override
-                    public void onComplete(String message) {
-                        if (myLoader != null && myLoader.isMyLoaderShowing())
-                            myLoader.dismissLoader();
-
-                        //step++;
-                        //progress_posting.setProgress(step);
-                        selected_service_property.setText("" + step10option);
-                        if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())) {
-                            ((PostProjectRegistrationAndFinalizeFragment) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())).showProjectPosted();
-
+        try {
+            ProServiceApiHelper.getInstance(PostProjectActivity.this).postProjectAPI(
+                    new ProServiceApiHelper.getApiProcessCallback() {
+                        @Override
+                        public void onStart() {
+                            myLoader.showLoader();
                         }
 
-                        closeKeypad();
+                        @Override
+                        public void onComplete(String message) {
+                            if (myLoader != null && myLoader.isMyLoaderShowing())
+                                myLoader.dismissLoader();
 
-//                        CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Post Project", "" + message, PostProjectActivity.this);
-//                        customAlert.createNormalAlert("ok",1);
+                            //step++;
+                            //progress_posting.setProgress(step);
+                            selected_service_property.setText("" + step10option);
+                            if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName().equals(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())) {
+                                ((PostProjectRegistrationAndFinalizeFragment) getSupportFragmentManager().findFragmentByTag(PostProjectRegistrationAndFinalizeFragment.class.getCanonicalName())).showProjectPosted();
 
-                        isSubmitPostProject = true;
-                    }
+                            }
 
-                    @Override
-                    public void onError(String error) {
-                        if (myLoader != null && myLoader.isMyLoaderShowing())
-                            myLoader.dismissLoader();
+                            closeKeypad();
 
-                        isSubmitPostProject = true;
+    //                        CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Post Project", "" + message, PostProjectActivity.this);
+    //                        customAlert.createNormalAlert("ok",1);
 
-                        CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Project post error", "" + error, PostProjectActivity.this);
-                        customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
-                    }
-                },
-                selectedCategory.getId(),
-                selectedService.getId(),
-                service_look_type,
-                property_type,
-                project_stage,
-                timeframe_id,
-                mCurrentPhotoPath,
-                project_description_text,
-                selectedSetGetAddressData.getZip_code(),
-                selectedSetGetAddressData.getCity(),
-                selectedSetGetAddressData.getState_code(),
-                selectedSetGetAddressData.getCountry_code(),
-                selectedSetGetAddressData.getLatitude() + "",
-                selectedSetGetAddressData.getLongitude() + "",
-                first_name,
-                last_name,
-                email,
-                confirm_password
-        );
+                            isSubmitPostProject = true;
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            if (myLoader != null && myLoader.isMyLoaderShowing())
+                                myLoader.dismissLoader();
+
+                            isSubmitPostProject = true;
+
+                            CustomAlert customAlert = new CustomAlert(PostProjectActivity.this, "Project post error", "" + error, PostProjectActivity.this);
+                            customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+                        }
+                    },
+                    selectedCategory.getId(),
+                    selectedService.getId(),
+                    service_look_type,
+                    property_type,
+                    project_stage,
+                    timeframe_id,
+                    mCurrentPhotoPath,
+                    URLEncoder.encode(project_description_text, "utf-8"),
+                    selectedSetGetAddressData.getZip_code(),
+                    selectedSetGetAddressData.getCity(),
+                    selectedSetGetAddressData.getState_code(),
+                    selectedSetGetAddressData.getCountry_code(),
+                    selectedSetGetAddressData.getLatitude() + "",
+                    selectedSetGetAddressData.getLongitude() + "",
+                    first_name,
+                    last_name,
+                    email,
+                    confirm_password
+            );
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         /**
          * .add("cat_id", params[0])

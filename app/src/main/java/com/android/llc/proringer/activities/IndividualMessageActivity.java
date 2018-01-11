@@ -33,6 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -255,25 +257,29 @@ public class IndividualMessageActivity extends AppCompatActivity {
     }
 
     public void sendMessage() {
-        ProServiceApiHelper.getInstance(IndividualMessageActivity.this).sendMessageAPI(new ProServiceApiHelper.getApiProcessCallback() {
-            @Override
-            public void onStart() {
-                Logger.printMessage("start", "start");
-            }
+        try {
+            ProServiceApiHelper.getInstance(IndividualMessageActivity.this).sendMessageAPI(new ProServiceApiHelper.getApiProcessCallback() {
+                @Override
+                public void onStart() {
+                    Logger.printMessage("start", "start");
+                }
 
-            @Override
-            public void onComplete(String message) {
-                Logger.printMessage("complete", message);
-                updateMessage();
-                Toast.makeText(IndividualMessageActivity.this, message, Toast.LENGTH_SHORT).show();
-                edt_sent_message.setText("");
-            }
+                @Override
+                public void onComplete(String message) {
+                    Logger.printMessage("complete", message);
+                    updateMessage();
+                    Toast.makeText(IndividualMessageActivity.this, message, Toast.LENGTH_SHORT).show();
+                    edt_sent_message.setText("");
+                }
 
-            @Override
-            public void onError(String error) {
+                @Override
+                public void onError(String error) {
 
-            }
-        }, project_id, pro_id, edt_sent_message.getText().toString().trim(), mCurrentPhotoPath);
+                }
+            }, project_id, pro_id, URLEncoder.encode(edt_sent_message.getText().toString().trim(), "utf-8"), mCurrentPhotoPath);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateMessage() {
