@@ -91,7 +91,19 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
         myLoader = new MyLoader(this);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                drawerReset();
+            }
+        };
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -699,15 +711,21 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
     }
 
     private void closeDrawer() {
-        closeKeypad();
         new Handler().post(new Runnable() {
             @Override
             public void run() {
                 if (mDrawer != null)
                     mDrawer.closeDrawer(GravityCompat.START);
+            }
+        });
+    }
 
+    private void drawerReset() {
+        closeKeypad();
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
                 navigationHandler.closeAndResetSideMenuDesign();
-
             }
         });
     }
