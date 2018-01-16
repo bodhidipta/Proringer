@@ -3935,9 +3935,9 @@ public class ProServiceApiHelper {
                                 .add("device_token", params[1])
                                 .build();
 
-                        Logger.printMessage("user_id", ":-" + params[0]);
-                        Logger.printMessage("device_token", ":-" + params[1]);
-                        Logger.printMessage("usersDeviceUpdateAPI", usersDeviceUpdateAPI);
+                        Logger.printMessage("user_id", "-->" + params[0]);
+                        Logger.printMessage("device_token", "-->" + params[1]);
+                        Logger.printMessage("usersDeviceUpdateAPI","-->"+ usersDeviceUpdateAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
