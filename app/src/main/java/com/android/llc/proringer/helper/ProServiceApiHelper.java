@@ -3950,7 +3950,7 @@ public class ProServiceApiHelper {
                         Response response = client.newCall(request).execute();
                         String response_string = response.body().string();
 
-                        Logger.printMessage("LogIN", usersDeviceUpdateAPI + "\n" + params[0] + "/" + params[1] + "\n" + response_string);
+                        Logger.printMessage("usersDeviceUpdateAPI", usersDeviceUpdateAPI + "\n" + params[0] + "/" + params[1] + "\n" + response_string);
                         JSONObject mainResponseObj = new JSONObject(response_string);
 
                         if (mainResponseObj.getBoolean("response")) {

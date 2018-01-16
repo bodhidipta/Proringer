@@ -44,6 +44,7 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -296,6 +297,27 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
              */
             redirectMyProject();
         }
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Logger.printMessage(getClass().getName(), "Refreshed token: " + refreshedToken);
+
+        ProServiceApiHelper.getInstance(getApplication()).setUserDeviceAPI(new ProServiceApiHelper.getApiProcessCallback() {
+            @Override
+            public void onStart() {
+                Logger.printMessage("start", "start");
+            }
+
+            @Override
+            public void onComplete(String message) {
+                Logger.printMessage("complete", message);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        },  ProApplication.getInstance().getUserId(), refreshedToken);
+
     }
 
     @Override
