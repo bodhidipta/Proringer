@@ -65,7 +65,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:design:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v4:26.+'
@@ -75,15 +75,17 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
 //    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.google.android.gms:play-services:11.6.0'
+    compile 'com.google.android.gms:play-services:11.0.1'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
-    compile 'com.google.firebase:firebase-core:11.6.0'
-    compile 'com.google.firebase:firebase-auth:11.6.0'
+    compile 'com.google.firebase:firebase-core:11.0.1'
+    compile 'com.google.firebase:firebase-auth:11.0.1'
+    compile 'com.google.firebase:firebase-messaging:11.0.1'
+
 }
 // Add to the bottom of the file
 apply plugin: 'com.google.gms.google-services'

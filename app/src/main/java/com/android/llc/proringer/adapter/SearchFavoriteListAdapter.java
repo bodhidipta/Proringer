@@ -4,28 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextPaint;
+
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
-import com.android.llc.proringer.helper.ShowMyDialog;
-import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.MethodsUtils;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
-import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
