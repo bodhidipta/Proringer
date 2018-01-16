@@ -3931,13 +3931,13 @@ public class ProServiceApiHelper {
                     try {
 
                         RequestBody body = new FormBody.Builder()
-                                .add("email", params[0])
-                                .add("password", params[1])
+                                .add("user_id", params[0])
+                                .add("device_token", params[1])
                                 .build();
 
-                        Logger.printMessage("email", ":-" + params[0]);
-                        Logger.printMessage("password", ":-" + params[1]);
-                        Logger.printMessage("loginAPI", usersDeviceUpdateAPI);
+                        Logger.printMessage("user_id", ":-" + params[0]);
+                        Logger.printMessage("device_token", ":-" + params[1]);
+                        Logger.printMessage("usersDeviceUpdateAPI", usersDeviceUpdateAPI);
 
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
