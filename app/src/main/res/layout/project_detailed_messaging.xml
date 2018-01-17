@@ -4,36 +4,101 @@
     android:layout_height="match_parent"
     android:background="@color/colorBGblueShade"
     android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/detailed_project_search"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorAccent"
-        android:paddingBottom="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="10dp">
 
-        <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
+    <LinearLayout
+        android:id="@+id/LLMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:background="@drawable/background_white_with_border"
-            android:hint="Search"
-            android:paddingLeft="30dp"
-            android:textColorHint="@color/colorTextDark"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProRegularEditText
+                android:id="@+id/edt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/background_white_with_border"
+                android:hint="Search"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:lines="1"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textColorHint="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:padding="2dp"
+                android:src="@drawable/ic_search_orange" />
+
+            <ImageView
+                android:id="@+id/img_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="6dp"
+                android:src="@drawable/ic_cross_circle" />
+        </RelativeLayout>
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_empty_show"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorLightBrick"
+            android:gravity="center"
+            android:text="No Result Found"
+            android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:padding="2dp"
-            android:src="@drawable/ic_search_orange" />
-    </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/message_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/message_list"
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/LLNetworkDisconnection"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_disconnect"
+            />
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_network"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextBlack"
+            android:text="Check Your Network Connection"/>
+
+
+    </LinearLayout>
+
+
+
 </LinearLayout>
