@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,14 +57,12 @@ public class IndividualMessageActivity extends AppCompatActivity {
     RecyclerView chat_list;
     ImageView img_background;
     MyLoader myLoader = null;
-    JSONObject jsonObject;
     LinkedList<SetGetChatPojoData> chatList;
     IndevidualChatAdapter indevidualChatAdapter;
     ImageView img_camaragallery, im_send;
     ProLightEditText edt_sent_message;
     private String mCurrentPhotoPath = "";
-    String project_id, id, pro_id;
-    TextWatcher mySearchTextWatcher;
+    String pro_id="", project_id="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +72,9 @@ public class IndividualMessageActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        pro_id=getIntent().getStringExtra("pro_id");
+        project_id=getIntent().getStringExtra("project_id");
 
         chat_list = (RecyclerView) findViewById(R.id.chat_list);
         chat_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
@@ -100,56 +99,6 @@ public class IndividualMessageActivity extends AppCompatActivity {
 
         chatList = new LinkedList<>();
 
-        try {
-            jsonObject = new JSONObject(getIntent().getStringExtra("infoarry"));
-
-            id = jsonObject.getString("id");
-            project_id = jsonObject.getString("project_id");
-            pro_id = jsonObject.getString("pro_id");
-            JSONArray message_list = jsonObject.getJSONArray("message_list");
-
-            Logger.printMessage("jsonObject", "-->" + jsonObject);
-            Logger.printMessage("project_id", "-->" + project_id);
-            Logger.printMessage("id", "-->" + id);
-            Logger.printMessage("pro_id", "-->" + pro_id);
-
-            for (int i = 0; i < message_list.length(); i++) {
-
-                for (int j = 0; j < message_list.getJSONObject(i).getJSONArray("info").length(); j++) {
-
-                    SetGetChatPojoData chatPojo = new SetGetChatPojoData();
-                    if (j == 0) {
-                        chatPojo.setDate(message_list.getJSONObject(i).getString("date"));
-                    } else {
-                        chatPojo.setDate("");
-                    }
-                    chatPojo.setUser(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
-                    chatPojo.setSender_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
-                    chatPojo.setReceiver_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
-                    chatPojo.setMessage_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
-                    chatPojo.setProject_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
-                    chatPojo.setMessage_info(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
-                    chatPojo.setOther_file_type(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
-                    chatPojo.setMsg_attachment(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
-                    chatPojo.setTime_status(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
-                    chatPojo.setTime_show(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
-                    chatPojo.setCom_name(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
-                    chatPojo.setUsersimage(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
-
-                    chatList.add(chatPojo);
-
-                }
-            }
-
-
-            Collections.reverse(chatList);
-            indevidualChatAdapter = new IndevidualChatAdapter(IndividualMessageActivity.this, chatList);
-
-            chat_list.setAdapter(indevidualChatAdapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         im_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,7 +135,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
 
 //        edt_sent_message.addTextChangedListener(mySearchTextWatcher);
 
-
+        updateMessage();
     }
 
     /*  @Override
@@ -302,40 +251,40 @@ public class IndividualMessageActivity extends AppCompatActivity {
 
                     if (info_array.getJSONObject(0).has("all_pro_user_list")) {
 
-                        for (int c = 0; c < info_array.getJSONObject(0).getJSONArray("all_pro_user_list").length(); c++) {
+                        JSONArray message_list = info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(0).getJSONArray("message_list");
+                        for (int i = 0; i < message_list.length(); i++) {
 
-                            if (info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(c).getString("id").trim().equals(id.trim())) {
+                            for (int j = 0; j < message_list.getJSONObject(i).getJSONArray("info").length(); j++) {
 
-                                JSONArray message_list = info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(c).getJSONArray("message_list");
-                                for (int i = 0; i < message_list.length(); i++) {
-
-                                    for (int j = 0; j < message_list.getJSONObject(i).getJSONArray("info").length(); j++) {
-
-                                        SetGetChatPojoData chatPojo = new SetGetChatPojoData();
-                                        if (j == 0) {
-                                            chatPojo.setDate(message_list.getJSONObject(i).getString("date"));
-                                        } else {
-                                            chatPojo.setDate("");
-                                        }
-                                        chatPojo.setUser(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
-                                        chatPojo.setSender_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
-                                        chatPojo.setReceiver_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
-                                        chatPojo.setMessage_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
-                                        chatPojo.setProject_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
-                                        chatPojo.setMessage_info(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
-                                        chatPojo.setOther_file_type(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
-                                        chatPojo.setMsg_attachment(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
-                                        chatPojo.setTime_status(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
-                                        chatPojo.setTime_show(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
-                                        chatPojo.setCom_name(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
-                                        chatPojo.setUsersimage(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
-
-                                        chatList.add(chatPojo);
-                                    }
+                                SetGetChatPojoData chatPojo = new SetGetChatPojoData();
+                                if (j == 0) {
+                                    chatPojo.setDate(message_list.getJSONObject(i).getString("date"));
+                                } else {
+                                    chatPojo.setDate("");
                                 }
-                                Collections.reverse(chatList);
-                                indevidualChatAdapter.notifyDataSetChanged();
+                                chatPojo.setUser(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("user"));
+                                chatPojo.setSender_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("sender_id"));
+                                chatPojo.setReceiver_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("receiver_id"));
+                                chatPojo.setMessage_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_id"));
+                                chatPojo.setProject_id(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("project_id"));
+                                chatPojo.setMessage_info(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("message_info"));
+                                chatPojo.setOther_file_type(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("other_file_type"));
+                                chatPojo.setMsg_attachment(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("msg_attachment"));
+                                chatPojo.setTime_status(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_status"));
+                                chatPojo.setTime_show(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("time_show"));
+                                chatPojo.setCom_name(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("com_name"));
+                                chatPojo.setUsersimage(message_list.getJSONObject(i).getJSONArray("info").getJSONObject(j).getString("usersimage"));
+
+                                chatList.add(chatPojo);
                             }
+                        }
+                        Collections.reverse(chatList);
+
+                        if (indevidualChatAdapter == null) {
+                            indevidualChatAdapter = new IndevidualChatAdapter(IndividualMessageActivity.this, chatList);
+                            chat_list.setAdapter(indevidualChatAdapter);
+                        } else {
+                            indevidualChatAdapter.notifyDataSetChanged();
                         }
                     }
                 } catch (JSONException e) {
@@ -347,7 +296,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
             public void onError(String error) {
                 Logger.printMessage("Error", "-->" + error);
             }
-        }, ProApplication.getInstance().getUserId(), project_id);
+        }, ProApplication.getInstance().getUserId(), project_id, "", pro_id);
     }
 
 }

@@ -244,7 +244,8 @@ public class ProjectMessagingFragment extends Fragment {
                                         //startActivity(new Intent((LandScreenActivity) getActivity(), IndividualMessageActivity.class));
                                         Intent intent = new Intent(getActivity(), IndividualMessageActivity.class);
                                         try {
-                                            intent.putExtra("infoarry", info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(position).toString());
+                                            intent.putExtra("pro_id", info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(position).getString("pro_id"));
+                                            intent.putExtra("project_id", info_array.getJSONObject(0).getJSONArray("all_pro_user_list").getJSONObject(position).getString("project_id"));
                                             startActivity(intent);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -277,7 +278,7 @@ public class ProjectMessagingFragment extends Fragment {
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
             }
-        }, ProApplication.getInstance().getUserId(), mypojectid, list_search);
+        }, ProApplication.getInstance().getUserId(), mypojectid, list_search,"");
 
     }
 

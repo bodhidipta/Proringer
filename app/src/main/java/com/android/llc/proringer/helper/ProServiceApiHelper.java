@@ -3677,8 +3677,9 @@ public class ProServiceApiHelper {
                         Logger.printMessage("user_id", ":-" + params[0]);
                         Logger.printMessage("project_id", ":-" + params[1]);
                         Logger.printMessage("list_search", ":-" + params[2]);
+                        Logger.printMessage("pro_user_id", ":-" + params[3]);
 
-                        String MessageListAPI = messageListAPI + "?user_id=" + params[0] + "&project_id=" + params[1]+"&list_search="+params[2];
+                        String MessageListAPI = messageListAPI + "?user_id=" + params[0] + "&project_id=" + params[1]+"&list_search="+params[2]+"&pro_user_id="+params[3];
 
                         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
 
