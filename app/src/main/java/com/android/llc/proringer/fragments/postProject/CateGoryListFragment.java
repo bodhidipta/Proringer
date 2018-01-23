@@ -264,7 +264,6 @@ public class CateGoryListFragment extends Fragment implements MyCustomAlertListe
                         ((PostProjectActivity) getActivity()).setHeaderTextCategory();
                         ((PostProjectActivity) getActivity()).increaseStep();
 
-                        Log.i("fridge","fridge");
                         /**
                          * fragment calling
                          */

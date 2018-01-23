@@ -38,6 +38,8 @@ import android.widget.ImageView;
 import android.widget.OverScroller;
 import android.widget.Scroller;
 
+import com.android.llc.proringer.utils.Logger;
+
 
 public class TouchImageView extends AppCompatImageView {
 
@@ -1371,7 +1373,7 @@ public class TouchImageView extends AppCompatImageView {
     private void printMatrixInfo() {
         float[] n = new float[9];
         matrix.getValues(n);
-        Log.d(DEBUG, "Scale: " + n[Matrix.MSCALE_X] + " TransX: "
+        Logger.printMessage(DEBUG, "Scale: " + n[Matrix.MSCALE_X] + " TransX: "
                 + n[Matrix.MTRANS_X] + " TransY: " + n[Matrix.MTRANS_Y]);
     }
 }

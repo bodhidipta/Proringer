@@ -12,6 +12,8 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.llc.proringer.utils.Logger;
+
 /**
  * Created by su on 11/7/17.
  */
@@ -302,7 +304,7 @@ public class TouchImageViewFinal extends AppCompatImageView {
 
             int bmHeight = drawable.getIntrinsicHeight();
 
-            Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
+            Logger.printMessage("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
 
             float scaleX = (float) viewWidth / (float) bmWidth;
 

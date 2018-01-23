@@ -80,15 +80,15 @@ public class MyProjectDetailsFragment extends Fragment {
         SetGetAppsdata.Project_name = (ProApplication.getInstance().getDataSelected().getProject_category_name());
         SetGetAppsdata.projectzip = ProApplication.getInstance().getDataSelected().getZip();
 
-        Log.d("projectid", SetGetAppsdata.projectid);
-        Log.d("service_name", SetGetAppsdata.service);
-        Log.d("Project_name", SetGetAppsdata.Project_name);
-        Log.d("city", ProApplication.getInstance().getDataSelected().getCity());
-        Log.d("Zip", SetGetAppsdata.projectzip);
-        Log.d("count", ProApplication.getInstance().getDataSelected().getCountry_code());
-        Log.d("State", ProApplication.getInstance().getDataSelected().getState_code());
-        Log.d("latlong", ProApplication.getInstance().getDataSelected().getLatitude());
-        Log.d("longitude", ProApplication.getInstance().getDataSelected().getLatitude());
+        Logger.printMessage("projectid", SetGetAppsdata.projectid);
+        Logger.printMessage("service_name", SetGetAppsdata.service);
+        Logger.printMessage("Project_name", SetGetAppsdata.Project_name);
+        Logger.printMessage("city", ProApplication.getInstance().getDataSelected().getCity());
+        Logger.printMessage("Zip", SetGetAppsdata.projectzip);
+        Logger.printMessage("count", ProApplication.getInstance().getDataSelected().getCountry_code());
+        Logger.printMessage("State", ProApplication.getInstance().getDataSelected().getState_code());
+        Logger.printMessage("latlong", ProApplication.getInstance().getDataSelected().getLatitude());
+        Logger.printMessage("longitude", ProApplication.getInstance().getDataSelected().getLatitude());
 
 
 

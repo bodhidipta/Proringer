@@ -141,7 +141,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
     /*  @Override
       public void onError(String error) {
 
-          Log.d("onError","onError");
+          Logger.printMessage("onError","onError");
       }*/
     //}, ProApplication.getInstance().getUserId(), project_id);
     public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
@@ -170,7 +170,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
 //                          }
 //                      });
 
-                Log.i("path-->", mCurrentPhotoPath);
+                Logger.printMessage("path-->", mCurrentPhotoPath);
                 sendMessage();
 
                 Toast.makeText(IndividualMessageActivity.this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
@@ -233,7 +233,7 @@ public class IndividualMessageActivity extends AppCompatActivity {
 
     public void updateMessage() {
         chatList.clear();
-        Log.d("againcall", "yes");
+        Logger.printMessage("againcall", "yes");
         ProServiceApiHelper.getInstance(IndividualMessageActivity.this).getUserMessageListAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
             public void onStart() {

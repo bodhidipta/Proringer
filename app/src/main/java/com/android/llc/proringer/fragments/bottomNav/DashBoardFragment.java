@@ -23,6 +23,7 @@ import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
+import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.utils.PermissionController;
 import com.android.llc.proringer.viewsmod.BottomNav;
 import com.android.llc.proringer.viewsmod.NavigationHandler;
@@ -300,7 +301,7 @@ public class DashBoardFragment extends Fragment implements MyCustomAlertListener
 
                 loadProfileImage();
 
-                Log.i("path-->", mCurrentPhotoPath);
+                Logger.printMessage("path-->", mCurrentPhotoPath);
 
                 Toast.makeText(getActivity(), "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

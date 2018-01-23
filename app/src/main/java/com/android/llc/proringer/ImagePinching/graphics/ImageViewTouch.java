@@ -15,6 +15,8 @@ import android.view.ScaleGestureDetector;
 import android.view.ScaleGestureDetector.OnScaleGestureListener;
 import android.view.ViewConfiguration;
 
+import com.android.llc.proringer.utils.Logger;
+
 public class ImageViewTouch extends ImageViewTouchBase {
     static final float SCROLL_DELTA_THRESHOLD = 1.0f;
     /**
@@ -148,7 +150,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
     protected void onZoomAnimationCompleted(float scale) {
 
         if (DEBUG) {
-            Log.d(TAG, "onZoomAnimationCompleted. scale: " + scale + ", minZoom: " + getMinScale());
+            Logger.printMessage(TAG, "onZoomAnimationCompleted. scale: " + scale + ", minZoom: " + getMinScale());
         }
 
         if (scale < getMinScale()) {
@@ -184,7 +186,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
         }
 
         if (DEBUG) {
-            Log.i(TAG, "onFling");
+            Logger.printMessage(TAG, "onFling");
         }
 
         if (Math.abs(velocityX) > (mMinFlingVelocity * 4) || Math.abs(velocityY) > (mMinFlingVelocity * 4)) {
@@ -290,7 +292,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             if (DEBUG) {
-                Log.i(TAG, "onDoubleTap. double tap enabled? " + mDoubleTapEnabled);
+                Logger.printMessage(TAG, "onDoubleTap. double tap enabled? " + mDoubleTapEnabled);
             }
             if (mDoubleTapEnabled) {
                 if (Build.VERSION.SDK_INT >= 19) {
@@ -377,7 +379,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
         @Override
         public boolean onDown(MotionEvent e) {
             if (DEBUG) {
-                Log.i(TAG, "onDown");
+                Logger.printMessage(TAG, "onDown");
             }
             stopAllAnimations();
 

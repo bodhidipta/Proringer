@@ -95,7 +95,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                 public void onGlobalLayout() {
                     holder.tv_review_comment.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     int lineCount = holder.tv_review_comment.getLineCount();
-                    Log.d("count", "Number of lines is " + lineCount);
+                    Logger.printMessage("count", "Number of lines is " + lineCount);
 
                     if (lineCount > 1) {
 
@@ -159,7 +159,7 @@ public class ProsReviewAllAdapter extends RecyclerView.Adapter<ProsReviewAllAdap
                     public void onGlobalLayout() {
                         holder.tv_review_reply.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                         int lineCount = holder.tv_review_reply.getLineCount();
-                        Log.d("count", "Number of lines is " + lineCount);
+                        Logger.printMessage("count", "Number of lines is " + lineCount);
 
                         if (lineCount > 1) {
 

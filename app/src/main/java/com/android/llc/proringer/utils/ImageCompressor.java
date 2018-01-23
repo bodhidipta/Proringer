@@ -78,7 +78,7 @@ public class ImageCompressor {
             File source = new File(getRealPathFromURI(imageUri));
             if (source.exists()) {
                 boolean isdeleted = source.delete();
-                Log.d(TAG, (isdeleted) ? "SourceImage File deleted" : "SourceImage File not deleted");
+                Logger.printMessage(TAG, (isdeleted) ? "SourceImage File deleted" : "SourceImage File not deleted");
             }
         }
 
@@ -120,7 +120,7 @@ public class ImageCompressor {
             // Delete the file create from the drawable Id
             if (image.exists()) {
                 boolean isdeleted = image.delete();
-                Log.d(TAG, (isdeleted) ? "SourceImage File deleted" : "SourceImage File not deleted");
+                Logger.printMessage(TAG, (isdeleted) ? "SourceImage File deleted" : "SourceImage File not deleted");
             }
 
             // return the path to the compress image
@@ -176,7 +176,7 @@ public class ImageCompressor {
             File source = new File(getRealPathFromURI(imageUri));
             if (source.exists()) {
                 boolean isdeleted = source.delete();
-                Log.d(TAG, (isdeleted) ? "SourceImage File deleted" : "SourceImage File not deleted");
+                Logger.printMessage(TAG, (isdeleted) ? "SourceImage File deleted" : "SourceImage File not deleted");
             }
         }
         return bitmap;
@@ -267,17 +267,17 @@ public class ImageCompressor {
 
             int orientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION, 0);
-            Log.d("EXIF", "Exif: " + orientation);
+            Logger.printMessage("EXIF", "Exif: " + orientation);
             Matrix matrix = new Matrix();
             if (orientation == 6) {
                 matrix.postRotate(90);
-                Log.d("EXIF", "Exif: " + orientation);
+                Logger.printMessage("EXIF", "Exif: " + orientation);
             } else if (orientation == 3) {
                 matrix.postRotate(180);
-                Log.d("EXIF", "Exif: " + orientation);
+                Logger.printMessage("EXIF", "Exif: " + orientation);
             } else if (orientation == 8) {
                 matrix.postRotate(270);
-                Log.d("EXIF", "Exif: " + orientation);
+                Logger.printMessage("EXIF", "Exif: " + orientation);
             }
             scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0,
                     scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,
@@ -386,17 +386,17 @@ public class ImageCompressor {
 
             int orientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION, 0);
-            Log.d("EXIF", "Exif: " + orientation);
+            Logger.printMessage("EXIF", "Exif: " + orientation);
             Matrix matrix = new Matrix();
             if (orientation == 6) {
                 matrix.postRotate(90);
-                Log.d("EXIF", "Exif: " + orientation);
+                Logger.printMessage("EXIF", "Exif: " + orientation);
             } else if (orientation == 3) {
                 matrix.postRotate(180);
-                Log.d("EXIF", "Exif: " + orientation);
+                Logger.printMessage("EXIF", "Exif: " + orientation);
             } else if (orientation == 8) {
                 matrix.postRotate(270);
-                Log.d("EXIF", "Exif: " + orientation);
+                Logger.printMessage("EXIF", "Exif: " + orientation);
             }
             scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0,
                     scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,

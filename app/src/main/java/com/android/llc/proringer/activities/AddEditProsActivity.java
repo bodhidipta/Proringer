@@ -52,7 +52,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         fragmentManager = getSupportFragmentManager();
         tv_toolbar = (ProRegularTextView) findViewById(R.id.tv_toolbar);
         fragmentPushList = new ArrayList<>();
-        Log.d("address", String.valueOf(selectedSetGetAddressData));
+        Logger.printMessage("address", String.valueOf(selectedSetGetAddressData));
         img_back = (ImageView) findViewById(R.id.img_back);
         img_home = (ImageView) findViewById(R.id.img_home);
         progress_posting = (ProgressBar) findViewById(R.id.progress_posting);
@@ -66,7 +66,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
         String projectname = getIntent().getExtras().getString("Project");
         tv_toolbar.setText(projectname);
-        Log.d("project", projectname);
+        Logger.printMessage("project", projectname);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,15 +131,15 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
     public boolean completeEditProject() {
 
-        Log.d("project_id","-->"+ SetGetAppsdata.projectid );
-        Log.d("user_id","-->"+ProApplication.getInstance().getUserId());
-        Log.d("project_zipcode", "-->" + selectedSetGetAddressData.getZip_code());
-        Log.d("city","-->"+ selectedSetGetAddressData.getCity());
-        Log.d("state","-->"+ selectedSetGetAddressData.getState_code());
-        Log.d("country","-->"+ selectedSetGetAddressData.getCountry_code());
-        Log.d("latitude","-->"+ selectedSetGetAddressData.getLatitude());
-        Log.d("longitude","-->"+ selectedSetGetAddressData.getLongitude());
-        Log.d("Description","-->"+ project_description);
+        Logger.printMessage("project_id","-->"+ SetGetAppsdata.projectid );
+        Logger.printMessage("user_id","-->"+ProApplication.getInstance().getUserId());
+        Logger.printMessage("project_zipcode", "-->" + selectedSetGetAddressData.getZip_code());
+        Logger.printMessage("city","-->"+ selectedSetGetAddressData.getCity());
+        Logger.printMessage("state","-->"+ selectedSetGetAddressData.getState_code());
+        Logger.printMessage("country","-->"+ selectedSetGetAddressData.getCountry_code());
+        Logger.printMessage("latitude","-->"+ selectedSetGetAddressData.getLatitude());
+        Logger.printMessage("longitude","-->"+ selectedSetGetAddressData.getLongitude());
+        Logger.printMessage("Description","-->"+ project_description);
 
         Logger.printMessage("@registrationPostPro", "mCurrentPhotoPath :" + mCurrentPhotoPath);
 
@@ -233,7 +233,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
         super.onBackPressed();
         closeKeypad();
         progressStep--;
-        Log.d("size list", "" + fragmentPushList.size());
+        Logger.printMessage("size list", "" + fragmentPushList.size());
         if (fragmentPushList.size() >= 1) {
             if (fragmentPushList.size() == 3) {
                 fragmentPushList.remove(fragmentPushList.size() - 1);

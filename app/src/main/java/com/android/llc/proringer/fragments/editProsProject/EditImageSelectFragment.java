@@ -171,7 +171,7 @@ public class EditImageSelectFragment extends Fragment {
                     }
                 });
 
-                Log.i("path-->", mCurrentPhotoPath);
+                Logger.printMessage("path-->", mCurrentPhotoPath);
 
                 Toast.makeText(getActivity(), "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
