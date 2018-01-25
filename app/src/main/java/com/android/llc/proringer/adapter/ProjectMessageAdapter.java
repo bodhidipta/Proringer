@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -26,10 +27,13 @@ import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -140,7 +144,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout);
             main_container = (RelativeLayout) itemView.findViewById(R.id.main_container);
             delete_layout = (LinearLayout) itemView.findViewById(R.id.delete_layout);
-
             project_type_img = (ImageView) itemView.findViewById(R.id.project_type_img);
             project_name = (ProSemiBoldTextView) itemView.findViewById(R.id.project_name);
             status = (ProSemiBoldTextView) itemView.findViewById(R.id.status);
@@ -161,24 +164,8 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
                 }
             });
 
+            Picasso.with(mcontext).load(setGetProjectMessage.getProj_image()).into(project_type_img);
 
-            Glide.with(mcontext).load(setGetProjectMessage.getProj_image())
-                    .placeholder(R.drawable.plumber)
-                    .into(new GlideDrawableImageViewTarget(project_type_img) {
-                        /**
-                         * {@inheritDoc}
-                         * If no {@link GlideAnimation} is given or if the animation does not set the
-                         * {@link Drawable} on the view, the drawable is set using
-                         * {@link ImageView#setImageDrawable(Drawable)}.
-                         *
-                         * @param resource  {@inheritDoc}
-                         * @param animation {@inheritDoc}
-                         */
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                            super.onResourceReady(resource, animation);
-                        }
-                    });
             project_name.setText(setGetProjectMessage.getProj_name());
 
             if (Integer.parseInt(setGetProjectMessage.getNo_of_pros_user()) == 0) {
@@ -198,7 +185,6 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
             } else {
                 status.setVisibility(View.GONE);
             }
-
 
             date.setText(setGetProjectMessage.getProject_date());
         }

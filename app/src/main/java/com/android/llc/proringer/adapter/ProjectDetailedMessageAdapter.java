@@ -30,6 +30,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -189,23 +190,25 @@ public class ProjectDetailedMessageAdapter extends RecyclerView.Adapter<ProjectD
             tv_date.setText(setGetProjectMessageDetailsData.getPro_time_status());
             tv_description.setText(setGetProjectMessageDetailsData.getMessage_info());
 
-            Glide.with(mcontext).load(setGetProjectMessageDetailsData.getPro_img())
-                    .placeholder(R.drawable.plumber)
-                    .into(new GlideDrawableImageViewTarget(prof_img) {
-                        /**
-                         * {@inheritDoc}
-                         * If no {@link GlideAnimation} is given or if the animation does not set the
-                         * {@link Drawable} on the view, the drawable is set using
-                         * {@link ImageView#setImageDrawable(Drawable)}.
-                         *
-                         * @param resource  {@inheritDoc}
-                         * @param animation {@inheritDoc}
-                         */
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                            super.onResourceReady(resource, animation);
-                        }
-                    });
+//            Glide.with(mcontext).load(setGetProjectMessageDetailsData.getPro_img())
+//                    .placeholder(R.drawable.plumber)
+//                    .into(new GlideDrawableImageViewTarget(prof_img) {
+//                        /**
+//                         * {@inheritDoc}
+//                         * If no {@link GlideAnimation} is given or if the animation does not set the
+//                         * {@link Drawable} on the view, the drawable is set using
+//                         * {@link ImageView#setImageDrawable(Drawable)}.
+//                         *
+//                         * @param resource  {@inheritDoc}
+//                         * @param animation {@inheritDoc}
+//                         */
+//                        @Override
+//                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+//                            super.onResourceReady(resource, animation);
+//                        }
+//                    });
+
+            Picasso.with(mcontext).load(setGetProjectMessageDetailsData.getPro_img()).into(prof_img);
 
             //textView.setText(data);
         }
