@@ -32,7 +32,8 @@
                 android:lines="1"
                 android:inputType="text"
                 android:singleLine="true"
-                android:textColorHint="@color/colorTextDark"
+                android:textColorHint="@color/colorDarkGray"
+                android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
 
             <ImageView
@@ -61,7 +62,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/colorLightBrick"
             android:gravity="center"
-            android:text="No Result Found"
+            android:text="No Results Found"
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
 

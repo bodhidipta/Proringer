@@ -39,6 +39,7 @@ import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.SetGetProCategoryData;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,6 +76,7 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
     ImageView img_clear;
     ProCategoryListAdapter proCategoryListAdapter;
     private InputMethodManager keyboard;
+    ProRegularTextView tv_empty_show;
 
     @Nullable
     @Override
@@ -95,6 +97,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
         myLoader = new MyLoader(getActivity());
         img_clear = (ImageView) view.findViewById(R.id.img_clear);
         img_clear.setVisibility(View.GONE);
+
+
+        tv_empty_show = (ProRegularTextView) view.findViewById(R.id.tv_empty_show);
+        tv_empty_show.setVisibility(View.GONE);
 
         keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -182,9 +188,10 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
     @Override
     public void callbackForAlert(String result, int i) {
-        if (result.equalsIgnoreCase("retry") && i == 1) {
-            plotUserInformation();
-        } else if (result.equalsIgnoreCase("ok") && i == 1) {
+//        if (result.equalsIgnoreCase("retry") && i == 1) {
+//            plotUserInformation();
+//        } else
+            if (result.equalsIgnoreCase("ok") && i == 1) {
             plotUserInformation();
         } else if (result.equalsIgnoreCase("ok") && i == 3) {
             plotUserInformation();
@@ -220,6 +227,9 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
 
                 try {
                     JSONObject jsonObject = new JSONObject(message);
+
+                    pros_list.setVisibility(View.VISIBLE);
+                    tv_empty_show.setVisibility(View.GONE);
 
                     if (jsonObject.has("info_array")) {
 
@@ -261,15 +271,18 @@ public class SearchLocalProFragment extends Fragment implements MyCustomAlertLis
                     LLMain.setVisibility(View.GONE);
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
-                if (searchProListAdapter != null) {
-                    Logger.printMessage("searchProListAdapter", "not null");
+//                if (searchProListAdapter != null) {
+                    Logger.printMessage("searchProListAdapter", "not null with error");
 
-                    JSONArray jarr_info_array = new JSONArray();
-                    searchProListAdapter.refreshData(jarr_info_array);
-                }
+                    pros_list.setVisibility(View.GONE);
+                    tv_empty_show.setVisibility(View.VISIBLE);
 
-                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+                    //JSONArray jarr_info_array = new JSONArray();
+                    //searchProListAdapter.refreshData(jarr_info_array);
+                //}
+
+                //CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, SearchLocalProFragment.this);
+                //customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
 
             }
         }, ProApplication.getInstance().getUserId(), category_search, ((LandScreenActivity) getActivity()).local_pros_search_zip);

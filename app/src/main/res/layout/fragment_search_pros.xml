@@ -57,7 +57,8 @@
                 android:lines="1"
                 android:inputType="text"
                 android:singleLine="true"
-                android:textColorHint="@color/colorTextDark"
+                android:textColorHint="@color/colorDarkGray"
+                android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
 
             <ImageView
@@ -76,6 +77,19 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_cross_circle" />
         </RelativeLayout>
+
+        <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
+            android:id="@+id/tv_empty_show"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorLightBrick"
+            android:gravity="center"
+            android:text="No Results Found"
+            android:textColor="@color/colorTextDark"
+            android:textSize="14sp" />
 
         <!--tytytrytrytrrt-->
         <android.support.v7.widget.RecyclerView

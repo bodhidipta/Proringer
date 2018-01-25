@@ -26,13 +26,14 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:background="@drawable/background_white_with_border"
-                android:hint="Search"
+                android:hint="Search Messages"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:lines="1"
                 android:paddingLeft="30dp"
                 android:singleLine="true"
-                android:textColorHint="@color/colorTextDark"
+                android:textColorHint="@color/colorDarkGray"
+                android:textColor="@color/colorTextDark"
                 android:textSize="14sp" />
 
             <ImageView
@@ -61,7 +62,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/colorLightBrick"
             android:gravity="center"
-            android:text="No Result Found"
+            android:text="No Results Found"
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
 

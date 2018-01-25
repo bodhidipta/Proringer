@@ -34,6 +34,7 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
+import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,6 +68,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
     ProRegularEditText edt_search;
     TextWatcher mySearchTextWatcher;
     private InputMethodManager keyboard;
+    ProRegularTextView tv_empty_show;
 
     @Nullable
     @Override
@@ -92,6 +94,9 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
 
         pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
         pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
+
+        tv_empty_show = (ProRegularTextView) view.findViewById(R.id.tv_empty_show);
+        tv_empty_show.setVisibility(View.GONE);
 
         myLoader = new MyLoader(getActivity());
 
@@ -187,6 +192,9 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 try {
                     JSONObject jsonObject = new JSONObject(message);
 
+                    pros_list.setVisibility(View.VISIBLE);
+                    tv_empty_show.setVisibility(View.GONE);
+
                     if (jsonObject.has("info_array")) {
 
                         JSONArray info_array = jsonObject.getJSONArray("info_array");
@@ -224,15 +232,18 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
-                if (searchFavoriteListAdapter != null) {
+//                if (searchFavoriteListAdapter != null) {
                     Logger.printMessage("searchProListAdapter", "not null");
 
-                    JSONArray jarr_info_array = new JSONArray();
-                    searchFavoriteListAdapter.refreshData(jarr_info_array);
-                }
+                    pros_list.setVisibility(View.GONE);
+                    tv_empty_show.setVisibility(View.VISIBLE);
+//
+//                    JSONArray jarr_info_array = new JSONArray();
+//                    searchFavoriteListAdapter.refreshData(jarr_info_array);
+//                }
 
-                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+//                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
+//                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
         }, ProApplication.getInstance().getUserId(), category_search, ((LandScreenActivity) getActivity()).local_pros_search_zip);
     }
@@ -293,7 +304,8 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 }
 
                 if (searchFavoriteListAdapter != null) {
-                    Logger.printMessage("searchProListAdapter", "not null");
+                    Logger.printMessage("searchProListAdapter", "not null in error call");
+
 
                     JSONArray jarr_info_array = new JSONArray();
                     searchFavoriteListAdapter.refreshData(jarr_info_array);
