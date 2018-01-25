@@ -65,6 +65,7 @@ public class ProjectMessageAdapter extends RecyclerView.Adapter<ProjectMessageAd
     MyLoader myLoader;
     private final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
+
     public ProjectMessageAdapter(Context mcontext, ArrayList<SetGetProjectMessage> setGetProjectMessageArrayList, MessageFragment.onOptionSelected callback) {
         this.mcontext = mcontext;
         this.callback = callback;
