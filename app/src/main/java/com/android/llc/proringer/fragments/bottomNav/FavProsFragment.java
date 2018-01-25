@@ -24,10 +24,8 @@ import android.widget.TextView;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.adapter.SearchFavoriteListAdapter;
-import com.android.llc.proringer.adapter.SearchProListAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.database.DatabaseHandler;
-import com.android.llc.proringer.fragments.drawerNav.SearchLocalProFragment;
 import com.android.llc.proringer.helper.CustomAlert;
 import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
@@ -59,7 +57,7 @@ import org.json.JSONObject;
  */
 
 public class FavProsFragment extends Fragment implements MyCustomAlertListener {
-    private RecyclerView pros_list;
+    private RecyclerView rcv;
     MyLoader myLoader = null;
     SearchFavoriteListAdapter searchFavoriteListAdapter;
     LinearLayout LLMain, LLNetworkDisconnection;
@@ -92,8 +90,8 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
 
         view.findViewById(R.id.tv_empty_show).setVisibility(View.GONE);
 
-        pros_list = (RecyclerView) view.findViewById(R.id.pros_list);
-        pros_list.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
+        rcv = (RecyclerView) view.findViewById(R.id.pros_list);
+        rcv.setLayoutManager(new LinearLayoutManager((LandScreenActivity) getActivity()));
 
         tv_empty_show = (ProRegularTextView) view.findViewById(R.id.tv_empty_show);
         tv_empty_show.setVisibility(View.GONE);
@@ -192,7 +190,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 try {
                     JSONObject jsonObject = new JSONObject(message);
 
-                    pros_list.setVisibility(View.VISIBLE);
+                    rcv.setVisibility(View.VISIBLE);
                     tv_empty_show.setVisibility(View.GONE);
 
                     if (jsonObject.has("info_array")) {
@@ -210,7 +208,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                                     DeleteFavPro(value, position);
                                 }
                             });
-                            pros_list.setAdapter(searchFavoriteListAdapter);
+                            rcv.setAdapter(searchFavoriteListAdapter);
                         } else {
                             Logger.printMessage("searchProListAdapter", "not null");
                             searchFavoriteListAdapter.refreshData(info_array);
@@ -233,10 +231,10 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 }
 
 //                if (searchFavoriteListAdapter != null) {
-                    Logger.printMessage("searchProListAdapter", "not null");
+                Logger.printMessage("searchProListAdapter", "not null");
 
-                    pros_list.setVisibility(View.GONE);
-                    tv_empty_show.setVisibility(View.VISIBLE);
+                rcv.setVisibility(View.GONE);
+                tv_empty_show.setVisibility(View.VISIBLE);
 //
 //                    JSONArray jarr_info_array = new JSONArray();
 //                    searchFavoriteListAdapter.refreshData(jarr_info_array);
@@ -266,6 +264,9 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                 try {
                     JSONObject jsonObject = new JSONObject(message);
 
+                    rcv.setVisibility(View.VISIBLE);
+                    tv_empty_show.setVisibility(View.GONE);
+
                     if (jsonObject.has("info_array")) {
 
                         JSONArray info_array = jsonObject.getJSONArray("info_array");
@@ -281,7 +282,7 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                                     DeleteFavPro(value, position);
                                 }
                             });
-                            pros_list.setAdapter(searchFavoriteListAdapter);
+                            rcv.setAdapter(searchFavoriteListAdapter);
                         } else {
                             Logger.printMessage("searchProListAdapter", "not null");
                             searchFavoriteListAdapter.refreshData(info_array);
@@ -303,17 +304,19 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                     LLNetworkDisconnection.setVisibility(View.VISIBLE);
                 }
 
-                if (searchFavoriteListAdapter != null) {
-                    Logger.printMessage("searchProListAdapter", "not null in error call");
+//                if (searchFavoriteListAdapter != null) {
+                Logger.printMessage("searchProListAdapter", "not null in error call");
+
+                rcv.setVisibility(View.GONE);
+                tv_empty_show.setVisibility(View.VISIBLE);
+
+//                    JSONArray jarr_info_array = new JSONArray();
+//                    searchFavoriteListAdapter.refreshData(jarr_info_array);
+//                }
 
 
-                    JSONArray jarr_info_array = new JSONArray();
-                    searchFavoriteListAdapter.refreshData(jarr_info_array);
-                }
-
-
-                CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
-                customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+                // CustomAlert customAlert = new CustomAlert(getActivity(), "Load Error", "" + error, FavProsFragment.this);
+                // customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
             }
         }, ProApplication.getInstance().getUserId(), category_search, ((LandScreenActivity) getActivity()).local_pros_search_zip);
     }
@@ -350,34 +353,34 @@ public class FavProsFragment extends Fragment implements MyCustomAlertListener {
                         ///////////delete from favorite list
                         try {
                             ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).deleteFavoriteProAPI(new ProServiceApiHelper.getApiProcessCallback() {
-                                                                                                                      @Override
-                                                                                                                      public void onStart() {
-                                                                                                                          myLoader.showLoader();
-                                                                                                                      }
+                                                                                                                         @Override
+                                                                                                                         public void onStart() {
+                                                                                                                             myLoader.showLoader();
+                                                                                                                         }
 
-                                                                                                                      @Override
-                                                                                                                      public void onComplete(String message) {
+                                                                                                                         @Override
+                                                                                                                         public void onComplete(String message) {
 
-                                                                                                                          searchFavoriteListAdapter.notifyMe(pos);
+                                                                                                                             searchFavoriteListAdapter.notifyMe(pos);
 
-                                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
-                                                                                                                              myLoader.dismissLoader();
+                                                                                                                             if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                                 myLoader.dismissLoader();
 
-                                                                                                                          CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + message, FavProsFragment.this);
-                                                                                                                          customAlert.createNormalAlert("ok", 1);
+                                                                                                                             CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + message, FavProsFragment.this);
+                                                                                                                             customAlert.createNormalAlert("ok", 1);
 
-                                                                                                                      }
+                                                                                                                         }
 
-                                                                                                                      @Override
-                                                                                                                      public void onError(String error) {
-                                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
-                                                                                                                              myLoader.dismissLoader();
+                                                                                                                         @Override
+                                                                                                                         public void onError(String error) {
+                                                                                                                             if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                                 myLoader.dismissLoader();
 
 
-                                                                                                                          CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + error, FavProsFragment.this);
-                                                                                                                          customAlert.createNormalAlert("ok", 2);
-                                                                                                                      }
-                                                                                                                  },
+                                                                                                                             CustomAlert customAlert = new CustomAlert(getActivity(), "Delete Favorite pros", "" + error, FavProsFragment.this);
+                                                                                                                             customAlert.createNormalAlert("ok", 2);
+                                                                                                                         }
+                                                                                                                     },
                                     ProApplication.getInstance().getUserId(),
                                     pros_id
                             );
