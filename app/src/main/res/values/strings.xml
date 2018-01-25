@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Proringer</string>
+    <string name="app_name">ProRinger</string>
 
     <string name="fb_login_protocol_scheme">fb151286725493846</string>
     <string name="facebook_app_id" translatable="false">151286725493846</string>
