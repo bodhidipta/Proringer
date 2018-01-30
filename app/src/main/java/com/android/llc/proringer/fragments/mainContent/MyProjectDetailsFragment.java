@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +18,9 @@ import com.android.llc.proringer.R;
 import com.android.llc.proringer.activities.AddEditProsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
-import com.android.llc.proringer.pojo.SetGetAppsdata;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 import com.android.llc.proringer.viewsmod.textview.ProSemiBoldTextView;
@@ -75,23 +74,20 @@ public class MyProjectDetailsFragment extends Fragment {
         img_description.setText(ProApplication.getInstance().getDataSelected().getProject_name());
 
 
-        SetGetAppsdata.projectid = ProApplication.getInstance().getDataSelected().getId();
-        SetGetAppsdata.service = ProApplication.getInstance().getDataSelected().getProject_category_service_name();
-        SetGetAppsdata.Project_name = (ProApplication.getInstance().getDataSelected().getProject_category_name());
-        SetGetAppsdata.projectzip = ProApplication.getInstance().getDataSelected().getZip();
+        ProConstant.projectid = ProApplication.getInstance().getDataSelected().getId();
+        ProConstant.service = ProApplication.getInstance().getDataSelected().getProject_category_service_name();
+        ProConstant.Project_name = (ProApplication.getInstance().getDataSelected().getProject_category_name());
+        ProConstant.projectzip = ProApplication.getInstance().getDataSelected().getZip();
 
-        Logger.printMessage("projectid", SetGetAppsdata.projectid);
-        Logger.printMessage("service_name", SetGetAppsdata.service);
-        Logger.printMessage("Project_name", SetGetAppsdata.Project_name);
+        Logger.printMessage("projectid", ProConstant.projectid);
+        Logger.printMessage("service_name", ProConstant.service);
+        Logger.printMessage("Project_name", ProConstant.Project_name);
         Logger.printMessage("city", ProApplication.getInstance().getDataSelected().getCity());
-        Logger.printMessage("Zip", SetGetAppsdata.projectzip);
+        Logger.printMessage("Zip", ProConstant.projectzip);
         Logger.printMessage("count", ProApplication.getInstance().getDataSelected().getCountry_code());
         Logger.printMessage("State", ProApplication.getInstance().getDataSelected().getState_code());
         Logger.printMessage("latlong", ProApplication.getInstance().getDataSelected().getLatitude());
         Logger.printMessage("longitude", ProApplication.getInstance().getDataSelected().getLatitude());
-
-
-
 
 
         myLoader = new MyLoader(getActivity());

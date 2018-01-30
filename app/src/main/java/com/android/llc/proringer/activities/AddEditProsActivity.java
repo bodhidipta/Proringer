@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -13,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.fragments.editProsProject.EditImageSelectFragment;
 import com.android.llc.proringer.fragments.editProsProject.EditProsDetailsFragment;
 import com.android.llc.proringer.fragments.editProsProject.EditSearchLocationFragment;
@@ -21,7 +21,6 @@ import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.pojo.SetGetAddressData;
-import com.android.llc.proringer.pojo.SetGetAppsdata;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
@@ -61,7 +60,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
         myLoader = new MyLoader(AddEditProsActivity.this);
 
-        selected_service_category.setText(SetGetAppsdata.service);
+        selected_service_category.setText(ProConstant.service);
 
 
         String projectname = getIntent().getExtras().getString("Project");
@@ -131,7 +130,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
     public boolean completeEditProject() {
 
-        Logger.printMessage("project_id","-->"+ SetGetAppsdata.projectid );
+        Logger.printMessage("project_id","-->"+ ProConstant.projectid );
         Logger.printMessage("user_id","-->"+ProApplication.getInstance().getUserId());
         Logger.printMessage("project_zipcode", "-->" + selectedSetGetAddressData.getZip_code());
         Logger.printMessage("city","-->"+ selectedSetGetAddressData.getCity());
@@ -178,7 +177,7 @@ public class AddEditProsActivity extends AppCompatActivity implements MyCustomAl
 
 
                 }, ProApplication.getInstance().getUserId()
-                , SetGetAppsdata.projectid ,
+                , ProConstant.projectid ,
                 ""+ selectedSetGetAddressData.getZip_code(),
                 ""+ selectedSetGetAddressData.getCity(),
                 ""+ selectedSetGetAddressData.getState_code(),
