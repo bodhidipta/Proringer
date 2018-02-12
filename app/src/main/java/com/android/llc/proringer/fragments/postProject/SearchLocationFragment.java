@@ -208,6 +208,7 @@ public class SearchLocationFragment extends Fragment {
                     if (setGetAddressDataList != null && setGetAddressDataList.size() > 0) {
                         if (setGetAddressDataList.get(0).getCountry_code().equals("US") ||
                                 setGetAddressDataList.get(0).getCountry_code().equals("CA")) {
+
                             ((PostProjectActivity) getActivity()).selectedSetGetAddressData = setGetAddressDataList.get(0);
 
                             if (zip_search_adapter == null) {

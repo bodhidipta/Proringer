@@ -55,6 +55,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
     //    ProLightEditText address;
     PopupWindow popupWindow;
     MyLoader myLoader = null;
+    String lat,lng;
     ImageView Erase;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;

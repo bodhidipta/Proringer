@@ -2568,7 +2568,10 @@ public class ProServiceApiHelper {
 
                                     for (int j = 0; j < terms.length(); j++) {
                                         if (terms.getJSONObject(j).getString("value").contains("United States") ||
-                                                terms.getJSONObject(j).getString("value").contains("Canada")) {
+                                                terms.getJSONObject(j).getString("value").contains("Canada")
+                                                ||terms.getJSONObject(j).getString("value").contains("USA")
+                                                ||terms.getJSONObject(j).getString("value").contains("US")
+                                                ) {
                                             Logger.printMessage("description", "" + innerIncer.getString("description"));
                                             addressList.add(innerIncer.getString("description"));
                                             break;

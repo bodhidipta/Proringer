@@ -102,11 +102,11 @@ public class LocationFinder extends AppCompatActivity {
 
             @Override
             public void onComplete(ArrayList<String> listData) {
+                Logger.printMessage("list","-->"+listData);
                 if (listData.size() > 0) {
                     ArrayAdapter adapter = new ArrayAdapter(LocationFinder.this, R.layout.location_list_adapter, android.R.id.text1, listData);
                     listviewLocation.setAdapter(adapter);
                     listviewLocation.setVisibility(View.VISIBLE);
-
                 } else {
                     listviewLocation.setVisibility(View.GONE);
                 }
