@@ -368,7 +368,9 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
                                                                                                               rcv_project_gallery.setAdapter(prosDetailsImageAdapter);
 
                                                                                                               if (!infoArrayJsonObject.getString("achievement").equals(""))
-                                                                                                                  Glide.with(ProsProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement")).centerCrop().into(img_achievements);
+                                                                                                                  Glide.with(ProsProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement"))
+//                                                                                                                          .centerCrop()
+                                                                                                                          .into(img_achievements);
 
 
                                                                                                           } catch (JSONException e) {

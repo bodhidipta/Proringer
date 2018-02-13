@@ -44,14 +44,14 @@
                         android:padding="15dp"
                         android:src="@drawable/ic_keyboard_arrow_left_black_24px" />
 
-                    <ImageView
-                        android:id="@+id/img_share"
-                        android:layout_width="56dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:padding="15dp"
-                        android:src="@drawable/ic_share" />
+                    <!--<ImageView-->
+                        <!--android:id="@+id/img_share"-->
+                        <!--android:layout_width="56dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:padding="15dp"-->
+                        <!--android:src="@drawable/ic_share" />-->
 
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -460,7 +460,7 @@
                                 <android.support.v7.widget.RecyclerView
                                     android:id="@+id/rcv_service_area"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                                    android:layout_height="wrap_content"/>
 
 
                             </LinearLayout>
@@ -477,7 +477,7 @@
                                     android:layout_marginTop="20dp"
                                     android:text="Licence"
                                     android:textColor="@color/colorTextDark"
-                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                    android:textSize="14sp"/>
 
                                 <View
                                     android:id="@+id/SplitLine_hor5"
@@ -489,7 +489,7 @@
                                 <android.support.v7.widget.RecyclerView
                                     android:id="@+id/rcv_license"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                                    android:layout_height="wrap_content"/>
 
                                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                                     android:layout_width="wrap_content"
@@ -497,7 +497,7 @@
                                     android:layout_marginTop="20dp"
                                     android:text="Company info"
                                     android:textColor="@color/colorTextDark"
-                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                    android:textSize="14sp"/>
 
                                 <View
                                     android:id="@+id/SplitLine_hor6"
@@ -519,7 +519,7 @@
                                         android:paddingRight="5dp"
                                         android:text="business_since"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -528,7 +528,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
                                 </LinearLayout>
 
@@ -545,7 +545,7 @@
                                         android:paddingRight="5dp"
                                         android:text="No of employee"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -555,7 +555,7 @@
                                         android:layout_weight="1"
                                         android:paddingRight="5dp"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
                                 </LinearLayout>
 
@@ -572,7 +572,7 @@
                                         android:paddingRight="5dp"
                                         android:text="Proringer_awarded"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -581,7 +581,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
                                 </LinearLayout>
 
@@ -598,7 +598,7 @@
                                         android:paddingRight="5dp"
                                         android:text="Review"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -607,7 +607,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
                                 </LinearLayout>
 
@@ -624,7 +624,7 @@
                                         android:paddingRight="5dp"
                                         android:text="Last date on \nproringer verified"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -633,7 +633,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="12sp"/>
 
                                 </LinearLayout>
 
@@ -648,7 +648,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Project Gallery"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="14sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -658,7 +658,7 @@
                                         android:layout_alignParentRight="true"
                                         android:text="Pictures"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="14sp"/>
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                                         android:id="@+id/tv_no_of_picture_value"
@@ -668,7 +668,7 @@
                                         android:layout_toLeftOf="@+id/tv_no_of_picture_name"
                                         android:text="20"
                                         android:textColor="@color/colorAccent"
-                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="14sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -679,7 +679,7 @@
                                         android:layout_toLeftOf="@+id/tv_no_of_picture_value"
                                         android:text="Project"
                                         android:textColor="@color/colorTextDark"
-                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="14sp"/>
 
 
                                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -690,7 +690,7 @@
                                         android:layout_toLeftOf="@+id/tv_no_of_project_name"
                                         android:text="5"
                                         android:textColor="@color/colorAccent"
-                                        android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                        android:textSize="14sp"/>
 
 
                                 </RelativeLayout>
@@ -706,7 +706,7 @@
                                     android:id="@+id/rcv_project_gallery"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
+                                    android:layout_marginTop="10dp"/>
 
                                 <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
                                     android:layout_width="wrap_content"
@@ -714,7 +714,7 @@
                                     android:layout_marginTop="20dp"
                                     android:text="Achievements of Proringer"
                                     android:textColor="@color/colorTextDark"
-                                    android:textSize="14sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                                    android:textSize="14sp"/>
 
                                 <View
                                     android:id="@+id/SplitLine_hor8"
