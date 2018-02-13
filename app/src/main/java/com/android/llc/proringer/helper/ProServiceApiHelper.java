@@ -2572,6 +2572,7 @@ public class ProServiceApiHelper {
                                                 terms.getJSONObject(j).getString("value").contains("Canada")
                                                 ||terms.getJSONObject(j).getString("value").contains("USA")
                                                 ||terms.getJSONObject(j).getString("value").contains("US")
+                                                ||terms.getJSONObject(j).getString("value").contains("CA")
                                                 ) {
                                             Logger.printMessage("description", "" + innerIncer.getString("description"));
                                             addressList.add(innerIncer.getString("description"));
