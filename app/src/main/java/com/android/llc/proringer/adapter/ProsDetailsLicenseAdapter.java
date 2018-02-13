@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.llc.proringer.R;
+import com.android.llc.proringer.activities.ProsProjectDetailsActivity;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by su on 8/3/17.
@@ -31,7 +33,7 @@ public class ProsDetailsLicenseAdapter extends RecyclerView.Adapter<ProsDetailsL
     }
 
     @Override
-    public void onBindViewHolder(ProsDetailsLicenseAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProsDetailsLicenseAdapter.MyViewHolder holder, final int position) {
 
         try {
             holder.tv_category_name.setText(licenseJsonArray.getJSONObject(position).getString("category_name"));
@@ -41,7 +43,11 @@ public class ProsDetailsLicenseAdapter extends RecyclerView.Adapter<ProsDetailsL
             holder.tv_view_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    try {
+                        ((ProsProjectDetailsActivity)context).showImageProsLicenceDialog(licenseJsonArray.getJSONObject(position).getString("license_file"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         } catch (Exception ex) {

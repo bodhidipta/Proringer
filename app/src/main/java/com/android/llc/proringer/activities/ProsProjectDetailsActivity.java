@@ -1,10 +1,10 @@
 package com.android.llc.proringer.activities;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -21,6 +21,8 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.llc.proringer.ImagePinching.graphics.ImageViewTouch;
+import com.android.llc.proringer.ImagePinching.graphics.ImageViewTouchBase;
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaAdapter;
 import com.android.llc.proringer.adapter.ProDetailsServiceAreaDialogAdapter;
@@ -28,7 +30,6 @@ import com.android.llc.proringer.adapter.ProDetailsServiceDialogAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsBusinessHourAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsImageAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsLicenseAdapter;
-import com.android.llc.proringer.adapter.ProsDetailsPortfolioImageAdapter;
 import com.android.llc.proringer.adapter.ProsDetailsServiceAdapter;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.helper.CustomAlert;
@@ -198,6 +199,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 //        super.onResume();
 //        setDataProListDetails();
 //    }
+
 
     public void setDataProListDetails() {
 
@@ -482,4 +484,69 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
             setDataProListDetails();
         }
     }
+
+
+
+    public void showImageProsLicenceDialog(String url) {
+
+        Logger.printMessage("url", url);
+        final Dialog dialog = new Dialog(ProsProjectDetailsActivity.this, android.R.style.Theme_Light);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialogbox_portfolio);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        dialog.findViewById(R.id.RelativeMainLL).getLayoutParams().width = (MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[1]);
+        dialog.findViewById(R.id.RelativeMainLL).getLayoutParams().height = MethodsUtils.getScreenHeightAndWidth(ProsProjectDetailsActivity.this)[0];
+
+
+        dialog.findViewById(R.id.img_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        ImageViewTouch mImage = (ImageViewTouch) dialog.findViewById(R.id.imageview_dialog);
+
+        // set the default image display type
+        mImage.setDisplayType(ImageViewTouchBase.DisplayType.FIT_WIDTH);
+        Glide.with(ProsProjectDetailsActivity.this).load(url).into(mImage);
+
+
+        mImage.setSingleTapListener(
+                new ImageViewTouch.OnImageViewTouchSingleTapListener() {
+
+                    @Override
+                    public void onSingleTapConfirmed() {
+                        Logger.printMessage("onSingleTapConfirmed", "onSingleTapConfirmed");
+                    }
+                }
+        );
+
+
+        mImage.setDoubleTapListener(
+                new ImageViewTouch.OnImageViewTouchDoubleTapListener() {
+
+                    @Override
+                    public void onDoubleTap() {
+                        Logger.printMessage("onDoubleTap", "onDoubleTap");
+                    }
+                }
+        );
+
+        mImage.setOnDrawableChangedListener(
+                new ImageViewTouchBase.OnDrawableChangeListener() {
+
+                    @Override
+                    public void onDrawableChanged(Drawable drawable) {
+                        Logger.printMessage("onBitmapChanged", "onBitmapChanged: " + drawable);
+                    }
+                }
+        );
+
+
+        dialog.show();
+    }
+
 }

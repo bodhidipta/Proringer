@@ -65,7 +65,8 @@ public class ProServiceApiHelper {
     private String currentLat = "";
     private String currentLng = "";
 
-    private String BaseUrl = "http://esolz.co.in/lab6/proringer_latest/";
+//    private String BaseUrl = "http://esolz.co.in/lab6/proringer_latest/";
+    private String BaseUrl = "http://111.93.181.155/lab6/proringer_latest/";
 
     private String categoryAPI = BaseUrl + "app_categorylist";
     private String serviceAPI = BaseUrl + "app_catrgoryservice_list";
