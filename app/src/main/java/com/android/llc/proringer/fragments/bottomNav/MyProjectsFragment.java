@@ -93,8 +93,9 @@ public class MyProjectsFragment extends Fragment implements MyCustomAlertListene
 
                         }
                     }));
-                else
+                else {
                     no_project_available.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

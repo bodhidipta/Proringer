@@ -19,6 +19,9 @@ import com.android.llc.proringer.activities.AddEditProsActivity;
 import com.android.llc.proringer.activities.LandScreenActivity;
 import com.android.llc.proringer.appconstant.ProApplication;
 import com.android.llc.proringer.appconstant.ProConstant;
+import com.android.llc.proringer.fragments.postProject.PostProjectRegistrationAndFinalizeFragment;
+import com.android.llc.proringer.helper.CustomAlert;
+import com.android.llc.proringer.helper.MyCustomAlertListener;
 import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
@@ -30,12 +33,12 @@ import com.bumptech.glide.Glide;
  * Created by su on 7/17/17.
  */
 
-public class MyProjectDetailsFragment extends Fragment {
+public class MyProjectDetailsFragment extends Fragment implements MyCustomAlertListener{
     MyLoader myLoader = null;
     ProRegularTextView tv_posted_in, tv_project, tv_service, tv_type, tv_property, tv_status, tv_start, img_description;
     ImageView img_project;
     LinearLayout LL_Active;
-    ProSemiBoldTextView tv_accepted_review, tv_edit;
+    ProSemiBoldTextView tv_accepted_review, tv_edit,tv_renew;
 
     @Nullable
     @Override
@@ -60,6 +63,7 @@ public class MyProjectDetailsFragment extends Fragment {
         LL_Active = (LinearLayout) view.findViewById(R.id.LL_Active);
         tv_accepted_review = (ProSemiBoldTextView) view.findViewById(R.id.tv_accepted_review);
         tv_edit = (ProSemiBoldTextView) view.findViewById(R.id.tv_edit);
+        tv_renew = (ProSemiBoldTextView) view.findViewById(R.id.tv_renew);
         tv_posted_in.setText(ProApplication.getInstance().getDataSelected().getDate_time());
 
 
@@ -121,6 +125,19 @@ public class MyProjectDetailsFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        tv_renew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CustomAlert customAlert = new CustomAlert(getActivity(), "Renew", "Are you sure you want to renew this project posting?", MyProjectDetailsFragment.this);
+                customAlert.getListenerRetryCancelFromNormalAlert("ok","cancel",1);
+
+            }
+        });
+
+
+
         view.findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -254,5 +271,65 @@ public class MyProjectDetailsFragment extends Fragment {
                                                                                             },
                 ProApplication.getInstance().getUserId(),
                 ProApplication.getInstance().getDataSelected().getId());
+    }
+    public void renew() {
+        ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).renewProAPI(new ProServiceApiHelper.getApiProcessCallback() {
+                                                                                                @Override
+                                                                                                public void onStart() {
+                                                                                                    myLoader.showLoader();
+
+                                                                                                }
+
+                                                                                                @Override
+                                                                                                public void onComplete(String message) {
+
+//                                                                          itemList.remove(position);
+//                                                                          notifyItemRemoved(position);
+
+                                                                                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                        myLoader.dismissLoader();
+
+
+                                                                                                    new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                            .setTitle("project posting renew")
+                                                                                                            .setMessage("" + message)
+                                                                                                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                @Override
+                                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                                    dialog.dismiss();
+                                                                                                                }
+                                                                                                            })
+                                                                                                            .setCancelable(false)
+                                                                                                            .show();
+                                                                                                }
+
+                                                                                                @Override
+                                                                                                public void onError(String error) {
+                                                                                                    if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                        myLoader.dismissLoader();
+
+                                                                                                    new AlertDialog.Builder((LandScreenActivity) getActivity())
+                                                                                                            .setTitle("project posting renew Error")
+                                                                                                            .setMessage("" + error)
+                                                                                                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                                                                                @Override
+                                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                                    dialog.dismiss();
+                                                                                                                }
+                                                                                                            })
+                                                                                                            .setCancelable(false)
+                                                                                                            .show();
+
+                                                                                                }
+                                                                                            },
+                ProApplication.getInstance().getUserId(),
+                ProApplication.getInstance().getDataSelected().getId());
+    }
+
+    @Override
+    public void callbackForAlert(String result, int i) {
+        if (result.equalsIgnoreCase("ok")&&i==1) {
+            renew();
+        }
     }
 }

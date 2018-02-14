@@ -89,6 +89,7 @@ public class ProServiceApiHelper {
     private String contactUsAPI = BaseUrl + "app_contact_us";
     private String myProjectDeleteAPI = BaseUrl + "app_myproject_delete";
     private String myProjectDetailsAPI = BaseUrl + "app_myproject_details?user_id=";
+    private String myProjectRenewAPI = BaseUrl + "project_renew";
     private String favoriteProsListAPI = BaseUrl + "app_favourite_pros?user_id=";
     private String favoriteProsDeleteAPI = BaseUrl + "app_favourite_pros_delete";
     private String faqInformationAPI = BaseUrl + "app_faq";
@@ -2259,6 +2260,83 @@ public class ProServiceApiHelper {
             callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
         }
     }
+
+
+
+
+
+
+    /**
+     * renew my project
+     *
+     * @param callback
+     * @param params
+     */
+    public void renewProAPI(final getApiProcessCallback callback, String... params) {
+        if (NetworkUtil.getInstance().isNetworkAvailable(mcontext)) {
+            new AsyncTask<String, Void, String>() {
+                String exception = "";
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    callback.onStart();
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    try {
+                        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(6000, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true).build();
+
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("user_id", params[0])
+                                .add("p_id", params[1])
+                                .build();
+
+                        Logger.printMessage("user_id", ":--" + params[0]);
+                        Logger.printMessage("p_id", ":--" + params[1]);
+                        Logger.printMessage("favoriteProsDeleteAPI", myProjectRenewAPI);
+
+                        Request request = new Request.Builder()
+                                .post(requestBody)
+                                .url(myProjectRenewAPI)
+                                .build();
+
+                        Response response = client.newCall(request).execute();
+                        String responseString = response.body().string();
+
+                        Logger.printMessage("home_svhe", "" + responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
+                        if (jsonObject.getBoolean("response")) {
+                            return jsonObject.getString("message");
+                        } else {
+                            exception = jsonObject.getString("message");
+                            return exception;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        exception = e.getMessage();
+                        return exception;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    if (exception.equals("")) {
+                        callback.onComplete(s);
+                    } else {
+                        callback.onError(s);
+                    }
+                }
+            }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
+
+        } else {
+            callback.onError(mcontext.getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection));
+        }
+    }
+
 
     /**
      * Search area by google API
