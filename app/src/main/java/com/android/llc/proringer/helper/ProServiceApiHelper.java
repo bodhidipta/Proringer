@@ -2103,7 +2103,6 @@ public class ProServiceApiHelper {
                         return exception;
                     }
                 }
-
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
