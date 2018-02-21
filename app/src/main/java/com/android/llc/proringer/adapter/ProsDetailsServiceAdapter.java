@@ -18,6 +18,7 @@ import org.json.JSONException;
  * Created by su on 8/2/17.
  */
 
+
 public class ProsDetailsServiceAdapter extends RecyclerView.Adapter<ProsDetailsServiceAdapter.MyViewHolder> {
     JSONArray serviceAreaJsonArray;
     Context context;

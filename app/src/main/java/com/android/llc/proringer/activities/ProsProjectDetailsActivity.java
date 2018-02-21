@@ -56,7 +56,7 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
     RecyclerView rcv_service, rcv_business_hour, rcv_service_area, rcv_license, rcv_project_gallery;
     JSONObject jsonObject = null;
     MyLoader myLoader = null;
-    RatingBar rbar;
+
     ProsDetailsServiceAdapter proDetailsService;
     ProsDetailsBusinessHourAdapter prosDetailsBusinessHourAdapter;
     ProsDetailsLicenseAdapter prosDetailsLicenseAdapter;
@@ -90,8 +90,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
         cardview_contact_pro = (CardView) findViewById(R.id.cardview_contact_pro);
 
-        rbar = (RatingBar) findViewById(R.id.rbar);
-
         rcv_service = (RecyclerView) findViewById(R.id.rcv_service);
         rcv_service.setLayoutManager(new GridLayoutManager(ProsProjectDetailsActivity.this, 2));
 
@@ -115,6 +113,8 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
             @Override
             public void onClick(View view) {
                 try {
+
+                    Logger.printMessage("pros_id","-->"+pros_id);
                     Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsReviewAllListActivity.class);
                     intent.putExtra("pros_company_name", pros_company_name);
                     intent.putExtra("pros_id", pros_id);
@@ -210,190 +210,189 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
 
         ProServiceApiHelper.getInstance(ProsProjectDetailsActivity.this).getProsIndividualListingAPI(new ProServiceApiHelper.getApiProcessCallback() {
 
-                                                                                                      @Override
-                                                                                                      public void onStart() {
-                                                                                                          myLoader.showLoader();
-                                                                                                      }
+                                                                                                         @Override
+                                                                                                         public void onStart() {
+                                                                                                             myLoader.showLoader();
+                                                                                                         }
 
-                                                                                                      @Override
-                                                                                                      public void onComplete(String message) {
-                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
-                                                                                                              myLoader.dismissLoader();
+                                                                                                         @Override
+                                                                                                         public void onComplete(String message) {
+                                                                                                             if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                 myLoader.dismissLoader();
 
-                                                                                                          Logger.printMessage("message", "" + message);
-                                                                                                          try {
-                                                                                                              jsonObject = new JSONObject(message);
-                                                                                                              infoArrayJsonObject = jsonObject.getJSONObject("info_array");
-                                                                                                              infoJsonObject = infoArrayJsonObject.getJSONObject("info");
+                                                                                                             Logger.printMessage("message", "" + message);
+                                                                                                             try {
+                                                                                                                 jsonObject = new JSONObject(message);
+                                                                                                                 infoArrayJsonObject = jsonObject.getJSONObject("info_array");
+                                                                                                                 infoJsonObject = infoArrayJsonObject.getJSONObject("info");
 
-                                                                                                              contact_info_status = infoJsonObject.getString("contact_info_status");
-                                                                                                              services = infoArrayJsonObject.getJSONArray("services");
-
-
-                                                                                                              if (!infoJsonObject.getString("header_image").equals(""))
-                                                                                                                  Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
+                                                                                                                 contact_info_status = infoJsonObject.getString("contact_info_status");
+                                                                                                                 services = infoArrayJsonObject.getJSONArray("services");
 
 
-                                                                                                              if (infoJsonObject.getString("verified_status").trim().equalsIgnoreCase("Y")) {
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.GONE);
-                                                                                                                  ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.VISIBLE);
-                                                                                                              } else {
-                                                                                                                  ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.GONE);
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.VISIBLE);
-                                                                                                              }
+                                                                                                                 if (!infoJsonObject.getString("header_image").equals(""))
+                                                                                                                     Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("header_image")).centerCrop().into(img_top);
 
 
-                                                                                                              if (!infoJsonObject.getString("profile_image").equals(""))
-                                                                                                                  Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("profile_image")).centerCrop().into(img_profile);
-
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_company_name)).setText(infoJsonObject.getString("company_name"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_user_name)).setText(infoJsonObject.getString("user_name"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_designation)).setText(infoJsonObject.getString("designation"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_address)).setText(infoJsonObject.getString("address"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_city_state_zipcode)).setText(infoJsonObject.getString("city") + ", " + infoJsonObject.getString("state") + " " + infoJsonObject.getString("zipcode"));
+                                                                                                                 if (!infoJsonObject.getString("profile_image").equals(""))
+                                                                                                                     Glide.with(ProsProjectDetailsActivity.this).load(infoJsonObject.getString("profile_image")).centerCrop().into(img_profile);
 
 
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_review_value)).setText(infoArrayJsonObject.getString("total_review"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_rate_value)).setText(infoArrayJsonObject.getString("total_avg_review"));
+                                                                                                                 if (infoJsonObject.getString("verified_status").trim().equalsIgnoreCase("Y")) {
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.GONE);
+                                                                                                                     ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.VISIBLE);
+                                                                                                                 } else {
+                                                                                                                     ((LinearLayout) findViewById(R.id.LLVerified)).setVisibility(View.GONE);
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.tv_contact_pro_btn_unverified)).setVisibility(View.VISIBLE);
+                                                                                                                 }
+
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_company_name)).setText(infoJsonObject.getString("company_name"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_user_name)).setText(infoJsonObject.getString("user_name"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_designation)).setText(infoJsonObject.getString("designation"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_address)).setText(infoJsonObject.getString("address"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_city_state_zipcode)).setText(infoJsonObject.getString("city") + ", " + infoJsonObject.getString("state") + " " + infoJsonObject.getString("zipcode"));
 
 
-                                                                                                              rbar.setRating(Float.parseFloat(infoArrayJsonObject.getString("total_avg_review")));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_review_value)).setText(infoArrayJsonObject.getString("total_review"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_rate_value)).setText(infoArrayJsonObject.getString("total_avg_review"));
 
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
+                                                                                                                 ((RatingBar) findViewById(R.id.rbar)).setRating(Float.parseFloat(infoArrayJsonObject.getString("total_avg_review")));
 
-
-                                                                                                              if (infoArrayJsonObject.getJSONArray("services").length() > 14) {
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.VISIBLE);
-                                                                                                              } else {
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.GONE);
-                                                                                                              }
-
-                                                                                                              findViewById(R.id.view_all_service).setOnClickListener(new View.OnClickListener() {
-                                                                                                                  @Override
-                                                                                                                  public void onClick(View view) {
-                                                                                                                      try {
-                                                                                                                          if (infoArrayJsonObject.getJSONArray("services").length() > 14) {
-                                                                                                                              showServicesDialog(infoArrayJsonObject.getJSONArray("services"));
-                                                                                                                          }
-                                                                                                                      } catch (JSONException e) {
-                                                                                                                          e.printStackTrace();
-                                                                                                                      }
-                                                                                                                  }
-                                                                                                              });
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_about)).setText(infoArrayJsonObject.getJSONObject("about").getString("description"));
 
 
-                                                                                                              proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"), new onOptionSelected() {
-                                                                                                                  @Override
-                                                                                                                  public void onItemPassed(int position, String value) {
-                                                                                                                      try {
-                                                                                                                          if (value.equalsIgnoreCase("more")) {
-                                                                                                                              showServicesDialog(infoArrayJsonObject.getJSONArray("services"));
-                                                                                                                          }
-                                                                                                                      } catch (JSONException e) {
-                                                                                                                          e.printStackTrace();
-                                                                                                                      }
-                                                                                                                  }
-                                                                                                              });
-                                                                                                              rcv_service.setAdapter(proDetailsService);
+                                                                                                                 if (infoArrayJsonObject.getJSONArray("services").length() > 14) {
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.VISIBLE);
+                                                                                                                 } else {
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.view_all_service)).setVisibility(View.GONE);
+                                                                                                                 }
 
-                                                                                                              if (infoJsonObject.getString("business_hour").trim().equals("0")) {
-                                                                                                                  rcv_business_hour.setVisibility(View.VISIBLE);
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setVisibility(View.GONE);
-                                                                                                                  prosDetailsBusinessHourAdapter = new ProsDetailsBusinessHourAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("business_hours"));
-                                                                                                                  rcv_business_hour.setAdapter(prosDetailsBusinessHourAdapter);
-                                                                                                              } else {
-                                                                                                                  rcv_business_hour.setVisibility(View.GONE);
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setVisibility(View.VISIBLE);
-                                                                                                                  ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setText("Always Open");
-                                                                                                              }
-
-                                                                                                              if (infoArrayJsonObject.getJSONArray("service_area").length() > 14) {
-                                                                                                                  findViewById(R.id.view_all_service_area).setVisibility(View.VISIBLE);
-                                                                                                              } else {
-                                                                                                                  findViewById(R.id.view_all_service_area).setVisibility(View.GONE);
-                                                                                                              }
-
-                                                                                                              findViewById(R.id.view_all_service_area).setOnClickListener(new View.OnClickListener() {
-                                                                                                                  @Override
-                                                                                                                  public void onClick(View view) {
-                                                                                                                      try {
-                                                                                                                          if (infoArrayJsonObject.getJSONArray("service_area").length() > 14) {
-                                                                                                                              showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
-                                                                                                                          }
-                                                                                                                      } catch (JSONException e) {
-                                                                                                                          e.printStackTrace();
-                                                                                                                      }
-                                                                                                                  }
-                                                                                                              });
-
-                                                                                                              ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
-                                                                                                                  @Override
-                                                                                                                  public void onItemPassed(int position, String value) {
-                                                                                                                      try {
-                                                                                                                          if (value.equalsIgnoreCase("more")) {
-
-                                                                                                                              showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
-                                                                                                                          }
-                                                                                                                      } catch (JSONException e) {
-                                                                                                                          e.printStackTrace();
-                                                                                                                      }
-                                                                                                                  }
-                                                                                                              });
-                                                                                                              rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
-
-                                                                                                              JSONObject company_infoJsonOBJ = infoArrayJsonObject.getJSONObject("company_info");
-
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_business_since)).setText(company_infoJsonOBJ.getString("business_since"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_no_of_employee)).setText(company_infoJsonOBJ.getString("no_of_employee"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_proringer_awarded)).setText(company_infoJsonOBJ.getString("proringer_awarded"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_business_review)).setText(company_infoJsonOBJ.getString("business_review"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_last_verified_on)).setText(company_infoJsonOBJ.getString("last_verified_on"));
+                                                                                                                 findViewById(R.id.view_all_service).setOnClickListener(new View.OnClickListener() {
+                                                                                                                     @Override
+                                                                                                                     public void onClick(View view) {
+                                                                                                                         try {
+                                                                                                                             if (infoArrayJsonObject.getJSONArray("services").length() > 14) {
+                                                                                                                                 showServicesDialog(infoArrayJsonObject.getJSONArray("services"));
+                                                                                                                             }
+                                                                                                                         } catch (JSONException e) {
+                                                                                                                             e.printStackTrace();
+                                                                                                                         }
+                                                                                                                     }
+                                                                                                                 });
 
 
-                                                                                                              prosDetailsLicenseAdapter = new ProsDetailsLicenseAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("licence"));
-                                                                                                              rcv_license.setAdapter(prosDetailsLicenseAdapter);
+                                                                                                                 proDetailsService = new ProsDetailsServiceAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("services"), new onOptionSelected() {
+                                                                                                                     @Override
+                                                                                                                     public void onItemPassed(int position, String value) {
+                                                                                                                         try {
+                                                                                                                             if (value.equalsIgnoreCase("more")) {
+                                                                                                                                 showServicesDialog(infoArrayJsonObject.getJSONArray("services"));
+                                                                                                                             }
+                                                                                                                         } catch (JSONException e) {
+                                                                                                                             e.printStackTrace();
+                                                                                                                         }
+                                                                                                                     }
+                                                                                                                 });
+                                                                                                                 rcv_service.setAdapter(proDetailsService);
 
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_no_of_project_value)).setText(infoArrayJsonObject.getString("total_project"));
-                                                                                                              ((ProRegularTextView) findViewById(R.id.tv_no_of_picture_value)).setText(infoArrayJsonObject.getString("total_picture"));
+                                                                                                                 if (infoJsonObject.getString("business_hour").trim().equals("0")) {
+                                                                                                                     rcv_business_hour.setVisibility(View.VISIBLE);
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setVisibility(View.GONE);
+                                                                                                                     prosDetailsBusinessHourAdapter = new ProsDetailsBusinessHourAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("business_hours"));
+                                                                                                                     rcv_business_hour.setAdapter(prosDetailsBusinessHourAdapter);
+                                                                                                                 } else {
+                                                                                                                     rcv_business_hour.setVisibility(View.GONE);
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setVisibility(View.VISIBLE);
+                                                                                                                     ((ProRegularTextView) findViewById(R.id.tv_business_hour)).setText("Always Open");
+                                                                                                                 }
+
+                                                                                                                 if (infoArrayJsonObject.getJSONArray("service_area").length() > 14) {
+                                                                                                                     findViewById(R.id.view_all_service_area).setVisibility(View.VISIBLE);
+                                                                                                                 } else {
+                                                                                                                     findViewById(R.id.view_all_service_area).setVisibility(View.GONE);
+                                                                                                                 }
+
+                                                                                                                 findViewById(R.id.view_all_service_area).setOnClickListener(new View.OnClickListener() {
+                                                                                                                     @Override
+                                                                                                                     public void onClick(View view) {
+                                                                                                                         try {
+                                                                                                                             if (infoArrayJsonObject.getJSONArray("service_area").length() > 14) {
+                                                                                                                                 showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
+                                                                                                                             }
+                                                                                                                         } catch (JSONException e) {
+                                                                                                                             e.printStackTrace();
+                                                                                                                         }
+                                                                                                                     }
+                                                                                                                 });
+
+                                                                                                                 ProDetailsServiceAreaAdapter proDetailsServiceAreaAdapter = new ProDetailsServiceAreaAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("service_area"), new onOptionSelected() {
+                                                                                                                     @Override
+                                                                                                                     public void onItemPassed(int position, String value) {
+                                                                                                                         try {
+                                                                                                                             if (value.equalsIgnoreCase("more")) {
+
+                                                                                                                                 showServiceAreaDialog(infoArrayJsonObject.getJSONArray("service_area"));
+                                                                                                                             }
+                                                                                                                         } catch (JSONException e) {
+                                                                                                                             e.printStackTrace();
+                                                                                                                         }
+                                                                                                                     }
+                                                                                                                 });
+                                                                                                                 rcv_service_area.setAdapter(proDetailsServiceAreaAdapter);
+
+                                                                                                                 JSONObject company_infoJsonOBJ = infoArrayJsonObject.getJSONObject("company_info");
+
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_business_since)).setText(company_infoJsonOBJ.getString("business_since"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_no_of_employee)).setText(company_infoJsonOBJ.getString("no_of_employee"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_proringer_awarded)).setText(company_infoJsonOBJ.getString("proringer_awarded"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_business_review)).setText(company_infoJsonOBJ.getString("business_review"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_last_verified_on)).setText(company_infoJsonOBJ.getString("last_verified_on"));
 
 
-                                                                                                              prosDetailsImageAdapter = new ProsDetailsImageAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("project_gallery"), new onOptionSelected() {
-                                                                                                                  @Override
-                                                                                                                  public void onItemPassed(int position, String value) {
-                                                                                                                      Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsProjectGalleryActivity.class);
-                                                                                                                      intent.putExtra("portfolio_id", value);
-                                                                                                                      startActivity(intent);
-                                                                                                                  }
-                                                                                                              });
-                                                                                                              rcv_project_gallery.setAdapter(prosDetailsImageAdapter);
+                                                                                                                 prosDetailsLicenseAdapter = new ProsDetailsLicenseAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("licence"));
+                                                                                                                 rcv_license.setAdapter(prosDetailsLicenseAdapter);
 
-                                                                                                              if (!infoArrayJsonObject.getString("achievement").equals(""))
-                                                                                                                  Glide.with(ProsProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement"))
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_no_of_project_value)).setText(infoArrayJsonObject.getString("total_project"));
+                                                                                                                 ((ProRegularTextView) findViewById(R.id.tv_no_of_picture_value)).setText(infoArrayJsonObject.getString("total_picture"));
+
+
+                                                                                                                 prosDetailsImageAdapter = new ProsDetailsImageAdapter(ProsProjectDetailsActivity.this, infoArrayJsonObject.getJSONArray("project_gallery"), new onOptionSelected() {
+                                                                                                                     @Override
+                                                                                                                     public void onItemPassed(int position, String value) {
+                                                                                                                         Intent intent = new Intent(ProsProjectDetailsActivity.this, ProsProjectGalleryActivity.class);
+                                                                                                                         intent.putExtra("portfolio_id", value);
+                                                                                                                         startActivity(intent);
+                                                                                                                     }
+                                                                                                                 });
+                                                                                                                 rcv_project_gallery.setAdapter(prosDetailsImageAdapter);
+
+                                                                                                                 if (!infoArrayJsonObject.getString("achievement").equals(""))
+                                                                                                                     Glide.with(ProsProjectDetailsActivity.this).load(infoArrayJsonObject.getString("achievement"))
 //                                                                                                                          .centerCrop()
-                                                                                                                          .into(img_achievements);
+                                                                                                                             .into(img_achievements);
 
 
-                                                                                                          } catch (JSONException e) {
-                                                                                                              e.printStackTrace();
-                                                                                                          }
+                                                                                                             } catch (JSONException e) {
+                                                                                                                 e.printStackTrace();
+                                                                                                             }
 
-                                                                                                      }
+                                                                                                         }
 
-                                                                                                      @Override
-                                                                                                      public void onError(String error) {
-                                                                                                          if (myLoader != null && myLoader.isMyLoaderShowing())
-                                                                                                              myLoader.dismissLoader();
+                                                                                                         @Override
+                                                                                                         public void onError(String error) {
+                                                                                                             if (myLoader != null && myLoader.isMyLoaderShowing())
+                                                                                                                 myLoader.dismissLoader();
 
-                                                                                                          if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
-                                                                                                              RLCollapsingImage.setVisibility(View.GONE);
-                                                                                                              nested_scroll_main.setVisibility(View.GONE);
-                                                                                                              LLNetworkDisconnection.setVisibility(View.VISIBLE);
-                                                                                                          }
+                                                                                                             if (error.equalsIgnoreCase(getResources().getString(R.string.no_internet_connection_found_Please_check_your_internet_connection))) {
+                                                                                                                 RLCollapsingImage.setVisibility(View.GONE);
+                                                                                                                 nested_scroll_main.setVisibility(View.GONE);
+                                                                                                                 LLNetworkDisconnection.setVisibility(View.VISIBLE);
+                                                                                                             }
 
-                                                                                                          CustomAlert customAlert = new CustomAlert(ProsProjectDetailsActivity.this, "Contact Us Error", "" + error, ProsProjectDetailsActivity.this);
-                                                                                                          customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
-                                                                                                      }
-                                                                                                  },
+                                                                                                             CustomAlert customAlert = new CustomAlert(ProsProjectDetailsActivity.this, "Contact Us Error", "" + error, ProsProjectDetailsActivity.this);
+                                                                                                             customAlert.getListenerRetryCancelFromNormalAlert("retry", "abort", 1);
+                                                                                                         }
+                                                                                                     },
 //                "56"
                 ProApplication.getInstance().getUserId()
                 ,
@@ -486,7 +485,6 @@ public class ProsProjectDetailsActivity extends AppCompatActivity implements MyC
             setDataProListDetails();
         }
     }
-
 
 
     public void showImageProsLicenceDialog(String url) {

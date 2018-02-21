@@ -51,7 +51,7 @@
                         android:layout_alignParentRight="true"
                         android:text="Report"
                         android:textColor="@color/colorTextDark"
-                        android:textSize="12sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                        android:textSize="12sp"/>
 
 
                     <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
@@ -62,7 +62,7 @@
                         android:layout_toLeftOf="@+id/tv_report"
                         android:text="Terry Belley"
                         android:textColor="@color/colorTextDark"
-                        android:textSize="16sp"></com.android.llc.proringer.viewsmod.textview.ProRegularTextView>
+                        android:textSize="16sp"/>
 
 
                     <RatingBar
