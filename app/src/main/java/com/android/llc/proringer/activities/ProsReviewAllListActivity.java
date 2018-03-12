@@ -81,7 +81,6 @@ public class ProsReviewAllListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     if (!pros_id.trim().equals("")) {
-
                         Intent intent = new Intent(ProsReviewAllListActivity.this, ProsReviewActivity.class);
                         intent.putExtra("pros_id", pros_id);
                         intent.putExtra("img", img);
