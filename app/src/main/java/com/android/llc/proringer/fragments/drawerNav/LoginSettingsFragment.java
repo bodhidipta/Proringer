@@ -96,6 +96,46 @@ public class LoginSettingsFragment extends Fragment implements MyCustomAlertList
             }
         });
 
+        change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validatePasswordInput();
+            }
+        });
+        view.findViewById(R.id.show_password1).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    new_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    new_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    new_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+
+                }
+                return true;
+            }
+        });
+        change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validatePasswordInput();
+            }
+        });
+        view.findViewById(R.id.show_password2).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    confirm_new_password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    confirm_new_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    confirm_new_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+
+                }
+                return true;
+            }
+        });
 
     }
 

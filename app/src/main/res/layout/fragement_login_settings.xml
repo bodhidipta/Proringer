@@ -127,16 +127,28 @@
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
 
-        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
-            android:id="@+id/new_password"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/edit_text_selecter"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="@color/colorTextDark"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/new_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_selecter"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/show_password1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:src="@drawable/ic_show_password" />
+        </RelativeLayout>
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:layout_width="match_parent"
@@ -145,16 +157,29 @@
             android:textAllCaps="true"
             android:textColor="@color/colorTextDark"
             android:textSize="14sp" />
-
-        <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
-            android:id="@+id/confirm_new_password"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_selecter"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="@color/colorTextDark"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content">
+
+            <com.android.llc.proringer.viewsmod.edittext.ProLightEditText
+                android:id="@+id/confirm_new_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_selecter"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/show_password2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:src="@drawable/ic_show_password" />
+        </RelativeLayout>
+
 
         <com.android.llc.proringer.viewsmod.textview.ProRegularTextView
             android:id="@+id/change_password"

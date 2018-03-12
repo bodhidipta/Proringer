@@ -1,17 +1,25 @@
 package com.android.llc.proringer.fragments.drawerNav;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Scroller;
 import android.widget.Toast;
 
 import com.android.llc.proringer.R;
@@ -26,11 +34,16 @@ import com.android.llc.proringer.helper.MyLoader;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.android.llc.proringer.viewsmod.edittext.ProLightEditText;
+import com.android.llc.proringer.viewsmod.edittext.ProRegularEditText;
 import com.android.llc.proringer.viewsmod.textview.ProRegularTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by bodhidipta on 22/06/17.
@@ -54,25 +67,62 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
     ProRegularTextView tv_search_by_location;
     //    ProLightEditText address;
     PopupWindow popupWindow;
+
     MyLoader myLoader = null;
+    ProRegularEditText et_aboutyou;
     String lat,lng;
     ImageView Erase;
     boolean checkToShowAfterSearach = false;
     PlaceCustomListAdapterDialog placeCustomListAdapterDialog;
     int textLength = 0;
-
+    String countryCod = "", latitude, longtitude = "";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user_information, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         first_name = (ProLightEditText) view.findViewById(R.id.first_name);
         last_name = (ProLightEditText) view.findViewById(R.id.last_name);
         contact = (ProLightEditText) view.findViewById(R.id.contact);
+       et_aboutyou=(ProRegularEditText)view.findViewById(R.id.et_aboutyou);
+
+       et_aboutyou.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable editable) {
+
+           }
+       });
+        et_aboutyou.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View view, MotionEvent event) {
+
+                if (view.getId() ==R.id.et_aboutyou) {
+                    Logger.printMessage("etid_found","touch------------->");
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
 
         contact.addTextChangedListener(new TextWatcher() {
 
@@ -127,6 +177,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                 startActivityForResult(i, 1);
             }
         });
+
 
         //  Erase= (ImageView) view.findViewById(R.id.Erase);
 
@@ -192,7 +243,9 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
     }
 
     private void updateUserInformation() {
-
+        Logger.printMessage("ccc",countryCod);
+        Logger.printMessage("lattitude",latitude);
+        Logger.printMessage("longtitude",longtitude);
         if (first_name.getText().toString().trim().equals(""))
         {
             first_name.setError("Enter First Name");
@@ -239,6 +292,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                                 CustomAlert customAlert = new CustomAlert(getActivity(), "Updating Error", "Please Choose the correct address which will contains zip code , city, state", UserInformationFragment.this);
                                 customAlert.createNormalAlert("ok", 1);
                             } else {
+
                                 ProServiceApiHelper.getInstance((LandScreenActivity) getActivity()).updateUserInformationAPI(
                                         new ProServiceApiHelper.getApiProcessCallback() {
                                             @Override
@@ -267,13 +321,13 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                                         tv_search_by_location.getText().toString().trim(),
 //                    address.getText().toString().trim(),
                                         city.getText().toString().trim(),
-                                        "USA",
+                                        countryCod,
                                         state.getText().toString().trim(),
                                         zip_code.getText().toString().trim(),
                                         contact.getText().toString().trim(),
-                                        "",
-                                        "",
-                                        "");
+                                        et_aboutyou.getText().toString().trim(),
+                                        latitude,
+                                        longtitude);
                             }
                         }
                     }
@@ -283,11 +337,13 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
     }
 
     private void plotUserInformation() {
+        myLoader.showLoader();
         DatabaseHandler.getInstance((LandScreenActivity) getActivity()).getUserInfo(
                 ProApplication.getInstance().getUserId(),
                 new DatabaseHandler.onQueryCompleteListener() {
                     @Override
                     public void onSuccess(String... s) {
+                        myLoader.dismissLoader();
 
                         Logger.printMessage("database", "Yes");
                         Logger.printMessage("success", "s:--" + s);
@@ -309,6 +365,14 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                             state.setText(innerObj.getString("state") + "");
                             zip_code.setText(innerObj.getString("zipcode") + "");
                             contact.setText(innerObj.getString("ph_no") + "");
+                            latitude= innerObj.getString("latitude"+"");
+                            longtitude=innerObj.getString("longitude"+"");
+                            countryCod=innerObj.getString("country_name"+"");
+                            Logger.printMessage("sdjshskhdjshdk",latitude);
+                            Logger.printMessage("jkhdjshds",longtitude);
+                            Logger.printMessage("countrycode",countryCod);
+
+
 
                         } catch (JSONException jse) {
                             jse.printStackTrace();
@@ -317,6 +381,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
 
                     @Override
                     public void onError(String s) {
+                        myLoader.dismissLoader();
                         /**
                          * No user data found on database or something went wrong
                          */
@@ -324,6 +389,43 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                     }
                 });
     }
+
+
+    public void getAddress(Double lat, Double lng) {
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(lat, lng, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Address obj = addresses.get(0);
+        String add = obj.getAddressLine(0);
+        String currentAddress = obj.getSubAdminArea() + ","
+                + obj.getAdminArea();
+        String latitude = String.valueOf(obj.getLatitude());
+        String longitude = String.valueOf(obj.getLongitude());
+        String currentCity = obj.getSubAdminArea();
+        String currentState = obj.getAdminArea();
+        add = add + "\n" + obj.getCountryName();
+        add = add + "\n" + obj.getCountryCode();
+        countryCod = obj.getCountryCode();
+        Logger.printMessage("countryCod", countryCod);
+        add = add + "\n" + obj.getAdminArea();
+        add = add + "\n" + obj.getPostalCode();
+        add = add + "\n" + obj.getSubAdminArea();
+        add = add + "\n" + obj.getLocality();
+        add = add + "\n" + obj.getSubThoroughfare();
+
+        Log.v("IGA", "Address" + add);
+        // Toast.makeText(this, "Address=>" + add,
+        // Toast.LENGTH_SHORT).show();
+
+        // TennisAppActivity.showDialog(add);
+
+    }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -339,6 +441,8 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                     Logger.printMessage("zip", "--->" + extras.getString("zip"));
                     Logger.printMessage("city", "--->" + extras.getString("city"));
                     Logger.printMessage("state", "--->" + extras.getString("state"));
+                    Logger.printMessage("lattitude", "--->" + extras.getString("lattitude"));
+                    Logger.printMessage("longttitude", "--->" + extras.getString("longttitude"));
 
                     if (!extras.getString("selectedPlace").equals("")) {
                         tv_search_by_location.setText(extras.getString("selectedPlace").substring(0, extras.getString("selectedPlace").indexOf(",")));
@@ -347,6 +451,10 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
                     zip_code.setText(extras.getString("zip"));
                     city.setText(extras.getString("city"));
                     state.setText(extras.getString("state"));
+                    latitude = extras.getString("lattitude");
+                    longtitude = extras.getString("longttitude");
+                    getAddress(Double.valueOf(latitude), Double.valueOf(longtitude));
+
                 }
 
             }
@@ -365,6 +473,7 @@ public class UserInformationFragment extends Fragment implements MyCustomAlertLi
             @Override
             public void onStart() {
             }
+
 
             @Override
             public void onComplete(String message) {
