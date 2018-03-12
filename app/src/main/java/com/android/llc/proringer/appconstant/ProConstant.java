@@ -20,8 +20,7 @@ package com.android.llc.proringer.appconstant;
 
 public class ProConstant {
     public static boolean cameraRequested = false;
-
-
+    public static String firebasedevice_token="";
     public static String service="";
     public static  String Project_name="";
     public static String projectid="";

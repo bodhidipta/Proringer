@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import com.android.llc.proringer.R;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.fragments.bottomNav.DashBoardFragment;
 import com.android.llc.proringer.fragments.bottomNav.FavProsFragment;
 import com.android.llc.proringer.fragments.bottomNav.MessageFragment;
@@ -298,8 +299,8 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             redirectMyProject();
         }
 
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Logger.printMessage(getClass().getName(), "Refreshed token: " + refreshedToken);
+//        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//        Logger.printMessage(getClass().getName(), "Refreshed token: " + refreshedToken);
 
         ProServiceApiHelper.getInstance(getApplication()).setUserDeviceAPI(new ProServiceApiHelper.getApiProcessCallback() {
             @Override
@@ -316,7 +317,7 @@ public class LandScreenActivity extends AppCompatActivity implements MyCustomAle
             public void onError(String error) {
 
             }
-        },  ProApplication.getInstance().getUserId(), refreshedToken);
+        },  ProApplication.getInstance().getUserId(), ProConstant.firebasedevice_token);
 
     }
 

@@ -2,6 +2,7 @@ package com.android.llc.proringer.pushNotification;
 
 import android.util.Log;
 import com.android.llc.proringer.appconstant.ProApplication;
+import com.android.llc.proringer.appconstant.ProConstant;
 import com.android.llc.proringer.helper.ProServiceApiHelper;
 import com.android.llc.proringer.utils.Logger;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -27,6 +28,10 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Logger.printMessage("@@ ", "Refreshed token: " + refreshedToken);
+
+        if (refreshedToken!=null){
+            ProConstant.firebasedevice_token=refreshedToken;
+        }
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
